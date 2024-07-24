@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @layer components {
   .bio-section {
     @apply flex flex-col items-center justify-center py-4 px-4 text-center;
@@ -80,6 +84,26 @@
   .modal-social-links {
     @apply flex flex-col gap-4;
   }
+
+  .dropdown {
+    @apply relative inline-block;
+  }
+
+  .dropdown-button {
+    @apply text-base font-normal focus:outline-none transition-colors duration-200;
+  }
+
+  .dropdown-menu {
+    @apply absolute left-0 mt-2 w-48 bg-white text-black rounded-[var(--border-radius)] shadow-lg z-10 py-1 hidden;
+  }
+
+  .dropdown-item {
+    @apply block px-4 py-2 text-sm hover:bg-gray-300 transition-colors duration-200;
+  }
+
+  .dropdown-item.active {
+    @apply bg-gray-100 font-normal;
+  }
 }
 
 @layer utilities {
@@ -120,4 +144,8 @@
   .contact-button:hover {
     @apply bg-[#E1F5FE] text-[#4A90E2];
   }
+}
+
+.group:hover .dropdown-menu {
+  display: block;
 }

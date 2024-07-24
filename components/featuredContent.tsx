@@ -1,4 +1,5 @@
-// FeaturedContent.js
+// Server Component: FeaturedContent
+
 import React from "react";
 
 const FeaturedContent = () => (

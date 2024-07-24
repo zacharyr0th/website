@@ -1,4 +1,5 @@
-// ProjectsContent.js
+// Server Component: ProjectsContent
+
 import React from "react";
 
 const ProjectsContent = () => (

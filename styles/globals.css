@@ -11,6 +11,9 @@
   --secondary-color: #888888;
   --transition-duration: 0.3s;
   --border-radius: 0.5rem;
+  --primary-color: #4a90e2;
+  --background-color: #ffffff;
+  --text-color: #333333;
 }
 
 @layer base {
@@ -114,18 +117,6 @@
     @apply bg-transparent text-[var(--secondary-color)];
   }
 
-  .modal-overlay {
-    @apply fixed inset-0 grid place-items-center z-50 bg-black bg-opacity-50;
-  }
-
-  .modal-content {
-    @apply p-6 max-w-lg w-full bg-[var(--primary-bg)] rounded-[var(--border-radius)] shadow-lg;
-  }
-
-  .close-button {
-    @apply w-full py-2 px-4 bg-[#4a4a4a] text-[var(--primary-text)] border-none rounded-[var(--border-radius)] cursor-pointer transition-colors duration-[var(--transition-duration)];
-  }
-
   .bio-section {
     @apply flex flex-col items-center justify-center py-4 px-4 text-center;
   }
@@ -148,14 +139,6 @@
 
   .content:hover {
     @apply transform scale-105;
-  }
-
-  .modal-title {
-    @apply text-2xl font-bold mb-4 text-[var(--primary-text)];
-  }
-
-  .modal-description {
-    @apply mb-6 text-[var(--primary-text)];
   }
 
   .social-link,
@@ -305,10 +288,6 @@
   .tab-button:hover,
   .contact-button:hover {
     @apply scale-105;
-  }
-
-  .close-button:hover {
-    @apply bg-[#333333];
   }
 
   .tab-button:not(.active):hover {
