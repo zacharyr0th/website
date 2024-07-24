@@ -43,7 +43,7 @@
 }
 
 .twitter {
-  @apply bg-[#1DA1F2] hover:bg-[#0a8bd9];
+  @apply bg-[#000000] hover:bg-[#141414];
 }
 
 .closeButton {

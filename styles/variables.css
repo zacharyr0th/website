@@ -1,0 +1,11 @@
+/* variables.css */
+:root {
+    --primary-bg: #121212;
+    --primary-text: #f0f0f0;
+    --accent-color: #4B9CD3;
+    --secondary-color: #888888;
+    --transition-duration: 0.3s;
+    --border-radius: 0.5rem;
+    --background-color: #ffffff;
+    --text-color: #333333;
+  }

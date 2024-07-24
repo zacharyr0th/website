@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { FaLinkedin, FaTwitter } from 'react-icons/fa';
-import styles from './ContactModal.module.css';
+import { FaLinkedin, FaXTwitter } from 'react-icons/fa6';
+import styles from '../../styles/ContactModal.module.css';
 
 const ContactModal: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,7 +27,7 @@ const ContactModal: React.FC = () => {
           <div className={styles.modalContent}>
             <h2 className={styles.modalTitle}>Get in Touch</h2>
             <p className={styles.modalText}>
-              Feel free to reach out on LinkedIn or Twitter
+              Feel free to reach out on LinkedIn or X
             </p>
             <div className={styles.modalSocialLinks}>
               <a
@@ -40,13 +40,13 @@ const ContactModal: React.FC = () => {
                 LinkedIn
               </a>
               <a
-                href="https://twitter.com/zacharyr0th"
+                href="https://x.com/zacharyr0th"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`${styles.socialButton} ${styles.twitter}`}
               >
-                <FaTwitter className={styles.socialIcon} />
-                Twitter
+                <FaXTwitter className={styles.socialIcon} />
+                X
               </a>
             </div>
             <button onClick={closeModal} className={styles.closeButton}>

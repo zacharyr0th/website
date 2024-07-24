@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './ContactModal.module.css';
+import styles from '../../styles/ContactModal.module.css';
 
 interface ModalContentProps {
   children: React.ReactNode;

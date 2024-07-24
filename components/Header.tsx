@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, memo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { FaLinkedin, FaTwitter, FaGithub } from "react-icons/fa";
+import { FaLinkedin, FaXTwitter, FaGithub } from "react-icons/fa6";
+import "../styles/header.css"; 
 
 interface DropdownItem {
   label: string;
@@ -19,13 +20,13 @@ const Header = () => {
   const mediaItems: DropdownItem[] = [
     { label: "Audio", href: "/audio" },
     { label: "Visuals", href: "/visuals" },
-    { label: "NFTs", href: "/nfts" },
+    { label: "Minting", href: "/minting" },
   ];
 
   const socialLinks = [
-    { href: "https://www.twitter.com/zacharyr0th", Icon: FaTwitter },
-    { href: "https://www.linkedin.com/in/zacharyr0th", Icon: FaLinkedin },
-    { href: "https://www.github.com/zacharyr0th", Icon: FaGithub },
+    { href: "https://x.com/zacharyr0th", Icon: FaXTwitter, label: "X Profile" },
+    { href: "https://www.linkedin.com/in/zacharyr0th", Icon: FaLinkedin, label: "LinkedIn Profile" },
+    { href: "https://www.github.com/zacharyr0th", Icon: FaGithub, label: "GitHub Profile" },
   ];
 
   useEffect(() => {
@@ -42,42 +43,38 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="w-full bg-[#121212] text-white">
-      <nav className="flex justify-between items-center p-4">
-        <div className="flex items-center space-x-6">
+    <header className="header">
+      <nav className="nav">
+        <div className="nav-links">
           {pathname !== "/" && (
-            <Link href="/" className="flex items-center transform hover:scale-105 transition-transform duration-300">
-              <div className="w-8 h-8 rounded-full overflow-hidden">
+            <Link href="/" aria-label="Home">
+              <div className="home-link">
                 <Image
                   src="/profile-picture.jpg"
                   alt="Zachary Roth"
                   width={32}
                   height={32}
-                  className="object-cover"
+                  className="profile-picture"
                   priority
                 />
               </div>
             </Link>
           )}
 
-          <div className="relative" ref={dropdownRef}>
+          <div className="dropdown" ref={dropdownRef}>
             <button
               onClick={() => setIsMediaOpen(!isMediaOpen)}
-              className="text-white hover:text-gray-300 focus:outline-none transition-colors duration-150"
               aria-haspopup="true"
               aria-expanded={isMediaOpen}
+              aria-controls="media-menu"
+              className="dropdown-button"
             >
               Media
             </button>
             {isMediaOpen && (
-              <div className="absolute z-10 w-40 mt-2 bg-gray-200 rounded-md shadow-lg overflow-hidden">
+              <div id="media-menu" className="dropdown-menu" role="menu" aria-labelledby="media-button">
                 {mediaItems.map(({ label, href }) => (
-                  <Link
-                    key={href}
-                    href={href}
-                    className="block w-full px-4 py-2 text-left text-black hover:bg-gray-400 transition-colors duration-150"
-                    onClick={() => setIsMediaOpen(false)}
-                  >
+                  <Link key={href} href={href} role="menuitem" onClick={() => setIsMediaOpen(false)}>
                     {label}
                   </Link>
                 ))}
@@ -89,24 +86,17 @@ const Header = () => {
             <Link
               key={item}
               href={`/${item}`}
-              className={`text-white hover:text-gray-300 transition-all duration-300 focus:outline-none transform hover:scale-105 ${
-                pathname === `/${item}` ? "font-bold" : ""
-              }`}
+              className={pathname === `/${item}` ? "active" : ""}
+              aria-current={pathname === `/${item}` ? "page" : undefined}
             >
               {item.charAt(0).toUpperCase() + item.slice(1)}
             </Link>
           ))}
         </div>
 
-        <div className="flex space-x-4">
-          {socialLinks.map(({ href, Icon }) => (
-            <Link
-              key={href}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-gray-300 transition-all duration-300 focus:outline-none transform hover:scale-105"
-            >
+        <div className="social-links">
+          {socialLinks.map(({ href, Icon, label }) => (
+            <Link key={href} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}>
               <Icon size={24} />
             </Link>
           ))}
@@ -116,4 +106,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header);

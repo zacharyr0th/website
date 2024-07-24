@@ -1,0 +1,27 @@
+/* responsive.css */
+@media (min-width: 768px) {
+    .navbar-links,
+    .social-links {
+      @apply flex-row gap-8;
+    }
+  }
+  
+  @media (hover: hover) and (pointer: fine) {
+    .nav-link:hover:not(.active-link),
+    .dropdown-menu:hover {
+      @apply text-[var(--primary-text)];
+    }
+  
+    .tab-button:hover,
+    .contact-button:hover {
+      @apply scale-105;
+    }
+  
+    .tab-button:not(.active):hover {
+      @apply bg-[#e1f5fe] text-[#4a90e2];
+    }
+  
+    .contact-button:hover {
+      @apply bg-[#E1F5FE] text-[#4A90E2];
+    }
+  }

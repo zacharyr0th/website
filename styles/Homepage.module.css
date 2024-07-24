@@ -27,25 +27,6 @@
     @apply mb-6 text-[var(--primary-text)];
   }
 
-  .social-link,
-  .social-button {
-    @apply flex items-center justify-center p-2 rounded-[var(--border-radius)] text-white transition-colors duration-300;
-  }
-
-  .social-link.linkedin,
-  .social-button.linkedin {
-    @apply bg-[#0077b5] hover:bg-[#005f8e];
-  }
-
-  .social-link.twitter,
-  .social-button.twitter {
-    @apply bg-[#1da1f2] hover:bg-[#0c85d0];
-  }
-
-  .social-link-icon,
-  .social-icon {
-    @apply mr-2;
-  }
 
   .profile-picture,
   .profile-icon {
@@ -75,14 +56,6 @@
 
   .tabs-container {
     @apply flex justify-center gap-3 mb-4;
-  }
-
-  .contact-button-container {
-    @apply mt-4 flex justify-center;
-  }
-
-  .modal-social-links {
-    @apply flex flex-col gap-4;
   }
 
   .dropdown {
