@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { FaLinkedin, FaXTwitter } from 'react-icons/fa6';
-import styles from '../../styles/ContactModal.module.css';
+import styles from '../../styles/components/ContactModal.module.css';
 
 const ContactModal: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,8 +36,7 @@ const ContactModal: React.FC = () => {
                 rel="noopener noreferrer"
                 className={`${styles.socialButton} ${styles.linkedin}`}
               >
-                <FaLinkedin className={styles.socialIcon} />
-                LinkedIn
+                <FaLinkedin className={styles.socialIcon} /> 
               </a>
               <a
                 href="https://x.com/zacharyr0th"
@@ -46,7 +45,6 @@ const ContactModal: React.FC = () => {
                 className={`${styles.socialButton} ${styles.twitter}`}
               >
                 <FaXTwitter className={styles.socialIcon} />
-                X
               </a>
             </div>
             <button onClick={closeModal} className={styles.closeButton}>

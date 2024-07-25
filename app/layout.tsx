@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import ErrorBoundaryClient from "../components/ErrorBoundaryClient";
+import Footer from "../components/Footer";  // Import the Footer component
+import Header from "../components/Header";  // Import the Header component if you want to use it
 
-import "../styles/globals.css";
+import "../styles/global/globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL('http://localhost:3000'), // Update this to your production URL when deploying
+  metadataBase: new URL('http://localhost:3000'), 
   title: "Zachary Roth - Technologist, Writer, Musician",
   description: "Personal website of Zachary Roth - Explore my work in technology, writing, and music.",
   keywords: ["Zachary Roth", "technologist", "writer", "musician", "portfolio"],
@@ -35,7 +35,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="font-inter">
         <div className="flex flex-col min-h-screen">
-          <Header />
+          <Header />  {/* Add this if you want to use the Header */}
           <ErrorBoundaryClient>
             <main className="flex-grow">{children}</main>
           </ErrorBoundaryClient>

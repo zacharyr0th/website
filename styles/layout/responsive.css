@@ -1,0 +1,80 @@
+/* responsive.css */
+
+/* Mobile styles (up to 768px) */
+
+@media (max-width: 768px) {
+  .navbar {
+    @apply flex-col items-start;
+  }
+
+  .navbar-links {
+    @apply flex-col items-start space-y-4 mb-4;
+  }
+
+  .social-links {
+    @apply w-full justify-center mt-4;
+  }
+}
+
+/* Tablet and desktop styles (768px and above) */
+
+@media (min-width: 768px) {
+  .navbar-links,
+  .social-links {
+    @apply flex-row gap-8;
+  }
+}
+
+/* Hover styles for devices with fine pointer control */
+
+@media (hover: hover) and (pointer: fine) {
+  .nav-link:hover:not(.active-link),
+  .dropdown-menu:hover {
+    @apply text-[var(--primary-text)];
+  }
+
+  .tab-button:hover,
+  .contact-button:hover {
+    @apply scale-105;
+  }
+
+  .tab-button:not(.active):hover {
+    @apply bg-[#e1f5fe] text-[#4a90e2];
+  }
+
+  .contact-button:hover {
+    @apply bg-[#E1F5FE] text-[#4A90E2];
+  }
+}
+
+/* Reduced motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print styles */
+
+@media print {
+  .navbar,
+  .social-links,
+  .contact-button {
+    display: none;
+  }
+
+  body {
+    color: black;
+    background: none;
+  }
+
+  @page {
+    margin: 2cm;
+  }
+}

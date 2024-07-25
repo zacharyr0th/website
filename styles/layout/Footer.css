@@ -1,0 +1,13 @@
+/* Footer.css */
+
+.site-footer {
+    background-color: var(--primary-bg);
+    color: var(--secondary-color);
+    font-size: 0.875rem;
+    padding: 1.5rem 0;
+  }
+  
+  .copyright {
+    text-align: center;
+  }
+  

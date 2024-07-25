@@ -1,0 +1,31 @@
+/* globals.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+/* Components */
+@import '../components/ContactModal.module.css'; 
+@import '../components/TabSection.css'; 
+
+/* Core */
+@import '../core/base.css';
+@import '../core/utilities.css';
+@import '../core/variables.css';
+
+/* Layout */
+@import '../layout/responsive.css';
+@import '../layout/Footer.css'; 
+@import '../layout/Header.css'; 
+
+/* Global */
+@import './accessibility.css';
+
+/* Pages */
+@import '../pages/Homepage.module.css';
+@import '../pages/Writing.module.css';
+
+/* Special */
+@import '../special/print.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

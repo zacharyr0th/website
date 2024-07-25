@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { FaLinkedin, FaXTwitter, FaGithub } from "react-icons/fa6";
-import "../styles/header.css"; 
+import "../styles/layout/Header.css"; 
 
 interface DropdownItem {
   label: string;

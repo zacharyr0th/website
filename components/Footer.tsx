@@ -2,10 +2,12 @@
 
 import React from "react";
 
-export default function Footer() {
+export function Footer() {
     return (
       <footer className="site-footer">
         <p className="copyright">&copy; {new Date().getFullYear()}</p>
       </footer>
     );
-  }
+}
+
+export default Footer;

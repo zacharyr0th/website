@@ -1,0 +1,69 @@
+.header {
+  @apply w-full bg-[#121212] text-gray-200 shadow-none transition-colors duration-300;
+}
+
+.nav {
+  @apply flex justify-between items-center p-4;
+}
+
+.nav-links {
+  @apply flex items-center space-x-6;
+}
+
+.home-link {
+  @apply flex items-center transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500;
+}
+
+.home-link:hover {
+  @apply transform scale-105;
+}
+
+.profile-picture {
+  @apply rounded-full;
+}
+
+.dropdown {
+  @apply relative;
+}
+
+.dropdown-button {
+  @apply text-gray-200 transition-colors duration-150 hover:text-gray-300 focus:outline-none;
+}
+
+.dropdown-menu {
+  @apply absolute z-10 w-40 mt-2 bg-[#333333] rounded-lg shadow-none overflow-hidden;
+}
+
+.dropdown-menu a {
+  @apply block w-full px-4 py-2 text-left text-gray-200 transition-colors duration-150;
+}
+
+.dropdown-menu a:hover {
+  @apply bg-[#121212] text-gray-400;
+}
+
+.nav-links a {
+  @apply text-gray-200 transition-colors duration-300 focus:outline-none;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+  @apply text-gray-300;
+}
+
+.nav-links a.active {
+  @apply font-bold;
+}
+
+.social-links {
+  @apply flex space-x-4;
+}
+
+.social-links a {
+  @apply text-gray-200 transition-transform duration-300 focus:outline-none;
+}
+
+.social-links a:hover,
+.social-links a:focus {
+  @apply transform scale-110 text-gray-300;
+}
