@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import ErrorBoundaryClient from "../components/ErrorBoundaryClient";
-import Footer from "../components/Footer";  // Import the Footer component
-import Header from "../components/Header";  // Import the Header component if you want to use it
+import Footer from "../components/Footer";  
+import Header from "../components/Header"; 
+import { Analytics } from "@vercel/analytics/react"
 
 import "../styles/global/globals.css";
 

@@ -8,7 +8,7 @@ const ProjectsContent = () => (
       {
         name: "This Website",
         description:
-          "Lorum Ipsum",
+          "Lorem Ipsum",
       },
       { name: "Product B", description: "Testing." },
       { name: "Product C", description: "Testing." },

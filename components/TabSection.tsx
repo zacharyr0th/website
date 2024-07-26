@@ -5,8 +5,12 @@
 import { useState } from "react";
 import dynamic from 'next/dynamic';
 
-const FeaturedContent = dynamic(() => import('./FeaturedContent'));
-const ProjectsContent = dynamic(() => import('./ProjectsContent'));
+const FeaturedContent = dynamic(() => import('./FeaturedContent'), {
+  ssr: false,
+});
+const ProjectsContent = dynamic(() => import('./ProjectsContent'), {
+  ssr: false,
+});
 
 export default function TabSection() {
   const [activeTab, setActiveTab] = useState("bio");
@@ -30,7 +34,7 @@ export default function TabSection() {
 
       {activeTab === "bio" && (
         <div className="bio-section">
-          <p className="bio-text">Lorum Ipsum</p>
+          <p className="bio-text">Lorem Ipsum</p>
         </div>
       )}
 
