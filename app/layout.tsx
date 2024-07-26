@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import ErrorBoundaryClient from "../components/ErrorBoundaryClient";
 import Footer from "../components/Footer";  
 import Header from "../components/Header"; 
+
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import "../styles/global/globals.css";
 
@@ -42,6 +44,8 @@ export default function RootLayout({
           </ErrorBoundaryClient>
           <Footer />
         </div>
+          <SpeedInsights />
+          <Analytics />
       </body>
     </html>
   );
