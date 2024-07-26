@@ -27,7 +27,6 @@
     @apply mb-6 text-[var(--primary-text)];
   }
 
-
   .profile-picture,
   .profile-icon {
     @apply rounded-full overflow-hidden transform transition-transform duration-500;
@@ -76,6 +75,15 @@
 
   .dropdown-item.active {
     @apply bg-gray-100 font-normal;
+  }
+
+  /* Added centering styles */
+  .page-container {
+    @apply flex flex-col items-center justify-center min-h-screen px-4;
+  }
+
+  .content-container {
+    @apply w-full max-w-4xl mx-auto text-center;
   }
 }
 

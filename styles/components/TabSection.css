@@ -1,5 +1,3 @@
-/* TabSection.css */
-
 .container {
     max-width: 56rem; 
     margin-left: auto;
@@ -7,45 +5,52 @@
     padding-left: 1rem;
     padding-right: 1rem;
     width: 100%;
-  }
-  
-  .tab-button,
-  .contact-button {
+}
+
+.tab-button,
+.contact-button {
     padding: 0.5rem 1.5rem;
     font-size: 1rem;
     border: none;
     border-radius: var(--border-radius);
     cursor: pointer;
     transition: all var(--transition-duration);
-  }
-  
-  .tab-button.active,
-  .contact-button {
+}
+
+.tab-button.active,
+.contact-button {
     background-color: var(--accent-color);
     color: var(--primary-text);
-  }
-  
-  .tab-button:not(.active) {
+}
+
+.tab-button:not(.active) {
     background-color: transparent;
     color: var(--secondary-color);
-  }
-  
-  .tabs-container {
+}
+
+.tabs-container {
     display: flex;
     justify-content: center;
     gap: 0.75rem;
     margin-bottom: 1rem;
-  }
-  
-  .content {
+    position: relative;
+}
+
+.tabs-container::before,
+.tabs-container::after {
+    content: '';
+    flex: 1;
+}
+
+.content {
     background-color: #1e293b;
     color: white;
     border-radius: var(--border-radius);
     padding: 1.5rem;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     transition: transform 0.3s;
-  }
-  
-  .content:hover {
+}
+
+.content:hover {
     transform: scale(1.05);
-  }
+}
