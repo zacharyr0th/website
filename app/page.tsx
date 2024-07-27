@@ -1,8 +1,8 @@
 'use client';
 
-import ProfileSection from './HomePage/ProfileSection';
-import TabSection from './HomePage/TabSection';
-import ContactModal from './HomePage/ContactModal/ContactModal';
+import ProfileSection from '../components/homepage-components/ProfileSection';
+import TabSection from '../components/homepage-components/TabSection';
+import ContactModal from '../components/homepage-components/ContactModal/ContactModal';
 
 export default function Home() {
   return (

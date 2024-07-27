@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import './WritingPage.css';
+import styles from '../styles/pages/WritingPage.module.css';
 
 interface Content {
   id: string;
@@ -39,16 +39,17 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
   };
 
   const ArticleCard: React.FC<{ article: Content }> = ({ article }) => {
-    const imageSrc = article.image && (article.image.startsWith('/') || article.image.startsWith('http'))
-      ? article.image
-      : '/placeholder.jpg';
+    const imageSrc =
+      article.image && (article.image.startsWith('/') || article.image.startsWith('http'))
+        ? article.image
+        : '/placeholder.jpg';
 
     return (
       <div className="absolute inset-0 rounded-lg overflow-hidden shadow-lg bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a]">
-        <Link href={`/writing/${article.slug}`}>
-          <div className="relative h-full cursor-pointer">
-            <Image
-              src={imageSrc}
+      <Link href={`/writing/${article.slug}`}>
+        <div className="relative h-full cursor-pointer">
+          <Image
+            src={imageSrc}
               alt={`Cover image for ${article.title}`}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
@@ -68,7 +69,9 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
   };
 
   const handlePrevArticle = () => {
-    setCurrentArticleIndex((prev) => (prev - 1 + featuredArticles.length) % featuredArticles.length);
+    setCurrentArticleIndex(
+      (prev) => (prev - 1 + featuredArticles.length) % featuredArticles.length
+    );
   };
 
   const handleNextArticle = () => {
@@ -149,9 +152,13 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
                           <div className="flex items-center p-3 h-full">
                             <div className="relative w-14 h-14 flex-shrink-0">
                               <Image
-                                src={content.image && (content.image.startsWith('/') || content.image.startsWith('http'))
-                                  ? content.image
-                                  : '/placeholder.jpg'}
+                                src={
+                                  content.image &&
+                                  (content.image.startsWith('/') ||
+                                    content.image.startsWith('http'))
+                                    ? content.image
+                                    : '/placeholder.jpg'
+                                }
                                 alt={`Thumbnail for ${content.title}`}
                                 fill
                                 sizes="(max-width: 768px) 100vw, 50vw"

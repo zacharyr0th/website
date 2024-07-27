@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default function WritingPage({
-  searchParams,
+  searchParams
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {

@@ -20,7 +20,7 @@
 @import './layout.css';
 
 /* Pages */
-@import '../HomePage.module.css';
+@import '../pages/HomePage.module.css';
 
 /* Special */
 @import '../special/print.css';
