@@ -18,7 +18,6 @@
 /* Global */
 @import './accessibility.css';
 @import './layout.css';
-@import './responsive.css';
 
 /* Pages */
 @import '/styles/HomePage.module.css';
