@@ -21,8 +21,8 @@
 @import './responsive.css';
 
 /* Pages */
-@import '../HomePage.module.css';
-@import '../WritingPage.module.css';
+@import '/styles/HomePage.module.css';
+@import '/styles/WritingPage.module.css';
 
 /* Special */
 @import '../special/print.css';
