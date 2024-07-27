@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import WritingPageClient from './WritingPageClient';
+import { getContentItems } from '../../lib/content';
 
 export const metadata: Metadata = {
   title: 'Writing | Zachary Roth',
@@ -13,6 +14,7 @@ export default function WritingPage({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const contentType = searchParams.type as 'article' | 'review' | 'interview' | undefined;
+  const allContent = getContentItems(contentType);
 
-  return <WritingPageClient contentType={contentType} />;
+  return <WritingPageClient contentType={contentType} allContent={allContent} />;
 }
