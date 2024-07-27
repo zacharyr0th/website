@@ -1,10 +1,22 @@
 ---
-title: 'The Future of AI in Web Development'
-slug: 'future-of-ai-in-web-development'
-image: '/placeholder.jpg'
-pageViews: 1500
-type: 'article'
-description: 'Exploring how artificial intelligence is shaping the future of web development and revolutionizing the way we build websites and applications.'
+id: "acid-for-the-childres"
+title: "Acid for the Children"
+subtitle: "Undefined"
+author: "Zachary Roth"
+bookAuthor: "Flea"
+date: "2023-01-15"
+image: "/placeholder.jpg"
+imageCaption: ""
+description: "Undefined"
+tags:
+  - Music
+  - Autobiography
+readTime: 2
+likes: 0
+comments: 0
+shares: 0
+type: "review"
+slug: "acid-for-the-children"
 ---
 
-Content of the article goes here...
+TEST

@@ -5,16 +5,16 @@
 /* base styles */
 
 html {
-  font-size: 16px;
+  font-size: var(--font-size-base);
   height: 100%;
   scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--primary-bg);
-  color: var(--primary-text);
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
   font-family: 'Inter', sans-serif;
-  line-height: 1.5;
+  line-height: var(--line-height-base);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
@@ -35,7 +35,7 @@ h4,
 h5,
 h6 {
   font-weight: bold;
-  color: var(--primary-text);
+  color: var(--color-text-light);
   letter-spacing: 0.025em;
   margin-bottom: 0.5rem;
 }
@@ -100,6 +100,6 @@ img {
 /* Custom properties */
 
 :root {
-  --primary-bg: #121212;
-  --primary-text: #ffffff;
+  --color-primary: #121212;
+  --color-text-light: #ffffff;
 }

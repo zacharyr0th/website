@@ -19,13 +19,13 @@
 
 .tab-button.active,
 .contact-button {
-  background-color: var(--accent-color);
-  color: var(--primary-text);
+  background-color: var(--color-accent);
+  color: var(--color-text-primary);
 }
 
 .tab-button:not(.active) {
   background-color: transparent;
-  color: var(--secondary-color);
+  color: var(--color-secondary);
 }
 
 .tabs-container {
@@ -47,7 +47,7 @@
   color: white;
   border-radius: var(--border-radius);
   padding: 1.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--box-shadow);
   transition: transform 0.3s;
 }
 

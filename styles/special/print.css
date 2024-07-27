@@ -8,7 +8,7 @@
   }
 
   body {
-    color: black;
+    color: var(--color-text-primary);
     background: none;
   }
 

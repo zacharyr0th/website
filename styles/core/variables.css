@@ -1,12 +1,25 @@
 /* variables.css */
 
 :root {
-  --primary-bg: #121212;
-  --primary-text: #f0f0f0;
-  --accent-color: #4b9cd3;
-  --secondary-color: #888888;
+  /* Colors */
+  --color-primary: #121212;
+  --color-secondary: #888888;
+  --color-accent: #4b9cd3;
+  --color-background: #ffffff;
+  --color-text-primary: #333333;
+  --color-text-light: #f0f0f0;
+
+  /* Spacing */
+  --spacing-small: 0.5rem;
+  --spacing-medium: 1rem;
+  --spacing-large: 2rem;
+
+  /* Typography */
+  --font-size-base: 16px;
+  --line-height-base: 1.5;
+
+  /* Effects */
   --transition-duration: 0.3s;
   --border-radius: 0.5rem;
-  --background-color: #ffffff;
-  --text-color: #333333;
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

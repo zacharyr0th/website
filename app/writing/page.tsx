@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import WritingPageClient from './WritingPageClient';
 import { getContentItems } from '../../lib/content';
 
@@ -15,6 +16,10 @@ export default function WritingPage({
 }) {
   const contentType = searchParams.type as 'article' | 'review' | 'interview' | undefined;
   const allContent = getContentItems(contentType);
+
+  if (allContent.length === 0) {
+    notFound();
+  }
 
   return <WritingPageClient contentType={contentType} allContent={allContent} />;
 }

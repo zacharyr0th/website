@@ -46,11 +46,11 @@
 .profile-name {
   font-size: 2.25rem;
   font-weight: bold;
-  color: var(--primary-text);
+  color: var(--color-text-light);
 }
 
 .profile-title {
   margin-bottom: 2rem;
   font-size: 1.125rem;
-  color: #868686;
+  color: var(--color-secondary);
 }

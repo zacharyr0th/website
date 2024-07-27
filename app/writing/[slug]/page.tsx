@@ -25,6 +25,11 @@ export async function generateStaticParams() {
 }
 
 export default function WritingPage({ params }: { params: { slug: string } }) {
+  if (!params.slug) {
+    console.error('Slug is undefined');
+    notFound();
+  }
+
   const post = getContentItems().find((post) => post.slug === params.slug);
   
   console.log('Requested slug:', params.slug);
@@ -40,7 +45,7 @@ export default function WritingPage({ params }: { params: { slug: string } }) {
   return (
     <article className="container mx-auto px-4 py-8 max-w-3xl">
       <Image
-        src={post.image}
+        src={`/images/writing/${post.type}s/${post.slug}/${post.image}`}
         alt={post.title}
         width={800}
         height={400}

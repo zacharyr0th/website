@@ -13,7 +13,7 @@
 }
 
 .bg-darker-blue {
-  background-color: var(--accent-color);
+  background-color: var(--color-accent);
 }
 
 .animate-fadeIn {

@@ -24,11 +24,11 @@
   }
 
   .modal-title {
-    @apply text-2xl font-bold mb-4 text-[var(--primary-text)];
+    @apply text-2xl font-bold mb-4 text-[var(--color-text-primary)];
   }
 
   .modal-description {
-    @apply mb-6 text-[var(--primary-text)];
+    @apply mb-6 text-[var(--color-text-primary)];
   }
 
   .profile-picture,
@@ -50,11 +50,11 @@
   }
 
   .profile-name {
-    @apply mt-6 text-4xl font-bold text-[var(--primary-text)];
+    @apply mt-6 text-4xl font-bold text-[var(--color-text-light)];
   }
 
   .profile-title {
-    @apply mt-6 mb-8 text-lg text-[#868686];
+    @apply mt-6 mb-8 text-lg text-[var(--color-secondary)];
   }
 
   .tabs-container {

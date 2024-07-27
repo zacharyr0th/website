@@ -1,5 +1,5 @@
 .content-item {
-  transition: all 0.3s ease;
+  transition: all var(--transition-duration) ease;
 }
 
 .content-item:hover {
