@@ -172,7 +172,7 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType }) =>
             Writing
           </motion.h1>
           <nav className="navbar-links">
-            <ul className="flex gap-8">
+            <ul className="flex gap-4">
               {contentType && (
                 <motion.li
                   initial={{ opacity: 0, y: -10 }}
