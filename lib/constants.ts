@@ -7,28 +7,28 @@ export const hardcodedFeaturedArticles: Content[] = [
     title: 'Forty Audiobooks',
     image: '/writing/new.jpg',
     pageViews: 1000,
-    type: 'article'
+    type: 'article',
   },
   {
     id: 'blockchains-in-africa',
     slug: 'blockchains-in-africa',
-    title: "Blockchains in Africa",
+    title: 'Blockchains in Africa',
     image: '/writing/blockchains-in-africa.jpg',
     pageViews: 1000,
-    type: 'article'
+    type: 'article',
   },
   {
     id: 'derivatives',
     slug: 'derivatives',
-    title: "Derivatives Markets and Spot Prices",
+    title: 'Derivatives Markets and Spot Prices',
     image: '/writing/derivatives.jpg',
     pageViews: 1000,
-    type: 'article'
-  }
+    type: 'article',
+  },
 ];
 
 export const CATEGORY_DESCRIPTIONS: { [key: string]: string } = {
   Articles: 'Technology & Finance',
   Reviews: 'Books & Products',
-  Interviews: 'Founders & Builders'
+  Interviews: 'Founders & Builders',
 };

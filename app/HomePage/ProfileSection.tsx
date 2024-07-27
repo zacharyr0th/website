@@ -1,6 +1,6 @@
 // Server Component: ProfileSection
 
-import Image from "next/image";
+import Image from 'next/image';
 
 export default function ProfileSection() {
   return (
@@ -15,13 +15,9 @@ export default function ProfileSection() {
           priority
         />
       </div>
-    
-      <h1 className="profile-name">
-        Zachary Roth
-      </h1>
-      <p className="profile-title">
-        Technologist, Writer, Musician
-      </p>
+
+      <h1 className="profile-name">Zachary Roth</h1>
+      <p className="profile-title">Technologist, Writer, Musician</p>
     </div>
   );
 }

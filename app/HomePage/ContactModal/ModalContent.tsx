@@ -7,11 +7,7 @@ interface ModalContentProps {
 }
 
 const ModalContent: React.FC<ModalContentProps> = ({ children }) => {
-  return (
-    <div className={styles.modalContent}>
-      {children}
-    </div>
-  );
+  return <div className={styles.modalContent}>{children}</div>;
 };
 
 export default ModalContent;

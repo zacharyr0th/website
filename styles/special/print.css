@@ -1,18 +1,18 @@
 /* print.css */
 
 @media print {
-    .navbar,
-    .social-links,
-    .contact-button {
-      display: none;
-    }
-  
-    body {
-      color: black;
-      background: none;
-    }
-  
-    @page {
-      margin: 2cm;
-    }
+  .navbar,
+  .social-links,
+  .contact-button {
+    display: none;
   }
+
+  body {
+    color: black;
+    background: none;
+  }
+
+  @page {
+    margin: 2cm;
+  }
+}

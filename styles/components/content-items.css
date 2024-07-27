@@ -1,0 +1,8 @@
+.content-item {
+    transition: all 0.3s ease;
+  }
+  
+  .content-item:hover {
+    transform: scale(1.05);
+  }
+  

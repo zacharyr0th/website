@@ -1,14 +1,15 @@
-// Client Component: TabSection
 'use client';
 
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
-import './TabSection.css';
 
 const FeaturedContent = dynamic(() => import('./FeaturedContent'), {
   ssr: false,
 });
 const ProjectsContent = dynamic(() => import('./ProjectsContent'), {
+  ssr: false,
+});
+const BioSection = dynamic(() => import('./BioSection'), {
   ssr: false,
 });
 
@@ -32,18 +33,9 @@ export default function TabSection() {
         ))}
       </div>
 
-      <div className="content-container">
-        <div className="content">
-          {activeTab === 'bio' && (
-            <div className="bio-section">
-              <p className="bio-text">Lorem Ipsum</p>
-            </div>
-          )}
-
-          {activeTab === 'featured' && <FeaturedContent />}
-          {activeTab === 'projects' && <ProjectsContent />}
-        </div>
-      </div>
+      {activeTab === 'bio' && <BioSection />}
+      {activeTab === 'featured' && <FeaturedContent />}
+      {activeTab === 'projects' && <ProjectsContent />}
     </div>
   );
 }

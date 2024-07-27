@@ -9,7 +9,7 @@ export async function getWritingContentData(slug: string) {
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
   return {
-    id: slug, 
+    id: slug,
     slug,
     content,
     title: data.title,
@@ -20,7 +20,7 @@ export async function getWritingContentData(slug: string) {
     readTime: data.readTime,
     tags: data.tags,
     type: data.type,
-    pageViews: 0, 
+    pageViews: 0,
   };
 }
 
@@ -41,9 +41,9 @@ export async function getAllWritingMetadata(): Promise<Array<{ slug: string; tit
 
 export async function getRecommendedWritingContent(currentSlug: string, count: number) {
   const allWriting = await getAllWritingMetadata();
-  const filteredWriting = allWriting.filter(article => article.slug !== currentSlug);
+  const filteredWriting = allWriting.filter((article) => article.slug !== currentSlug);
   const shuffled = filteredWriting.sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, count).map(article => ({
+  return shuffled.slice(0, count).map((article) => ({
     title: article.title,
     image: '/placeholder.jpg',
     link: `/writing/${article.slug}`,
@@ -52,13 +52,15 @@ export async function getRecommendedWritingContent(currentSlug: string, count: n
 
 export async function getWritingContent(type: 'all' | 'article' | 'review' | 'interview') {
   const files = fs.readdirSync(writingDirectory);
-  const allContent = await Promise.all(files.map(async (fileName) => {
-    const slug = fileName.replace(/\.md$/, '');
-    return await getWritingContentData(slug);
-  }));
+  const allContent = await Promise.all(
+    files.map(async (fileName) => {
+      const slug = fileName.replace(/\.md$/, '');
+      return await getWritingContentData(slug);
+    })
+  );
   if (type === 'all') {
     return allContent;
   } else {
-    return allContent.filter(content => content.type === type);
+    return allContent.filter((content) => content.type === type);
   }
 }
