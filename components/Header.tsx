@@ -33,12 +33,18 @@ const Header = () => {
   return (
     <header className="w-full bg-[#121212] text-gray-200 shadow-none transition-colors duration-300">
       <nav className="flex justify-between items-center p-4">
-
         {/* Home Button */}
         <div className="flex items-center space-x-6">
           {pathname !== '/' && (
-            <Link href="/" aria-label="Home" className="flex items-center transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 hover:transform hover:scale-105">
-              <div className="rounded-full overflow-hidden transform transition-transform duration-500 hover:scale-105" style={{ border: '2px solid #4a4a4a' }}>
+            <Link
+              href="/"
+              aria-label="Home"
+              className="flex items-center transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 hover:transform hover:scale-105"
+            >
+              <div
+                className="rounded-full overflow-hidden transform transition-transform duration-500 hover:scale-105"
+                style={{ border: '2px solid #4a4a4a' }}
+              >
                 <Image
                   src="/profile-picture.jpg"
                   alt="Zachary Roth"
@@ -90,12 +96,16 @@ const Header = () => {
             </Link>
           ))}
         </div>
-          
+
         {/* Social Links */}
         <div className="flex space-x-4">
           {[
             { href: 'https://x.com/zacharyr0th', Icon: FaXTwitter, label: 'X Profile' },
-            { href: 'https://www.linkedin.com/in/zacharyr0th', Icon: FaLinkedin, label: 'LinkedIn Profile' },
+            {
+              href: 'https://www.linkedin.com/in/zacharyr0th',
+              Icon: FaLinkedin,
+              label: 'LinkedIn Profile',
+            },
             { href: 'https://www.github.com/zacharyr0th', Icon: FaGithub, label: 'GitHub Profile' },
           ].map(({ href, Icon, label }) => (
             <Link
@@ -110,7 +120,6 @@ const Header = () => {
             </Link>
           ))}
         </div>
-
       </nav>
     </header>
   );

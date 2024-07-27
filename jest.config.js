@@ -4,8 +4,11 @@ module.exports = {
   testPathIgnorePatterns: ['/node_modules/', '/dist/'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   transform: {
-    '^.+\\.(ts|tsx)$': ['ts-jest', {
-      tsconfig: 'tsconfig.json',
-    }],
+    '^.+\\.(ts|tsx)$': [
+      'ts-jest',
+      {
+        tsconfig: 'tsconfig.json',
+      },
+    ],
   },
 };

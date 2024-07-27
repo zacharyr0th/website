@@ -14,7 +14,7 @@ const FeaturedContent = () => (
   <ul className="grid grid-cols-2 gap-4">
     {featuredItems.map((item) => (
       <li key={item.id}>
-        <Link 
+        <Link
           href={item.link}
           className={`content-item featured-item-${item.id} block p-3 rounded-lg text-center bg-gray-700 text-text-dark transition-all duration-300`}
         >

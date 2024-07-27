@@ -12,8 +12,8 @@ const projects = [
 const ProjectsContent = () => (
   <div className="space-y-4">
     {projects.map((project) => (
-      <div 
-        key={project.id} 
+      <div
+        key={project.id}
         className={`content-item project-item-${project.id} p-4 rounded-lg bg-gray-700 transition-all duration-300`}
       >
         <h3 className="text-lg font-semibold text-pastel-blue">{project.name}</h3>
