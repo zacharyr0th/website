@@ -5,22 +5,22 @@
 @tailwind utilities;
 
 /* Components */
-@import './components/ContactModal.module.css';
-@import './components/content-items.css';
-@import './components/ProfileSection.css';
-@import './components/TabSection.css';
+@import '../components/ContactModal.module.css';
+@import '../components/content-items.css';
+@import '../components/ProfileSection.css';
+@import '../components/TabSection.css';
 
 /* Core */
-@import './core/base.css';
-@import './core/utilities.css';
-@import './core/variables.css';
+@import '../core/base.css';
+@import '../core/utilities.css';
+@import '../core/variables.css';
 
 /* Global */
 @import './accessibility.css';
 @import './layout.css';
 
 /* Pages */
-@import './HomePage.module.css';
+@import '../HomePage.module.css';
 
 /* Special */
-@import './special/print.css';
+@import '../special/print.css';
