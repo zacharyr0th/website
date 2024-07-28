@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import React from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { motion } from "framer-motion";
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 const categories = [
-  { title: "Recordings", description: "Full discography", slug: "recordings" },
-  { title: "Compositions", description: "Originals", slug: "compositions" },
-  { title: "Theory", description: "Lorum Ipsum", slug: "theory" },
-  { title: "Sheet Music", description: "Useful notation", slug: "sheet-music" },
-  { title: "Datasets", description: "With many usecases", slug: "datasets" },
-  { title: "Archive", description: "History", slug: "archive" },
+  { title: 'Recordings', description: 'Full discography', slug: 'recordings' },
+  { title: 'Compositions', description: 'Originals', slug: 'compositions' },
+  { title: 'Theory', description: 'Lorum Ipsum', slug: 'theory' },
+  { title: 'Sheet Music', description: 'Useful notation', slug: 'sheet-music' },
+  { title: 'Datasets', description: 'With many usecases', slug: 'datasets' },
+  { title: 'Archive', description: 'History', slug: 'archive' },
 ];
 
 const AudioPage = () => {
@@ -69,12 +69,11 @@ const AudioPage = () => {
             </div>
             <div className="md:w-1/2">
               <p className="text-gray-300 leading-relaxed p-4 rounded-lg">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod
-                malesuada. Nulla facilisi. Curabitur a est vel leo fermentum
-                consequat. Donec vel turpis nec sapien bibendum bibendum.
-                Aliquam erat volutpat. Integer ut nulla ac erat suscipit
-                suscipit. Nulla ut augue ac orci auctor fermentum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae
+                vestibulum vestibulum. Cras venenatis euismod malesuada. Nulla facilisi. Curabitur a
+                est vel leo fermentum consequat. Donec vel turpis nec sapien bibendum bibendum.
+                Aliquam erat volutpat. Integer ut nulla ac erat suscipit suscipit. Nulla ut augue ac
+                orci auctor fermentum.
               </p>
             </div>
           </div>
@@ -100,8 +99,19 @@ const AudioPage = () => {
                     <p className="text-gray-400 mb-4">{category.description}</p>
                     <div className="text-blue-400 hover:text-blue-300 inline-flex items-center">
                       View All
-                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      <svg
+                        className="w-4 h-4 ml-2"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
                       </svg>
                     </div>
                   </div>

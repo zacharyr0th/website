@@ -6,7 +6,7 @@ import LikeButton from '../../../components/LikeButton';
 import ShareButton from '../../../components/ShareButton';
 import dynamic from 'next/dynamic';
 
-const CommentSection = dynamic(() => import('@/components/CommentSection'), {
+const CommentSection = dynamic(() => import('@/components/comment-section/CommentSection'), {
   ssr: false,
 });
 
@@ -22,7 +22,10 @@ type ContentItem = {
 
 export async function generateStaticParams() {
   const posts = await getContentItems();
-  console.log('Generated paths:', posts.map(post => ({ slug: post.slug })));
+  console.log(
+    'Generated paths:',
+    posts.map((post) => ({ slug: post.slug }))
+  );
   return posts.map((post) => ({
     slug: post.slug,
   }));
@@ -37,7 +40,7 @@ export default async function WritingPage({ params }: { params: { slug: string }
   try {
     const posts = await getContentItems();
     const post = posts.find((post) => post.slug === params.slug);
-    
+
     if (!post || !post.content) {
       console.error('Post not found or content missing for slug:', params.slug);
       notFound();
@@ -58,9 +61,9 @@ export default async function WritingPage({ params }: { params: { slug: string }
         <div className="text-gray-600 mb-6">
           <span>{post.author}</span> • <span>{post.date}</span> • <span>{post.type}</span>
         </div>
-        <div 
+        <div
           className="prose prose-lg max-w-none mb-12"
-          dangerouslySetInnerHTML={{ __html: sanitizedContent }} 
+          dangerouslySetInnerHTML={{ __html: sanitizedContent }}
         />
         <div className="flex items-center space-x-4 mb-8">
           <LikeButton postSlug={post.slug} />

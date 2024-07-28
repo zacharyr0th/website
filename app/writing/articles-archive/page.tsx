@@ -44,7 +44,7 @@ export default function ArticlesArchive() {
   }, []);
 
   const filteredArticles = useMemo(() => {
-    return articles.filter(article =>
+    return articles.filter((article) =>
       article.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [articles, searchTerm]);
@@ -74,21 +74,27 @@ export default function ArticlesArchive() {
             <table className="min-w-full bg-inherit rounded-lg overflow-hidden">
               <thead className="bg-[#1a1a1a]">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Title</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Tags</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Read Time</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                    Title
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                    Tags
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                    Read Time
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-800">
                 {filteredArticles.map((article) => (
-                  <motion.tr 
+                  <motion.tr
                     key={article.slug}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.3 }}
                     whileHover={{ backgroundColor: 'rgba(26, 26, 26, 0.5)' }}
                     className="cursor-pointer"
-                    onClick={() => window.location.href = `/writing/${article.slug}`}
+                    onClick={() => (window.location.href = `/writing/${article.slug}`)}
                   >
                     <td className="px-6 py-4 whitespace-nowrap flex items-center">
                       <div className="w-12 h-12">
@@ -107,7 +113,10 @@ export default function ArticlesArchive() {
                         {article.tags ? (
                           Array.isArray(article.tags) ? (
                             article.tags.map((tag, index) => (
-                              <span key={index} className="px-2 py-1 text-xs font-semibold rounded-full bg-gray-700 text-gray-300">
+                              <span
+                                key={index}
+                                className="px-2 py-1 text-xs font-semibold rounded-full bg-gray-700 text-gray-300"
+                              >
                                 {tag}
                               </span>
                             ))

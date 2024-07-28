@@ -43,17 +43,14 @@ interface FrontMatterData {
 }
 
 function isFrontMatterData(data: unknown): data is FrontMatterData {
-  return (
-    typeof data === 'object' &&
-    data !== null &&
-    'slug' in data &&
-    'title' in data
-  );
+  return typeof data === 'object' && data !== null && 'slug' in data && 'title' in data;
 }
 
 const contentDirectory = path.join(process.cwd(), 'content', 'writing');
 
-export async function getContentItems(type?: 'article' | 'review' | 'interview'): Promise<ContentItem[]> {
+export async function getContentItems(
+  type?: 'article' | 'review' | 'interview'
+): Promise<ContentItem[]> {
   const directories = type ? [type + 's'] : ['articles', 'reviews', 'interviews'];
   const contentDirectory = path.join(process.cwd(), 'content', 'writing');
 
@@ -72,21 +69,21 @@ export async function getContentItems(type?: 'article' | 'review' | 'interview')
 
     const items = await Promise.all(
       files
-        .filter(file => file.endsWith('.md') || file.endsWith('.tsx'))
+        .filter((file) => file.endsWith('.md') || file.endsWith('.tsx'))
         .map(async (file): Promise<ContentItem | null> => {
           const filePath = path.join(fullPath, file);
           let fileContents: string;
-          
+
           try {
             fileContents = await fs.readFile(filePath, 'utf8');
           } catch (error) {
             console.error(`Error reading file ${file}:`, error);
             return null;
           }
-          
+
           let data: FrontMatterData | null = null;
           let content: string = '';
-          
+
           if (file.endsWith('.md')) {
             const parsed = matter(fileContents);
             data = parsed.data as FrontMatterData;
@@ -144,10 +141,10 @@ export async function getContentItems(type?: 'article' | 'review' | 'interview')
 
 export async function getContentItem(slug: string): Promise<ContentItem | undefined> {
   const allItems = await getContentItems();
-  return allItems.find(item => item.slug === slug);
+  return allItems.find((item) => item.slug === slug);
 }
 
 export async function getAllContentSlugs(): Promise<string[]> {
   const allItems = await getContentItems();
-  return allItems.map(item => item.slug);
+  return allItems.map((item) => item.slug);
 }

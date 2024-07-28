@@ -33,11 +33,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className="font-inter">
@@ -49,8 +45,8 @@ export default function RootLayout({
             </ErrorBoundaryClient>
             <Footer />
           </div>
-          <SpeedInsights />
-          <Analytics />
+          {process.env.NODE_ENV === 'production' && <SpeedInsights />}
+          {process.env.NODE_ENV === 'production' && <Analytics />}
         </StyledComponentsRegistry>
       </body>
     </html>
