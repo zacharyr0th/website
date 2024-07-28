@@ -4,35 +4,31 @@ import { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import type { Content } from '@/lib/types';
+import type { ContentItem } from '@/lib/types';
 
-export default function InterviewsArchive() {
+interface InterviewsArchiveProps {
+  initialInterviews: ContentItem[];
+}
+
+export default function InterviewsArchive({ initialInterviews }: InterviewsArchiveProps) {
   const router = useRouter();
-  const [interviews, setInterviews] = useState<Content[]>([]);
+  const [interviews, setInterviews] = useState<ContentItem[]>(initialInterviews);
   const [searchTerm, setSearchTerm] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchInterviews = async () => {
-      try {
-        const response = await fetch('/api/interviews');
-        const items = await response.json();
-        setInterviews(items);
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Error fetching interviews:', error);
-        setIsLoading(false);
-      }
-    };
-
-    fetchInterviews();
-  }, []);
 
   const filteredInterviews = useMemo(() => {
     return interviews.filter((interview) =>
-      interview.title.toLowerCase().includes(searchTerm.toLowerCase())
+      interview.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      interview.tags?.some((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase()))
     );
   }, [interviews, searchTerm]);
+
+  useEffect(() => {
+    console.log('InterviewsArchive mounted with', interviews.length, 'interviews');
+  }, [interviews]);
+
+  if (interviews.length === 0) {
+    return <div>No interviews available. Please check the console for more information.</div>;
+  }
 
   return (
     <div className="min-h-screen bg-inherit text-gray-300">
@@ -50,74 +46,46 @@ export default function InterviewsArchive() {
       </header>
 
       <main className="container mx-auto px-4 py-8">
-        {isLoading ? (
-          <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-500"></div>
-          </div>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="min-w-full bg-inherit rounded-lg overflow-hidden">
-              <thead className="bg-[#1a1a1a]">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
-                    Title
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
-                    Tags
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
-                    Read Time
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-800">
-                {filteredInterviews.map((interview) => (
-                  <motion.tr
-                    key={interview.slug}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                    whileHover={{ backgroundColor: 'rgba(26, 26, 26, 0.5)' }}
-                    className="cursor-pointer"
-                    onClick={() => router.push(`/writing/${interview.slug}`)}
-                  >
-                    <td className="px-6 py-4 whitespace-nowrap flex items-center">
-                      <div className="w-12 h-12">
-                        <Image
-                          src={interview.image}
-                          alt={interview.title}
-                          width={50}
-                          height={50}
-                          className="rounded-full object-cover w-full h-full"
-                        />
-                      </div>
-                      <div className="ml-4 text-sm font-medium text-gray-300">{interview.title}</div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="flex flex-wrap gap-2">
-                        {interview.tags ? (
-                          interview.tags.map((tag, index) => (
-                            <span
-                              key={index}
-                              className="px-2 py-1 text-xs font-semibold rounded-full bg-gray-700 text-gray-300"
-                            >
-                              {tag}
-                            </span>
-                          ))
-                        ) : (
-                          <span className="text-gray-500">No tags</span>
-                        )}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-400">{interview.readTime} min</div>
-                    </td>
-                  </motion.tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredInterviews.map((interview) => (
+            <motion.div
+              key={interview.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="bg-[#1a1a1a] rounded-lg overflow-hidden shadow-lg"
+            >
+              <Image
+                src={interview.image || '/images/placeholder.webp'}
+                alt={interview.title}
+                width={400}
+                height={200}
+                className="w-full h-48 object-cover"
+                priority={true}
+              />
+              <div className="p-6">
+                <h2 className="text-xl font-semibold mb-2">{interview.title}</h2>
+                <p className="text-gray-400 mb-4">{interview.description}</p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {interview.tags?.map((tag, index) => (
+                    <span
+                      key={index}
+                      className="px-2 py-1 text-xs font-semibold rounded-full bg-gray-700 text-gray-300"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <button
+                  onClick={() => router.push(`/writing/${interview.slug}`)}
+                  className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                >
+                  Read More
+                </button>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </main>
     </div>
   );

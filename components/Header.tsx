@@ -46,7 +46,7 @@ const Header = () => {
                 style={{ border: '2px solid #4a4a4a' }}
               >
                 <Image
-                  src="/profile-picture.jpg"
+                  src="/profile-picture.webp"
                   alt="Zachary Roth"
                   width={32}
                   height={32}

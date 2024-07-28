@@ -7,7 +7,7 @@ export default function ProfileSection() {
     <div className="text-center mb-2">
       <div className="profile-picture">
         <Image
-          src="/profile-picture.jpg"
+          src="/profile-picture.webp"
           alt="Zachary Roth"
           width={256}
           height={256}

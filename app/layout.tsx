@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     url: 'https://www.zacharyroth.com',
     images: [
       {
-        url: '/profile-picture.jpg',
+        url: '/profile-picture.webp',
         width: 256,
         height: 256,
         alt: 'Zachary Roth',
@@ -36,12 +36,16 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="font-inter">
+      <body className="font-inter" suppressHydrationWarning={true}>
         <StyledComponentsRegistry>
           <div className="flex flex-col min-h-screen">
             <Header />
             <ErrorBoundaryClient>
-              <main className="flex-grow">{children}</main>
+              <main className="flex-grow w-full">
+                <div className="px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 max-w-7xl mx-auto">
+                  {children}
+                </div>
+              </main>
             </ErrorBoundaryClient>
             <Footer />
           </div>

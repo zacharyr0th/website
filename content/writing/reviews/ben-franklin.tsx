@@ -1,32 +1,30 @@
-// ben-franklin.tsx
-
 import React from 'react';
+import { ContentItem } from '../../../lib/types';
 
-export const metadata = {
+export const metadata: ContentItem = {
   id: 'ben-franklin',
-  title: 'Ben Franklin',
+  slug: 'ben-franklin',
+  title: 'The Autobiography of Ben Franklin',
   subtitle: 'An American Life',
-  author: 'Lisa Wong',
-  bookAuthor: 'Be',
-  date: '2024-01-10',
-  image: '/images/reviews/placeholder.jpg',
+  image: '/placeholder.webp',
   imageCaption: 'Book cover of Ben Franklin: An American Life',
+  pageViews: 0,
+  type: 'review',
   description: 'A review of Walter Isaacson\'s biography of one of America\'s founding fathers.',
-  tags: ['Biography', 'American History'],
+  content: '',
+  author: 'Zachary Roth',
+  bookAuthor: 'Benjamin Franklin',
+  date: '2024-01-10',
+  tags: ['Autobiography'],
   readTime: 5,
   likes: 0,
   comments: 0,
   shares: 0,
-  type: 'review',
-  slug: 'ben-franklin',
 };
 
 const BenFranklin: React.FC = () => {
   return (
     <article>
-      <h1>{metadata.title}</h1>
-      <h2>{metadata.subtitle}</h2>
-      <p>{metadata.description}</p>
     </article>
   );
 };

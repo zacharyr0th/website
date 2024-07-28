@@ -1,32 +1,30 @@
-// born-standing-up.tsx
-
 import React from 'react';
+import { ContentItem } from '../../../lib/types';
 
-export const metadata = {
+export const metadata: ContentItem = {
   id: 'born-standing-up',
+  slug: 'born-standing-up',
   title: 'Born Standing Up',
   subtitle: 'A Comic\'s Life',
-  author: 'Rachel Green',
+  image: '/images/reviews/born-standing-up.webp',
+  imageCaption: 'Book cover of Born Standing Up by Steve Martin',
+  pageViews: 0,
+  type: 'review',
+  description: 'A review of Steve Martin\'s memoir about his early years in comedy.',
+  content: '', 
+  author: 'Zachary Roth',
   bookAuthor: 'Steve Martin',
   date: '2024-04-01',
-  image: '/images/reviews/placeholder.jpg',
-  imageCaption: 'Book cover of Born Standing Up by Steve Martin',
-  description: 'A review of Steve Martin\'s memoir about his early years in comedy.',
   tags: ['Autobiography', 'Comedy'],
   readTime: 4,
   likes: 0,
   comments: 0,
   shares: 0,
-  type: 'review',
-  slug: 'born-standing-up',
 };
 
 const BornStandingUp: React.FC = () => {
   return (
     <article>
-      <h1>{metadata.title}</h1>
-      <h2>{metadata.subtitle}</h2>
-      <p>{metadata.description}</p>
     </article>
   );
 };

@@ -1,31 +1,30 @@
-// anti-mimetics.tsx
-
 import React from 'react';
+import { ContentItem } from '../../../lib/types';
 
-export const metadata = {
-  id: 'anti-mimetics',
-  title: 'Anti-Mimetics',
+export const metadata: ContentItem = {
+  id: 'there-is-no-anti-mimetics-division',
+  slug: 'there-is-no-anti-mimetics-division',
+  title: 'There is No Anti-Mimetics Division',
   subtitle: 'The Science of Resisting Imitation',
-  author: 'Sarah Lee',
-  date: '2023-11-20',
-  image: '/images/reviews/placeholder.jpg',
+  image: '/placeholder.webp',
   imageCaption: 'Book cover of Anti-Mimetics',
+  pageViews: 0,
+  type: 'review',
   description: 'An exploration of how to resist unconscious imitation in a world of social influence.',
+  content: '', 
+  author: 'Zachary Roth',
+  date: '2024-07-20',
   tags: ['Sci-Fi'],
   readTime: 5,
   likes: 0,
   comments: 0,
   shares: 0,
-  type: 'review',
-  slug: 'anti-mimetics',
+  bookAuthor: 'qntm', 
 };
 
 const AntiMimetics: React.FC = () => {
   return (
     <article>
-      <h1>{metadata.title}</h1>
-      <h2>{metadata.subtitle}</h2>
-      <p>{metadata.description}</p>
     </article>
   );
 };

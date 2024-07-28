@@ -1,5 +1,3 @@
-// blockchain-chicken-farm.tsx
-
 import React from 'react';
 import { ContentItem } from '../../../lib/types';
 
@@ -8,7 +6,7 @@ export const metadata: ContentItem = {
   slug: 'blockchain-chicken-farm',
   title: 'Blockchain Chicken Farm',
   subtitle: 'Technology and Rural Innovation in China',
-  image: '/images/reviews/placeholder.jpg',
+  image: '/placeholder.webp',
   imageCaption: 'Illustration of a high-tech chicken farm',
   pageViews: 0,
   type: 'review',
@@ -17,7 +15,7 @@ export const metadata: ContentItem = {
   author: 'Sophia Chen',
   bookAuthor: 'Xiaowei Wang',
   date: '2024-03-01',
-  tags: ['Technology', 'Agriculture', 'China', 'Blockchain'],
+  tags: ['Technology'],
   readTime: 10,
   likes: 0,
   comments: 0,
@@ -27,7 +25,6 @@ export const metadata: ContentItem = {
 const BlockchainChickenFarm: React.FC = () => {
   return (
     <article>
-      {/* Review content goes here */}
     </article>
   );
 };

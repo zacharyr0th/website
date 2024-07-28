@@ -1,27 +1,7 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-
-interface ContentItem {
-  id: string;
-  slug: string;
-  title: string;
-  subtitle?: string;
-  image: string;
-  imageCaption?: string;
-  pageViews: number;
-  type: 'article' | 'review' | 'interview';
-  description?: string;
-  content: string;
-  author: string;
-  date: string;
-  tags?: string[];
-  readTime?: number;
-  likes?: number;
-  comments?: number;
-  shares?: number;
-  bookAuthor?: string; // For reviews
-}
+import { ContentItem } from './types';
 
 export async function getContentItems(
   type?: 'article' | 'review' | 'interview'
@@ -29,9 +9,8 @@ export async function getContentItems(
   const directories = type ? [type + 's'] : ['articles', 'reviews', 'interviews'];
   const contentDirectory = path.join(process.cwd(), 'content', 'writing');
 
-  console.log('Content directory:', contentDirectory);
-
   let allItems: ContentItem[] = [];
+  const usedIds = new Set();
 
   for (const dir of directories) {
     const fullPath = path.join(contentDirectory, dir);
@@ -60,22 +39,35 @@ export async function getContentItems(
           data = frontmatter;
           content = mdContent;
         } else if (file.endsWith('.tsx')) {
-          const metadataMatch = fileContents.match(/export const metadata = ({[\s\S]*?});/);
-          const contentMatch = fileContents.match(/<article>([\s\S]*?)<\/article>/);
+          const metadataMatch = fileContents.match(/export\s+const\s+metadata\s*:\s*ContentItem\s*=\s*({[\s\S]*?});/);
           
           if (metadataMatch) {
-            data = eval(`(${metadataMatch[1]})`);
+            const metadataString = metadataMatch[1];
+            data = eval(`(${metadataString})`);
           }
+          const contentMatch = fileContents.match(/<article>([\s\S]*?)<\/article>/);
           if (contentMatch) {
             content = contentMatch[1].trim();
           }
         }
 
         if (data && data.slug) {
+          const publicDir = path.join(process.cwd(), 'public');
+          const imagePath = path.join(publicDir, data.image);
+          const imageExists = await fs.access(imagePath).then(() => true).catch(() => false);
+
+          // Ensure unique IDs
+          if (usedIds.has(data.id)) {
+            console.warn(`Duplicate ID found: ${data.id}. Generating a new ID.`);
+            data.id = `${data.id}-${Date.now()}`;
+          }
+          usedIds.add(data.id);
+
           allItems.push({
             ...data,
             content,
             type: dir.slice(0, -1) as 'article' | 'review' | 'interview',
+            image: imageExists ? data.image : '/images/placeholder.webp',
           });
         }
       }
@@ -84,6 +76,10 @@ export async function getContentItems(
 
   console.log('Loaded items:', allItems);
   return allItems;
+}
+
+export async function getReviewItems(): Promise<ContentItem[]> {
+  return getContentItems('review');
 }
 
 export async function getContentItem(slug: string): Promise<ContentItem | undefined> {

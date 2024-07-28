@@ -45,7 +45,7 @@ export async function getRecommendedWritingContent(currentSlug: string, count: n
   const shuffled = filteredWriting.sort(() => 0.5 - Math.random());
   return shuffled.slice(0, count).map((article) => ({
     title: article.title,
-    image: '/placeholder.jpg',
+    image: '/placeholder.webp',
     link: `/writing/${article.slug}`,
   }));
 }

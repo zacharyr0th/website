@@ -16,7 +16,7 @@ export interface ContentItem {
   likes?: number;
   comments?: number;
   shares?: number;
-  bookAuthor?: string; 
+  bookAuthor?: string;
 }
 
 export interface WritingPageClientProps {

@@ -62,7 +62,7 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
               onError={(e) => {
                 (e.target as HTMLImageElement).src = '/placeholder.jpg';
               }}
-              priority
+              priority={true}
             />
             <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black/80 to-transparent">
               <h2 className="text-2xl font-bold mb-1">{article.title}</h2>
@@ -172,6 +172,7 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
                                 onError={(e) => {
                                   (e.target as HTMLImageElement).src = '/placeholder.jpg';
                                 }}
+                                priority={true}
                               />
                             </div>
                             <div className="ml-3 overflow-hidden flex-grow">
