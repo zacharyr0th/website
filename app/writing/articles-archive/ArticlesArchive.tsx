@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import type { ContentItem } from '@/lib/types';
 
 interface InterviewsArchiveProps {
@@ -11,7 +11,6 @@ interface InterviewsArchiveProps {
 }
 
 export default function InterviewsArchive({ initialInterviews }: InterviewsArchiveProps) {
-  const router = useRouter();
   const [interviews, setInterviews] = useState<ContentItem[]>(initialInterviews);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -23,7 +22,9 @@ export default function InterviewsArchive({ initialInterviews }: InterviewsArchi
   }, [interviews, searchTerm]);
 
   useEffect(() => {
-    console.log('InterviewsArchive mounted with', interviews.length, 'interviews');
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('InterviewsArchive mounted with', interviews.length, 'interviews');
+    }
   }, [interviews]);
 
   if (interviews.length === 0) {
@@ -47,7 +48,7 @@ export default function InterviewsArchive({ initialInterviews }: InterviewsArchi
 
       <main className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredInterviews.map((interview) => (
+          {filteredInterviews.map((interview, index) => (
             <motion.div
               key={interview.id}
               initial={{ opacity: 0, y: 20 }}
@@ -61,7 +62,7 @@ export default function InterviewsArchive({ initialInterviews }: InterviewsArchi
                 width={400}
                 height={200}
                 className="w-full h-48 object-cover"
-                priority={true}
+                loading={index < 3 ? "eager" : "lazy"}
               />
               <div className="p-6">
                 <h2 className="text-xl font-semibold mb-2">{interview.title}</h2>
@@ -76,12 +77,11 @@ export default function InterviewsArchive({ initialInterviews }: InterviewsArchi
                     </span>
                   ))}
                 </div>
-                <button
-                  onClick={() => router.push(`/writing/${interview.slug}`)}
-                  className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-                >
-                  Read More
-                </button>
+                <Link href={`/writing/${interview.slug}`} passHref>
+                  <a className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                    Read More
+                  </a>
+                </Link>
               </div>
             </motion.div>
           ))}

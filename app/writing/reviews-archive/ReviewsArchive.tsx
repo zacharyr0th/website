@@ -25,7 +25,9 @@ export default function ReviewsArchive({ initialReviews }: ReviewsArchiveProps) 
   }, [reviews, searchTerm]);
 
   useEffect(() => {
-    console.log('ReviewsArchive mounted with', reviews.length, 'reviews');
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('ReviewsArchive mounted with', reviews.length, 'reviews');
+    }
   }, [reviews]);
 
   if (reviews.length === 0) {
@@ -99,12 +101,12 @@ export default function ReviewsArchive({ initialReviews }: ReviewsArchiveProps) 
                           width={50}
                           height={50}
                           className="rounded-full object-cover w-full h-full"
-                          priority={true}
+                          loading={process.env.NODE_ENV !== 'production' ? "eager" : "lazy"}
                         />
                       </div>
                       <div className="ml-4 text-sm font-medium text-gray-300">{review.title}</div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-6 py-4">
                       <div className="text-sm text-gray-300">{review.bookAuthor}</div>
                     </td>
                     <td className="px-6 py-4">

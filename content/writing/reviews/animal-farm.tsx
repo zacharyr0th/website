@@ -6,7 +6,7 @@ export const metadata: ContentItem = {
   slug: 'animal-farm',
   title: 'Animal Farm',
   subtitle: 'A Political Allegory by George Orwell',
-  image: '/placeholder.webp',
+  image: '/images/reviews/animal-farm.webp',
   imageCaption: 'Book cover of Animal Farm by George Orwell',
   pageViews: 0,
   type: 'review',
