@@ -9,13 +9,13 @@ export const metadata: Metadata = {
     'Articles, reviews, and interviews by Zachary Roth on technology, finance, and more.',
 };
 
-export default function WritingPage({
+export default async function WritingPage({
   searchParams
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const contentType = searchParams.type as 'article' | 'review' | 'interview' | undefined;
-  const allContent = getContentItems(contentType);
+  const allContent = await getContentItems(contentType);
 
   if (allContent.length === 0) {
     notFound();

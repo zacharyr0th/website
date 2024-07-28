@@ -26,11 +26,16 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
 
   useEffect(() => {
     setMounted(true);
-    setRandomizedContent(allContent.sort(() => Math.random() - 0.5).slice(0, 5));
+    // Ensure allContent is an array before sorting and slicing
+    const contentArray = Array.isArray(allContent) ? allContent : [];
+    setRandomizedContent(contentArray.sort(() => Math.random() - 0.5).slice(0, 5));
   }, [allContent]);
 
-  const featuredArticles = allContent.slice(0, 3);
-  const popularArticles = mounted ? randomizedContent : allContent.slice(0, 5);
+  // Ensure allContent is an array
+  const contentArray = Array.isArray(allContent) ? allContent : [];
+
+  const featuredArticles = contentArray.slice(0, 3);
+  const popularArticles = mounted ? randomizedContent : contentArray.slice(0, 5);
 
   const categoryDescriptions: Record<string, string> = {
     Articles: 'Technology & Finance',
@@ -46,10 +51,10 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
 
     return (
       <div className="absolute inset-0 rounded-lg overflow-hidden shadow-lg bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a]">
-      <Link href={`/writing/${article.slug}`}>
-        <div className="relative h-full cursor-pointer">
-          <Image
-            src={imageSrc}
+        <Link href={`/writing/${article.slug}`}>
+          <div className="relative h-full cursor-pointer">
+            <Image
+              src={imageSrc}
               alt={`Cover image for ${article.title}`}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"

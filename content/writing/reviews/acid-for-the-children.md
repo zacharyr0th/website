@@ -1,11 +1,11 @@
 ---
-id: "acid-for-the-childres"
+id: "acid-for-the-children"
 title: "Acid for the Children"
 subtitle: "Undefined"
 author: "Zachary Roth"
 bookAuthor: "Flea"
 date: "2023-01-15"
-image: "/placeholder.jpg"
+image: "/images/reviews/acid-for-the-children-cover.webp"
 imageCaption: ""
 description: "Undefined"
 tags:
