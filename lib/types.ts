@@ -1,4 +1,4 @@
-export interface Content {
+export interface ContentItem {
   id: string;
   slug: string;
   title: string;
@@ -16,10 +16,10 @@ export interface Content {
   likes?: number;
   comments?: number;
   shares?: number;
-  bookAuthor?: string; // For reviews
+  bookAuthor?: string; 
 }
 
 export interface WritingPageClientProps {
-  initialContent: Content[];
+  initialContent: ContentItem[];
   contentType?: 'article' | 'review' | 'interview';
 }

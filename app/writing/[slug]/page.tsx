@@ -49,7 +49,7 @@ export default async function WritingPage({ params }: { params: { slug: string }
         />
         <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
         <div className="text-gray-600 mb-6">
-          <span>{post.author}</span> • <span>{post.date}</span> • <span>{post.type}</span>
+          <span>{post.author}</span> • <span>{post.date}</span> • <span>{post.type.charAt(0).toUpperCase() + post.type.slice(1)}</span>
         </div>
         <div
           className="prose prose-lg max-w-none mb-12"
