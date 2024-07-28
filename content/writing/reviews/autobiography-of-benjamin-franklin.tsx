@@ -2,15 +2,15 @@ import React from 'react';
 import { ContentItem } from '../../../lib/types';
 
 export const metadata: ContentItem = {
-  id: 'ben-franklin',
-  slug: 'ben-franklin',
-  title: 'The Autobiography of Ben Franklin',
+  id: 'autobiography-of-benjamin-franklin',
+  slug: 'autobiography-of-benjamin-franklin',
+  title: 'The Autobiography of Benjamin Franklin',
   subtitle: 'An American Life',
-  image: '/placeholder.webp',
-  imageCaption: 'Book cover of Ben Franklin: An American Life',
+  image: '/images/reviews/autobiography-of-benjamin-franklin.webp',
+  imageCaption: 'Book cover of The Autobiography of Benjamin Franklin: An American Life',
   pageViews: 0,
   type: 'review',
-  description: 'A review of Walter Isaacson\'s biography of one of America\'s founding fathers.',
+  description: 'A review of Benjamin Franklin\'s autobiography of one of America\'s founding fathers.',
   content: '',
   author: 'Zachary Roth',
   bookAuthor: 'Benjamin Franklin',

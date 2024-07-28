@@ -2,12 +2,12 @@ import React from 'react';
 import { ContentItem } from '../../../lib/types';
 
 export const metadata: ContentItem = {
-  id: 'there-is-no-anti-mimetics-division',
-  slug: 'there-is-no-anti-mimetics-division',
-  title: 'There is No Anti-Mimetics Division',
+  id: 'there-is-no-antimimetecs-division',
+  slug: 'there-is-no-antimimetecs-division',
+  title: 'There is No Antimimetecs Division',
   subtitle: 'The Science of Resisting Imitation',
-  image: '/placeholder.webp',
-  imageCaption: 'Book cover of Anti-Mimetics',
+  image: '/images/reviews/anti.webp',
+  imageCaption: 'Book cover of Antimimetecs',
   pageViews: 0,
   type: 'review',
   description: 'An exploration of how to resist unconscious imitation in a world of social influence.',
