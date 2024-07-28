@@ -1,25 +1,13 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-
-type Content = {
-  id: string;
-  slug: string;
-  title: string;
-  image: string;
-  date?: string;
-  author?: string;
-  description?: string;
-  tags?: string[] | string;
-  pageViews: number;
-  readTime?: number;
-  type: 'article' | 'review' | 'interview';
-};
+import { useRouter } from 'next/navigation';
+import type { Content } from '@/lib/types'; // Changed from ContentItem to Content
 
 export default function ArticlesArchive() {
+  const router = useRouter();
   const [articles, setArticles] = useState<Content[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(true);
@@ -28,11 +16,8 @@ export default function ArticlesArchive() {
     const fetchArticles = async () => {
       try {
         const response = await fetch('/api/articles');
-        if (!response.ok) {
-          throw new Error('Failed to fetch articles');
-        }
-        const data = await response.json();
-        setArticles(data);
+        const items = await response.json();
+        setArticles(items);
         setIsLoading(false);
       } catch (error) {
         console.error('Error fetching articles:', error);
@@ -94,7 +79,7 @@ export default function ArticlesArchive() {
                     transition={{ duration: 0.3 }}
                     whileHover={{ backgroundColor: 'rgba(26, 26, 26, 0.5)' }}
                     className="cursor-pointer"
-                    onClick={() => (window.location.href = `/writing/${article.slug}`)}
+                    onClick={() => router.push(`/writing/${article.slug}`)}
                   >
                     <td className="px-6 py-4 whitespace-nowrap flex items-center">
                       <div className="w-12 h-12">
@@ -111,20 +96,14 @@ export default function ArticlesArchive() {
                     <td className="px-6 py-4">
                       <div className="flex flex-wrap gap-2">
                         {article.tags ? (
-                          Array.isArray(article.tags) ? (
-                            article.tags.map((tag, index) => (
-                              <span
-                                key={index}
-                                className="px-2 py-1 text-xs font-semibold rounded-full bg-gray-700 text-gray-300"
-                              >
-                                {tag}
-                              </span>
-                            ))
-                          ) : (
-                            <span className="px-2 py-1 text-xs font-semibold rounded-full bg-gray-700 text-gray-300">
-                              {article.tags}
+                          article.tags.map((tag, index) => (
+                            <span
+                              key={index}
+                              className="px-2 py-1 text-xs font-semibold rounded-full bg-gray-700 text-gray-300"
+                            >
+                              {tag}
                             </span>
-                          )
+                          ))
                         ) : (
                           <span className="text-gray-500">No tags</span>
                         )}
