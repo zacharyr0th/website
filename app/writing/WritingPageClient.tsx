@@ -148,9 +148,9 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
               <div className="overflow-y-auto flex-grow popular-articles hover-scroll">
                 {popularArticles.length > 0 ? (
                   <ul className="space-y-3 pr-2">
-                    {popularArticles.map((content) => (
+                    {popularArticles.map((content, index) => (
                       <li
-                        key={content.id}
+                        key={index}
                         className="bg-[#242424] hover:bg-[#2a2a2a] transition-all duration-300 rounded-lg overflow-hidden shadow-md h-[100px]"
                       >
                         <Link href={`/writing/${content.slug}`}>
