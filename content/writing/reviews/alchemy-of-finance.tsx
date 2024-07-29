@@ -13,7 +13,7 @@ export const metadata: ContentItem = {
   description: 'A deep dive into the complex world of financial markets and investment strategies.',
   content: '', 
   author: 'Zachary Roth',
-  date: '2023-09-10',
+  date: 'Sep 2022',
   tags: ['Finance'],
   readTime: 6,
   likes: 0,

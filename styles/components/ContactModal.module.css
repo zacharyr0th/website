@@ -9,7 +9,7 @@
 }
 
 .contactButton {
-  @apply bg-[#4A90E2] shadow-lg hover:text-[#4A90E2] hover:bg-[#E1F5FE];
+  @apply bg-[#4A90E2] text-white shadow-lg hover:text-[#4A90E2] hover:bg-[#E1F5FE];
 }
 
 .modalOverlay,

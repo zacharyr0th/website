@@ -13,7 +13,7 @@ export const metadata: ContentItem = {
   description: 'A review of Peter Zeihan\'s book The Absent Superpower',
   content: '',
   author: 'Zachary Roth',
-  date: '2023-09-10',
+  date: 'May 2022',
   tags: ['Geopolitics'],
   readTime: 6,
   likes: 0,

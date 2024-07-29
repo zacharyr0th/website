@@ -14,7 +14,7 @@ export const metadata: ContentItem = {
   content: '', 
   author: 'Zachary Roth',
   bookAuthor: 'Nial Ferguson',
-  date: '2023-12-05',
+  date: 'Aug 2022',
   tags: ['Finance', 'History'],
   readTime: 6,
   likes: 0,

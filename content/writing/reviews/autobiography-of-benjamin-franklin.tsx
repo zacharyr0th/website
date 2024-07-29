@@ -14,7 +14,7 @@ export const metadata: ContentItem = {
   content: '',
   author: 'Zachary Roth',
   bookAuthor: 'Benjamin Franklin',
-  date: '2024-01-10',
+  date: 'Aug 2022',
   tags: ['Autobiography'],
   readTime: 5,
   likes: 0,
@@ -25,6 +25,11 @@ export const metadata: ContentItem = {
 const BenFranklin: React.FC = () => {
   return (
     <article>
+      <p>It is refreshing to read the personal account of someone level-headed during a time when humanity was not. Meditations by Marcus Aurelius is similar, but that book was boring.</p>
+
+      <p>I'm no Benjamin Franklin historian, but I know he was a frisky individual and a powerful freemason - this book doesn't get into that at all (why would it). It mainly highlights the thought processes of a revolutionary polymath who impacted the trajectory of history.</p>
+
+      <p>You'll like this one if you're into period pieces and history.</p>
     </article>
   );
 };

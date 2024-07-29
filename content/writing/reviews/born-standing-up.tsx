@@ -14,7 +14,7 @@ export const metadata: ContentItem = {
   content: '', 
   author: 'Zachary Roth',
   bookAuthor: 'Steve Martin',
-  date: '2024-04-01',
+  date: 'Oct 2022',
   tags: ['Autobiography', 'Comedy'],
   readTime: 4,
   likes: 0,

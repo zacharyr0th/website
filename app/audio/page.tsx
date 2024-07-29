@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 const categories = [
   { title: 'Recordings', description: 'Full discography', slug: 'recordings' },
   { title: 'Compositions', description: 'Originals', slug: 'compositions' },
-  { title: 'Theory', description: 'Lorum Ipsum', slug: 'theory' },
+  { title: 'Theory', description: 'Mainly exploratory', slug: 'theory' },
   { title: 'Sheet Music', description: 'Useful notation', slug: 'sheet-music' },
   { title: 'Datasets', description: 'With many usecases', slug: 'datasets' },
   { title: 'Archive', description: 'History', slug: 'archive' },
@@ -59,7 +59,7 @@ const AudioPage = () => {
             <div className="md:w-1/2">
               <div className="rounded-lg shadow-lg">
                 <Image
-                  src="/placeholder.jpg"
+                  src="/placeholder.webp"
                   alt="Description of the image"
                   width={1400}
                   height={1000}

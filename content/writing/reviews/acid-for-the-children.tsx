@@ -13,7 +13,7 @@ export const metadata: ContentItem = {
   description: 'A review of Flea\'s raw and honest memoir about his wild youth and the formation of the Red Hot Chili Peppers.',
   content: '', 
   author: 'Zachary Roth',
-  date: '2023-01-15',
+  date: 'Jan 2023',
   tags: ['Autobiography', 'Music'],
   readTime: 2,
   likes: 0,

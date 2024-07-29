@@ -13,7 +13,7 @@ export const reviewData: ContentItem = {
   description: 'An exploration of how unforeseen circumstances led to the emergence of a new global superpower.',
   content: '', 
   author: 'Zachary Roth',
-  date: '2023-08-05',
+  date: 'May 2022',
   tags: ['Geopolitics'],
   readTime: 5,
   likes: 0,

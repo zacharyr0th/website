@@ -13,7 +13,7 @@ export const metadata: ContentItem = {
   description: 'A review of Orwell\'s classic novel that uses farm animals to satirize totalitarian regimes.',
   content: '', 
   author: 'George Orwell',
-  date: '2023-10-15',
+  date: 'Oct 2022',
   tags: ['Satire', 'Classic'],
   readTime: 4,
   likes: 0,

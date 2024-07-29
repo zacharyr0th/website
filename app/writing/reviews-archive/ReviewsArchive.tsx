@@ -43,7 +43,7 @@ export default function ReviewsArchive({ initialReviews }: ReviewsArchiveProps) 
 
   return (
     <div className="min-h-screen bg-inherit text-gray-300">
-      <header className="sticky top-0 z-10 bg-inherit shadow-md">
+      <header className="bg-inherit shadow-md">
         <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
           <h1 className="text-4xl font-bold">Reviews Archive</h1>
           <input

@@ -20,7 +20,6 @@
 .tab-button.active,
 .contact-button {
   background-color: var(--color-accent);
-  color: var(--color-text-primary);
 }
 
 .tab-button:not(.active) {
