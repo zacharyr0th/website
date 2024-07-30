@@ -32,18 +32,6 @@ const ContentWrapper = styled.div`
   background-color: inherit;
 `;
 
-const Header = styled.div`
-  padding: 1.5rem 2rem;
-  background-color: rgba(0, 0, 0, 0.2);
-`;
-
-const Title = styled.h1`
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin: 0;
-  color: var(--color-text-secondary);
-`;
-
 const ContentContainer = styled.div`
   display: flex;
   flex: 1;
@@ -189,11 +177,14 @@ const GameOverModal = styled.div`
   border-radius: 15px;
   text-align: center;
   animation: ${modalAnimation} 0.3s ease-out;
+  color: white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 
   h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: #f0f0f0;
+    color: var(--color-accent);
   }
 
   p {
@@ -203,19 +194,63 @@ const GameOverModal = styled.div`
   }
 `;
 
+const ScoreSection = styled.div`
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+
+  p {
+    margin: 0.5rem 0;
+  }
+
+  .new-high-score {
+    color: #ffd700;
+    font-weight: bold;
+  }
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+`;
+
 const Button = styled.button`
-  background-color: var(--color-accent);
-  color: var(--color-text-primary);
-  border: none;
-  padding: 0.5rem 1.5rem;
+  padding: 0.75rem 1.5rem;
   font-size: 1rem;
+  border: none;
   border-radius: var(--border-radius);
   cursor: pointer;
   transition: all var(--transition-duration);
-  margin: 0 0.5rem;
+  background-color: var(--color-accent);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
 
   &:hover {
-    background-color: var(--color-accent-hover);
+    background-color: white;
+    color: var(--color-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  &.active {
+    background-color: white;
+    color: var(--color-accent);
+  }
+
+  &.active:hover {
+    background-color: var(--color-accent);
+    color: white;
   }
 `;
 
@@ -228,14 +263,11 @@ export default function SnakeGame() {
   const [snake, setSnake] = useState(() => [{ x: 10, y: 10, color: getRandomPastelColor() }]);
   const [food, setFood] = useState(() => ({ x: 5, y: 5 }));
   const [direction, setDirection] = useState<Direction>('RIGHT');
-  const [gameOver, setGameOver] = useState(false);
-  const [gameWon, setGameWon] = useState(false);
+  const [gameState, setGameState] = useState<'playing' | 'over' | 'won'>('playing');
   const [highScore, setHighScore] = useState(() => {
-    const savedHighScore = localStorage.getItem('snakeHighScore');
-    return savedHighScore ? parseInt(savedHighScore, 10) : 0;
+    return parseInt(localStorage.getItem('snakeHighScore') || '0', 10);
   });
   const [score, setScore] = useState(0);
-  const [difficulty, setDifficulty] = useState('medium');
 
   const updateHighScore = useCallback((newScore: number) => {
     if (newScore > highScore) {
@@ -245,46 +277,38 @@ export default function SnakeGame() {
   }, [highScore]);
 
   const moveSnake = useCallback(() => {
-    if (gameOver || gameWon) return;
+    if (gameState !== 'playing') return;
     setSnake((prevSnake) => {
       const newSnake = [...prevSnake];
       const head = { ...newSnake[0], color: getRandomPastelColor() };
 
-      switch (direction) {
-        case 'UP':
-          head.y = (head.y - 1 + 20) % 20;
-          break;
-        case 'DOWN':
-          head.y = (head.y + 1) % 20;
-          break;
-        case 'LEFT':
-          head.x = (head.x - 1 + 20) % 20;
-          break;
-        case 'RIGHT':
-          head.x = (head.x + 1) % 20;
-          break;
-      }
+      const newHead = {
+        x: (head.x + (direction === 'RIGHT' ? 1 : direction === 'LEFT' ? -1 : 0) + 20) % 20,
+        y: (head.y + (direction === 'DOWN' ? 1 : direction === 'UP' ? -1 : 0) + 20) % 20,
+        color: head.color,
+      };
 
-      if (newSnake.some((segment) => segment.x === head.x && segment.y === head.y)) {
-        setGameOver(true);
+      if (newSnake.some((segment) => segment.x === newHead.x && segment.y === newHead.y)) {
+        setGameState('over');
         return prevSnake;
       }
 
-      if (head.x === food.x && head.y === food.y) {
-        newSnake.unshift(head);
-        updateHighScore(newSnake.length - 1); 
+      if (newHead.x === food.x && newHead.y === food.y) {
+        newSnake.unshift(newHead);
+        setScore(newSnake.length - 1);
+        updateHighScore(newSnake.length - 1);
         if (newSnake.length === 400) {
-          setGameWon(true);
+          setGameState('won');
           return newSnake;
         }
         setFood({ x: Math.floor(Math.random() * 20), y: Math.floor(Math.random() * 20) });
       } else {
         newSnake.pop();
-        newSnake.unshift(head);
+        newSnake.unshift(newHead);
       }
       return newSnake;
     });
-  }, [direction, food, gameOver, gameWon, updateHighScore]);
+  }, [direction, food, gameState, updateHighScore]);
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
@@ -298,10 +322,7 @@ export default function SnakeGame() {
       if (newDirection) {
         setDirection((prev) => {
           const opposites: Record<Direction, Direction> = {
-            UP: 'DOWN',
-            DOWN: 'UP',
-            LEFT: 'RIGHT',
-            RIGHT: 'LEFT',
+            UP: 'DOWN', DOWN: 'UP', LEFT: 'RIGHT', RIGHT: 'LEFT',
           };
           return opposites[prev] !== newDirection ? newDirection : prev;
         });
@@ -317,51 +338,56 @@ export default function SnakeGame() {
     };
   }, [moveSnake]);
 
-  const closeModal = useCallback(() => {
-    setGameOver(false);
-    setGameWon(false);
+  const resetGame = useCallback(() => {
+    setGameState('playing');
     setSnake([{ x: 10, y: 10, color: getRandomPastelColor() }]);
     setDirection('RIGHT');
     setFood({ x: Math.floor(Math.random() * 20), y: Math.floor(Math.random() * 20) });
+    setScore(0);
   }, []);
 
-  const boardCells = useMemo(
-    () =>
-      Array(20)
-        .fill(0)
-        .map((_, y) =>
-          Array(20)
-            .fill(0)
-            .map((_, x) => {
-              const snakeSegment = snake.find((s) => s.x === x && s.y === y);
-              const isSnake = !!snakeSegment;
-              const isHead = snake[0].x === x && snake[0].y === y;
-              return (
-                <Cell
-                  key={`${x}-${y}`}
-                  $isSnake={isSnake}
-                  $isFood={food.x === x && food.y === y}
-                  $isHead={isHead}
-                  $color={snakeSegment ? snakeSegment.color : ''}
-                />
-              );
-            })
-        ),
-    [snake, food]
-  );
+  const boardCells = useMemo(() => (
+    Array(20).fill(0).map((_, y) =>
+      Array(20).fill(0).map((_, x) => {
+        const snakeSegment = snake.find((s) => s.x === x && s.y === y);
+        const isSnake = !!snakeSegment;
+        const isHead = snake[0].x === x && snake[0].y === y;
+        return (
+          <Cell
+            key={`${x}-${y}`}
+            $isSnake={isSnake}
+            $isFood={food.x === x && food.y === y}
+            $isHead={isHead}
+            $color={snakeSegment ? snakeSegment.color : ''}
+          />
+        );
+      })
+    )
+  ), [snake, food]);
 
   return (
     <GameContainer>
       <ContentWrapper>
-        <Header>
-          <Title>Snake Game</Title>
-        </Header>
+        <header className="py-6 mb-8">
+          <div className="container flex justify-between items-center">
+            <h1 className="text-4xl font-bold">404 - Page Not Found</h1>
+            <nav className="navbar-links">
+              <ul className="flex gap-4">
+                <li>
+                  <Link href="/" className="nav-link">
+                    <span>Back to the Homepage</span>
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </header>
         <ContentContainer>
           <LeftSection>
             <TopLeftSection>
+              <p>So here's a snake game.</p>
               <ScoreDisplay>Score: {score}</ScoreDisplay>
               <HighScoreDisplay>High Score: {highScore}</HighScoreDisplay>
-              <HomeLink href="/">Back to Home</HomeLink>
             </TopLeftSection>
             <RulesSection>
               <RulesTitle>Game Rules</RulesTitle>
@@ -380,18 +406,32 @@ export default function SnakeGame() {
         </ContentContainer>
       </ContentWrapper>
 
-      {(gameOver || gameWon) && (
+      {gameState !== 'playing' && (
         <GameOverlay>
           <GameOverModal>
-            <h2>{gameWon ? 'Congratulations' : 'Game Over'}</h2>
-            <p>
-              {gameWon ? 'You filled the entire board 💪' : `Your final score: ${score}`}
-            </p>
-            <p>{score > highScore ? 'New High Score!' : `High Score: ${highScore}`}</p>
-            <div>
-              <Button onClick={closeModal}>Play Again</Button>
-              <Button onClick={() => window.location.reload()}>Reset Game</Button>
-            </div>
+            <h2>{gameState === 'won' ? 'Congratulations!' : 'Game Over'}</h2>
+            <ScoreSection>
+              <p>
+                {gameState === 'won' 
+                  ? 'You filled the entire board! Amazing job!' 
+                  : `Your final score: ${score}`}
+              </p>
+              <p>
+                {score > highScore 
+                  ? <span className="new-high-score">New High Score: {score}!</span>
+                  : `High Score: ${highScore}`}
+              </p>
+            </ScoreSection>
+            <ButtonGroup>
+              <Button onClick={resetGame} className="active">
+                <span>Play Again</span>
+              </Button>
+              <Link href="/" passHref>
+                <Button as="a">
+                  <span>Back to Home</span>
+                </Button>
+              </Link>
+            </ButtonGroup>
           </GameOverModal>
         </GameOverlay>
       )}

@@ -26,16 +26,15 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
 
   useEffect(() => {
     setMounted(true);
-    // Ensure allContent is an array before sorting and slicing
-    const contentArray = Array.isArray(allContent) ? allContent : [];
-    setRandomizedContent(contentArray.sort(() => Math.random() - 0.5).slice(0, 5));
+    // Randomize all content
+    setRandomizedContent([...allContent].sort(() => Math.random() - 0.5));
   }, [allContent]);
 
   // Ensure allContent is an array
   const contentArray = Array.isArray(allContent) ? allContent : [];
 
   const featuredArticles = contentArray.slice(0, 3);
-  const popularArticles = mounted ? randomizedContent : contentArray.slice(0, 5);
+  const allRandomizedContent = mounted ? randomizedContent : contentArray;
 
   const categoryDescriptions: Record<string, string> = {
     Articles: 'Technology & Finance',
@@ -146,9 +145,9 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
             <div className="bg-[#1a1a1a] p-4 rounded-lg shadow-lg h-[calc(3*100px+3rem)] flex flex-col">
               <h2 className="text-xl font-bold mb-3">Random</h2>
               <div className="overflow-y-auto flex-grow popular-articles hover-scroll">
-                {popularArticles.length > 0 ? (
+                {allRandomizedContent.length > 0 ? (
                   <ul className="space-y-3 pr-2">
-                    {popularArticles.map((content, index) => (
+                    {allRandomizedContent.map((content, index) => (
                       <li
                         key={index}
                         className="bg-[#242424] hover:bg-[#2a2a2a] transition-all duration-300 rounded-lg overflow-hidden shadow-md h-[100px]"

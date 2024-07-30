@@ -1,63 +1,61 @@
-/* audio.css */
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* General Styles */
-.audio-container {
-  @apply min-h-screen flex flex-col;
-}
+@layer components {
+  .audio-container {
+    @apply min-h-screen flex flex-col;
+  }
 
-.audio-main {
-  @apply container mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-8 flex-grow;
-}
+  .audio-main {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-8 flex-grow;
+  }
 
-.audio-title {
-  @apply text-xl sm:text-5xl font-extrabold text-gray-100 text-left mb-6;
-}
+  .audio-title {
+    @apply text-xl sm:text-5xl font-extrabold text-gray-100 text-left mb-6;
+  }
 
-.audio-divider {
-  @apply border-gray-700 mb-8;
-}
+  .audio-divider {
+    @apply border-gray-700 mb-8;
+  }
 
-.audio-section {
-  @apply mb-12;
-}
+  .audio-section {
+    @apply mb-12;
+  }
 
-.audio-flex-container {
-  @apply flex flex-col md:flex-row items-center gap-8;
-}
+  .audio-flex-container {
+    @apply flex flex-col md:flex-row items-center gap-8;
+  }
 
-.audio-image {
-  @apply w-full md:w-1/2 rounded-lg;
-}
+  .audio-image {
+    @apply w-full md:w-1/2 rounded-lg;
+  }
 
-.audio-text {
-  @apply w-full md:w-1/2 text-gray-300 text-lg;
-}
+  .audio-text {
+    @apply w-full md:w-1/2 text-gray-300 text-lg;
+  }
 
-/* Category Grid */
-.audio-grid {
-  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8;
-}
+  .audio-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8;
+  }
 
-.audio-card {
-  @apply block bg-transparent rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700;
-}
+  .audio-card {
+    @apply block bg-transparent rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700;
+  }
 
-.audio-card-content {
-  @apply p-6;
-}
+  .audio-card-content {
+    @apply p-6;
+  }
 
-.audio-card-title {
-  @apply text-2xl font-bold text-gray-100 mb-2;
-}
+  .audio-card-title {
+    @apply text-2xl font-bold text-gray-100 mb-2;
+  }
 
-.audio-card-description {
-  @apply text-gray-400;
-}
+  .audio-card-description {
+    @apply text-gray-400;
+  }
 
-.audio-card-gradient {
-  @apply h-1 w-full bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300;
+  .audio-card-gradient {
+    @apply h-1 w-full bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300;
+  }
 }
