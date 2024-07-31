@@ -6,7 +6,7 @@ export const metadata: ContentItem = {
   slug: 'brave-new-world',
   title: 'Brave New World',
   subtitle: 'Aldous Huxley\'s Vision of a Dystopian Future',
-  image: '/placeholder.webp',
+  image: '/images/reviews/brave-new-world.webp',
   imageCaption: 'A monochrome dystopia representing the plot of \'Brave New World\'',
   pageViews: 0,
   type: 'review',

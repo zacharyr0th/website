@@ -264,17 +264,23 @@ export default function SnakeGame() {
   const [food, setFood] = useState(() => ({ x: 5, y: 5 }));
   const [direction, setDirection] = useState<Direction>('RIGHT');
   const [gameState, setGameState] = useState<'playing' | 'over' | 'won'>('playing');
-  const [highScore, setHighScore] = useState(() => {
-    return parseInt(localStorage.getItem('snakeHighScore') || '0', 10);
-  });
+  const [highScore, setHighScore] = useState(0);
   const [score, setScore] = useState(0);
 
+  useEffect(() => {
+    const storedHighScore = localStorage.getItem('snakeHighScore');
+    setHighScore(storedHighScore ? parseInt(storedHighScore, 10) : 0);
+  }, []);
+
   const updateHighScore = useCallback((newScore: number) => {
-    if (newScore > highScore) {
-      setHighScore(newScore);
-      localStorage.setItem('snakeHighScore', newScore.toString());
-    }
-  }, [highScore]);
+    setHighScore(prevHighScore => {
+      if (newScore > prevHighScore) {
+        localStorage.setItem('snakeHighScore', newScore.toString());
+        return newScore;
+      }
+      return prevHighScore;
+    });
+  }, []);
 
   const moveSnake = useCallback(() => {
     if (gameState !== 'playing') return;

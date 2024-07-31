@@ -1,11 +1,16 @@
-import React from 'react';
+import AudioArchive from './AudioArchive';
+import { getAudioItems } from '../../../lib/audio';
+import type { AudioItem } from '@/lib/types';
 
-export default function ArchivePage() {
+export default async function ArchivePage() {
+  const audioItems: AudioItem[] = await getAudioItems();
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-4">Audio Archive</h1>
-      <p>Explore our collection of archived audio files and recordings.</p>
-      {/* Add content specific to the audio archive */}
+    <div className="audio-container">
+      <main className="audio-main">
+        <h1 className="audio-title">Audio Archive</h1>
+        <hr className="audio-divider" />
+        <AudioArchive initialAudioItems={audioItems} />
+      </main>
     </div>
   );
 }

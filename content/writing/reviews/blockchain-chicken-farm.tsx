@@ -6,7 +6,7 @@ export const metadata: ContentItem = {
   slug: 'blockchain-chicken-farm',
   title: 'Blockchain Chicken Farm',
   subtitle: 'Technology and Rural Innovation in China',
-  image: '/placeholder.webp',
+  image: '/images/reviews/blockchain-chicken-farm.webp',
   imageCaption: 'Illustration of a high-tech chicken farm',
   pageViews: 0,
   type: 'review',
