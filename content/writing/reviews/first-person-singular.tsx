@@ -16,7 +16,7 @@ export const metadata: ContentItem = {
   bookAuthor: 'Haruki Murakami',
   date: 'Jul 2023',
   tags: ['Fiction', 'Short Stories'],
-  readTime: 4,
+  readTime: 2,
   likes: 0,
   comments: 0,
   shares: 0,

@@ -12,7 +12,7 @@ content: ''
 author: 'Zachary Roth'
 date: 'July 2024'
 tags: ['Sci-Fi']
-readTime: 5
+readTime: 2
 likes: 0
 comments: 0
 shares: 0

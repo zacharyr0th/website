@@ -15,7 +15,7 @@ export const metadata: ContentItem = {
   author: 'Zachary Roth',
   date: 'May 2022',
   tags: ['Geopolitics'],
-  readTime: 6,
+  readTime: 2,
   likes: 0,
   comments: 0,
   shares: 0,

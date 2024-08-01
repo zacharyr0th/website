@@ -12,8 +12,8 @@ content: ''
 author: 'Zachary Roth'
 bookAuthor: 'Michael Lewis'
 date: 'Nov 2022'
-tags: ['History', 'Economics']
-readTime: 5
+tags: ['Finance']
+readTime: 2
 likes: 0
 comments: 0
 shares: 0

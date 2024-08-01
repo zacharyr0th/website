@@ -43,11 +43,24 @@ export async function getContentItems(
           
           if (metadataMatch) {
             const metadataString = metadataMatch[1];
-            data = eval(`(${metadataString})`);
+            try {
+              // Use eval to parse the metadata object
+              data = eval(`(${metadataString})`);
+            } catch (error) {
+              console.warn(`Failed to parse metadata for file: ${file}`, error);
+              continue;
+            }
+          } else {
+            console.warn(`No metadata found for file: ${file}`);
+            continue;
           }
+
           const contentMatch = fileContents.match(/<article>([\s\S]*?)<\/article>/);
           if (contentMatch) {
             content = contentMatch[1].trim();
+          } else {
+            console.warn(`No content found for file: ${file}`);
+            // Don't continue here, as the content might be dynamically generated
           }
         }
 
@@ -69,12 +82,14 @@ export async function getContentItems(
             type: dir.slice(0, -1) as 'article' | 'review' | 'interview',
             image: imageExists ? data.image : '/images/placeholder.webp',
           });
+        } else {
+          console.warn(`Missing slug or invalid data for file: ${file}`);
         }
       }
     }
   }
 
-  console.log('Loaded items:', allItems);
+  console.log('Loaded items:', allItems.length);
   return allItems;
 }
 

@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="font-inter" suppressHydrationWarning={true}>
+      <body className="font-inter">
         <StyledComponentsRegistry>
           <div className="flex flex-col min-h-screen">
             <Header />
@@ -49,9 +49,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </ErrorBoundaryClient>
             <Footer />
           </div>
-          {process.env.NODE_ENV === 'production' && <SpeedInsights />}
-          {process.env.NODE_ENV === 'production' && <Analytics />}
         </StyledComponentsRegistry>
+        {process.env.NODE_ENV === 'production' && (
+          <>
+            <SpeedInsights />
+            <Analytics />
+          </>
+        )}
       </body>
     </html>
   );

@@ -65,9 +65,6 @@ export default function ArticlesArchive({ initialArticles }: ArticlesArchiveProp
                   Title
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
-                  Book Author
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                   Tags
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
@@ -101,9 +98,6 @@ export default function ArticlesArchive({ initialArticles }: ArticlesArchiveProp
                       />
                     </div>
                     <div className="ml-4 text-sm font-medium text-gray-300">{article.title}</div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="text-sm text-gray-300">{article.bookAuthor}</div>
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex flex-wrap gap-2">

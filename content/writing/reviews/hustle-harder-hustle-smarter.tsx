@@ -16,7 +16,7 @@ export const metadata: ContentItem = {
   bookAuthor: '50 Cent',
   date: 'May 2023',
   tags: ['Biography'],
-  readTime: 4,
+  readTime: 2,
   likes: 0,
   comments: 0,
   shares: 0,

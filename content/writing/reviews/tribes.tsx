@@ -15,7 +15,7 @@ export const metadata: ContentItem = {
   author: 'Zachary Roth',
   bookAuthor: 'Seth Godin',
   date: 'Aug 2023',
-  tags: ['Marketing', 'Leadership'],
+  tags: ['Productivity'],
   readTime: 2,
   likes: 0,
   comments: 0,

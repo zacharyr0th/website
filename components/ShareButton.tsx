@@ -14,7 +14,6 @@ export default function ShareButton({ postSlug }: { postSlug: string }) {
         console.error('Error sharing:', error);
       }
     } else {
-      // Fallback for browsers that don't support the Web Share API
       alert('Share URL: ' + window.location.href);
     }
   };

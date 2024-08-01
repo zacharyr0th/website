@@ -16,7 +16,7 @@ export const metadata: ContentItem = {
   bookAuthor: 'Michael Lewis',
   date: 'Mar 2023',
   tags: ['Finance'],
-  readTime: 4,
+  readTime: 2,
   likes: 0,
   comments: 0,
   shares: 0,

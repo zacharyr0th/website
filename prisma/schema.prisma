@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model WrittenContent {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  subtitle    String?
+  image       String
+  imageCaption String?
+  pageViews   Int      @default(0)
+  type        String
+  description String?
+  content     String
+  author      String
+  date        DateTime
+  tags        String[]
+  readTime    Int?
+  likes       Int      @default(0)
+  comments    Int      @default(0)
+  shares      Int      @default(0)
+  bookAuthor  String?
+}
+
+model AudioContent {
+  id       String   @id @default(cuid())
+  slug     String   @unique
+  title    String
+  artist   String?
+  type     String
+  tags     String[]
+  date     DateTime
+  duration String
+  image    String?
+  content  String
+  fileType String
+  fileSize Int
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  slug      String   @unique
+  likeCount Int      @default(0)
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String
+  postSlug  String   // Added this line
+  createdAt DateTime @default(now())
+}

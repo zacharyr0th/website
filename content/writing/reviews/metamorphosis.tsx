@@ -16,7 +16,7 @@ export const metadata: ContentItem = {
   bookAuthor: 'Franz Kafka',
   date: 'Aug 2023',
   tags: ['Fiction', 'Classic'],
-  readTime: 3,
+  readTime: 2,
   likes: 0,
   comments: 0,
   shares: 0,

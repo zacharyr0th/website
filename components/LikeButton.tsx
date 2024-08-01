@@ -8,9 +8,25 @@ export default function LikeButton({ postSlug }: { postSlug: string }) {
   const [likeCount, setLikeCount] = useState(0);
 
   const handleLike = async () => {
-    // TODO: Implement API call to update like count
-    setLiked(!liked);
-    setLikeCount(liked ? likeCount - 1 : likeCount + 1);
+    try {
+      const response = await fetch('/api/like', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ postSlug, liked: !liked }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setLiked(data.liked);
+        setLikeCount(data.likeCount);
+      } else {
+        console.error('Failed to update like status');
+      }
+    } catch (error) {
+      console.error('Error updating like status:', error);
+    }
   };
 
   return (

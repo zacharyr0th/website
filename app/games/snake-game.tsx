@@ -391,7 +391,7 @@ export default function SnakeGame() {
         <ContentContainer>
           <LeftSection>
             <TopLeftSection>
-              <p>So here's a snake game.</p>
+              <p>So here&apos;s a snake game.</p>
               <ScoreDisplay>Score: {score}</ScoreDisplay>
               <HighScoreDisplay>High Score: {highScore}</HighScoreDisplay>
             </TopLeftSection>

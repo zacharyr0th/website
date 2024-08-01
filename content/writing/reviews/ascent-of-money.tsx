@@ -16,7 +16,7 @@ export const metadata: ContentItem = {
   bookAuthor: 'Nial Ferguson',
   date: 'Aug 2022',
   tags: ['Finance', 'History'],
-  readTime: 6,
+  readTime: 2,
   likes: 0,
   comments: 0,
   shares: 0,
