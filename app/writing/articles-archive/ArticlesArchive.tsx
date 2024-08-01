@@ -25,10 +25,9 @@ export default function ArticlesArchive({ initialArticles }: ArticlesArchiveProp
   }, [articles, searchTerm]);
 
   useEffect(() => {
-    if (process.env.NODE_ENV !== 'production') {
-      console.log('ArticlesArchive mounted with', articles.length, 'articles');
-    }
-  }, [articles]);
+    setArticles(initialArticles);
+    console.log('ArticlesArchive mounted with', initialArticles.length, 'articles');
+  }, [initialArticles]);
 
   if (articles.length === 0) {
     return <div>No articles available. Please check the console for more information.</div>;

@@ -1,40 +1,37 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import type { ContentItem } from '@/lib/types';
 
-interface InterviewContentItem extends ContentItem {
-  interviewee?: string;
-}
-
 interface InterviewsArchiveProps {
-  initialInterviews: InterviewContentItem[];
+  initialInterviews: ContentItem[];
 }
 
 export default function InterviewsArchive({ initialInterviews }: InterviewsArchiveProps) {
-  const [interviews, setInterviews] = useState<InterviewContentItem[]>(initialInterviews);
+  const router = useRouter();
+  const [interviews, setInterviews] = useState<ContentItem[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setInterviews(initialInterviews);
+    setIsClient(true);
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('InterviewsArchive mounted with', initialInterviews.length, 'interviews');
+    }
+  }, [initialInterviews]);
 
   const filteredInterviews = useMemo(() => {
     return interviews.filter((interview) =>
       interview.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       interview.tags?.some((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase())) ||
-      interview.interviewee?.toLowerCase().includes(searchTerm.toLowerCase())
+      interview.bookAuthor?.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [interviews, searchTerm]);
-
-  useEffect(() => {
-    if (process.env.NODE_ENV !== 'production') {
-      console.log('InterviewsArchive mounted with', interviews.length, 'interviews');
-    }
-  }, [interviews]);
-
-  if (interviews.length === 0) {
-    return <div>No interviews available. Please check the console for more information.</div>;
-  }
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -43,64 +40,111 @@ export default function InterviewsArchive({ initialInterviews }: InterviewsArchi
     return `${month} ${year}`;
   };
 
+  if (!isClient) {
+    return null; // or a loading spinner
+  }
+
+  if (interviews.length === 0) {
+    return <div>No interviews available. Please check the console for more information.</div>;
+  }
+
   return (
     <div className="min-h-screen bg-inherit text-gray-300">
       <header className="bg-inherit shadow-md">
         <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
           <h1 className="text-4xl font-bold">Interviews Archive</h1>
-          <input
-            type="text"
-            placeholder="Search interviews..."
-            className="w-1/3 px-4 py-2 rounded-full bg-inherit focus:outline-none focus:ring-2 focus:ring-gray-700"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
+          {isClient && (
+            <input
+              type="text"
+              placeholder="Search interviews..."
+              className="w-1/3 px-4 py-2 rounded-full bg-inherit focus:outline-none focus:ring-2 focus:ring-gray-700"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          )}
         </nav>
       </header>
 
       <main className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredInterviews.map((interview, index) => (
-            <motion.div
-              key={interview.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className="bg-[#1a1a1a] rounded-lg overflow-hidden shadow-lg"
-            >
-              <Image
-                src={interview.image || '/images/placeholder.webp'}
-                alt={interview.title}
-                width={400}
-                height={200}
-                className="w-full h-48 object-cover"
-                loading={index < 3 ? "eager" : "lazy"}
-              />
-              <div className="p-6">
-                <h2 className="text-xl font-semibold mb-2">{interview.title}</h2>
-                <p className="text-gray-400 mb-4">{interview.description}</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {interview.tags?.map((tag, index) => (
-                    <span
-                      key={index}
-                      className="px-2 py-1 text-xs font-semibold rounded-full bg-gray-700 text-gray-300"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <div className="flex items-center mb-4">
-                  <span className="text-gray-400 mr-2">With {interview.interviewee}</span>
-                  <span className="text-gray-400">{formatDate(interview.date)}</span>
-                </div>
-                <Link href={`/writing/${interview.slug}`} passHref>
-                  <a className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                    Read More
-                  </a>
+        <div className="overflow-x-auto">
+          <table className="min-w-full bg-inherit rounded-lg overflow-hidden">
+            <thead className="bg-[#1a1a1a]">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  Title
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  Interviewee
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  Tags
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  Date
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  Read Time
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-800">
+              {filteredInterviews.map((interview) => (
+                <Link
+                  key={interview.id}
+                  href={interview.slug ? `/writing/${interview.slug}` : '#'}
+                  passHref
+                  legacyBehavior
+                >
+                  <motion.tr
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    whileHover={{ backgroundColor: 'rgba(26, 26, 26, 0.5)' }}
+                    className="cursor-pointer"
+                  >
+                    <td className="px-6 py-4 whitespace-nowrap flex items-center">
+                      <div className="w-12 h-12">
+                        <Image
+                          src={interview.image || '/images/placeholder.webp'}
+                          alt={interview.title}
+                          width={50}
+                          height={50}
+                          className="rounded-full object-cover w-full h-full"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div className="ml-4 text-sm font-medium text-gray-300">{interview.title}</div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="text-sm text-gray-300">{interview.bookAuthor}</div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="flex flex-wrap gap-2">
+                        {interview.tags ? (
+                          interview.tags.map((tag: string, index: number) => (
+                            <span
+                              key={index}
+                              className="px-2 py-1 text-xs font-semibold rounded-full bg-gray-700 text-gray-300"
+                            >
+                              {tag}
+                            </span>
+                          ))
+                        ) : (
+                          <span className="text-gray-500">No tags</span>
+                        )}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-300">{formatDate(interview.date)}</div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-400">{interview.readTime} min</div>
+                    </td>
+                  </motion.tr>
                 </Link>
-              </div>
-            </motion.div>
-          ))}
+              ))}
+            </tbody>
+          </table>
         </div>
       </main>
     </div>
