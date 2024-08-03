@@ -21,10 +21,7 @@ const VisualPage = () => {
               </li>
               {categories.map((category) => (
                 <li key={category}>
-                  <Link
-                    href={`/visual?category=${category.toLowerCase()}`}
-                    className="nav-link"
-                  >
+                  <Link href={`/visual?category=${category.toLowerCase()}`} className="nav-link">
                     <span>{category}</span>
                   </Link>
                 </li>

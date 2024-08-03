@@ -10,8 +10,9 @@ export const metadata: ContentItem = {
   imageCaption: 'Book cover of Ascent of Money',
   pageViews: 0,
   type: 'review',
-  description: 'A comprehensive look at the evolution of financial systems throughout human history.',
-  content: '', 
+  description:
+    'A comprehensive look at the evolution of financial systems throughout human history.',
+  content: '',
   author: 'Zachary Roth',
   bookAuthor: 'Nial Ferguson',
   date: 'Aug 2022',
@@ -23,10 +24,7 @@ export const metadata: ContentItem = {
 };
 
 const AscentOfMoney: React.FC = () => {
-  return (
-    <article>
-    </article>
-  );
+  return <article></article>;
 };
 
 export default AscentOfMoney;

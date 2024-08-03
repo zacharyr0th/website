@@ -21,8 +21,8 @@ export const useComments = (postSlug: string) => {
       const data = await response.json();
       setComments(data);
     } catch (error) {
-      console.error("Failed to fetch comments:", error);
-      setError("Failed to load comments. Please try again later.");
+      console.error('Failed to fetch comments:', error);
+      setError('Failed to load comments. Please try again later.');
     } finally {
       setIsLoading(false);
     }

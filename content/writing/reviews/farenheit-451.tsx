@@ -10,8 +10,8 @@ export const metadata: ContentItem = {
   imageCaption: 'Book cover of Fahrenheit 451 by Ray Bradbury',
   pageViews: 0,
   type: 'review',
-  description: 'A critical review of Ray Bradbury\'s dystopian novel.',
-  content: '', 
+  description: "A critical review of Ray Bradbury's dystopian novel.",
+  content: '',
   author: 'Zachary Roth',
   bookAuthor: 'Ray Bradbury',
   date: 'Aug 2023',
@@ -25,11 +25,19 @@ export const metadata: ContentItem = {
 const Farenheit451: React.FC = () => {
   return (
     <article>
-      <p>Fahrenheit 451 disgracefully fails at trying to be Brave New World. Fahrenheit 451 is a busted Brave New World.</p>
+      <p>
+        Fahrenheit 451 disgracefully fails at trying to be Brave New World. Fahrenheit 451 is a
+        busted Brave New World.
+      </p>
 
       <p>I don't know what Ray Bradbury was thinking.</p>
 
-      <p>This book came out 22 years after Brave New World and was absolute heresy. I'm being dramatic, but I read this shortly after Brave New World, and I was appalled at how pathetic it was in comparison. The themes are the exact same but dumbed down. The characters are simps, and the story is predictable.</p>
+      <p>
+        This book came out 22 years after Brave New World and was absolute heresy. I'm being
+        dramatic, but I read this shortly after Brave New World, and I was appalled at how pathetic
+        it was in comparison. The themes are the exact same but dumbed down. The characters are
+        simps, and the story is predictable.
+      </p>
 
       <p>This book should have been thrown in the fires it talks about.</p>
     </article>

@@ -64,7 +64,7 @@ const HomeLink = styled(Link)`
   text-decoration: none;
   align-self: flex-start;
   margin-top: auto;
-  
+
   &:hover {
     background-color: transparent;
     color: var(--color-secondary);
@@ -273,7 +273,7 @@ export default function SnakeGame() {
   }, []);
 
   const updateHighScore = useCallback((newScore: number) => {
-    setHighScore(prevHighScore => {
+    setHighScore((prevHighScore) => {
       if (newScore > prevHighScore) {
         localStorage.setItem('snakeHighScore', newScore.toString());
         return newScore;
@@ -328,7 +328,10 @@ export default function SnakeGame() {
       if (newDirection) {
         setDirection((prev) => {
           const opposites: Record<Direction, Direction> = {
-            UP: 'DOWN', DOWN: 'UP', LEFT: 'RIGHT', RIGHT: 'LEFT',
+            UP: 'DOWN',
+            DOWN: 'UP',
+            LEFT: 'RIGHT',
+            RIGHT: 'LEFT',
           };
           return opposites[prev] !== newDirection ? newDirection : prev;
         });
@@ -352,24 +355,30 @@ export default function SnakeGame() {
     setScore(0);
   }, []);
 
-  const boardCells = useMemo(() => (
-    Array(20).fill(0).map((_, y) =>
-      Array(20).fill(0).map((_, x) => {
-        const snakeSegment = snake.find((s) => s.x === x && s.y === y);
-        const isSnake = !!snakeSegment;
-        const isHead = snake[0].x === x && snake[0].y === y;
-        return (
-          <Cell
-            key={`${x}-${y}`}
-            $isSnake={isSnake}
-            $isFood={food.x === x && food.y === y}
-            $isHead={isHead}
-            $color={snakeSegment ? snakeSegment.color : ''}
-          />
-        );
-      })
-    )
-  ), [snake, food]);
+  const boardCells = useMemo(
+    () =>
+      Array(20)
+        .fill(0)
+        .map((_, y) =>
+          Array(20)
+            .fill(0)
+            .map((_, x) => {
+              const snakeSegment = snake.find((s) => s.x === x && s.y === y);
+              const isSnake = !!snakeSegment;
+              const isHead = snake[0].x === x && snake[0].y === y;
+              return (
+                <Cell
+                  key={`${x}-${y}`}
+                  $isSnake={isSnake}
+                  $isFood={food.x === x && food.y === y}
+                  $isHead={isHead}
+                  $color={snakeSegment ? snakeSegment.color : ''}
+                />
+              );
+            })
+        ),
+    [snake, food]
+  );
 
   return (
     <GameContainer>
@@ -418,14 +427,16 @@ export default function SnakeGame() {
             <h2>{gameState === 'won' ? 'Congratulations!' : 'Game Over'}</h2>
             <ScoreSection>
               <p>
-                {gameState === 'won' 
-                  ? 'You filled the entire board! Amazing job!' 
+                {gameState === 'won'
+                  ? 'You filled the entire board! Amazing job!'
                   : `Your final score: ${score}`}
               </p>
               <p>
-                {score > highScore 
-                  ? <span className="new-high-score">New High Score: {score}!</span>
-                  : `High Score: ${highScore}`}
+                {score > highScore ? (
+                  <span className="new-high-score">New High Score: {score}!</span>
+                ) : (
+                  `High Score: ${highScore}`
+                )}
               </p>
             </ScoreSection>
             <ButtonGroup>

@@ -11,7 +11,7 @@ export const metadata: ContentItem = {
   pageViews: 0,
   type: 'review',
   description: 'A deep dive into the complex world of financial markets and investment strategies.',
-  content: '', 
+  content: '',
   author: 'Zachary Roth',
   date: 'Sep 2022',
   tags: ['Finance'],
@@ -23,10 +23,7 @@ export const metadata: ContentItem = {
 };
 
 const AlchemyOfFinance: React.FC = () => {
-  return (
-    <article>
-    </article>
-  );
+  return <article></article>;
 };
 
 export default AlchemyOfFinance;

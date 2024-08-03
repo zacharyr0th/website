@@ -8,7 +8,8 @@ import CommentForm from './CommentForm';
 
 const CommentSection: React.FC<{ postSlug: string }> = ({ postSlug }) => {
   const { comments, error, isLoading } = useComments(postSlug);
-  const { handleSubmit, authorName, setAuthorName, newComment, setNewComment } = useCommentForm(postSlug);
+  const { handleSubmit, authorName, setAuthorName, newComment, setNewComment } =
+    useCommentForm(postSlug);
 
   return (
     <section className="mt-12 bg-inherit text-gray-300">

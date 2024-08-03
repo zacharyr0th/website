@@ -16,9 +16,10 @@ export default function AudioArchive({ initialAudioItems }: AudioArchiveProps) {
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredAudioItems = useMemo(() => {
-    return audioItems.filter((item) =>
-      item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.tags?.some((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+    return audioItems.filter(
+      (item) =>
+        item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.tags?.some((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase()))
     );
   }, [audioItems, searchTerm]);
 
@@ -92,7 +93,7 @@ export default function AudioArchive({ initialAudioItems }: AudioArchiveProps) {
                         width={50}
                         height={50}
                         className="rounded-full object-cover w-full h-full"
-                        loading={process.env.NODE_ENV !== 'production' ? "eager" : "lazy"}
+                        loading={process.env.NODE_ENV !== 'production' ? 'eager' : 'lazy'}
                       />
                     </div>
                     <div className="ml-4 text-sm font-medium text-gray-300">{item.title}</div>

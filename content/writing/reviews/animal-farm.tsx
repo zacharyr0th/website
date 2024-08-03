@@ -10,8 +10,9 @@ export const metadata: ContentItem = {
   imageCaption: 'Book cover of Animal Farm by George Orwell',
   pageViews: 0,
   type: 'review',
-  description: 'A review of Orwell\'s classic novel that uses farm animals to satirize totalitarian regimes.',
-  content: '', 
+  description:
+    "A review of Orwell's classic novel that uses farm animals to satirize totalitarian regimes.",
+  content: '',
   author: 'Zachary Roth',
   date: 'Oct 2022',
   tags: ['Satire', 'Classic'],
@@ -23,10 +24,7 @@ export const metadata: ContentItem = {
 };
 
 const AnimalFarm: React.FC = () => {
-  return (
-    <article>
-    </article>
-  );
+  return <article></article>;
 };
 
 export default AnimalFarm;

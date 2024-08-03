@@ -10,8 +10,8 @@ export const metadata: ContentItem = {
   imageCaption: 'Book cover of The Divine Comedy by Dante Alighieri',
   pageViews: 0,
   type: 'review',
-  description: 'A review of Dante Alighieri\'s epic poem.',
-  content: '', 
+  description: "A review of Dante Alighieri's epic poem.",
+  content: '',
   author: 'Zachary Roth',
   bookAuthor: 'Dante Alighieri',
   date: 'Oct 2023',
@@ -27,7 +27,11 @@ const DivineComedy: React.FC = () => {
     <article>
       <p>I tried my best to get through this whole thing, but it's a lot.</p>
 
-      <p>Very creepy and good. Historically significant and impressive. This used to be memorized and told over fire and brimstone by bards. They would implement the techniques detailed in Moonwalking with Einstein (40 Audiobooks: Part 2).</p>
+      <p>
+        Very creepy and good. Historically significant and impressive. This used to be memorized and
+        told over fire and brimstone by bards. They would implement the techniques detailed in
+        Moonwalking with Einstein (40 Audiobooks: Part 2).
+      </p>
 
       <p>Imagine being present at one of those.</p>
     </article>

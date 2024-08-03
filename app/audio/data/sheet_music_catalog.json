@@ -1,0 +1,140 @@
+{
+    "bach_air": {
+      "title": "Air on the G String",
+      "composer": "Johann Sebastian Bach",
+      "opus": "BWV 1068",
+      "collection": "Orchestral Suite No. 3 in D major",
+      "key": "D major",
+      "year": "c. 1730",
+      "genre": "Baroque",
+      "instrument": "Orchestra (arranged for various instruments)",
+      "fileType": "PDF",
+      "fileSize": "200 KB",
+      "pages": 3,
+      "resolution": "300 DPI",
+      "creator": "MuseScore 3.6.2",
+      "creationDate": "2023-06-01",
+      "modificationDate": "2023-06-01",
+      "copyright": "Public Domain",
+      "source": "IMSLP",
+      "tags": [
+        "Piano",
+        "Classical"
+      ]
+    },
+    "bach_fugue-2": {
+      "title": "Fugue No. 2 in C Minor",
+      "composer": "Johann Sebastian Bach",
+      "opus": "BWV 847",
+      "collection": "The Well-Tempered Clavier, Book I",
+      "key": "C minor",
+      "year": "1722",
+      "genre": "Baroque",
+      "instrument": "Keyboard",
+      "fileType": "PDF",
+      "fileSize": "180 KB",
+      "pages": 3,
+      "resolution": "300 DPI",
+      "creator": "MuseScore 3.6.2",
+      "creationDate": "2023-05-20",
+      "modificationDate": "2023-05-20",
+      "copyright": "Public Domain",
+      "source": "IMSLP",
+      "tags": [
+        "Piano",
+        "Classical"
+      ]
+    },
+    "bach_jesu": {
+      "title": "Jesu, Joy of Man's Desiring",
+      "composer": "Johann Sebastian Bach",
+      "opus": "BWV 147",
+      "collection": "Herz und Mund und Tat und Leben",
+      "key": "G major",
+      "year": "1723",
+      "genre": "Baroque",
+      "instrument": "Choir and Orchestra (arranged for various instruments)",
+      "fileType": "PDF",
+      "fileSize": "220 KB",
+      "pages": 4,
+      "resolution": "300 DPI",
+      "creator": "MuseScore 3.6.2",
+      "creationDate": "2023-06-10",
+      "modificationDate": "2023-06-10",
+      "copyright": "Public Domain",
+      "source": "IMSLP",
+      "tags": [
+        "Piano",
+        "Classical"
+      ]
+    },
+    "bach_1001-1": {
+      "title": "Violin Sonata No. 1 in G minor",
+      "composer": "Johann Sebastian Bach",
+      "opus": "BWV 1001",
+      "collection": "Sonatas and Partitas for Solo Violin",
+      "key": "G minor",
+      "year": "c. 1720",
+      "genre": "Baroque",
+      "instrument": "Violin",
+      "fileType": "PDF",
+      "fileSize": "250 KB",
+      "pages": 5,
+      "resolution": "300 DPI",
+      "creator": "MuseScore 3.6.2",
+      "creationDate": "2023-06-15",
+      "modificationDate": "2023-06-15",
+      "copyright": "Public Domain",
+      "source": "IMSLP",
+      "tags": [
+        "Violin",
+        "Classical"
+      ]
+    },
+    "bach_1006-1": {
+      "title": "Partita No. 3 in E major for solo violin",
+      "composer": "Johann Sebastian Bach",
+      "opus": "BWV 1006",
+      "collection": "Sonatas and Partitas for Solo Violin",
+      "key": "E major",
+      "year": "c. 1720",
+      "genre": "Baroque",
+      "instrument": "Violin",
+      "fileType": "PDF",
+      "fileSize": "300 KB",
+      "pages": 6,
+      "resolution": "300 DPI",
+      "creator": "MuseScore 3.6.2",
+      "creationDate": "2023-06-20",
+      "modificationDate": "2023-06-20",
+      "copyright": "Public Domain",
+      "source": "IMSLP",
+      "tags": [
+        "Violin",
+        "Classical"
+      ]
+    },
+    "bach_prelude-2": {
+      "title": "Prelude No. 2 in C Minor",
+      "composer": "Johann Sebastian Bach",
+      "opus": "BWV 847",
+      "collection": "The Well-Tempered Clavier, Book I",
+      "key": "C minor",
+      "year": "1722",
+      "genre": "Baroque",
+      "instrument": "Keyboard",
+      "fileType": "PDF",
+      "fileSize": "150 KB",
+      "pages": 2,
+      "resolution": "300 DPI",
+      "creator": "MuseScore 3.6.2",
+      "creationDate": "2023-05-15",
+      "modificationDate": "2023-05-15",
+      "copyright": "Public Domain",
+      "source": "IMSLP",
+      "tags": [
+        "Piano",
+        "Classical"
+      ]
+    }
+  }

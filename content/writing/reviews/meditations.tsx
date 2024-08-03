@@ -10,8 +10,8 @@ export const metadata: ContentItem = {
   imageCaption: 'Book cover of Meditations by Marcus Aurelius',
   pageViews: 0,
   type: 'review',
-  description: 'A review of Marcus Aurelius\' classic work on Stoic philosophy.',
-  content: '', 
+  description: "A review of Marcus Aurelius' classic work on Stoic philosophy.",
+  content: '',
   author: 'Zachary Roth',
   bookAuthor: 'Marcus Aurelius',
   date: 'May 2023',
@@ -26,11 +26,14 @@ const Meditations: React.FC = () => {
   return (
     <article>
       <p>
-        I listened to this when I traveled to the Permissionless crypto conference in May. Maybe it was the airports or Miami, but I didn't enjoy the experience, although it was likely worthwhile.
+        I listened to this when I traveled to the Permissionless crypto conference in May. Maybe it
+        was the airports or Miami, but I didn't enjoy the experience, although it was likely
+        worthwhile.
       </p>
 
       <p>
-        Rather than a book, this content is best delivered in small tidbits, like Buddhist kōans… or as a calendar… 😆.
+        Rather than a book, this content is best delivered in small tidbits, like Buddhist kōans… or
+        as a calendar… 😆.
       </p>
     </article>
   );

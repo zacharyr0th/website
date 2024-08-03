@@ -10,8 +10,8 @@ export const metadata: ContentItem = {
   imageCaption: 'Book cover of Breath by James Nestor',
   pageViews: 0,
   type: 'review',
-  description: 'A review of James Nestor\'s exploration of the science and importance of breathing.',
-  content: '', 
+  description: "A review of James Nestor's exploration of the science and importance of breathing.",
+  content: '',
   author: 'Zachary Roth',
   bookAuthor: 'James Nestor',
   date: 'Jul 2023',
@@ -27,9 +27,17 @@ const Breath: React.FC = () => {
     <article>
       <p>Everyone knows that mouth breathing is bad, but no one knows why.</p>
 
-      <p>James found out, and I'm aggravated that more scientists haven't made it a big deal. No doctor has ever said anything to me about it. If I had a platform, I would preach about this book.</p>
+      <p>
+        James found out, and I'm aggravated that more scientists haven't made it a big deal. No
+        doctor has ever said anything to me about it. If I had a platform, I would preach about this
+        book.
+      </p>
 
-      <p>There is so much proven value in breathing correctly, and no one talks about it or even prescribes it. It reminds me of the doctors that prescribe three different anti-depressants to a teenager who just had their first breakup rather than prescribe them diet and exercise.</p>
+      <p>
+        There is so much proven value in breathing correctly, and no one talks about it or even
+        prescribes it. It reminds me of the doctors that prescribe three different anti-depressants
+        to a teenager who just had their first breakup rather than prescribe them diet and exercise.
+      </p>
 
       <p>I'm not saying anything else about this book. Go read it.</p>
     </article>

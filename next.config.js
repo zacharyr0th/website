@@ -18,6 +18,6 @@ const nextConfig = {
     unoptimized: false,
     formats: ['image/webp'],
   },
-}
+};
 
 module.exports = nextConfig;

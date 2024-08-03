@@ -9,12 +9,13 @@ export function getAudioFiles(): string[] {
   const audioExtensions = ['.wav', '.mp3', '.mp4', '.ogg', '.flac'];
   let files: string[] = [];
 
-  categories.forEach(category => {
+  categories.forEach((category) => {
     const categoryPath = path.join(audioDirectory, category);
     if (fs.existsSync(categoryPath)) {
-      const categoryFiles = fs.readdirSync(categoryPath)
-        .filter(file => audioExtensions.some(ext => file.endsWith(ext)))
-        .map(file => path.join(category, file));
+      const categoryFiles = fs
+        .readdirSync(categoryPath)
+        .filter((file) => audioExtensions.some((ext) => file.endsWith(ext)))
+        .map((file) => path.join(category, file));
       files = files.concat(categoryFiles);
     }
   });

@@ -6,7 +6,7 @@ export interface ContentItem {
   image: string;
   imageCaption?: string;
   pageViews: number;
-  type: 'article' | 'review' | 'interview';
+  type: 'article' | 'review' | 'interview' | 'sheet-music';
   description?: string;
   content: string;
   author: string;
@@ -17,11 +17,13 @@ export interface ContentItem {
   comments?: number;
   shares?: number;
   bookAuthor?: string;
+  composer?: string;
+  fileType: 'mdx' | 'tsx' | 'pdf' | 'mscz' | string;
 }
 
 export interface WritingPageClientProps {
   initialContent: ContentItem[];
-  contentType?: 'article' | 'review' | 'interview';
+  contentType?: 'article' | 'review' | 'interview' | 'sheet-music';
 }
 
 export interface AudioItem {
@@ -38,3 +40,5 @@ export interface AudioItem {
   fileType: string;
   fileSize: number;
 }
+
+export type Content = ContentItem;

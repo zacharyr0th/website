@@ -10,8 +10,9 @@ export const metadata: ContentItem = {
   imageCaption: 'Book cover of Acid for the Children by Flea',
   pageViews: 0,
   type: 'review',
-  description: 'A review of Flea\'s raw and honest memoir about his wild youth and the formation of the Red Hot Chili Peppers.',
-  content: '', 
+  description:
+    "A review of Flea's raw and honest memoir about his wild youth and the formation of the Red Hot Chili Peppers.",
+  content: '',
   author: 'Zachary Roth',
   date: 'Jan 2023',
   tags: ['Autobiography', 'Music'],
@@ -23,10 +24,7 @@ export const metadata: ContentItem = {
 };
 
 const AcidForTheChildren: React.FC = () => {
-  return (
-    <article>
-    </article>
-  );
+  return <article></article>;
 };
 
 export default AcidForTheChildren;

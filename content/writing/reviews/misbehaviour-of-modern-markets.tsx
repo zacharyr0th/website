@@ -10,8 +10,9 @@ export const metadata: ContentItem = {
   imageCaption: 'Book cover of The (Mis)behaviour of Markets by Benoit Mandelbrot',
   pageViews: 0,
   type: 'review',
-  description: 'A review of Benoit Mandelbrot\'s application of fractal geometry to financial markets.',
-  content: '', 
+  description:
+    "A review of Benoit Mandelbrot's application of fractal geometry to financial markets.",
+  content: '',
   author: 'Zachary Roth',
   bookAuthor: 'Benoit Mandelbrot',
   date: 'Feb 2023',
@@ -26,11 +27,15 @@ const MisbehaviourOfModernMarkets: React.FC = () => {
   return (
     <article>
       <p>
-        Benoit is one of the world's foremost mathematicians specializing in fractal geometry. He applies his methods to all fields, and algorithms based on his work have found novel patterns in financial markets.
+        Benoit is one of the world's foremost mathematicians specializing in fractal geometry. He
+        applies his methods to all fields, and algorithms based on his work have found novel
+        patterns in financial markets.
       </p>
 
       <p>
-        This book is pretty dry, but Benoit is so smart that you will regret not coming across it earlier. I read this about ten months ago and don't recall much, but I remember being engaged throughout.
+        This book is pretty dry, but Benoit is so smart that you will regret not coming across it
+        earlier. I read this about ten months ago and don't recall much, but I remember being
+        engaged throughout.
       </p>
     </article>
   );

@@ -17,10 +17,11 @@ export default function ArticlesArchive({ initialArticles }: ArticlesArchiveProp
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredArticles = useMemo(() => {
-    return articles.filter((article) =>
-      article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      article.tags?.some((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase())) ||
-      article.bookAuthor?.toLowerCase().includes(searchTerm.toLowerCase())
+    return articles.filter(
+      (article) =>
+        article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        article.tags?.some((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        article.bookAuthor?.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [articles, searchTerm]);
 
@@ -93,7 +94,7 @@ export default function ArticlesArchive({ initialArticles }: ArticlesArchiveProp
                         width={50}
                         height={50}
                         className="rounded-full object-cover w-full h-full"
-                        loading={process.env.NODE_ENV !== 'production' ? "eager" : "lazy"}
+                        loading={process.env.NODE_ENV !== 'production' ? 'eager' : 'lazy'}
                       />
                     </div>
                     <div className="ml-4 text-sm font-medium text-gray-300">{article.title}</div>

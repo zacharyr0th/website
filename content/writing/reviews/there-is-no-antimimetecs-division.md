@@ -8,7 +8,7 @@ imageCaption: 'Book cover of Antimimetecs'
 pageViews: 0
 type: 'review'
 description: 'An exploration of how to resist unconscious imitation in a world of social influence.'
-content: '' 
+content: ''
 author: 'Zachary Roth'
 date: 'July 2024'
 tags: ['Sci-Fi']

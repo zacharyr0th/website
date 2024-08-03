@@ -1,11 +1,8 @@
-import React from 'react';
+import SheetMusicArchive from '../sheet-music-archive/SheetMusicArchive';
+import { getContentItems } from '@/lib/content';
+import type { ContentItem } from '@/lib/types';
 
-export default function SheetMusicPage() {
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-4">Sheet Music</h1>
-      <p>Browse and download sheet music for various compositions.</p>
-      {/* Add content specific to sheet music */}
-    </div>
-  );
+export default async function SheetMusicPage() {
+  const sheetMusic: ContentItem[] = await getContentItems('sheet-music');
+  return <SheetMusicArchive initialSheetMusic={sheetMusic} />;
 }

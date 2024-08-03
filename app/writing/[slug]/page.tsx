@@ -24,7 +24,7 @@ type Post = {
 };
 
 export async function generateStaticParams() {
-  const items = await getContentItems();
+  const items = await getContentItems(undefined);
   console.log('Generated paths:', items.map((post) => ({ slug: post.slug })));
   return items.map((post) => ({
     slug: post.slug,
@@ -40,7 +40,7 @@ export default async function WritingPage({ params }: { params: { slug: string }
   }
 
   try {
-    const posts = await getContentItems();
+    const posts = await getContentItems(undefined);
     console.log('All posts:', posts.map(p => p.slug));
     const currentPostIndex = posts.findIndex((post) => post.slug === params.slug);
 

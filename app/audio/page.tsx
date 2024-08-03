@@ -46,10 +46,10 @@ const AudioPage = () => {
           </div>
           <p className="md:w-1/2 text-gray-300 leading-relaxed p-4 rounded-lg">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae
-            vestibulum vestibulum. Cras venenatis euismod malesuada. Nulla facilisi. Curabitur a
-            est vel leo fermentum consequat. Donec vel turpis nec sapien bibendum bibendum.
-            Aliquam erat volutpat. Integer ut nulla ac erat suscipit suscipit. Nulla ut augue ac
-            orci auctor fermentum.
+            vestibulum vestibulum. Cras venenatis euismod malesuada. Nulla facilisi. Curabitur a est
+            vel leo fermentum consequat. Donec vel turpis nec sapien bibendum bibendum. Aliquam erat
+            volutpat. Integer ut nulla ac erat suscipit suscipit. Nulla ut augue ac orci auctor
+            fermentum.
           </p>
         </div>
 
@@ -63,7 +63,13 @@ const AudioPage = () => {
   );
 };
 
-const CategoryCard = ({ category, index }: { category: { title: string; description: string; slug: string }; index: number }) => (
+const CategoryCard = ({
+  category,
+  index,
+}: {
+  category: { title: string; description: string; slug: string };
+  index: number;
+}) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
@@ -87,12 +93,7 @@ const CategoryCard = ({ category, index }: { category: { title: string; descript
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </div>
         </div>

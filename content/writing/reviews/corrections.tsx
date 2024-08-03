@@ -10,8 +10,8 @@ export const metadata: ContentItem = {
   imageCaption: 'Book cover of The Corrections by Jonathan Franzen',
   pageViews: 0,
   type: 'review',
-  description: 'A review of Jonathan Franzen\'s novel about a Midwestern family.',
-  content: '', 
+  description: "A review of Jonathan Franzen's novel about a Midwestern family.",
+  content: '',
   author: 'Zachary Roth',
   bookAuthor: 'Jonathan Franzen',
   date: 'Nov 2023',
@@ -27,9 +27,15 @@ const Corrections: React.FC = () => {
     <article>
       <p>I'm from the Midwest. Johnathon Franzen is from the Midwest.</p>
 
-      <p>Johnathon Franzen writes what he knows. I can tell you that his perception of the Midwest is largely accurate. It's a depressing picture he paints, but it's something I empathize with.</p>
+      <p>
+        Johnathon Franzen writes what he knows. I can tell you that his perception of the Midwest is
+        largely accurate. It's a depressing picture he paints, but it's something I empathize with.
+      </p>
 
-      <p>He is a good writer. But as I said, it's depressing, and there were moments when I wished I had read something else, but the ending was potent.</p>
+      <p>
+        He is a good writer. But as I said, it's depressing, and there were moments when I wished I
+        had read something else, but the ending was potent.
+      </p>
     </article>
   );
 };

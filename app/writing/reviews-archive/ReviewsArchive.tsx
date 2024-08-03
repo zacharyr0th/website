@@ -17,10 +17,11 @@ export default function ReviewsArchive({ initialReviews }: ReviewsArchiveProps) 
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredReviews = useMemo(() => {
-    return reviews.filter((review) =>
-      review.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      review.tags?.some((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase())) ||
-      review.bookAuthor?.toLowerCase().includes(searchTerm.toLowerCase())
+    return reviews.filter(
+      (review) =>
+        review.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        review.tags?.some((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        review.bookAuthor?.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [reviews, searchTerm]);
 
@@ -101,7 +102,7 @@ export default function ReviewsArchive({ initialReviews }: ReviewsArchiveProps) 
                           width={50}
                           height={50}
                           className="rounded-full object-cover w-full h-full"
-                          loading={process.env.NODE_ENV !== 'production' ? "eager" : "lazy"}
+                          loading={process.env.NODE_ENV !== 'production' ? 'eager' : 'lazy'}
                         />
                       </div>
                       <div className="ml-4 text-sm font-medium text-gray-300">{review.title}</div>

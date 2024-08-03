@@ -11,11 +11,11 @@ interface Content {
   slug: string;
   title: string;
   image?: string;
-  type: 'article' | 'review' | 'interview';
+  type: 'article' | 'review' | 'interview' | 'sheet-music';
 }
 
 interface WritingPageClientProps {
-  contentType?: 'article' | 'review' | 'interview';
+  contentType?: 'article' | 'review' | 'interview' | 'sheet-music';
   allContent: Content[];
 }
 

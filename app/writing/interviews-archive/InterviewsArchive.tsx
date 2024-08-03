@@ -26,10 +26,11 @@ export default function InterviewsArchive({ initialInterviews }: InterviewsArchi
   }, [initialInterviews]);
 
   const filteredInterviews = useMemo(() => {
-    return interviews.filter((interview) =>
-      interview.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      interview.tags?.some((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase())) ||
-      interview.bookAuthor?.toLowerCase().includes(searchTerm.toLowerCase())
+    return interviews.filter(
+      (interview) =>
+        interview.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        interview.tags?.some((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        interview.bookAuthor?.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [interviews, searchTerm]);
 
@@ -113,7 +114,9 @@ export default function InterviewsArchive({ initialInterviews }: InterviewsArchi
                           loading="lazy"
                         />
                       </div>
-                      <div className="ml-4 text-sm font-medium text-gray-300">{interview.title}</div>
+                      <div className="ml-4 text-sm font-medium text-gray-300">
+                        {interview.title}
+                      </div>
                     </td>
                     <td className="px-6 py-4">
                       <div className="text-sm text-gray-300">{interview.bookAuthor}</div>
