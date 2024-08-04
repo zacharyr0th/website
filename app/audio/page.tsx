@@ -34,30 +34,13 @@ const AudioPage = () => {
       </motion.header>
 
       <main className="container mx-auto px-4">
-        <div className="mb-12 flex flex-col md:flex-row gap-8">
-          <div className="md:w-1/2">
-            <Image
-              src="/placeholder.webp"
-              alt="Description of the image"
-              width={1400}
-              height={1000}
-              className="rounded-lg shadow-lg"
-            />
-          </div>
-          <p className="md:w-1/2 text-gray-300 leading-relaxed p-4 rounded-lg">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae
-            vestibulum vestibulum. Cras venenatis euismod malesuada. Nulla facilisi. Curabitur a est
-            vel leo fermentum consequat. Donec vel turpis nec sapien bibendum bibendum. Aliquam erat
-            volutpat. Integer ut nulla ac erat suscipit suscipit. Nulla ut augue ac orci auctor
-            fermentum.
-          </p>
-        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {categories.map((category, index) => (
             <CategoryCard key={category.slug} category={category} index={index} />
           ))}
         </div>
+        
       </main>
     </div>
   );
@@ -77,9 +60,7 @@ const CategoryCard = ({
   >
     <Link href={`/audio/${category.slug}`} className="block">
       <motion.div
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="bg-inherit rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700"
+        className="bg-inherit rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700 hover:bg-[#242424]"
       >
         <div className="p-6">
           <h2 className="text-2xl font-bold text-gray-100 mb-2">{category.title}</h2>
