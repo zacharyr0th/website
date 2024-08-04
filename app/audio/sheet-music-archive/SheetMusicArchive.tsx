@@ -1,7 +1,13 @@
+// make downloaded button stay gray when file is already downloaded
+// make downloaded file have the same name as the file's filename e.g bach_1006-1.pdf
+// preview the downloaded file in the browser in a new tab
+// make the download button have a loading spinner when the file is downloading
+// optimize / notate the file 
+
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import type { ContentItem } from '@/lib/types';
 import catalog from '../data/sheet_music_catalog.json';
 
@@ -10,7 +16,10 @@ type CatalogEntry = {
   composer?: string;
   tags?: string[];
   fileType: string;
+  filename: string;
 };
+
+type SheetMusicItem = ContentItem & { filename: string };
 
 const tabButtonStyle = `
   px-4 py-2 text-sm font-medium text-gray-300 bg-transparent 
@@ -20,27 +29,42 @@ const tabButtonStyle = `
 `;
 
 interface SheetMusicArchiveProps {
-  initialSheetMusic: ContentItem[];
+  initialSheetMusic: SheetMusicItem[];
 }
 
-const transformToContentItem = (slug: string, entry: CatalogEntry): ContentItem => ({
+const transformToContentItem = (slug: string, entry: CatalogEntry): SheetMusicItem => ({
   id: slug,
   slug,
   title: entry.title,
   composer: entry.composer,
   tags: entry.tags,
   fileType: entry.fileType,
+  filename: entry.filename,
   image: '',
   pageViews: 0,
   type: 'sheet-music',
   content: '',
-  author: entry.composer || 'Unknown', // Add author property
-  date: new Date().toISOString(), // Add date property with current date
+  author: entry.composer || 'Unknown',
+  date: new Date().toISOString(),
 });
 
+const buttonVariants = {
+  idle: { backgroundColor: 'transparent' },
+  downloading: { backgroundColor: '#4A5568' },
+  downloaded: { backgroundColor: '#48BB78' },
+  error: { backgroundColor: '#F56565' },
+};
+
+const textVariants = {
+  initial: { opacity: 0, y: 10 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -10 },
+};
+
 export default function SheetMusicArchive({ initialSheetMusic }: SheetMusicArchiveProps) {
-  const [sheetMusic, setSheetMusic] = useState<ContentItem[]>(initialSheetMusic);
+  const [sheetMusic, setSheetMusic] = useState<SheetMusicItem[]>(initialSheetMusic);
   const [searchTerm, setSearchTerm] = useState('');
+  const [downloadStatus, setDownloadStatus] = useState<{ [key: string]: string }>({});
 
   const filteredSheetMusic = useMemo(() => {
     return sheetMusic.filter(
@@ -57,7 +81,47 @@ export default function SheetMusicArchive({ initialSheetMusic }: SheetMusicArchi
     );
     setSheetMusic(musicList);
     console.log('SheetMusicArchive mounted with', musicList.length, 'items');
+
+    // Load persistent download status from localStorage
+    const storedStatus = localStorage.getItem('downloadStatus');
+    if (storedStatus) {
+      setDownloadStatus(JSON.parse(storedStatus));
+    }
   }, []);
+
+  useEffect(() => {
+    // Save download status to localStorage whenever it changes
+    localStorage.setItem('downloadStatus', JSON.stringify(downloadStatus));
+  }, [downloadStatus]);
+
+  const downloadFile = async (item: SheetMusicItem) => {
+    setDownloadStatus((prev) => ({ ...prev, [item.slug]: 'Downloading...' }));
+    try {
+      const response = await fetch(`/api/downloads?file=${item.filename}`);
+      if (!response.ok) throw new Error('Download failed');
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      a.download = item.filename;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      setDownloadStatus((prev) => ({ ...prev, [item.slug]: 'Downloaded' }));
+    } catch (error) {
+      console.error('Download error:', error);
+      setDownloadStatus((prev) => ({ ...prev, [item.slug]: 'Error' }));
+    }
+  };
+
+  const resetDownloadStatus = (slug: string) => {
+    setDownloadStatus((prev) => {
+      const newStatus = { ...prev };
+      delete newStatus[slug];
+      return newStatus;
+    });
+  };
 
   if (sheetMusic.length === 0) {
     return <div>No sheet music available. Please check the console for more information.</div>;
@@ -93,7 +157,7 @@ export default function SheetMusicArchive({ initialSheetMusic }: SheetMusicArchi
                   Tags
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
-                  Actions
+                  Download
                 </th>
               </tr>
             </thead>
@@ -130,13 +194,30 @@ export default function SheetMusicArchive({ initialSheetMusic }: SheetMusicArchi
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <a
-                      href={`/api/downloads?file=${item.slug}.${item.fileType}`}
-                      className={tabButtonStyle}
-                      download
+                    <motion.button
+                      className={`${tabButtonStyle} w-28`}
+                      variants={buttonVariants}
+                      animate={downloadStatus[item.slug] || 'idle'}
+                      onClick={() => 
+                        downloadStatus[item.slug] === 'Downloaded' 
+                          ? resetDownloadStatus(item.slug)
+                          : downloadFile(item)
+                      }
+                      disabled={downloadStatus[item.slug] === 'Downloading...'}
                     >
-                      Download
-                    </a>
+                      <AnimatePresence mode="wait">
+                        <motion.span
+                          key={downloadStatus[item.slug] || 'Download'}
+                          variants={textVariants}
+                          initial="initial"
+                          animate="animate"
+                          exit="exit"
+                          transition={{ duration: 0.2 }}
+                        >
+                          {downloadStatus[item.slug] || 'Download'}
+                        </motion.span>
+                      </AnimatePresence>
+                    </motion.button>
                   </td>
                 </motion.tr>
               ))}
