@@ -2,9 +2,9 @@ import React from 'react';
 import { ContentItem } from '../../../lib/types';
 
 export const metadata: ContentItem = {
-  id: 'derivatives',
-  slug: 'derivatives',
-  title: 'Are Derivatives the Real Underlying Asset?',
+  id: 'boson-protocol',
+  slug: 'boson-protocol',
+  title: 'Boson Protocol',
   subtitle: 'test',
   image: '/placeholder.webp',
   imageCaption: 'test',
@@ -27,122 +27,179 @@ const Derivatives: React.FC = () => {
   return (
     <article>
       <p>
-        Carl Icahn and some deep pocketed traders supposedly bought lots of 4050 puts when /ES was
-        floating between 4150-4200 the other day. Well, /ES dropped to 4050 the day the puts
-        expired. Fearless Then it became known that the same trader(s) bought 3950 puts that expire
-        next month. The market doesn’t seem to go up when big players are positioned for it to go
-        down. Why is that? Are they just hedging larger long positions? Are they taking advantage of
-        option flows and the influential affects of dealer positioning? Lets look into it. DAOJ is a
-        reader-supported publication. To receive new posts and support my work, consider becoming a
-        free or paid subscriber. Type your email... Subscribe This article: Explains how developed
-        equity markets are imprudently affected by outsized derivative markets and the actions of
-        market makers. Breaks down the not-so-subtle difference between real value and notional
-        value by cross referencing the S&P 500 with the Fed’s balance sheet. Explains how
-        undeveloped crypto markets are less affected by this phenomenon but more affected by others.
-        One largely overlooked aspect of retail trading is market structure. To be a good trader,
-        just buy or sell before others do. Predicting when to buy/sell is going to happen is where
-        billions are made, and having a thorough understanding of market structure and how big
-        players are positioned, or how big positions are played, is one of the market’s most
-        predictive resources. Market Structure Market Structure encompasses all characteristics of a
-        market such as the number and size of buyers and sellers, competition level, information
-        availability, regulatory environment, and the physical and virtual infrastructures where
-        financial instruments are traded. All of which can significantly affect market efficiency,
-        price discovery, and overall price trajectory. During Covid times, gamma squeezes became a
-        colloquial term on financial news channels. They represent the phenomenon of dealer
-        positioning (Gary), an inevitable result of how equity markets are structured. In short,
-        when you buy derivatives that profit on the upside on an asset (going long), a dealer can
-        sell you the derivative (going short) and hedge against that by buying the underlying, which
-        is the asset that the derivative is using to base its value on. When the acceleration of
-        upside derivative purchases increases, so does the purchasing of the underlying by
-        cash-heavy dealers, resulting in exponential rises in price as seen in Gamestop and AMC.
-        Monitoring the call or put volume prior to a gamma squeeze could give actionable insights on
-        how to trade it. This is what a gamma squeeze looks like. GME Consequences of 1987 How can
-        these dealers be so involved if they impact the market so much? The answer is liquidity.
-        Some of these market-making dealers are legally obliged to place bids under specific market
-        conditions. This is meant to protect the infrastructure and price stability of the
-        underlying and became standard practice after the 1987 crash which resulted from an
-        overcrowded trade in portfolio insurance. Sometime in the 80s The crash was a technical
-        reaction to how the market was structured. - there was no fundamental change that provoked
-        the price collapse. Simply put, there were not enough market-making firms willing to place a
-        bid on that frightful morning. Regulators deemed that unacceptable and market makers have
-        since become one of the primary driving forces of global markets. The arguably black swan
-        events of 2008 and 2020 were two moments in time where this market-making backstop failed.
-        In both cases, price conditions were so dire that there seemed to be no buyers left - until
-        the central banks made their money printing intentions clear. Notional Value vs. Real Value
-        Below is a graph of the S&P 500 index (traded as /ES) priced in USD. It has essentially been
-        up only since 2009 when quantitative easing measures began taking place. SPX Index. Source:
-        Bloomberg Global Macro Investor Now compare the index against the Fed’s balance sheet. S&P
-        500 / Fed Balance Sheet Ratio. Source Bloomberg: Global Macro Investor As you can see, the
-        value of the index in 2007/2008 was around 0.0016. So for every $1 on the Fed’s balance
-        sheet, there existed ~$0.0016 of value in the S&P 500 index. Quantitative easing and bank
-        bailouts brought floods of new capital into the system and onto the Fed’s balance sheet,
-        pushing the value of the index to the $0.0004/0.0006 territory. The index has not even come
-        close to its previous highs in relative real value. Meanwhile, in USD notional value, there
-        exists a precipitous rise. This leads to the forgone conclusion that each unit of USD is
-        effectively losing its real value. In other words, prices are rising. Real value can be
-        measured by notional value less inflation (resulting in spending power) but how do we
-        measure inflation? You can listen to what the Fed reports in its CPI numbers or you can
-        measure your purchases. Candy is not a Store of Value Below is a display of candy’s quiet
-        inflation. Source: Brand View The notional value of these candies has not changed, yet the
-        real value of what you are purchasing has declined substantially. This pattern of decreasing
-        returns and/or increasing prices is common across many industries such as education,
-        groceries, commodities, ride-sharing services, and streaming platforms. It’s is not a
-        specific issue, its a systemic problem. Thank you for reading DAOJ. This post is public so
-        feel free to share it. Share Asset Scarcity Dan Held, the previous head of growth at the
-        Kraken crypto exchange, recently posted an interesting perspective on the relative value of
-        US dollars. Source: Dan Held’s LinkedIn Scarcity, physical or digital, has made its way to
-        the front lines of the debate on asset valuation. One thing is certain; the US dollar is not
-        scarce, and neither are the derivatives tied to it. According to Visualist Capitalist’
-        research on the world’s money supply, the global derivatives markets outsize the world’s
-        stock markets by a factor of 11. $ is in billions. Source: Visualist Capitalist A modest
-        estimate of the world’s derivatives is $1,000,000,000,000,000. One quadrillion US dollars.
-        Source: XDC News If that estimate is correct, then for every $1 in a stock market, there are
-        $11 in derivatives. These $11 serve a variety of purposes such as supply-side hedging but
-        most are cash-settled speculations. These are side-bets, bets on side-bets, and bets on bets
-        on side-bets. The sheer quantity of the value of side bets changes how the initial bet plays
-        out. It’s similar to the reflexivity principle discussed by George Soros or the concept of
-        Gary as described by legendary market maker and fund manager, Cem Karsan. The Observer
-        Effect Physicists deal with the same issues of reflexivity as financial markets, but in a
-        more fundamental sense — the observer effect. “In physics, the observer effect is the
-        disturbance of an observed system by the act of observation.[1] [2] This is often the result
-        of instruments that, by necessity, alter the state of what they measure in some manner. A
-        common example is checking the pressure in an automobile tire; this is difficult to do
-        without letting out some of the air, thus changing the pressure. Similarly, it is not
-        possible to see any object without light hitting the object, and causing it to reflect that
-        light. While the effects of observation are often negligible, the object still experiences a
-        change.” Financial markets are dynamic entities with infinitely complex combinations of
-        observers and their intentions. This observer effect is compounded through the use of
-        derivatives. Crypto Market Structure Things are slightly different in crypto. The whales in
-        the equity markets are usually large traditional funds or market makers. The whales in
-        crypto, on the other hand, are often early adopters, emerging funds, or individual traders
-        with large risk tolerances. For large traders, simply opening a position can cause a market
-        to rise or fall, especially in lower market cap / less liquid altcoins. When Doge had a ~$40
-        billion market cap, nearly half of its supply was held by a handful of wallets. What if
-        these wallets colluded and decided to market sell at the same time? These dynamics creates
-        levels of sustained volatility unmatched in traditional equity markets, aside from perhaps
-        penny stocks or OTC stocks where market caps are small and majority share owners can
-        (temporarily) get away with acting shady to pump or dump prices. Volatility as a Feature
-        This volatility has proven itself to be a feature, rather than a bug. Due to the way crypto
-        exchanges operate and distribute leverage, cascading liquidations can easily result from
-        large traders moving positions. In a sense, the cascading liquidations are crypto’s version
-        of a decentralized gamma squeeze across centralized exchanges. This liquidation effect is
-        present in traditional markets as well but to a much smaller extent because of the standards
-        practiced since the 1987 crash, the relative size of retail traders when compared to
-        institutional investors, and leverage distributions. So which is the underlying asset? It
-        varies. Sometimes spot equities lead derivative price action and vice versa. In crypto, it’s
-        not so clear. Crypto derivatives are relatively niche in comparison to equity derivatives
-        and their notional value is far less. The existence of multiple crypto futures exchanges,
-        funding rates, on-chain activity, and price discounts/premiums are other factors that muddy
-        the answer. For example, there have been times Bitcoin futures traded 10% higher on Coinbase
-        than on other exchanges. This simply doesn’t happen on the single exchange (CME) where all
-        /ES futures contracts are traded. Bitcoin’s premium has been as high as 20% in South Korea
-        due to restrictions on foreigners trading the South Korean Won — it eventually gets
-        arbitraged out or resets to equilibrium, but that is a non-existent phenomenon in equity
-        markets. The lack of standardized futures contracts and the use of many different price
-        oracles in cryptocurrency markets creates a complex and uncorrelated web of price data that
-        has yet to be demonstrated to have the same impact on crypto spot transactions as evidenced
-        in traditional markets. As crypto derivatives markets mature, will they become as reflexive
-        as equity markets? Only time will tell.
+        DAOJ Subscribe Sign in DAOJ Discover more from DAOJ Actionable perspectives on new
+        technologies and relevant financial topics Type your email... Subscribe Continue reading
+        Sign in Boson Protocol Decentralized Commerce Zachary Roth Sep 06, 2021 Boson Protocol Named
+        after an elementary particle described as a force carrier that functions as the 'glue'
+        holding matter together, Boson Protocol has made its mission to enable decentralized
+        commerce ecosystems to 'disrupt, demonopolize, and democratize commerce. Boson provides a
+        toolset that introduces novel NFT contracts called Commitment Tokens. Through these
+        Commitment tokens and the surrounding architecture, Boson looks to enable disparate entities
+        to engage in trustless transactions of Things across space and time. Things are physical
+        goods being transacted. Boson Protocol enables the following for any Thing: The tokenization
+        of digital to physical redemption using NFTs structured as futures contracts encoded with
+        game theory tactics that incentivize a decreasing amount of human involvement. Liquid
+        digital markets for these NFTs. A robust commerce data market. The stated vision of Boson is
+        'To be the world's open, public infrastructure layer for commercial transactions and their
+        data. Boson is building a bridge between the Metaverse and the physical universe. Purpose
+        "Commerce is a human endeavor that should not have value captured by the few." Justin Banon,
+        Boson CEO When the internet began taking over, idealists viewed the future as inherently
+        decentralized. As time passed, it became clear that the infrastructure built within web2 was
+        exorbitantly favorable to centralized scaling by companies like Amazon & Google. Commerce is
+        a multi-trillion dollar global industry constantly manipulated by these monolithic public
+        companies that serve as the bridge between content and consumers. If Amazon wants to ban you
+        for having too many items returned, Amazon can do that. If Amazon wants to ban you for
+        returning too many things, Amazon can do that. If Amazon wants to use data from sellers on
+        its platform to build competitive product offerings and place them in front of its
+        competitors, it can do that. Apple can too. If Amazon wants to be a monopoly, Amazon can do
+        that. You get the point. While Amazon is the main culprit here, institutions like Shopify,
+        Etsy, Pinterest, Alibaba, Restoration Hardware, Home Depot, etc., have similar problems -
+        they're too powerful for their own good. This centralization & rent-seeking by big companies
+        is rampant across many industries, and it's become clear that it's just the way of web2.
+        Web2's centralized scaling capabilities enabled the creation of multi-trillion-dollar
+        monopolies. Web3 companies seek to dismantle them. Web3's infrastructure - public
+        blockchains, NFTs, digital wallets, etc. have given vendors an entirely new framework to
+        operate within. You no longer need to rely on these immovable marketplace intermediaries to
+        perform commerce functions or stay on top of commerce data. Boson's Buyer/Seller Diagram
+        There are two main issues Boson is taking head-on: 'Coordinating commercial transactions
+        requires centralized intermediaries or decentralized arbitrators to manage dispute mediation
+        and transaction reversal. This adds cost and trust, which limits the scope and reduces the
+        efficiency of commerce.' 'Data collected from commercial transactions by centralized
+        intermediaries is locked-away and used to strengthen anti-competitive market dominance which
+        imperils the interests of the consumer, other firms and even governments.' Boson has taken
+        inspiration from the trustless & tokenized DeFi communities built around individual
+        protocols. These DeFi communities are disrupting banks with their newfound ability to
+        transact and anonymously create digital value without enacting harmful rent-seeking
+        practices. Boson is creating a new medium of exchange between Buyers and Sellers with a
+        similar goal. There's no need to rely on antiquated Antitrust laws and shady governments to
+        protect you. You can depend on the permissionless transaction mechanisms made possible by
+        modern cryptography and smart contract design. Function To understand the Boson Protocol,
+        you must understand Commitment Tokens, Thing Tokens, and the role of BOSON tokens.
+        Commitment Tokens A Buyer commits a Seller to exchange digital value for a physical item (a
+        Thing). This commitment is funded & tokenized into an escrow contract built into an NFT
+        contract. The NFT serves as a voucher to buy or sell an item, so Boson refers to them as
+        NFTVs. The NFT contract has an expiration date and is, in essence, acting as a futures
+        contract where the Seller is obliged to deliver the said item(s) listed in the contract at
+        expiration. Commitment Token holders are granted the right to transfer their token to
+        another wallet or reliably and securely redeem the token for a particular Thing. The
+        Commitment Tokens / NFT Voucher Tokens have the following characteristics: Universal - Can
+        represent any Thing. Interoperable - Can represent a standardized version of any Thing.
+        Composable - Can be assembled into composite products. Programmable - Fully customizable
+        within computing limits. Transferable / Storable - Between any standard web3 wallet.
+        Stateful - Appropriately change state (redeemed/canceled/failed/complained about) across the
+        core exchange mechanism process. The Core Exchange Mechanism takes the governance of
+        Commitment Tokens, where the programmed game theory comes into play. Buyers and Sellers
+        sequentially deposit up-front funds, so there are varying levels of skin in the game on both
+        sides of the transaction. The final deposit transfer process is structured to incentivize
+        good behavior by both parties. Boson's Core Exchange Mechanism Diagram Using this sequential
+        transaction process, Commitment Tokens can achieve a 'Subgame Perfect Equilibrium,' which
+        equates to each subgame of the original game as having a Nash equilibrium. As those of you
+        in the CFA curriculum know, Nash equilibrium equates to the balance between players when
+        each player knows the other players' strategy and has nothing to gain by changing only their
+        own strategy. The possible outcomes of the game are the triangles on the right side of the
+        above diagram. CoF stands for Cancel or Fault, which is an undesirable outcome. Therefore
+        the most desirable outcome of the game for all parties is 'Redemption; No Complaint; No
+        CoF,' which is the 4th triangle from the top of the diagram. The purpose of this game theory
+        being programmed into Commitment Tokens is to minimize the number of disputes and
+        arbitration required between Buyers and Sellers. Thing Tokens Thing Tokens, which conform to
+        the standard ERC20 contract, are used to purchase Commitment Tokens. Think of a Thing token
+        as a 'generalized Unisock' and the Commitment Token as an add-on futures contract. Unisocks
+        are a grand experiment in scarcity. There were 500 real pairs of Uniswap merchandise socks
+        tokenized as SOCKs and deposited into a liquidity pool on Uniswap along with their starting
+        value worth of ETH. Each SOCK token represents the redeemable ownership of 1 pair of socks
+        and is minted with a bonding curve, hence the 11,048.07% increase in price from the original
+        $12. You can either sell the token back to the liquidity pool or redeem it for the physical
+        socks, where the Uniswap company will ship a physical pair to you anywhere in the world.
+        Unisocks Exchange At the time of writing, the price of a $SOCK was $132,576.82, and 192 have
+        already been redeemed. Thing tokens are similar. The interoperability and composability of
+        Thing tokens enable them to be fitted or retrofitted into any existing DeFi infrastructure.
+        They are tradable in the same way you can trade SOCKs between different wallets, and they
+        can 'plug' into AMMs (Automated Market Makers) to create liquid digital markets. Their use
+        cases within DeFi include product price discovery on DEXes, yield optimization, and the
+        crowdfunding of non-existent products through ITOs (Initial Thing Offerings). BOSON Tokens
+        The incentive is the invisible hand that Adam Smith was talking about. Markets love
+        incentives. Just look at Carbon Credits or Tesla's profitability. Boson built reward
+        mechanisms within the Thing / Commitment Token relationship to incentivize good behavior by
+        both Buyers and Sellers - but that doesn't tell the whole story. The core objective of the
+        Boson Protocol is to 'maximize the supply of quality redemptions.' In other words: it
+        facilitates successful commerce transactions. To do so, Boson implemented the BOSON token
+        (Bosons) as a monetary reward for actors within the Boson ecosystem who help the protocol
+        reach its objective. Below is a high-level overview of the main stakeholders within the
+        Boson Protocol. High-Level Mapping of Boson Stakeholders Gluons For each voucher, there is a
+        unique derivative called a Gluon that represents the stake of the participant holding the
+        voucher and the associated BOSON reward. Vouchers with higher amounts of Gluons indicate
+        items that are expected to be higher quality than items with lower amounts of Gluons. Let's
+        say a Seller posts a voucher believing it will deliver an item that is highly valued in a
+        no-complaint transaction. The Seller would be incentivized to stake more capital than the
+        minimum required to be exposed to more Gluons, increasing the chance of receiving more BOSON
+        rewards. This engineering marvel incentivizes market participants to partake in high-quality
+        transactions of high-quality physical goods. For a more detailed analysis of all the game
+        theory involved, including math, check out the Boson Whitepaper. Applications Is your brain
+        spinning? Did you think there would be such a seamless exchange of digital and physical
+        value? It's just money, data, and Things. Things; Money; Data, #dCommerce Unisocks,
+        unrelated to Boson, is a proof of concept for decentralized commerce of physical goods.
+        While the Boson protocol is built for that, below is a list of some other potential use
+        cases suggested in their white paper. Online Commerce Non-Monetary Vouchers - Think
+        automated & auditable food stamps representing real food for those in need. M2M-commerce
+        (Machine to Machine) - Let your autonomous car purchase new tires. Loyalty & Rewards -
+        Standardized, composable, interoperable loyalty programs & credit card reward systems.
+        Imagine exchanging your Southwest Airlines miles for $SOCKs on Uniswap. Games - Video games
+        can grant players physical gifts for achieving certain success levels. (A REAL Mystic
+        Axie??? - just kidding) Gaming - Enable blockchain games to distribute prizes as NFTVs or
+        $BOSONs. Crypto Exchanges - Enable exchange tokens to be redeemed for physical rewards.
+        Service Bookings - Secure bookings permissionlessly with two-sided deposits. Tokenized
+        Networks - Exchange network tokens for digital/physical goods & services. Governance Boson
+        enacted a 3-phase structure of decentralizing their governance and is currently in the
+        Startup Phase. Startup Phase - Achieve 'protocol-market-fit' by rapid iteration through
+        opinionated leadership. Network Phase - Enable minimally extractive fees for vouchers and
+        ultimately incentivize market participants to contribute valuable work. Community Governance
+        - 'At the time of writing, it is anticipated that the governance structure will be a
+        decentralized autonomous organization (DAO), structured to ensure regulatory compliance as
+        well as resist capture from centralized entities or groups.' Roadmap To scale, Boson
+        estimates they will need to handle, on average, ten transactions per second, with peaks
+        potentially being more than 10x that. To do so, they decided to utilize the most
+        battle-tested layer 1 - Ethereum, which can generally handle dozens of transactions per
+        second. Boson raised $36,000,000 in token sales and USD that funded teams across protocol
+        design & and architecture, legal engineering & game theory while also scaling the employee
+        count to over 50. The Boson token is #511 on CoinMarketCap, with a market value of around
+        $60 million. Along with prolific hirings, Boson has released a DEX for any Thing, an app to
+        reference transactions, and began a groundbreaking experiment in Decentraland. Boson's
+        Leptonite App Boson purchased over $700,000 in digital real estate within Decentraland's
+        Vegas City. Boson is creating Portal, the world's first lifestyle and commerce playground,
+        through its collaboration with Polygonal Mind. The Portal will enable creators and brands to
+        sell redeemable NFTs for real-world products and services. Boson Portal's Space Layout in
+        Decentraland Now that funds have been raised, the team has been formed, and a strategy has
+        been implemented - Boson is in what it calls the 'hyper blitz scale mode of development. For
+        a more refined definition of the hyper-blitz scale to Boson, check out their Roadmap article
+        on Medium. Commerce's Byproducts Commerce is a natural process of giving and taking. There
+        are discounts and premiums on items dependent on market demand. Still, with centralized
+        scaling, many companies have taken advantage of billions of consumers and millions of small
+        businesses. The gatekeeping and rent-seeking of the intermediaries and arbiters involved is
+        nothing new. It's just a byproduct of the fact that commerce is so resource-intensive. Only
+        Kings and Parliaments had the funding to scour the globe for optimal ways to deliver goods,
+        so only Kings and Parliaments were in control of the world's trade. Do you blame Amazon for
+        being a monopoly? All Jeff did was to act on a future vision that turned out to be correct…
+        and then he got greedy. Boson looks to flatline intermediaries like Amazon and prevents
+        other Amazons from happening. Conclusion Boson is pioneering a future of decentralized
+        commerce. If they pull it off, they'll become one of the most important protocols in the
+        world. Their 60 million dollar market cap would be a drop in how much value would be
+        accrued. Given the magnitude of the issues at hand and the ethos of decentralized
+        governance, you can imagine the benefit that Boson could have on society. There are risks
+        associated with decentralized commerce that could require centralized emergency maintenance.
+        These include layer one failures, smart contract risk, unknown future regulations, and
+        competition. Still, as they have stated - they are open to changing their settlement layers
+        and are working on full-scale compliance with international law. They have progressed rather
+        quickly, the protocol is transparent, the passion of the founders is focused, and the
+        roadmaps are clear. Even if Boson isn’t the one to take down Amazon, perhaps they spawn the
+        ideas that do so. In any case, the trend of decentralized commerce is worth watching. Boson
+        Links Boson Socials: Twitter | Medium | Telegram | YouTube | LinkedIn Boson Links: Website |
+        Whitepaper | Litepaper | FAQs Subscribe to DAOJ By zachary r0th · Launched 3 years ago
+        Actionable perspectives on new technologies and relevant financial topics Type your email...
+        Subscribe Comments Write a comment... Top Latest Discussions NounsDAO Timeless Aug 31, 2021
+        • Zachary Roth 4 1 Star Atlas An Ambitious Metaverse Sep 23, 2021 • Zachary Roth 1 2 Audius
+        | Royal | Catalog Audius | Royal | Catalog Sep 15, 2021 • Zachary Roth 1 See all Ready for
+        more? Type your email... Subscribe © 2024 Zachary Roth Privacy ∙ Terms ∙ Collection notice
+        Start Writing Get the app Substack is the home for great culture{' '}
       </p>
     </article>
   );

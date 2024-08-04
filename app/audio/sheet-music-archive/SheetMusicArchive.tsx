@@ -32,10 +32,10 @@ const tabButtonStyle = `
 
 // Animation variants
 const buttonVariants = {
-  idle: { backgroundColor: 'transparent' },
-  downloading: { backgroundColor: '#4A5568' },
-  downloaded: { backgroundColor: '#4A5568' },
-  error: { backgroundColor: '#F56565' },
+  idle: { backgroundColor: 'rgba(0, 0, 0, 0)' },
+  downloading: { backgroundColor: 'rgba(74, 85, 104, 1)' },
+  downloaded: { backgroundColor: 'rgba(74, 85, 104, 1)' },
+  error: { backgroundColor: 'rgba(245, 101, 101, 1)' },
 };
 
 const textVariants = {
@@ -94,6 +94,14 @@ export default function SheetMusicArchive({ initialSheetMusic }: SheetMusicArchi
   useEffect(() => {
     localStorage.setItem('downloadStatus', JSON.stringify(downloadStatus));
   }, [downloadStatus]);
+
+  // New useEffect hook to remove data-np-intersection-state attribute
+  useEffect(() => {
+    const input = document.querySelector('input[data-np-intersection-state]');
+    if (input) {
+      input.removeAttribute('data-np-intersection-state');
+    }
+  }, []);
 
   // Download file function
   const downloadFile = useCallback(
@@ -169,8 +177,7 @@ export default function SheetMusicArchive({ initialSheetMusic }: SheetMusicArchi
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
-                  whileHover={{ backgroundColor: 'rgba(26, 26, 26, 0.5)' }}
-                  className="cursor-pointer"
+                  className="cursor-pointer hover:bg-gray-800/50"
                 >
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm font-medium text-gray-300">{item.title}</div>

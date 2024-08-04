@@ -141,13 +141,20 @@ const GameBoard = styled.div`
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 `;
 
-const Cell = styled.div<{ $isSnake: boolean; $isFood: boolean; $isHead: boolean; $color: string }>`
+interface CellProps {
+  $isSnake: boolean;
+  $isFood: boolean;
+  $isHead: boolean;
+  $color: string;
+}
+
+const Cell = styled.div<CellProps>`
   aspect-ratio: 1 / 1;
-  background-color: ${(props) =>
+  background-color: ${(props: CellProps) =>
     props.$isSnake ? props.$color : props.$isFood ? 'var(--color-accent)' : 'transparent'};
   border-radius: 4px;
   transition: all 0.1s ease;
-  ${(props) =>
+  ${(props: CellProps) =>
     props.$isFood &&
     css`
       animation: ${pulseAnimation} 2s ease-in-out infinite;

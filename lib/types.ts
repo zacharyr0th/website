@@ -18,7 +18,7 @@ export interface ContentItem {
   shares?: number;
   bookAuthor?: string;
   composer?: string;
-  fileType: 'mdx' | 'tsx' | 'pdf' | 'mscz' | string;
+  fileType?: 'mdx' | 'tsx' | 'pdf' | 'mscz' | string;
 }
 
 export interface WritingPageClientProps {
