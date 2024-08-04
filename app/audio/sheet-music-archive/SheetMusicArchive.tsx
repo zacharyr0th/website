@@ -1,16 +1,11 @@
-// make downloaded button stay gray when file is already downloaded
-// make downloaded file have the same name as the file's filename e.g bach_1006-1.pdf
-// preview the downloaded file in the browser in a new tab
-// make the download button have a loading spinner when the file is downloading
-// optimize / notate the file 
-
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { ContentItem } from '@/lib/types';
 import catalog from '../data/sheet_music_catalog.json';
 
+// Type definitions
 type CatalogEntry = {
   title: string;
   composer?: string;
@@ -21,6 +16,13 @@ type CatalogEntry = {
 
 type SheetMusicItem = ContentItem & { filename: string };
 
+type DownloadStatus = 'Downloading...' | 'Downloaded' | 'Error' | undefined;
+
+interface SheetMusicArchiveProps {
+  initialSheetMusic: SheetMusicItem[];
+}
+
+// Styles
 const tabButtonStyle = `
   px-4 py-2 text-sm font-medium text-gray-300 bg-transparent 
   border border-gray-700 rounded-md transition-colors duration-300 
@@ -28,10 +30,21 @@ const tabButtonStyle = `
   focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white
 `;
 
-interface SheetMusicArchiveProps {
-  initialSheetMusic: SheetMusicItem[];
-}
+// Animation variants
+const buttonVariants = {
+  idle: { backgroundColor: 'transparent' },
+  downloading: { backgroundColor: '#4A5568' },
+  downloaded: { backgroundColor: '#4A5568' },
+  error: { backgroundColor: '#F56565' },
+};
 
+const textVariants = {
+  initial: { opacity: 0, y: 10 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -10 },
+};
+
+// Helper functions
 const transformToContentItem = (slug: string, entry: CatalogEntry): SheetMusicItem => ({
   id: slug,
   slug,
@@ -48,53 +61,44 @@ const transformToContentItem = (slug: string, entry: CatalogEntry): SheetMusicIt
   date: new Date().toISOString(),
 });
 
-const buttonVariants = {
-  idle: { backgroundColor: 'transparent' },
-  downloading: { backgroundColor: '#4A5568' },
-  downloaded: { backgroundColor: '#48BB78' },
-  error: { backgroundColor: '#F56565' },
-};
-
-const textVariants = {
-  initial: { opacity: 0, y: 10 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -10 },
-};
-
 export default function SheetMusicArchive({ initialSheetMusic }: SheetMusicArchiveProps) {
   const [sheetMusic, setSheetMusic] = useState<SheetMusicItem[]>(initialSheetMusic);
   const [searchTerm, setSearchTerm] = useState('');
-  const [downloadStatus, setDownloadStatus] = useState<{ [key: string]: string }>({});
+  const [downloadStatus, setDownloadStatus] = useState<Record<string, DownloadStatus>>({});
 
+  // Memoize filtered sheet music
   const filteredSheetMusic = useMemo(() => {
-    return sheetMusic.filter(
-      (item) =>
-        item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.tags?.some((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase())) ||
-        item.composer?.toLowerCase().includes(searchTerm.toLowerCase())
+    const lowercasedSearchTerm = searchTerm.toLowerCase();
+    return sheetMusic.filter((item) =>
+      item.title.toLowerCase().includes(lowercasedSearchTerm) ||
+      item.tags?.some((tag) => tag.toLowerCase().includes(lowercasedSearchTerm)) ||
+      item.composer?.toLowerCase().includes(lowercasedSearchTerm)
     );
   }, [sheetMusic, searchTerm]);
 
+  // Load sheet music and download status on mount
   useEffect(() => {
     const musicList = Object.entries(catalog as Record<string, CatalogEntry>).map(
       ([slug, metadata]) => transformToContentItem(slug, metadata)
     );
     setSheetMusic(musicList);
-    console.log('SheetMusicArchive mounted with', musicList.length, 'items');
 
-    // Load persistent download status from localStorage
     const storedStatus = localStorage.getItem('downloadStatus');
     if (storedStatus) {
       setDownloadStatus(JSON.parse(storedStatus));
     }
   }, []);
 
+  // Save download status to localStorage
   useEffect(() => {
-    // Save download status to localStorage whenever it changes
     localStorage.setItem('downloadStatus', JSON.stringify(downloadStatus));
   }, [downloadStatus]);
 
-  const downloadFile = async (item: SheetMusicItem) => {
+  // Download file function
+  const downloadFile = useCallback(async (item: SheetMusicItem) => {
+    if (downloadStatus[item.slug] === 'Downloaded') {
+      return; // Prevent re-downloading if already downloaded
+    }
     setDownloadStatus((prev) => ({ ...prev, [item.slug]: 'Downloading...' }));
     try {
       const response = await fetch(`/api/downloads?file=${item.filename}`);
@@ -113,15 +117,7 @@ export default function SheetMusicArchive({ initialSheetMusic }: SheetMusicArchi
       console.error('Download error:', error);
       setDownloadStatus((prev) => ({ ...prev, [item.slug]: 'Error' }));
     }
-  };
-
-  const resetDownloadStatus = (slug: string) => {
-    setDownloadStatus((prev) => {
-      const newStatus = { ...prev };
-      delete newStatus[slug];
-      return newStatus;
-    });
-  };
+  }, [downloadStatus]);
 
   if (sheetMusic.length === 0) {
     return <div>No sheet music available. Please check the console for more information.</div>;
@@ -138,6 +134,7 @@ export default function SheetMusicArchive({ initialSheetMusic }: SheetMusicArchi
             className="w-1/3 px-4 py-2 rounded-full bg-inherit focus:outline-none focus:ring-2 focus:ring-gray-700"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            aria-label="Search sheet music"
           />
         </nav>
       </header>
@@ -147,18 +144,10 @@ export default function SheetMusicArchive({ initialSheetMusic }: SheetMusicArchi
           <table className="min-w-full bg-inherit rounded-lg overflow-hidden">
             <thead className="bg-[#1a1a1a]">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
-                  Name
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
-                  Composer
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
-                  Tags
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
-                  Download
-                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Name</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Composer</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Tags</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Download</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-800">
@@ -198,12 +187,9 @@ export default function SheetMusicArchive({ initialSheetMusic }: SheetMusicArchi
                       className={`${tabButtonStyle} w-28`}
                       variants={buttonVariants}
                       animate={downloadStatus[item.slug] || 'idle'}
-                      onClick={() => 
-                        downloadStatus[item.slug] === 'Downloaded' 
-                          ? resetDownloadStatus(item.slug)
-                          : downloadFile(item)
-                      }
+                      onClick={() => downloadFile(item)}
                       disabled={downloadStatus[item.slug] === 'Downloading...'}
+                      aria-label={`Download ${item.title}`}
                     >
                       <AnimatePresence mode="wait">
                         <motion.span
