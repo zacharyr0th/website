@@ -34,13 +34,11 @@ const AudioPage = () => {
       </motion.header>
 
       <main className="container mx-auto px-4">
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {categories.map((category, index) => (
             <CategoryCard key={category.slug} category={category} index={index} />
           ))}
         </div>
-        
       </main>
     </div>
   );
@@ -59,9 +57,7 @@ const CategoryCard = ({
     transition={{ duration: 0.5, delay: index * 0.1 }}
   >
     <Link href={`/audio/${category.slug}`} className="block">
-      <motion.div
-        className="bg-inherit rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700 hover:bg-[#242424]"
-      >
+      <motion.div className="bg-inherit rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700 hover:bg-[#242424]">
         <div className="p-6">
           <h2 className="text-2xl font-bold text-gray-100 mb-2">{category.title}</h2>
           <p className="text-gray-400 mb-4">{category.description}</p>

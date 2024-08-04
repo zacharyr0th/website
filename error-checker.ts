@@ -10,12 +10,12 @@ const argv = yargs(hideBin(process.argv))
     alias: 'd',
     type: 'string',
     description: 'Directory to check',
-    default: process.cwd()
+    default: process.cwd(),
   })
   .option('output', {
     alias: 'o',
     type: 'string',
-    description: 'Output file for results'
+    description: 'Output file for results',
   })
   .help()
   .parseSync() as { dir: string; output?: string };
@@ -65,9 +65,9 @@ async function checkESLintErrors(files: string[]): Promise<string> {
   try {
     const results = await eslintCLI.lintFiles(files);
     const formatter = await eslintCLI.loadFormatter('stylish');
-    const resultText = formatter.format(results, { 
+    const resultText = formatter.format(results, {
       cwd: process.cwd(),
-      rulesMeta: eslintCLI.getRulesMetaForResults(results)
+      rulesMeta: eslintCLI.getRulesMetaForResults(results),
     });
     return resultText;
   } catch (error) {
@@ -101,4 +101,4 @@ async function main() {
   writeToFileOrConsole(output, argv.output);
 }
 
-main().catch(error => console.error('An error occurred:', error));
+main().catch((error) => console.error('An error occurred:', error));

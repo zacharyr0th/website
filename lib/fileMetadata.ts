@@ -16,7 +16,9 @@ export async function addMetadataToPDF(filePath: string, metadata: Metadata): Pr
     pdfDoc = await PDFDocument.load(pdfFile);
   } catch (error) {
     if (error instanceof Error && error.message.includes('encrypted')) {
-      console.warn(`PDF file is encrypted: ${filePath}. Attempting to load with ignoreEncryption option.`);
+      console.warn(
+        `PDF file is encrypted: ${filePath}. Attempting to load with ignoreEncryption option.`
+      );
       pdfDoc = await PDFDocument.load(pdfFile, { ignoreEncryption: true });
     } else {
       throw error;
@@ -65,9 +67,12 @@ export async function addMetadataToFile(filePath: string, metadata: Metadata): P
   }
 }
 
-export async function processAllPDFsInFolder(folderPath: string, getMetadataForFile: (fileName: string) => Metadata): Promise<void> {
+export async function processAllPDFsInFolder(
+  folderPath: string,
+  getMetadataForFile: (fileName: string) => Metadata
+): Promise<void> {
   const files = await fs.readdir(folderPath);
-  const pdfFiles = files.filter(file => path.extname(file).toLowerCase() === '.pdf');
+  const pdfFiles = files.filter((file) => path.extname(file).toLowerCase() === '.pdf');
 
   for (const pdfFile of pdfFiles) {
     const filePath = path.join(folderPath, pdfFile);
@@ -76,7 +81,9 @@ export async function processAllPDFsInFolder(folderPath: string, getMetadataForF
       await addMetadataToPDF(filePath, metadata);
       console.log(`Successfully added metadata to ${pdfFile}`);
     } catch (error) {
-      console.error(`Error processing ${pdfFile}: ${error instanceof Error ? error.message : String(error)}`);
+      console.error(
+        `Error processing ${pdfFile}: ${error instanceof Error ? error.message : String(error)}`
+      );
     }
   }
 }

@@ -15,7 +15,12 @@ export default async function WritingPage({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const contentType = searchParams.type as 'article' | 'review' | 'interview' | 'sheet-music' | undefined;
+  const contentType = searchParams.type as
+    | 'article'
+    | 'review'
+    | 'interview'
+    | 'sheet-music'
+    | undefined;
   const allContent = await getContentItems(contentType);
 
   if (allContent.length === 0) {

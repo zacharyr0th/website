@@ -69,10 +69,11 @@ export default function SheetMusicArchive({ initialSheetMusic }: SheetMusicArchi
   // Memoize filtered sheet music
   const filteredSheetMusic = useMemo(() => {
     const lowercasedSearchTerm = searchTerm.toLowerCase();
-    return sheetMusic.filter((item) =>
-      item.title.toLowerCase().includes(lowercasedSearchTerm) ||
-      item.tags?.some((tag) => tag.toLowerCase().includes(lowercasedSearchTerm)) ||
-      item.composer?.toLowerCase().includes(lowercasedSearchTerm)
+    return sheetMusic.filter(
+      (item) =>
+        item.title.toLowerCase().includes(lowercasedSearchTerm) ||
+        item.tags?.some((tag) => tag.toLowerCase().includes(lowercasedSearchTerm)) ||
+        item.composer?.toLowerCase().includes(lowercasedSearchTerm)
     );
   }, [sheetMusic, searchTerm]);
 
@@ -95,29 +96,32 @@ export default function SheetMusicArchive({ initialSheetMusic }: SheetMusicArchi
   }, [downloadStatus]);
 
   // Download file function
-  const downloadFile = useCallback(async (item: SheetMusicItem) => {
-    if (downloadStatus[item.slug] === 'Downloaded') {
-      return; // Prevent re-downloading if already downloaded
-    }
-    setDownloadStatus((prev) => ({ ...prev, [item.slug]: 'Downloading...' }));
-    try {
-      const response = await fetch(`/api/downloads?file=${item.filename}`);
-      if (!response.ok) throw new Error('Download failed');
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.style.display = 'none';
-      a.href = url;
-      a.download = item.filename;
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
-      setDownloadStatus((prev) => ({ ...prev, [item.slug]: 'Downloaded' }));
-    } catch (error) {
-      console.error('Download error:', error);
-      setDownloadStatus((prev) => ({ ...prev, [item.slug]: 'Error' }));
-    }
-  }, [downloadStatus]);
+  const downloadFile = useCallback(
+    async (item: SheetMusicItem) => {
+      if (downloadStatus[item.slug] === 'Downloaded') {
+        return; // Prevent re-downloading if already downloaded
+      }
+      setDownloadStatus((prev) => ({ ...prev, [item.slug]: 'Downloading...' }));
+      try {
+        const response = await fetch(`/api/downloads?file=${item.filename}`);
+        if (!response.ok) throw new Error('Download failed');
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = item.filename;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        setDownloadStatus((prev) => ({ ...prev, [item.slug]: 'Downloaded' }));
+      } catch (error) {
+        console.error('Download error:', error);
+        setDownloadStatus((prev) => ({ ...prev, [item.slug]: 'Error' }));
+      }
+    },
+    [downloadStatus]
+  );
 
   if (sheetMusic.length === 0) {
     return <div>No sheet music available. Please check the console for more information.</div>;
@@ -144,10 +148,18 @@ export default function SheetMusicArchive({ initialSheetMusic }: SheetMusicArchi
           <table className="min-w-full bg-inherit rounded-lg overflow-hidden">
             <thead className="bg-[#1a1a1a]">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Name</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Composer</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Tags</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Download</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  Name
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  Composer
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  Tags
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  Download
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-800">

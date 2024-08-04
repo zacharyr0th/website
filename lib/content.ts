@@ -7,8 +7,8 @@ import { addMetadataToFile } from './fileMetadata';
 export async function getContentItems(
   type: 'article' | 'review' | 'interview' | 'sheet-music' | undefined
 ): Promise<ContentItem[]> {
-  const directories = type 
-    ? [type === 'sheet-music' ? 'sheet-music' : type + 's'] 
+  const directories = type
+    ? [type === 'sheet-music' ? 'sheet-music' : type + 's']
     : ['articles', 'reviews', 'interviews', 'sheet-music'];
   const contentDirectory = path.join(process.cwd(), 'content', 'writing');
 
@@ -16,9 +16,10 @@ export async function getContentItems(
   const usedIds = new Set();
 
   for (const dir of directories) {
-    const fullPath = dir === 'sheet-music'
-      ? path.join(process.cwd(), 'content', 'audio', 'sheet-music')
-      : path.join(contentDirectory, dir);
+    const fullPath =
+      dir === 'sheet-music'
+        ? path.join(process.cwd(), 'content', 'audio', 'sheet-music')
+        : path.join(contentDirectory, dir);
     console.log('Checking directory:', fullPath);
 
     try {
@@ -32,7 +33,11 @@ export async function getContentItems(
     console.log(`Found ${files.length} files in ${dir}:`, files);
 
     for (const file of files) {
-      if (file.endsWith('.md') || file.endsWith('.tsx') || (dir === 'sheet-music' && ['.pdf', '.mscz', '.zip'].includes(path.extname(file)))) {
+      if (
+        file.endsWith('.md') ||
+        file.endsWith('.tsx') ||
+        (dir === 'sheet-music' && ['.pdf', '.mscz', '.zip'].includes(path.extname(file)))
+      ) {
         const filePath = path.join(fullPath, file);
         let data: any = {};
         let content: string = '';
@@ -108,7 +113,10 @@ export async function getContentItems(
           allItems.push({
             ...data,
             content,
-            type: dir === 'sheet-music' ? 'sheet-music' : dir.slice(0, -1) as 'article' | 'review' | 'interview',
+            type:
+              dir === 'sheet-music'
+                ? 'sheet-music'
+                : (dir.slice(0, -1) as 'article' | 'review' | 'interview'),
             image: imageExists ? data.image : '/images/placeholder.webp',
           });
         } else {
@@ -141,8 +149,8 @@ export async function getAllContentSlugs(): Promise<string[]> {
   try {
     const sheetMusicFiles = await fs.readdir(sheetMusicDir);
     sheetMusicSlugs = sheetMusicFiles
-      .filter(file => ['.pdf', '.mscz', '.zip'].includes(path.extname(file)))
-      .map(file => path.parse(file).name);
+      .filter((file) => ['.pdf', '.mscz', '.zip'].includes(path.extname(file)))
+      .map((file) => path.parse(file).name);
     console.log(`Found ${sheetMusicSlugs.length} sheet music files`);
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
