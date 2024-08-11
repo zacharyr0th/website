@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import styles from '../styles/pages/WritingPage.module.css';
 
 interface Content {
   id: string;
@@ -26,8 +25,9 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
 
   useEffect(() => {
     setMounted(true);
-    // Randomize all content
-    setRandomizedContent([...allContent].sort(() => Math.random() - 0.5));
+    // Filter out audio content and randomize the remaining writing content
+    const writingContent = allContent.filter((content) => content.type !== 'sheet-music');
+    setRandomizedContent([...writingContent].sort(() => Math.random() - 0.5));
   }, [allContent]);
 
   // Ensure allContent is an array

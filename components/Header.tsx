@@ -34,7 +34,7 @@ const Header = () => {
     <header className="w-full bg-[#121212] text-gray-200 shadow-none transition-colors duration-300">
       <nav className="flex justify-between items-center p-4">
         {/* Home Button */}
-        <div className="flex items-center space-x-6">
+        <div className="flex items-center space-x-4">
           {pathname !== '/' && (
             <Link
               href="/"
