@@ -95,6 +95,17 @@ export async function getContentItems(
           }
         }
 
+        // Add language detection
+        const fileNameParts = path.parse(file).name.split('-');
+        const language = fileNameParts[fileNameParts.length - 1].length === 2
+          ? fileNameParts.pop()
+          : 'en'; // Default to English if no language code is found
+
+        data = {
+          ...data,
+          language, // Add the language to the metadata
+        };
+
         if (data && data.slug) {
           const publicDir = path.join(process.cwd(), 'public');
           const imagePath = path.join(publicDir, data.image || '');
@@ -118,6 +129,7 @@ export async function getContentItems(
                 ? 'sheet-music'
                 : (dir.slice(0, -1) as 'article' | 'review' | 'interview'),
             image: imageExists ? data.image : '/images/placeholder.webp',
+            language: data.language || 'en', // Ensure language is always set
           });
         } else {
           console.warn(`Missing slug or invalid data for file: ${file}`);

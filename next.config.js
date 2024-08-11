@@ -18,6 +18,10 @@ const nextConfig = {
     unoptimized: false,
     formats: ['image/webp'],
   },
+  i18n: {
+    locales: ['en', 'fr', 'sp'],
+    defaultLocale: 'en',
+  },
 };
 
 module.exports = nextConfig;

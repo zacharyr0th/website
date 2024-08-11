@@ -19,6 +19,7 @@ export interface ContentItem {
   bookAuthor?: string;
   composer?: string;
   fileType?: 'mdx' | 'tsx' | 'pdf' | 'mscz' | string;
+  language: string;
 }
 
 export interface WritingPageClientProps {
