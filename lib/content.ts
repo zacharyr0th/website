@@ -97,9 +97,8 @@ export async function getContentItems(
 
         // Add language detection
         const fileNameParts = path.parse(file).name.split('-');
-        const language = fileNameParts[fileNameParts.length - 1].length === 2
-          ? fileNameParts.pop()
-          : 'en'; // Default to English if no language code is found
+        const language =
+          fileNameParts[fileNameParts.length - 1].length === 2 ? fileNameParts.pop() : 'en'; // Default to English if no language code is found
 
         data = {
           ...data,

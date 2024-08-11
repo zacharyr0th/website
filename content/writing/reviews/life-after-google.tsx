@@ -10,7 +10,8 @@ export const metadata: ContentItem = {
   imageCaption: 'Book cover of Life After Google by George Gilder',
   pageViews: 0,
   type: 'review',
-  description: "A review of George Gilder's book on the future of the internet and blockchain technology.",
+  description:
+    "A review of George Gilder's book on the future of the internet and blockchain technology.",
   content: '',
   author: 'Zachary Roth',
   bookAuthor: 'George Gilder',
@@ -24,11 +25,7 @@ export const metadata: ContentItem = {
 };
 
 const LifeAfterGoogle: React.FC = () => {
-  return (
-    <article>
-      {/* Add your review content here */}
-    </article>
-  );
+  return <article>{/* Add your review content here */}</article>;
 };
 
 export default LifeAfterGoogle;

@@ -59,6 +59,7 @@ const transformToContentItem = (slug: string, entry: CatalogEntry): SheetMusicIt
   content: '',
   author: entry.composer || 'Unknown',
   date: new Date().toISOString(),
+  language: 'en',
 });
 
 export default function SheetMusicArchive({ initialSheetMusic }: SheetMusicArchiveProps) {

@@ -21,7 +21,7 @@ export async function getWritingContentData(slug: string) {
     tags: data.tags,
     type: data.type,
     pageViews: 0,
-    language: data.language
+    language: data.language,
   };
 }
 
