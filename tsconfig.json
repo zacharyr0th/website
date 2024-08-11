@@ -5,6 +5,8 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "types": ["node", "react", "react-dom"],
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -22,8 +24,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
-    },
-    "typeRoots": ["./node_modules/@types", "./types"]
+    }
   },
   "include": [
     "next-env.d.ts",

@@ -1,3 +1,8 @@
+/// <reference types="node" />
+/// <reference types="react" />
+/// <reference types="react-dom" />
+
+declare module 'isomorphic-dompurify';
 declare module 'dompurify';
 declare module 'hoist-non-react-statics';
 declare module 'js-yaml';

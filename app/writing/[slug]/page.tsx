@@ -1,17 +1,10 @@
 import { getContentItems } from '../../../lib/content';
-import { notFound } from 'next/navigation';
+import { notFound, useRouter } from 'next/navigation';
 import DOMPurify from 'isomorphic-dompurify';
 import Image from 'next/image';
-import LikeButton from '../../../components/LikeButton';
-import ShareButton from '../../../components/ShareButton';
-import dynamic from 'next/dynamic';
 import { ReactElement } from 'react';
 import Link from 'next/link';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-
-const CommentSection = dynamic(() => import('@/components/comment-section/CommentSection'), {
-  ssr: false,
-});
 
 type Post = {
   slug: string;
@@ -119,11 +112,6 @@ export default async function WritingPage({ params }: { params: { slug: string }
           ) : (
             <div className="prose prose-lg max-w-none mb-12">{sanitizedContent}</div>
           )}
-          <div className="flex items-center space-x-4 mb-8">
-            <LikeButton postSlug={post.slug} />
-            <ShareButton postSlug={post.slug} />
-          </div>
-          <CommentSection postSlug={post.slug} />
         </article>
       </div>
     );
