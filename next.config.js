@@ -12,7 +12,8 @@ const nextConfig = {
     loader: 'default',
     disableStaticImages: false,
     minimumCacheTTL: 60,
-    contentSecurityPolicy: "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'",
+    contentSecurityPolicy:
+      "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'",
     remotePatterns: [],
     unoptimized: false,
     formats: ['image/webp'],
