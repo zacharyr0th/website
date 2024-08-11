@@ -6,7 +6,7 @@ export const metadata: ContentItem = {
   slug: 'ministry-for-the-future',
   title: 'The Ministry for the Future',
   subtitle: 'A Novel',
-  image: '/placeholder.webp',
+  image: '/images/reviews/the-ministry-for-the-future.webp',
   imageCaption: 'Book cover of The Ministry for the Future by Kim Stanley Robinson',
   pageViews: 0,
   type: 'review',
@@ -21,6 +21,7 @@ export const metadata: ContentItem = {
   likes: 0,
   comments: 0,
   shares: 0,
+  language: 'en', // Added this line
 };
 
 const MinistryForTheFuture: React.FC = () => {

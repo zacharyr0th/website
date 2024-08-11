@@ -6,7 +6,7 @@ export const metadata: ContentItem = {
   slug: 'boson-protocol',
   title: 'Boson Protocol',
   subtitle: 'test',
-  image: '/placeholder.webp',
+  image: '/images/articles/bp-0.webp',
   imageCaption: 'test',
   pageViews: 0,
   type: 'article',
@@ -21,6 +21,7 @@ export const metadata: ContentItem = {
   likes: 0,
   comments: 0,
   shares: 0,
+  language: 'en',
 };
 
 const BosonProtocol: React.FC = () => {

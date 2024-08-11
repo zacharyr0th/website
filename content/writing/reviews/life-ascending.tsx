@@ -6,7 +6,7 @@ export const metadata: ContentItem = {
   slug: 'life-ascending',
   title: 'Life Ascending',
   subtitle: 'The Ten Great Inventions of Evolution',
-  image: '/placeholder.webp',
+  image: '/images/reviews/life-ascending.webp',
   imageCaption: 'Book cover of Life Ascending by Nick Lane',
   pageViews: 0,
   type: 'review',
@@ -21,6 +21,7 @@ export const metadata: ContentItem = {
   likes: 0,
   comments: 0,
   shares: 0,
+  language: 'en',
 };
 
 const LifeAscending: React.FC = () => {

@@ -6,7 +6,7 @@ export const metadata: ContentItem = {
   slug: 'one-hundred-years-of-solitude',
   title: 'One Hundred Years of Solitude',
   subtitle: 'A Masterpiece of Magical Realism',
-  image: '/placeholder.webp',
+  image: '/images/reviews/100y.webp',
   imageCaption: 'Book cover of One Hundred Years of Solitude by Gabriel García Márquez',
   pageViews: 0,
   type: 'review',
@@ -21,6 +21,7 @@ export const metadata: ContentItem = {
   likes: 0,
   comments: 0,
   shares: 0,
+  language: 'en',
 };
 
 const OneHundredYearsOfSolitude: React.FC = () => {

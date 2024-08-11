@@ -17,6 +17,7 @@ likes: 0
 comments: 0
 shares: 0
 bookAuthor: 'qntm'
+language: 'en'
 ---
 
 # There is No Antimimetecs Division

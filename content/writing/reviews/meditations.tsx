@@ -20,6 +20,7 @@ export const metadata: ContentItem = {
   likes: 0,
   comments: 0,
   shares: 0,
+  language: 'en',
 };
 
 const Meditations: React.FC = () => {

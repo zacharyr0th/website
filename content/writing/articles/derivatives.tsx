@@ -6,7 +6,7 @@ export const metadata: ContentItem = {
   slug: 'derivatives',
   title: 'Are Derivatives the Real Underlying Asset?',
   subtitle: 'test',
-  image: '/placeholder.webp',
+  image: '/images/articles/derivatives-0.webp',
   imageCaption: 'test',
   pageViews: 0,
   type: 'article',
@@ -21,6 +21,7 @@ export const metadata: ContentItem = {
   likes: 0,
   comments: 0,
   shares: 0,
+  language: 'en',
 };
 
 const Derivatives: React.FC = () => {

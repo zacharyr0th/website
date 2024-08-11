@@ -21,6 +21,7 @@ export const metadata: ContentItem = {
   comments: 0,
   shares: 0,
   bookAuthor: 'George Orwell',
+  language: 'en',
 };
 
 const AnimalFarm: React.FC = () => {

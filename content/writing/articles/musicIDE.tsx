@@ -2,11 +2,11 @@ import React from 'react';
 import { ContentItem } from '../../../lib/types';
 
 export const metadata: ContentItem = {
-  id: 'musicIDE-treatise',
-  slug: 'musicIDE-treatise',
-  title: 'MusicIDE Treatise',
+  id: 'musicIDE',
+  slug: 'musicIDE',
+  title: 'MusicIDE',
   subtitle: 'Revolutionizing Music Production with Integrated Development Environments',
-  image: '/placeholder.webp',
+  image: '/images/articles/musicIDE-0.webp',
   imageCaption: 'Conceptual image of a music production interface',
   pageViews: 0,
   type: 'article',
@@ -20,6 +20,7 @@ export const metadata: ContentItem = {
   likes: 0,
   comments: 0,
   shares: 0,
+  language: 'en',
 };
 
 const MusicIDE: React.FC = () => {

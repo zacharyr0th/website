@@ -6,7 +6,7 @@ export const metadata: ContentItem = {
   slug: 'playlist-ai',
   title: 'Playlist AI',
   subtitle: 'test',
-  image: '/placeholder.webp',
+  image: '/images/interviews/playlist-0.webp',
   imageCaption: 'test',
   pageViews: 0,
   type: 'interview',
@@ -20,6 +20,7 @@ export const metadata: ContentItem = {
   comments: 0,
   shares: 0,
   content: '',
+  language: 'en',
 };
 
 const Nouns: React.FC = () => {

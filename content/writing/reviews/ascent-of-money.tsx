@@ -6,7 +6,7 @@ export const metadata: ContentItem = {
   slug: 'ascent-of-money',
   title: 'Ascent of Money',
   subtitle: 'A Financial History of the World',
-  image: '/placeholder.webp',
+  image: '/images/reviews/ascent-of-money.webp',
   imageCaption: 'Book cover of Ascent of Money',
   pageViews: 0,
   type: 'review',
@@ -21,6 +21,7 @@ export const metadata: ContentItem = {
   likes: 0,
   comments: 0,
   shares: 0,
+  language: 'en',
 };
 
 const AscentOfMoney: React.FC = () => {

@@ -6,7 +6,7 @@ export const metadata: ContentItem = {
   slug: 'wanting',
   title: 'Wanting',
   subtitle: 'The Power of Mimetic Desire in Everyday Life',
-  image: '/placeholder.webp',
+  image: '/images/reviews/wanting.webp',
   imageCaption: 'Book cover of Wanting by Luke Burgis',
   pageViews: 0,
   type: 'review',
@@ -21,6 +21,7 @@ export const metadata: ContentItem = {
   likes: 0,
   comments: 0,
   shares: 0,
+  language: 'en',
 };
 
 const Wanting: React.FC = () => {

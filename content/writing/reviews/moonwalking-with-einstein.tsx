@@ -6,7 +6,7 @@ export const metadata: ContentItem = {
   slug: 'moonwalking-with-einstein',
   title: 'Moonwalking with Einstein',
   subtitle: 'The Art and Science of Remembering Everything',
-  image: '/placeholder.webp',
+  image: '/images/reviews/moonwalking-with-einstein.webp',
   imageCaption: 'Book cover of Moonwalking with Einstein by Joshua Foer',
   pageViews: 0,
   type: 'review',
@@ -21,6 +21,7 @@ export const metadata: ContentItem = {
   likes: 0,
   comments: 0,
   shares: 0,
+  language: 'en',
 };
 
 const MoonwalkingWithEinstein: React.FC = () => {

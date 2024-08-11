@@ -20,7 +20,8 @@ export const metadata: ContentItem = {
   readTime: 2,
   likes: 0,
   comments: 0,
-  shares: 0,
+  shares: 0, 
+  language: 'en',
 };
 
 const DisunitedNations: React.FC = () => {

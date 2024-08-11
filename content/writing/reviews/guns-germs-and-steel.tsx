@@ -3,10 +3,10 @@ import { ContentItem } from '../../../lib/types';
 
 export const metadata: ContentItem = {
   id: 'guns-germs-steel',
-  slug: 'guns-germs-steel',
+  slug: 'guns-germs-and-steel',
   title: 'Guns, Germs, and Steel',
   subtitle: 'The Fates of Human Societies',
-  image: '/images/reviews/guns-germs-steel.webp',
+  image: '/images/reviews/guns-germs-and-steel.webp',
   imageCaption: 'Book cover of Guns, Germs, and Steel by Jared Diamond',
   pageViews: 0,
   type: 'review',
@@ -21,6 +21,7 @@ export const metadata: ContentItem = {
   likes: 0,
   comments: 0,
   shares: 0,
+  language: 'en', // Added this line
 };
 
 const GunsGermsSteel: React.FC = () => {

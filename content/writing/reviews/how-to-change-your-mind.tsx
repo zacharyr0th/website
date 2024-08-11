@@ -7,7 +7,7 @@ export const metadata: ContentItem = {
   title: 'How to Change Your Mind',
   subtitle:
     'What the New Science of Psychedelics Teaches Us About Consciousness, Dying, Addiction, Depression, and Transcendence',
-  image: '/placeholder.webp',
+  image: '/images/reviews/how-to-change-your-mind.webp',
   imageCaption: 'Book cover of How to Change Your Mind by Michael Pollan',
   pageViews: 0,
   type: 'review',
@@ -21,6 +21,7 @@ export const metadata: ContentItem = {
   likes: 0,
   comments: 0,
   shares: 0,
+  language: 'en',
 };
 
 const HowToChangeYourMind: React.FC = () => {

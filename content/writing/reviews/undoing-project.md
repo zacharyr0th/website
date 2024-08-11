@@ -3,7 +3,7 @@ id: 'undoing-project'
 slug: 'undoing-project'
 title: 'The Undoing Project'
 subtitle: 'A Friendship That Changed Our Minds'
-image: '/placeholder.webp'
+image: '/images/reviews/undoing-project.webp'
 imageCaption: 'Book cover of The Undoing Project'
 pageViews: 0
 type: 'review'
@@ -17,6 +17,7 @@ readTime: 2
 likes: 0
 comments: 0
 shares: 0
+language: 'en'
 ---
 
 A love story between Michael Lewis, Amos Tversky, and Daniel Kahneman. Michael's writing is great, and these monolithic figures deserve recognition, but this felt too much like an ode to friendship or the trials and tribulations of it. Maybe that's the point.

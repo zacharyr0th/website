@@ -6,7 +6,7 @@ export const metadata: ContentItem = {
   slug: 'nounsDAO',
   title: 'NounsDAO',
   subtitle: 'Time. Albeit, Nouns are more timeless.',
-  image: '/placeholder.webp',
+  image: '/images/articles/nouns-0.webp',
   imageCaption: 'NounsDAO logo and John Cage portrait',
   pageViews: 0,
   type: 'article',
@@ -19,6 +19,7 @@ export const metadata: ContentItem = {
   comments: 0,
   shares: 0,
   content: '',
+  language: 'en',
 };
 
 const Nouns: React.FC = () => {

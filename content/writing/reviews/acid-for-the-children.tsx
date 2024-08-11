@@ -21,6 +21,7 @@ export const metadata: ContentItem = {
   comments: 0,
   shares: 0,
   bookAuthor: 'Flea',
+  language: 'en',
 };
 
 const AcidForTheChildren: React.FC = () => {

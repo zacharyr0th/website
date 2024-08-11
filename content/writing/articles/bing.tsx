@@ -6,7 +6,7 @@ export const metadata: ContentItem = {
   slug: 'bing',
   title: 'Bing!',
   subtitle: 'bing',
-  image: '/placeholder.webp',
+  image: '/images/articles/bing-0.webp',
   imageCaption: 'bing',
   pageViews: 0,
   type: 'article',
@@ -22,6 +22,7 @@ export const metadata: ContentItem = {
   comments: 0,
   shares: 0,
   fileType: 'tsx',
+  language: 'en',
 };
 
 const Bing: React.FC = () => {

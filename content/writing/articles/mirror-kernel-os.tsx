@@ -6,7 +6,7 @@ export const metadata: ContentItem = {
   slug: 'mirror-kernel-os',
   title: 'Mirror Kernel OS',
   subtitle: 'Revolutionizing Operating Systems with Modular Architecture',
-  image: '/placeholder.webp',
+  image: '/images/articles/kernel-0.webp',
   imageCaption: 'Conceptual image of a modular microkernel architecture',
   pageViews: 0,
   type: 'article',
@@ -20,6 +20,7 @@ export const metadata: ContentItem = {
   likes: 0,
   comments: 0,
   shares: 0,
+  language: 'en',
 };
 
 const ModularMicrokernelOS: React.FC = () => {

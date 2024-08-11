@@ -21,6 +21,7 @@ export const metadata: ContentItem = {
   comments: 0,
   shares: 0,
   bookAuthor: 'Peter Zeihan',
+  language: 'en',
 };
 
 const AccidentalSuperpower: React.FC = () => {

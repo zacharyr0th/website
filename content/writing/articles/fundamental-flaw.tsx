@@ -6,7 +6,7 @@ export const metadata: ContentItem = {
   slug: 'fundamental-flaw',
   title: 'The Fundamental Flaw',
   subtitle: 'test',
-  image: '/placeholder.webp',
+  image: '/images/articles/flaw.webp',
   imageCaption: 'test',
   pageViews: 0,
   type: 'article',
@@ -21,6 +21,7 @@ export const metadata: ContentItem = {
   likes: 0,
   comments: 0,
   shares: 0,
+  language: 'en',
 };
 
 const FundamentalFlaw: React.FC = () => {

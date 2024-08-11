@@ -6,7 +6,7 @@ export const metadata: ContentItem = {
   slug: 'sovereign-individual',
   title: 'The Sovereign Individual',
   subtitle: 'Mastering the Transition to the Information Age',
-  image: '/placeholder.webp',
+  image: '/images/reviews/si.webp',
   imageCaption:
     'Book cover of The Sovereign Individual by James Dale Davidson and William Rees-Mogg',
   pageViews: 0,
@@ -22,6 +22,7 @@ export const metadata: ContentItem = {
   likes: 0,
   comments: 0,
   shares: 0,
+  language: 'en',
 };
 
 const SovereignIndividual: React.FC = () => {
