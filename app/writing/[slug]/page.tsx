@@ -1,5 +1,5 @@
 import { getContentItems } from '../../../lib/content';
-import { notFound, useRouter } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import DOMPurify from 'isomorphic-dompurify';
 import Image from 'next/image';
 import { ReactElement } from 'react';
@@ -14,6 +14,8 @@ type Post = {
   type: string;
   image: string;
   content: string | ReactElement;
+  subtitle?: string;
+  readTime?: number;
 };
 
 export async function generateStaticParams() {
@@ -70,13 +72,13 @@ export default async function WritingPage({ params }: { params: { slug: string }
     const sanitizedContent = typeof content === 'string' ? DOMPurify.sanitize(content) : content;
 
     return (
-      <div className="relative">
+      <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {prevPost && (
           <Link
             href={`/writing/${prevPost.slug}`}
             className="fixed left-4 top-1/2 transform -translate-y-1/2"
           >
-            <button className="bg-inherit text-white p-3 rounded-full hover:bg-black/60 transition-all duration-300">
+            <button className="bg-inherit text-gray-600 p-3 rounded-full hover:bg-gray-200 transition-all duration-300">
               <FaChevronLeft size={24} />
             </button>
           </Link>
@@ -86,12 +88,32 @@ export default async function WritingPage({ params }: { params: { slug: string }
             href={`/writing/${nextPost.slug}`}
             className="fixed right-4 top-1/2 transform -translate-y-1/2"
           >
-            <button className="bg-inherit text-white p-3 rounded-full hover:bg-black/60 transition-all duration-300">
+            <button className="bg-inherit text-gray-600 p-3 rounded-full hover:bg-gray-200 transition-all duration-300">
               <FaChevronRight size={24} />
             </button>
           </Link>
         )}
-        <article className="container mx-auto px-4 py-8 max-w-3xl">
+        <article>
+          <header className="mb-8">
+            <h1 className="text-4xl font-bold mb-2">{post.title}</h1>
+            {post.subtitle && (
+              <h2 className="text-2xl text-gray-600 mb-4">{post.subtitle}</h2>
+            )}
+            <div className="flex items-center text-sm text-gray-500">
+              <span>{post.author}</span>
+              <span className="mx-2">•</span>
+              <span>{post.date}</span>
+              <span className="mx-2">•</span>
+              <span>{post.type.charAt(0).toUpperCase() + post.type.slice(1)}</span>
+              {post.readTime && (
+                <>
+                  <span className="mx-2">•</span>
+                  <span>{post.readTime} min read</span>
+                </>
+              )}
+            </div>
+          </header>
+
           <Image
             src={post.image}
             alt={post.title}
@@ -99,19 +121,14 @@ export default async function WritingPage({ params }: { params: { slug: string }
             height={400}
             className="rounded-lg mb-8"
           />
-          <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-          <div className="text-gray-600 mb-6">
-            <span>{post.author}</span> • <span>{post.date}</span> •{' '}
-            <span>{post.type.charAt(0).toUpperCase() + post.type.slice(1)}</span>
+
+          <div className="prose prose-lg max-w-none">
+            {typeof sanitizedContent === 'string' ? (
+              <div dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
+            ) : (
+              sanitizedContent
+            )}
           </div>
-          {typeof sanitizedContent === 'string' ? (
-            <div
-              className="prose prose-lg max-w-none mb-12"
-              dangerouslySetInnerHTML={{ __html: sanitizedContent }}
-            />
-          ) : (
-            <div className="prose prose-lg max-w-none mb-12">{sanitizedContent}</div>
-          )}
         </article>
       </div>
     );
