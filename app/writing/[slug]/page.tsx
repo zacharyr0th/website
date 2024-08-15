@@ -1,7 +1,6 @@
 import { getContentItems } from '../../../lib/content';
 import { notFound } from 'next/navigation';
 import DOMPurify from 'isomorphic-dompurify';
-import Image from 'next/image';
 import { ReactElement } from 'react';
 import Link from 'next/link';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
@@ -151,16 +150,6 @@ export default async function WritingPage({ params }: { params: { slug: string }
               )}
             </div>
           </header>
-
-          {post.image && (
-            <Image
-              src={post.image}
-              alt={post.title}
-              width={1200}
-              height={600}
-              className="w-full h-64 object-cover rounded-md mb-8"
-            />
-          )}
 
           <div className="prose prose-lg max-w-none prose-invert">
             {typeof formattedContent === 'string' ? (

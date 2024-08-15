@@ -28,6 +28,7 @@ export const metadata: ContentItem = {
 const Bing: React.FC = () => {
   return (
     <article>
+      <img src="/images/articles/bing-0.webp" alt="Bing" />
       <p>
         DAOJ Subscribe Sign in Bing has a long way to go, but I'm here for it Everyone loves an
         underdog zachary r0th Feb 27, 2023 If you have an AI idea that you want to get funded, now

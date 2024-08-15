@@ -27,6 +27,7 @@ export const metadata: ContentItem = {
 const DeepWork: React.FC = () => {
   return (
     <article>
+
       <p>Good but it's a little too boomery.</p>
 
       <p>
@@ -35,6 +36,15 @@ const DeepWork: React.FC = () => {
         I listened to was refreshing, but most of it was obvious - use the least amount of
         technology you need to.
       </p>
+
+      <figure className="my-8">
+        <img
+          src="/images/reviews/deep-work.webp"
+          className="w-full h-auto rounded-lg shadow-lg"
+        />
+      </figure>
+
+      <p> </p>
 
       <p>It's a good book, but you don't need to read it.</p>
     </article>

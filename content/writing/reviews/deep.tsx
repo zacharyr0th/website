@@ -26,6 +26,15 @@ export const metadata: ContentItem = {
 const Deep: React.FC = () => {
   return (
     <article>
+      <figure className="my-8">
+        <img
+          src="/images/reviews/deep.webp"
+          className="w-full h-auto rounded-lg shadow-lg"
+        />
+      </figure>
+
+      <p> </p>
+
       <p>
         This book works well when listened to shortly after Breath - a book also on this list by the
         same author. Breath is more clinical, while Deep is more theoretical.

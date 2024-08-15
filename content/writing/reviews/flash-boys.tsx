@@ -37,6 +37,7 @@ const FlashBoys: React.FC = () => {
         The stories involved in doing that are very interesting, and if you are trying to be a
         trader and don't know about the insights in this book, you're in trouble.
       </p>
+
     </article>
   );
 };
