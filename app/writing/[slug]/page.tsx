@@ -31,6 +31,11 @@ export async function generateStaticParams() {
   }));
 }
 
+function truncateText(text: string, maxLength: number) {
+  if (text.length <= maxLength) return text;
+  return text.slice(0, maxLength).trim() + '...';
+}
+
 export default async function WritingPage({ params }: { params: { slug: string } }) {
   console.log('Rendering page for slug:', params.slug);
 
@@ -112,7 +117,7 @@ export default async function WritingPage({ params }: { params: { slug: string }
 
     // Get 2-3 random recommendations
     const getRandomRecommendations = (currentSlug: string, count: number) => {
-      const filteredPosts = posts.filter(post => post.slug !== currentSlug);
+      const filteredPosts = posts.filter((post) => post.slug !== currentSlug);
       const shuffled = filteredPosts.sort(() => 0.5 - Math.random());
       return shuffled.slice(0, count);
     };
@@ -187,50 +192,49 @@ export default async function WritingPage({ params }: { params: { slug: string }
           {/* Recommendations Section */}
           <div className="mt-12">
             <h3 className="text-2xl font-semibold mb-4">Recommended Reading</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {recommendations.map((rec) => (
-                <Link
+                <div
                   key={rec.slug}
-                  href={`/writing/${rec.slug}`}
-                  className="group relative overflow-hidden rounded-xl bg-gray-800/30 p-6 transition-all duration-300 hover:bg-gray-700/40 hover:shadow-lg hover:shadow-pastel-blue/20 border border-gray-800 hover:border-gray-700 flex flex-col h-full"
+                  className="bg-[#1a1a1a] rounded-lg shadow-lg hover:bg-[#242424] transition-all duration-300 flex flex-col h-[400px]"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-pastel-blue/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-                  <div className="relative w-full h-48 mb-4 overflow-hidden rounded-lg">
+                  <div className="relative h-48 w-full">
                     <Image
-                      src={rec.image || '/placeholder.webp'}
-                      alt={rec.title}
-                      layout="fill"
-                      objectFit="cover"
-                      className="transition-transform duration-300 group-hover:scale-105"
+                      src={rec.image || '/placeholder.jpg'}
+                      alt={`Cover image for ${rec.title}`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      style={{ objectFit: 'cover' }}
+                      className="rounded-t-lg"
                     />
                   </div>
-
-                  <h4 className="text-xl font-bold text-gray-200 mb-3 group-hover:text-pastel-blue transition-colors duration-300">
-                    {rec.title}
-                  </h4>
-                  <p className="text-gray-400 mb-4 flex-grow overflow-hidden text-sm sm:text-base group-hover:text-gray-300 transition-colors duration-300 line-clamp-3">
-                    {rec.description}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {rec.tags?.map((tag, index) => (
-                      <span
-                        key={index}
-                        className="px-2 py-1 bg-gray-700/50 text-gray-300 text-xs font-medium rounded-full border border-gray-600 transition-all duration-300 group-hover:bg-gray-600/50 group-hover:border-gray-500"
+                  <div className="p-6 flex flex-col flex-grow">
+                    <h4 className="text-xl font-semibold mb-2">{rec.title}</h4>
+                    <p className="text-gray-400 mb-4 flex-grow overflow-hidden">
+                      {truncateText(rec.description || '', 100)}
+                    </p>
+                    <Link
+                      href={`/writing/${rec.slug}`}
+                      className="text-blue-400 hover:text-blue-300 inline-flex items-center self-start mt-auto"
+                    >
+                      Read More
+                      <svg
+                        className="w-4 h-4 ml-2"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
                       >
-                        {tag}
-                      </span>
-                    ))}
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </Link>
                   </div>
-
-                  <div className="flex space-x-4 mt-auto pt-4 border-t border-gray-700">
-                    <span className="flex items-center text-gray-400 group-hover:text-pastel-blue transition-all duration-300 transform group-hover:scale-105">
-                      <FaExternalLinkAlt className="mr-2" />
-                      <span className="text-sm">Read</span>
-                    </span>
-                  </div>
-                </Link>
+                </div>
               ))}
             </div>
           </div>

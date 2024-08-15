@@ -1,141 +1,165 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DOMPurify from 'isomorphic-dompurify';
 import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown, ChevronUp } from 'lucide-react';
+
+interface Experience {
+  title: string;
+  company: string;
+  period: string;
+  description: string;
+}
+
+interface Skill {
+  name: string;
+  level: number;
+}
+
+const experiences: Experience[] = [
+  {
+    title: 'Head of Growth for DeFi & AI',
+    company: 'Aptos Labs',
+    period: '2022 - Present',
+    description:
+      'Leading strategies to expand DeFi and AI ecosystems, leveraging extensive experience in product management, developer ecosystems, and financial analysis to drive innovation in the crypto space.',
+  },
+  {
+    title: 'Product Manager',
+    company: 'Solrise Finance',
+    period: '2020 - 2022',
+    description:
+      'Spearheaded the development of advanced blockchain solutions, including non-custodial fund management platforms and on-chain trading competitions.',
+  },
+  {
+    title: 'Senior Analyst',
+    company: 'N2 Communications',
+    period: '2018 - 2020',
+    description:
+      "Contributed to raising over $2 billion for specialized private equity ventures, focusing on commodities and high-performing companies in Germany's Mittelstand market.",
+  },
+];
+
+const skills: Skill[] = [
+  { name: 'Blockchain Technology', level: 95 },
+  { name: 'Decentralized Finance (DeFi)', level: 90 },
+  { name: 'Artificial Intelligence in Blockchain', level: 85 },
+  { name: 'Ecosystem Growth Strategies', level: 92 },
+  { name: 'Product Management', level: 88 },
+  { name: 'Financial Analysis', level: 85 },
+];
 
 export default function BioSection() {
   const [expanded, setExpanded] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
-  const shortBio = `
-    <p>Blockchain industry professional specializing in ecosystem growth, DeFi, and AI. 
-    Head of Growth for DeFi & AI at Aptos Labs. Experienced in product management, 
-    developer ecosystems, and financial analysis. Passionate about leveraging technology 
-    for innovative solutions in decentralized finance.</p>
-  `;
-
-  const fullBio = `
-    <div class="flex flex-col md:flex-row gap-8">
-      <div class="md:w-1/4 relative h-48 w-48 mx-auto md:mx-0">
-        <Image
-          src="/placeholder.jpg"
-          alt="Your Name"
-          fill
-          sizes="(max-width: 768px) 100vw, 33vw"
-          className="rounded-full object-cover"
-        />
-      </div>
-      <div class="md:w-3/4">
-        <h2 class="text-3xl font-bold mb-4">Your Name</h2>
-        <p class="text-xl mb-4">Head of Growth for DeFi & AI at Aptos Labs</p>
-        <p class="mb-6">Blockchain Industry Expert | Ecosystem Growth | DeFi | AI</p>
-        
-        <h3 class="text-2xl font-semibold mb-3">About</h3>
-        <p class="mb-4">As a seasoned professional in the blockchain industry with a particular emphasis on ecosystem growth, DeFi, and AI, 
-        I've had the pleasure of being on the ground floor of the Solana ecosystem in 2020 and the burgeoning Aptos ecosystem in 2022. 
-        In both cases, the cutting-edge technological advancements inherent within the chain enabled new blockchain use cases not possible outside of these ecosystems 
-        and I've been working hand in hand with some of the world's best developers, investors, and community builders.</p>
-        
-        <h3 class="text-2xl font-semibold mb-3">Experience</h3>
-        <div class="mb-4">
-          <h4 class="text-xl font-medium">Head of Growth for DeFi & AI</h4>
-          <p>Aptos Labs · Full-time</p>
-          <p>2022 - Present</p>
-          <p>Leading strategies to expand DeFi and AI ecosystems, leveraging experience in product management, 
-          developer ecosystems, and financial analysis to drive innovation in the crypto space.</p>
-        </div>
-        <div class="mb-4">
-          <h4 class="text-xl font-medium">Product Manager</h4>
-          <p>Solrise Finance · Full-time</p>
-          <p>2020 - 2022</p>
-          <p>Spearheaded the development of cutting-edge blockchain solutions, including 
-          non-custodial fund management platforms and on-chain trading competitions.</p>
-        </div>
-        <div class="mb-4">
-          <h4 class="text-xl font-medium">Senior Analyst</h4>
-          <p>N2 Communications · Full-time</p>
-          <p>2018 - 2020</p>
-          <p>Contributed to raising over $2 billion for specialized private equity ventures, focusing on commodities 
-          and high-performing companies in Germany's Mittelstand market.</p>
-        </div>
-        
-        <h3 class="text-2xl font-semibold mb-3">Skills & Expertise</h3>
-        <ul class="list-disc list-inside mb-4">
-          <li>Blockchain Technology</li>
-          <li>Decentralized Finance (DeFi)</li>
-          <li>Artificial Intelligence in Blockchain</li>
-          <li>Ecosystem Growth Strategies</li>
-          <li>Product Management</li>
-          <li>Financial Analysis</li>
-          <li>Technical Documentation</li>
-          <li>Educational Content Creation</li>
-        </ul>
-        
-        <h3 class="text-2xl font-semibold mb-3">Passion and Vision</h3>
-        <p>My passion lies in leveraging technology to create innovative solutions and driving growth in the decentralized finance space. 
-        I'm always eager to explore new opportunities at the intersection of blockchain, AI, and traditional finance.</p>
-      </div>
-    </div>
-  `;
-
-  const formatContent = (content: string) => {
-    return content.replace(
-      /<(p|h[1-6]|ul|ol|li|blockquote)>([\s\S]*?)<\/\1>/g,
-      (match, tag, text) => {
-        switch (tag) {
-          case 'p':
-            return `<p class="mb-4 leading-relaxed">${text}</p>`;
-          case 'h2':
-            return `<h2 class="text-3xl font-bold text-white mb-8">${text}</h2>`;
-          case 'h3':
-            return `<h3 class="text-xl font-semibold mt-6 mb-3">${text}</h3>`;
-          case 'ul':
-            return `<ul class="list-disc list-inside space-y-2 mb-4">${text}</ul>`;
-          case 'ol':
-            return `<ol class="list-decimal list-inside space-y-2 mb-4">${text}</ol>`;
-          case 'li':
-            return `<li class="mb-1">${text}</li>`;
-          case 'blockquote':
-            return `<blockquote class="border-l-4 border-gray-500 pl-4 italic my-6">${text}</blockquote>`;
-          default:
-            return match;
-        }
-      }
-    );
-  };
-
-  const sanitizedShortBio = DOMPurify.sanitize(formatContent(shortBio));
-  const sanitizedFullBio = DOMPurify.sanitize(formatContent(fullBio));
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const toggleExpanded = () => {
-    setExpanded(!expanded);
+    setExpanded((prev) => !prev);
   };
 
+  const shortBio = `
+
+  `;
+
+  const sanitizedShortBio = DOMPurify.sanitize(shortBio);
+
   return (
-    <section className="bio-section py-16 px-4 bg-inherit text-gray-300">
-      <div className="max-w-4xl mx-auto">        
-        <div className="prose prose-lg max-w-none prose-invert">
-          <div 
-            onClick={expanded ? toggleExpanded : undefined}
-            className={expanded ? "cursor-pointer" : ""}
-          >
-            <div dangerouslySetInnerHTML={{ __html: sanitizedShortBio }} />
-          </div>
-          {expanded && (
-            <div className="mt-8 pt-8 border-t border-gray-700">
-              <div dangerouslySetInnerHTML={{ __html: sanitizedFullBio }} />
+    <React.Fragment>
+      <section className="bio-section py-16 px-4 bg-inherit text-gray-300">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex flex-col md:flex-row gap-8 items-start">
+            <div className=" relative h-64 w-64 md:h-80 md:w-80 rounded-full overflow-hidden shadow-lg">
+              <Image
+                src="/placeholder.jpg"
+                alt="Your Name"
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                className="object-cover"
+              />
             </div>
-          )}
+            <div className="md:w-2/3">
+              <h2 className="text-2xl text-gray-400 mb-4 text-left">
+                Head of Growth for DeFi & AI at Aptos Labs
+              </h2>
+              <p className="text-gray-400 mb-4 text-left">
+                A dedicated blockchain professional with experience across multiple non-EVM
+                ecosystems specializing in ecosystem growth, DeFi, and AI.
+              </p>
+              <div
+                className="prose prose-lg max-w-none prose-invert mb-6 text-left"
+                dangerouslySetInnerHTML={{ __html: sanitizedShortBio }}
+              />
+              <button
+                onClick={toggleExpanded}
+                className="flex items-center px-6 py-2 bg-inherit hover:bg-blue-700 text-white font-semibold rounded-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+              >
+                {expanded ? (
+                  <>
+                    <ChevronUp className="mr-2" />
+                    View Less
+                  </>
+                ) : (
+                  <>
+                    <ChevronDown className="mr-2" />
+                    View More
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+
+          <AnimatePresence>
+            {expanded && isClient && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.5 }}
+                className="mt-12 pt-8 border-t border-gray-700 text-left"
+              >
+                <div className="grid md:grid-cols-2 gap-12">
+                  <div>
+                    <h3 className="text-2xl font-semibold mb-6 text-white">Experience</h3>
+                    {experiences.map((exp, index) => (
+                      <div key={index} className="mb-8">
+                        <h4 className="text-xl font-medium text-blue-400">{exp.title}</h4>
+                        <p className="text-gray-400">{exp.company}</p>
+                        <p className="text-sm text-gray-500 mb-2">{exp.period}</p>
+                        <p className="text-gray-300">{exp.description}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div>
+                    <h3 className="text-2xl font-semibold mb-6 text-white">Skills & Expertise</h3>
+                    {skills.map((skill, index) => (
+                      <div key={index} className="mb-4">
+                        <div className="flex justify-between mb-1">
+                          <span className="text-gray-300">{skill.name}</span>
+                          <span className="text-gray-400">{skill.level}%</span>
+                        </div>
+
+                        <div className="w-full bg-inherit rounded-full h-2.5">
+                          <div
+                            className="bg-blue-600 h-2.5 rounded-full"
+                            style={{ width: `${skill.level}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
-        
-        <button
-          onClick={toggleExpanded}
-          className="mt-8 px-6 py-2 bg-gray-800 hover:bg-gray-700 text-white font-semibold rounded-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-offset-2 focus:ring-offset-gray-900"
-          aria-label={expanded ? 'Collapse bio' : 'Expand bio'}
-        >
-          {expanded ? '▲ Show Less' : '▼ View Full Biography'}
-        </button>
-      </div>
-    </section>
+      </section>
+    </React.Fragment>
   );
 }

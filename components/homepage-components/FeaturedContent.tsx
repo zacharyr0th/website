@@ -7,8 +7,7 @@ const featuredProjects = [
   {
     id: 'zacharyroth',
     name: 'zacharyr0th.com',
-    description:
-      '',
+    description: '',
     tags: ['Next.js', 'Tailwind', 'TypeScript'],
     github: 'https://github.com/yourusername/zacharyroth-website',
     liveLink: 'https://zacharyroth.com',
@@ -89,7 +88,8 @@ const FeaturedProjectCard = ({ project }: { project: Project }) => (
       </div>
       {/* You can add more details or a screenshot here */}
       <div className="text-gray-400">
-        This website is a fully open-source Portfolio/CV built with Next.js, Tailwind, and TypeScript
+        This website is a fully open-source Portfolio/CV built with Next.js, Tailwind, and
+        TypeScript
       </div>
     </div>
   </motion.div>
