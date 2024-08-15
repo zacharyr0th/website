@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'ministry-for-the-future',
   slug: 'ministry-for-the-future',
   title: 'The Ministry for the Future',
-  subtitle: 'A Novel',
+  subtitle: 'Kim Stanley Robinson',
   image: '/images/reviews/the-ministry-for-the-future.webp',
   imageCaption: 'Book cover of The Ministry for the Future by Kim Stanley Robinson',
   pageViews: 0,

@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'doom',
   slug: 'doom',
   title: 'Doom: The Politics of Catastrophe',
-  subtitle: '',
+  subtitle: 'Niall Ferguson',
   image: '/images/reviews/doom.webp',
   imageCaption: 'Book cover of Doom: The Politics of Catastrophe by Niall Ferguson',
   pageViews: 0,

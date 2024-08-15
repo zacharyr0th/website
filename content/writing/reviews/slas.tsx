@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'seeing-like-a-state',
   slug: 'seeing-like-a-state',
   title: 'Seeing Like a State',
-  subtitle: 'How Certain Schemes to Improve the Human Condition Have Failed',
+  subtitle: 'James C. Scott',
   image: '/images/reviews/slas-0.webp',
   imageCaption: 'Book cover of Seeing Like a State by James C. Scott',
   pageViews: 0,

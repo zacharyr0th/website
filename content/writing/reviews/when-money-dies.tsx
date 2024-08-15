@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'when-money-dies',
   slug: 'when-money-dies',
   title: 'When Money Dies',
-  subtitle: 'The Nightmare of Deficit Spending, Devaluation, and Hyperinflation in Weimar Germany',
+  subtitle: 'Adam Fergusson',
   image: '/images/reviews/when-money-dies.webp',
   imageCaption: 'Book cover of When Money Dies by Adam Fergusson',
   pageViews: 0,

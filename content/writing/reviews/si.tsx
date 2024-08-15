@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'sovereign-individual',
   slug: 'sovereign-individual',
   title: 'The Sovereign Individual',
-  subtitle: 'Mastering the Transition to the Information Age',
+  subtitle: 'James Dale Davidson',
   image: '/images/reviews/si.webp',
   imageCaption:
     'Book cover of The Sovereign Individual by James Dale Davidson and William Rees-Mogg',
@@ -15,7 +15,7 @@ export const metadata: ContentItem = {
     'A critical review of The Sovereign Individual and its predictions about technology and society.',
   content: '',
   author: 'Zachary Roth',
-  bookAuthor: 'James Dale Davidson and William Rees-Mogg',
+  bookAuthor: 'James Dale Davidson',
   date: 'Jun 2023',
   tags: ['Technology', 'Philosophy'],
   readTime: 2,

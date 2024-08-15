@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'one-hundred-years-of-solitude',
   slug: 'one-hundred-years-of-solitude',
   title: 'One Hundred Years of Solitude',
-  subtitle: 'A Masterpiece of Magical Realism',
+  subtitle: 'Gabriel García Márquez',
   image: '/images/reviews/100y.webp',
   imageCaption: 'Book cover of One Hundred Years of Solitude by Gabriel García Márquez',
   pageViews: 0,

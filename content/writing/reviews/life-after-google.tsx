@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'life-after-google',
   slug: 'life-after-google',
   title: 'Life After Google',
-  subtitle: 'The Fall of Big Data and the Rise of the Blockchain Economy',
+  subtitle: 'George Gilder',
   image: '/images/reviews/life-after-google.webp',
   imageCaption: 'Book cover of Life After Google by George Gilder',
   pageViews: 0,

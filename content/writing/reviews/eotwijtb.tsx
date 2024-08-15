@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'eotwijtb',
   slug: 'eotwijtb',
   title: 'The End of the World is Just the Beginning',
-  subtitle: 'Mapping the Collapse of Globalization',
+  subtitle: 'Peter Zeihan',
   image: '/images/reviews/eotwijtb.webp',
   imageCaption: 'Book cover of The End of the World is Just the Beginning by Peter Zeihan',
   pageViews: 0,

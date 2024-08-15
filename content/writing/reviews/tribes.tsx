@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'tribes',
   slug: 'tribes',
   title: 'Tribes',
-  subtitle: 'We Need You to Lead Us',
+  subtitle: 'Seth Godin',
   image: '/images/reviews/tribes.webp',
   imageCaption: 'Book cover of Tribes by Seth Godin',
   pageViews: 0,

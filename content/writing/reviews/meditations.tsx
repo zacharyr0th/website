@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'meditations',
   slug: 'meditations',
   title: 'Meditations',
-  subtitle: 'A Stoic Philosophy Classic',
+  subtitle: 'Marcus Aurelius',
   image: '/images/reviews/meditations.webp',
   imageCaption: 'Book cover of Meditations by Marcus Aurelius',
   pageViews: 0,

@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'overstory',
   slug: 'overstory',
   title: 'Overstory',
-  subtitle: 'A Novel',
+  subtitle: 'Richard Powers',
   image: '/images/reviews/overstory.webp',
   imageCaption: 'Book cover of The Overstory by Richard Powers',
   pageViews: 0,

@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'life-ascending',
   slug: 'life-ascending',
   title: 'Life Ascending',
-  subtitle: 'The Ten Great Inventions of Evolution',
+  subtitle: 'Nick Lane',
   image: '/images/reviews/life-ascending.webp',
   imageCaption: 'Book cover of Life Ascending by Nick Lane',
   pageViews: 0,

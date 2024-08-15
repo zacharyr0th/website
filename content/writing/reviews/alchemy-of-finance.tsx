@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'alchemy-of-finance',
   slug: 'alchemy-of-finance',
   title: 'The Alchemy of Finance',
-  subtitle: 'Understanding the World of High Finance',
+  subtitle: 'Niall Ferguson',
   image: '/images/reviews/alchemy-of-finance.webp',
   imageCaption: 'Book cover of Alchemy of Finance',
   pageViews: 0,

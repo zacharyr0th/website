@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'blockchain-chicken-farm',
   slug: 'blockchain-chicken-farm',
   title: 'Blockchain Chicken Farm',
-  subtitle: 'Technology and Rural Innovation in China',
+  subtitle: 'Xiaowei Wang',
   image: '/images/reviews/blockchain-chicken-farm.webp',
   imageCaption: 'Illustration of a high-tech chicken farm',
   pageViews: 0,

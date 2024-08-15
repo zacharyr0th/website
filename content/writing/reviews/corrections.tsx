@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'corrections',
   slug: 'corrections',
   title: 'The Corrections',
-  subtitle: '',
+  subtitle: 'Jonathan Franzen',
   image: '',
   imageCaption: 'Book cover of The Corrections by Jonathan Franzen',
   pageViews: 0,

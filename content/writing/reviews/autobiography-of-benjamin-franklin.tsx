@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'autobiography-of-benjamin-franklin',
   slug: 'autobiography-of-benjamin-franklin',
   title: 'The Autobiography of Benjamin Franklin',
-  subtitle: 'An American Life',
+  subtitle: 'Benjamin Franklin',
   image: '/images/reviews/autobiography-of-benjamin-franklin.webp',
   imageCaption: 'Book cover of The Autobiography of Benjamin Franklin: An American Life',
   pageViews: 0,

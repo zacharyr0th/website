@@ -5,10 +5,10 @@ export const metadata: ContentItem = {
   id: 'blockchains-in-africa',
   slug: 'blockchains-in-africa',
   title: 'Blockchains in Africa',
-  subtitle: 'The Potential and Challenges of Cryptocurrency Adoption',
+  subtitle: 'An Emerging Trend',
   image: '',
   imageCaption:
-    "A vibrant African landscape symbolizing the continent's potential for blockchain adoption",
+    "A vibrant African landscape with a Bitcoin symbol encompassing the sun.",
   pageViews: 0,
   type: 'article',
   description:
@@ -17,7 +17,7 @@ export const metadata: ContentItem = {
   author: 'Zachary Roth',
   bookAuthor: '',
   date: '2023-05-15',
-  tags: ['Technology'],
+  tags: ['Technology', 'Blockchains'],
   readTime: 15,
   likes: 0,
   comments: 0,
@@ -28,6 +28,10 @@ export const metadata: ContentItem = {
 const BlockchainsInAfrica: React.FC = () => {
   return (
     <article>
+
+      <img src="/images/articles/ba-0.webp" alt="Blockchains in Africa" />
+      <p>   </p>
+
       <p>Before we get into what's happening in Africa, let's ponder the following.</p>
 
       <p>"Are blockchains a solution looking for a problem?"</p>
@@ -97,50 +101,6 @@ const BlockchainsInAfrica: React.FC = () => {
         This uptick in crypto-related investments is significant. Investors envision the
         possibilities of blockchains in Africa, and they're putting their money where their mouth
         is.
-      </p>
-
-      <p>On that note, let's take a moment to hear from this issue's sponsor, Superdao.</p>
-
-      <h2>🦸 Superdao NFT Giveaway</h2>
-      <p>
-        Superdao is an all-in-one DAO platform that makes it easy to start and operate decentralized
-        autonomous organizations. It's a complete suite of tools for DAOs, and they're offering a
-        one-time giveaway of Creator Tier NFTs, giving free DAO formations for DAOJ subscribers.
-      </p>
-
-      <p>
-        ✨ Easy formation 🎁 NFT membership 🗳 Governance 💰 Treasury 📰 Newsfeed 😎 Member directory
-        & more.
-      </p>
-
-      <p>As a Superdao NFT holder, you can:</p>
-      <ul>
-        <li>Create a DAO in one click for free.</li>
-        <li>Generate smart contracts for NFTs and tokens.</li>
-        <li>Use built-in member directories and treasury dashboards💰.</li>
-        <li>Regulate a contributor compensation system.</li>
-        <li>Do more with third-party apps.</li>
-        <li>Explore partnership and cross-marketing opportunities.</li>
-        <li>Partake in Superdao's DAO Heroes community-led media brand.</li>
-      </ul>
-
-      <p>Giveaway Process and How to Participate:</p>
-      <ol>
-        <li>Fill out the pre-screen online form</li>
-        <li>
-          Superdao will select people to giveaway 1000+ NFTs Winners will get a claim link from
-          Superdao via email
-        </li>
-        <li>Launch your first DAO in a few clicks</li>
-      </ol>
-
-      <p>💡</p>
-
-      <p>For more information on Superdao and what it has to offer, watch this.</p>
-
-      <p>
-        I stumbled upon the Superdao platform and already received my NFT. Stay tuned for more
-        exciting news, gifts, and maybe even the creation of DAOJ DAO 👀.
       </p>
 
       <h2>Blockchains as a Solution</h2>

@@ -1,11 +1,13 @@
 import React from 'react';
 import { ContentItem } from '../../../lib/types';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export const metadata: ContentItem = {
   id: 'flash-boys',
   slug: 'flash-boys',
   title: 'Flash Boys',
-  subtitle: 'A Wall Street Revolt',
+  subtitle: 'Michael Lewis',
   image: '/images/reviews/flash-boys.webp',
   imageCaption: 'Book cover of Flash Boys by Michael Lewis',
   pageViews: 0,

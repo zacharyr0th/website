@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'infinite-machine',
   slug: 'infinite-machine',
   title: 'The Infinite Machine',
-  subtitle: 'How an Army of Crypto-hackers Is Building the Next Internet with Ethereum',
+  subtitle: 'Camila Russo',
   image: '/images/reviews/infinite-machine.webp',
   imageCaption: 'Book cover of The Infinite Machine by Camila Russo',
   pageViews: 0,

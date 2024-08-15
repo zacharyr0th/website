@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'first-person-singular',
   slug: 'first-person-singular',
   title: 'First Person Singular',
-  subtitle: 'Stories',
+  subtitle: 'Haruki Murakami',
   image: '/images/reviews/first-person-singular.webp',
   imageCaption: 'Book cover of First Person Singular by Haruki Murakami',
   pageViews: 0,

@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'metamorphosis',
   slug: 'metamorphosis',
   title: 'The Metamorphosis',
-  subtitle: 'A Novella by Franz Kafka',
+  subtitle: 'Franz Kafka',
   image: '/images/reviews/metamorphosis.webp',
   imageCaption: 'Book cover of The Metamorphosis by Franz Kafka',
   pageViews: 0,

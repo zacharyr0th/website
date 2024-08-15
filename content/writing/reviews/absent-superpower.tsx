@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'absent-superpower',
   slug: 'absent-superpower',
   title: 'The Absent Superpower',
-  subtitle: 'The Shale Revolution and a World Without America',
+  subtitle: 'Peter Zeihan',
   image: '/images/reviews/absent-superpower.webp',
   imageCaption:
     'Prompt: power willingly chooses to withdraw inward abstract expressionist painting dramatic and geometric',

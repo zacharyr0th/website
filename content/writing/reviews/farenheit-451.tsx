@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'farenheit-451',
   slug: 'farenheit-451',
   title: 'Fahrenheit 451',
-  subtitle: 'A Novel',
+  subtitle: 'Ray Bradbury',
   image: '/images/reviews/farenheit-451.webp',
   imageCaption: 'Book cover of Fahrenheit 451 by Ray Bradbury',
   pageViews: 0,

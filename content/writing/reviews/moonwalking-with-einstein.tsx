@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'moonwalking-with-einstein',
   slug: 'moonwalking-with-einstein',
   title: 'Moonwalking with Einstein',
-  subtitle: 'The Art and Science of Remembering Everything',
+  subtitle: 'Joshua Foer',
   image: '/images/reviews/moonwalking-with-einstein.webp',
   imageCaption: 'Book cover of Moonwalking with Einstein by Joshua Foer',
   pageViews: 0,

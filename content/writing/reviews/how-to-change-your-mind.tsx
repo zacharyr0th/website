@@ -5,8 +5,7 @@ export const metadata: ContentItem = {
   id: 'how-to-change-your-mind',
   slug: 'how-to-change-your-mind',
   title: 'How to Change Your Mind',
-  subtitle:
-    'What the New Science of Psychedelics Teaches Us About Consciousness, Dying, Addiction, Depression, and Transcendence',
+  subtitle: 'Michael Pollan',
   image: '/images/reviews/how-to-change-your-mind.webp',
   imageCaption: 'Book cover of How to Change Your Mind by Michael Pollan',
   pageViews: 0,

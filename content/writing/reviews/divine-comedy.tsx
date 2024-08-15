@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'divine-comedy',
   slug: 'divine-comedy',
   title: 'The Divine Comedy',
-  subtitle: '',
+  subtitle: 'Dante Alighieri',
   image: '/images/reviews/divine-comedy.webp',
   imageCaption: 'Book cover of The Divine Comedy by Dante Alighieri',
   pageViews: 0,

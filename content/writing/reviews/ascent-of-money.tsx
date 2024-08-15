@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'ascent-of-money',
   slug: 'ascent-of-money',
   title: 'Ascent of Money',
-  subtitle: 'A Financial History of the World',
+  subtitle: 'Niall Ferguson',
   image: '/images/reviews/ascent-of-money.webp',
   imageCaption: 'Book cover of Ascent of Money',
   pageViews: 0,

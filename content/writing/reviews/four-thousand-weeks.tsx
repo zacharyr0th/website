@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'four-thousand-weeks',
   slug: 'four-thousand-weeks',
   title: 'Four Thousand Weeks',
-  subtitle: 'Time Management for Mortals',
+  subtitle: 'Oliver Burkeman',
   image: '/images/reviews/four-thousand-weeks.webp',
   imageCaption: 'Book cover of Four Thousand Weeks by Oliver Burkeman',
   pageViews: 0,

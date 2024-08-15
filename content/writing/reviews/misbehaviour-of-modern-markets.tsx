@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'misbehaviour-of-modern-markets',
   slug: 'misbehaviour-of-modern-markets',
   title: 'The (Mis)behaviour of Markets',
-  subtitle: 'A Fractal View of Risk, Ruin, and Reward',
+  subtitle: 'Benoit Mandelbrot',
   image: '/images/reviews/misbehaviour-of-modern-markets.webp',
   imageCaption: 'Book cover of The (Mis)behaviour of Markets by Benoit Mandelbrot',
   pageViews: 0,

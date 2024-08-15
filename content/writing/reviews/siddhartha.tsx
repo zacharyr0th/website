@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'siddhartha',
   slug: 'siddhartha',
   title: 'Siddhartha',
-  subtitle: 'An Indian Tale',
+  subtitle: 'Walter Herman Hesse',
   image: '/images/reviews/siddhartha.webp',
   imageCaption: 'Book cover of Siddhartha by Hermann Hesse',
   pageViews: 0,

@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'disunited-nations',
   slug: 'disunited-nations',
   title: 'Disunited Nations',
-  subtitle: 'The Scramble for Power in an Ungoverned World',
+  subtitle: 'Peter Zeihan',
   image: '/images/reviews/disunited-nations.webp',
   imageCaption: 'Book cover of Disunited Nations by Peter Zeihan',
   pageViews: 0,

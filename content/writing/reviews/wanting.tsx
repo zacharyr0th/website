@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'wanting',
   slug: 'wanting',
   title: 'Wanting',
-  subtitle: 'The Power of Mimetic Desire in Everyday Life',
+  subtitle: 'Luke Burgis',
   image: '/images/reviews/wanting.webp',
   imageCaption: 'Book cover of Wanting by Luke Burgis',
   pageViews: 0,

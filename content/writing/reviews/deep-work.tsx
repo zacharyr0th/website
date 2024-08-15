@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'deep-work',
   slug: 'deep-work',
   title: 'Deep Work',
-  subtitle: 'Rules for Focused Success in a Distracted World',
+  subtitle: 'Cal Newport',
   image: '/images/reviews/deep-work1.webp',
   imageCaption: 'Book cover of Deep Work by Cal Newport',
   pageViews: 0,

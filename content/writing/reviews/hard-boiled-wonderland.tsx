@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'hard-boiled-wonderland',
   slug: 'hard-boiled-wonderland',
   title: 'Hard-Boiled Wonderland and the End of the World',
-  subtitle: 'A Novel',
+  subtitle: 'Haruki Murakami',
   image: '/images/reviews/hard-boiled-wonderland.webp',
   imageCaption: 'Book cover of Hard-Boiled Wonderland and the End of the World by Haruki Murakami',
   pageViews: 0,

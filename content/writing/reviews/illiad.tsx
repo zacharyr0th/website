@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'illiad',
   slug: 'illiad',
   title: 'The Iliad',
-  subtitle: 'An Ancient Greek Epic Poem',
+  subtitle: 'Homer',
   image: '/images/reviews/illiad.webp',
   imageCaption: 'Artistic representation of a scene from The Iliad',
   pageViews: 0,

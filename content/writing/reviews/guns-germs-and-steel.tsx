@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'guns-germs-steel',
   slug: 'guns-germs-and-steel',
   title: 'Guns, Germs, and Steel',
-  subtitle: 'The Fates of Human Societies',
+  subtitle: 'Jared Diamond',
   image: '/images/reviews/guns-germs-and-steel.webp',
   imageCaption: 'Book cover of Guns, Germs, and Steel by Jared Diamond',
   pageViews: 0,

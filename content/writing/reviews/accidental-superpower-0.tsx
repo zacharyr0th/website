@@ -6,7 +6,7 @@ export const metadata: ContentItem = {
   id: 'accidental-superpower',
   slug: 'accidental-superpower',
   title: 'The Accidental Superpower',
-  subtitle: 'The Next Generation of American Preeminence and the Coming Global Disorder',
+  subtitle: 'Peter Zeihan',
   image: '/images/reviews/accidental-superpower-.webp',
   imageCaption: 'Prompt: of Accidental Superpower',
   pageViews: 0,

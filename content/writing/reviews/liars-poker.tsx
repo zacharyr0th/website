@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'liars-poker',
   slug: 'liars-poker',
   title: "Liar's Poker",
-  subtitle: 'Rising Through the Wreckage on Wall Street',
+  subtitle: 'Michael Lewis',
   image: '/images/reviews/liars-poker.webp',
   imageCaption: "Book cover of Liar's Poker by Michael Lewis",
   pageViews: 0,

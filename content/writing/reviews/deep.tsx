@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'deep',
   slug: 'deep',
   title: 'Deep',
-  subtitle: 'Freediving, Renegade Science, and What the Ocean Tells Us about Ourselves',
+  subtitle: 'James Nestor',
   image: '/images/reviews/deep.webp',
   imageCaption: 'Book cover of Deep by James Nestor',
   pageViews: 0,

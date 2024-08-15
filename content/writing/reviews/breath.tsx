@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'breath',
   slug: 'breath',
   title: 'Breath',
-  subtitle: 'The New Science of a Lost Art',
+  subtitle: 'James Nestor',
   image: '/images/reviews/breath.webp',
   imageCaption: 'Book cover of Breath by James Nestor',
   pageViews: 0,

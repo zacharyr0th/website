@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'acid-for-the-children',
   slug: 'acid-for-the-children',
   title: 'Acid for the Children',
-  subtitle: 'A Memoir by Red Hot Chili Peppers Bassist Flea',
+  subtitle: 'Flea',
   image: '/images/reviews/acid-for-the-children.webp',
   imageCaption: 'Book cover of Acid for the Children by Flea',
   pageViews: 0,
