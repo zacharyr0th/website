@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'born-standing-up',
   slug: 'born-standing-up',
   title: 'Born Standing Up',
-  subtitle: "Steve Martin",
+  subtitle: 'Steve Martin',
   image: '/images/reviews/born-standing-up.webp',
   imageCaption: 'Book cover of Born Standing Up by Steve Martin',
   pageViews: 0,

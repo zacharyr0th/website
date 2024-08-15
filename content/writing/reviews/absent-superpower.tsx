@@ -27,7 +27,6 @@ export const metadata: ContentItem = {
 const AbsentSuperpower: React.FC = () => {
   return (
     <article>
-      
       <p>
         The Absent Superpower carries on the narratives introduced in the Accidental Superpower that
         the US still reigns supreme - but now has reasons and incentive to withdraw itself from

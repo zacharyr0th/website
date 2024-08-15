@@ -7,8 +7,7 @@ export const metadata: ContentItem = {
   title: 'Blockchains in Africa',
   subtitle: 'An Emerging Trend',
   image: '',
-  imageCaption:
-    "A vibrant African landscape with a Bitcoin symbol encompassing the sun.",
+  imageCaption: 'A vibrant African landscape with a Bitcoin symbol encompassing the sun.',
   pageViews: 0,
   type: 'article',
   description:
@@ -28,9 +27,8 @@ export const metadata: ContentItem = {
 const BlockchainsInAfrica: React.FC = () => {
   return (
     <article>
-
       <img src="/images/articles/ba-0.webp" alt="Blockchains in Africa" />
-      <p>   </p>
+      <p> </p>
 
       <p>Before we get into what's happening in Africa, let's ponder the following.</p>
 

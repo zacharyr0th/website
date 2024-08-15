@@ -32,7 +32,10 @@ export async function getContentItems(
     console.log(`Found ${files.length} files in ${dir}:`, files);
 
     for (const file of files) {
-      if (file.endsWith('.tsx') || (dir === 'sheet-music' && ['.pdf', '.mscz', '.zip'].includes(path.extname(file)))) {
+      if (
+        file.endsWith('.tsx') ||
+        (dir === 'sheet-music' && ['.pdf', '.mscz', '.zip'].includes(path.extname(file)))
+      ) {
         const filePath = path.join(fullPath, file);
         let data: any = {};
         let content: string = '';

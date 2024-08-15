@@ -5,7 +5,7 @@ export const metadata: ContentItem = {
   id: 'brave-new-world',
   slug: 'brave-new-world',
   title: 'Brave New World',
-  subtitle: "Aldous Huxley",
+  subtitle: 'Aldous Huxley',
   image: '/images/reviews/brave-new-world.webp',
   imageCaption: "A monochrome dystopia representing the plot of 'Brave New World'",
   pageViews: 0,

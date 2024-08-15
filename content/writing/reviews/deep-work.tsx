@@ -27,7 +27,6 @@ export const metadata: ContentItem = {
 const DeepWork: React.FC = () => {
   return (
     <article>
-
       <p>Good but it's a little too boomery.</p>
 
       <p>
@@ -38,10 +37,7 @@ const DeepWork: React.FC = () => {
       </p>
 
       <figure className="my-8">
-        <img
-          src="/images/reviews/deep-work.webp"
-          className="w-full h-auto rounded-lg shadow-lg"
-        />
+        <img src="/images/reviews/deep-work.webp" className="w-full h-auto rounded-lg shadow-lg" />
       </figure>
 
       <p> </p>
