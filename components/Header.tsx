@@ -66,12 +66,12 @@ const Header = () => {
               Media
             </button>
             {isMediaOpen && (
-              <div className="absolute z-10 mt-2 w-40 bg-[#4a4a4a] rounded-lg shadow-lg">
+              <div className="absolute z-10 mt-2 w-32 bg-gray-800/30 rounded-lg shadow-lg border border-gray-800 overflow-hidden">
                 {mediaItems.map(({ label, href }) => (
                   <Link
                     key={href}
                     href={href}
-                    className="block px-4 py-2 text-sm text-gray-200 hover:bg-[#121212] transition-colors duration-300 focus:outline-none"
+                    className="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700/40 transition-colors duration-300 focus:outline-none text-left"
                     onClick={() => setIsMediaOpen(false)}
                   >
                     {label}
