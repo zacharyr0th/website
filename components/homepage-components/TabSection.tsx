@@ -11,6 +11,9 @@ const FeaturedContent = dynamic(() => import('./FeaturedContent'), {
 const ProjectsContent = dynamic(() => import('./ProjectsContent'), {
   ssr: false,
 });
+const BioSection = dynamic(() => import('./BioSection'), {
+  ssr: false,
+});
 
 export default function TabSection() {
   const [activeTab, setActiveTab] = useState('bio');
@@ -32,11 +35,7 @@ export default function TabSection() {
         ))}
       </div>
 
-      {activeTab === 'bio' && (
-        <div className="bio-section">
-          <p className="bio-text">Lorem Ipsum</p>
-        </div>
-      )}
+      {activeTab === 'bio' && <BioSection />}
 
       {activeTab === 'featured' && <FeaturedContent />}
       {activeTab === 'projects' && <ProjectsContent />}

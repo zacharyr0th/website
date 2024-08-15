@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import { motion } from 'framer-motion';
@@ -32,7 +32,6 @@ const featuredProjects = [
   },
 ];
 
-// Add this type definition
 type Project = {
   id: string;
   name: string;
@@ -42,72 +41,68 @@ type Project = {
   liveLink?: string;
 };
 
-const ProjectCard = React.memo(({ project }: { project: Project }) => (
+const FeaturedProjectCard = ({ project }: { project: Project }) => (
   <motion.div
-    key={project.id}
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
+    initial={{ opacity: 0, x: 20 }}
+    animate={{ opacity: 1, x: 0 }}
     transition={{ duration: 0.5 }}
-    className="group relative overflow-hidden rounded-xl bg-gray-800/30 p-6 transition-all duration-300 hover:bg-gray-700/40 hover:shadow-lg hover:shadow-pastel-blue/20 border border-gray-800 hover:border-gray-700 flex flex-col h-full"
+    className="flex flex-col md:flex-row bg-gray-800/50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-gray-700/50"
   >
-    <div className="absolute inset-0 bg-gradient-to-br from-pastel-blue/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-    <h3 className="text-2xl font-bold text-gray-200 mb-3 group-hover:text-pastel-blue transition-colors duration-300">
-      {project.name}
-    </h3>
-    <p className="text-gray-400 mb-4 flex-grow overflow-hidden text-sm sm:text-base group-hover:text-gray-300 transition-colors duration-300">
-      {project.description}
-    </p>
-
-    <div className="flex flex-wrap gap-2 mb-4">
-      {project.tags.map((tag, index) => (
-        <span
-          key={index}
-          className="px-2 py-1 bg-gray-700/50 text-gray-300 text-xs font-medium rounded-full border border-gray-600 transition-all duration-300 group-hover:bg-gray-600/50 group-hover:border-gray-500"
-        >
-          {tag}
-        </span>
-      ))}
+    <div className="md:w-2/5 p-6 flex flex-col justify-center">
+      <h3 className="text-2xl font-bold text-pastel-blue mb-2">{project.name}</h3>
+      <p className="text-gray-300 mb-4">{project.description}</p>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {project.tags.map((tag, index) => (
+          <span
+            key={index}
+            className="px-2 py-1 bg-gray-700/70 text-pastel-blue text-xs font-medium rounded-full"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
     </div>
-
-    <div className="flex space-x-4 mt-auto pt-4 border-t border-gray-700">
-      {project.github && (
-        <Link
-          href={project.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center text-gray-400 hover:text-pastel-blue transition-colors duration-300"
-        >
-          <FaGithub className="mr-2" />
-          <span className="text-sm">GitHub</span>
-        </Link>
-      )}
-      {project.liveLink && (
-        <Link
-          href={project.liveLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center text-gray-400 hover:text-pastel-blue transition-colors duration-300"
-        >
-          <FaExternalLinkAlt className="mr-2" />
-          <span className="text-sm">Live Demo</span>
-        </Link>
-      )}
+    <div className="md:w-3/5 bg-gray-900/50 p-6 flex flex-col justify-center">
+      <div className="flex space-x-4 mb-4">
+        {project.github && (
+          <Link
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center text-gray-300 hover:text-pastel-blue transition-colors duration-300"
+          >
+            <FaGithub className="mr-2" />
+            <span>GitHub</span>
+          </Link>
+        )}
+        {project.liveLink && (
+          <Link
+            href={project.liveLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center text-gray-300 hover:text-pastel-blue transition-colors duration-300"
+          >
+            <FaExternalLinkAlt className="mr-2" />
+            <span>Live Demo</span>
+          </Link>
+        )}
+      </div>
+      {/* You can add more details or a screenshot here */}
+      <div className="text-gray-400">
+        Additional project details or a screenshot could go here...
+      </div>
     </div>
   </motion.div>
-));
-
-ProjectCard.displayName = 'ProjectCard';
+);
 
 const FeaturedContent = () => {
-  const projectCards = useMemo(
-    () => featuredProjects.map((project) => <ProjectCard key={project.id} project={project} />),
-    []
-  );
-
   return (
     <div className="p-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">{projectCards}</div>
+      <div className="space-y-8">
+        {featuredProjects.slice(0, 1).map((project) => (
+          <FeaturedProjectCard key={project.id} project={project} />
+        ))}
+      </div>
     </div>
   );
 };
