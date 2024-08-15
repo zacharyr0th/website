@@ -6,7 +6,7 @@ export const metadata: ContentItem = {
   slug: 'blockchains-in-africa',
   title: 'Blockchains in Africa',
   subtitle: 'The Potential and Challenges of Cryptocurrency Adoption',
-  image: '/images/articles/ba-0.webp',
+  image: '',
   imageCaption:
     "A vibrant African landscape symbolizing the continent's potential for blockchain adoption",
   pageViews: 0,

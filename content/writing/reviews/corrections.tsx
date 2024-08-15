@@ -6,7 +6,7 @@ export const metadata: ContentItem = {
   slug: 'corrections',
   title: 'The Corrections',
   subtitle: '',
-  image: '/images/reviews/corrections.webp',
+  image: '',
   imageCaption: 'Book cover of The Corrections by Jonathan Franzen',
   pageViews: 0,
   type: 'review',

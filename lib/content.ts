@@ -1,6 +1,5 @@
 import { promises as fs } from 'fs';
 import path from 'path';
-import matter from 'gray-matter';
 import { ContentItem } from './types';
 import { addMetadataToFile } from './fileMetadata';
 
@@ -33,11 +32,7 @@ export async function getContentItems(
     console.log(`Found ${files.length} files in ${dir}:`, files);
 
     for (const file of files) {
-      if (
-        file.endsWith('.md') ||
-        file.endsWith('.tsx') ||
-        (dir === 'sheet-music' && ['.pdf', '.mscz', '.zip'].includes(path.extname(file)))
-      ) {
+      if (file.endsWith('.tsx') || (dir === 'sheet-music' && ['.pdf', '.mscz', '.zip'].includes(path.extname(file)))) {
         const filePath = path.join(fullPath, file);
         let data: any = {};
         let content: string = '';
@@ -63,11 +58,6 @@ export async function getContentItems(
             console.error(`Failed to add metadata to file: ${filePath}`, error);
             // Continue processing other files even if metadata addition fails for one
           }
-        } else if (file.endsWith('.md')) {
-          const fileContents = await fs.readFile(filePath, 'utf8');
-          const { data: frontmatter, content: mdContent } = matter(fileContents);
-          data = frontmatter;
-          content = mdContent;
         } else if (file.endsWith('.tsx')) {
           const fileContents = await fs.readFile(filePath, 'utf8');
           const metadataMatch = fileContents.match(

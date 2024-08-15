@@ -16,6 +16,7 @@ type Post = {
   content: string | ReactElement;
   subtitle?: string;
   readTime?: number;
+  tags?: string[];
 };
 
 export async function generateStaticParams() {
@@ -57,22 +58,59 @@ export default async function WritingPage({ params }: { params: { slug: string }
     let content: string | ReactElement = post.content;
 
     // If content is empty, try to import the component
-    if (!content && post.type === 'review') {
+    if (!content) {
       try {
-        const ReviewComponent = (
-          await import(`../../../content/writing/reviews/${params.slug}.tsx`)
+        const ContentComponent = (
+          await import(`../../../content/writing/${post.type}s/${params.slug}.tsx`)
         ).default;
-        content = <ReviewComponent />;
+        content = <ContentComponent />;
       } catch (error) {
-        console.error('Error importing review component:', error);
+        console.error('Error importing content component:', error);
         notFound();
       }
     }
 
     const sanitizedContent = typeof content === 'string' ? DOMPurify.sanitize(content) : content;
 
+    const formatContent = (content: string | ReactElement) => {
+      if (typeof content === 'string') {
+        return content.replace(
+          /<(article|h[1-6]|p|ul|ol|li|blockquote)>([\s\S]*?)<\/\1>/g,
+          (match, tag, text) => {
+            switch (tag) {
+              case 'article':
+                return `<article class="space-y-6">${text}</article>`;
+              case 'h1':
+                return `<h1 class="text-3xl font-bold mt-8 mb-4">${text}</h1>`;
+              case 'h2':
+                return `<h2 class="text-2xl font-semibold mt-8 mb-4">${text}</h2>`;
+              case 'h3':
+                return `<h3 class="text-xl font-semibold mt-6 mb-3">${text}</h3>`;
+              case 'h4':
+                return `<h4 class="text-base font-semibold mt-4 mb-2">${text}</h4>`;
+              case 'p':
+                return `<p class="mb-4 leading-relaxed">${text}</p>`;
+              case 'ul':
+                return `<ul class="list-disc list-inside space-y-2 mb-4">${text}</ul>`;
+              case 'ol':
+                return `<ol class="list-decimal list-inside space-y-2 mb-4">${text}</ol>`;
+              case 'li':
+                return `<li class="mb-1">${text}</li>`;
+              case 'blockquote':
+                return `<blockquote class="border-l-4 border-gray-500 pl-4 italic my-6">${text}</blockquote>`;
+              default:
+                return match;
+            }
+          }
+        );
+      }
+      return content;
+    };
+
+    const formattedContent = formatContent(sanitizedContent);
+
     return (
-      <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-inherit">
         {prevPost && (
           <Link
             href={`/writing/${prevPost.slug}`}
@@ -93,13 +131,13 @@ export default async function WritingPage({ params }: { params: { slug: string }
             </button>
           </Link>
         )}
-        <article>
+        <article className="bg-inherit">
           <header className="mb-8">
             <h1 className="text-4xl font-bold mb-2">{post.title}</h1>
             {post.subtitle && (
-              <h2 className="text-2xl text-gray-600 mb-4">{post.subtitle}</h2>
+              <h2 className="text-2xl text-gray-400 mb-4">{post.subtitle}</h2>
             )}
-            <div className="flex items-center text-sm text-gray-500">
+            <div className="flex items-center text-sm text-gray-400">
               <span>{post.author}</span>
               <span className="mx-2">•</span>
               <span>{post.date}</span>
@@ -114,21 +152,39 @@ export default async function WritingPage({ params }: { params: { slug: string }
             </div>
           </header>
 
-          <Image
-            src={post.image}
-            alt={post.title}
-            width={800}
-            height={400}
-            className="rounded-lg mb-8"
-          />
+          {post.image && (
+            <Image
+              src={post.image}
+              alt={post.title}
+              width={1200}
+              height={600}
+              className="w-full h-64 object-cover rounded-md mb-8"
+            />
+          )}
 
-          <div className="prose prose-lg max-w-none">
-            {typeof sanitizedContent === 'string' ? (
-              <div dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
+          <div className="prose prose-lg max-w-none prose-invert">
+            {typeof formattedContent === 'string' ? (
+              <div dangerouslySetInnerHTML={{ __html: formattedContent }} />
             ) : (
-              sanitizedContent
+              formattedContent
             )}
           </div>
+
+          {post.tags && post.tags.length > 0 && (
+            <div className="mt-8">
+              <h3 className="text-lg font-semibold mb-2 text-gray-300">Tags:</h3>
+              <div className="flex flex-wrap gap-2">
+                {post.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="bg-gray-700 text-gray-300 px-2 py-1 rounded-full text-sm"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
         </article>
       </div>
     );
