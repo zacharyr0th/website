@@ -143,7 +143,7 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
           {/* Random Section */}
           <aside className="w-full lg:w-1/3">
             <div className="bg-[#1a1a1a] p-4 rounded-lg shadow-lg h-[calc(3*100px+3rem)] flex flex-col">
-              <h2 className="text-xl font-bold mb-3">Random</h2>
+              <h2 className="text-xl font-bold mb-3">Random Assortment</h2>
               <div className="overflow-y-auto flex-grow popular-articles hover-scroll">
                 {allRandomizedContent.length > 0 ? (
                   <ul className="space-y-3 pr-2">

@@ -75,7 +75,7 @@ const ProjectCard = React.memo(({ project }: { project: Project }) => (
           href={project.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center text-gray-400 hover:text-pastel-blue transition-colors duration-300"
+          className="flex items-center text-gray-400 hover:text-pastel-blue transition-all duration-300 transform hover:scale-105"
         >
           <FaGithub className="mr-2" />
           <span className="text-sm">GitHub</span>
@@ -86,7 +86,7 @@ const ProjectCard = React.memo(({ project }: { project: Project }) => (
           href={project.liveLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center text-gray-400 hover:text-pastel-blue transition-colors duration-300"
+          className="flex items-center text-gray-400 hover:text-pastel-blue transition-all duration-300 transform hover:scale-105"
         >
           <FaExternalLinkAlt className="mr-2" />
           <span className="text-sm">Live Demo</span>

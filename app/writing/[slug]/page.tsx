@@ -3,7 +3,8 @@ import { notFound } from 'next/navigation';
 import DOMPurify from 'isomorphic-dompurify';
 import { ReactElement } from 'react';
 import Link from 'next/link';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight, FaExternalLinkAlt } from 'react-icons/fa';
+import Image from 'next/image';
 
 type Post = {
   slug: string;
@@ -16,6 +17,7 @@ type Post = {
   subtitle?: string;
   readTime?: number;
   tags?: string[];
+  description?: string;
 };
 
 export async function generateStaticParams() {
@@ -108,6 +110,15 @@ export default async function WritingPage({ params }: { params: { slug: string }
 
     const formattedContent = formatContent(sanitizedContent);
 
+    // Get 2-3 random recommendations
+    const getRandomRecommendations = (currentSlug: string, count: number) => {
+      const filteredPosts = posts.filter(post => post.slug !== currentSlug);
+      const shuffled = filteredPosts.sort(() => 0.5 - Math.random());
+      return shuffled.slice(0, count);
+    };
+
+    const recommendations = getRandomRecommendations(params.slug, 3);
+
     return (
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-inherit">
         {prevPost && (
@@ -158,8 +169,8 @@ export default async function WritingPage({ params }: { params: { slug: string }
           </div>
 
           {post.tags && post.tags.length > 0 && (
-            <div className="mt-8">
-              <h3 className="text-lg font-semibold mb-2 text-gray-300">Tags:</h3>
+            <div className="mt-8 flex items-center">
+              <h3 className="text-lg font-semibold mr-2 text-gray-300">Tags:</h3>
               <div className="flex flex-wrap gap-2">
                 {post.tags.map((tag) => (
                   <span
@@ -172,6 +183,57 @@ export default async function WritingPage({ params }: { params: { slug: string }
               </div>
             </div>
           )}
+
+          {/* Recommendations Section */}
+          <div className="mt-12">
+            <h3 className="text-2xl font-semibold mb-4">Recommended Reading</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {recommendations.map((rec) => (
+                <Link
+                  key={rec.slug}
+                  href={`/writing/${rec.slug}`}
+                  className="group relative overflow-hidden rounded-xl bg-gray-800/30 p-6 transition-all duration-300 hover:bg-gray-700/40 hover:shadow-lg hover:shadow-pastel-blue/20 border border-gray-800 hover:border-gray-700 flex flex-col h-full"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-pastel-blue/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+                  <div className="relative w-full h-48 mb-4 overflow-hidden rounded-lg">
+                    <Image
+                      src={rec.image || '/placeholder.webp'}
+                      alt={rec.title}
+                      layout="fill"
+                      objectFit="cover"
+                      className="transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
+
+                  <h4 className="text-xl font-bold text-gray-200 mb-3 group-hover:text-pastel-blue transition-colors duration-300">
+                    {rec.title}
+                  </h4>
+                  <p className="text-gray-400 mb-4 flex-grow overflow-hidden text-sm sm:text-base group-hover:text-gray-300 transition-colors duration-300 line-clamp-3">
+                    {rec.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {rec.tags?.map((tag, index) => (
+                      <span
+                        key={index}
+                        className="px-2 py-1 bg-gray-700/50 text-gray-300 text-xs font-medium rounded-full border border-gray-600 transition-all duration-300 group-hover:bg-gray-600/50 group-hover:border-gray-500"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex space-x-4 mt-auto pt-4 border-t border-gray-700">
+                    <span className="flex items-center text-gray-400 group-hover:text-pastel-blue transition-all duration-300 transform group-hover:scale-105">
+                      <FaExternalLinkAlt className="mr-2" />
+                      <span className="text-sm">Read</span>
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
         </article>
       </div>
     );
