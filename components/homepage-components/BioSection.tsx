@@ -110,9 +110,9 @@ export default function BioSection() {
               <motion.div
                 key="logo-0"
                 className="bg-gray-800 rounded-full aspect-square overflow-hidden w-16 h-16 md:w-18 md:h-18 mt-2 mb-2"
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0 }}
+                initial={{ opacity: 0, scale: 0.5, rotate: 0 }}
+                animate={{ opacity: 1, scale: 1, rotate: 360 }}
+                transition={{ duration: 1.5, delay: 0 }}
               >
                 <Image
                   src={logos[0]}
@@ -127,9 +127,9 @@ export default function BioSection() {
                   <motion.div
                     key={`logo-${index + 1}`}
                     className="bg-gray-800 rounded-full aspect-square overflow-hidden w-16 h-16 md:w-18 md:h-18"
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
+                    initial={{ opacity: 0, scale: 0.5, rotate: 0 }}
+                    animate={{ opacity: 1, scale: 1, rotate: 360 }}
+                    transition={{ duration: 1.5, delay: index === 0 ? 0.075 : 0.125 }}
                   >
                     <Image
                       src={logo}
