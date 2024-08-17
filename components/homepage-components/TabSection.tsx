@@ -16,12 +16,12 @@ const BioSection = dynamic(() => import('./BioSection'), {
 });
 
 export default function TabSection() {
-  const [activeTab, setActiveTab] = useState('bio');
+  const [activeTab, setActiveTab] = useState('projects');
 
   return (
     <div className="transition-opacity duration-300 ease-in-out">
       <div className="tabs-container" role="tablist">
-        {['bio', 'featured', 'projects'].map((tab) => (
+        {['projects', 'bio', 'featured'].map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
@@ -35,10 +35,9 @@ export default function TabSection() {
         ))}
       </div>
 
-      {activeTab === 'bio' && <BioSection />}
-
-      {activeTab === 'featured' && <FeaturedContent />}
       {activeTab === 'projects' && <ProjectsContent />}
+      {activeTab === 'bio' && <BioSection />}
+      {activeTab === 'featured' && <FeaturedContent />}
     </div>
   );
 }

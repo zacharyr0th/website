@@ -7,7 +7,8 @@ const featuredProjects = [
   {
     id: 'zacharyroth',
     name: 'zacharyr0th.com',
-    description: '',
+    description:
+      'This website is an open-source portfolio built with Next.js, Tailwind CSS, and TypeScript.',
     tags: ['Next.js', 'Tailwind', 'TypeScript'],
     github: 'https://github.com/yourusername/zacharyroth-website',
     liveLink: 'https://zacharyroth.com',
@@ -45,10 +46,13 @@ const FeaturedProjectCard = ({ project }: { project: Project }) => (
     initial={{ opacity: 0, x: 20 }}
     animate={{ opacity: 1, x: 0 }}
     transition={{ duration: 0.5 }}
-    className="flex flex-col md:flex-row bg-gray-800/50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-gray-700/50"
+    className="group relative overflow-hidden rounded-xl bg-gray-800/30 p-6 transition-all duration-300 hover:bg-gray-700/40 hover:shadow-lg hover:shadow-pastel-blue/20 flex flex-col md:flex-row"
   >
-    <div className="md:w-2/5 p-6 flex flex-col justify-center">
-      <h3 className="text-2xl font-bold text-pastel-blue mb-2">{project.name}</h3>
+    <div className="absolute inset-0 bg-gradient-to-br from-pastel-blue/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+    <div className="md:w-2/5 p-6 flex flex-col justify-center relative z-10">
+      <h3 className="text-2xl font-bold text-gray-200 mb-2 group-hover:text-pastel-blue transition-colors duration-300">
+        {project.name}
+      </h3>
       <p className="text-gray-300 mb-4">{project.description}</p>
       <div className="flex flex-wrap gap-2 mb-4">
         {project.tags.map((tag, index) => (
@@ -61,7 +65,7 @@ const FeaturedProjectCard = ({ project }: { project: Project }) => (
         ))}
       </div>
     </div>
-    <div className="md:w-3/5 bg-gray-900/50 p-6 flex flex-col justify-center">
+    <div className="md:w-3/5 bg-gray-30 p-6 flex flex-col justify-center relative z-10">
       <div className="flex space-x-4 mb-4">
         {project.github && (
           <Link
@@ -86,7 +90,6 @@ const FeaturedProjectCard = ({ project }: { project: Project }) => (
           </Link>
         )}
       </div>
-      {/* You can add more details or a screenshot here */}
       <div className="text-gray-400">
         This website is a fully open-source Portfolio/CV built with Next.js, Tailwind, and
         TypeScript

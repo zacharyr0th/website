@@ -5,10 +5,18 @@ import { motion } from 'framer-motion';
 
 const projects = [
   {
+    id: 'simpleos',
+    name: 'SimpleOS',
+    description:
+      'An x86_64 operating system kernel with basic interrupt handling, memory management, and VGA text mode output.',
+    tags: ['OS', 'C', 'Assembly'],
+    github: 'https://github.com/zacharyr0th/SimpleOS',
+  },
+  {
     id: 'zacharyroth',
     name: 'zacharyr0th.com',
     description:
-      'This website is a fully open-source Portfolio/CV built with Next.js, Tailwind, and TypeScript',
+      'This website is an open-source portfolio built with Next.js, Tailwind CSS, and TypeScript.',
     tags: ['Next.js', 'Tailwind', 'TypeScript'],
     github: 'https://github.com/yourusername/zacharyroth-website',
     liveLink: 'https://zacharyroth.com',
@@ -16,19 +24,10 @@ const projects = [
   {
     id: 'musicide',
     name: 'MusicIDE',
-    description:
-      'Integrated Development Environment for AI assisted music production with built in music theory tools',
+    description: 'An integrated Development Environment for AI assisted music production.',
     tags: ['AI', 'Music', 'IDE'],
     github: 'https://github.com/yourusername/musicide',
     liveLink: 'https://musicide.app',
-  },
-  {
-    id: 'microkernel',
-    name: 'Multi Layered Kernel',
-    description:
-      'An experimental operating system built on a flexible, layered microkernel architecture',
-    tags: ['OS', 'C', 'Assembly'],
-    github: 'https://github.com/yourusername/microkernel-os',
   },
 ];
 
@@ -47,7 +46,7 @@ const ProjectCard = React.memo(({ project }: { project: Project }) => (
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
-    className="group relative overflow-hidden rounded-xl bg-gray-800/30 p-6 transition-all duration-300 hover:bg-gray-700/40 hover:shadow-lg hover:shadow-pastel-blue/20 border border-gray-800 hover:border-gray-700 flex flex-col h-full"
+    className="group relative overflow-hidden rounded-xl bg-gray-800/30 p-6 transition-all duration-300 hover:bg-gray-700/40 hover:shadow-lg hover:shadow-pastel-blue/20 flex flex-col h-full"
   >
     <div className="absolute inset-0 bg-gradient-to-br from-pastel-blue/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
@@ -62,7 +61,7 @@ const ProjectCard = React.memo(({ project }: { project: Project }) => (
       {project.tags.map((tag, index) => (
         <span
           key={index}
-          className="px-2 py-1 bg-gray-700/50 text-gray-300 text-xs font-medium rounded-full border border-gray-600 transition-all duration-300 group-hover:bg-gray-600/50 group-hover:border-gray-500"
+          className="px-2 py-1 bg-gray-700/50 text-gray-300 text-xs font-medium rounded-full transition-all duration-300 group-hover:bg-gray-600/50"
         >
           {tag}
         </span>
@@ -105,8 +104,10 @@ const ProjectsContent = () => {
   );
 
   return (
-    <div className="p-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">{projectCards}</div>
+    <div className="px-4 py-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">{projectCards}</div>
+      </div>
     </div>
   );
 };
