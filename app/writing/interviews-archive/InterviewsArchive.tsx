@@ -16,6 +16,7 @@ export default function InterviewsArchive({ initialInterviews }: InterviewsArchi
   const [interviews, setInterviews] = useState<ContentItem[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [isClient, setIsClient] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     setInterviews(initialInterviews);
@@ -41,6 +42,10 @@ export default function InterviewsArchive({ initialInterviews }: InterviewsArchi
     return `${month} ${year}`;
   };
 
+  const toggleDropdown = () => {
+    setIsDropdownOpen((prevState) => !prevState);
+  };
+
   if (!isClient) {
     return null; // or a loading spinner
   }
@@ -53,7 +58,41 @@ export default function InterviewsArchive({ initialInterviews }: InterviewsArchi
     <div className="min-h-screen bg-inherit text-gray-300">
       <header className="bg-inherit shadow-md">
         <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-4xl font-bold">Interviews Archive</h1>
+          <div className="relative">
+            <button
+              onClick={toggleDropdown}
+              className="text-4xl font-bold flex items-center"
+            >
+              Interviews Archive
+            </button>
+            {isDropdownOpen && (
+              <div className="absolute z-10 mt-2 w-48 rounded-md shadow-lg bg-gray-800">
+                <div className="py-1" role="menu" aria-orientation="vertical">
+                  <Link
+                    href="/writing/reviews"
+                    className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700"
+                    role="menuitem"
+                  >
+                    Reviews Archive
+                  </Link>
+                  <Link
+                    href="/writing/articles"
+                    className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700"
+                    role="menuitem"
+                  >
+                    Articles Archive
+                  </Link>
+                  <Link
+                    href="/writing/interviews"
+                    className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700"
+                    role="menuitem"
+                  >
+                    Interviews Archive
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
           {isClient && (
             <input
               type="text"

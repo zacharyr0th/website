@@ -15,6 +15,7 @@ export default function ReviewsArchive({ initialReviews }: ReviewsArchiveProps) 
   const router = useRouter();
   const [reviews, setReviews] = useState<ContentItem[]>(initialReviews);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const filteredReviews = useMemo(() => {
     return reviews.filter(
@@ -42,11 +43,49 @@ export default function ReviewsArchive({ initialReviews }: ReviewsArchiveProps) 
     return `${month} ${year}`;
   };
 
+  const toggleDropdown = () => {
+    setIsDropdownOpen((prevState) => !prevState);
+  };
+
   return (
     <div className="min-h-screen bg-inherit text-gray-300">
       <header className="bg-inherit shadow-md">
         <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-4xl font-bold">Reviews Archive</h1>
+          <div className="relative">
+            <button
+              onClick={toggleDropdown}
+              className="text-4xl font-bold flex items-center"
+            >
+              Reviews Archive
+            </button>
+            {isDropdownOpen && (
+              <div className="absolute z-10 mt-2 w-48 rounded-md shadow-lg bg-gray-800">
+                <div className="py-1" role="menu" aria-orientation="vertical">
+                  <Link
+                    href="/writing/reviews"
+                    className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700"
+                    role="menuitem"
+                  >
+                    Reviews Archive
+                  </Link>
+                  <Link
+                    href="/writing/articles"
+                    className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700"
+                    role="menuitem"
+                  >
+                    Articles Archive
+                  </Link>
+                  <Link
+                    href="/writing/interviews"
+                    className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700"
+                    role="menuitem"
+                  >
+                    Interviews Archive
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
           <input
             type="text"
             placeholder="Search reviews..."

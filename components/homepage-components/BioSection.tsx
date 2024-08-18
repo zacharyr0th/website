@@ -159,7 +159,7 @@ export default function BioSection() {
                 >
                   Aptos Labs
                 </a>
-                , leveraging cross-chain expertise in Aptos, Solana, and EVM ecosystems.
+                , with a refined understanding of on-chain product market fit based on years of experience building and participating in the Aptos, Solana, and EVM ecosystems.
               </p>
             </motion.div>
           </div>

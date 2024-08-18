@@ -194,9 +194,10 @@ export default async function WritingPage({ params }: { params: { slug: string }
             <h3 className="text-2xl font-semibold mb-4">Recommended Reading</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {recommendations.map((rec) => (
-                <div
+                <Link
                   key={rec.slug}
-                  className="bg-[#1a1a1a] rounded-lg shadow-lg hover:bg-[#242424] transition-all duration-300 flex flex-col h-[400px]"
+                  href={`/writing/${rec.slug}`}
+                  className="block bg-[#1a1a1a] rounded-lg shadow-lg hover:bg-[#242424] transition-all duration-300 h-[400px] overflow-hidden"
                 >
                   <div className="relative h-48 w-full">
                     <Image
@@ -208,33 +209,14 @@ export default async function WritingPage({ params }: { params: { slug: string }
                       className="rounded-t-lg"
                     />
                   </div>
-                  <div className="p-6 flex flex-col flex-grow">
+                  <div className="p-6 flex flex-col h-[calc(100%-12rem)]">
                     <h4 className="text-xl font-semibold mb-2">{rec.title}</h4>
                     <p className="text-gray-400 mb-4 flex-grow overflow-hidden">
                       {truncateText(rec.description || '', 100)}
                     </p>
-                    <Link
-                      href={`/writing/${rec.slug}`}
-                      className="text-blue-400 hover:text-blue-300 inline-flex items-center self-start mt-auto"
-                    >
-                      Read More
-                      <svg
-                        className="w-4 h-4 ml-2"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
-                    </Link>
+                    
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

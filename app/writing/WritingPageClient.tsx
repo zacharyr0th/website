@@ -37,9 +37,9 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
   const allRandomizedContent = mounted ? randomizedContent : contentArray;
 
   const categoryDescriptions: Record<string, string> = {
-    Articles: 'Technology & Finance',
-    Reviews: 'Books & Products',
-    Interviews: 'Founders & Builders',
+    Articles: 'Articles',
+    Reviews: 'Reviews',
+    Interviews: 'Interviews',
   };
 
   const ArticleCard: React.FC<{ article: Content }> = ({ article }) => {
@@ -148,7 +148,7 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
           {/* Random Section */}
           <aside className="w-full lg:w-1/3">
             <div className="bg-[#1a1a1a] p-4 rounded-lg shadow-lg h-[calc(3*100px+3rem)] flex flex-col">
-              <h2 className="text-xl font-bold mb-3">Random Assortment</h2>
+              <h2 className="text-xl font-bold mb-3">Random</h2>
               <div className="overflow-y-auto flex-grow popular-articles hover-scroll">
                 {allRandomizedContent.length > 0 ? (
                   <ul className="space-y-3 pr-2">
@@ -205,19 +205,17 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
       <section className="container my-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {['Articles', 'Reviews', 'Interviews'].map((category) => (
-            <div
+            <Link
               key={category}
-              className="bg-[#1a1a1a] p-6 rounded-lg shadow-lg hover:bg-[#242424] transition-all duration-300"
+              href={`/writing/${category.toLowerCase()}`}
+              className="block bg-[#1a1a1a] p-6 rounded-lg shadow-lg hover:bg-[#242424] transition-all duration-300 group"
             >
-              <h3 className="text-xl font-semibold mb-4">{category}</h3>
+              <h3 className="text-xl font-semibold mb-4 group-hover:text-blue-400 transition-colors duration-300">{category}</h3>
               <p className="text-gray-400 mb-4">{categoryDescriptions[category]}</p>
-              <Link
-                href={`/writing/${category.toLowerCase()}`}
-                className="text-blue-400 hover:text-blue-300 inline-flex items-center"
-              >
+              <div className="text-blue-400 inline-flex items-center group-hover:underline">
                 View All
                 <svg
-                  className="w-4 h-4 ml-2"
+                  className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -230,8 +228,8 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
                     d="M9 5l7 7-7 7"
                   />
                 </svg>
-              </Link>
-            </div>
+              </div>
+            </Link>
           ))}
         </div>
       </section>
