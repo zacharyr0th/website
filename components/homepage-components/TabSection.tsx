@@ -30,7 +30,9 @@ export default function TabSection() {
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`tab-button ${activeTab === tab ? 'active' : ''} ${isLoaded ? 'loaded' : ''}`}
+            className={`tab-button ${activeTab === tab ? 'active' : ''} ${
+              isLoaded ? 'loaded' : ''
+            }`}
             role="tab"
             aria-selected={activeTab === tab}
             aria-controls={`${tab}-content`}
@@ -60,8 +62,12 @@ export default function TabSection() {
         }
 
         @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
         }
 
         .tab-button {

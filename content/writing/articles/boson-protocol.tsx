@@ -27,7 +27,6 @@ export const metadata: ContentItem = {
 const BosonProtocol: React.FC = () => {
   return (
     <article>
-      <h2>Introduction</h2>
       <p>
         Named after an elementary particle described as a force carrier that functions as the 'glue'
         holding matter together, Boson Protocol has made its mission to enable decentralized

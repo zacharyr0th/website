@@ -5,6 +5,7 @@ import { ReactElement } from 'react';
 import Link from 'next/link';
 import { FaChevronLeft, FaChevronRight, FaExternalLinkAlt } from 'react-icons/fa';
 import Image from 'next/image';
+import './writing.css';  // Adjust the path as necessary
 
 type Post = {
   slug: string;
@@ -80,21 +81,30 @@ export default async function WritingPage({ params }: { params: { slug: string }
 
     const formatContent = (content: string | ReactElement) => {
       if (typeof content === 'string') {
+        let isFirstParagraph = true;
         return content.replace(
-          /<(article|h[1-6]|p|ul|ol|li|blockquote)>([\s\S]*?)<\/\1>/g,
+          /<(article|h[1-6]|p|ul|ol|li|blockquote|a)>([\s\S]*?)<\/\1>/g,
           (match, tag, text) => {
             switch (tag) {
               case 'article':
                 return `<article class="space-y-6">${text}</article>`;
               case 'h1':
-                return `<h1 class="text-3xl font-bold mt-8 mb-4">${text}</h1>`;
+                return `<h1 class="text-4xl font-bold mt-10 mb-6">${text}</h1>`;
               case 'h2':
-                return `<h2 class="text-2xl font-semibold mt-8 mb-4">${text}</h2>`;
+                return `<h2 class="text-3xl font-semibold mt-8 mb-4">${text}</h2>`;
               case 'h3':
-                return `<h3 class="text-xl font-semibold mt-6 mb-3">${text}</h3>`;
+                return `<h3 class="text-2xl font-semibold mt-6 mb-3">${text}</h3>`;
               case 'h4':
-                return `<h4 class="text-base font-semibold mt-4 mb-2">${text}</h4>`;
+                return `<h4 class="text-xl font-semibold mt-5 mb-2">${text}</h4>`;
+              case 'h5':
+                return `<h5 class="text-lg font-semibold mt-4 mb-2">${text}</h5>`;
+              case 'h6':
+                return `<h6 class="text-base font-semibold mt-3 mb-2">${text}</h6>`;
               case 'p':
+                if (isFirstParagraph) {
+                  isFirstParagraph = false;
+                  return `<p class="intro-paragraph"><span class="drop-cap">${text.charAt(0)}</span>${text.slice(1)}</p>`;
+                }
                 return `<p class="mb-4 leading-relaxed">${text}</p>`;
               case 'ul':
                 return `<ul class="list-disc list-inside space-y-2 mb-4">${text}</ul>`;
@@ -104,6 +114,11 @@ export default async function WritingPage({ params }: { params: { slug: string }
                 return `<li class="mb-1">${text}</li>`;
               case 'blockquote':
                 return `<blockquote class="border-l-4 border-gray-500 pl-4 italic my-6">${text}</blockquote>`;
+              case 'a':
+                return text.replace(/<a\s+(?:[^>]*?\s+)?href="([^"]*)"([^>]*)>(.*?)<\/a>/g, 
+                  (_: string, href: string, attrs: string, linkText: string) => 
+                    `<a href="${href}" class="text-blue-400 hover:text-blue-300 underline" target="_blank" rel="noopener noreferrer"${attrs}>${linkText}</a>`
+                );
               default:
                 return match;
             }
@@ -214,7 +229,6 @@ export default async function WritingPage({ params }: { params: { slug: string }
                     <p className="text-gray-400 mb-4 flex-grow overflow-hidden">
                       {truncateText(rec.description || '', 100)}
                     </p>
-                    
                   </div>
                 </Link>
               ))}

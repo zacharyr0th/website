@@ -52,10 +52,7 @@ export default function ReviewsArchive({ initialReviews }: ReviewsArchiveProps) 
       <header className="bg-inherit shadow-md">
         <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="relative">
-            <button
-              onClick={toggleDropdown}
-              className="text-4xl font-bold flex items-center"
-            >
+            <button onClick={toggleDropdown} className="text-4xl font-bold flex items-center">
               Reviews Archive
             </button>
             {isDropdownOpen && (

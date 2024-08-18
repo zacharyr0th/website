@@ -210,7 +210,9 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
               href={`/writing/${category.toLowerCase()}`}
               className="block bg-[#1a1a1a] p-6 rounded-lg shadow-lg hover:bg-[#242424] transition-all duration-300 group"
             >
-              <h3 className="text-xl font-semibold mb-4 group-hover:text-blue-400 transition-colors duration-300">{category}</h3>
+              <h3 className="text-xl font-semibold mb-4 group-hover:text-blue-400 transition-colors duration-300">
+                {category}
+              </h3>
               <p className="text-gray-400 mb-4">{categoryDescriptions[category]}</p>
               <div className="text-blue-400 inline-flex items-center group-hover:underline">
                 View All

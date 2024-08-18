@@ -133,7 +133,7 @@ export default function BioSection() {
     if (isResumeLinkInView && !hasAnimated) {
       setHasAnimated(true);
     }
-  }, [isResumeLinkInView]);
+  }, [isResumeLinkInView, hasAnimated]);
 
   return (
     <section className="bio-section py-6 px-4 sm:px-6 lg:px-8 bg-inherit text-gray-300">
@@ -159,7 +159,8 @@ export default function BioSection() {
                 >
                   Aptos Labs
                 </a>
-                , with a refined understanding of on-chain product market fit based on years of experience building and participating in the Aptos, Solana, and EVM ecosystems.
+                , with a refined understanding of on-chain product market fit based on years of
+                experience building and participating in the Aptos, Solana, and EVM ecosystems.
               </p>
             </motion.div>
           </div>
