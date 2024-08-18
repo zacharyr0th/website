@@ -4,7 +4,7 @@ import React from 'react';
 
 export function Footer() {
   return (
-    <footer className="bg-[var(--primary-bg)] text-sm py-6">
+    <footer className="bg-[var(--primary-bg)] text-sm py-16">
       <p className="text-center text-[var(--color-secondary)]">&copy; {new Date().getFullYear()}</p>
     </footer>
   );

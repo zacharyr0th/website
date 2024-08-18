@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default function ProfileSection() {
   return (
-    <div className="text-center mb-2">
+    <div className="text-center pt-8">
       <div className="profile-picture">
         <Image
           src="/profile-picture.webp"

@@ -92,12 +92,15 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
       <header className="py-6 mb-8">
         <div className="container flex justify-between items-center">
           <h1 className="text-4xl font-bold">Writing</h1>
-          <nav className="navbar-links">
-            <ul className="flex gap-4">
+          <nav className="navbar-links hidden md:block">
+            <ul className="flex gap-6">
               {contentType && (
                 <li>
-                  <Link href="/writing" className="nav-link">
-                    <span>All</span>
+                  <Link
+                    href="/writing"
+                    className="text-gray-200 transition-all duration-300 focus:outline-none hover:text-gray-500"
+                  >
+                    All
                   </Link>
                 </li>
               )}
@@ -105,11 +108,13 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
                 <li key={item}>
                   <Link
                     href={`/writing?type=${item.toLowerCase().slice(0, -1)}`}
-                    className={`nav-link ${
-                      contentType === item.toLowerCase().slice(0, -1) ? 'active-link' : ''
+                    className={`text-gray-200 transition-all duration-300 focus:outline-none ${
+                      contentType === item.toLowerCase().slice(0, -1)
+                        ? 'text-gray-500'
+                        : 'hover:text-gray-500'
                     }`}
                   >
-                    <span>{item}</span>
+                    {item}
                   </Link>
                 </li>
               ))}

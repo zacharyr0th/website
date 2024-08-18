@@ -6,7 +6,7 @@ export const metadata: ContentItem = {
   slug: 'blockchains-in-africa',
   title: 'Blockchains in Africa',
   subtitle: 'An Emerging Trend',
-  image: '',
+  image: '/images/articles/ba-0.webp',
   imageCaption: 'A vibrant African landscape with a Bitcoin symbol encompassing the sun.',
   pageViews: 0,
   type: 'article',

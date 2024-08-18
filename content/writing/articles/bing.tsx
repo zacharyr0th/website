@@ -30,7 +30,7 @@ const Bing: React.FC = () => {
     <article>
       <img src="/images/articles/bing-0.webp" alt="Bing" />
 
-      <h2>Introduction</h2>
+      <p></p>
       <p>
         Everyone loves an underdog, and in the world of search engines, Bing is positioning itself
         as just that. With the recent integration of ChatGPT-like technology, Bing is making waves

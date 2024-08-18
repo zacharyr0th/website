@@ -30,6 +30,10 @@ const Header = () => {
     };
   }, []);
 
+  const toggleMedia = () => {
+    setIsMediaOpen((prevState) => !prevState);
+  };
+
   return (
     <header className="w-full bg-[#121212] text-gray-200 shadow-none transition-colors duration-300">
       <nav className="flex justify-between items-center p-4">
@@ -39,11 +43,14 @@ const Header = () => {
             <Link
               href="/"
               aria-label="Home"
-              className="flex items-center transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 hover:transform hover:scale-105"
+              className="flex items-center transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
             >
               <div
-                className="rounded-full overflow-hidden transform transition-transform duration-500 hover:scale-105"
-                style={{ border: '2px solid #4a4a4a' }}
+                className="rounded-full overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-glow active:scale-95"
+                style={{
+                  border: '2px solid #4a4a4a',
+                  cursor: 'pointer',
+                }}
               >
                 <Image
                   src="/profile-picture.webp"
@@ -58,31 +65,37 @@ const Header = () => {
           )}
 
           {/* Media Dropdown */}
-          <div className="relative" ref={dropdownRef}>
+          <div className="relative">
             <button
-              onClick={() => setIsMediaOpen(!isMediaOpen)}
-              className="text-gray-200 hover:text-gray-300 transition-colors duration-300 focus:outline-none"
+              onClick={toggleMedia}
+              className={`text-gray-200 transition-all duration-300 focus:outline-none ${
+                isMediaOpen ? 'text-gray-500' : 'hover:text-gray-500 hover:scale-105'
+              }`}
             >
               Media
             </button>
             {isMediaOpen && (
-              <div className="absolute z-10 mt-2 w-32 bg-gray-800/30 rounded-lg shadow-lg border border-gray-800 overflow-hidden">
-                {mediaItems.map(({ label, href }) => (
-                  <Link
-                    key={href}
-                    href={href}
-                    className="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700/40 transition-colors duration-300 focus:outline-none text-left"
-                    onClick={() => setIsMediaOpen(false)}
-                  >
-                    {label}
-                  </Link>
+              <div
+                ref={dropdownRef}
+                className="absolute z-50 left-0 top-full w-48 bg-[#121212] rounded-lg shadow-lg overflow-hidden"
+              >
+                {mediaItems.map(({ label, href }, index) => (
+                  <div key={href} className="py-2">
+                    <Link
+                      href={href}
+                      className="text-gray-200 hover:text-gray-500 transition-all duration-300 focus:outline-none text-left whitespace-nowrap hover:scale-105 active:scale-95 px-0"
+                      onClick={() => setIsMediaOpen(false)}
+                    >
+                      {label}
+                    </Link>
+                  </div>
                 ))}
               </div>
             )}
           </div>
 
           {/* Writing/Research Links */}
-          {['writing', 'research'].map((item) => (
+          {['writing', 'resume'].map((item) => (
             <Link
               key={item}
               href={`/${item}`}

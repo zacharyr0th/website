@@ -1,28 +1,16 @@
-.bio-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  text-align: center;
-}
-
-.bio-text {
-  margin-bottom: 1.5rem;
-  max-width: 600px;
-}
-
 .profile-picture,
 .profile-icon {
   border-radius: 50%;
   overflow: hidden;
   transform: translateZ(0);
-  transition: transform 0.5s;
+  transition: transform 0.5s, box-shadow 0.3s, cursor 0.3s;
+  cursor: pointer;
 }
 
 .profile-picture:hover,
 .profile-icon:hover {
   transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
 }
 
 .profile-picture {
@@ -47,10 +35,4 @@
   font-size: 2.25rem;
   font-weight: bold;
   color: var(--color-text-light);
-}
-
-.profile-title {
-  margin-bottom: 2rem;
-  font-size: 1.125rem;
-  color: var(--color-secondary);
 }
