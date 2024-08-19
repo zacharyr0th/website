@@ -5,7 +5,7 @@ import { ReactElement } from 'react';
 import Link from 'next/link';
 import { FaChevronLeft, FaChevronRight, FaExternalLinkAlt } from 'react-icons/fa';
 import Image from 'next/image';
-import './writing.css';  // Adjust the path as necessary
+import './writing.css'; // Adjust the path as necessary
 
 type Post = {
   slug: string;
@@ -103,7 +103,9 @@ export default async function WritingPage({ params }: { params: { slug: string }
               case 'p':
                 if (isFirstParagraph) {
                   isFirstParagraph = false;
-                  return `<p class="intro-paragraph"><span class="drop-cap">${text.charAt(0)}</span>${text.slice(1)}</p>`;
+                  return `<p class="intro-paragraph"><span class="drop-cap">${text.charAt(
+                    0
+                  )}</span>${text.slice(1)}</p>`;
                 }
                 return `<p class="mb-4 leading-relaxed">${text}</p>`;
               case 'ul':
@@ -115,8 +117,9 @@ export default async function WritingPage({ params }: { params: { slug: string }
               case 'blockquote':
                 return `<blockquote class="border-l-4 border-gray-500 pl-4 italic my-6">${text}</blockquote>`;
               case 'a':
-                return text.replace(/<a\s+(?:[^>]*?\s+)?href="([^"]*)"([^>]*)>(.*?)<\/a>/g, 
-                  (_: string, href: string, attrs: string, linkText: string) => 
+                return text.replace(
+                  /<a\s+(?:[^>]*?\s+)?href="([^"]*)"([^>]*)>(.*?)<\/a>/g,
+                  (_: string, href: string, attrs: string, linkText: string) =>
                     `<a href="${href}" class="text-blue-400 hover:text-blue-300 underline" target="_blank" rel="noopener noreferrer"${attrs}>${linkText}</a>`
                 );
               default:

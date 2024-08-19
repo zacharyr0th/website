@@ -14,7 +14,7 @@
 }
 
 .intro-paragraph::before {
-  content: "TL;DR";
+  content: 'TL;DR';
   display: block;
   font-weight: bold;
   margin-bottom: 0.5rem;

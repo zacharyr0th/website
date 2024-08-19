@@ -17,11 +17,6 @@ const BioSection = dynamic(() => import('./BioSection'), {
 
 export default function TabSection() {
   const [activeTab, setActiveTab] = useState('about');
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
 
   return (
     <div className="tab-section">
@@ -30,9 +25,7 @@ export default function TabSection() {
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`tab-button ${activeTab === tab ? 'active' : ''} ${
-              isLoaded ? 'loaded' : ''
-            }`}
+            className={`tab-button ${activeTab === tab ? 'active' : ''}`}
             role="tab"
             aria-selected={activeTab === tab}
             aria-controls={`${tab}-content`}
@@ -70,16 +63,21 @@ export default function TabSection() {
           }
         }
 
-        .tab-button {
-          animation: fadeInDown 0.5s ease-out backwards;
+        .tabs-container {
+          opacity: 0;
+          animation: fadeIn 0.5s ease-out forwards;
+          animation-delay: 0.2s;
         }
 
-        .tab-button.active {
-          transition: all 0.3s ease;
+        .tab-button {
+          opacity: 0;
+          animation: fadeInDown 0.5s ease-out forwards;
         }
 
         .tab-content {
-          animation: fadeIn 0.3s ease-out;
+          opacity: 0;
+          animation: fadeIn 0.5s ease-out forwards;
+          animation-delay: 0.5s;
         }
       `}</style>
     </div>

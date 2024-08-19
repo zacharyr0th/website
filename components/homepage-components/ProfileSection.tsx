@@ -11,7 +11,7 @@ export default function ProfileSection() {
           alt="Zachary Roth"
           width={256}
           height={256}
-          className="object-cover"
+          className="object-cover profile-image"
           priority
         />
       </div>
@@ -41,20 +41,37 @@ export default function ProfileSection() {
         }
 
         .profile-picture {
-          animation: fadeIn 0.8s ease-out;
+          animation: fadeIn 2s ease-out;
         }
 
         .profile-name,
         .profile-title {
-          animation: fadeInUp 0.8s ease-out;
+          animation: fadeInUp 1.5s ease-out;
+          opacity: 0;
+          animation-fill-mode: forwards;
         }
 
         .profile-name {
-          animation-delay: 0.2s;
+          animation-delay: 0.5s;
         }
 
         .profile-title {
-          animation-delay: 0.4s;
+          animation-delay: 1s;
+        }
+
+        .profile-image {
+          animation: scaleIn 1.5s ease-out;
+        }
+
+        @keyframes scaleIn {
+          from {
+            opacity: 0;
+            transform: scale(0.8);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
         }
       `}</style>
     </div>

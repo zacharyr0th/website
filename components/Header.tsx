@@ -10,6 +10,7 @@ const Header = () => {
   const pathname = usePathname();
   const [isMediaOpen, setIsMediaOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   const mediaItems = [
     { label: 'Audio', href: '/audio' },
@@ -30,12 +31,20 @@ const Header = () => {
     };
   }, []);
 
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
   const toggleMedia = () => {
     setIsMediaOpen((prevState) => !prevState);
   };
 
   return (
-    <header className="w-full bg-[#121212] text-gray-200 shadow-none transition-colors duration-300">
+    <header
+      className={`w-full bg-[#121212] text-gray-200 shadow-none transition-all duration-500 ${
+        isVisible ? 'opacity-100' : 'opacity-0'
+      }`}
+    >
       <nav className="flex justify-between items-center p-4">
         {/* Home Button */}
         <div className="flex items-center space-x-4">
@@ -65,11 +74,11 @@ const Header = () => {
           )}
 
           {/* Media Dropdown */}
-          <div className="relative">
+          <div className="relative group">
             <button
               onClick={toggleMedia}
               className={`text-gray-200 transition-all duration-300 focus:outline-none ${
-                isMediaOpen ? 'text-gray-500' : 'hover:text-gray-500 hover:scale-105'
+                isMediaOpen ? 'text-gray-500' : 'group-hover:text-gray-500 group-hover:scale-105'
               }`}
             >
               Media
@@ -77,18 +86,19 @@ const Header = () => {
             {isMediaOpen && (
               <div
                 ref={dropdownRef}
-                className="absolute z-50 left-0 top-full w-48 bg-[#121212] rounded-lg shadow-lg overflow-hidden"
+                className="absolute z-50 left-0 top-full mt-1 bg-[#121212] shadow-lg overflow-hidden rounded-2xl"
               >
                 {mediaItems.map(({ label, href }, index) => (
-                  <div key={href} className="py-2">
-                    <Link
-                      href={href}
-                      className="text-gray-200 hover:text-gray-500 transition-all duration-300 focus:outline-none text-left whitespace-nowrap hover:scale-105 active:scale-95 px-0"
-                      onClick={() => setIsMediaOpen(false)}
-                    >
+                  <Link
+                    key={href}
+                    href={href}
+                    className="block py-2 pr-20 pl-0 text-gray-200 transition-all duration-300 focus:outline-none text-left whitespace-nowrap m-1"
+                    onClick={() => setIsMediaOpen(false)}
+                  >
+                    <span className="hover:text-gray-500 hover:scale-105 inline-block transition-all duration-300">
                       {label}
-                    </Link>
-                  </div>
+                    </span>
+                  </Link>
                 ))}
               </div>
             )}

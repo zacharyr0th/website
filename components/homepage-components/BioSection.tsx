@@ -176,7 +176,7 @@ export default function BioSection() {
                 whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(255, 255, 255, 0.3)' }}
                 whileTap={{ scale: 0.95 }}
               >
-                <a
+                <Link
                   href={
                     index === 0
                       ? 'https://aptosfoundation.org/'
@@ -201,7 +201,7 @@ export default function BioSection() {
                     height={64}
                     className="object-cover w-full h-full"
                   />
-                </a>
+                </Link>
               </motion.div>
             ))}
           </div>
@@ -214,8 +214,8 @@ export default function BioSection() {
             transition={{ duration: 0.5 }}
           >
             <Link href="/resume" passHref>
-              <motion.a
-                className="inline-flex items-center text-base font-medium text-gray-400 hover:text-[var(--color-secondary)] transition-colors duration-200 focus:outline-none"
+              <motion.span
+                className="inline-flex items-center text-base font-medium text-gray-400 hover:text-[var(--color-secondary)] transition-colors duration-200 focus:outline-none cursor-pointer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -228,7 +228,7 @@ export default function BioSection() {
                 >
                   <ChevronRight className="w-3 h-3" aria-hidden="true" />
                 </motion.span>
-              </motion.a>
+              </motion.span>
             </Link>
           </motion.div>
         </div>
