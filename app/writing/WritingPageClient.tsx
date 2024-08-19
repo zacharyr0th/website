@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 interface Content {
   id: string;
@@ -87,7 +88,12 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
   }
 
   return (
-    <div className="home-container">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="home-container"
+    >
       {/* SubHeader */}
       <header className="py-6 mb-8">
         <div className="container flex justify-between items-center">
@@ -235,7 +241,7 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
           ))}
         </div>
       </section>
-    </div>
+    </motion.div>
   );
 };
 

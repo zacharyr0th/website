@@ -16,7 +16,12 @@ const categories = [
 
 const AudioPage = () => {
   return (
-    <div className="bg-[#121212] text-white min-h-screen">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="bg-[#121212] text-white min-h-screen"
+    >
       <motion.header
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -40,7 +45,7 @@ const AudioPage = () => {
           ))}
         </div>
       </main>
-    </div>
+    </motion.div>
   );
 };
 

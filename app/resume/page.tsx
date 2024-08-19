@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 interface Education {
@@ -113,7 +115,13 @@ const skills: Skill[] = [
   },
 ];
 
-const ResearchPage = () => {
+const ResumePage = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
   return (
     <div className="home-container">
       {/* SubHeader */}
@@ -124,7 +132,11 @@ const ResearchPage = () => {
       </header>
 
       {/* Main content */}
-      <main className="container">
+      <main
+        className={`container transition-opacity duration-500 ease-in ${
+          isVisible ? 'opacity-100' : 'opacity-0'
+        }`}
+      >
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           <div className="text-left">
             <div className="mb-8">
@@ -203,4 +215,4 @@ const ResearchPage = () => {
   );
 };
 
-export default ResearchPage;
+export default ResumePage;
