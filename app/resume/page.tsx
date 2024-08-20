@@ -52,7 +52,7 @@ const experiences: Experience[] = [
         period: 'May 2023 - Oct 2023',
         location: 'San Francisco, CA',
         description:
-          '• Managed relationships with DeFi projects building on Aptos\n• Facilitated technical integrations and provided support to developers\n• Organized developer-focused events and hackathons to grow the Aptos ecosystem',
+          '• Managed relationships with DeFi projects building on Aptos\n�� Facilitated technical integrations and provided support to developers\n• Organized developer-focused events and hackathons to grow the Aptos ecosystem',
       },
     ],
   },
@@ -125,7 +125,9 @@ const ResumePage = () => {
   return (
     <div className="home-container">
       {/* SubHeader */}
-      <header className="py-6 mb-8">
+      <header className={`py-6 mb-8 transition-opacity duration-500 ease-in ${
+        isVisible ? 'opacity-100' : 'opacity-0'
+      }`}>
         <div className="container flex justify-between items-center">
           <h1 className="text-4xl font-bold">Resume</h1>
         </div>
@@ -137,8 +139,8 @@ const ResumePage = () => {
           isVisible ? 'opacity-100' : 'opacity-0'
         }`}
       >
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          <div className="text-left">
+        <div className="flex flex-col lg:grid lg:grid-cols-3 gap-12">
+          <div className="order-2 lg:order-1 lg:col-span-1">
             <div className="mb-8">
               <h3 className="text-2xl font-semibold mb-4 text-white border-b border-gray-700 pb-2">
                 Education
@@ -172,7 +174,7 @@ const ResumePage = () => {
             </div>
           </div>
 
-          <div className="lg:col-span-2 text-left">
+          <div className="order-1 lg:order-2 lg:col-span-2">
             <h3 className="text-2xl font-semibold mb-4 text-white border-b border-gray-700 pb-2">
               Professional Experience
             </h3>

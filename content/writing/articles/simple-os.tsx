@@ -2,16 +2,16 @@ import React from 'react';
 import { ContentItem } from '../../../lib/types';
 
 export const metadata: ContentItem = {
-  id: 'mirror-kernel-os',
-  slug: 'mirror-kernel-os',
-  title: 'Mirror Kernel OS',
-  subtitle: 'Revolutionizing Operating Systems with Modular Architecture',
+  id: 'a-simple-operating-system',
+  slug: 'a-simple-operating-system',
+  title: 'A Simple Operating System',
+  subtitle: 'BSOD and the need for a multi-layered kernel',
   image: '/images/articles/kernel-0.webp',
   imageCaption: 'Conceptual image of a modular microkernel architecture',
   pageViews: 0,
   type: 'article',
   description:
-    'An exploration of modular microkernel operating systems and their potential to transform computing landscapes.',
+    'This article explores the need for a multi-layered kernel operating system with context from the recent Crowdstrike BSOD incident.',
   content: '',
   author: 'Zachary Roth',
   date: 'Aug 2024',
@@ -30,7 +30,7 @@ const ModularMicrokernelOS: React.FC = () => {
         <p>
           I was fortunate enough to have scheduled my flight from SFO to MKE for July 19th, 2024. It
           was early and I didn't check the news so was not aware that the Blue Screen of Death
-          (BSOD) was coming. Luckily my flight was only delayed 2 hours but I felt for everyone who
+          (BSOD) was coming. Luckily my flight was only delayed 2 hours but I sympathized with everyone who
           had their flights delayed or cancelled before mine.
         </p>
         <p>
@@ -41,10 +41,10 @@ const ModularMicrokernelOS: React.FC = () => {
         <p>
           This happened to thousands of people across the country at the same time and it led to all
           relevant flights being booked for the next few days. it affected 8.5m computers running
-          crowdstrike by half of the top sp500 companies
+          Crowdstrike, a cybersecurity software used by half of the top S/P 500 companies.
         </p>
         <p>
-          Feeling SoL, I ended up diving into the teeny tiny error that caused this mess. It was a
+          Feeling SoL, I ended up diving into the teeny tiny error that caused this mess. Initial reports were that it was a
           single Crowdstrike file that accidentally created a null pointer. (video from twitter)
         </p>
         <p>
