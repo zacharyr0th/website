@@ -172,7 +172,7 @@ export default function BioSection() {
                 className="rounded-full aspect-square overflow-hidden w-12 h-12 md:w-16 md:h-16 logo-container"
                 initial={{ opacity: 0, scale: 0.5, rotate: -180 }}
                 animate={isLogoInView ? { opacity: 1, scale: 1, rotate: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.5, delay: index * 0.3 }}
                 whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(255, 255, 255, 0.3)' }}
                 whileTap={{ scale: 0.95 }}
               >

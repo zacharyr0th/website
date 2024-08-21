@@ -6,8 +6,8 @@
   margin-top: 3rem;
   font-size: 1.25rem;
   line-height: 1.75;
-  border-left: 4px solid rgba(255, 255, 255, 0.1); 
-  background-color: rgba(255, 255, 255, 0.05); 
+  border-left: 4px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.05);
   padding: 1.5rem;
   border-radius: 0.5rem;
   transition: all 0.3s ease;
@@ -18,7 +18,7 @@
   display: block;
   font-weight: bold;
   margin-bottom: 0.5rem;
-  color: rgba(255, 255, 255, 0.7); 
+  color: rgba(255, 255, 255, 0.7);
 }
 
 @media (max-width: 640px) {
@@ -90,5 +90,67 @@
 @media (max-width: 640px) {
   .footnotes {
     font-size: 0.8125rem;
+  }
+}
+
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 2.5rem 0;
+  background-color: rgba(18, 18, 18, 0.8);
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+thead,
+th:first-child,
+td:first-child {
+  background-color: rgba(30, 30, 30, 0.9);
+}
+
+th, td {
+  padding: 1.25rem 1.5rem;
+  text-align: left;
+}
+
+th {
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+td {
+  color: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Emphasize first column */
+th:first-child,
+td:first-child {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+@media (max-width: 640px) {
+  table {
+    font-size: 0.9rem;
+  }
+
+  th, td {
+    padding: 1rem 1.25rem;
   }
 }

@@ -125,9 +125,11 @@ const ResumePage = () => {
   return (
     <div className="home-container">
       {/* SubHeader */}
-      <header className={`py-6 mb-8 transition-opacity duration-500 ease-in ${
-        isVisible ? 'opacity-100' : 'opacity-0'
-      }`}>
+      <header
+        className={`py-6 mb-8 transition-opacity duration-500 ease-in ${
+          isVisible ? 'opacity-100' : 'opacity-0'
+        }`}
+      >
         <div className="container flex justify-between items-center">
           <h1 className="text-4xl font-bold">Resume</h1>
         </div>

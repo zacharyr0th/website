@@ -5,7 +5,8 @@ import { ReactElement } from 'react';
 import Link from 'next/link';
 import { FaChevronLeft, FaChevronRight, FaExternalLinkAlt } from 'react-icons/fa';
 import Image from 'next/image';
-import './writing.css'; // Adjust the path as necessary
+import './writing.css';
+import dynamic from 'next/dynamic';
 
 type Post = {
   slug: string;
@@ -83,7 +84,7 @@ export default async function WritingPage({ params }: { params: { slug: string }
       if (typeof content === 'string') {
         let isFirstParagraph = true;
         return content.replace(
-          /<(article|h[1-6]|p|ul|ol|li|blockquote|a)>([\s\S]*?)<\/\1>/g,
+          /<(article|h[1-6]|p|ul|ol|li|blockquote|a|github-embed|twitter-embed)>([\s\S]*?)<\/\1>/g,
           (match, tag, text) => {
             switch (tag) {
               case 'article':
@@ -122,6 +123,11 @@ export default async function WritingPage({ params }: { params: { slug: string }
                   (_: string, href: string, attrs: string, linkText: string) =>
                     `<a href="${href}" class="text-blue-400 hover:text-blue-300 underline" target="_blank" rel="noopener noreferrer"${attrs}>${linkText}</a>`
                 );
+              case 'github-embed':
+                const [owner, repo, path] = text.split('/');
+                return `<div class="my-4"><GitHubEmbed owner="${owner}" repo="${repo}" path="${path}" /></div>`;
+              case 'twitter-embed':
+                return `<div class="my-4"><TwitterEmbed tweetId="${text}" /></div>`;
               default:
                 return match;
             }
@@ -185,7 +191,17 @@ export default async function WritingPage({ params }: { params: { slug: string }
 
           <div className="prose prose-lg max-w-none prose-invert">
             {typeof formattedContent === 'string' ? (
-              <div dangerouslySetInnerHTML={{ __html: formattedContent }} />
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: formattedContent.replace(
+                    /<GitHubEmbed([^>]*)>/g,
+                    (_, props) => `<GitHubEmbed ${props} />`
+                  ).replace(
+                    /<TwitterEmbed([^>]*)>/g,
+                    (_, props) => `<TwitterEmbed ${props} />`
+                  ),
+                }}
+              />
             ) : (
               formattedContent
             )}
