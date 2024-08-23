@@ -111,7 +111,8 @@ td:first-child {
   background-color: rgba(30, 30, 30, 0.9);
 }
 
-th, td {
+th,
+td {
   padding: 1.25rem 1.5rem;
   text-align: left;
 }
@@ -150,7 +151,37 @@ tr:last-child td {
     font-size: 0.9rem;
   }
 
-  th, td {
+  th,
+  td {
     padding: 1rem 1.25rem;
   }
+}
+
+/* Link Styles */
+a {
+  color: #3498db;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #2980b9;
+}
+
+/* Article content link styles */
+.article-content a {
+  text-decoration: underline;
+}
+
+/* Footnote Link Styles */
+.footnote-ref,
+.footnote-backref {
+  color: #4a5568;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footnote-ref:hover,
+.footnote-backref:hover {
+  color: #2d3748;
 }

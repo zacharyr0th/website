@@ -2,16 +2,15 @@ import React from 'react';
 import { ContentItem } from '../../../lib/types';
 
 export const metadata: ContentItem = {
-  id: 'derivatives',
-  slug: 'derivatives',
-  title: 'Are Derivatives the Real Underlying Asset?',
-  subtitle: 'test',
+  id: 'derivative-vs-spot',
+  slug: 'derivative-vs-spot',
+  title: 'Derivatives vs Spot',
+  subtitle: 'Chicken and the egg',
   image: '/images/articles/derivatives-0.webp',
   imageCaption: 'test',
   pageViews: 0,
   type: 'article',
-  description:
-    "An in-depth exploration of how blockchain technology and cryptocurrencies are being adopted in Africa, discussing the potential benefits, challenges, and implications for the continent's economic future.",
+  description: "A high level overview of the difference between spot and derivative markets across crypto and equity markets",
   content: '',
   author: 'Zachary Roth',
   bookAuthor: '',

@@ -1,110 +1,131 @@
-import React from 'react';
-import Link from 'next/link';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
-import { motion } from 'framer-motion';
+import React, { useEffect } from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import { FaCode, FaMusic, FaPen, FaMicrochip, FaGraduationCap, FaRobot, FaServer, FaLock, FaDatabase, FaDesktop } from 'react-icons/fa';
 
-const featuredProjects = [
+const featuredItems = [
   {
-    id: 'zacharyroth',
-    name: 'zacharyr0th.com',
-    description:
-      'This website is an open-source portfolio built with Next.js, Tailwind CSS, and TypeScript.',
-    tags: ['Next.js', 'Tailwind', 'TypeScript'],
-    github: 'https://github.com/yourusername/zacharyroth-website',
-    liveLink: 'https://zacharyroth.com',
+    icon: <FaCode />,
+    title: 'Full-Stack Development',
+    description: 'React, Node.js, GraphQL, RESTful APIs',
+    color: 'from-[#E3F2FD] to-[#BBDEFB]',
   },
   {
-    id: 'musicide',
-    name: 'MusicIDE',
-    description:
-      'Integrated Development Environment for AI assisted music production with built in music theory tools',
-    tags: ['AI', 'Music', 'IDE'],
-    github: 'https://github.com/yourusername/musicide',
-    liveLink: 'https://musicide.app',
+    icon: <FaMusic />,
+    title: 'Music Technology',
+    description: 'AI-assisted composition and production',
+    color: 'from-[#BBDEFB] to-[#90CAF9]',
   },
   {
-    id: 'microkernel',
-    name: 'Multi Layered Kernel',
-    description:
-      'An experimental operating system built on a flexible, layered microkernel architecture',
-    tags: ['OS', 'C', 'Assembly'],
-    github: 'https://github.com/yourusername/microkernel-os',
+    icon: <FaPen />,
+    title: 'Technical Writing',
+    description: 'Documenting emerging technologies',
+    color: 'from-[#90CAF9] to-[#64B5F6]',
+  },
+  {
+    icon: <FaMicrochip />,
+    title: 'Low-Level Programming',
+    description: 'OS development, embedded systems',
+    color: 'from-[#64B5F6] to-[#42A5F5]',
+  },
+  {
+    icon: <FaGraduationCap />,
+    title: 'Continuous Learning',
+    description: 'AI, quantum computing, cybersecurity',
+    color: 'from-[#E3F2FD] to-[#BBDEFB]',
+  },
+  {
+    icon: <FaRobot />,
+    title: 'AI & Machine Learning',
+    description: 'Neural networks, NLP, computer vision',
+    color: 'from-[#BBDEFB] to-[#90CAF9]',
+  },
+  {
+    icon: <FaServer />,
+    title: 'DevOps & Cloud',
+    description: 'CI/CD, containerization, cloud platforms',
+    color: 'from-[#90CAF9] to-[#64B5F6]',
+  },
+  {
+    icon: <FaLock />,
+    title: 'Cybersecurity',
+    description: 'Penetration testing, encryption, secure coding',
+    color: 'from-[#64B5F6] to-[#42A5F5]',
+  },
+  {
+    icon: <FaDatabase />,
+    title: 'Database Management',
+    description: 'SQL, NoSQL, data modeling, optimization',
+    color: 'from-[#BBDEFB] to-[#90CAF9]',
+  },
+  {
+    icon: <FaDesktop />,
+    title: 'UI/UX Design',
+    description: 'Responsive, accessible, user-centered interfaces',
+    color: 'from-[#90CAF9] to-[#64B5F6]',
   },
 ];
 
-type Project = {
-  id: string;
-  name: string;
-  description: string;
-  tags: string[];
-  github?: string;
-  liveLink?: string;
-};
+interface FeaturedItemProps {
+  item: {
+    icon: React.ReactNode;
+    title: string;
+    description: string;
+    color: string;
+  };
+  index: number;
+  totalItems: number;
+}
 
-const FeaturedProjectCard = ({ project }: { project: Project }) => (
-  <motion.div
-    initial={{ opacity: 0, x: 20 }}
-    animate={{ opacity: 1, x: 0 }}
-    transition={{ duration: 0.5 }}
-    className="group relative overflow-hidden rounded-xl bg-gray-800/30 p-6 transition-all duration-300 hover:bg-gray-700/40 hover:shadow-lg hover:shadow-pastel-blue/20 flex flex-col md:flex-row"
-  >
-    <div className="absolute inset-0 bg-gradient-to-br from-pastel-blue/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-    <div className="md:w-2/5 p-6 flex flex-col justify-center relative z-10">
-      <h3 className="text-2xl font-bold text-gray-200 mb-2 group-hover:text-pastel-blue transition-colors duration-300">
-        {project.name}
-      </h3>
-      <p className="text-gray-300 mb-4">{project.description}</p>
-      <div className="flex flex-wrap gap-2 mb-4">
-        {project.tags.map((tag, index) => (
-          <span
-            key={index}
-            className="px-2 py-1 bg-gray-700/70 text-pastel-blue text-xs font-medium rounded-full"
-          >
-            {tag}
-          </span>
-        ))}
+const FeaturedItem: React.FC<FeaturedItemProps> = ({ item, index, totalItems }) => {
+  const controls = useAnimation();
+
+  useEffect(() => {
+    const animationDuration = 4; 
+    const totalDuration = totalItems * animationDuration;
+    const delay = index * animationDuration;
+
+    controls.start({
+      opacity: [0, 1, 1, 0],
+      scale: [0.8, 1, 1, 0.8],
+      transition: {
+        times: [0, 0.1, 0.9, 1],
+        duration: animationDuration,
+        repeat: Infinity,
+        repeatDelay: totalDuration - animationDuration,
+        delay: delay % totalDuration,
+      },
+    });
+  }, [controls, index, totalItems]);
+
+  return (
+    <motion.div
+      animate={controls}
+      className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 h-48 flex flex-col"
+    >
+      <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-90`} />
+      <div className="relative z-10 p-4 flex flex-col h-full">
+        <div className="text-2xl text-[#0A192F] mb-2">{item.icon}</div>
+        <h3 className="text-lg font-bold text-[#0A192F] mb-1">{item.title}</h3>
+        <p className="text-xs text-[#0A192F]/80 flex-grow overflow-hidden">{item.description}</p>
       </div>
-    </div>
-    <div className="md:w-3/5 bg-gray-30 p-6 flex flex-col justify-center relative z-10">
-      <div className="flex space-x-4 mb-4">
-        {project.github && (
-          <Link
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center text-gray-300 hover:text-pastel-blue transition-colors duration-300"
-          >
-            <FaGithub className="mr-2" />
-            <span>GitHub</span>
-          </Link>
-        )}
-        {project.liveLink && (
-          <Link
-            href={project.liveLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center text-gray-300 hover:text-pastel-blue transition-colors duration-300"
-          >
-            <FaExternalLinkAlt className="mr-2" />
-            <span>Live Demo</span>
-          </Link>
-        )}
-      </div>
-      <div className="text-gray-400">
-        This website is a fully open-source Portfolio/CV built with Next.js, Tailwind, and
-        TypeScript
-      </div>
-    </div>
-  </motion.div>
-);
+    </motion.div>
+  );
+};
 
 const FeaturedContent = () => {
   return (
-    <div className="p-8">
-      <div className="space-y-8">
-        {featuredProjects.slice(0, 1).map((project) => (
-          <FeaturedProjectCard key={project.id} project={project} />
-        ))}
+    <div className="px-4 py-6 bg-inherit">
+      <div className="max-w-4xl mx-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+          {featuredItems.map((item, index) => (
+            <FeaturedItem 
+              key={index} 
+              item={item} 
+              index={index} 
+              totalItems={featuredItems.length} 
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

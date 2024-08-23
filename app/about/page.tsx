@@ -52,7 +52,7 @@ const experiences: Experience[] = [
         period: 'May 2023 - Oct 2023',
         location: 'San Francisco, CA',
         description:
-          '• Managed relationships with DeFi projects building on Aptos\n�� Facilitated technical integrations and provided support to developers\n• Organized developer-focused events and hackathons to grow the Aptos ecosystem',
+          '• Managed relationships with DeFi projects building on Aptos\n Facilitated technical integrations and provided support to developers\n• Organized developer-focused events and hackathons to grow the Aptos ecosystem',
       },
     ],
   },
@@ -65,7 +65,7 @@ const experiences: Experience[] = [
         period: 'Feb 2021 - Nov 2022',
         location: 'Chicago, IL',
         description:
-          '• Led product strategy and managed technical documentation for innovative blockchain solutions\n• Bridged the gap between new users and blockchain wallets by conducting extensive user research',
+          '• Led product strategy and managed technical documentation for innovative blockchain solutions including a non-custodial fund management platform, on-chain trading competitions, deep links, on-chain notifications, and digital wallets.\n• Bridged the gap between new users and blockchain wallets by conducting extensive user research and collaborating with senior engineers to implement fixes that enhanced the onboarding and overall user experience.\n• Owned all user facing content funnels that catered to audiences across skill levels. Developed onboarding materials, technical articles, editorials, and a popular 14-part course on blockchain technology and the role of DeFi.',
       },
       {
         title: 'Technical Writer',
@@ -85,7 +85,7 @@ const experiences: Experience[] = [
         period: 'Jan 2018 - Dec 2021',
         location: 'Chicago, IL',
         description:
-          '• Played a pivotal role in capital raising initiatives for specialized private equity ventures\n• Enhanced investor relations through comprehensive monthly reports\n• Developed expertise in analyzing global regulatory landscapes, particularly in the crypto sector',
+          '• Played a pivotal role in capital raising initiatives, contributing to over $2 billion in funds raised for specialized private equity ventures. Focused on commodities and high-performing companies in Germany\'s Mittelstand market, demonstrating expertise in niche investment sectors and cross-border financial operations.\n• Enhanced investor relations across multiple firms through the creation of comprehensive monthly reports. Specialized in analyzing and communicating complex information on crypto and commodity investments, synthesizing data to provide actionable insights for stakeholders.\n• Developed a reputation for incisive analysis of global regulatory landscapes, particularly in the evolving crypto sector. Provided strategic guidance to help firms navigate complex international financial regulations, mitigating risks and identifying opportunities in rapidly changing markets.',
       },
     ],
   },
@@ -115,7 +115,7 @@ const skills: Skill[] = [
   },
 ];
 
-const ResumePage = () => {
+const AboutPage = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -131,7 +131,7 @@ const ResumePage = () => {
         }`}
       >
         <div className="container flex justify-between items-center">
-          <h1 className="text-4xl font-bold">Resume</h1>
+          <h1 className="text-4xl font-bold">About</h1>
         </div>
       </header>
 
@@ -219,4 +219,4 @@ const ResumePage = () => {
   );
 };
 
-export default ResumePage;
+export default AboutPage;

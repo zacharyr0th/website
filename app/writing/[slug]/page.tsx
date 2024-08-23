@@ -193,13 +193,9 @@ export default async function WritingPage({ params }: { params: { slug: string }
             {typeof formattedContent === 'string' ? (
               <div
                 dangerouslySetInnerHTML={{
-                  __html: formattedContent.replace(
-                    /<GitHubEmbed([^>]*)>/g,
-                    (_, props) => `<GitHubEmbed ${props} />`
-                  ).replace(
-                    /<TwitterEmbed([^>]*)>/g,
-                    (_, props) => `<TwitterEmbed ${props} />`
-                  ),
+                  __html: formattedContent
+                    .replace(/<GitHubEmbed([^>]*)>/g, (_, props) => `<GitHubEmbed ${props} />`)
+                    .replace(/<TwitterEmbed([^>]*)>/g, (_, props) => `<TwitterEmbed ${props} />`),
                 }}
               />
             ) : (

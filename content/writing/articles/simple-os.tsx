@@ -15,8 +15,8 @@ export const metadata: ContentItem = {
   content: '',
   author: 'Zachary Roth',
   date: 'Aug 2024',
-  tags: ['Technology'],
-  readTime: 10,
+  tags: ['Technology', 'Kernels'],
+  readTime: 5,
   likes: 0,
   comments: 0,
   shares: 0,
@@ -27,23 +27,38 @@ const ModularMicrokernelOS: React.FC = () => {
   return (
     <article>
       <section>
-        <img src="/images/articles/kernel-0.webp" alt="Bing" className="article-image" />
-        <p>A software update crashed millions of computers on July 19, 2024, causing widespread flight cancellations. This incident highlighted the risks of applications requesting kernel-level access, prompting an exploration of different kernel types and potential safeguards against similar future disruptions.</p>
+        <img src="/images/articles/simpleos-2.webp" alt="" className="article-image" />
         <p>
-          I was fortunate enough to have booked my flight from SFO to MKE on July 19, 2024, unaware that the Blue Screen of Death (BSOD) was about to hit. My flight was only delayed by two hours, but I felt for those whose journeys were more severely disrupted.
+          A software update crashed millions of computers on July 19, 2024, causing widespread
+          flight cancellations. I was fortunate enough to have booked my flight on this day, and while I 
+          was waiting in the terminal, I started to think about kernels.
         </p>
         <p>
-          That sympathy was gone when, four hours before my return flight a few days later, Delta notified me that it was canceled. Thousands across the country received similar messages, leading to all relevant flights being booked for days. The cause was a widespread failure that affected 8.5 million Windows computers running CrowdStrike, a cybersecurity software that half of the top S&P 500 companies used.
+          My flight was only delayed by two hours, but I felt for those whose journeys were more 
+          severely disrupted. That sympathy was gone when Delta notified me four hours before my return flight a few days 
+          later that they had canceled it. Thousands across the country received similar messages,
+          leading people to book all relevant flights for days. The cause was a widespread failure
+          that affected 8.5 million Windows computers running CrowdStrike, a cybersecurity software
+          that half of the top S&P 500 companies use.
         </p>
         <h2>The Incident</h2>
         <p>
-          At 04:09 UTC on July 19, CrowdStrike released an update for its Falcon sensor software on Windows systems. A defect in this update caused these systems to crash, triggering the infamous BSOD or boot loop.
+          At 04:09 UTC on July 19, CrowdStrike released an update for its Falcon sensor software on
+          Windows systems. A defect in this update caused these systems to crash, triggering the
+          infamous BSOD or boot loop.
         </p>
         <p>
-          The root cause was a problematic modification to a configuration file, Channel File 291, which handles screening named pipes. This led to an out-of-bounds memory read, causing an invalid page fault. Channel File 291 was designed to manage named pipes, a feature often used by malware for communication. The file caused a kernel-level crash, simultaneously bringing down millions of systems.
+          The root cause was a problematic modification to a configuration file, Channel File 291,
+          which handles screening named pipes. This led to an out-of-bounds memory read, causing an
+          invalid page fault - aka - the program tried to access memory it shouldn't, causing a crash
+          and bringing down millions of systems.
         </p>
         <p>
-          Like many security products, CrowdStrike's Falcon sensor operates at the kernel level to provide comprehensive protection. This deep integration also means issues with Falcon can have catastrophic effects on the entire operating system. The trend with many new applications is to request kernel level access At the same time which got me thinking about the variations of kernels out there and what could be done to prevent this from happening again.
+          Like many security products, CrowdStrike's Falcon sensor operates at the kernel level to
+          provide protection. This introduces the risk of an application crashing the entire system and
+          when that happened with Falcon, and I was waiting at my gate, I started thinking 
+          about the variations of kernels out there and what could be done to prevent this from
+          happening again.
         </p>
       </section>
       <section>
@@ -93,25 +108,44 @@ const ModularMicrokernelOS: React.FC = () => {
       <section>
         <h2>Multi-Tier Kernels</h2>
         <p>
-          While there are modular microkernels, I wondered why there wasn't a kernel with a multi-tier structure or authentication scheme. This aims to create a more granular approach to kernel access, potentially mitigating the risks associated with kernel-level vulnerabilities.
-        </p>
-        <p>
-          A multi-tier kernel could operate on the principle of least privilege, with different levels of kernel access for various types of software. 
+          A multi-tier kernel in theory could prevent higher level applications from accessing the kernel access for various types of software.
         </p>
         <ul>
           <li>Core OS functions might operate at the lowest, most privileged level.</li>
-          <li>Essential drivers and security software could run slightly higher, with more restricted access.</li>
-          <li>Application-level software would operate at even higher levels with minimal kernel access.</li>
+          <li>
+            Essential drivers and security software could run slightly higher, with more restricted
+            access.
+          </li>
+          <li>
+            Application-level software would operate at even higher levels with minimal kernel
+            access.
+          </li>
         </ul>
         <p>
-          This tiered approach could help contain the impact of vulnerabilities or bugs in any single component. If an issue occurs in a higher-level tier, it would be less likely to bring down the entire system or affect core OS functions.
+          As I began researching this idea, I came across this <a href="https://faculty.nps.edu/irvine/Publications/Publications2006/NPS-CS-06-001_Analysis3KernelArchi.pdf">paper</a> which discusses 
+          three different multilevel security kernel architectures. The authors conclude that the choice between these architectures depends on the specific requirements of a given system or deployment scenario. In any case,
+          the goas is to prevent a single issue from bringing down the entire system or affecting core OS functions. 
         </p>
         <p>
-          A multi-tier kernel would be inherently more complex than most other kernel architectures and requires significant battle testing before any statements can be made about its security. 
+          This multi-tier approach could be used to implement a least privilege architecture, which may have limited the impact of a vulnerability or bug in Falcon's Channel File 291.
         </p>
+      </section>
+      <section>
+        <h2>SimpleOS: A Prototype Implementation</h2>
         <p>
-          The ultimate aim of this research is not to replace existing kernel architectures but to explore innovative approaches that could inform the next generation of operating system design. Conceptualizing a multi-tier kernel architecture opens up interesting avenues for research and experimentation in operating system design. With the help of AI, I've decided to explore this as a medium to gain a deeper understanding of the limitations of existing kernel architectures in production environments and to prototype a multi-tier permission kernel.
+          After learning so much about kernels, I decided to prototype one. There is not much to it, but it will be a continuous project. To start, it features the following:
         </p>
+        <ul>
+          <li>Monolithic kernel design</li>
+          <li>Interrupt handling system with custom handler support</li>
+          <li>Memory management with paging and simple heap allocation</li>
+          <li>Basic multitasking using round-robin scheduling</li>
+          <li>Essential x86 structures (GDT, IDT) and initialization</li>
+        </ul>
+        <p>
+          The first iteration can be found here: <a href="https://github.com/zacharyr0th/SimpleOS">SimpleOS</a>. 
+        </p>
+        <img src="/images/articles/simpleos-1.webp" alt="" className="article-image" />
       </section>
     </article>
   );
