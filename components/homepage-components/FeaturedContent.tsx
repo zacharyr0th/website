@@ -1,6 +1,17 @@
 import React, { useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
-import { FaCode, FaMusic, FaPen, FaMicrochip, FaGraduationCap, FaRobot, FaServer, FaLock, FaDatabase, FaDesktop } from 'react-icons/fa';
+import {
+  FaCode,
+  FaMusic,
+  FaPen,
+  FaMicrochip,
+  FaGraduationCap,
+  FaRobot,
+  FaServer,
+  FaLock,
+  FaDatabase,
+  FaDesktop,
+} from 'react-icons/fa';
 
 const featuredItems = [
   {
@@ -80,7 +91,7 @@ const FeaturedItem: React.FC<FeaturedItemProps> = ({ item, index, totalItems }) 
   const controls = useAnimation();
 
   useEffect(() => {
-    const animationDuration = 4; 
+    const animationDuration = 4;
     const totalDuration = totalItems * animationDuration;
     const delay = index * animationDuration;
 
@@ -118,12 +129,7 @@ const FeaturedContent = () => {
       <div className="max-w-4xl mx-auto">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
           {featuredItems.map((item, index) => (
-            <FeaturedItem 
-              key={index} 
-              item={item} 
-              index={index} 
-              totalItems={featuredItems.length} 
-            />
+            <FeaturedItem key={index} item={item} index={index} totalItems={featuredItems.length} />
           ))}
         </div>
       </div>

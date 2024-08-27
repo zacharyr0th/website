@@ -10,7 +10,8 @@ export const metadata: ContentItem = {
   imageCaption: 'test',
   pageViews: 0,
   type: 'article',
-  description: "A high level overview of the difference between spot and derivative markets across crypto and equity markets",
+  description:
+    'A high level overview of the difference between spot and derivative markets across crypto and equity markets',
   content: '',
   author: 'Zachary Roth',
   bookAuthor: '',
