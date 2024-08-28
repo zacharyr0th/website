@@ -52,7 +52,7 @@ const FundamentalFlaw: React.FC = () => {
           <a href="https://www.foxbusiness.com/markets/sec-chairman-gary-gensler-met-with-head-ftx-months-before-collapse">
             FTX's
           </a>
-          collapse because he was too busy fining Kim Kardashian for an 
+          collapse because he was too busy fining Kim Kardashian for an
           <a href="https://www.vox.com/recode/2022/10/3/23384955/kim-kardashian-crypto-ethereum-max-emax-sec">
             Instagram post
           </a>
@@ -64,19 +64,19 @@ const FundamentalFlaw: React.FC = () => {
         </p>
         <p>
           Kim reportedly earned only a few hundred thousand dollars from that post, yet faced a
-          $1.26 million fine, which was later 
+          $1.26 million fine, which was later
           <a href="https://decrypt.co/116734/kim-kardashian-floyd-mayweather-ethereummax-lawsuit-dismissed">
             rescinded
           </a>
           . She regularly makes a million
           <a href="https://www.instyle.com/kim-kardashian-north-west-cher-dionne-clueless-halloween-8385018">
             per post
-          </a> 
+          </a>
           for other endorsements, so it was a questionable display by the SEC. Gary Gensler then
-          bragged about it on his 
+          bragged about it on his
           <a href="https://x.com/GaryGensler/status/1576897535427448832?lang=en">Twitter</a>, and
           only a few months later, Sam Bankman Fried checked off the box on a document, declaring
-          that FTX's bankruptcy was in the ballpark of $10 - $50 
+          that FTX's bankruptcy was in the ballpark of $10 - $50
           <a href="https://www.pymnts.com/cryptocurrency/2022/ftx-us-and-alameda-research-each-have-liabilities-of-10b-to-50b/">
             billion
           </a>
@@ -136,7 +136,6 @@ const FundamentalFlaw: React.FC = () => {
           and everyone walks hand-in-hand down the yellow-brick road together.
         </p>
         <p>
-           
           Many things can go wrong during the above process, even if everything goes right on-chain.
           The on-chain capital is almost unreal unless you're spending out of your blockchain
           account (not possible for most purchases yet) or the value it represents is in your bank
@@ -145,7 +144,7 @@ const FundamentalFlaw: React.FC = () => {
           most people.
         </p>
       </section>
-            
+
       <section>
         <h2>Censorship</h2>
         <p>
@@ -222,13 +221,17 @@ const FundamentalFlaw: React.FC = () => {
         <p>
           Governments are the hardest to convince and many see it as a problem. It's difficult to
           imagine a world where governments want their "users" to access censorship-resistant,
-          global, permissionless markets. They probably wish to have everyone use <a href="https://www.investopedia.com/terms/c/central-bank-digital-currency-cbdc.asp">CBDCs</a>, and I
-          suspect they will begin banning blockchain activity once they understand it to be a trojan
-          horse that removes their power. Non-technical people see blockchains as a confusing and
-          largely unnecessary thing killing the planet because they don't know the difference
-          between PoS and PoW. No matter the public and policy sentiment, persuading anti-blockchain
-          people (no-coiners) is easier done when the listener is technical. Telling them that its a
-          distributed database with only read and write properties usually gets their gears going.
+          global, permissionless markets. They probably wish to have everyone use{' '}
+          <a href="https://www.investopedia.com/terms/c/central-bank-digital-currency-cbdc.asp">
+            CBDCs
+          </a>
+          , and I suspect they will begin banning blockchain activity once they understand it to be
+          a trojan horse that removes their power. Non-technical people see blockchains as a
+          confusing and largely unnecessary thing killing the planet because they don't know the
+          difference between PoS and PoW. No matter the public and policy sentiment, persuading
+          anti-blockchain people (no-coiners) is easier done when the listener is technical. Telling
+          them that its a distributed database with only read and write properties usually gets
+          their gears going.
         </p>
         <p>
           Technical people either see its value, don't see it (usually due to not understanding the
