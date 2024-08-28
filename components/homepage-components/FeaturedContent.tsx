@@ -1,135 +1,49 @@
-import React, { useEffect } from 'react';
-import { motion, useAnimation } from 'framer-motion';
-import {
-  FaCode,
-  FaMusic,
-  FaPen,
-  FaMicrochip,
-  FaGraduationCap,
-  FaRobot,
-  FaServer,
-  FaLock,
-  FaDatabase,
-  FaDesktop,
-} from 'react-icons/fa';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { FaCode, FaMusic, FaPen } from 'react-icons/fa';
 
-const featuredItems = [
-  {
-    icon: <FaCode />,
-    title: 'Full-Stack Development',
-    description: 'React, Node.js, GraphQL, RESTful APIs',
-    color: 'from-[#E3F2FD] to-[#BBDEFB]',
-  },
-  {
-    icon: <FaMusic />,
-    title: 'Music Technology',
-    description: 'AI-assisted composition and production',
-    color: 'from-[#BBDEFB] to-[#90CAF9]',
-  },
-  {
-    icon: <FaPen />,
-    title: 'Technical Writing',
-    description: 'Documenting emerging technologies',
-    color: 'from-[#90CAF9] to-[#64B5F6]',
-  },
-  {
-    icon: <FaMicrochip />,
-    title: 'Low-Level Programming',
-    description: 'OS development, embedded systems',
-    color: 'from-[#64B5F6] to-[#42A5F5]',
-  },
-  {
-    icon: <FaGraduationCap />,
-    title: 'Continuous Learning',
-    description: 'AI, quantum computing, cybersecurity',
-    color: 'from-[#E3F2FD] to-[#BBDEFB]',
-  },
-  {
-    icon: <FaRobot />,
-    title: 'AI & Machine Learning',
-    description: 'Neural networks, NLP, computer vision',
-    color: 'from-[#BBDEFB] to-[#90CAF9]',
-  },
-  {
-    icon: <FaServer />,
-    title: 'DevOps & Cloud',
-    description: 'CI/CD, containerization, cloud platforms',
-    color: 'from-[#90CAF9] to-[#64B5F6]',
-  },
-  {
-    icon: <FaLock />,
-    title: 'Cybersecurity',
-    description: 'Penetration testing, encryption, secure coding',
-    color: 'from-[#64B5F6] to-[#42A5F5]',
-  },
-  {
-    icon: <FaDatabase />,
-    title: 'Database Management',
-    description: 'SQL, NoSQL, data modeling, optimization',
-    color: 'from-[#BBDEFB] to-[#90CAF9]',
-  },
-  {
-    icon: <FaDesktop />,
-    title: 'UI/UX Design',
-    description: 'Responsive, accessible, user-centered interfaces',
-    color: 'from-[#90CAF9] to-[#64B5F6]',
-  },
-];
-
-interface FeaturedItemProps {
-  item: {
-    icon: React.ReactNode;
-    title: string;
-    description: string;
-    color: string;
-  };
-  index: number;
-  totalItems: number;
+interface FeaturedItem {
+  title: string;
+  description: string;
+  icon: React.ElementType;
 }
 
-const FeaturedItem: React.FC<FeaturedItemProps> = ({ item, index, totalItems }) => {
-  const controls = useAnimation();
+const featuredItems: FeaturedItem[] = [
+  {
+    title: 'Full-Stack Development',
+    description: 'React, Node.js, GraphQL, RESTful APIs',
+    icon: FaCode,
+  },
+  {
+    title: 'Music Technology',
+    description: 'AI-assisted composition and production',
+    icon: FaMusic,
+  },
+  { title: 'Technical Writing', description: 'Documenting emerging technologies', icon: FaPen },
+];
 
-  useEffect(() => {
-    const animationDuration = 4;
-    const totalDuration = totalItems * animationDuration;
-    const delay = index * animationDuration;
-
-    controls.start({
-      opacity: [0, 1, 1, 0],
-      scale: [0.8, 1, 1, 0.8],
-      transition: {
-        times: [0, 0.1, 0.9, 1],
-        duration: animationDuration,
-        repeat: Infinity,
-        repeatDelay: totalDuration - animationDuration,
-        delay: delay % totalDuration,
-      },
-    });
-  }, [controls, index, totalItems]);
-
+const FeaturedContent: React.FC = () => {
   return (
-    <motion.div
-      animate={controls}
-      className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 h-48 flex flex-col"
-    >
-      <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-90`} />
-      <div className="relative z-10 p-4 flex flex-col h-full">
-        <div className="text-2xl text-[#0A192F] mb-2">{item.icon}</div>
-        <h3 className="text-lg font-bold text-[#0A192F] mb-1">{item.title}</h3>
-        <p className="text-xs text-[#0A192F]/80 flex-grow overflow-hidden">{item.description}</p>
-      </div>
-    </motion.div>
-  );
-};
-
-const FeaturedContent = () => {
-  return (
-    <div className="px-4 py-6 bg-inherit">
+    <div className="px-4 py-6">
       <div className="max-w-4xl mx-auto">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-items-center">
           {featuredItems.map((item, index) => (
-            <FeaturedItem key={index} item={item} index={index} totalItems={featuredItems.length} />
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="group relative overflow-hidden rounded-lg bg-gray-800/30 p-6 transition-all duration-300 hover:bg-gray-700/40 hover:shadow-lg hover:shadow-pastel-blue/20 flex flex-col h-full w-full"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-pastel-blue/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="flex items-center mb-4">
+                <item.icon className="text-2xl mr-3 text-blue-400" />
+                <h3 className="text-lg font-semibold">{item.title}</h3>
+              </div>
+              <p className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                {item.description}
+              </p>
+            </motion.div>
           ))}
         </div>
       </div>

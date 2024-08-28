@@ -1,77 +1,97 @@
 // Server Component: ProfileSection
 
+import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { motion, useInView } from 'framer-motion';
+
+const logos = [
+  '/images/logos/aptos-logo.webp',
+  '/images/logos/solana-logo.webp',
+  '/images/logos/ethereum-logo.webp',
+];
 
 export default function ProfileSection() {
+  const logoRef = React.useRef(null);
+  const isLogoInView = useInView(logoRef, { once: true, amount: 0.5 });
+
   return (
-    <div className="text-center pt-8">
-      <div className="profile-picture">
-        <Image
-          src="/profile-picture.webp"
-          alt="Zachary Roth"
-          width={256}
-          height={256}
-          className="object-cover profile-image"
-          priority
-        />
+    <div className="profile-section">
+      <div className="profile-info">
+        <div className="profile-text">
+          <div className="profile-photo-container">
+            <Image
+              src="/profile-picture.webp"
+              alt="Zachary Roth"
+              width={240}
+              height={240}
+              className="profile-photo"
+            />
+          </div>
+          <h2 className="profile-name">Zachary Roth</h2>
+          <h3 className="profile-subtitle">Technologist • Writer • Musician</h3>
+          <p className="profile-description">
+            Head of Growth for DeFi and AI at
+            <a
+              href="https://aptoslabs.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-pastel-blue hover:underline font-semibold ml-1"
+            >
+              Aptos Labs
+            </a>
+          </p>
+        </div>
       </div>
 
-      <h1 className="profile-name">Zachary Roth</h1>
-      <p className="profile-title">Technologist, Writer, Musician</p>
-
       <style jsx>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
+        .profile-section {
+          display: flex;
+          flex-direction: column;
+          padding: 2rem;
+          color: #d1d5db;
         }
-
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+        .profile-info {
+          display: flex;
+          justify-content: center;
+          margin-top: 2rem;
+          border-radius: 1rem;
+          padding: 0rem;
         }
-
-        .profile-picture {
-          animation: fadeIn 2s ease-out;
+        .profile-text {
+          max-width: 600px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-top: 4rem;
         }
-
-        .profile-name,
-        .profile-title {
-          animation: fadeInUp 1.5s ease-out;
-          opacity: 0;
-          animation-fill-mode: forwards;
+        .profile-photo-container {
+          width: 150px;
+          height: 150px;
+          border-radius: 50%;
+          overflow: hidden;
+          margin-bottom: 1.5rem;
         }
-
+        .profile-photo {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
         .profile-name {
-          animation-delay: 0.5s;
+          font-size: 2.5rem;
+          margin-bottom: 0.5rem;
+          text-align: center;
         }
-
-        .profile-title {
-          animation-delay: 1s;
+        .profile-subtitle {
+          font-size: 1.15rem;
+          margin: 1rem;
+          text-align: center;
+          color: #9ca3af;
         }
-
-        .profile-image {
-          animation: scaleIn 1.5s ease-out;
-        }
-
-        @keyframes scaleIn {
-          from {
-            opacity: 0;
-            transform: scale(0.8);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
+        .profile-description {
+          font-size: 1rem;
+          line-height: 1.5;
+          text-align: center;
         }
       `}</style>
     </div>

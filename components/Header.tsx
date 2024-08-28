@@ -64,8 +64,8 @@ const Header = () => {
                 <Image
                   src="/profile-picture.webp"
                   alt="Zachary Roth"
-                  width={32}
-                  height={32}
+                  width={32}  
+                  height={32} 
                   className="rounded-full"
                   priority
                 />
@@ -77,7 +77,7 @@ const Header = () => {
           <div className="relative group">
             <button
               onClick={toggleMedia}
-              className={`text-gray-200 transition-all duration-300 focus:outline-none ${
+              className={`text-gray-200 transition-all duration-300 focus:outline-none text-lg ${
                 isMediaOpen ? 'text-gray-500' : 'group-hover:text-gray-500 group-hover:scale-105'
               }`}
             >
@@ -92,7 +92,7 @@ const Header = () => {
                   <Link
                     key={href}
                     href={href}
-                    className="block py-2 pr-20 pl-0 text-gray-200 transition-all duration-300 focus:outline-none text-left whitespace-nowrap m-1"
+                    className="block py-2 pr-20 pl-0 text-gray-200 transition-all duration-300 focus:outline-none text-left whitespace-nowrap m-1 text-lg"
                     onClick={() => setIsMediaOpen(false)}
                   >
                     <span className="hover:text-gray-500 hover:scale-105 inline-block transition-all duration-300">
@@ -104,12 +104,12 @@ const Header = () => {
             )}
           </div>
 
-          {/* Writing/Research Links */}
+          {/* Main Page Links */}
           {['writing', 'about'].map((item) => (
             <Link
               key={item}
               href={`/${item}`}
-              className={`text-gray-200 transition-all duration-300 focus:outline-none ${
+              className={`text-gray-200 transition-all duration-300 focus:outline-none text-lg ${
                 pathname === `/${item}`
                   ? 'text-gray-500'
                   : 'hover:text-gray-500 hover:transform hover:scale-105'
@@ -139,7 +139,7 @@ const Header = () => {
               aria-label={label}
               className="text-gray-200 transition-transform duration-300 focus:outline-none hover:transform hover:scale-110 hover:text-gray-300"
             >
-              <Icon size={24} />
+              <Icon size={24} /> 
             </Link>
           ))}
         </div>

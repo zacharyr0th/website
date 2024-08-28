@@ -11,31 +11,46 @@ interface Content {
   slug: string;
   title: string;
   image?: string;
-  type: 'article' | 'review' | 'interview' | 'sheet-music';
+  type: 'article' | 'review' | 'interview';
 }
 
 interface WritingPageClientProps {
-  contentType?: 'article' | 'review' | 'interview' | 'sheet-music';
+  contentType?: 'article' | 'review' | 'interview';
   allContent: Content[];
 }
 
 const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allContent }) => {
   const [mounted, setMounted] = useState(false);
   const [currentArticleIndex, setCurrentArticleIndex] = useState(0);
-  const [randomizedContent, setRandomizedContent] = useState<Content[]>([]);
+  const [randomArticles, setRandomArticles] = useState<Content[]>([]);
 
   useEffect(() => {
     setMounted(true);
-    // Filter out audio content and randomize the remaining writing content
-    const writingContent = allContent.filter((content) => content.type !== 'sheet-music');
-    setRandomizedContent([...writingContent].sort(() => Math.random() - 0.5));
-  }, [allContent]);
+    refreshRandomArticles();
+  }, [allContent, contentType]);
+
+  const refreshRandomArticles = () => {
+    const contentArray = Array.isArray(allContent) ? allContent : [];
+    const featuredArticles = contentArray.slice(0, 3);
+    
+    const filteredContent = contentArray.filter((content) => {
+      // Exclude featured articles
+      if (featuredArticles.some(featured => featured.id === content.id)) return false;
+      
+      // Filter based on contentType if it's specified
+      if (contentType && content.type !== contentType) return false;
+      
+      return true;
+    });
+
+    const shuffled = [...filteredContent].sort(() => Math.random() - 0.5);
+    setRandomArticles(shuffled.slice(0, 5));
+  };
 
   // Ensure allContent is an array
   const contentArray = Array.isArray(allContent) ? allContent : [];
 
   const featuredArticles = contentArray.slice(0, 3);
-  const allRandomizedContent = mounted ? randomizedContent : contentArray;
 
   const categoryDescriptions: Record<string, string> = {
     Articles: 'Articles',
@@ -114,7 +129,7 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
                 <li key={item}>
                   <Link
                     href={`/writing?type=${item.toLowerCase().slice(0, -1)}`}
-                    className={`text-gray-200 transition-all duration-300 focus:outline-none ${
+                    className={`text-gray-200 text-lg transition-all duration-300 focus:outline-none ${
                       contentType === item.toLowerCase().slice(0, -1)
                         ? 'text-gray-500'
                         : 'hover:text-gray-500'
@@ -130,10 +145,10 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
       </header>
 
       {/* Main content */}
-      <main className="container">
-        {/* Featured Articles Section */}
-        <div className="flex flex-col lg:flex-row gap-4">
-          <section className="w-full lg:w-2/3">
+      <main className="container mb-8">
+        <div className="grid grid-cols-3 gap-6">
+          {/* Featured Articles Section */}
+          <section className="col-span-2">
             <div className="relative h-[calc(3*100px+3rem)] rounded-lg overflow-hidden">
               <ArticleCard article={featuredArticles[currentArticleIndex]} />
               <button
@@ -152,13 +167,23 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
           </section>
 
           {/* Random Section */}
-          <aside className="w-full lg:w-1/3">
+          <aside className="col-span-1">
             <div className="bg-[#1a1a1a] p-4 rounded-lg shadow-lg h-[calc(3*100px+3rem)] flex flex-col">
-              <h2 className="text-xl font-bold mb-3">Random</h2>
-              <div className="overflow-y-auto flex-grow popular-articles hover-scroll">
-                {allRandomizedContent.length > 0 ? (
-                  <ul className="space-y-3 pr-2">
-                    {allRandomizedContent.map((content, index) => (
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-2xl font-bold">Random</h2>
+                <button
+                  onClick={refreshRandomArticles}
+                  className="text-white hover:text-gray-300 transition-colors duration-300"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd" />
+                  </svg>
+                </button>
+              </div>
+              <div className="overflow-y-auto flex-grow no-scrollbar">
+                {randomArticles.length > 0 ? (
+                  <ul className="space-y-4">
+                    {randomArticles.map((content, index) => (
                       <li
                         key={index}
                         className="bg-[#242424] hover:bg-[#2a2a2a] transition-all duration-300 rounded-lg overflow-hidden shadow-md h-[100px]"
@@ -208,19 +233,37 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
       </main>
 
       {/* Archives */}
-      <section className="container my-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {['Articles', 'Reviews', 'Interviews'].map((category) => (
+      <section className="container">
+        <div className="grid grid-cols-3 gap-6">
+          {[
+            {
+              title: 'Articles',
+              description: 'Tech & Finance',
+              link: '/writing/articles'
+            },
+            {
+              title: 'Reviews',
+              description: 'Books & Products',
+              link: '/writing/reviews'
+            },
+            {
+              title: 'Interviews',
+              description: 'Founders & Builders',
+              link: '/writing/interviews'
+            }
+          ].map((category) => (
             <Link
-              key={category}
-              href={`/writing/${category.toLowerCase()}`}
-              className="block bg-[#1a1a1a] p-6 rounded-lg shadow-lg hover:bg-[#242424] transition-all duration-300 group"
+              key={category.title}
+              href={category.link}
+              className="bg-[#1a1a1a] p-6 rounded-lg shadow-lg hover:bg-[#242424] transition-all duration-300 group h-full flex flex-col justify-between"
             >
-              <h3 className="text-xl font-semibold mb-4 group-hover:text-blue-400 transition-colors duration-300">
-                {category}
-              </h3>
-              <p className="text-gray-400 mb-4">{categoryDescriptions[category]}</p>
-              <div className="text-blue-400 inline-flex items-center group-hover:underline">
+              <div>
+                <h3 className="text-2xl font-bold mb-2 group-hover:text-blue-400 transition-colors duration-300">
+                  {category.title}
+                </h3>
+                <p className="text-gray-400 text-lg">{category.description}</p>
+              </div>
+              <div className="text-blue-400 inline-flex items-center group-hover:underline mt-4">
                 View All
                 <svg
                   className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1"
@@ -241,6 +284,17 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
           ))}
         </div>
       </section>
+
+      <style jsx>{`
+        .no-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+
+        .no-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </motion.div>
   );
 };

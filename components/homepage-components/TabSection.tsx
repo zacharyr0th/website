@@ -16,7 +16,7 @@ const BioSection = dynamic(() => import('./BioSection'), {
 });
 
 export default function TabSection() {
-  const [activeTab, setActiveTab] = useState('about');
+  const [activeTab, setActiveTab] = useState('projects');
 
   return (
     <div className="tab-section">
