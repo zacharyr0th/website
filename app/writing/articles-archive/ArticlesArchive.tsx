@@ -18,11 +18,12 @@ export default function ArticlesArchive({ initialArticles }: ArticlesArchiveProp
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const filteredArticles = useMemo(() => {
+    const searchRegex = new RegExp(searchTerm.split('').join('.*'), 'i');
     return articles.filter(
       (article) =>
-        article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        article.tags?.some((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase())) ||
-        article.bookAuthor?.toLowerCase().includes(searchTerm.toLowerCase())
+        searchRegex.test(article.title) ||
+        article.tags?.some((tag) => searchRegex.test(tag)) ||
+        (article.bookAuthor && searchRegex.test(article.bookAuthor))
     );
   }, [articles, searchTerm]);
 

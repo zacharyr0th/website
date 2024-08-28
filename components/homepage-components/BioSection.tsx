@@ -17,8 +17,6 @@ export default function BioSection() {
   );
 }
 
-
-
 function AboutSection() {
   return (
     <motion.div 
@@ -35,6 +33,26 @@ function AboutSection() {
     </motion.div>
   );
 }
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.3,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5 },
+  },
+};
 
 function ExperienceHighlights() {
   const highlights = [
@@ -53,13 +71,16 @@ function ExperienceHighlights() {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+    <motion.div
+      className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
       {highlights.map((highlight, index) => (
         <motion.div
           key={index}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: index * 0.1 }}
+          variants={itemVariants}
           className="group bg-gray-800/30 rounded-lg p-6 hover:bg-gray-700/40 transition-all duration-300"
         >
           <h3 className="text-xl font-semibold mb-3 text-white">{highlight.title}</h3>
@@ -68,7 +89,7 @@ function ExperienceHighlights() {
           </p>
         </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 }
 
