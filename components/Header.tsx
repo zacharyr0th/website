@@ -64,8 +64,8 @@ const Header = () => {
                 <Image
                   src="/profile-picture.webp"
                   alt="Zachary Roth"
-                  width={32}  
-                  height={32} 
+                  width={32}
+                  height={32}
                   className="rounded-full"
                   priority
                 />
@@ -139,7 +139,7 @@ const Header = () => {
               aria-label={label}
               className="text-gray-200 transition-transform duration-300 focus:outline-none hover:transform hover:scale-110 hover:text-gray-300"
             >
-              <Icon size={24} /> 
+              <Icon size={24} />
             </Link>
           ))}
         </div>

@@ -11,11 +11,11 @@ interface Content {
   slug: string;
   title: string;
   image?: string;
-  type: 'article' | 'review' | 'interview';
+  type: 'article' | 'review' | 'interview' | 'sheet-music';
 }
 
 interface WritingPageClientProps {
-  contentType?: 'article' | 'review' | 'interview';
+  contentType?: 'article' | 'review' | 'interview' | 'sheet-music';
   allContent: Content[];
 }
 
@@ -24,28 +24,28 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
   const [currentArticleIndex, setCurrentArticleIndex] = useState(0);
   const [randomArticles, setRandomArticles] = useState<Content[]>([]);
 
-  useEffect(() => {
-    setMounted(true);
-    refreshRandomArticles();
-  }, [allContent, contentType]);
-
-  const refreshRandomArticles = () => {
+  const refreshRandomArticles = React.useCallback(() => {
     const contentArray = Array.isArray(allContent) ? allContent : [];
     const featuredArticles = contentArray.slice(0, 3);
-    
+
     const filteredContent = contentArray.filter((content) => {
       // Exclude featured articles
-      if (featuredArticles.some(featured => featured.id === content.id)) return false;
-      
+      if (featuredArticles.some((featured) => featured.id === content.id)) return false;
+
       // Filter based on contentType if it's specified
       if (contentType && content.type !== contentType) return false;
-      
+
       return true;
     });
 
     const shuffled = [...filteredContent].sort(() => Math.random() - 0.5);
     setRandomArticles(shuffled.slice(0, 5));
-  };
+  }, [allContent, contentType]);
+
+  useEffect(() => {
+    setMounted(true);
+    refreshRandomArticles();
+  }, [refreshRandomArticles]);
 
   // Ensure allContent is an array
   const contentArray = Array.isArray(allContent) ? allContent : [];
@@ -175,8 +175,17 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
                   onClick={refreshRandomArticles}
                   className="text-white hover:text-gray-300 transition-colors duration-300"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                 </button>
               </div>
@@ -239,18 +248,18 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
             {
               title: 'Articles',
               description: 'Tech & Finance',
-              link: '/writing/articles'
+              link: '/writing/articles',
             },
             {
               title: 'Reviews',
               description: 'Books & Products',
-              link: '/writing/reviews'
+              link: '/writing/reviews',
             },
             {
               title: 'Interviews',
               description: 'Founders & Builders',
-              link: '/writing/interviews'
-            }
+              link: '/writing/interviews',
+            },
           ].map((category) => (
             <Link
               key={category.title}

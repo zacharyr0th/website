@@ -7,11 +7,11 @@ import ContactModal from '../components/homepage-components/ContactModal/Contact
 
 export default function Home() {
   return (
-    <motion.main 
+    <motion.main
       className="flex flex-col items-center justify-center min-h-screen"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 1}}
+      transition={{ duration: 1 }}
     >
       <div className="text-center">
         <ProfileSection />

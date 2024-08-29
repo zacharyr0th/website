@@ -19,16 +19,16 @@ export default function BioSection() {
 
 function AboutSection() {
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       className="mb-12 text-center max-w-2xl mx-auto"
     >
       <p className="text-lg">
-      As a seasoned thought leader with experience across multiple hyper-growth ecosystems, 
-      I specialize in identifying product-market fit and advising on how to leverage on-chain technology
-      to build superior products and services.
+        As a seasoned thought leader with experience across multiple hyper-growth ecosystems, I
+        specialize in identifying product-market fit and advising on how to leverage on-chain
+        technology to build superior products and services.
       </p>
     </motion.div>
   );
@@ -57,17 +57,20 @@ const itemVariants = {
 function ExperienceHighlights() {
   const highlights = [
     {
-      title: "DeFi and AI Innovation",
-      description: "Leading growth initiatives on Aptos, the world's highest-performance blockchain."
+      title: 'DeFi and AI Innovation',
+      description:
+        "Leading growth initiatives on Aptos, the world's highest-performance blockchain.",
     },
     {
-      title: "Product Leadership",
-      description: "Led product at Solflare/Solrise on Solana and provided institutional market research on EVM ecosystems."
+      title: 'Product Leadership',
+      description:
+        'Led product at Solflare/Solrise on Solana and provided institutional market research on EVM ecosystems.',
     },
     {
-      title: "On-Chain Expertise",
-      description: "Strong understanding of on-chain product-market fit, honed through years of observing what works."
-    }
+      title: 'On-Chain Expertise',
+      description:
+        'Strong understanding of on-chain product-market fit, honed through years of observing what works.',
+    },
   ];
 
   return (
