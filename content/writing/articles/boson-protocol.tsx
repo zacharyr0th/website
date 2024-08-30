@@ -27,111 +27,278 @@ export const metadata: ContentItem = {
 const BosonProtocol: React.FC = () => {
   return (
     <article>
+      <img src="/images/articles/bp-0.webp" alt="Boson Protocol" />
       <p>
         Named after an elementary particle described as a force carrier that functions as the 'glue'
         holding matter together, Boson Protocol has made its mission to enable decentralized
-        commerce ecosystems to 'disrupt, demonopolize, and democratize commerce.
+        commerce ecosystems to disrupt, demonopolize, and democratize global trade.
       </p>
-
-      <h2>What Boson Protocol Enables</h2>
-      <ul>
-        <li>Tokenization of digital to physical redemption using NFTs</li>
-        <li>Liquid digital markets for these NFTs</li>
-        <li>A robust commerce data market</li>
-      </ul>
-
-      <h2>Vision</h2>
-      <blockquote>
-        "To be the world's open, public infrastructure layer for commercial transactions and their
-        data."
-      </blockquote>
-      <p>Boson is building a bridge between the Metaverse and the physical universe.</p>
-
-      <h2>Purpose</h2>
-      <blockquote>
-        "Commerce is a human endeavor that should not have value captured by the few." - Justin
-        Banon, Boson CEO
-      </blockquote>
-
-      <h3>The Problem with Web2 Commerce</h3>
-      <ul>
-        <li>Centralized scaling favors companies like Amazon & Google</li>
-        <li>Monopolistic practices and data misuse</li>
-        <li>Rent-seeking behavior by big companies</li>
-      </ul>
-
-      <h3>Web3 Solution</h3>
       <p>
-        Web3's infrastructure - public blockchains, NFTs, digital wallets, etc. have given vendors
-        an entirely new framework to operate within.
+        Boson Protocol is a powerful toolset that empowers businesses and individuals, giving them
+        the control to engage in trustless physical goods and services transactions using Ethereum
+        as the underlying settlement layer. It enables the tokenization items and the digital to
+        physical redemption using NFTs, the creation of liquid digital markets for these NFTs, and
+        the creation of a robust data market.
+      </p>
+      <p></p>
+
+      <blockquote>
+        "Commerce is a human endeavor that should not have value captured by the few."
+        <p>Justin Banon, Boson CEO</p>
+      </blockquote>
+
+      <p>
+        The early Internet promised a future of fair and accessible data for all. Instead, market
+        forces favored centralized infrastructure for its profitability. This trend extended to
+        e-commerce, where intermediaries now dominate. These middlemen often exploit user data for
+        profit or fail to utilize it effectively, hindering the potential for a genuinely open and
+        efficient online marketplace.
+      </p>
+      <p>
+        Web3's infrastructure - public blockchains, NFTs, digital wallets, etc. —has given vendors
+        an entirely new framework. You no longer need to rely on these immovable marketplace
+        intermediaries to perform commerce functions or keep track of commerce data.
       </p>
 
-      <h2>Key Components of Boson Protocol</h2>
-      <h3>1. Commitment Tokens</h3>
+      <img src="/images/articles/bp-1.webp" alt="Boson Protocol 1" />
+
+      <p></p>
+      <p>
+        Inspired by trustless and tokenized DeFi communities, Boson Protocol aims to reduce
+        intermediaries' rent-seeking behavior by creating a decentralized and trustless environment
+        for commerce. The functionality surrounds what are called Commitment tokens, Thing tokens,
+        and the role of the BOSON token.
+      </p>
+
+      <h3>Commitment Tokens</h3>
+      <p>
+        A Buyer and Seller commit to exchange digital value for a physical item (a Thing). This
+        commitment is funded & tokenized into an escrow contract built into an NFT. The NFT serves
+        as a voucher to buy or sell an item, so Boson refers to them as NFTVs. The NFT contract has
+        an expiration date and, in essence, acts as a futures contract where the Seller is obliged
+        to deliver the said item(s) listed in the contract at expiration. Commitment Token holders
+        are granted the right to transfer their token to another wallet or reliably and securely
+        redeem the token for a particular Thing.
+      </p>
+
+      <h4>Commitment Tokens Characteristics</h4>
       <ul>
-        <li>NFT contracts serving as vouchers (NFTVs)</li>
-        <li>Act as futures contracts for physical items</li>
         <li>
-          Characteristics: Universal, Interoperable, Composable, Programmable, Transferable,
-          Stateful
+          <strong>Universal</strong> - Can represent any Thing.
+        </li>
+        <li>
+          <strong>Interoperable</strong> - Can represent a standardized version of any Thing.
+        </li>
+        <li>
+          <strong>Composable</strong> - Can be assembled into composite products.
+        </li>
+        <li>
+          <strong>Programmable</strong> - Fully customizable within computing limits.
+        </li>
+        <li>
+          <strong>Transferable / Storable</strong> - Between any standard web3 wallet.
+        </li>
+        <li>
+          <strong>Stateful</strong> - Appropriately change state across the core exchange mechanism
+          process.
         </li>
       </ul>
-
-      <h3>2. Thing Tokens</h3>
-      <ul>
-        <li>ERC20 tokens used to purchase Commitment Tokens</li>
-        <li>Similar to Unisocks concept</li>
-        <li>Interoperable and composable with existing DeFi infrastructure</li>
-      </ul>
-
-      <h3>3. BOSON Tokens</h3>
-      <ul>
-        <li>Monetary reward for ecosystem participants</li>
-        <li>Incentivizes quality transactions</li>
-      </ul>
-
-      <h3>4. Gluons</h3>
-      <p>Unique derivatives representing stake and associated BOSON rewards for each voucher.</p>
-
-      <h2>Applications</h2>
-      <ul>
-        <li>Online Commerce</li>
-        <li>Non-Monetary Vouchers</li>
-        <li>M2M-commerce</li>
-        <li>Loyalty & Rewards</li>
-        <li>Gaming</li>
-        <li>Crypto Exchanges</li>
-        <li>Service Bookings</li>
-        <li>Tokenized Networks</li>
-      </ul>
-
-      <h2>Governance</h2>
-      <ol>
-        <li>Startup Phase</li>
-        <li>Network Phase</li>
-        <li>Community Governance (DAO)</li>
-      </ol>
-
-      <h2>Roadmap and Progress</h2>
-      <ul>
-        <li>$36,000,000 raised in token sales and USD</li>
-        <li>Team scaled to over 50 employees</li>
-        <li>Released DEX for any Thing</li>
-        <li>Launched Leptonite App</li>
-        <li>Purchased $700,000 in Decentraland real estate</li>
-      </ul>
-
-      <h2>Conclusion</h2>
       <p>
-        Boson is pioneering a future of decentralized commerce. If successful, it could become one
-        of the most important protocols in the world, potentially disrupting giants like Amazon.
+        The Core Exchange Mechanism governs Commitment Tokens, where the programmed game theory
+        comes into play. Buyers and Sellers sequentially deposit up-front funds, so there are
+        varying levels of skin in the game on both sides of the transaction. The final deposit
+        transfer process is structured to incentivize both parties to behave well.
+      </p>
+      <p>
+        Using this sequential transaction process, Commitment Tokens can achieve a 'Subgame Perfect
+        Equilibrium,' a concept from game theory. This equilibrium ensures that each transaction
+        step is balanced and fair, reducing the potential for disputes. In simpler terms, it's like
+        a game where each player knows the other players' strategy and has nothing to gain by
+        changing only their strategy, leading to a balanced outcome.
+      </p>
+      <img src="/images/articles/bp-2.webp" alt="Boson Protocol 2" />
+      <p></p>
+      <p>
+        Using this sequential transaction process, Commitment Tokens can achieve a 'Subgame Perfect
+        Equilibrium,' which equates to each subgame of the original game as having a Nash
+        equilibrium. As those of you in the CFA curriculum know, Nash equilibrium equates to the
+        balance between players when each player knows the other players' strategy and has nothing
+        to gain by changing only their own strategy.
+      </p>
+      <p>
+        The possible game outcomes are the triangles on the right side of the above diagram. CoF
+        stands for Cancel or Fault, which is an undesirable outcome. The most desirable outcome for
+        all parties is 'Redemption; No Complaint; No CoF,' which is the fourth triangle from the top
+        of the diagram. The purpose of programming this game theory into Commitment Tokens is to
+        minimize the number of disputes and arbitration required between Buyers and Sellers,
+        providing a smooth and efficient transaction process.
       </p>
 
-      <h2>Boson Links</h2>
+      <h3>Thing Tokens</h3>
       <p>
-        <strong>Socials:</strong> Twitter | Medium | Telegram | YouTube | LinkedIn
-        <br />
-        <strong>Resources:</strong> Website | Whitepaper | Litepaper | FAQs
+        Thing Tokens, which conform to the standard ERC20 contract, are used to purchase Commitment
+        Tokens. Think of a Thing token as a 'generalized Unisock' and the Commitment Token as an
+        add-on futures contract. Unisocks are a grand experiment in scarcity. There were 500 real
+        pairs of Uniswap merchandise socks tokenized as SOCKs and deposited into a liquidity pool on
+        Uniswap along with their starting value worth of ETH.
+      </p>
+      <p>
+        Each SOCK token represents the redeemable ownership of 1 pair of socks and is minted with a
+        bonding curve, hence the 11,048.07% increase in price from the original $12. You can either
+        sell the token back to the liquidity pool or redeem it for the physical socks, where the
+        Uniswap company will ship a physical pair to you anywhere in the world.
+      </p>
+      <img src="/images/articles/bp-3.webp" alt="Boson Protocol 3" />
+      <p></p>
+      <p>
+        At the time of writing, the price of a $SOCK was $132,576.82, and 192 have already been
+        redeemed. Thing tokens are similar. The interoperability and composability of Thing tokens
+        enable them to be fitted or retrofitted into any existing DeFi infrastructure. They are
+        tradable in the same way you can trade SOCKs between different wallets, and they can 'plug'
+        into AMMs (Automated Market Makers) to create liquid digital markets. Their use cases within
+        DeFi include product price discovery on DEXes, yield optimization, and the crowdfunding of
+        non-existent products through ITOs (Initial Thing Offerings).
+      </p>
+      <h3>Boson Tokens</h3>
+      <p>
+        The incentive is the invisible hand that Adam Smith was talking about. Boson built reward
+        mechanisms within the Thing / Commitment Token relationship to incentivize good behavior by
+        both Buyers and Sellers - but that doesn't tell the whole story. The core objective of the
+        Boson Protocol is to 'maximize the supply of quality redemptions.' In other words, it
+        facilitates successful commerce transactions. To do so, Boson implemented the BOSON token
+        (Bosons) as a monetary reward for actors within the Boson ecosystem who help the protocol
+        reach its objective. Below is a high-level overview of the main stakeholders within the
+        Boson Protocol.
+      </p>
+      <img src="/images/articles/bp-4.webp" alt="Boson Protocol 4" />
+      <img src="/images/articles/bp-5.webp" alt="Boson Protocol 5" />
+
+      <h3>Gluons</h3>
+      <p>
+        Gluons act as a quality indicator, encouraging participants to stake more capital for
+        higher-quality items. This system incentivizes market participants to engage in high-quality
+        transactions of high-quality physical goods. Each voucher has a unique derivative called a
+        Gluon that represents the stake of the participant holding the voucher and the associated
+        BOSON reward. Vouchers with higher amounts of Gluons indicate items expected to be higher
+        quality than items with lower amounts of Gluons.{' '}
+      </p>
+
+      <p>
+        A Seller posts a voucher believing it will deliver a highly valued item in a no-complaint
+        transaction. The Seller would be incentivized to stake more capital than the minimum
+        required to be exposed to more Gluons, increasing the chance of receiving more BOSON
+        rewards. This system incentivizes market participants to engage in high-quality transactions
+        of high-quality physical goods. The Boson Whitepaper provides a more detailed analysis of
+        all the game theory involved.{' '}
+      </p>
+
+      <p>
+        This engineering marvel incentivizes market participants to partake in high-quality
+        transactions of high-quality physical goods. For a more detailed analysis of all the game
+        theory involved, including math, check out the Boson Whitepaper.
+      </p>
+      <h3>Applications</h3>
+      <p>
+        Unisocks, unrelated to Boson, is a proof of concept for decentralized commerce of physical
+        goods. While the Boson protocol is built for that, their white paper lists other potential
+        use cases.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Application</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <strong>Online Commerce</strong>
+            </td>
+            <td>Decentralized e-commerce platform</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>M2M-commerce</strong>
+            </td>
+            <td>Autonomous machine-to-machine transactions</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Loyalty & Rewards</strong>
+            </td>
+            <td>Interoperable, composable reward systems</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Gaming</strong>
+            </td>
+            <td>Physical rewards for in-game achievements</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Crypto Exchanges</strong>
+            </td>
+            <td>Token redemption for physical rewards</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Service Bookings</strong>
+            </td>
+            <td>Permissionless, two-sided deposit bookings</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Tokenized Networks</strong>
+            </td>
+            <td>Token exchange for goods and services</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Governance Roadmap</h3>
+      <p>
+        Boson enacted a 3-phase structure of decentralizing their governance and is currently in the
+        Startup Phase.
+      </p>
+
+      <ol>
+        <li>
+          <strong>Startup Phase</strong> - Achieve 'protocol-market-fit' by rapid iteration through
+          opinionated leadership.
+        </li>
+        <li>
+          <strong>Network Phase</strong> - Enable minimally extractive fees for vouchers and
+          ultimately incentivize market participants to contribute valuable work.
+        </li>
+        <li>
+          <strong>Community Governance</strong> - 'At the time of writing, it is anticipated that
+          the governance structure will be a decentralized autonomous organization (DAO), structured
+          to ensure regulatory compliance as well as resist capture from centralized entities or
+          groups.'
+        </li>
+      </ol>
+
+      <h3>Stats</h3>
+      <p>
+        To scale, Boson estimates they will need to handle, on average, ten transactions per second,
+        with peaks potentially being more than 10x that. To do so, they decided to utilize the most
+        battle-tested layer 1 - Ethereum, which handles dozens of transactions per second. Boson
+        raised $36,000,000 in token sales and USD that funded teams across protocol design & and
+        architecture, legal engineering & game theory while also scaling the employee count to over
+        50. The Boson token is #511 on CoinMarketCap, with a market value of around $60 million.
+      </p>
+      <img src="/images/articles/bp-8.webp" alt="Boson Protocol 8" />
+      <p></p>
+      <p>
+        Boson purchased over $700,000 in digital real estate within Decentraland's Vegas City. By
+        collaborating with Polygonal Mind, Boson is creating Portal, the world's first lifestyle and
+        commerce playground. The Portal will enable creators and brands to sell redeemable NFTs for
+        real-world products and services. Now that funds have been raised, the team assembled, and
+        the strategy set, Boson has entered what it calls "hyper blitz scale mode" of development.
+        For a detailed explanation of what hyper-blitz scaling means to Boson, refer to their
+        Roadmap article on Medium.
       </p>
     </article>
   );

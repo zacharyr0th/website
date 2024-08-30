@@ -25,10 +25,6 @@ export const metadata: ContentItem = {
   language: 'en',
 };
 
-// fix photo
-// fix links to other reviews
-// add a photo of him
-
 const AccidentalSuperpower: React.FC = () => {
   return (
     <article>

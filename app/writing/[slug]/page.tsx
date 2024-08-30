@@ -20,6 +20,7 @@ type Post = {
   readTime?: number;
   tags?: string[];
   description?: string;
+  bookAuthor?: string;
 };
 
 export async function generateStaticParams() {
@@ -34,6 +35,7 @@ export async function generateStaticParams() {
 }
 
 function truncateText(text: string, maxLength: number) {
+  if (!text) return '';
   if (text.length <= maxLength) return text;
   return text.slice(0, maxLength).trim() + '...';
 }
@@ -227,7 +229,7 @@ export default async function WritingPage({ params }: { params: { slug: string }
                 <Link
                   key={rec.slug}
                   href={`/writing/${rec.slug}`}
-                  className="block bg-[#1a1a1a] rounded-lg shadow-lg hover:bg-[#242424] transition-all duration-300 h-[400px] overflow-hidden"
+                  className="block bg-[#1a1a1a] rounded-lg shadow-lg hover:bg-[#242424] transition-all duration-300 h-[360px] overflow-hidden"
                 >
                   <div className="relative h-48 w-full">
                     <Image
@@ -239,11 +241,30 @@ export default async function WritingPage({ params }: { params: { slug: string }
                       className="rounded-t-lg"
                     />
                   </div>
-                  <div className="p-6 flex flex-col h-[calc(100%-12rem)]">
-                    <h4 className="text-xl font-semibold mb-2">{rec.title}</h4>
-                    <p className="text-gray-400 mb-4 flex-grow overflow-hidden">
-                      {truncateText(rec.description || '', 100)}
-                    </p>
+                  <div className="p-4 flex flex-col h-[calc(100%-12rem)] justify-between">
+                    <div>
+                      <h4 className="text-lg font-semibold mb-1 line-clamp-2">{rec.title}</h4>
+                      {rec.type === 'review' ? (
+                        <p className="text-sm text-gray-400 mb-1">Book by {rec.bookAuthor}</p>
+                      ) : (
+                        <p className="text-sm text-gray-400 mb-1">by Zachary Roth</p>
+                      )}
+                      <p className="text-xs text-gray-500">
+                        {rec.type.charAt(0).toUpperCase() + rec.type.slice(1)}
+                      </p>
+                    </div>
+                    {rec.tags && rec.tags.length > 0 && (
+                      <div className="flex flex-wrap gap-2 mt-auto">
+                        {rec.tags.slice(0, 2).map((tag) => (
+                          <span
+                            key={tag}
+                            className="bg-gray-700 text-gray-300 px-2 py-0.5 rounded-full text-xs"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </Link>
               ))}

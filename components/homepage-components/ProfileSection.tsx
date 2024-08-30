@@ -55,7 +55,7 @@ const ProfileSection = () => (
         height: 220px;
         border-radius: 50%;
         overflow: hidden;
-        margin-bottom: 1.5rem;
+        margin-bottom: 0.25rem;
       }
       .profile-name {
         font-size: 2.5rem;

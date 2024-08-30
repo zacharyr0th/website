@@ -6,7 +6,8 @@ const projects = [
   {
     id: 'zacharyroth',
     name: 'zacharyr0th.com',
-    description: 'This website is an open-source portfolio built with Next.js, Tailwind CSS, and TypeScript.',
+    description:
+      'This website is an open-source portfolio built with Next.js, Tailwind CSS, and TypeScript.',
     tags: ['Next.js', 'Tailwind', 'TypeScript'],
     github: 'https://github.com/yourusername/zacharyroth-website',
     liveLink: 'https://zacharyr0th.com',
@@ -14,7 +15,8 @@ const projects = [
   {
     id: 'simpleos',
     name: 'SimpleOS',
-    description: 'An x86_64 operating system kernel with basic interrupt handling, memory management, and VGA output.',
+    description:
+      'An x86_64 operating system kernel with basic interrupt handling, memory management, and VGA output.',
     tags: ['OS', 'C', 'Assembly'],
     github: 'https://github.com/zacharyr0th/SimpleOS',
     liveLink: 'http://zacharyr0th/writing/a-simple-operating-system',
@@ -56,7 +58,10 @@ const ProjectCard: React.FC<{ project: Project }> = React.memo(({ project }) => 
       </p>
       <div className="flex flex-wrap gap-2 mb-4">
         {project.tags.map((tag, index) => (
-          <span key={index} className="px-2 py-1 bg-gray-700/50 text-gray-300 text-xs font-medium rounded-full transition-all duration-300 group-hover:bg-gray-600/50 group-hover:text-pastel-blue">
+          <span
+            key={index}
+            className="px-2 py-1 bg-gray-700/50 text-gray-300 text-xs font-medium rounded-full transition-all duration-300 group-hover:bg-gray-600/50 group-hover:text-pastel-blue"
+          >
             {tag}
           </span>
         ))}
@@ -103,7 +108,12 @@ const ProjectsContent: React.FC = () => (
         transition={{ staggerChildren: 0.1 }}
       >
         {projects.map((project) => (
-          <motion.div key={project.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+          <motion.div
+            key={project.id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
             <ProjectCard project={project} />
           </motion.div>
         ))}

@@ -159,7 +159,7 @@ tr:last-child td {
 
 /* Link Styles */
 a {
-  color: #3498db;
+  color: var(--color-accent);
   text-decoration: none;
   transition: color 0.3s ease;
 }
