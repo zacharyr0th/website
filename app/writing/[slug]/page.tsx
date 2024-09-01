@@ -40,7 +40,11 @@ const CustomLink = ({ href, children }: { href: string; children: React.ReactNod
   };
 
   return (
-    <a href={href} onClick={handleClick} className="text-blue-400 hover:text-blue-300 underline font-bold">
+    <a
+      href={href}
+      onClick={handleClick}
+      className="text-blue-400 hover:text-blue-300 underline font-bold"
+    >
       {children}
     </a>
   );
@@ -169,14 +173,20 @@ function renderNavigationButtons(prevPost: Post | null, nextPost: Post | null) {
   return (
     <>
       {prevPost && (
-        <Link href={`/writing/${prevPost.slug}`} className="fixed left-4 top-1/2 transform -translate-y-1/2 hidden lg:block">
+        <Link
+          href={`/writing/${prevPost.slug}`}
+          className="fixed left-4 top-1/2 transform -translate-y-1/2 hidden lg:block"
+        >
           <button className="bg-inherit text-gray-600 p-3 rounded-full hover:bg-gray-200 transition-all duration-300">
             <FaChevronLeft size={24} />
           </button>
         </Link>
       )}
       {nextPost && (
-        <Link href={`/writing/${nextPost.slug}`} className="fixed right-4 top-1/2 transform -translate-y-1/2 hidden lg:block">
+        <Link
+          href={`/writing/${nextPost.slug}`}
+          className="fixed right-4 top-1/2 transform -translate-y-1/2 hidden lg:block"
+        >
           <button className="bg-inherit text-gray-600 p-3 rounded-full hover:bg-gray-200 transition-all duration-300">
             <FaChevronRight size={24} />
           </button>

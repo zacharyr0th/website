@@ -49,7 +49,8 @@ const Bing: React.FC = () => {
       </p>
       <p>
         There's a meme now that all you have to do to raise money from VCs is build a UI wrapper
-        around a ChatGPT function—like an app that gives you customized recipes or helps you code. Even
+        around a ChatGPT function—like an app that gives you customized recipes or helps you code.
+        Even
         <a href="https://www.theverge.com/2023/2/27/23614959/snapchat-my-ai-chatbot-chatgpt-openai-plus-subscription">
           Snapchat
         </a>
@@ -68,14 +69,13 @@ const Bing: React.FC = () => {
         Tech companies are feeling the competition. Google's co-founder, Sergey Brin, came out of
         the shadows to submit his first
         <a href="https://www.forbes.com/sites/richardnieva/2023/01/31/sergey-brin-code-request-lamda/?sh=751f6a857ce6">
-        request for code access
+          request for code access
         </a>
-         in years to none other than LaMDa - Google's natural language
-        chatbot.
+        in years to none other than LaMDa - Google's natural language chatbot.
       </p>
       <p>
         This was a natural reaction to the moves Microsoft has been making with Bing. Microsoft's
-        CEO, Satya Nadella, made <a href="https://www.youtube.com/watch?v=UcLw-CNySiA">his</a> 
+        CEO, Satya Nadella, made <a href="https://www.youtube.com/watch?v=UcLw-CNySiA">his</a>
         position very clear, "I want people to know that we made them dance."
       </p>
       <h3>Let's talk about Bing</h3>
@@ -97,14 +97,14 @@ const Bing: React.FC = () => {
       <p>Well, they have the best model for now.</p>
       <h2>Public Perception</h2>
       <p>
-        The public's reaction is mixed. Some see Sam Altman's vision of the AI-enabled future and 
-        others feel Elizer Yudkowsky's fears of the unknown. In the past few decades, there have been 
-        stories of individuals who began fearing imminent human extinction due to rapid AI progress. 
-        They typically liquidate all their assets and indulge recklessly, only to realize they've acted
-        prematurely a few years later. Others fear it will take their jobs, but it remains to be
-        seen which industries will be massively interrupted first. Some AI experts, such as Lann
-        Yucun, say that these models are insufficient, and we need new architecture to reach the
-        coveted "artificial general intelligence" level of machine reasoning.
+        The public's reaction is mixed. Some see Sam Altman's vision of the AI-enabled future and
+        others feel Elizer Yudkowsky's fears of the unknown. In the past few decades, there have
+        been stories of individuals who began fearing imminent human extinction due to rapid AI
+        progress. They typically liquidate all their assets and indulge recklessly, only to realize
+        they've acted prematurely a few years later. Others fear it will take their jobs, but it
+        remains to be seen which industries will be massively interrupted first. Some AI experts,
+        such as Lann Yucun, say that these models are insufficient, and we need new architecture to
+        reach the coveted "artificial general intelligence" level of machine reasoning.
       </p>
       <Image src="/images/articles/bing-2.webp" alt="Bing-2" width={800} height={600} />
       <p></p>
@@ -160,7 +160,8 @@ const Bing: React.FC = () => {
         maybe Apple will, or Tesla, or Anthropic, or
         <a href="https://hackernoon.com/how-buzzfeed-plans-to-use-ai-to-generate-listicles-and-more-content">
           Buzzfeed
-        </a> will.
+        </a>{' '}
+        will.
       </p>
       <h3>Inspiration</h3>
       <p>
