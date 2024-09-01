@@ -159,12 +159,14 @@ tr:last-child td {
 
 /* Article content link styles */
 .article-content a {
-  text-decoration: underline;
-  transition: color 0.3s ease;
+  color: inherit;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 .article-content a:hover {
-  color: #2980b9;
+  text-decoration: underline;
 }
 
 /* Centered Images with bottom margin */

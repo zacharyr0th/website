@@ -20,7 +20,7 @@ const projects = [
       'An x86_64 operating system kernel with basic interrupt handling, memory management, and VGA output.',
     tags: ['OS', 'C', 'Assembly'],
     github: 'https://github.com/zacharyr0th/SimpleOS',
-    liveLink: 'http://zacharyr0th/writing/a-simple-operating-system',
+    liveLink: 'https://www.zacharyr0th.com/writing/a-simple-operating-system',
   },
   {
     id: 'musicide',
