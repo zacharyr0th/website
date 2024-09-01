@@ -4,36 +4,7 @@ import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-export default function BioSection() {
-  return (
-    <section className="bio-section py-4 px-4 sm:px-6 lg:px-8 bg-inherit text-gray-300">
-      <div className="max-w-4xl mx-auto">
-        <AboutSection />
-        <ExperienceHighlights />
-        <BlockchainLogos />
-        <BioLink />
-      </div>
-    </section>
-  );
-}
-
-function AboutSection() {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="mb-12 text-center max-w-2xl mx-auto"
-    >
-      <p className="text-lg">
-        As a seasoned thought leader with experience across multiple hyper-growth ecosystems, I
-        specialize in identifying product-market fit and advising on how to leverage on-chain
-        technology to build superior products and services.
-      </p>
-    </motion.div>
-  );
-}
-
+// Move shared variants outside of components
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -54,24 +25,61 @@ const itemVariants = {
   },
 };
 
+// Memoize static components
+const MemoizedBlockchainLogos = React.memo(BlockchainLogos);
+const MemoizedBioLink = React.memo(BioLink);
+
+export default function BioSection() {
+  return (
+    <section className="bio-section py-4 px-4 sm:px-6 lg:px-8 bg-inherit text-gray-300">
+      <div className="max-w-4xl mx-auto">
+        <AboutSection />
+        <ExperienceHighlights />
+        <MemoizedBlockchainLogos />
+        <MemoizedBioLink />
+      </div>
+    </section>
+  );
+}
+
+function AboutSection() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="mb-12 text-center max-w-2xl mx-auto"
+    >
+      <p className="text-lg">
+        A seasoned thought leader with experience across multiple hyper-growth ecosystems. I
+        specialize in identifying product-market fit and advising on how to leverage on-chain
+        technology to build superior products and services.
+      </p>
+    </motion.div>
+  );
+}
+
 function ExperienceHighlights() {
-  const highlights = [
-    {
-      title: 'DeFi and AI Innovation',
-      description:
-        "Leading growth initiatives on Aptos, the world's highest-performance blockchain.",
-    },
-    {
-      title: 'Product Leadership',
-      description:
-        'Led product at Solflare/Solrise on Solana and provided institutional market research on EVM ecosystems.',
-    },
-    {
-      title: 'On-Chain Expertise',
-      description:
-        'Strong understanding of on-chain product-market fit, honed through years of observing what works.',
-    },
-  ];
+  const highlights = React.useMemo(
+    () => [
+      {
+        title: 'DeFi and AI Innovation',
+        description:
+          "Leading growth initiatives on Aptos, the world's highest-performance blockchain.",
+      },
+      {
+        title: 'Product Leadership',
+        description:
+          'Led product at Solflare/Solrise on Solana and provided institutional market research on EVM ecosystems.',
+      },
+      {
+        title: 'On-Chain Expertise',
+        description:
+          'Strong understanding of on-chain product-market fit, honed through years of observing what works.',
+      },
+    ],
+    []
+  );
 
   return (
     <motion.div
@@ -97,11 +105,15 @@ function ExperienceHighlights() {
 }
 
 function BlockchainLogos() {
-  const logos = [
-    { src: '/images/logos/aptos-logo.webp', alt: 'Aptos' },
-    { src: '/images/logos/solana-logo.webp', alt: 'Solana' },
-    { src: '/images/logos/ethereum-logo.webp', alt: 'Ethereum' },
-  ];
+  // Move logos data outside of the component to avoid recreating on each render
+  const logos = React.useMemo(
+    () => [
+      { src: '/images/logos/aptos-logo.webp', alt: 'Aptos' },
+      { src: '/images/logos/solana-logo.webp', alt: 'Solana' },
+      { src: '/images/logos/ethereum-logo.webp', alt: 'Ethereum' },
+    ],
+    []
+  );
 
   return (
     <div className="flex justify-center space-x-6 mb-8">

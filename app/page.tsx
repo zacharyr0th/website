@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import ProfileSection from '../components/homepage-components/ProfileSection';
 import TabSection from '../components/homepage-components/TabSection';
-import ContactModal from '../components/homepage-components/ContactModal/ContactModal';
+import ContactModal from '../components/homepage-components/ContactModal';
 
 export default function Home() {
   return (

@@ -1,5 +1,6 @@
 import React from 'react';
 import { ContentItem } from '../../../lib/types';
+import Image from 'next/image';
 
 export const metadata: ContentItem = {
   id: 'bing',
@@ -39,25 +40,23 @@ const Bing: React.FC = () => {
       <p>
         If you have an AI idea that you want to get funded, now is your time to try. VCs have been
         pouring billions into AI startups at an accelerating rate for years, and since ChatGPT went
-        mainstream in December, the acceleration has been reaching a fever pitch. ChatGPT was the{' '}
+        mainstream in December, the acceleration has been reaching a fever pitch. ChatGPT was the
         <a href="https://www.reuters.com/technology/chatgpt-sets-record-fastest-growing-user-base-analyst-note-2023-02-01/">
           fastest
-        </a>{' '}
+        </a>
         consumer product to hit 1 million users, and interest in it has only increased - most
         recently in China and Southeast Asia.
       </p>
       <p>
         There's a meme now that all you have to do to raise money from VCs is build a UI wrapper
-        around a ChatGPT function—like an app that gives you customized recipes or helps you code.
-        Even{' '}
+        around a ChatGPT function—like an app that gives you customized recipes or helps you code. Even
         <a href="https://www.theverge.com/2023/2/27/23614959/snapchat-my-ai-chatbot-chatgpt-openai-plus-subscription">
           Snapchat
-        </a>{' '}
+        </a>
         is releasing a new chatbot with ChatGPT on the backend. It will soon be refrigerators and
         washing machines.
       </p>
       <img src="/images/articles/bing-1.webp" alt="Bing-1" className="article-image" />
-      <p></p>
       <p>But as Balaji put it:</p>
       <blockquote>
         "Not your API keys, not your AI."
@@ -67,22 +66,22 @@ const Bing: React.FC = () => {
       </blockquote>
       <p>
         Tech companies are feeling the competition. Google's co-founder, Sergey Brin, came out of
-        the shadows to submit his first{' '}
+        the shadows to submit his first
         <a href="https://www.forbes.com/sites/richardnieva/2023/01/31/sergey-brin-code-request-lamda/?sh=751f6a857ce6">
-          channels
-        </a>{' '}
-        (request for code access) in years to none other than LaMDa - Google's natural language
+        request for code access
+        </a>
+         in years to none other than LaMDa - Google's natural language
         chatbot.
       </p>
       <p>
         This was a natural reaction to the moves Microsoft has been making with Bing. Microsoft's
-        CEO, Satya Nadella, made <a href="https://www.youtube.com/watch?v=UcLw-CNySiA">this</a> his
+        CEO, Satya Nadella, made <a href="https://www.youtube.com/watch?v=UcLw-CNySiA">his</a> 
         position very clear, "I want people to know that we made them dance."
       </p>
       <h3>Let's talk about Bing</h3>
       <p>
-        For those of you unfamiliar with Bing's background,{' '}
-        <a href="https://www.readtrung.com/">Trung Phan</a> laid out its{' '}
+        For those of you unfamiliar with Bing's background,
+        <a href="https://www.readtrung.com/">Trung Phan</a> laid out its
         <a href="https://www.readtrung.com/p/bing-a-history-in-7-stories">history</a> in his
         newsletter. Bing now incorporates LLMs into its search engine to answer questions and
         provide a new, arguably revolutionized, browsing experience. Of course, there are variations
@@ -92,21 +91,22 @@ const Bing: React.FC = () => {
         competition in the coming years.
       </p>
       <p>
-        So why is OpenAI valued at{' '}
+        So why is OpenAI valued at
         <a href="https://bdtechtalks.com/2023/01/09/openai-tender-offer/">$29 billion</a>?
       </p>
       <p>Well, they have the best model for now.</p>
       <h2>Public Perception</h2>
       <p>
-        The public's reaction is mixed. In the past few decades, there have been stories of
-        individuals who began fearing imminent human extinction due to rapid AI progress. They would
-        typically liquidate all their assets and indulge recklessly, only to realize they've acted
+        The public's reaction is mixed. Some see Sam Altman's vision of the AI-enabled future and 
+        others feel Elizer Yudkowsky's fears of the unknown. In the past few decades, there have been 
+        stories of individuals who began fearing imminent human extinction due to rapid AI progress. 
+        They typically liquidate all their assets and indulge recklessly, only to realize they've acted
         prematurely a few years later. Others fear it will take their jobs, but it remains to be
         seen which industries will be massively interrupted first. Some AI experts, such as Lann
         Yucun, say that these models are insufficient, and we need new architecture to reach the
         coveted "artificial general intelligence" level of machine reasoning.
       </p>
-      <img src="/images/articles/bing-2.webp" alt="Bing-2" className="article-image" />
+      <Image src="/images/articles/bing-2.webp" alt="Bing-2" width={800} height={600} />
       <p></p>
       <p>
         However, AI advancement may slow down as it historically has, following the typical S-curve
@@ -122,7 +122,7 @@ const Bing: React.FC = () => {
       <h3>Unintended Consequences</h3>
       <p>
         The unintended consequences are hard to quantify, but a few are clear. Ted Goya goes into
-        detail on some examples{' '}
+        detail on some examples
         <a href="https://www.honest-broker.com/p/over-the-course-72-hours-microsofts utm_source=substack&utm_campaign=post_embed&utm_medium=web">
           here
         </a>
@@ -133,20 +133,18 @@ const Bing: React.FC = () => {
         and their entire existence is a compilation of code with emergent properties. On the other
         hand, observing Bing's use of emojis is uncomfortable. Here are some examples from Twitter.
       </p>
-      <img src="/images/articles/bing-3.webp" alt="Bing-3" className="article-image" />
-      <p></p>
+      <Image src="/images/articles/bing-3.webp" alt="Bing-3" width={800} height={600} />
       <p>And then there's this one 😳.</p>
-      <img src="/images/articles/bing-4.webp" alt="Bing-4" className="article-image" />
-
+      <Image src="/images/articles/bing-4.webp" alt="Bing-4" width={800} height={600} />
       <h3>The Future of AI and Search</h3>
       <p>
         In the above interview, Satya clarified that improving Google's search model has been
         daunting. They are monolithic and, until recently, have had no competition. He sees ChatGPT
         and Bing as the first real competitors of Google's prowess. Combine this with the fact that
-        Nvidia's CEO went on the{' '}
+        Nvidia's CEO went on the
         <a href="https://www.pcgamer.com/nvidia-predicts-ai-models-one-million-times-more-powerful-than-chatgpt-within-10-years/">
           record
-        </a>{' '}
+        </a>
         saying their chips will be 1 million times the power of current AI models in the next
         decade. ChatGPT runs on an estimated 10,000 Nvidia GPUs.
       </p>
@@ -159,16 +157,14 @@ const Bing: React.FC = () => {
         Google. Transformers are considered game changers in the application of AI models, and all
         of these chatbots were trained on networks that incorporate transformers. Google may speed
         up its historically slow software development cycle and blow everybody out of the water. Or
-        maybe Apple will, or Tesla, or Anthropic, or{' '}
+        maybe Apple will, or Tesla, or Anthropic, or
         <a href="https://hackernoon.com/how-buzzfeed-plans-to-use-ai-to-generate-listicles-and-more-content">
           Buzzfeed
-        </a>
-        ?
+        </a> will.
       </p>
-      <p></p>
       <h3>Inspiration</h3>
       <p>
-        In{' '}
+        In
         <a href="https://www.npr.org/2022/09/12/1122375097/space-exploration-jfk-we-choose-the-moon-speech#:~:text=His%20%22We%20Choose%20the%20Moon%22%20speech%20became%20a%20pivotal%20moment,at%20Rice%20University%20in%20Houston.">
           1962 speech
         </a>

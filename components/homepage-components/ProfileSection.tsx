@@ -1,11 +1,14 @@
 import React from 'react';
 import Image from 'next/image';
+import { Inter } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'] });
 
 const ProfileSection = () => (
-  <div className="profile-section">
-    <div className="profile-info">
-      <div className="profile-text">
-        <div className="profile-photo-container">
+  <div className="flex flex-col p-8 text-gray-300">
+    <div className="flex justify-center mt-8">
+      <div className="flex flex-col items-center max-w-xl mt-16">
+        <div className="w-56 h-56 rounded-full overflow-hidden mb-1">
           <Image
             src="/profile-picture.webp"
             alt="Zachary Roth"
@@ -15,9 +18,11 @@ const ProfileSection = () => (
             priority
           />
         </div>
-        <h2 className="profile-name">Zachary Roth</h2>
-        <h3 className="profile-subtitle">Technologist • Writer • Musician</h3>
-        <p className="profile-description">
+        <h2 className={`${inter.className} text-4xl mb-2 text-center`}>Zachary Roth</h2>
+        <h3 className={`${inter.className} text-lg my-4 text-center text-gray-400`}>
+          Technologist • Writer • Musician
+        </h3>
+        <p className={`${inter.className} text-base text-center`}>
           Head of Growth for DeFi and AI at
           <a
             href="https://aptoslabs.com/"
@@ -30,50 +35,6 @@ const ProfileSection = () => (
         </p>
       </div>
     </div>
-    <style jsx>{`
-      .profile-section {
-        display: flex;
-        flex-direction: column;
-        padding: 2rem;
-        color: #d1d5db;
-      }
-      .profile-info {
-        display: flex;
-        justify-content: center;
-        margin-top: 2rem;
-        border-radius: 1rem;
-      }
-      .profile-text {
-        max-width: 600px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 4rem;
-      }
-      .profile-photo-container {
-        width: 220px;
-        height: 220px;
-        border-radius: 50%;
-        overflow: hidden;
-        margin-bottom: 0.25rem;
-      }
-      .profile-name {
-        font-size: 2.5rem;
-        margin-bottom: 0.5rem;
-        text-align: center;
-      }
-      .profile-subtitle {
-        font-size: 1.15rem;
-        margin: 1rem;
-        text-align: center;
-        color: #9ca3af;
-      }
-      .profile-description {
-        font-size: 1rem;
-        line-height: 1.5;
-        text-align: center;
-      }
-    `}</style>
   </div>
 );
 

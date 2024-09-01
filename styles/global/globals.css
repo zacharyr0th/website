@@ -5,7 +5,6 @@
 @tailwind utilities;
 
 /* Components */
-@import '../components/ContactModal.module.css';
 @import '../components/content-items.css';
 @import '../components/ProfileSection.css';
 @import '../components/TabSection.css';

@@ -38,57 +38,37 @@ const FundamentalFlaw: React.FC = () => {
         <p>
           Goldman unofficially became Gary Gensler's prefix once he made an estimated between high 8
           and low 9
-          <a href="https://news.bloomberglaw.com/securities-law/biden-sec-nominee-gary-gensler-worth-as-much-as-119-million">
-            figures
-          </a>
+          <a href="https://news.bloomberglaw.com/securities-law/biden-sec-nominee-gary-gensler-worth-as-much-as-119-million">figures</a>
           at Goldman Sachs before former US President Clinton nominated him as the Assistant
           Secretary of the Treasury. Over the past few months, Gary Gensler has been cracking down
           on a few seemingly
-          <a href="https://www.justice.gov/usao-edny/pr/founder-and-majority-owner-bitzlato-cryptocurrency-exchange-charged-unlicensed-money">
-            inconsequential
-          </a>
+          <a href="https://www.justice.gov/usao-edny/pr/founder-and-majority-owner-bitzlato-cryptocurrency-exchange-charged-unlicensed-money">inconsequential</a>
           crypto events. He missed out on becoming an iconic fiduciary figure by preventing a spot
           bitcoin ETF and by not preventing
-          <a href="https://www.foxbusiness.com/markets/sec-chairman-gary-gensler-met-with-head-ftx-months-before-collapse">
-            FTX's
-          </a>
+          <a href="https://www.foxbusiness.com/markets/sec-chairman-gary-gensler-met-with-head-ftx-months-before-collapse">FTX's</a>
           collapse because he was too busy fining Kim Kardashian for an
-          <a href="https://www.vox.com/recode/2022/10/3/23384955/kim-kardashian-crypto-ethereum-max-emax-sec">
-            Instagram post
-          </a>
-          . Meanwhile, more
-          <a href="https://www.forbes.com/sites/kenrapoza/2022/11/20/ftx-failure-reminds-investors-crypto-investor-protection-does-not-exist/?sh=2e8965b51210">
-            voices
-          </a>
+          <a href="https://www.vox.com/recode/2022/10/3/23384955/kim-kardashian-crypto-ethereum-max-emax-sec">Instagram post</a>. Meanwhile, more
+          <a href="https://www.forbes.com/sites/kenrapoza/2022/11/20/ftx-failure-reminds-investors-crypto-investor-protection-does-not-exist/?sh=2e8965b51210">voices</a>
           are beginning to argue that the SEC is failing to fulfill its investor protection mandate.
         </p>
         <p>
           Kim reportedly earned only a few hundred thousand dollars from that post, yet faced a
           $1.26 million fine, which was later
-          <a href="https://decrypt.co/116734/kim-kardashian-floyd-mayweather-ethereummax-lawsuit-dismissed">
-            rescinded
-          </a>
-          . She regularly makes a million
-          <a href="https://www.instyle.com/kim-kardashian-north-west-cher-dionne-clueless-halloween-8385018">
-            per post
-          </a>
+          <a href="https://decrypt.co/116734/kim-kardashian-floyd-mayweather-ethereummax-lawsuit-dismissed">rescinded</a>. She regularly makes a million
+          <a href="https://www.instyle.com/kim-kardashian-north-west-cher-dionne-clueless-halloween-8385018">per post</a>
           for other endorsements, so it was a questionable display by the SEC. Gary Gensler then
           bragged about it on his
           <a href="https://x.com/GaryGensler/status/1576897535427448832?lang=en">Twitter</a>, and
           only a few months later, Sam Bankman Fried checked off the box on a document, declaring
           that FTX's bankruptcy was in the ballpark of $10 - $50
-          <a href="https://www.pymnts.com/cryptocurrency/2022/ftx-us-and-alameda-research-each-have-liabilities-of-10b-to-50b/">
-            billion
-          </a>
-          . It's easy to point out the flawed actions of a controversial government figure, but a
+          <a href="https://www.pymnts.com/cryptocurrency/2022/ftx-us-and-alameda-research-each-have-liabilities-of-10b-to-50b/">billion</a>. 
+          It's easy to point out the flawed actions of a controversial government figure, but a
           more significant issue looms over the blockchain industry that doesn't have clear
           solutions.
         </p>
       </section>
-
       <section>
         <h2>On and Off Ramps</h2>
-
         <h3>Onboarding</h3>
         <p>
           Onboarding to a blockchain is challenging for first-time users. An estimated 30 million
@@ -100,7 +80,6 @@ const FundamentalFlaw: React.FC = () => {
           this.
         </p>
       </section>
-
       <section>
         <p>
           Many ideas are in progress, but only two well-adopted methods exist for funding a
@@ -116,7 +95,6 @@ const FundamentalFlaw: React.FC = () => {
           when you offboard you run into the same issues listed below that affect everyone else.
         </p>
       </section>
-
       <section>
         <h3>Offboarding</h3>
         <p>
@@ -144,9 +122,8 @@ const FundamentalFlaw: React.FC = () => {
           most people.
         </p>
       </section>
-
       <section>
-        <h2>Censorship</h2>
+        <h3>Censorship</h3>
         <p>
           If you understand the financial plumbing behind both of the above options, you can
           appreciate how flawed the idea of monetary sovereignty is from a censorship perspective.
@@ -168,7 +145,6 @@ const FundamentalFlaw: React.FC = () => {
           entirely.
         </p>
       </section>
-
       <section>
         <p>
           The reality is that DeFi's value depends on your location. If you're not one to care about
@@ -179,7 +155,6 @@ const FundamentalFlaw: React.FC = () => {
           manage your finances - such is the case in Argentina, Venezuela, Russia, and elsewhere.
         </p>
       </section>
-
       <section>
         <h2>The Fundamental Flaw</h2>
         <p>
@@ -191,9 +166,8 @@ const FundamentalFlaw: React.FC = () => {
           the first billion users that everyone talks about in their pitch decks.
         </p>
       </section>
-
       <section>
-        <h2>Ideals</h2>
+        <h3>Ideals</h3>
         <p>
           Blockchains are trying to become economies that are independent from the real world. Banks
           have no control, governments have no control, markets are free, and individuals have
@@ -205,9 +179,8 @@ const FundamentalFlaw: React.FC = () => {
           unclear where crypto would be.
         </p>
       </section>
-
       <section>
-        <h2>Bridging the Gap</h2>
+        <h3>Bridging the Gap</h3>
         <p>
           There's a certain level of speculation involved with every cryptocurrency because it is
           more than just a store of value that may be fleeting depending on which cryptocurrency
@@ -221,10 +194,8 @@ const FundamentalFlaw: React.FC = () => {
         <p>
           Governments are the hardest to convince and many see it as a problem. It's difficult to
           imagine a world where governments want their "users" to access censorship-resistant,
-          global, permissionless markets. They probably wish to have everyone use{' '}
-          <a href="https://www.investopedia.com/terms/c/central-bank-digital-currency-cbdc.asp">
-            CBDCs
-          </a>
+          global, permissionless markets. They probably wish to have everyone use
+          <a href="https://www.investopedia.com/terms/c/central-bank-digital-currency-cbdc.asp">CBDCs</a>
           , and I suspect they will begin banning blockchain activity once they understand it to be
           a trojan horse that removes their power. Non-technical people see blockchains as a
           confusing and largely unnecessary thing killing the planet because they don't know the
