@@ -1,7 +1,0 @@
-.content-item {
-  transition: all var(--transition-duration) ease;
-}
-
-.content-item:hover {
-  transform: scale(1.05);
-}

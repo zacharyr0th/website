@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-primary: #121212;
+  --color-text-light: #ffffff;
+  --font-size-base: 16px;
+  --line-height-base: 1.5;
+}
+
 /* base styles */
 
 html {
@@ -96,10 +103,10 @@ img {
     @apply text-lg text-gray-400;
   }
 }
-
 /* Custom properties */
 
 :root {
   --color-primary: #121212;
   --color-text-light: #ffffff;
 }
+

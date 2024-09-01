@@ -95,12 +95,24 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="home-container"
+      className="bg-[#121212] text-white min-h-screen"
     >
       {/* SubHeader */}
-      <header className="py-6 mb-8">
-        <div className="container flex justify-between items-center">
-          <h1 className="text-4xl font-bold">Writing</h1>
+      <motion.header
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="py-6 mb-8 container"
+      >
+        <div className="flex justify-between items-center">
+          <motion.h1
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-4xl font-bold"
+          >
+            Writing
+          </motion.h1>
           <nav className="navbar-links hidden md:block">
             <ul className="flex gap-6">
               {contentType && (
@@ -130,10 +142,15 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
             </ul>
           </nav>
         </div>
-      </header>
+      </motion.header>
 
       {/* Main content */}
-      <main className="container mb-8">
+      <motion.main
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+        className="container mb-8"
+      >
         <div className="grid grid-cols-3 gap-6">
           {/* Featured Articles Section */}
           <section className="col-span-2">
@@ -227,10 +244,15 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
             </div>
           </aside>
         </div>
-      </main>
+      </motion.main>
 
       {/* Archives */}
-      <section className="container">
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+        className="container"
+      >
         <div className="grid grid-cols-3 gap-6">
           {[
             {
@@ -248,39 +270,45 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
               description: 'Founders & Builders',
               link: '/writing/interviews',
             },
-          ].map((category) => (
-            <Link
+          ].map((category, index) => (
+            <motion.div
               key={category.title}
-              href={category.link}
-              className="bg-[#1a1a1a] p-6 rounded-lg shadow-lg hover:bg-[#242424] transition-all duration-300 group h-full flex flex-col justify-between"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
             >
-              <div>
-                <h3 className="text-2xl font-bold mb-2 group-hover:text-blue-400 transition-colors duration-300">
-                  {category.title}
-                </h3>
-                <p className="text-gray-400 text-lg">{category.description}</p>
-              </div>
-              <div className="text-blue-400 inline-flex items-center group-hover:underline mt-4">
-                View All
-                <svg
-                  className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </div>
-            </Link>
+              <Link
+                href={category.link}
+                className="bg-[#1a1a1a] p-6 rounded-lg shadow-lg hover:bg-[#242424] transition-all duration-300 group h-full flex flex-col justify-between"
+              >
+                <div>
+                  <h3 className="text-2xl font-bold mb-2 group-hover:text-blue-400 transition-colors duration-300">
+                    {category.title}
+                  </h3>
+                  <p className="text-gray-400 text-lg">{category.description}</p>
+                </div>
+                <div className="text-blue-400 inline-flex items-center group-hover:underline mt-4">
+                  View All
+                  <svg
+                    className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </div>
+              </Link>
+            </motion.div>
           ))}
         </div>
-      </section>
+      </motion.section>
 
       <style jsx>{`
         .no-scrollbar::-webkit-scrollbar {

@@ -5,49 +5,40 @@
 }
 
 .space-y-16 > :not([hidden]) ~ :not([hidden]) {
-  margin-top: 4rem;
+  --space-y: 4rem;
+  margin-top: var(--space-y);
 }
 
 .space-x-6 > :not([hidden]) ~ :not([hidden]) {
-  margin-left: 1.5rem;
+  --space-x: 1.5rem;
+  margin-left: var(--space-x);
 }
 
 .bg-darker-blue {
   background-color: var(--color-accent);
 }
 
-.animate-fadeIn {
-  animation: fadeIn 0.5s ease-in-out;
-}
-
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
 
+.animate-fadeIn,
 .fade-in {
-  animation: fadeIn var(--transition-duration) ease-in-out;
+  animation: fadeIn var(--transition-duration, 0.5s) ease-in-out;
 }
 
 .fade-out {
-  animation: fadeOut var(--transition-duration) ease-in-out;
+  animation: fadeOut var(--transition-duration, 0.5s) ease-in-out;
 }
 
 .transition-opacity {
-  transition: opacity var(--transition-duration) ease-in-out;
+  transition: opacity var(--transition-duration, 0.5s) ease-in-out;
 }
 
 .hover-scroll {
@@ -58,7 +49,6 @@
 .hover-scroll::-webkit-scrollbar {
   width: 0;
   height: 0;
-  background: transparent;
 }
 
 .hover-scroll:hover {
@@ -73,8 +63,4 @@
 .hover-scroll:hover::-webkit-scrollbar-thumb {
   background-color: #4a4a4a;
   border-radius: 3px;
-}
-
-.hover-scroll:hover::-webkit-scrollbar-track {
-  background: transparent;
 }

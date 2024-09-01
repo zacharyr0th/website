@@ -1,9 +1,9 @@
 'use client';
 
-import React from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
+import AudioVisualizer from './AudioVisualizer';
 
 const categories = [
   { title: 'Recordings', description: 'Full discography', slug: 'recordings' },
@@ -14,42 +14,7 @@ const categories = [
   { title: 'Archive', description: 'History', slug: 'archive' },
 ];
 
-const AudioPage = () => {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="bg-[#121212] text-white min-h-screen"
-    >
-      <motion.header
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="py-6 mb-2 container mx-auto px-4"
-      >
-        <motion.h1
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-4xl font-bold"
-        >
-          Audio
-        </motion.h1>
-      </motion.header>
-
-      <main className="container mx-auto px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {categories.map((category, index) => (
-            <CategoryCard key={category.slug} category={category} index={index} />
-          ))}
-        </div>
-      </main>
-    </motion.div>
-  );
-};
-
-const CategoryCard = ({
+const CategoryCard = memo(({
   category,
   index,
 }: {
@@ -83,6 +48,48 @@ const CategoryCard = ({
       </motion.div>
     </Link>
   </motion.div>
-);
+));
+
+const MemoizedCategoryCard = memo(CategoryCard);
+
+const AudioPage = () => {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="bg-inherit text-white min-h-screen"
+    >
+      <motion.header
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="py-6 mb-2 container mx-auto px-4"
+      >
+        <motion.h1
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-4xl font-bold"
+        >
+          Audio
+        </motion.h1>
+      </motion.header>
+
+      <main className="container mx-auto px-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {categories.map((category, index) => (
+            <MemoizedCategoryCard key={category.slug} category={category} index={index} />
+          ))}
+        </div>
+      </main>
+
+      <section className="mt-12">
+        <h2 className="text-3xl font-bold mb-4">Audio Visualizer</h2>
+        <AudioVisualizer />
+      </section>
+    </motion.div>
+  );
+};
 
 export default AudioPage;

@@ -4,11 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Components */
-@import '../components/content-items.css';
-@import '../components/ProfileSection.css';
-@import '../components/TabSection.css';
-
 /* Core */
 @import '../core/base.css';
 @import '../core/utilities.css';

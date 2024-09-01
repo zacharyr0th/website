@@ -7,19 +7,27 @@
   --color-accent: #4b9cd3;
   --color-background: #ffffff;
   --color-text-primary: #333333;
+  --color-text-secondary: #666666;
   --color-text-light: #f0f0f0;
 
   /* Spacing */
-  --spacing-small: 0.5rem;
-  --spacing-medium: 1rem;
-  --spacing-large: 2rem;
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 4rem;
 
   /* Typography */
+  --font-family-base: 'Arial', sans-serif;
   --font-size-base: 16px;
+  --font-size-sm: 0.875rem;
+  --font-size-lg: 1.25rem;
   --line-height-base: 1.5;
 
   /* Effects */
   --transition-duration: 0.3s;
-  --border-radius: 0.5rem;
+  --border-radius-sm: 0.25rem;
+  --border-radius-md: 0.5rem;
+  --border-radius-lg: 1rem;
   --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
