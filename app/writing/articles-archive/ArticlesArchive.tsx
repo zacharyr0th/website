@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
@@ -18,6 +18,7 @@ export default function ArticlesArchive({ initialArticles }: ArticlesArchiveProp
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const filteredArticles = useMemo(() => {
+    if (!searchTerm) return articles;
     const searchRegex = new RegExp(searchTerm.split('').join('.*'), 'i');
     return articles.filter(
       (article) =>
@@ -36,16 +37,18 @@ export default function ArticlesArchive({ initialArticles }: ArticlesArchiveProp
     return <div>No articles available. Please check the console for more information.</div>;
   }
 
-  const formatDate = (dateString: string) => {
+  const formatDate = useCallback((dateString: string) => {
     const date = new Date(dateString);
-    const month = date.toLocaleString('default', { month: 'short' });
-    const year = date.getFullYear();
-    return `${month} ${year}`;
-  };
+    return date.toLocaleDateString('default', { month: 'short', year: 'numeric' });
+  }, []);
 
-  const toggleDropdown = () => {
+  const toggleDropdown = useCallback(() => {
     setIsDropdownOpen((prevState) => !prevState);
-  };
+  }, []);
+
+  const handleArticleClick = useCallback((slug: string) => {
+    router.push(`/writing/${slug || ''}`);
+  }, [router]);
 
   return (
     <div className="min-h-screen bg-inherit text-gray-300">
@@ -121,7 +124,7 @@ export default function ArticlesArchive({ initialArticles }: ArticlesArchiveProp
                   transition={{ duration: 0.3 }}
                   whileHover={{ backgroundColor: 'rgba(26, 26, 26, 0.5)' }}
                   className="cursor-pointer"
-                  onClick={() => router.push(`/writing/${article.slug || ''}`)}
+                  onClick={() => handleArticleClick(article.slug || '')}
                 >
                   <td className="px-6 py-4 whitespace-nowrap flex items-center">
                     <div className="w-12 h-12">

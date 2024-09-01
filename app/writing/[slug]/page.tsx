@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import Image from 'next/image';
 import './writing.css';
+import ContentRenderer from './ContentRenderer';
 
 type Post = {
   slug: string;
@@ -155,9 +156,9 @@ export default async function WritingPage({ params }: { params: { slug: string }
     return (
       <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-inherit">
         {renderNavigationButtons(prevPost, nextPost)}
-        <article className="bg-inherit">
+        <article className="bg-inherit reader-mode">
           {renderHeader(post)}
-          {renderContent(formattedContent)}
+          <ContentRenderer content={formattedContent} />
           {renderTags(post.tags)}
           {renderRecommendations(recommendations)}
         </article>

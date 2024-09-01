@@ -1,16 +1,20 @@
+/* Common styles */
+.intro-paragraph,
+.article-content table {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+/* Intro paragraph */
 .intro-paragraph {
   position: relative;
   z-index: 10;
-  text-indent: 0;
-  margin-bottom: 2rem;
-  margin-top: 3rem;
+  margin: 3rem 0 2rem;
   font-size: 1.25rem;
   line-height: 1.75;
   border-left: 4px solid rgba(255, 255, 255, 0.1);
-  background-color: rgba(255, 255, 255, 0.05);
   padding: 1.5rem;
-  border-radius: 0.5rem;
-  transition: all 0.3s ease;
 }
 
 .intro-paragraph::before {
@@ -21,37 +25,23 @@
   color: rgba(255, 255, 255, 0.7);
 }
 
-@media (max-width: 640px) {
-  .intro-paragraph {
-    font-size: 1.125rem;
-    margin-top: 2rem;
-  }
-}
-
+/* Drop cap */
 .drop-cap {
-  initial-letter: 2;
-  -webkit-initial-letter: 2;
-  color: #4a5568;
-  font-weight: bold;
-  margin-right: 0.5em;
   float: left;
   font-size: 3.25rem;
   line-height: 0.8;
+  margin-right: 0.1em;
+  margin-top: 0.15em;
+  color: #4a5568;
+  font-weight: bold;
 }
 
-@supports not (initial-letter: 2) {
+@supports (initial-letter: 2) {
   .drop-cap {
-    float: left;
-    font-size: 3.25rem;
-    line-height: 0.8;
-    margin-right: 0.1em;
-    margin-top: 0.15em;
-  }
-}
-
-@media (max-width: 640px) {
-  .drop-cap {
-    font-size: 2.75rem;
+    initial-letter: 2;
+    -webkit-initial-letter: 2;
+    margin-right: 0.5em;
+    margin-top: 0;
   }
 }
 
@@ -66,10 +56,10 @@
   padding-left: 1.5rem;
 }
 
-.footnotes li {
+.footnotes li,
+.footnote-backref {
   font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 0.5rem;
 }
 
 .footnote-ref {
@@ -81,80 +71,57 @@
 }
 
 .footnote-backref {
-  font-size: 0.875rem;
   color: #4a5568;
   text-decoration: none;
   margin-left: 0.25rem;
 }
 
-@media (max-width: 640px) {
-  .footnotes {
-    font-size: 0.8125rem;
-  }
-}
-
 /* Table Styles */
-table {
+.article-content table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
   margin: 2.5rem 0;
   background-color: rgba(18, 18, 18, 0.8);
-  border-radius: 1rem;
   overflow: hidden;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
-thead,
-th:first-child,
-td:first-child {
-  background-color: rgba(30, 30, 30, 0.9);
-}
-
-th,
-td {
+.article-content th,
+.article-content td {
   padding: 1.25rem 1.5rem;
   text-align: left;
 }
 
-th {
-  font-weight: 700;
+.article-content th,
+.article-content td:first-child {
+  font-weight: 600;
   color: rgba(255, 255, 255, 0.95);
+}
+
+.article-content th {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-td {
+.article-content td {
   color: rgba(255, 255, 255, 0.8);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Emphasize first column */
-th:first-child,
-td:first-child {
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.95);
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+.article-content thead,
+.article-content th:first-child,
+.article-content td:first-child {
+  background-color: rgba(30, 30, 30, 0.9);
 }
 
-tr:nth-child(even) {
+.article-content tr:nth-child(even) {
   background-color: rgba(255, 255, 255, 0.02);
 }
 
-tr:last-child td {
+.article-content tr:last-child td {
   border-bottom: none;
-}
-
-@media (max-width: 640px) {
-  table {
-    font-size: 0.9rem;
-  }
-
-  th,
-  td {
-    padding: 1rem 1.25rem;
-  }
 }
 
 /* Article content link styles */
@@ -169,33 +136,45 @@ tr:last-child td {
   text-decoration: underline;
 }
 
-/* Centered Images with bottom margin */
+/* Image styles */
 .prose img,
 .prose .image-container {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto 1.5rem;
   max-width: 100%;
   height: auto;
-  margin-bottom: 1.5rem; /* Add space below images */
 }
 
-.prose .image-container > * {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Add space after image captions if present */
 .prose .image-container figcaption {
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
+  margin: 0.5rem 0 1rem;
   text-align: center;
   font-style: italic;
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* Ensure paragraphs after images have consistent spacing */
 .prose img + p,
 .prose .image-container + p {
   margin-top: 1.5rem;
+}
+
+/* Media queries */
+@media (max-width: 640px) {
+  .intro-paragraph,
+  .article-content table,
+  .footnotes {
+    font-size: 0.9rem;
+  }
+
+  .intro-paragraph {
+    margin-top: 2rem;
+  }
+
+  .drop-cap {
+    font-size: 2.75rem;
+  }
+
+  .article-content th,
+  .article-content td {
+    padding: 1rem 1.25rem;
+  }
 }

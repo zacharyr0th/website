@@ -1,3 +1,9 @@
-export default function WritingLayout({ children }: { children: React.ReactNode }) {
-  return <div>{children}</div>;
-}
+import React from 'react';
+
+const WritingLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <main className="writing-layout">
+    {children}
+  </main>
+);
+
+export default WritingLayout;

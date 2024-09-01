@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
@@ -17,35 +17,39 @@ export default function ReviewsArchive({ initialReviews }: ReviewsArchiveProps) 
   const [searchTerm, setSearchTerm] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const filteredReviews = useMemo(() => {
-    return reviews.filter(
-      (review) =>
-        review.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        review.tags?.some((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase())) ||
-        review.bookAuthor?.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  }, [reviews, searchTerm]);
-
   useEffect(() => {
     if (process.env.NODE_ENV !== 'production') {
       console.log('ReviewsArchive mounted with', reviews.length, 'reviews');
     }
   }, [reviews]);
 
+  const filteredReviews = useMemo(() => {
+    if (!searchTerm) return reviews;
+    const searchRegex = new RegExp(searchTerm.split('').join('.*'), 'i');
+    return reviews.filter(
+      (review) =>
+        searchRegex.test(review.title) ||
+        review.tags?.some((tag) => searchRegex.test(tag)) ||
+        (review.bookAuthor && searchRegex.test(review.bookAuthor))
+    );
+  }, [reviews, searchTerm]);
+
+  const formatDate = useCallback((dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('default', { month: 'short', year: 'numeric' });
+  }, []);
+
+  const toggleDropdown = useCallback(() => {
+    setIsDropdownOpen((prevState) => !prevState);
+  }, []);
+
+  const handleReviewClick = useCallback((slug: string) => {
+    router.push(`/writing/${slug || ''}`);
+  }, [router]);
+
   if (reviews.length === 0) {
     return <div>No reviews available. Please check the console for more information.</div>;
   }
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    const month = date.toLocaleString('default', { month: 'short' });
-    const year = date.getFullYear();
-    return `${month} ${year}`;
-  };
-
-  const toggleDropdown = () => {
-    setIsDropdownOpen((prevState) => !prevState);
-  };
 
   return (
     <div className="min-h-screen bg-inherit text-gray-300">
@@ -117,59 +121,54 @@ export default function ReviewsArchive({ initialReviews }: ReviewsArchiveProps) 
             </thead>
             <tbody className="divide-y divide-gray-800">
               {filteredReviews.map((review) => (
-                <Link
+                <motion.tr
                   key={review.id}
-                  href={review.slug ? `/writing/${review.slug}` : '#'}
-                  passHref
-                  legacyBehavior
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                  whileHover={{ backgroundColor: 'rgba(26, 26, 26, 0.5)' }}
+                  className="cursor-pointer"
+                  onClick={() => handleReviewClick(review.slug || '')}
                 >
-                  <motion.tr
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                    whileHover={{ backgroundColor: 'rgba(26, 26, 26, 0.5)' }}
-                    className="cursor-pointer"
-                  >
-                    <td className="px-6 py-4 whitespace-nowrap flex items-center">
-                      <div className="w-12 h-12">
-                        <Image
-                          src={review.image || '/images/placeholder.webp'}
-                          alt={review.title}
-                          width={50}
-                          height={50}
-                          className="rounded-full object-cover w-full h-full"
-                          loading={process.env.NODE_ENV !== 'production' ? 'eager' : 'lazy'}
-                        />
-                      </div>
-                      <div className="ml-4 text-sm font-medium text-gray-300">{review.title}</div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="text-sm text-gray-300">{review.bookAuthor}</div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="flex flex-wrap gap-2">
-                        {review.tags ? (
-                          review.tags.map((tag: string, index: number) => (
-                            <span
-                              key={index}
-                              className="px-2 py-1 text-xs font-semibold rounded-full bg-gray-700 text-gray-300"
-                            >
-                              {tag}
-                            </span>
-                          ))
-                        ) : (
-                          <span className="text-gray-500">No tags</span>
-                        )}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-300">{formatDate(review.date)}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-400">{review.readTime} min</div>
-                    </td>
-                  </motion.tr>
-                </Link>
+                  <td className="px-6 py-4 whitespace-nowrap flex items-center">
+                    <div className="w-12 h-12">
+                      <Image
+                        src={review.image || '/images/placeholder.webp'}
+                        alt={review.title}
+                        width={50}
+                        height={50}
+                        className="rounded-full object-cover w-full h-full"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="ml-4 text-sm font-medium text-gray-300">{review.title}</div>
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="text-sm text-gray-300">{review.bookAuthor}</div>
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="flex flex-wrap gap-2">
+                      {review.tags ? (
+                        review.tags.map((tag: string, index: number) => (
+                          <span
+                            key={index}
+                            className="px-2 py-1 text-xs font-semibold rounded-full bg-gray-700 text-gray-300"
+                          >
+                            {tag}
+                          </span>
+                        ))
+                      ) : (
+                        <span className="text-gray-500">No tags</span>
+                      )}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-300">{formatDate(review.date)}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-400">{review.readTime} min</div>
+                  </td>
+                </motion.tr>
               ))}
             </tbody>
           </table>

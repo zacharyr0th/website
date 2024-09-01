@@ -5,7 +5,7 @@
 
 .nav-link span {
   display: inline-block;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s;
 }
 
 .nav-link:hover span {

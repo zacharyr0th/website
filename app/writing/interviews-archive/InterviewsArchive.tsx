@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
@@ -27,11 +27,13 @@ export default function InterviewsArchive({ initialInterviews }: InterviewsArchi
   }, [initialInterviews]);
 
   const filteredInterviews = useMemo(() => {
+    if (!searchTerm) return interviews;
+    const searchRegex = new RegExp(searchTerm.split('').join('.*'), 'i');
     return interviews.filter(
       (interview) =>
-        interview.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        interview.tags?.some((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase())) ||
-        interview.bookAuthor?.toLowerCase().includes(searchTerm.toLowerCase())
+        searchRegex.test(interview.title) ||
+        interview.tags?.some((tag) => searchRegex.test(tag)) ||
+        (interview.bookAuthor && searchRegex.test(interview.bookAuthor))
     );
   }, [interviews, searchTerm]);
 

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
@@ -19,74 +19,64 @@ interface WritingPageClientProps {
   allContent: Content[];
 }
 
+const ArticleCard: React.FC<{ article: Content }> = React.memo(({ article }) => {
+  const imageSrc =
+    article.image && (article.image.startsWith('/') || article.image.startsWith('http'))
+      ? article.image
+      : '/placeholder.jpg';
+
+  return (
+    <div className="absolute inset-0 rounded-lg overflow-hidden shadow-lg bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a]">
+      <Link href={`/writing/${article.slug}`}>
+        <div className="relative h-full cursor-pointer">
+          <Image
+            src={imageSrc}
+            alt={`Cover image for ${article.title}`}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            style={{ objectFit: 'cover' }}
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = '/placeholder.jpg';
+            }}
+            priority={true}
+          />
+          <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black/80 to-transparent">
+            <h2 className="text-2xl font-bold mb-1">{article.title}</h2>
+          </div>
+        </div>
+      </Link>
+    </div>
+  );
+});
+
 const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allContent }) => {
   const [mounted, setMounted] = useState(false);
   const [currentArticleIndex, setCurrentArticleIndex] = useState(0);
   const [randomArticles, setRandomArticles] = useState<Content[]>([]);
 
+  const { contentArray, featuredArticles } = useMemo(() => {
+    const array = Array.isArray(allContent) ? allContent : [];
+    return {
+      contentArray: array,
+      featuredArticles: array.slice(0, 3)
+    };
+  }, [allContent]);
+
   const refreshRandomArticles = React.useCallback(() => {
-    const contentArray = Array.isArray(allContent) ? allContent : [];
-    const featuredArticles = contentArray.slice(0, 3);
-
     const filteredContent = contentArray.filter((content) => {
-      // Exclude featured articles
       if (featuredArticles.some((featured) => featured.id === content.id)) return false;
-
-      // Filter based on contentType if it's specified
       if (contentType && content.type !== contentType) return false;
-
       return true;
     });
 
     const shuffled = [...filteredContent].sort(() => Math.random() - 0.5);
     setRandomArticles(shuffled.slice(0, 5));
-  }, [allContent, contentType]);
+  }, [contentArray, featuredArticles, contentType]);
 
   useEffect(() => {
     setMounted(true);
     refreshRandomArticles();
   }, [refreshRandomArticles]);
-
-  // Ensure allContent is an array
-  const contentArray = Array.isArray(allContent) ? allContent : [];
-
-  const featuredArticles = contentArray.slice(0, 3);
-
-  const categoryDescriptions: Record<string, string> = {
-    Articles: 'Articles',
-    Reviews: 'Reviews',
-    Interviews: 'Interviews',
-  };
-
-  const ArticleCard: React.FC<{ article: Content }> = ({ article }) => {
-    const imageSrc =
-      article.image && (article.image.startsWith('/') || article.image.startsWith('http'))
-        ? article.image
-        : '/placeholder.jpg';
-
-    return (
-      <div className="absolute inset-0 rounded-lg overflow-hidden shadow-lg bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a]">
-        <Link href={`/writing/${article.slug}`}>
-          <div className="relative h-full cursor-pointer">
-            <Image
-              src={imageSrc}
-              alt={`Cover image for ${article.title}`}
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              style={{ objectFit: 'cover' }}
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = '/placeholder.jpg';
-              }}
-              priority={true}
-            />
-            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black/80 to-transparent">
-              <h2 className="text-2xl font-bold mb-1">{article.title}</h2>
-            </div>
-          </div>
-        </Link>
-      </div>
-    );
-  };
 
   const handlePrevArticle = () => {
     setCurrentArticleIndex(
@@ -98,9 +88,7 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
     setCurrentArticleIndex((prev) => (prev + 1) % featuredArticles.length);
   };
 
-  if (!mounted) {
-    return null; // Return null on server-side and first client-side render
-  }
+  if (!mounted) return null;
 
   return (
     <motion.div
@@ -308,4 +296,4 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
   );
 };
 
-export default WritingPageClient;
+export default React.memo(WritingPageClient);
