@@ -56,7 +56,7 @@ export async function getAllWritingMetadata(): Promise<Array<{ slug: string; tit
 export async function getRecommendedWritingContent(currentSlug: string, count: number) {
   const allWriting = await getAllWritingMetadata();
   const filteredWriting = allWriting.filter((article) => article.slug !== currentSlug);
-  
+
   // Fisher-Yates shuffle algorithm
   for (let i = filteredWriting.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));

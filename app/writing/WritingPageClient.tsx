@@ -58,7 +58,7 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
     const array = Array.isArray(allContent) ? allContent : [];
     return {
       contentArray: array,
-      featuredArticles: array.slice(0, 3)
+      featuredArticles: array.slice(0, 3),
     };
   }, [allContent]);
 

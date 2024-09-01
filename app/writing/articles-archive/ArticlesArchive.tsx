@@ -46,9 +46,12 @@ export default function ArticlesArchive({ initialArticles }: ArticlesArchiveProp
     setIsDropdownOpen((prevState) => !prevState);
   }, []);
 
-  const handleArticleClick = useCallback((slug: string) => {
-    router.push(`/writing/${slug || ''}`);
-  }, [router]);
+  const handleArticleClick = useCallback(
+    (slug: string) => {
+      router.push(`/writing/${slug || ''}`);
+    },
+    [router]
+  );
 
   return (
     <div className="min-h-screen bg-inherit text-gray-300">

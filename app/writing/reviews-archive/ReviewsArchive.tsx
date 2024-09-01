@@ -43,9 +43,12 @@ export default function ReviewsArchive({ initialReviews }: ReviewsArchiveProps) 
     setIsDropdownOpen((prevState) => !prevState);
   }, []);
 
-  const handleReviewClick = useCallback((slug: string) => {
-    router.push(`/writing/${slug || ''}`);
-  }, [router]);
+  const handleReviewClick = useCallback(
+    (slug: string) => {
+      router.push(`/writing/${slug || ''}`);
+    },
+    [router]
+  );
 
   if (reviews.length === 0) {
     return <div>No reviews available. Please check the console for more information.</div>;

@@ -22,7 +22,7 @@ export default function ContentRenderer({ content }: ContentRendererProps) {
               .replace(/<GitHubEmbed([^>]*)>/g, (_, props) => `<GitHubEmbed ${props} />`)
               .replace(/<TwitterEmbed([^>]*)>/g, (_, props) => `<TwitterEmbed ${props} />`)
               .replace(/<table/g, '<div class="table-wrapper"><table')
-              .replace(/<\/table>/g, '</table></div>')
+              .replace(/<\/table>/g, '</table></div>'),
           }}
         />
       ) : (
