@@ -33,10 +33,6 @@ export default function ArticlesArchive({ initialArticles }: ArticlesArchiveProp
     console.log('ArticlesArchive mounted with', initialArticles.length, 'articles');
   }, [initialArticles]);
 
-  if (articles.length === 0) {
-    return <div>No articles available. Please check the console for more information.</div>;
-  }
-
   const formatDate = useCallback((dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('default', { month: 'short', year: 'numeric' });
@@ -52,6 +48,10 @@ export default function ArticlesArchive({ initialArticles }: ArticlesArchiveProp
     },
     [router]
   );
+
+  if (articles.length === 0) {
+    return <div>No articles available. Please check the console for more information.</div>;
+  }
 
   return (
     <div className="min-h-screen bg-inherit text-gray-300">

@@ -27,6 +27,19 @@ export default function SnakeGame() {
     setHighScore(storedHighScore ? parseInt(storedHighScore, 10) : 0);
   }, []);
 
+  useEffect(() => {
+    const currentGameContainer = gameContainerRef.current;
+    if (currentGameContainer) {
+      currentGameContainer.focus();
+    }
+
+    return () => {
+      if (currentGameContainer) {
+        currentGameContainer.blur();
+      }
+    };
+  }, []);
+
   const updateHighScore = useCallback((newScore: number) => {
     setHighScore((prevHighScore) => {
       if (newScore > prevHighScore) {
@@ -103,9 +116,11 @@ export default function SnakeGame() {
       e.preventDefault();
     };
 
+    const currentGameContainer = gameContainerRef.current;
+
     if (!isPaused) {
       document.addEventListener('keydown', handleKeyPress);
-      gameContainerRef.current?.addEventListener('wheel', preventScroll, { passive: false });
+      currentGameContainer?.addEventListener('wheel', preventScroll, { passive: false });
     }
 
     const gameInterval = setInterval(() => {
@@ -116,7 +131,7 @@ export default function SnakeGame() {
 
     return () => {
       document.removeEventListener('keydown', handleKeyPress);
-      gameContainerRef.current?.removeEventListener('wheel', preventScroll);
+      currentGameContainer?.removeEventListener('wheel', preventScroll);
       clearInterval(gameInterval);
     };
   }, [moveSnake, gameStarted, isPaused]);
@@ -180,18 +195,18 @@ export default function SnakeGame() {
         <div className={styles.contentContainer}>
           <div className={styles.leftSection}>
             <div>
-              <h2 className={styles.subtitle}>So here's a Snake Game!</h2>
+              <h2 className={styles.subtitle}>So here&apos;s a Snake Game!</h2>
               <div className={styles.scoreDisplay}>Score: {score}</div>
               <div className={styles.highScoreDisplay}>High Score: {highScore}</div>
             </div>
             <div className={styles.rulesSection}>
               <h2 className={styles.rulesTitle}>Game Rules</h2>
               <ul className={styles.rulesList}>
-                <li className={styles.ruleItem}>Use arrow keys to move the snake</li>
-                <li className={styles.ruleItem}>Eat food to grow longer</li>
-                <li className={styles.ruleItem}>Avoid colliding with walls or yourself</li>
-                <li className={styles.ruleItem}>Fill the entire board to win!</li>
-                <li className={styles.ruleItem}>Click outside the game board to pause</li>
+                <li className="mb-1">Use arrow keys to move the snake</li>
+                <li className="mb-1">Eat food to grow longer</li>
+                <li className="mb-1">Avoid colliding with walls or yourself</li>
+                <li className="mb-1">Fill the entire board to win!</li>
+                <li className="mb-1">Click outside the game board to pause</li>
               </ul>
             </div>
           </div>

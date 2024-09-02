@@ -13,8 +13,5 @@
 @import './accessibility.css';
 @import './layout.css';
 
-/* Pages */
-@import '../pages/HomePage.module.css';
-
 /* Special */
 @import '../special/print.css';

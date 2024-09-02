@@ -50,7 +50,10 @@ const CategoryCard = memo(({
   </motion.div>
 ));
 
+CategoryCard.displayName = 'CategoryCard';
+
 const MemoizedCategoryCard = memo(CategoryCard);
+MemoizedCategoryCard.displayName = 'MemoizedCategoryCard';
 
 const AudioPage = () => {
   return (
@@ -91,5 +94,7 @@ const AudioPage = () => {
     </motion.div>
   );
 };
+
+AudioPage.displayName = 'AudioPage';
 
 export default AudioPage;

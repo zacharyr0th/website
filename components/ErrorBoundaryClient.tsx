@@ -1,14 +1,9 @@
 'use client';
 
 import React, { memo, useCallback } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
+import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 
-interface ErrorFallbackProps {
-  error: Error;
-  resetErrorBoundary: () => void;
-}
-
-const ErrorFallback: React.FC<ErrorFallbackProps> = memo(({ error, resetErrorBoundary }) => (
+const ErrorFallback = memo(({ error, resetErrorBoundary }: FallbackProps) => (
   <div role="alert" className="error-boundary">
     <h2>Something&apos;s gone wrong!</h2>
     <p>We apologize for the inconvenience. Here&apos;s what happened:</p>
@@ -25,11 +20,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = memo(({ error, resetErrorBou
 
 ErrorFallback.displayName = 'ErrorFallback';
 
-interface ErrorBoundaryClientProps {
-  children: React.ReactNode;
-}
-
-const ErrorBoundaryClient: React.FC<ErrorBoundaryClientProps> = ({ children }) => {
+const ErrorBoundaryClient: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const handleReset = useCallback(() => {
     localStorage.clear();
     window.location.reload();

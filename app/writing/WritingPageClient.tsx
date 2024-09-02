@@ -49,6 +49,8 @@ const ArticleCard: React.FC<{ article: Content }> = React.memo(({ article }) => 
   );
 });
 
+ArticleCard.displayName = 'ArticleCard';
+
 const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allContent }) => {
   const [mounted, setMounted] = useState(false);
   const [currentArticleIndex, setCurrentArticleIndex] = useState(0);
@@ -323,5 +325,7 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
     </motion.div>
   );
 };
+
+WritingPageClient.displayName = 'WritingPageClient';
 
 export default React.memo(WritingPageClient);
