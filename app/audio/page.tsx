@@ -14,41 +14,48 @@ const categories = [
   { title: 'Archive', description: 'History', slug: 'archive' },
 ];
 
-const CategoryCard = memo(({
-  category,
-  index,
-}: {
-  category: { title: string; description: string; slug: string };
-  index: number;
-}) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, delay: index * 0.1 }}
-  >
-    <Link href={`/audio/${category.slug}`} className="block">
-      <motion.div className="bg-inherit rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700 hover:bg-[#242424]">
-        <div className="p-6">
-          <h2 className="text-2xl font-bold text-gray-100 mb-2">{category.title}</h2>
-          <p className="text-gray-400 mb-4">{category.description}</p>
-          <div className="text-blue-400 hover:text-blue-300 inline-flex items-center">
-            View All
-            <svg
-              className="w-4 h-4 ml-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
+const CategoryCard = memo(
+  ({
+    category,
+    index,
+  }: {
+    category: { title: string; description: string; slug: string };
+    index: number;
+  }) => (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+    >
+      <Link href={`/audio/${category.slug}`} className="block">
+        <motion.div className="bg-inherit rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700 hover:bg-[#242424]">
+          <div className="p-6">
+            <h2 className="text-2xl font-bold text-gray-100 mb-2">{category.title}</h2>
+            <p className="text-gray-400 mb-4">{category.description}</p>
+            <div className="text-blue-400 hover:text-blue-300 inline-flex items-center">
+              View All
+              <svg
+                className="w-4 h-4 ml-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </div>
           </div>
-        </div>
-        <div className="h-1 w-full bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300"></div>
-      </motion.div>
-    </Link>
-  </motion.div>
-));
+          <div className="h-1 w-full bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300"></div>
+        </motion.div>
+      </Link>
+    </motion.div>
+  )
+);
 
 CategoryCard.displayName = 'CategoryCard';
 

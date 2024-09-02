@@ -138,7 +138,7 @@ export default function SnakeGame() {
 
   const togglePause = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
-    setIsPaused(prev => !prev);
+    setIsPaused((prev) => !prev);
   }, []);
 
   const handleContainerClick = useCallback(() => {
@@ -177,7 +177,9 @@ export default function SnakeGame() {
               return (
                 <div
                   key={`${x}-${y}`}
-                  className={`${styles.cell} ${isSnake ? styles.snake : ''} ${isHead ? styles.head : ''} ${food.x === x && food.y === y ? styles.food : ''}`}
+                  className={`${styles.cell} ${isSnake ? styles.snake : ''} ${
+                    isHead ? styles.head : ''
+                  } ${food.x === x && food.y === y ? styles.food : ''}`}
                   style={{ backgroundColor: snakeSegment ? snakeSegment.color : '' }}
                 />
               );
@@ -211,22 +213,32 @@ export default function SnakeGame() {
             </div>
           </div>
           <div className={styles.rightSection}>
-            <div className={styles.gameBoard} onClick={(e) => {
-              e.stopPropagation();
-              startGame();
-            }}>
+            <div
+              className={styles.gameBoard}
+              onClick={(e) => {
+                e.stopPropagation();
+                startGame();
+              }}
+            >
               {boardCells}
               {!gameStarted && gameState === 'playing' && (
                 <div className={styles.startOverlay}>
-                  <button className={styles.overlayButton} onClick={(e) => {
-                    e.stopPropagation();
-                    startGame();
-                  }}>Click to Start</button>
+                  <button
+                    className={styles.overlayButton}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      startGame();
+                    }}
+                  >
+                    Click to Start
+                  </button>
                 </div>
               )}
               {isPaused && (
                 <div className={styles.pauseOverlay} onClick={togglePause}>
-                  <button className={styles.overlayButton} onClick={togglePause}>Resume Game</button>
+                  <button className={styles.overlayButton} onClick={togglePause}>
+                    Resume Game
+                  </button>
                 </div>
               )}
             </div>
