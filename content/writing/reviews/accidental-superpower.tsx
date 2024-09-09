@@ -29,65 +29,113 @@ const AccidentalSuperpower: React.FC = () => {
   return (
     <article>
       <p>
-        Peter Zeihan is a well-known speaker and writer with private and public-sector experience.
-        He is a strong and persuasive speaker to the point where it prevents some people from taking
-        his work seriously because he is, in their mind, too confident in his position. He's also
-        said some innacurate things about Bitcoin and is considered smarmy at best and even part of
-        the deep state at worst, depending on the content intake of the reviewer. This confidence is
-        also present throughout his writing and may turn people who disagree with his conclusions
-        off. Peter deals a lot with the context of the USA and its relation to the world, as well as
+        The Accidental Superpower is a hefty introduction to the US-centric theses of Peter Zeihan,
+        a well-known geopolitical analyst, speaker, and writer with private and public-sector
+        experience.
+      </p>
+      <p>
+        Peter's job requires him to be a generalist, so much so that it's hard not to reel when he
+        glosses over a very complex topic and lays down his opinion. Some could perceive his
+        matter-of-factness as persuasive, but others may find it off-putting. This confidence is
+        present throughout the four books he has written, all reviewed on this website, and the
+        Accidental Superpower kicks it off.
+      </p>
+      <p>
+        Peter deals a lot with the context of the USA and its relation to the world, as well as
         historical events that have made things what they are. Throughout, he makes conclusive
-        statements that don't seem to tell the whole story or consider the full context of the
-        situation. It makes sense from his perspective as he has vast knowledge and doesn't have
-        time to get into the details that support each conclusion on every topic because his books
-        would be too long. I need to learn more about most of the issues he covers to have a
-        definitive opinion on his accuracy. Still, he's a good storyteller and has a team of
-        researchers working with him - so I choose to view his work as representing a particular
+        statements that don't tell the whole story or consider the full context of a given
+        situation. It makes sense from his perspective as there is a lot of ground to cover, and
+        there isn't enough time to get into the details that support each conclusion on every topic
+        because then his books would be too long. I'd need to learn more about most of the issues he
+        covers to have a definitive opinion on his accuracy. Still, he's a good storyteller and has
+        a team of researchers working with him - so I view his work as representing a particular
         school of thought.
       </p>
+      <h2>The Role of Geography</h2>
       <p>
-        Peter loudly concludes that the USA is positioned to dominate society for the foreseeable
+        Peter's books, much like Jared Diamond's Gun's, Germ, and Steel - also reviewed
+        <a href="/writing/reviews/guns-germs-steel">here</a> - focus on the fate of geography and
+        its unintended consequences. Geography underlies the forces that shape history and still
+        affect our lives today.
+      </p>
+      <p>
+        For example, Mexico is historically difficult to govern because its geography prevents it
+        from having a central power source. Instead, multiple regions of power in Mexico were
+        separated by geographic obstructions, each of which turned into their own states.
+      </p>
+      <p>
+        It's as simple as gravity. Trains in Mexico, for example, become less capable of transport
+        when they have to go up a hill, which is a prevelant feature of the boundaries seperating
+        the flatlands in the country. The US on the otherhand was lucky to be able to build
+        railroads over the flat flyover states that connected the country's East and West sides.
+        Mexico's terrain wasn't so friendly.
+      </p>
+      <h2>US Dominance</h2>
+      <p>
+        Peter loudly concludes that the US is positioned to dominate society for the foreseeable
         future. With no military threats to the North or South, the most potent natural defense
         barriers in the world - the Pacific and Atlantic Oceans, and the untapped shale beneath its
-        feet - he has some solid arguments. This book is the first of a four-part series, all
-        following the same train of thought and, at times, I'd prefer that more counterarguments
-        were considered because every road led to the supremacy of the USA. While it's possible and
-        maybe even likely, there are a lot of variables and unknown unknowns that could lead to a
-        different outcome.
+        feet, let alone the accelerating decline of Asian and European birth rates - he has some
+        solid arguments.
       </p>
       <p>
-        With that said, I enjoyed listening to all four of his books. They feel like a modern
-        history of the economic world, and Peter drops a lot of exciting facts between his
-        conclusions. He also has expansive datasets and interesting charts to support his arguments
-        which are available for free on his webiste. I go into more detail into some of those charts
-        in later reviews. Check out my reviews of his other books below.
+        This book is the first of a four-part series, all following the same train of thought. At
+        times it feels redundant and I'd prefer that more counterarguments to be considered because
+        every road Peter goes down leads to US supremacy. While it's possible and likely, there are
+        a lot of variables and unknown unknowns that could lead to a different outcome.
       </p>
-      <ul>
-        <li>
-          <Link href="/writing/reviews/accidental-superpower">The Accidental Superpower</Link>
-          <p>How the USA found itself in such a dominant position</p>
-        </li>
-        <li>
-          <Link href="/writing/reviews/absent-superpower">The Absent Superpower</Link>
-          <p>
-            How the USA began to resign from global affairs and what the world would look like if it
-            removed itself entirely
-          </p>
-        </li>
-        <li>
-          <Link href="/writing/reviews/disunited-nations">Disunited Nations</Link>
-          <p>
-            The best of the series. This details interesting historical events and modern
-            relationships that have occurred between countries other than the US, such as Angola,
-            Argentina, Turkey, and more.
-          </p>
-        </li>
-        <li>
-          <Link href="/writing/reviews/eotwijtb">The End of the World is Just the Beginning</Link>
-          <p>Where he thinks the world is going from here.</p>
-        </li>
-      </ul>
-      https://www.youtube.com/watch?v=IkuSHOPYQDU
+      <p>
+        With that said, I enjoyed listening to all four of his books. They feel like modern economic
+        world history, and Peter drops many interesting facts between his conclusions. He also has
+        expansive demographic datasets that he works with and interesting charts to support his
+        arguments, which are available for free on his website. I go into more detail about some of
+        those charts in later reviews.
+      </p>
+      <h2>Related Books in the Series</h2>
+      <p>Check out my reviews of his other books below.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Book</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <Link href="/writing/reviews/accidental-superpower">The Accidental Superpower</Link>
+            </td>
+            <td>How the USA found itself in such a dominant position</td>
+          </tr>
+          <tr>
+            <td>
+              <Link href="/writing/reviews/absent-superpower">The Absent Superpower</Link>
+            </td>
+            <td>
+              How the USA began to resign from global affairs and what the world would look like if
+              it removed itself entirely
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <Link href="/writing/reviews/disunited-nations">Disunited Nations</Link>
+            </td>
+            <td>
+              The best of the series. This book details interesting historical events and modern
+              relationships that have occurred between countries other than the US, such as Angola,
+              Argentina, Turkey, and more.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <Link href="/writing/reviews/eotwijtb">
+                The End of the World is Just the Beginning
+              </Link>
+            </td>
+            <td>This book outlays where Peter thinks the world is going from here.</td>
+          </tr>
+        </tbody>
+      </table>
     </article>
   );
 };

@@ -160,7 +160,7 @@ const Bing: React.FC = () => {
         maybe Apple will, or Tesla, or Anthropic, or
         <a href="https://hackernoon.com/how-buzzfeed-plans-to-use-ai-to-generate-listicles-and-more-content">
           Buzzfeed
-        </a>{' '}
+        </a>
         will.
       </p>
       <h3>Inspiration</h3>

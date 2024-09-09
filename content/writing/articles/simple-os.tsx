@@ -23,7 +23,7 @@ export const metadata: ContentItem = {
   language: 'en',
 };
 
-const ModularMicrokernelOS: React.FC = () => {
+const SimpleOS: React.FC = () => {
   return (
     <article>
       <section>
@@ -123,10 +123,10 @@ const ModularMicrokernelOS: React.FC = () => {
           </li>
         </ul>
         <p>
-          As I began researching this idea, I came across this{' '}
+          As I began researching this idea, I came across this
           <a href="https://faculty.nps.edu/irvine/Publications/Publications2006/NPS-CS-06-001_Analysis3KernelArchi.pdf">
             paper
-          </a>{' '}
+          </a>
           which discusses three different multilevel security kernel architectures. The authors
           conclude that the choice between these architectures depends on the specific requirements
           of a given system or deployment scenario. In any case, the goas is to prevent a single
@@ -151,7 +151,7 @@ const ModularMicrokernelOS: React.FC = () => {
           <li>Essential x86 structures (GDT, IDT) and initialization</li>
         </ul>
         <p>
-          The first iteration can be found here:{' '}
+          The first iteration can be found here:
           <a href="https://github.com/zacharyr0th/SimpleOS">SimpleOS</a>.
         </p>
         <img src="/images/articles/simpleos-1.webp" alt="" className="article-image" />
@@ -160,4 +160,4 @@ const ModularMicrokernelOS: React.FC = () => {
   );
 };
 
-export default ModularMicrokernelOS;
+export default SimpleOS;

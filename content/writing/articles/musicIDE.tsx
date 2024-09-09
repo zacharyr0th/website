@@ -28,6 +28,7 @@ const MusicIDE: React.FC = () => {
   return (
     <article>
       <Image src="/images/articles/musicIDE-0.webp" alt="MusicIDE" width={1000} height={1000} />
+      <p></p>
 
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus

@@ -201,7 +201,9 @@ function renderHeader(post: Post) {
   return (
     <header className="mb-8">
       <h1 className="text-4xl font-bold mb-2">{post.title}</h1>
-      {post.subtitle && <h2 className="text-2xl text-gray-400 mb-4">{post.subtitle}</h2>}
+      {post.subtitle && (
+        <h2 className="subtitle text-2xl font-normal text-gray-400 mb-4">{post.subtitle}</h2>
+      )}
       <div className="flex items-center text-sm text-gray-400">
         <span>{post.author}</span>
         <span className="mx-2">•</span>

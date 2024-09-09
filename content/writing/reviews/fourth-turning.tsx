@@ -2,25 +2,24 @@ import React from 'react';
 import { ContentItem } from '../../../lib/types';
 
 export const metadata: ContentItem = {
-  id: 'absent-superpower',
-  slug: 'absent-superpower',
-  title: 'The Absent Superpower',
-  subtitle: 'Peter Zeihan',
-  image: '/images/reviews/absent-superpower.webp',
-  imageCaption:
-    'Prompt: power willingly chooses to withdraw inward abstract expressionist painting dramatic and geometric',
+  id: 'fourth-turning',
+  slug: 'fourth-turning',
+  title: 'The Fourth Turning',
+  subtitle: '',
+  image: '/images/reviews/placeholder.webp',
+  imageCaption: '',
   pageViews: 0,
   type: 'review',
-  description: "A review of Peter Zeihan's book The Absent Superpower",
+  description: '',
   content: '',
   author: 'Zachary Roth',
   date: 'May 2022',
-  tags: ['Geopolitics'],
+  tags: [''],
   readTime: 2,
   likes: 0,
   comments: 0,
   shares: 0,
-  bookAuthor: 'Peter Zeihan',
+  bookAuthor: '',
   language: 'en',
 };
 
@@ -29,8 +28,8 @@ const AbsentSuperpower: React.FC = () => {
     <article>
       <p>
         The Absent Superpower carries on the narratives introduced in the Accidental Superpower that
-        the US still reigns supreme - but introduces more variables and reasons for why the US could
-        withdraw itself from world affairs.
+        the US still reigns supreme - but introduces more variables about how there is good reason
+        for the US to withdraw itself from world affairs.
       </p>
       <p>
         The Accidental Superpower explains how the US became so powerful by happenstance. It sets
@@ -38,16 +37,14 @@ const AbsentSuperpower: React.FC = () => {
         the US being as international as it historically has been. In this case, the US must focus
         on Mexico, Canada, and most importantly SHALE to do so.
       </p>
-      <h2>Shale</h2>
       <p>
         This book goes deep into the shale industry, which is not for the faint of heart if you're
-        uninitiated. There are lots of statistics and geopolitical explanations of historical events
-        and it makes compelling arguments for why the US will be the leader in shale for the
+        uninitiated. There are lots of statistics and geopolitical explanations of historical
+        events. It makes compelling arguments for why the US will be the leader in shale for the
         foreseeable future. The most recruited talent is in the US, the most money and arguably the
         most incentive is in the US, and the US has the most to lose. It also has the largest known
         shale beds in the world, of course.
       </p>
-      <h2>Geopolitical Implications</h2>
       <p>
         Once the US takes advantage of its shale fields and continues to improve its relationships
         with Canada and Mexico, it can withdraw from the global oil stage and immediately stop
@@ -61,14 +58,12 @@ const AbsentSuperpower: React.FC = () => {
         society hinges around extra-impactful periods known as Fourth Turnings. The period we are
         about to enter is what some refer to as the Fourth Turning. So that's interesting.
       </p>
-      <h2>Maps and More</h2>
       <p>
         The Accidental Superpower (Peter's first book - reviewed{' '}
         <a href="/writing/reviews/accidental-superpower">here</a>) includes a handful of useful maps
         listed on his website but this book leans harder on these charts as a source of content. You
-        can view all the charts on Peter's{' '}
-        <a href="https://zeihan.com/the-absent-superpower-maps/">website</a>, which will give you an
-        idea of the context he and his team are working with.
+        can view all the charts <a href="https://zeihan.com/the-absent-superpower-maps/">here</a>,
+        which will give you an idea of the context Peter and his team are working with.
       </p>
       <p>
         As with all four of Peter's books, they're informative and have a high signal-to-noise ratio

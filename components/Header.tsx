@@ -105,7 +105,7 @@ const Header = () => {
           </div>
 
           {/* Main Page Links */}
-          {['writing', 'About'].map((item) => (
+          {['writing', 'about'].map((item) => (
             <Link
               key={item}
               href={`/${item}`}

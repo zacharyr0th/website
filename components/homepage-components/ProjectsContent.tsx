@@ -42,6 +42,19 @@ type Project = {
   liveLink?: string;
 };
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.3 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
 const ProjectCard: React.FC<{ project: Project }> = React.memo(({ project }) => {
   // Use useMemo for complex JSX structures
   const tags = useMemo(
@@ -59,9 +72,7 @@ const ProjectCard: React.FC<{ project: Project }> = React.memo(({ project }) => 
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      variants={itemVariants}
       className="group relative overflow-hidden rounded-lg bg-gray-800/30 p-6 transition-all duration-300 hover:bg-gray-700/40 hover:shadow-lg hover:shadow-pastel-blue/20 flex flex-col h-full cursor-pointer"
       onClick={() => window.open(project.liveLink || '#', '_blank')}
     >
@@ -110,17 +121,7 @@ ProjectCard.displayName = 'ProjectCard';
 const ProjectsContent: React.FC = () => {
   // Use useMemo for the project cards to prevent unnecessary re-renders
   const projectCards = useMemo(
-    () =>
-      projects.map((project) => (
-        <motion.div
-          key={project.id}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <ProjectCard project={project} />
-        </motion.div>
-      )),
+    () => projects.map((project) => <ProjectCard key={project.id} project={project} />),
     []
   );
 
@@ -129,9 +130,9 @@ const ProjectsContent: React.FC = () => {
       <div className="max-w-4xl mx-auto">
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-items-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ staggerChildren: 0.1 }}
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
         >
           {projectCards}
         </motion.div>
