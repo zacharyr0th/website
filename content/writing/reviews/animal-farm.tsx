@@ -1,5 +1,6 @@
 import React from 'react';
 import { ContentItem } from '../../../lib/types';
+import Image from 'next/image';
 
 export const metadata: ContentItem = {
   id: 'animal-farm',
@@ -25,7 +26,27 @@ export const metadata: ContentItem = {
 };
 
 const AnimalFarm: React.FC = () => {
-  return <article></article>;
+  return (
+    <article>
+      <Image
+        src="/images/reviews/animal-farm.webp"
+        alt="Animal Farm by George Orwell"
+        width={500}
+        height={500}
+      />
+      <p>
+        Animal Farm is a must-read for anyone who wants to understand how power and propaganda work.
+        This book is never not timely because what's being satirized is always present somewhere in
+        the world.
+      </p>
+      <p>
+        I won't go into much detail here because there are thousands of reviews of this elsewhere ,
+        and many people read it in high school. I listened to this as an audiobook and finished it
+        in one day.
+      </p>
+      <p> It's fun, funny, and scary. That's all I'll say.</p>
+    </article>
+  );
 };
 
 export default AnimalFarm;

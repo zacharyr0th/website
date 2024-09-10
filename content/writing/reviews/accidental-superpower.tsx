@@ -1,6 +1,7 @@
 import React from 'react';
 import { ContentItem } from '../../../lib/types';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export const metadata: ContentItem = {
   id: 'accidental-superpower',
@@ -28,10 +29,16 @@ export const metadata: ContentItem = {
 const AccidentalSuperpower: React.FC = () => {
   return (
     <article>
+      <Image
+        src="/images/reviews/accidental-superpower-1.webp"
+        alt="Book cover of The Accidental Superpower"
+        width={500}
+        height={500}
+      />
       <p>
-        The Accidental Superpower is a hefty introduction to the US-centric theses of Peter Zeihan,
-        a well-known geopolitical analyst, speaker, and writer with private and public-sector
-        experience.
+        The Accidental Superpower, the first book in Peter Zeihan's series, is a hefty introduction
+        to the US-centric theses of Peter Zeihan, a well-known geopolitical analyst, speaker, and
+        writer with private and public-sector experience.
       </p>
       <p>
         Peter's job requires him to be a generalist, so much so that it's hard not to reel when he

@@ -1,5 +1,6 @@
 import React from 'react';
 import { ContentItem } from '../../../lib/types';
+import Image from 'next/image';
 
 export const metadata: ContentItem = {
   id: 'corrections',
@@ -26,17 +27,16 @@ export const metadata: ContentItem = {
 const Corrections: React.FC = () => {
   return (
     <article>
-      <p>I'm from the Midwest. Johnathon Franzen is from the Midwest.</p>
-
-      <p>
-        Johnathon Franzen writes what he knows. I can tell you that his perception of the Midwest is
-        largely accurate. It's a depressing picture he paints, but it's something I empathize with.
-      </p>
-
-      <p>
-        He is a good writer. But as I said, it's depressing, and there were moments when I wished I
-        had read something else, but the ending was potent.
-      </p>
+      <Image
+        src="/images/reviews/corrections.webp"
+        alt="Book cover of The Corrections by Jonathan Franzen"
+        width={500}
+        height={300}
+      />
+      <p>Jonathon Franzen's writing is famously Midwestern. I'm from the Midwest and can confirm his accuracy in describing what it can be like.</p>
+<p>
+The characters are unlikable, and the story is depressing but realistic. Readers observe a family's dysfunction and the patriarch's declining health throughout the book, which coincidentally was published around 9/11. Many associate the feelings of this book with that time period, and it has won a handful of awards.
+</p>
     </article>
   );
 };

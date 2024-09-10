@@ -1,5 +1,6 @@
 import React from 'react';
 import { ContentItem } from '../../../lib/types';
+import Image from 'next/image';
 
 export const metadata: ContentItem = {
   id: 'deep-work',
@@ -27,22 +28,52 @@ export const metadata: ContentItem = {
 const DeepWork: React.FC = () => {
   return (
     <article>
-      <p>Good but it's a little too boomery.</p>
-
+      <Image
+        src="/images/reviews/deep-work.webp"
+        alt="Book cover of Deep Work by Cal Newport"
+        width={500}
+        height={300}
+      />  
+      <p>A long lecture on how to be more productive by using less technology.</p>
       <p>
-        Although Cal isn't even a boomer (he was born in 1982), he is very smart; he does succeed in
-        imparting a stale perspective on the masses and their technological addictions. Some of what
-        I listened to was refreshing, but most of it was obvious - use the least amount of
-        technology you need to.
+ The thesis is to reduce your dependence on technology and multitasking while working because it's making you less productive.
+ When this topic comes up, I just think about the attention span that people had 100 years ago compared to today. If you're reading this,
+ you're probably on your phone right now, and that's fine. It's all about the quality of one's screen time rather than quantity now because of how
+ ubiquitous screens have become although they've been proven to make one's brain lazier just by being near them. Do with that what you will.
       </p>
-
-      <figure className="my-8">
-        <img src="/images/reviews/deep-work.webp" className="w-full h-auto rounded-lg shadow-lg" />
-      </figure>
-
-      <p> </p>
-
-      <p>It's a good book, but you don't need to read it.</p>
+      <h3>
+ Newport's Rules for Deep Work
+      </h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Rule</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Work Deeply</td>
+            <td>Focus intensely on your work without distractions.</td>
+          </tr>
+          <tr>
+            <td>Embrace Boredom</td>
+            <td>Allow yourself to be bored to improve your focus.</td>
+          </tr>
+          <tr>
+            <td>Quit Social Media</td>
+            <td>Reduce or eliminate social media use to avoid distractions.</td>
+          </tr>
+          <tr>
+            <td>Drain the Shallows</td>
+            <td>Minimize shallow work to focus on more meaningful tasks.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+ Technology addiction is real, and the advice here is good, but most of it is common sense. Cal gives out a lot of advice, and there are Deep Work 
+ Playbooks and analyses are available online if you're interested in implementing some of it.
+      </p>
     </article>
   );
 };

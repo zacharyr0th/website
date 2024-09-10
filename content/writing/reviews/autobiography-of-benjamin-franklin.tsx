@@ -1,5 +1,6 @@
 import React from 'react';
 import { ContentItem } from '../../../lib/types';
+import Image from 'next/image';
 
 export const metadata: ContentItem = {
   id: 'autobiography-of-benjamin-franklin',
@@ -27,18 +28,22 @@ export const metadata: ContentItem = {
 const BenFranklin: React.FC = () => {
   return (
     <article>
+      <Image
+        src="/images/reviews/autobiography-of-benjamin-franklin.webp"
+        alt="Book cover of The Autobiography of Benjamin Franklin"
+        width={500}
+        height={300}
+      />
       <p>
-        It is refreshing to read the personal account of someone level-headed during a time when
-        humanity was not. Meditations by Marcus Aurelius is similar, but that book was boring.
+        It is refreshing to read the personal account of a level-headed individual during a time
+        when humanity was not. Meditations by Marcus Aurelius is similar, but this one is funny.
       </p>
-
       <p>
         I'm no Benjamin Franklin historian, but I know he was a frisky individual and a powerful
-        freemason - this book doesn't get into that at all (why would it). It mainly highlights the
-        thought processes of a revolutionary polymath who impacted the trajectory of history.
+        freemason - this book doesn't get into that at all, as it mainly highlights the thought
+        processes of a revolutionary polymath who impacted the trajectory of history.
       </p>
-
-      <p>You'll like this one if you're into period pieces and history.</p>
+      <p>You'll like this one if you're into history.</p>
     </article>
   );
 };

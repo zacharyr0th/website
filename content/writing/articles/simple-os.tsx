@@ -6,7 +6,7 @@ export const metadata: ContentItem = {
   slug: 'a-simple-operating-system',
   title: 'A Simple Operating System',
   subtitle: 'BSOD and the need for a multi-layered kernel',
-  image: '/images/articles/kernel-0.webp',
+  image: '/images/articles/simpleos-2.webp',
   imageCaption: 'Conceptual image of a modular microkernel architecture',
   pageViews: 0,
   type: 'article',

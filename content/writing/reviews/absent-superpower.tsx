@@ -1,5 +1,6 @@
 import React from 'react';
 import { ContentItem } from '../../../lib/types';
+import Image from 'next/image';
 
 export const metadata: ContentItem = {
   id: 'absent-superpower',
@@ -27,10 +28,16 @@ export const metadata: ContentItem = {
 const AbsentSuperpower: React.FC = () => {
   return (
     <article>
+      <Image
+        src="/images/reviews/absent-superpower.webp"
+        alt="Book cover of The Absent Superpower"
+        width={500}
+        height={250}
+      />
       <p>
-        The Absent Superpower carries on the narratives introduced in the Accidental Superpower that
-        the US still reigns supreme - but introduces more variables and reasons for why the US could
-        withdraw itself from world affairs.
+        The Absent Superpower, Peter's 2nd book, carries on the narratives introduced in the
+        Accidental Superpower that the US still reigns supreme - but introduces more variables and
+        reasons for why the US could withdraw itself from world affairs.
       </p>
       <p>
         The Accidental Superpower explains how the US became so powerful by happenstance. It sets

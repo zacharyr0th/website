@@ -1,6 +1,6 @@
 import React from 'react';
 import { ContentItem } from '../../../lib/types';
-
+import Image from 'next/image';
 export const metadata: ContentItem = {
   id: 'brave-new-world',
   slug: 'brave-new-world',
@@ -26,23 +26,24 @@ export const metadata: ContentItem = {
 const BraveNewWorld: React.FC = () => {
   return (
     <article>
+      <Image
+        src="/images/reviews/brave-new-world.webp"
+        alt="Book cover of Brave New World by Aldous Huxley"
+        width={500}
+        height={300}
+      />
       <p>
-        Of the 40 books on this list, Brave New World is the only one I've read before this year. I
-        had to read it in high school - I barely did, and I cheated on the test - and then I decided
-        to read it again in college because I learned more about how amazing Aldous was.
+        Brave New World is one of the few books that I've read multiple times. I had to read it in
+        high school - I barely did - and then I decided to read it again in college because I
+        learned more about how ahead of his time Aldous Huxley was. Now having read it for the third
+        time, I can say that it's a must read for anyone.
       </p>
-
-      <p>
-        This was my third time reading it, and it was the best one yet. Aldous is one of my favorite
-        thinkers - I put his writing ability in the same arena as Keith Jarrett's piano ability -
-        and Keith is the best musician of all time.
-      </p>
-
       <p>
         Aldous published this in 1931, and it will still be relevant in 3131 and beyond. While the
-        story may seem derivative (since everyone copies him), there's no doubt he ascends to levels
-        that C.S. Lewis and company could only dream of.
+        story may seem derivative because everyone copies him, he hit the nail on the head with this
+        one.
       </p>
+      <p>I suggest jumping to The Island after you finish.</p>
     </article>
   );
 };

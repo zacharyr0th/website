@@ -31,8 +31,7 @@ const BlockchainsInAfrica: React.FC = () => {
       <Image src="/images/articles/ba-0.webp" alt="Blockchains in Africa" />
       <p>
         Blockchain technology is gaining traction in Africa, offering innovative solutions to
-        longstanding economic challenges while also presenting new risks and complexities for the
-        continent's diverse nations.
+        longstanding economic challenges.
       </p>
       <p>"Are blockchains a solution looking for a problem?"</p>
       <p>
@@ -67,7 +66,6 @@ const BlockchainsInAfrica: React.FC = () => {
         blockchains offer novel solutions to longstanding problems in Africa and their potential is
         being recognized by world leaders.
       </p>
-      <p>Speaking of Nigeria and Seychelles, check out this graph.</p>
       <Image
         src="/images/articles/ba-1.webp"
         alt="Graph showing the increase in remittances sent via crypto to Africa over the past few years"
@@ -90,7 +88,6 @@ const BlockchainsInAfrica: React.FC = () => {
         money until eternity, the less powerful nations in the region must deal with the
         consequences.
       </p>
-      <p>Here's a video showcasing Christine LaGarde's competency.</p>
       <p>
         While blockchain adoption is moving in the right direction in Nigeria, it's important to
         note that the Nigerian Naira's annual inflation rate accelerated to 16.82% in April of this
@@ -177,10 +174,7 @@ const BlockchainsInAfrica: React.FC = () => {
         inside the Legislative Assembly" to "coerce the legislative branch to act on his crime
         bill."
       </p>
-      <Image
-        src="/images/articles/ba-4.webp"
-        alt="El Salvadorian President Nayib Bukele's armed forces"
-      />
+      <Image src="/images/articles/ba-4.webp" alt="El Salvador Scene" />
       <p>
         I'm not saying that this is an authoritarian regime but what walks and sounds like a duck is
         usually a 🦆.
@@ -203,10 +197,7 @@ const BlockchainsInAfrica: React.FC = () => {
         Africa, CAR is resource-rich, so it is a target of commodity-minded governments like China
         and Russia.
       </p>
-      <Image
-        src="/images/articles/ba-5.webp"
-        alt="A vibrant river in the Central African Republic"
-      />
+      <Image src="/images/articles/ba-5.webp" alt="Vibrant river in CAR" />
       <p>
         Over the past few years, the CAR government has become very close to Putin's regime in
         Russia after decades of internal strife and external influence from France. French analyst
