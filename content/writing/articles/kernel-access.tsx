@@ -26,17 +26,19 @@ const KernelAccessApps: React.FC = () => {
   return (
     <article>
       <section>
-        <h2>Introduction</h2>
         <p>
           Kernel access is a powerful capability that allows software to interact directly with the
-          core of an operating system. While this access can provide significant performance
+          core of an operating system. While this can provide significant performance
           benefits and enable advanced functionality, it also comes with potential security risks.
-          This article explores various categories of applications that commonly require
-          kernel-level access and discusses the reasons behind this requirement.
         </p>
       </section>
 
       <section>
+        <p>
+          This article is going to list out various software packages that commonly require kernel-level
+          access with the hopes that this will help explain why a BSOD-type event is more likely to happen when
+          using these applications.
+        </p>
         <h2>1. Anti-Cheat Software</h2>
         <p>
           Anti-cheat systems often require kernel access to monitor game processes and system memory
@@ -144,14 +146,12 @@ const KernelAccessApps: React.FC = () => {
       </section>
 
       <section>
-        <h2>Conclusion</h2>
+        <h2>Final Thoughts</h2>
         <p>
-          While kernel access provides powerful capabilities for various applications, it's crucial
-          to understand the potential risks involved. Users and organizations should carefully
+          While kernel access provides powerful capabilities for various applications, it's important
+          to recognize the potential risks involved. Users and organizations should carefully
           evaluate the need for such software and ensure they trust the developers before granting
-          kernel-level permissions. As operating systems evolve, finding a balance between
-          functionality, performance, and security remains an ongoing challenge in software
-          development.
+          kernel-level permissions. 
         </p>
       </section>
     </article>

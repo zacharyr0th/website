@@ -16,7 +16,7 @@ export const metadata: ContentItem = {
   author: 'Zachary Roth',
   date: '2023-05-15',
   tags: ['Blockchain', 'DeFi'],
-  readTime: 12,
+  readTime: 15,
   likes: 0,
   comments: 0,
   shares: 0,

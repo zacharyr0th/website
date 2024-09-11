@@ -18,7 +18,7 @@ export const metadata: ContentItem = {
   bookAuthor: '',
   date: '2023-05-15',
   tags: ['Technology', 'AI'],
-  readTime: 10,
+  readTime: 15,
   likes: 0,
   comments: 0,
   shares: 0,

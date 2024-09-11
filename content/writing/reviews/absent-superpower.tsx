@@ -45,7 +45,7 @@ const AbsentSuperpower: React.FC = () => {
         the US being as international as it historically has been. In this case, the US must focus
         on Mexico, Canada, and most importantly SHALE to do so.
       </p>
-      <h2>Shale</h2>
+      <h3>Shale</h3>
       <p>
         This book goes deep into the shale industry, which is not for the faint of heart if you're
         uninitiated. There are lots of statistics and geopolitical explanations of historical events
@@ -54,7 +54,7 @@ const AbsentSuperpower: React.FC = () => {
         most incentive is in the US, and the US has the most to lose. It also has the largest known
         shale beds in the world, of course.
       </p>
-      <h2>Geopolitical Implications</h2>
+      <h3>Geopolitical Implications</h3>
       <p>
         Once the US takes advantage of its shale fields and continues to improve its relationships
         with Canada and Mexico, it can withdraw from the global oil stage and immediately stop
@@ -68,7 +68,7 @@ const AbsentSuperpower: React.FC = () => {
         society hinges around extra-impactful periods known as Fourth Turnings. The period we are
         about to enter is what some refer to as the Fourth Turning. So that's interesting.
       </p>
-      <h2>Maps and More</h2>
+      <h3>Maps and More</h3>
       <p>
         The Accidental Superpower (Peter's first book - reviewed{' '}
         <a href="/writing/reviews/accidental-superpower">here</a>) includes a handful of useful maps

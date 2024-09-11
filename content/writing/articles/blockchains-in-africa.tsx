@@ -38,33 +38,21 @@ const BlockchainsInAfrica: React.FC = () => {
         This was the keynote remark made by Ravi Menon, the Managing Director of the Monetary
         Authority of Singapore (MAS). He later clarified his answer and stated that "blockchain
         technology is mostly use-case driven: there is almost always a real problem to be solved."
-        Ravi's question above implies a common (mis)perception of cryptocurrency's role in developed
-        economies and is a consistent argument made by critics and no-coiners alike - although in
-        many cases it has merit. The intellectually honest opinion is that blockchains make more
-        sense in some regions and industries than others.
+        Ravi's question above implies a common misperception of cryptocurrency's role in developed
+        economies and is a consistent argument made by critics and no-coiners alike. The more practical
+        opinion is that different types of blockchains make more sense in some regions and industries than others.
       </p>
       <h2>Africa</h2>
       <p>
         Africa is the cradle of humankind and is a resource-rich, expansive landscape that can fit
         China, India, the USA, and half of Europe's landmass within its boundaries. Roughly 1.5
         billion people live across 54 countries, and it's estimated that 40% of the population is 15
-        years old or younger, and the ITU forecasts that 500 million Africans will have smartphones
-        by 2025.
-      </p>
-      <p>
-        At this stage, half of the battle of implementing blockchains is educating people on how to
-        use them. While the average African may not be acquainted with self-custody or the
-        difference between the consensus methods underlying Ethereum and Solana, the average
-        American or European isn't either. Africa's young and tech-savvy population has more ability
-        and incentive to learn how to utilize blockchains effectively, and a handful of countries
-        have already enabled a burgeoning crypto industry to begin.
+        years old or younger. Its population is expected to grow to 2.5 billion by 2050.
       </p>
       <p>
         Prominent players like Nigeria and Seychelles, Ethiopia, Ghana, Mauritius, Kenya, Rwanda,
         Sierra Leone, South Africa, and Tanzania have already made inroads or formally declared
-        their interest in blockchain and fintech industries. This growing adoption signals that
-        blockchains offer novel solutions to longstanding problems in Africa and their potential is
-        being recognized by world leaders.
+        their interest in blockchain and fintech industries as detailed in the following graph.
       </p>
       <Image
         src="/images/articles/ba-1.webp"
@@ -72,22 +60,14 @@ const BlockchainsInAfrica: React.FC = () => {
       />
       <p>
         Nigeria and Seychelles raised over 50% of all blockchain-based venture capital investments
-        on the continent as Africa's YoY VC investment increased by over 1100%. Nigeria is also one
+        on the continent as Africa's YoY VC investment increased by 1100%. Nigeria is also one
         of the largest oil exporters in the world and has become the wealthiest country in Africa.
-        As oil cruises to near all-time highs, Nigeria continues to collect a pretty penny from
+        As oil cruises to near all-time highs, Nigeria collects a pretty penny from
         energy-dependent countries like India, China, Europe, and elsewhere in Africa. Nigerian
         millionaires grew by 44% over the past decade, although 60% of the country still lives on
-        less than $1 / day.
+        less than $1 / day. Nigeria is also the 10th largest economy in the world by nominal GDP.
       </p>
       <h2>Blockchains as a Solution</h2>
-      <p>
-        Most countries don't have the luxury of managing their currency. Having the ability to put
-        money into the system or take it out using the medium of a domestic central bank is an
-        underrated superpower. For example, smaller and less affluent European nations are at the
-        whim of Christine Lagarde and the European Central Bank (ECB). If the ECB wants to print
-        money until eternity, the less powerful nations in the region must deal with the
-        consequences.
-      </p>
       <p>
         While blockchain adoption is moving in the right direction in Nigeria, it's important to
         note that the Nigerian Naira's annual inflation rate accelerated to 16.82% in April of this
@@ -97,12 +77,10 @@ const BlockchainsInAfrica: React.FC = () => {
       <h3>Currencies</h3>
       <p>
         Currencies traditionally have acted very similar to languages in that the ones that survive
-        only do so with an army and a navy. Bitcoin changed that.
-      </p>
-      <p>
-        Bitcoin, and blockchains at large, offer entirely new frameworks for global payment rails to
-        function. Using USD worldwide is doable, but there are plenty of limitations, and USD is
-        also experiencing surging inflation rates.
+        only do so with an army and a navy. Bitcoin changed that. Bitcoin, and blockchains in general,
+        offer entirely new frameworks for global payment rails to function. Using USD worldwide is
+        doable, but there are plenty of limitations, and USD is also experiencing surging inflation
+        rates right now.
       </p>
       <p>
         Rather than be subject to the volatility of Bitcoin or the more minor domestic currencies
@@ -136,8 +114,7 @@ const BlockchainsInAfrica: React.FC = () => {
       </p>
       <h3>Debt & Independence</h3>
       <p>
-        China recently banned holding and transacting cryptocurrency (although a few dozen Bitcoin
-        nodes are active within the country - it's all about who you know) in preparation for their
+        China recently banned holding and transacting cryptocurrency in preparation for their
         own Central Bank Digital Currency (CBDC). What does China have to do with Africa? China is
         Africa's largest creditor.
       </p>
@@ -149,21 +126,24 @@ const BlockchainsInAfrica: React.FC = () => {
         Time is a critical component of China's geopolitical strategies. Over the past few decades,
         there has been extensive investment from Chinese firms in infrastructure projects across the
         African continent. Many resource-rich but financially developing countries cannot pay their
-        debts. This can lead to several unintended consequences, such as the Chinese government's
+        debts and this can lead to several unintended consequences, such as the Chinese government's
         nationalizing of African public goods.
       </p>
       <p>
-        Rather than succumb to the external forces that China can put on less affluent African
+        The Chinese government has been known to nationalize assets in other countries, including
+        African ones, when they feel that the assets are being used for purposes that are not in the
+        best interests of the Chinese government or its citizens. This has led to concerns about the
+        long-term stability and sovereignty of African countries that have borrowed heavily from
+        China.
+      </p>
+      <p>
+        Rather than succumb to the external forces that the Chinese government has put on some of the less affluent African
         countries, blockchains present an alternative financial system for these countries to
         operate with. Businesses would be able to function globally without friction from Chinese
         authorities, and individuals would be able to self custody access their assets and not need
         to trust third parties.
       </p>
       <h2>Blockchains as a Problem</h2>
-      <p>
-        Rather than write more examples of how blockchains can help African economies, it's worth
-        noting how they can cause and solve problems.
-      </p>
       <p>
         El Salvador adopted BTC as a domestic currency in June of 2021, and the results have been
         lackluster. At the time of writing, President Nayib Bukele and the El Salvadorian government
@@ -176,12 +156,8 @@ const BlockchainsInAfrica: React.FC = () => {
       </p>
       <Image src="/images/articles/ba-4.webp" alt="El Salvador Scene" />
       <p>
-        I'm not saying that this is an authoritarian regime but what walks and sounds like a duck is
-        usually a 🦆.
-      </p>
-      <p>
         Crypto Critics' Corner recorded four interesting podcasts about the situation in El
-        Salvador, and all is not well. Those can be found here - 1, 2, 3, 4.
+        Salvador, and it seems that all is not well. Those can be found here - 1, 2, 3, 4.
       </p>
       <p>
         The IMF recently downgraded El Salvador's credit rating due to its lack of transparency and
@@ -218,11 +194,10 @@ const BlockchainsInAfrica: React.FC = () => {
         Africa isn't looking to disrupt the mortgage industry by putting real estate on the
         blockchain. There are more fundamental incentives and use cases that are garnering support.
         The low-hanging fruit is to replace volatile domestic currencies with on-chain stable coins
-        or other token networks, reduce the influence of foreign interests, and introduce
+        and other token networks, reduce the dependency on foreign interests, and introduce
         transparency in financial governance.
       </p>
-      <p>Adoption is happening but it's not going to be easy.</p>
-      <p>If it were, it would have already happened.</p>
+      <p>Blockchain adoption in Africa is happening.</p>
     </article>
   );
 };

@@ -58,7 +58,7 @@ const AccidentalSuperpower: React.FC = () => {
         a team of researchers working with him - so I view his work as representing a particular
         school of thought.
       </p>
-      <h2>The Role of Geography</h2>
+      <h3>The Role of Geography</h3>
       <p>
         Peter's books, much like Jared Diamond's Gun's, Germ, and Steel - also reviewed
         <a href="/writing/reviews/guns-germs-steel">here</a> - focus on the fate of geography and
@@ -77,7 +77,7 @@ const AccidentalSuperpower: React.FC = () => {
         railroads over the flat flyover states that connected the country's East and West sides.
         Mexico's terrain wasn't so friendly.
       </p>
-      <h2>US Dominance</h2>
+      <h3>US Dominance</h3>
       <p>
         Peter loudly concludes that the US is positioned to dominate society for the foreseeable
         future. With no military threats to the North or South, the most potent natural defense
@@ -98,7 +98,7 @@ const AccidentalSuperpower: React.FC = () => {
         arguments, which are available for free on his website. I go into more detail about some of
         those charts in later reviews.
       </p>
-      <h2>Related Books in the Series</h2>
+      <h3>Related Books in the Series</h3>
       <p>Check out my reviews of his other books below.</p>
       <table>
         <thead>

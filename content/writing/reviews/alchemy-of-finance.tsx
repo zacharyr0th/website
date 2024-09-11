@@ -34,8 +34,6 @@ const AlchemyOfFinance: React.FC = () => {
         width={500}
         height={500}
       />
-
-      <h2>Overview</h2>
       <p>
         Alchemy of Finance is a collection of George Soros' essays. It was pretty boring aside from
         the thesis that there exists a reflexivity principle in financial markets, meaning that
@@ -55,7 +53,7 @@ const AlchemyOfFinance: React.FC = () => {
         abilities are strong, and time in the market is better than timing the market.
       </p>
 
-      <h2>Reflexivity</h2>
+      <h3>Reflexivity</h3>
       <p>
         One thing to note about reflexivity: George discusses an idea called the Participation
         Function, aka 'The Observer Effect.'
@@ -74,7 +72,7 @@ const AlchemyOfFinance: React.FC = () => {
         a powerful force.
       </p>
 
-      <h2>Final Thoughts</h2>
+      <h3>Final Thoughts</h3>
       <p>
         Overall, this was forgettable, and I'm unsure what I learned from it. Maybe I wasn't paying
         enough attention

@@ -5,9 +5,9 @@ export const metadata: ContentItem = {
   id: 'boson-protocol',
   slug: 'boson-protocol',
   title: 'Boson Protocol',
-  subtitle: 'test',
-  image: '/images/articles/bp-0.webp',
-  imageCaption: 'test',
+  subtitle: 'A Protocol for Decentralized Commerce',
+  image: '/images/articles/boson.webp',
+  imageCaption: '',
   pageViews: 0,
   type: 'article',
   description:
@@ -27,7 +27,7 @@ export const metadata: ContentItem = {
 const BosonProtocol: React.FC = () => {
   return (
     <article>
-      <img src="/images/articles/bp-0.webp" alt="Boson Protocol" />
+      <img src="/images/articles/boson.webp" alt="Boson Protocol" />
       <p>
         Named after an elementary particle described as a force carrier that functions as the 'glue'
         holding matter together, Boson Protocol has made its mission to enable decentralized
