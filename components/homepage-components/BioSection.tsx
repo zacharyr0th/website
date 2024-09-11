@@ -49,7 +49,7 @@ export default function BioSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mb-12 text-center max-w-2xl mx-auto"
+          className="mb-10 text-center max-w-2xl mx-auto" 
         >
           <div className="space-y-2">
             <p className="text-lg font-semibold text-gray-200">
@@ -62,7 +62,7 @@ export default function BioSection() {
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12"
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10" 
           variants={containerVariants}
           initial="hidden"
           animate="visible"

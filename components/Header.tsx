@@ -137,9 +137,12 @@ const Header = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className="text-gray-200 transition-transform duration-300 focus:outline-none hover:transform hover:scale-110 hover:text-gray-300"
+              className="text-gray-200 transition-transform duration-300 focus:outline-none hover:transform hover:scale-110"
             >
-              <Icon size={24} />
+              <Icon
+                size={24}
+                className="transition-colors duration-300 hover:text-gray-500"
+              />
             </Link>
           ))}
         </div>

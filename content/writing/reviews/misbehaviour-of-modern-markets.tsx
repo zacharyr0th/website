@@ -4,7 +4,7 @@ import { ContentItem } from '../../../lib/types';
 export const metadata: ContentItem = {
   id: 'misbehaviour-of-modern-markets',
   slug: 'misbehaviour-of-modern-markets',
-  title: 'The (Mis)behaviour of Markets',
+  title: 'The Misbehaviour of Modern Markets',
   subtitle: 'Benoit Mandelbrot',
   image: '/images/reviews/misbehaviour-of-modern-markets.webp',
   imageCaption: 'Book cover of The (Mis)behaviour of Markets by Benoit Mandelbrot',

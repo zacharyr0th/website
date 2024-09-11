@@ -17,7 +17,7 @@ export const metadata: ContentItem = {
   author: 'Zachary Roth',
   bookAuthor: '',
   date: '2023-05-15',
-  tags: ['Finance'],
+  tags: ['Finance', 'Trading'],
   readTime: 15,
   likes: 0,
   comments: 0,

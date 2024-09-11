@@ -14,7 +14,7 @@ export const metadata: ContentItem = {
   description: '',
   author: 'Zachary Roth',
   date: '2021-08-31',
-  tags: ['Technology'],
+  tags: ['Blockchain','NFTs'],
   readTime: 15,
   likes: 0,
   comments: 0,
