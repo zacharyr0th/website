@@ -22,17 +22,17 @@ export default function BioSection() {
     {
       title: 'DeFi and AI Innovation',
       description:
-        "Leading growth initiatives on Aptos, the world's highest-performance blockchain.",
+        "Actively leading growth initiatives on Aptos, the world's highest performing blockchain.",
     },
     {
       title: 'Product Leadership',
       description:
-        'Led product at Solflare/Solrise on Solana and provided institutional market research on EVM ecosystems.',
+        'Led product development at Solflare and authored institutional research on EVM ecosystems.',
     },
     {
       title: 'On-Chain Expertise',
       description:
-        'Strong understanding of on-chain product-market fit, honed through years of observing what works.',
+        'Deep understanding of on-chain analytics, protocol design, and product-market fit.',
     },
   ];
 
@@ -51,16 +51,12 @@ export default function BioSection() {
           transition={{ duration: 0.5 }}
           className="mb-12 text-center max-w-2xl mx-auto"
         >
-          <h2 className="text-2xl font-bold mb-4 text-white">
-            Thought Leader in Blockchain Innovation
-          </h2>
           <div className="space-y-2">
             <p className="text-lg font-semibold text-gray-200">
               Experienced across multiple hyper-growth ecosystems
             </p>
-            <p className="text-md text-gray-400">Specializing in identifying product-market fit</p>
             <p className="text-md text-gray-400">
-              Advising on leveraging on-chain technology for superior products and services
+              Expert in identifying on-chain product-market fit and advising on utilizing on-chain technology for superior products and services.
             </p>
           </div>
         </motion.div>

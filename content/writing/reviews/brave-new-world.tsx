@@ -43,7 +43,7 @@ const BraveNewWorld: React.FC = () => {
         story may seem derivative because everyone copies him, he hit the nail on the head with this
         one.
       </p>
-      <p>I suggest jumping to The Island after you finish.</p>
+      <p>I suggest sailing to The Island after you finish.</p>
     </article>
   );
 };

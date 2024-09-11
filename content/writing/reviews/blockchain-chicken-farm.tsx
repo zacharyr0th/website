@@ -17,7 +17,7 @@ export const metadata: ContentItem = {
   bookAuthor: 'Xiaowei Wang',
   date: 'June 2022',
   tags: ['Technology'],
-  readTime: 2,
+  readTime: 5,
   likes: 0,
   comments: 0,
   shares: 0,
@@ -34,8 +34,8 @@ const BlockchainChickenFarm: React.FC = () => {
         height={300}
       />
       <p>
-        Depending on how it's used, technology can be a problem. Rural Chinese populations have
-        historically had that mindset, and this book provides several examples to support this idea.
+        Depending on how it's used, technology can be viewed as a root of many problems. Rural Chinese populations have
+        historically had that mindset but this book provides several examples to refute this idea.
         Farmers are implementing novel solutions, such as using a blockchain to maintain the
         accounting system for a chicken farm, but there is a deeper theme.
       </p>
@@ -49,7 +49,7 @@ const BlockchainChickenFarm: React.FC = () => {
       </p>
       <p>
         Historically, Chinese farmers have seen those in the cities wanting to move too fast for
-        their good, and the city-dweller has seen the farmers as living too slowly. The farmer's
+        their good, and the city-dweller have seen the farmers as living too slowly. The farmer's
         perspective was that the planet was already perfect, and it was the farmer's job to maintain
         it while city dwellers worked towards a utopian future. As more city-dwellers have burnt out
         and returned to the country, and the rural population has adopted more technology, the

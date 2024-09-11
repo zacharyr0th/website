@@ -38,17 +38,15 @@ const BornStandingUp: React.FC = () => {
         respect his artistry, so I thought this would be a nice quick autobiography - and it was.
       </p>
       <p>
-        As the author and narrator of the audiobook, Steve effectively leads you through the various
+        As the author and narrator of the audiobook, Steve leads you through the various
         stages of his life in a very empathetic way. He wasn't always a legend, and he's clear about
-        that. It's interesting listening to the entire arc where he went from a nobody to being the
-        number 1 comedian in the world for some time.
+        that so its interesting listening to the entire arc where he went from being a nobody to being the
+        number one comedian in the world for some time.
       </p>
       <p>
-        He's also a good banjo player as heard{' '}
+        He's also a good banjo player as heard
         <a href="https://www.youtube.com/watch?v=waeO_S928aU&list=RDEMFvT-gsXxdi4UkntJcCJmjg&start_radio=1">
-          here
-        </a>
-        , and he introduces the book with some banjo sounds. If you're a big Steve Martin fan, this
+          here</a>, and he introduces the book with some banjo sounds. If you're a big Steve Martin fan, this
         ones for you.
       </p>
     </article>

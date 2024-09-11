@@ -37,6 +37,7 @@ const Corrections: React.FC = () => {
 <p>
 The characters are unlikable, and the story is depressing but realistic. Readers observe a family's dysfunction and the patriarch's declining health throughout the book, which coincidentally was published around 9/11. Many associate the feelings of this book with that time period, and it has won a handful of awards.
 </p>
+<p>If you are into more traditional fiction and want to read a good old fashioned story, this is a good choice.</p>
     </article>
   );
 };

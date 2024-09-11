@@ -40,6 +40,32 @@ const DisunitedNations: React.FC = () => {
         them just come in one ear and see if they stay. Just make sure not to confuse them with the
         conclusions.
       </p>
+      <table>
+  <thead>
+    <tr>
+      <th>Book</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="/writing/reviews/accidental-superpower">The Accidental Superpower</a></td>
+      <td>How the USA found itself in such a dominant position</td>
+    </tr>
+    <tr>
+      <td><a href="/writing/reviews/absent-superpower">The Absent Superpower</a></td>
+      <td>How the USA began to resign from global affairs and what the world would look like if it removed itself entirely</td>
+    </tr>
+    <tr>
+      <td><a href="/writing/reviews/disunited-nations">Disunited Nations</a></td>
+      <td>The best of the series. This book details interesting historical events and modern relationships that have occurred between countries other than the US, such as Angola, Argentina, Turkey, and more.</td>
+    </tr>
+    <tr>
+      <td><a href="/writing/reviews/eotwijtb">The End of the World is Just the Beginning</a></td>
+      <td>This book outlays where Peter thinks the world is going from here.</td>
+    </tr>
+  </tbody>
+</table>
     </article>
   );
 };

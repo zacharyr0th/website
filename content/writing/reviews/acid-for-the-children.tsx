@@ -17,7 +17,7 @@ export const metadata: ContentItem = {
   author: 'Zachary Roth',
   date: 'Jan 2023',
   tags: ['Autobiography', 'Music'],
-  readTime: 2,
+  readTime: 5,
   likes: 0,
   comments: 0,
   shares: 0,

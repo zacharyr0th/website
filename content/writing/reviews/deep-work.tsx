@@ -18,7 +18,7 @@ export const metadata: ContentItem = {
   bookAuthor: 'Cal Newport',
   date: 'Nov 2023',
   tags: ['Productivity'],
-  readTime: 2,
+  readTime: 5,
   likes: 0,
   comments: 0,
   shares: 0,
@@ -39,11 +39,17 @@ const DeepWork: React.FC = () => {
  The thesis is to reduce your dependence on technology and multitasking while working because it's making you less productive.
  When this topic comes up, I just think about the attention span that people had 100 years ago compared to today. If you're reading this,
  you're probably on your phone right now, and that's fine. It's all about the quality of one's screen time rather than quantity now because of how
- ubiquitous screens have become although they've been proven to make one's brain lazier just by being near them. Do with that what you will.
+ ubiquitous screens have become although they've been proven to make one's brain lazier just by being near them. 
+ </p>
+ <p>
+ Do with that what you will.
       </p>
       <h3>
  Newport's Rules for Deep Work
       </h3>
+      <p>
+ Technology addiction is real, and the advice here is good, but most of it is common sense. 
+</p>
       <table>
         <thead>
           <tr>
@@ -70,9 +76,8 @@ const DeepWork: React.FC = () => {
           </tr>
         </tbody>
       </table>
-      <p>
- Technology addiction is real, and the advice here is good, but most of it is common sense. Cal gives out a lot of advice, and there are Deep Work 
- Playbooks and analyses are available online if you're interested in implementing some of it.
+<p>
+Cal gives out a lot of advice, and there are Deep Work laybooks and analyses are available online if you're interested in implementing some of it. I wasn't that ambitious about it.
       </p>
     </article>
   );

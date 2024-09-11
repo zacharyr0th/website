@@ -17,7 +17,7 @@ export const metadata: ContentItem = {
   author: 'Zachary Roth',
   date: 'May 2022',
   tags: ['Geopolitics'],
-  readTime: 2,
+  readTime: 5,
   likes: 0,
   comments: 0,
   shares: 0,
@@ -83,6 +83,32 @@ const AbsentSuperpower: React.FC = () => {
         If you have time, it's worth reading all four and skimming this one - unless you are an oil
         man or woman and want a more nuanced understanding of shale. In that case, take notes.
       </p>
+      <table>
+  <thead>
+    <tr>
+      <th>Book</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="/writing/accidental-superpower">The Accidental Superpower</a></td>
+      <td>How the USA found itself in such a dominant position</td>
+    </tr>
+    <tr>
+      <td><a href="/writing/absent-superpower">The Absent Superpower</a></td>
+      <td>How the USA began to resign from global affairs and what the world would look like if it removed itself entirely</td>
+    </tr>
+    <tr>
+      <td><a href="/writing/disunited-nations">Disunited Nations</a></td>
+      <td>The best of the series. This book details interesting historical events and modern relationships that have occurred between countries other than the US, such as Angola, Argentina, Turkey, and more.</td>
+    </tr>
+    <tr>
+      <td><a href="/writing/eotwijtb">The End of the World is Just the Beginning</a></td>
+      <td>This book outlays where Peter thinks the world is going from here.</td>
+    </tr>
+  </tbody>
+</table>
     </article>
   );
 };

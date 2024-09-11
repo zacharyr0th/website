@@ -1,6 +1,7 @@
 import React from 'react';
 import { ContentItem } from '../../../lib/types';
 import Image from 'next/image';
+import Link from 'next/link'; // Import Link component
 
 export const metadata: ContentItem = {
   id: 'breath',
@@ -17,7 +18,7 @@ export const metadata: ContentItem = {
   bookAuthor: 'James Nestor',
   date: 'Jul 2023',
   tags: ['Science', 'Health'],
-  readTime: 2,
+  readTime: 5,
   likes: 0,
   comments: 0,
   shares: 0,
@@ -38,18 +39,20 @@ const Breath: React.FC = () => {
         yet everyone knows that mouth breathing is wrong.
       </p>
       <p>
-        James Nestor found out and went above and beyond to explain the importance of nose
-        breathing. Unfortunately, modern medical science isn't more focused on this. I've never
+        James Nestor found out why and went above and beyond to explain the importance of nose
+        breathing. it doesn't make sense as to why modern medical science isn't more focused on this. I've never
         heard about it from a teacher or doctor, even though there is so much proven value in
         breathing correctly. This book details the disastrous effects of mouth breathing and does a
-        great job of scaring you into caring. The TLDR is - every time you breathe out of your
+        great job of scaring you into caring. The TLDR is - every time you breathe through your
         mouth, you're breathing inferior air than if you were to breathe through your nose, and you
         will probably die sooner.
       </p>
       <p>
-        The first book by James Nestor, Deep, was described as "renegade science," which gives you
+        The first book by James Nestor, <Link href="/content/writing/reviews/deep"><a>Deep</a></Link>, was described as "renegade science," which gives you
         an idea of how to expect some of it to come across. It gets gross but not too clinical,
         which is helpful because some books about science feel like textbooks and lose the reader.
+      </p>  
+      <p>  
         This one is an easy listen/read, and it's become a bit of a cult classic with an annual
         Breath retreat in Costa Rica.
       </p>
