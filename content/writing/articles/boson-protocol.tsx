@@ -1,5 +1,6 @@
 import React from 'react';
 import { ContentItem } from '../../../lib/types';
+import Image from 'next/image';
 
 export const metadata: ContentItem = {
   id: 'boson-protocol',
@@ -27,26 +28,24 @@ export const metadata: ContentItem = {
 const BosonProtocol: React.FC = () => {
   return (
     <article>
-      <img src="/images/articles/boson.webp" alt="Boson Protocol" />
+      <Image src="/images/articles/boson.webp" alt="Boson Protocol" />
       <p>
         Named after an elementary particle described as a force carrier that functions as the 'glue'
-        holding matter together, Boson Protocol has made its mission to enable decentralized
-        commerce ecosystems to disrupt, demonopolize, and democratize global trade.
+        holding matter together, Boson Protocol has made its mission to build a decentralized
+        commerce ecosystem to disrupt global trade.
       </p>
       <p>
-        Boson Protocol is a toolset that empowers businesses and individuals, giving them the
-        control to engage in trustless physical goods and services transactions using Ethereum as
-        the underlying settlement layer. It enables the tokenization and redemption of physical
-        items through NFTs, the creation of liquid digital markets for these NFTs, and as a
-        biproduct, the creation of a robust data market.
+        Boson Protocol is a toolset that gives businesses and individuals the control to engage in
+        trustless transactions of physical goods and services using Ethereum as the underlying
+        settlement layer. It enables the tokenization and redemption of physical items through NFTs,
+        the creation of liquid digital markets for these NFTs, and, as a biproduct, the creation of a
+        robust data market.
       </p>
       <p></p>
-
       <blockquote>
         "Commerce is a human endeavor that should not have value captured by the few."
         <p>Justin Banon, Boson CEO</p>
       </blockquote>
-
       <p>
         The early Internet promised a future of fair and accessible data for all. Instead, market
         forces favored centralized infrastructure for its profitability. This trend extended to
@@ -56,20 +55,16 @@ const BosonProtocol: React.FC = () => {
       </p>
       <p>
         Web3's infrastructure - public blockchains, NFTs, digital wallets, etc. — has given vendors
-        an entirely new framework. You no longer need to rely on these immovable marketplace
-        intermediaries to perform commerce functions or keep track of commerce data.
+        a level of control that wasn't available a decade ago. You no longer need to rely on these
+        intermediaries to perform commerce functions or pay an arm and a leg to keep track of commerce data.
       </p>
-
-      <img src="/images/articles/bp-1.webp" alt="Boson Protocol 1" />
-
-      <p></p>
+      <Image src="/images/articles/bp-1.webp" alt="Boson Protocol 1" />
       <p>
         Inspired by trustless and tokenized DeFi communities, Boson Protocol aims to reduce
-        intermediaries' rent-seeking behavior by creating a decentralized and trustless environment
+        incumbent rent-seeking behavior by creating a decentralized and trustless environment
         for commerce. The functionality surrounds what are called Commitment tokens, Thing tokens,
         and the role of the BOSON token.
       </p>
-
       <h3>Commitment Tokens</h3>
       <p>
         A Buyer and Seller commit to exchange digital value for a physical item (a Thing). This
@@ -80,7 +75,6 @@ const BosonProtocol: React.FC = () => {
         are granted the right to transfer their token to another wallet or reliably and securely
         redeem the token for a particular Thing.
       </p>
-
       <h4>Commitment Tokens Characteristics</h4>
       <ul>
         <li>
@@ -116,14 +110,13 @@ const BosonProtocol: React.FC = () => {
         a game where each player knows the other players' strategy and has nothing to gain by
         changing only their strategy, leading to a balanced outcome.
       </p>
-      <img src="/images/articles/bp-2.webp" alt="Boson Protocol 2" />
-      <p></p>
+      <Image src="/images/articles/bp-2.webp" alt="Boson Protocol 2" />
       <p>
         The possible game outcomes are the triangles on the right side of the above diagram. CoF
         stands for Cancel or Fault, which is an undesirable outcome. The most desirable outcome for
         all parties is 'Redemption; No Complaint; No CoF,' which is the fourth triangle from the top
         of the diagram. The purpose of programming this game theory into Commitment Tokens is to
-        minimize the number of disputes and arbitration required between Buyers and Sellers, witht
+        minimize the number of disputes and arbitration required between Buyers and Sellers, with
         the hopes of providing a smooth and efficient transaction process.
       </p>
       <h3>Thing Tokens</h3>
@@ -140,7 +133,7 @@ const BosonProtocol: React.FC = () => {
         sell the token back to the liquidity pool or redeem it for the physical socks, where the
         Uniswap company will ship a physical pair to you anywhere in the world.
       </p>
-      <img src="/images/articles/bp-3.webp" alt="Boson Protocol 3" />
+      <Image src="/images/articles/bp-3.webp" alt="Boson Protocol 3" />
       <p></p>
       <p>
         At the time of writing, the price of a $SOCK was $132,576.82, and 192 have already been
@@ -162,8 +155,8 @@ const BosonProtocol: React.FC = () => {
         reach its objective. Below is a high-level overview of the main stakeholders within the
         Protocol.
       </p>
-      <img src="/images/articles/bp-4.webp" alt="Boson Protocol 4" />
-      <img src="/images/articles/bp-5.webp" alt="Boson Protocol 5" />
+      <Image src="/images/articles/bp-4.webp" alt="Boson Protocol 4" />
+      <Image src="/images/articles/bp-5.webp" alt="Boson Protocol 5" />
       <h3>Gluons</h3>
       <p>
         There's also gluons, which act as a quality indicator, encouraging participants to stake
@@ -179,7 +172,6 @@ const BosonProtocol: React.FC = () => {
         goods. While the Boson protocol is built for that, their white paper lists other potential
         use cases.
       </p>
-
       <table>
         <thead>
           <tr>
@@ -232,30 +224,21 @@ const BosonProtocol: React.FC = () => {
           </tr>
         </tbody>
       </table>
-
       <h3>Governance Roadmap</h3>
       <p>
-        Boson enacted a 3-phase structure of decentralizing their governance and is currently in the
-        Startup Phase.
+        Boson has outlined a 3-phase approach to decentralizing their governance. They are currently in the Startup Phase.
       </p>
-
       <ol>
         <li>
-          <strong>Startup Phase</strong> - Achieve 'protocol-market-fit' by rapid iteration through
-          opinionated leadership.
+          <strong>Startup Phase:</strong> Achieve 'protocol-market-fit' through rapid iteration and strong leadership.
         </li>
         <li>
-          <strong>Network Phase</strong> - Enable minimally extractive fees for vouchers and
-          ultimately incentivize market participants to contribute valuable work.
+          <strong>Network Phase:</strong> Implement minimally extractive fees for vouchers and incentivize market participants to contribute valuable work.
         </li>
         <li>
-          <strong>Community Governance</strong> - 'At the time of writing, it is anticipated that
-          the governance structure will be a decentralized autonomous organization (DAO), structured
-          to ensure regulatory compliance as well as resist capture from centralized entities or
-          groups.'
+          <strong>Community Governance:</strong> Transition to a decentralized autonomous organization (DAO) to ensure regulatory compliance and prevent centralization.
         </li>
       </ol>
-
       <h3>Stats</h3>
       <p>
         To scale, Boson estimates they will need to handle, on average, ten transactions per second,
@@ -267,7 +250,7 @@ const BosonProtocol: React.FC = () => {
         Portal, a lifestyle and commerce playground. Portal will enable creators and brands to sell
         redeemable NFTs for real-world products and services.
       </p>
-      <img src="/images/articles/bp-8.webp" alt="Boson Protocol 8" />
+      <Image src="/images/articles/bp-8.webp" alt="Boson Protocol 8" />
       <p></p>
       <p>
         Now that funds have been raised, the team assembled, and the strategy set, Boson has entered

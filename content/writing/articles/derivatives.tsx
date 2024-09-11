@@ -193,7 +193,10 @@ const Derivatives: React.FC = () => {
         purchasing has declined substantially. This pattern of decreasing returns and increasing
         prices is common across many industries, such as education, groceries, commodities,
         ride-sharing services, and streaming platforms. It is not a specific issue, it's a systemic
-        problem. To be clear, its probably a good thing that we're getting less candy than before
+        problem. 
+      </p>
+      <p>
+        To be clear, its probably a good thing that we're getting less candy than before
         but prices should reflect that reality
       </p>
       <h2>Asset Scarcity</h2>
@@ -271,27 +274,14 @@ const Derivatives: React.FC = () => {
       <p>
         These dynamics create sustained volatility unmatched in traditional equity markets, aside
         from perhaps penny stocks or OTC stocks where market caps are small, and majority share
-        owners can (temporarily) get away with acting shady to pump or dump prices.
-      </p>
-      <h3>Volatility as a Feature</h3>
-      <p>
-        This volatility has proven to be a feature as much as it is a bug. Due to the way crypto
-        exchanges operate and distribute leverage, cascading liquidations can easily result from
-        large traders moving positions.
-      </p>
-      <p>
-        The cascading liquidations are crypto's version of a decentralized gamma squeeze across
-        centralized exchanges. This liquidation effect is also present in traditional markets.
-        Still, to a much smaller extent, because of the standards practiced since the 1987 crash,
-        the relative size of retail traders compared to institutional investors, and leverage
-        distributions.
+        owners can, at least temporarily, get away with acting shady to pump or dump prices.
       </p>
       <h2>So, which is the underlying asset?</h2>
       <p>
         It varies. Sometimes, spot equities lead to derivative price action and vice versa. In
         crypto, it's not so clear. Crypto derivatives are relatively niche compared to equity
         derivatives, and their notional value is far lower. The existence of multiple crypto futures
-        exchanges, funding rates, on-chain activity, and price discounts/premiums are other factors
+        exchanges, funding rates, on-chain activity, and price discounts and premiums are other factors
         that muddy the answer.
       </p>
       <p>

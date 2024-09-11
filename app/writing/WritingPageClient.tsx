@@ -10,6 +10,7 @@ interface Content {
   id: string;
   slug: string;
   title: string;
+  subtitle?: string;
   image?: string;
   type: 'article' | 'review' | 'interview' | 'sheet-music';
 }
@@ -42,6 +43,7 @@ const ArticleCard: React.FC<{ article: Content }> = React.memo(({ article }) => 
           />
           <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black/80 to-transparent">
             <h2 className="text-2xl font-bold mb-1">{article.title}</h2>
+            <p className="text-lg text-gray-400">{article.subtitle}</p> 
           </div>
         </div>
       </Link>
@@ -121,7 +123,7 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
                 <li>
                   <Link
                     href="/writing"
-                    className="text-gray-200 transition-all duration-300 focus:outline-none hover:text-gray-500"
+                    className="text-gray-200 text-lg transition-all duration-300 focus:outline-none transform hover:scale-105 hover:text-gray-500"
                   >
                     All
                   </Link>
@@ -131,7 +133,7 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
                 <li key={item}>
                   <Link
                     href={`/writing?type=${item.toLowerCase().slice(0, -1)}`}
-                    className={`text-gray-200 text-lg transition-all duration-300 focus:outline-none ${
+                    className={`text-gray-200 text-lg transition-all duration-300 focus:outline-none transform hover:scale-105 ${
                       contentType === item.toLowerCase().slice(0, -1)
                         ? 'text-gray-500'
                         : 'hover:text-gray-500'
@@ -180,7 +182,7 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allC
                 <h2 className="text-2xl font-bold">Random</h2>
                 <button
                   onClick={refreshRandomArticles}
-                  className="text-white hover:text-gray-300 transition-colors duration-300"
+                  className="text-white hover:text-gray-500 transition-transform duration-300 transform hover:scale-105"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

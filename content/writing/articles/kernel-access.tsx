@@ -6,7 +6,7 @@ export const metadata: ContentItem = {
   slug: 'apps-that-need-kernel-access',
   title: 'Apps That Need Kernel Access',
   subtitle: 'BSOD and the need for a multi-layered kernel',
-  image: '/images/articles/kernel-0.webp',
+  image: '/images/placeholder.webp',
   imageCaption: '',
   pageViews: 0,
   type: 'article',
@@ -28,130 +28,139 @@ const KernelAccessApps: React.FC = () => {
       <section>
         <p>
           Kernel access is a powerful capability that allows software to interact directly with the
-          core of an operating system. While this can provide significant performance
-          benefits and enable advanced functionality, it also comes with potential security risks.
+          core of an operating system. While this can provide performance
+          benefits and enable advanced functionality, it also comes with massive security risks.
         </p>
       </section>
-
       <section>
-        <p>
-          This article is going to list out various software packages that commonly require kernel-level
-          access with the hopes that this will help explain why a BSOD-type event is more likely to happen when
-          using these applications.
-        </p>
-        <h2>1. Anti-Cheat Software</h2>
-        <p>
-          Anti-cheat systems often require kernel access to monitor game processes and system memory
-          effectively, preventing cheating in online games.
-        </p>
-        <ul>
-          <li>Vanguard (Riot Games)</li>
-          <li>EA Anti-Cheat</li>
-          <li>nProtect GameGuard</li>
-          <li>BattlEye</li>
-          <li>Easy Anti-Cheat</li>
+            <h2>1. Anti-Cheat Software</h2>
+            <p>
+                Utilizes kernel-level access to monitor game processes, system memory, and hardware interactions in real-time. This deep integration allows for the detection and prevention of cheating methods that operate at a low level, such as memory manipulation or driver exploits. Kernel-mode anti-cheat can provide stronger protection against sophisticated cheating techniques but may raise privacy and security concerns.
+            </p>
+            <ul>
+                <li>Riot Games - Vanguard (used in Valorant)</li>
+                <li>Electronic Arts (EA) - EA Anti-Cheat</li>
+                <li>BattlEye</li>
+                <li>Epic Games - Easy Anti-Cheat</li>
+                <li>Valve Corporation - Valve Anti-Cheat (VAC)</li>
+            </ul>
+        </section>
+        <section>
+            <h2>2. Security Software</h2>
+            <p>
+                Requires kernel-level access to provide comprehensive system protection against malware, viruses, and other security threats. This access allows security software to monitor system calls, intercept potentially malicious activities, and protect critical system resources. Kernel-mode components can detect and prevent sophisticated attacks, including rootkits and zero-day exploits, that might evade user-mode detection.
+            </p>
+            <ul>
+                <li>Microsoft Defender (formerly Windows Defender)</li>
+                <li>Kaspersky Total Security</li>
+                <li>Bitdefender Total Security</li>
+                <li>Norton 360</li>
+                <li>McAfee Total Protection</li>
+            </ul>
+        </section>
+        <section>
+            <h2>3. Virtualization Software</h2>
+            <p>
+                Requires kernel-level access to efficiently manage virtual machines and provide near-native performance. This access allows for direct hardware resource allocation, memory management, and CPU scheduling for virtual machines. Kernel-mode components enable features like hardware-assisted virtualization, which significantly improves VM performance and security isolation.
+            </p>
+            <ul>
+                <li>VMware Workstation Pro</li>
+                <li>Oracle VM VirtualBox</li>
+                <li>Microsoft Hyper-V</li>
+                <li>Parallels Desktop (for macOS)</li>
+                <li>KVM (Kernel-based Virtual Machine, for Linux)</li>
+            </ul>
+        </section>
+        <section>
+            <h2>4. Performance Monitoring Tools</h2>
+            <p>
+                Utilizes kernel-level access to interact directly with hardware components and low-level system functions. This access allows for accurate monitoring of CPU frequencies, temperatures, voltages, and other hardware metrics. For overclocking tools, kernel-mode operation enables safe manipulation of hardware settings beyond what's possible in user mode, though it carries risks if not used properly.
+            </p>
+            <ul>
+                <li>MSI Afterburner</li>
+                <li>EVGA Precision X1</li>
+                <li>Intel Extreme Tuning Utility (XTU)</li>
+                <li>AMD Ryzen Master</li>
+                <li>HWiNFO</li>
+            </ul>
+        </section>
+        <section>
+            <h2>5. Remote Access Software</h2>
+            <p>
+                Some remote access solutions use kernel-level components to provide enhanced functionality, security, and performance. Kernel access can enable features like seamless remote desktop integration, efficient screen capture and transmission, and secure encrypted connections. However, not all remote access tools require kernel-level access to function effectively.
+            </p>
+            <ul>
+                <li>TeamViewer (certain components)</li>
+                <li>AnyDesk</li>
+                <li>LogMeIn</li>
+                <li>Microsoft Remote Desktop Protocol (RDP)</li>
+                <li>VNC (Virtual Network Computing, some implementations)</li>
+            </ul>
+        </section>
+        <section>
+            <h2>6. Backup and Recovery Software</h2>
+            <p>
+                Leverages kernel-level access to perform comprehensive system-level backups and provide advanced data recovery features. This access allows for creating exact disk images, backing up locked files, and performing bare-metal recovery operations. Kernel-mode components can also enable continuous data protection and instant recovery features in enterprise environments.
+            </p>
+            <ul>
+                <li>Acronis Cyber Protect Home Office (formerly True Image)</li>
+                <li>Veeam Backup & Replication</li>
+                <li>Macrium Reflect</li>
+                <li>Paragon Backup & Recovery</li>
+                <li>Veritas NetBackup</li>
+            </ul>
+        </section>
+        <section>
+            <h2>7. Disk Management Tools</h2>
+            <p>
+                Requires kernel-level access to perform low-level disk operations safely and efficiently. This access allows for direct manipulation of partition tables, file systems, and disk structures. Kernel-mode components enable operations like resizing partitions on active drives, converting between file systems, and performing advanced data recovery techniques.
+            </p>
+            <ul>
+                <li>Parted Magic</li>
+                <li>AOMEI Partition Assistant</li>
+                <li>GParted (primarily for Linux)</li>
+                <li>MiniTool Partition Wizard</li>
+                <li>Disk Management (built into Windows, uses kernel-mode drivers)</li>
+            </ul>
+        </section>
+        <section>
+            <h2>8. VPN Clients</h2>
+            <p>
+                Some VPN implementations use kernel-level drivers to enhance performance, security, and integration with the operating system's networking stack. Kernel-mode VPN components can provide better throughput and lower latency by bypassing user-mode processing. They can also offer stronger security by intercepting network traffic at a lower level, though this deep integration also increases the potential security risk if the VPN software is compromised.
+            </p>
+            <ul>
+                <li>OpenVPN (when using kernel-mode TUN driver)</li>
+                <li>WireGuard</li>
+                <li>Cisco AnyConnect</li>
+                <li>NordVPN (NordLynx protocol)</li>
+                <li>ExpressVPN Lightway protocol</li>
+            </ul>
+        </section>
+        <section>
+            <h2>9. Development and Debugging Tools</h2>
+            <p>
+                Utilizes kernel-level access to provide essential low-level system access and debugging capabilities for system-level programming, driver development, and operating system internals analysis. These tools can inspect and modify kernel memory, set hardware breakpoints, and analyze system crashes. Due to their powerful nature, kernel-mode debugging tools typically require special setup and can potentially destabilize a system if used incorrectly.
+            </p>
+            <ul>
+                <li>WinDbg (Windows Debugger)</li>
+                <li>GDB (GNU Debugger) with kernel debugging modules</li>
+          <li>LLDB (LLVM Debugger) for kernel debugging</li>
+          <li>Sysinternals Suite (various tools for Windows internals)</li>
+          <li>DTrace (for Unix-like systems)</li>
         </ul>
       </section>
-
-      <section>
-        <h2>2. Security Software</h2>
-        <p>
-          Antivirus and security solutions need deep system access to protect against sophisticated
-          malware and threats.
-        </p>
-        <ul>
-          <li>Antivirus programs (e.g., Kaspersky, Bitdefender, Norton)</li>
-          <li>Advanced third-party firewalls</li>
-          <li>Endpoint protection solutions</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>3. Virtualization Software</h2>
-        <p>
-          Virtualization software requires kernel access to manage virtual machines and provide
-          low-level system access.
-        </p>
-        <ul>
-          <li>VMware Workstation</li>
-          <li>VirtualBox (certain components)</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>4. Performance Monitoring and Overclocking Tools</h2>
-        <p>
-          Performance monitoring and overclocking tools need kernel access to access low-level
-          system information and make adjustments.
-        </p>
-        <ul>
-          <li>MSI Afterburner</li>
-          <li>EVGA Precision X1</li>
-          <li>CPU-Z (in some cases)</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>5. Remote Access Software</h2>
-        <p>
-          Remote access software may require kernel access for certain features, such as file
-          transfer or system control.
-        </p>
-        <ul>
-          <li>TeamViewer (certain components)</li>
-          <li>AnyDesk</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>6. Backup and Recovery Software</h2>
-        <p>
-          Backup and recovery software may need kernel access to access low-level system data and
-          perform system-level backups.
-        </p>
-        <ul>
-          <li>Acronis True Image</li>
-          <li>EaseUS Todo Backup</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>7. Disk Management Tools</h2>
-        <p>
-          Disk management tools require kernel access to perform low-level disk operations, such as
-          partitioning and formatting.
-        </p>
-        <ul>
-          <li>Partition Magic</li>
-          <li>AOMEI Partition Assistant</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>8. VPN Clients</h2>
-        <p>
-          Some VPN services use kernel-level drivers to improve performance and provide additional
-          features.
-        </p>
-        <p>Some VPN services use kernel-level drivers for enhanced performance</p>
-      </section>
-
-      <section>
-        <h2>9. Development and Debugging Tools</h2>
-        <p>
-          Certain development and debugging tools require kernel access for low-level system access
-          and debugging capabilities.
-        </p>
-        <p>Certain IDEs and debuggers for low-level programming</p>
-      </section>
-
       <section>
         <h2>Final Thoughts</h2>
         <p>
-          While kernel access provides powerful capabilities for various applications, it's important
-          to recognize the potential risks involved. Users and organizations should carefully
-          evaluate the need for such software and ensure they trust the developers before granting
-          kernel-level permissions. 
+          While kernel access provides powerful capabilities, it's important
+          to recognize the potential risks involved. Its unfortunate that the path of least resistance is not always the simplest or most secure and that a 
+          handful of kernel architectures will dominate the market for the forseeable future. 
+        </p>
+        <p>
+          In the meantime, there 
+          is plenty of room for innovation in the kernel design space. I'm most particularly interested in 
+          multi-layered kernel designs that can provide the performance of a monolithic kernel with the security 
+          of a microkernel. There may also be a demand for kernels specifically designed for a real time data processing use case such as high frequency trading or blockchain validation.
         </p>
       </section>
     </article>

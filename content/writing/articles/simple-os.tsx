@@ -51,7 +51,8 @@ const SimpleOS: React.FC = () => {
           The root cause was a problematic modification to a configuration file, Channel File 291,
           which handles screening named pipes. This led to an out-of-bounds memory read, causing an
           invalid page fault - aka - the program tried to access memory it shouldn't, causing a
-          crash and bringing down millions of systems.
+          crash and this update was forced upon millions of systems, ultimately bringing them into
+          a BSOD state.
         </p>
         <p>
           Like many security products, CrowdStrike's Falcon sensor operates at the kernel level to
@@ -62,6 +63,11 @@ const SimpleOS: React.FC = () => {
         </p>
       </section>
       <section>
+        <h2>Kernels</h2>
+        <p>
+          A kernel is the core of an operating system, providing essential services to other
+          programs.
+        </p>
         <table>
           <thead>
             <tr>
@@ -108,33 +114,22 @@ const SimpleOS: React.FC = () => {
       <section>
         <h2>Multi-Tier Kernels</h2>
         <p>
-          A multi-tier kernel in theory could prevent higher level applications from accessing the
-          kernel access for various types of software.
+          A multi-tier kernel architecture can theoretically prevent higher-level applications from having unrestricted access to the kernel, thereby enhancing system stability and security.
         </p>
         <ul>
-          <li>Core OS functions might operate at the lowest, most privileged level.</li>
-          <li>
-            Essential drivers and security software could run slightly higher, with more restricted
-            access.
-          </li>
-          <li>
-            Application-level software would operate at even higher levels with minimal kernel
-            access.
-          </li>
+          <li>Core OS functions operate at the lowest, most privileged level.</li>
+          <li>Essential drivers and security software run at a slightly higher level with restricted access.</li>
+          <li>Application-level software operates at the highest level with minimal kernel access.</li>
         </ul>
         <p>
-          As I began researching this idea, I came across this
+          During my brief research, I found a 
           <a href="https://faculty.nps.edu/irvine/Publications/Publications2006/NPS-CS-06-001_Analysis3KernelArchi.pdf">
             paper
-          </a>
-          which discusses three different multilevel security kernel architectures. The authors
-          conclude that the choice between these architectures depends on the specific requirements
-          of a given system or deployment scenario. In any case, the goas is to prevent a single
-          issue from bringing down the entire system or affecting core OS functions.
+          </a> 
+          discussing three different multilevel security kernel architectures. The authors rightly conclude that the choice of architecture depends on the specific requirements of a system or deployment scenario and that the goal is to prevent a single issue from compromising the entire system or affecting core OS functions.
         </p>
         <p>
-          This multi-tier approach could be used to implement a least privilege architecture, which
-          may have limited the impact of a vulnerability or bug in Falcon's Channel File 291.
+          Implementing a multi-tier approach could facilitate a least privilege architecture, potentially limiting the impact of vulnerabilities or bugs, such as the one in Falcon's Channel File 291.
         </p>
       </section>
       <section>
