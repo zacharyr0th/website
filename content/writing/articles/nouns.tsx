@@ -6,8 +6,8 @@ export const metadata: ContentItem = {
   id: 'nounsDAO',
   slug: 'nounsDAO',
   title: 'NounsDAO',
-  subtitle: 'Time. Albeit, Nouns are more timeless.',
-  image: '/images/articles/nouns-0.webp',
+  subtitle: 'The answer is time.',
+  image: '/images/articles/nouns-1.webp',
   imageCaption: 'NounsDAO logo and John Cage portrait',
   pageViews: 0,
   type: 'article',
@@ -15,7 +15,7 @@ export const metadata: ContentItem = {
   author: 'Zachary Roth',
   date: '2021-08-31',
   tags: ['Blockchain','NFTs'],
-  readTime: 15,
+  readTime: 10,
   likes: 0,
   comments: 0,
   shares: 0,
@@ -26,7 +26,7 @@ export const metadata: ContentItem = {
 const Nouns: React.FC = () => {
   return (
     <article>
-      <Image src="/images/articles/nouns-0.webp" alt="NounsDAO" width={1000} height={1000} />
+      <Image src="/images/articles/nouns-2.webp" alt="NounsDAO" width={1000} height={1000} />
       <p>What do NounsDAO & John Cage have in common?</p>
       <p>
         In 1985, contemporary composer John Cage wrote a solo piano piece called ASLSP (As Slow as
@@ -46,6 +46,7 @@ const Nouns: React.FC = () => {
         governed by Noun NFT holders. At the time of writing, 24 Nouns control 3260.6022 Ethereum
         ($11,003,847.70 at a current ETH price of $3,374.79).
       </p>
+      <Image src="/images/articles/nouns-3.webp" alt="NounsDAO" width={1000} height={1000} />
       <p>
         Since 100% of auction revenue gets deposited into the Treasury, the founders (Nounders) will
         be gifted every 10th Noun for the first five years.
@@ -67,11 +68,8 @@ const Nouns: React.FC = () => {
       </p>
       <p>
         These proposals can be anything from donating to charities to changing the amount of Nouns
-        supply required to submit proposals.
-      </p>
-      <p>
-        Given that this project is barely three weeks old, the community is still new, and the DAO
-        has not had much time to submit and enact proposals.
+        supply required to submit proposals. Given that this project is barely three weeks old, the
+        community is still new, and the DAO has not had much time to submit and enact proposals.
       </p>
       <p>
         Although they have succeeded in doling out a total of 30 ETH ($101,243.70) to 6 different
@@ -79,31 +77,21 @@ const Nouns: React.FC = () => {
         tab on the NounsDAO Treasury address on Etherscan. It's too bad governments don't have a
         public ledger for spending our money.
       </p>
-      <p>
-        While the Treasury can do whatever it wants, it seems like the goal is to ensure the
-        viability of the NounsDAO community.
-      </p>
+      <Image src="/images/articles/nouns-4.webp" alt="NounsDAO" width={1000} height={1000} />
       <h2>Derivatives</h2>
-      <p>The images are open source so anyone can build with them.</p>
       <p>
         Below, you can see the hand-drawn Improper Noun set. The artist is releasing a new one daily
         and can be connected with on Twitter here.
       </p>
+      <Image src="/images/articles/nouns-5.webp" alt="NounsDAO" width={1000} height={1000} />
       <p>
         Here is a set of paintings designed using the AI process known as GAN. Connect with the Noun
         GAN Study artist here.
       </p>
-      <h2>The Perception of Time</h2>
+      <Image src="/images/articles/nouns-6.webp" alt="NounsDAO" width={1000} height={1000} />
+      <h3>Time</h3>
       <p>
-        NounsDAO and John Cage's ASLSP challenge our perception of time. While Cage's piece
-        stretches over centuries, NounsDAO creates a new image every day, potentially forever if
-        they add in new traits.
-      </p>
-      <p>
-        John Cage and NounsDAO both manipulate our perception of time. When we ingest content, we
-        expect a beginning and an end. ASLSP dabbles with the concept of timelessness, but the piece
-        ultimately ends. The intention was to elongate expectations. NounsDAO, on the other hand,
-        can exist forever 😆.
+        John Cage's ASLSP and NounsDAO both have a beginning but only ASLSP has an end. Does that make it timeless?
       </p>
     </article>
   );

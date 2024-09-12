@@ -130,11 +130,9 @@ const Bing: React.FC = () => {
         this conversation anymore 😔" instead of giving me a wrong answer - as ChatGPT, You.com, or
         Poe would. Note the word return - I am not going to anthropomorphize these chatbots. It's
         not responding to me or talking to me. Prompts are the same as binary code to these things,
-        and their entire existence is a compilation of code with emergent properties. On the other
-        hand, observing Bing's use of emojis is uncomfortable. Here are some examples from Twitter.
+        and their entire existence is a compilation of code with emergent properties. 
       </p>
-      <Image src="/images/articles/bing-3.webp" alt="Bing-3" width={800} height={600} />
-      <p>And then there's this one 😳.</p>
+      <p>On the other hand, observing Bing's use of emojis is uncomfortable 😳.</p>
       <Image src="/images/articles/bing-4.webp" alt="Bing-4" width={800} height={600} />
       <h3>The Future of AI and Search</h3>
       <p>

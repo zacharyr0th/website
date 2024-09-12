@@ -45,7 +45,7 @@ const SimpleOS: React.FC = () => {
         <p>
           At 04:09 UTC on July 19, CrowdStrike released an update for its Falcon sensor software on
           Windows systems. A defect in this update caused these systems to crash, triggering the
-          infamous BSOD or boot loop.
+          infamous Blue Screen of Death (BSOD) or boot loop.
         </p>
         <p>
           The root cause was a problematic modification to a configuration file, Channel File 291,
@@ -66,7 +66,8 @@ const SimpleOS: React.FC = () => {
         <h2>Kernels</h2>
         <p>
           A kernel is the core of an operating system, providing essential services to other
-          programs.
+          programs. There are many different types of kernels, including monolithic, microkernel,
+          hybrid, exokernel, and nanokernel - all with their own pros and cons.
         </p>
         <table>
           <thead>
