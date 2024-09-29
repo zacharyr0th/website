@@ -5,13 +5,13 @@
 @tailwind utilities;
 
 /* Core */
-@import '../core/base.css';
-@import '../core/utilities.css';
-@import '../core/variables.css';
+@import './base.css';
+@import './utilities.css';
+@import './variables.css';
 
 /* Global */
 @import './accessibility.css';
 @import './layout.css';
 
 /* Special */
-@import '../special/print.css';
+@import './print.css';

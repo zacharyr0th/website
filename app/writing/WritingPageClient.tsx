@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 interface Content {
   id: string;
@@ -16,318 +16,294 @@ interface Content {
 }
 
 interface WritingPageClientProps {
-  contentType?: 'article' | 'review' | 'interview' | 'sheet-music';
   allContent: Content[];
 }
 
-const ArticleCard: React.FC<{ article: Content }> = React.memo(({ article }) => {
-  const imageSrc =
-    article.image && (article.image.startsWith('/') || article.image.startsWith('http'))
-      ? article.image
-      : '/placeholder.jpg';
-
-  return (
-    <div className="absolute inset-0 rounded-lg overflow-hidden shadow-lg bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a]">
-      <Link href={`/writing/${article.slug}`}>
-        <div className="relative h-full cursor-pointer">
-          <Image
-            src={imageSrc}
-            alt={`Cover image for ${article.title}`}
-            fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-            style={{ objectFit: 'cover' }}
-            onError={(e) => {
-              (e.target as HTMLImageElement).src = '/placeholder.jpg';
-            }}
-            priority={true}
-          />
-          <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black/80 to-transparent">
-            <h2 className="text-2xl font-bold mb-1">{article.title}</h2>
-            <p className="text-lg text-gray-400">{article.subtitle}</p> 
-          </div>
-        </div>
-      </Link>
-    </div>
-  );
-});
-
-ArticleCard.displayName = 'ArticleCard';
-
-const WritingPageClient: React.FC<WritingPageClientProps> = ({ contentType, allContent }) => {
+const WritingPageClient: React.FC<WritingPageClientProps> = ({ allContent }) => {
   const [mounted, setMounted] = useState(false);
-  const [currentArticleIndex, setCurrentArticleIndex] = useState(0);
-  const [randomArticles, setRandomArticles] = useState<Content[]>([]);
-
-  const { contentArray, featuredArticles } = useMemo(() => {
-    const array = Array.isArray(allContent) ? allContent : [];
-    return {
-      contentArray: array,
-      featuredArticles: array.slice(0, 3),
-    };
-  }, [allContent]);
-
-  const refreshRandomArticles = React.useCallback(() => {
-    const filteredContent = contentArray.filter((content) => {
-      if (featuredArticles.some((featured) => featured.id === content.id)) return false;
-      if (contentType && content.type !== contentType) return false;
-      return true;
-    });
-
-    const shuffled = [...filteredContent].sort(() => Math.random() - 0.5);
-    setRandomArticles(shuffled.slice(0, 5));
-  }, [contentArray, featuredArticles, contentType]);
+  const [activeCategory, setActiveCategory] = useState<string>('all');
 
   useEffect(() => {
     setMounted(true);
-    refreshRandomArticles();
-  }, [refreshRandomArticles]);
+  }, []);
 
-  const handlePrevArticle = () => {
-    setCurrentArticleIndex(
-      (prev) => (prev - 1 + featuredArticles.length) % featuredArticles.length
-    );
-  };
-
-  const handleNextArticle = () => {
-    setCurrentArticleIndex((prev) => (prev + 1) % featuredArticles.length);
-  };
+  const filteredContent = useMemo(() => {
+    return activeCategory === 'all'
+      ? allContent
+      : allContent.filter(item => item.type === activeCategory);
+  }, [allContent, activeCategory]);
 
   if (!mounted) return null;
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="bg-[#121212] text-white min-h-screen"
-    >
-      {/* SubHeader */}
-      <motion.header
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="py-6 mb-8 container"
-      >
-        <div className="flex justify-between items-center">
-          <motion.h1
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-4xl font-bold"
-          >
-            Writing
-          </motion.h1>
-          <nav className="navbar-links hidden md:block">
-            <ul className="flex gap-6">
-              {contentType && (
-                <li>
-                  <Link
-                    href="/writing"
-                    className="text-gray-200 text-lg transition-all duration-300 focus:outline-none transform hover:scale-105 hover:text-gray-500"
-                  >
-                    All
-                  </Link>
-                </li>
-              )}
-              {['Articles', 'Reviews', 'Interviews'].map((item) => (
-                <li key={item}>
-                  <Link
-                    href={`/writing?type=${item.toLowerCase().slice(0, -1)}`}
-                    className={`text-gray-200 text-lg transition-all duration-300 focus:outline-none transform hover:scale-105 ${
-                      contentType === item.toLowerCase().slice(0, -1)
-                        ? 'text-gray-500'
-                        : 'hover:text-gray-500'
-                    }`}
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
-      </motion.header>
-
-      {/* Main content */}
-      <motion.main
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-        className="container mb-8"
-      >
-        <div className="grid grid-cols-3 gap-6">
-          {/* Featured Articles Section */}
-          <section className="col-span-2">
-            <div className="relative h-[calc(3*100px+3rem)] rounded-lg overflow-hidden">
-              <ArticleCard article={featuredArticles[currentArticleIndex]} />
-              <button
-                onClick={handlePrevArticle}
-                className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/60 text-white p-1.5 rounded-full hover:bg-black/80 transition-all duration-300"
-              >
-                <FaChevronLeft size={16} />
-              </button>
-              <button
-                onClick={handleNextArticle}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/60 text-white p-1.5 rounded-full hover:bg-black/80 transition-all duration-300"
-              >
-                <FaChevronRight size={16} />
-              </button>
-            </div>
-          </section>
-
-          {/* Random Section */}
-          <aside className="col-span-1">
-            <div className="bg-[#1a1a1a] p-4 rounded-lg shadow-lg h-[calc(3*100px+3rem)] flex flex-col">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-2xl font-bold">Random</h2>
-                <button
-                  onClick={refreshRandomArticles}
-                  className="text-white hover:text-gray-500 transition-transform duration-300 transform hover:scale-105"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </button>
-              </div>
-              <div className="overflow-y-auto flex-grow no-scrollbar">
-                {randomArticles.length > 0 ? (
-                  <ul className="space-y-4">
-                    {randomArticles.map((content, index) => (
-                      <li
-                        key={index}
-                        className="bg-[#242424] hover:bg-[#2a2a2a] transition-all duration-300 rounded-lg overflow-hidden shadow-md h-[100px]"
-                      >
-                        <Link href={`/writing/${content.slug}`}>
-                          <div className="flex items-center p-3 h-full">
-                            <div className="relative w-14 h-14 flex-shrink-0">
-                              <Image
-                                src={
-                                  content.image &&
-                                  (content.image.startsWith('/') ||
-                                    content.image.startsWith('http'))
-                                    ? content.image
-                                    : '/placeholder.jpg'
-                                }
-                                alt={`Thumbnail for ${content.title}`}
-                                fill
-                                sizes="(max-width: 768px) 100vw, 50vw"
-                                style={{ objectFit: 'cover' }}
-                                className="rounded-lg"
-                                onError={(e) => {
-                                  (e.target as HTMLImageElement).src = '/placeholder.jpg';
-                                }}
-                                priority={true}
-                              />
-                            </div>
-                            <div className="ml-3 overflow-hidden flex-grow">
-                              <h3 className="text-sm font-semibold line-clamp-2">
-                                {content.title}
-                              </h3>
-                              <p className="text-xs text-gray-400">
-                                {content.type.charAt(0).toUpperCase() + content.type.slice(1)}
-                              </p>
-                            </div>
-                          </div>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p className="text-gray-400">No content available at the moment.</p>
-                )}
-              </div>
-            </div>
-          </aside>
-        </div>
+    <motion.div className="bg-[#121212] text-white min-h-screen">
+      <HeroSection />
+      <motion.main className="container mx-auto px-4">
+        <FeaturedSection content={allContent} />
+        <CategoryTiles />
+        <Categories activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
+        <ContentGrid content={filteredContent} />
+        <NewsletterSignup />
       </motion.main>
-
-      {/* Archives */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-        className="container"
-      >
-        <div className="grid grid-cols-3 gap-6">
-          {[
-            {
-              title: 'Articles',
-              description: 'Tech & Finance',
-              link: '/writing/articles',
-            },
-            {
-              title: 'Reviews',
-              description: 'Books & Products',
-              link: '/writing/reviews',
-            },
-            {
-              title: 'Interviews',
-              description: 'Founders & Builders',
-              link: '/writing/interviews',
-            },
-          ].map((category, index) => (
-            <motion.div
-              key={category.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-            >
-              <Link
-                href={category.link}
-                className="bg-[#1a1a1a] p-6 rounded-lg shadow-lg hover:bg-[#242424] transition-all duration-300 group h-full flex flex-col justify-between"
-              >
-                <div>
-                  <h3 className="text-2xl font-bold mb-2 group-hover:text-blue-400 transition-colors duration-300">
-                    {category.title}
-                  </h3>
-                  <p className="text-gray-400 text-lg">{category.description}</p>
-                </div>
-                <div className="text-blue-400 inline-flex items-center group-hover:underline mt-4">
-                  View All
-                  <svg
-                    className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-      </motion.section>
-
-      <style jsx>{`
-        .no-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-
-        .no-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
     </motion.div>
   );
 };
 
-WritingPageClient.displayName = 'WritingPageClient';
+const HeroSection: React.FC = () => (
+  <section className="bg-[#121212] text-white py-12">
+    <div className="container mx-auto px-4">
+      <h1 className="text-4xl md:text-5xl font-bold mb-4">Writing</h1>
+      <p className="text-xl mb-8">Explore articles, reviews, and interviews on tech, finance, and more.</p>
+      <Link href="/writing/articles" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full transition duration-300 inline-block">
+        Start Reading
+      </Link>
+    </div>
+  </section>
+);
+
+const FeaturedSection: React.FC<{ content: Content[] }> = ({ content }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const featuredContent = useMemo(() => content.slice(0, 6), [content]);
+  const totalSlides = Math.ceil(featuredContent.length / 2);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides);
+    }, 10000);
+    return () => clearInterval(interval);
+  }, [totalSlides]);
+
+  const changeSlide = useCallback((direction: number) => {
+    setCurrentIndex((prevIndex) => (prevIndex + direction + totalSlides) % totalSlides);
+  }, [totalSlides]);
+
+  return (
+    <section className="py-12">
+      <h2 className="text-3xl font-bold mb-8">Featured</h2>
+      <div className="relative">
+        <div className="overflow-hidden">
+          <div
+            className="flex transition-transform duration-300 ease-in-out"
+            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          >
+            {Array.from({ length: totalSlides }).map((_, slideIndex) => (
+              <div key={slideIndex} className="w-full flex-shrink-0 flex gap-4">
+                {featuredContent.slice(slideIndex * 2, slideIndex * 2 + 2).map((item) => (
+                  <div key={item.id} className="w-1/2">
+                    <FeaturedCard article={item} />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+        <button
+          onClick={() => changeSlide(-1)}
+          className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full"
+        >
+          &#10094;
+        </button>
+        <button
+          onClick={() => changeSlide(1)}
+          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full"
+        >
+          &#10095;
+        </button>
+      </div>
+    </section>
+  );
+};
+
+const FeaturedCard: React.FC<{ article: Content }> = React.memo(({ article }) => (
+  <Link href={`/writing/${article.slug}`}>
+    <div className="bg-[#1a1a1a] rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 mx-auto max-w-2xl">
+      <div className="relative h-64">
+        <Image
+          src={article.image || '/placeholder.jpg'}
+          alt={`Cover image for ${article.title}`}
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          style={{ objectFit: 'cover' }}
+          loading="eager"
+        />
+      </div>
+      <div className="p-6">
+        <h3 className="text-2xl font-semibold mb-2">{article.title}</h3>
+        {article.subtitle && <p className="text-gray-400 text-lg">{article.subtitle}</p>}
+      </div>
+    </div>
+  </Link>
+));
+
+const ArticleCard: React.FC<{ article: Content }> = React.memo(({ article }) => {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+    rootMargin: '300px',
+  });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0 }}
+      animate={inView ? { opacity: 1 } : {}}
+      transition={{ duration: 0.1 }}
+      className="bg-[#1a1a1a] rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
+    >
+      <Link href={`/writing/${article.slug}`}>
+        <div className="relative h-48 group">
+          <Image
+            src={article.image || '/placeholder.jpg'}
+            alt={`Cover image for ${article.title}`}
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            style={{ objectFit: 'cover' }}
+            loading="eager"
+          />
+          <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <span className="text-white font-bold">Read More</span>
+          </div>
+        </div>
+        <div className="p-6">
+          <h3 className="text-xl font-semibold mb-2">{article.title}</h3>
+          {article.subtitle && <p className="text-gray-400">{article.subtitle}</p>}
+        </div>
+      </Link>
+    </motion.div>
+  );
+});
+
+const CategoryTiles: React.FC = () => {
+  const categories = [
+    { title: 'Articles', description: 'Tech & Finance', link: '/writing/articles' },
+    { title: 'Reviews', description: 'Books & Products', link: '/writing/reviews' },
+    { title: 'Interviews', description: 'Founders & Builders', link: '/writing/interviews' },
+  ];
+
+  return (
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.4 }}
+      className="py-12"
+    >
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {categories.map((category, index) => (
+          <motion.div
+            key={category.title}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
+          >
+            <Link
+              href={category.link}
+              className="block bg-[#1a1a1a] p-6 rounded-lg shadow-lg hover:bg-[#242424] transition-all duration-300"
+            >
+              <h3 className="text-2xl font-bold mb-2">{category.title}</h3>
+              <p className="text-gray-400 text-lg mb-4">{category.description}</p>
+              <span className="text-blue-400 inline-flex items-center">
+                View All
+                <svg
+                  className="w-4 h-4 ml-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </span>
+            </Link>
+          </motion.div>
+        ))}
+      </div>
+    </motion.section>
+  );
+};
+
+const Categories: React.FC<{
+  activeCategory: string;
+  setActiveCategory: (category: string) => void;
+}> = React.memo(({ activeCategory, setActiveCategory }) => {
+  const categories = [
+    { id: 'all', name: 'All' },
+    { id: 'article', name: 'Articles' },
+    { id: 'review', name: 'Reviews' },
+    { id: 'interview', name: 'Interviews' },
+  ];
+
+  return (
+    <section className="py-12">
+      <div className="flex flex-wrap justify-center gap-4">
+        {categories.map((category) => (
+          <button
+            key={category.id}
+            onClick={() => setActiveCategory(category.id)}
+            className={`px-4 py-2 rounded-full transition-colors duration-300 ${
+              activeCategory === category.id
+                ? 'bg-blue-500 text-white'
+                : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+            }`}
+          >
+            {category.name}
+          </button>
+        ))}
+      </div>
+    </section>
+  );
+});
+
+const ContentGrid: React.FC<{ content: Content[] }> = React.memo(({ content }) => (
+  <section className="py-12">
+    <AnimatePresence>
+      <motion.div
+        key={content.length}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      >
+        {content.map((item) => (
+          <ArticleCard key={item.id} article={item} />
+        ))}
+      </motion.div>
+    </AnimatePresence>
+  </section>
+));
+
+const NewsletterSignup: React.FC = () => (
+  <section className="bg-[#1a1a1a] py-12">
+    <div className="container mx-auto px-4 text-center">
+      <h2 className="text-3xl font-bold mb-4">Stay Updated</h2>
+      <p className="text-xl text-gray-300 mb-8">Subscribe to my newsletter for the latest articles and insights</p>
+      <form className="max-w-md mx-auto">
+        <div className="flex">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            className="flex-grow px-4 py-2 rounded-l-full bg-white text-black focus:outline-none"
+          />
+          <button
+            type="submit"
+            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-r-full transition duration-300"
+          >
+            Subscribe
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+);
+
+FeaturedCard.displayName = 'FeaturedCard';
+ArticleCard.displayName = 'ArticleCard';
+Categories.displayName = 'Categories';
+ContentGrid.displayName = 'ContentGrid';
 
 export default React.memo(WritingPageClient);

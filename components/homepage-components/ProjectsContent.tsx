@@ -31,6 +31,15 @@ const projects = [
     github: '',
     liveLink: 'https://zacharyr0th.com/writing/music-ide',
   },
+  {
+    id: 'toml-tools',
+    name: 'toml-tools',
+    description:
+      `Scripts for analyzing, categorizing, and organizing TOML files from Electric Capital's crypto-ecosystems directory.`,
+    tags: ['Data Analysis', 'Blockchains'],
+    github: '',
+    liveLink: 'https://zacharyr0th.com/writing/music-ide',
+  },
 ];
 
 type Project = {

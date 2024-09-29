@@ -8,7 +8,7 @@ import StyledComponentsRegistry from '@/lib/registry';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
-import '@/styles/global/globals.css';
+import '@/styles/globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('http://localhost:3000'),

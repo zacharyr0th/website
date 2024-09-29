@@ -2,16 +2,18 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
 
-const FeaturedContent = dynamic(() => import('./FeaturedContent'), {
-  ssr: false,
-});
 const ProjectsContent = dynamic(() => import('./ProjectsContent'), {
   ssr: false,
 });
-const BioSection = dynamic(() => import('./BioSection'), {
+
+const WritingContent = dynamic(() => import('./WritingContent'), {
+  ssr: false,
+});
+
+const MusicContent = dynamic(() => import('./MusicContent'), {
   ssr: false,
 });
 
@@ -21,7 +23,7 @@ export default function TabSection() {
   return (
     <div className="tab-section">
       <div className="tabs-container" role="tablist">
-        {['projects', 'about', 'featured'].map((tab, index) => (
+        {['projects', 'writing', 'music'].map((tab, index) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
@@ -38,8 +40,8 @@ export default function TabSection() {
 
       <div className="tab-content">
         {activeTab === 'projects' && <ProjectsContent />}
-        {activeTab === 'about' && <BioSection />}
-        {activeTab === 'featured' && <FeaturedContent />}
+        {activeTab === 'writing' && <WritingContent />}
+        {activeTab === 'music' && <MusicContent />}
       </div>
 
       <style jsx>{`
