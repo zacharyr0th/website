@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs';
 import path from 'path';
-import { ContentItem } from './types';
 import { addMetadataToFile } from './fileMetadata';
+import { ContentItem } from './types';
 
 export async function getContentItems(
   type: 'article' | 'review' | 'interview' | 'sheet-music' | undefined
@@ -9,7 +9,7 @@ export async function getContentItems(
   const directories = type
     ? [type === 'sheet-music' ? 'sheet-music' : type + 's']
     : ['articles', 'reviews', 'interviews', 'sheet-music'];
-  const contentDirectory = path.join(process.cwd(), 'content', 'writing');
+  const contentDirectory = path.join(process.cwd(), 'public', 'content', 'writing');
 
   let allItems: ContentItem[] = [];
   const usedIds = new Set();

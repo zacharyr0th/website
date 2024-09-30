@@ -197,7 +197,7 @@ export default function SnakeGame() {
         <div className={styles.contentContainer}>
           <div className={styles.leftSection}>
             <div>
-              <h2 className={styles.subtitle}>So here&apos;s a Snake Game!</h2>
+              <h2 className={styles.subtitle}>So here&apos;s a Snake Game</h2>
               <div className={styles.scoreDisplay}>Score: {score}</div>
               <div className={styles.highScoreDisplay}>High Score: {highScore}</div>
             </div>

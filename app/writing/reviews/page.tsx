@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import ReviewsArchive from '../reviews-archive/ReviewsArchive';
+import ReviewsArchive from './reviews-archive/ReviewsArchive';
 import { getReviewItems } from '@/lib/content';
 import type { ContentItem } from '@/lib/types';
 

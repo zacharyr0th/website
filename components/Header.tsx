@@ -54,9 +54,7 @@ const Header = () => {
               key={item}
               href={`/${item}`}
               className={`text-gray-200 transition-all duration-300 focus:outline-none text-xl ${
-                pathname === `/${item}`
-                  ? 'text-gray-500'
-                  : 'hover:text-gray-500'
+                pathname === `/${item}` ? 'text-gray-500' : 'hover:text-gray-500'
               }`}
             >
               {item.charAt(0).toUpperCase() + item.slice(1)}
@@ -83,10 +81,7 @@ const Header = () => {
               aria-label={label}
               className="text-gray-200 transition-colors duration-300 focus:outline-none"
             >
-              <Icon
-                size={32}
-                className="transition-colors duration-300 hover:text-gray-500"
-              />
+              <Icon size={32} className="transition-colors duration-300 hover:text-gray-500" />
             </Link>
           ))}
         </div>

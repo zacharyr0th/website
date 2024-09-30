@@ -24,7 +24,7 @@ const projects = [
   },
   {
     id: 'musicide',
-    name: 'MusicIDE',
+    name: 'MusicIDE (WIP)',
     description:
       'A web-based integrated Development Environment for AI assisted music production and research.',
     tags: ['AI', 'Music', 'IDE'],
@@ -34,11 +34,26 @@ const projects = [
   {
     id: 'toml-tools',
     name: 'toml-tools',
-    description:
-      `Scripts for analyzing, categorizing, and organizing TOML files from Electric Capital's crypto-ecosystems directory.`,
+    description: `Scripts for analyzing, categorizing, and organizing TOML files from Electric Capital's crypto-ecosystems directory.`,
     tags: ['Data Analysis', 'Blockchains'],
     github: '',
     liveLink: 'https://zacharyr0th.com/writing/music-ide',
+  },
+  {
+    id: 'Privvy',
+    name: 'Privvy (WIP)',
+    description: `A privacy preserving DEX on the Aleo blockchain.`,
+    tags: ['Aleo', 'DeFi', 'Privacy'],
+    github: '',
+    liveLink: '',
+  },
+  {
+    id: 'casino-time',
+    name: 'Casino Time (WIP)',
+    description: `A gambling platform on the Aptos blockchain which utilizes Aptos randomness to ensure fair shuffling and private transactions for poker.`,
+    tags: ['Aptos', 'Move', 'Next.'],
+    github: '',
+    liveLink: '',
   },
 ];
 

@@ -1,4 +1,4 @@
-import ArticlesArchive from '../articles-archive/ArticlesArchive';
+import ArticlesArchive from './articles-archive/ArticlesArchive';
 import { getContentItems } from '@/lib/content';
 import type { ContentItem } from '@/lib/types';
 
