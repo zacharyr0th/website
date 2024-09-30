@@ -68,7 +68,7 @@ export interface WritingPageClientProps {
 }
 
 export interface FeaturedSectionProps {
-  content: Content[];
+  content: FeaturedWriting;
 }
 
 export interface CategoriesProps {

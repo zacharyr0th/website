@@ -39,8 +39,8 @@ const ArticleCard: React.FC<ArticleCardProps> = React.memo(({ article }) => {
       ref={ref}
       variants={cardVariants}
       initial="hidden"
-      animate={inView ? "visible" : "hidden"}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+      animate={inView ? 'visible' : 'hidden'}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
       className="bg-[#1a1a1a] rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
     >
       <Link href={`/writing/${slug}`}>

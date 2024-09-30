@@ -9,7 +9,7 @@ import CategoryTiles from '../components/CategoryTiles';
 import Categories from '../components/Categories';
 import ContentGrid from '../components/ContentGrid';
 import NewsletterSignup from '../components/NewsletterSignup';
-import { featuredWriting } from '@/components/homepage-components/featuredWriting';
+import { featuredWriting } from '../components/featuredWriting';
 
 const WritingPageClient: React.FC<WritingPageClientProps> = ({ initialContent }) => {
   const [mounted, setMounted] = useState(false);

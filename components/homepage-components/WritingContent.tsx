@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { featuredWriting } from './featuredWriting';
+import { featuredWriting } from '../../app/writing/components/featuredWriting';
 import CategoryTiles from '../../app/writing/components/CategoryTiles';
 
 const WritingContent: React.FC = () => {
@@ -47,7 +47,11 @@ const WritingContent: React.FC = () => {
         </div>
         <SlideButton direction="left" onClick={() => changeSlide(-1)} />
         <SlideButton direction="right" onClick={() => changeSlide(1)} />
-        <SlideIndicators totalSlides={totalSlides} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
+        <SlideIndicators
+          totalSlides={totalSlides}
+          currentIndex={currentIndex}
+          setCurrentIndex={setCurrentIndex}
+        />
       </div>
 
       <h2 className="text-2xl font-bold mb-6 mt-12 text-center">Writing Archives</h2>
@@ -56,7 +60,7 @@ const WritingContent: React.FC = () => {
   );
 };
 
-const ArticleCard: React.FC<{ article: typeof featuredWriting[0] }> = ({ article }) => (
+const ArticleCard: React.FC<{ article: (typeof featuredWriting)[0] }> = ({ article }) => (
   <Link href={article.link} className="w-1/2">
     <div className="bg-[#1a1a1a] rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 mx-auto max-w-2xl">
       <div className="relative h-64">
@@ -78,7 +82,10 @@ const ArticleCard: React.FC<{ article: typeof featuredWriting[0] }> = ({ article
   </Link>
 );
 
-const SlideButton: React.FC<{ direction: 'left' | 'right'; onClick: () => void }> = ({ direction, onClick }) => (
+const SlideButton: React.FC<{ direction: 'left' | 'right'; onClick: () => void }> = ({
+  direction,
+  onClick,
+}) => (
   <button
     onClick={onClick}
     className={`absolute top-1/2 ${

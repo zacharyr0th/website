@@ -1,10 +1,17 @@
 import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
-import { ContentType, ContentItem, WritingContentType, WritingMetadata, RecommendedWritingContent } from '@/lib/types';
+import {
+  ContentType,
+  ContentItem,
+  WritingContentType,
+  WritingMetadata,
+  RecommendedWritingContent,
+} from '@/lib/types';
 
 const writingDirectory = path.join(process.cwd(), 'public', 'content', 'writing');
-let cachedWritingMetadata: Map<string, WritingMetadata & { type: ContentType; data: any }> | null = null;
+let cachedWritingMetadata: Map<string, WritingMetadata & { type: ContentType; data: any }> | null =
+  null;
 
 export async function getWritingContentData(slug: string): Promise<ContentItem> {
   if (!cachedWritingMetadata) {
@@ -46,7 +53,9 @@ export async function getWritingContentData(slug: string): Promise<ContentItem> 
   };
 }
 
-export async function getAllWritingMetadata(): Promise<Map<string, WritingMetadata & { type: ContentType; data: any }>> {
+export async function getAllWritingMetadata(): Promise<
+  Map<string, WritingMetadata & { type: ContentType; data: any }>
+> {
   if (cachedWritingMetadata) return cachedWritingMetadata;
 
   try {
@@ -59,11 +68,11 @@ export async function getAllWritingMetadata(): Promise<Map<string, WritingMetada
         const fullPath = path.join(writingDirectory, fileName);
         const fileContents = await fs.readFile(fullPath, 'utf8');
         const { data } = matter(fileContents);
-        allWritingData.set(slug, { 
-          slug, 
-          title: data.title, 
-          type: data.type as ContentType, 
-          data 
+        allWritingData.set(slug, {
+          slug,
+          title: data.title,
+          type: data.type as ContentType,
+          data,
         });
       })
     );
@@ -76,7 +85,10 @@ export async function getAllWritingMetadata(): Promise<Map<string, WritingMetada
   }
 }
 
-export async function getRecommendedWritingContent(currentSlug: string, count: number): Promise<RecommendedWritingContent[]> {
+export async function getRecommendedWritingContent(
+  currentSlug: string,
+  count: number
+): Promise<RecommendedWritingContent[]> {
   const allWriting = await getAllWritingMetadata();
   const filteredWriting = Array.from(allWriting.entries()).filter(([slug]) => slug !== currentSlug);
 
@@ -93,9 +105,7 @@ export async function getRecommendedWritingContent(currentSlug: string, count: n
   }));
 }
 
-export async function getWritingContent(
-  type: WritingContentType
-): Promise<ContentItem[]> {
+export async function getWritingContent(type: WritingContentType): Promise<ContentItem[]> {
   const allContent = await getAllWritingMetadata();
 
   const filteredContent =

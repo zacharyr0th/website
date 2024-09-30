@@ -1,5 +1,5 @@
 import React from 'react';
-import { ContentItem } from '../../../lib/types';
+import { ContentItem } from '@/lib/types';
 import Image from 'next/image';
 
 export const metadata: ContentItem = {

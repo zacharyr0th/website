@@ -37,10 +37,7 @@ const FeaturedSection: React.FC<FeaturedSectionProps> = ({ content }) => {
               <div key={slideIndex} className="w-full flex-shrink-0 flex gap-4">
                 {featuredContent.slice(slideIndex * 2, slideIndex * 2 + 2).map((item, index) => (
                   <div key={item.id} className="w-1/2">
-                    <FeaturedCard 
-                      article={item} 
-                      priority={slideIndex === 0 && index === 0} 
-                    />
+                    <FeaturedCard article={item} priority={slideIndex === 0 && index === 0} />
                   </div>
                 ))}
               </div>

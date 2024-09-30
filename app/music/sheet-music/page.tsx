@@ -1,4 +1,4 @@
-import SheetMusicArchive from '../sheet-music-archive/SheetMusicArchive';
+import SheetMusicArchive from './sheet-music-archive/SheetMusicArchive';
 import { getContentItems } from '@/lib/content';
 import type { ContentItem } from '@/lib/types';
 
