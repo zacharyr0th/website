@@ -1,0 +1,146 @@
+:root {
+  /* Base colors */
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* Default theme (light) */
+  --color-primary: #546e7a; /* Blue gray */
+  --color-secondary: #78909c; /* Lighter blue gray */
+  --color-accent: #26a69a; /* Teal */
+  --color-text-primary: #37474f; /* Dark blue gray */
+  --color-text-secondary: #607d8b; /* Blue gray */
+  --color-background: #f5e9d6; /* Cream */
+  --color-surface: #fff8e1; /* Very light cream */
+  --color-error: #d32f2f; /* Dark red */
+  --color-success: #388e3c; /* Dark green */
+  --color-warning: #f57c00; /* Dark orange */
+  --color-info: #1976d2; /* Dark blue */
+
+  /* Typography */
+  --font-size-base: 16px;
+  --line-height-base: 1.5;
+
+  /* Spacing */
+  --spacing-unit: 0.25rem;
+  --spacing-xs: calc(var(--spacing-unit) * 1);
+  --spacing-sm: calc(var(--spacing-unit) * 2);
+  --spacing-md: calc(var(--spacing-unit) * 4);
+  --spacing-lg: calc(var(--spacing-unit) * 6);
+  --spacing-xl: calc(var(--spacing-unit) * 8);
+
+  /* Border radius */
+  --border-radius-unit: 0.25rem;
+  --border-radius-sm: var(--border-radius-unit);
+  --border-radius-md: calc(var(--border-radius-unit) * 2);
+  --border-radius-lg: calc(var(--border-radius-unit) * 4);
+
+  /* Box shadow */
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  /* Layout */
+  --transition-speed: 0.3s;
+  --header-height: 60px;
+  --footer-height: 40px;
+  --sidebar-width: 250px;
+  --max-content-width: 1200px;
+}
+
+/* Theme variations */
+.theme-dark {
+  --color-primary: #2c3e50; /* Dark slate gray */
+  --color-secondary: #34495e; /* Darker slate gray */
+  --color-accent: #3498db; /* Bright blue */
+  --color-text-primary: #ecf0f1; /* Off-white */
+  --color-text-secondary: #bdc3c7; /* Light gray */
+  --color-background: #1a1a1a; /* Very dark gray */
+  --color-surface: #2c2c2c; /* Dark gray */
+  --color-error: #e74c3c; /* Soft red */
+  --color-success: #2ecc71; /* Emerald green */
+  --color-warning: #f39c12; /* Orange */
+  --color-info: #3498db; /* Bright blue */
+}
+
+.theme-sepia {
+  /* Warm, rich brown for primary */
+  --color-primary: #8b4513;
+  /* Lighter, sandy brown for secondary */
+  --color-secondary: #d2b48c;
+  /* Terracotta accent color */
+  --color-accent: #cd5c5c;
+  /* Deep brown for primary text */
+  --color-text-primary: #3d2b1f;
+  /* Softer brown for secondary text */
+  --color-text-secondary: #6b4423;
+  /* Light, warm beige background */
+  --color-background: #f4e1c1;
+  /* Slightly darker beige for surface */
+  --color-surface: #e6d0a9;
+  /* Muted burgundy for error */
+  --color-error: #8b3a3a;
+  /* Muted olive green for success */
+  --color-success: #556b2f;
+  /* Warm orange for warning */
+  --color-warning: #d2691e;
+  /* Muted teal for info */
+  --color-info: #4a7b8a;
+
+  /* Additional sepia-specific styles */
+  --box-shadow: 0 4px 6px rgba(101, 67, 33, 0.2);
+  --border-radius-sm: 2px;
+  --border-radius-md: 4px;
+  --border-radius-lg: 6px;
+}
+
+.theme-high-contrast {
+  --color-primary: #000000; /* Pure black */
+  --color-secondary: #000000; /* Pure black */
+  --color-accent: #ffff00; /* Pure yellow */
+  --color-text-primary: #ffffff; /* Pure white */
+  --color-text-secondary: #ffffff; /* Pure white */
+  --color-background: #000000; /* Pure black */
+  --color-surface: #000000; /* Pure black */
+  --color-error: #ff0000; /* Pure red */
+  --color-success: #00ff00; /* Pure green */
+  --color-warning: #ffff00; /* Pure yellow */
+  --color-info: #00ffff; /* Pure cyan */
+
+  /* Additional high contrast adjustments */
+  --box-shadow: 0 0 0 2px #ffffff; /* White outline instead of shadow */
+  --border-radius-sm: 0;
+  --border-radius-md: 0;
+  --border-radius-lg: 0;
+}
+
+.theme-ocean {
+  --color-primary: #1a3a4a; /* Deep, dark ocean blue */
+  --color-secondary: #2c5364; /* Stormy sea blue */
+  --color-accent: #a7c5d9; /* Pale, foamy wave crest */
+  --color-text-primary: #e0e0e0; /* Light gray, like mist */
+  --color-text-secondary: #b0b0b0; /* Darker gray, like storm clouds */
+  --color-background: #0f2027; /* Nearly black, like the deep ocean */
+  --color-surface: #203a43; /* Dark blue-gray, like choppy waves */
+  --color-error: #8b0000; /* Dark red, like danger at sea */
+  --color-success: #2e8b57; /* Dark sea green */
+  --color-warning: #cd853f; /* Dark golden, like a fading lighthouse beam */
+  --color-info: #4682b4; /* Steel blue, like a stormy sky */
+
+  /* Additional ocean-specific styles */
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Deep, dark shadow */
+  --border-radius-sm: 4px;
+  --border-radius-md: 6px;
+  --border-radius-lg: 8px;
+}
+
+.theme-forest {
+  --color-primary: #2e7d32; /* Dark green */
+  --color-secondary: #388e3c; /* Slightly lighter green */
+  --color-accent: #ffa000; /* Amber */
+  --color-text-primary: #e8f5e9; /* Very light green */
+  --color-text-secondary: #c8e6c9; /* Light green */
+  --color-background: #1b5e20; /* Darker green */
+  --color-surface: #2e7d32; /* Dark green */
+  --color-error: #ff8a65; /* Light red */
+  --color-success: #b9f6ca; /* Light green */
+  --color-warning: #ffd54f; /* Light yellow */
+  --color-info: #80cbc4; /* Light teal */
+}

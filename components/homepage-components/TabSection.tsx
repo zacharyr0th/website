@@ -45,73 +45,53 @@ export default function TabSection() {
       </div>
 
       <style jsx>{`
-        .container {
-          max-width: 56rem;
-          margin-left: auto;
-          margin-right: auto;
-          padding-left: 1rem;
-          padding-right: 1rem;
+        .tab-section {
           width: 100%;
+          max-width: var(--max-content-width);
+          margin-inline: auto;
+          padding-inline: var(--spacing-md);
         }
 
-        .tab-button,
-        .contact-button {
-          padding: 0.5rem 1rem;
-          font-size: 1rem;
+        .tab-button {
+          padding: var(--spacing-sm) var(--spacing-md);
+          font-size: var(--font-size-base);
           border: none;
-          border-radius: 0.5rem;
+          border-radius: var(--border-radius-sm);
           cursor: pointer;
-          transition: all 0.3s;
+          transition: all var(--transition-speed);
+          background-color: transparent;
         }
 
-        .tab-button.active,
-        .contact-button {
-          background-color: var(--color-accent);
-          color: white;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .tab-button.active {
+          color: var(--color-text-primary);
+          font-weight: bold;
         }
 
         .tab-button:not(.active) {
-          background-color: transparent;
-          color: var(--color-secondary);
+          color: var(--color-text-secondary);
         }
 
-        .tab-button:not(.active):hover {
-          background-color: #e1f5fe;
-          color: #4a90e2;
+        .tab-button:hover {
+          color: var(--color-text-primary);
         }
 
         .tabs-container {
           display: flex;
           justify-content: center;
-          gap: 0.75rem;
-          margin-bottom: 1rem;
-          position: relative;
+          gap: var(--spacing-sm);
+          margin-bottom: var(--spacing-md);
         }
 
-        .tabs-container::before,
-        .tabs-container::after {
-          content: '';
-          flex: 1;
-        }
-
-        .content {
-          background-color: #1e293b;
-          color: white;
-          border-radius: var(--border-radius);
-          padding: 1.5rem;
-          box-shadow: var(--box-shadow);
-          transition: transform 0.3s;
-        }
-
-        .content:hover {
-          transform: scale(1.05);
+        .tab-content {
+          color: var(--color-text-primary);
+          border-radius: var(--border-radius-md);
+          padding: var(--spacing-lg);
         }
 
         @keyframes fadeInDown {
           from {
             opacity: 0;
-            transform: translateY(-10px);
+            transform: translateY(calc(var(--spacing-sm) * -1));
           }
           to {
             opacity: 1;
@@ -130,18 +110,18 @@ export default function TabSection() {
 
         .tabs-container {
           opacity: 0;
-          animation: fadeIn 0.5s ease-out forwards;
+          animation: fadeIn var(--transition-speed) ease-out forwards;
           animation-delay: 0.2s;
         }
 
         .tab-button {
           opacity: 0;
-          animation: fadeInDown 0.5s ease-out forwards;
+          animation: fadeInDown var(--transition-speed) ease-out forwards;
         }
 
         .tab-content {
           opacity: 0;
-          animation: fadeIn 0.5s ease-out forwards;
+          animation: fadeIn var(--transition-speed) ease-out forwards;
           animation-delay: 0.5s;
         }
       `}</style>

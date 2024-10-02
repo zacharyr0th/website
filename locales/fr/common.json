@@ -1,0 +1,40 @@
+{
+  "title": "Site Web de Zachary Roth",
+  "nav": {
+    "projects": "Projets",
+    "writing": "Écriture",
+    "audio": "Audio"
+  },
+  "hero": {
+    "greeting": "Bonjour, je suis",
+    "name": "Zachary Roth",
+    "tagline": "Technologue, Écrivain, Musicien"
+  },
+  "about": {
+    "title": "À propos de moi",
+    "description": "Je suis passionné par l'intersection de la technologie, de l'écriture et de la musique. Mon travail explore comment ces domaines peuvent se combiner pour créer des expériences uniques et significatives."
+  },
+  "projects": {
+    "title": "Projets",
+    "viewAll": "Voir tous les projets"
+  },
+  "writing": {
+    "title": "Écriture",
+    "viewAll": "Voir tous les articles"
+  },
+  "audio": {
+    "title": "Audio",
+    "viewAll": "Voir tout le contenu audio"
+  },
+  "newsletter": {
+    "title": "Abonnez-vous à ma newsletter",
+    "description": "Restez informé de mes derniers projets, articles et compositions musicales.",
+    "placeholder": "Votre adresse e-mail",
+    "button": "S'abonner"
+  },
+  "footer": {
+    "copyright": "© 2023 Zachary Roth. Tous droits réservés.",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation"
+  }
+}

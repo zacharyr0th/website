@@ -118,7 +118,7 @@ const ContactModal: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaXTwitter aria-hidden="true" /> Twitter
+                <FaXTwitter aria-hidden="true" />
               </TwitterButton>
               <LinkedInButton
                 as="a"
@@ -126,7 +126,7 @@ const ContactModal: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaLinkedin aria-hidden="true" /> LinkedIn
+                <FaLinkedin aria-hidden="true" />
               </LinkedInButton>
             </ModalSocialLinks>
             <CloseButton onClick={closeModal}>Close</CloseButton>

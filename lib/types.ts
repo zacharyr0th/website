@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 type ContentType = 'article' | 'review' | 'interview' | 'sheet-music';
 type AudioType = 'composition' | 'dataset' | 'recording' | 'sheet-music' | 'theory';
 
@@ -115,3 +117,20 @@ export interface FeaturedWritingItem {
 }
 
 export type FeaturedWriting = FeaturedWritingItem[];
+
+export interface FooterProps {
+  setTheme: Dispatch<SetStateAction<string>>;
+}
+
+// Add this new type
+export interface CustomNavigateOptions extends NavigateOptions {
+  locale?: string;
+}
+
+// Update the changeLanguage function type
+export type ChangeLanguageFunction = (lng: string) => void;
+
+export interface NavigationProps {
+  setTheme: (theme: string) => void;
+  changeLanguage: ChangeLanguageFunction;
+}

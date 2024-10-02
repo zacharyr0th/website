@@ -3,9 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ArticleCard from './ArticleCard';
 import { Content, ContentGridProps as BaseContentGridProps } from '@/lib/types'; // Adjust the import path based on the actual location
 
-interface ExtendedContentGridProps extends BaseContentGridProps {
-  // Add any additional properties here
-}
+type ExtendedContentGridProps = BaseContentGridProps;
 
 const ContentGrid: React.FC<ExtendedContentGridProps> = React.memo(({ content }) => {
   const gridItems = useMemo(

@@ -1,23 +1,29 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import ProfileSection from '../components/homepage-components/ProfileSection';
-import TabSection from '../components/homepage-components/TabSection';
-import ContactModal from '../components/homepage-components/ContactModal';
+import React, { useState } from 'react';
+import Navigation from './components/Navigation';
+import Hero from './components/Hero';
+import About from './components/About';
+import BackgroundSVG2 from './components/BackgroundSVG2';
+import Newsletter from './components/Newsletter';
+import Footer from '../components/Footer';
 
 export default function Home() {
+  const [theme, setTheme] = useState('theme-light');
+
   return (
-    <motion.main
-      className="flex flex-col items-center justify-center min-h-screen"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
+    <main
+      className={`flex flex-col w-auto min-h-screen overflow-x-hidden font-mono ${theme}`}
+      style={{ backgroundColor: 'var(--color-background)' }}
     >
-      <div className="text-center">
-        <ProfileSection />
-        <TabSection />
-        <ContactModal />
-      </div>
-    </motion.main>
+      <Navigation setTheme={setTheme} />
+      <Hero />
+      <About />
+      <section className="relative h-[100vh] w-full">
+        <BackgroundSVG2 />
+      </section>
+      <Newsletter />
+      <Footer />
+    </main>
   );
 }

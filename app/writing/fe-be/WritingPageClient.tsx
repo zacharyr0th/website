@@ -33,7 +33,7 @@ const WritingPageClient: React.FC<WritingPageClientProps> = ({ initialContent })
 
   return (
     <motion.div className="bg-[#121212] text-white min-h-screen">
-      <HeroSection initialContent={[]} />
+      <HeroSection initialContent={initialContent} />
       <motion.main className="container mx-auto px-4">
         <FeaturedSection content={featuredWriting as FeaturedWriting} />
         <CategoryTiles />

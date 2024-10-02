@@ -11,7 +11,7 @@ export async function getContentItems(
     : ['articles', 'reviews', 'interviews', 'sheet-music'];
   const contentDirectory = path.join(process.cwd(), 'public', 'content', 'writing');
 
-  let allItems: ContentItem[] = [];
+  const allItems: ContentItem[] = [];
   const usedIds = new Set();
 
   for (const dir of directories) {
@@ -38,7 +38,7 @@ export async function getContentItems(
       ) {
         const filePath = path.join(fullPath, file);
         let data: any = {};
-        let content: string = '';
+        let content = '';
 
         if (dir === 'sheet-music') {
           // For sheet music files, create minimal metadata
@@ -138,7 +138,7 @@ export async function getReviewItems(): Promise<ContentItem[]> {
   return getContentItems('review');
 }
 
-export async function getContentItem(slug: string): Promise<ContentItem | undefined> {
+export async function getContentItem(slug: string): Promise<ContentItem | null> {
   const allItems = await getContentItems(undefined);
   return allItems.find((item) => item.slug === slug);
 }

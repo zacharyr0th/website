@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { FaGithub, FaRegFileAlt } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
-// Move projects array outside of the component to prevent unnecessary re-creation
 const projects = [
   {
     id: 'zacharyroth',
