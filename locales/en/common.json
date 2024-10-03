@@ -3,6 +3,43 @@
   "nav": {
     "projects": "Projects",
     "writing": "Writing",
-    "audio": "Audio"
+    "audio": "Audio",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "home": {
+    "welcome": "Welcome to my personal website!",
+    "intro": "I'm Zachary Roth, a passionate developer and creator."
+  },
+  "projects": {
+    "title": "My Projects",
+    "description": "Here are some of the projects I've worked on."
+  },
+  "writing": {
+    "title": "My Writing",
+    "description": "Check out my latest articles and blog posts."
+  },
+  "audio": {
+    "title": "Audio Content",
+    "description": "Listen to my podcasts and audio projects."
+  },
+  "about": {
+    "title": "About Me",
+    "description": "Learn more about my background and interests."
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "description": "Feel free to reach out to me for collaborations or inquiries.",
+    "email": "Email",
+    "social": {
+      "twitter": "Twitter",
+      "linkedin": "LinkedIn",
+      "github": "GitHub"
+    }
+  },
+  "footer": {
+    "copyright": "© 2023 Zachary Roth. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
   }
 }

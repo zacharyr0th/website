@@ -1,27 +1,29 @@
 'use client';
 
 import React, { useState } from 'react';
-import Navigation from './components/Navigation';
-import Hero from './components/Hero';
-import About from './components/About';
-import BackgroundSVG2 from './components/BackgroundSVG2';
-import Newsletter from './components/Newsletter';
-import Footer from '../components/Footer';
+import Navigation from './components/common/Navigation';
+import Hero from './components/page-home/Hero';
+import Learning from './components/page-home/Learning';
+import BackgroundSVG2 from './components/page-home/BackgroundSVG2';
+import Newsletter from './components/page-home/Newsletter';
+import Footer from './components/common/Footer';
+import AudioSection from './components/page-home/AudioSection';
 
 export default function Home() {
   const [theme, setTheme] = useState('theme-light');
 
   return (
     <main
-      className={`flex flex-col w-auto min-h-screen overflow-x-hidden font-mono ${theme}`}
+      className={`flex flex-col w-auto full-height overflow-x-hidden font-mono ${theme}`}
       style={{ backgroundColor: 'var(--color-background)' }}
     >
       <Navigation setTheme={setTheme} />
       <Hero />
-      <About />
+      <Learning />
       <section className="relative h-[100vh] w-full">
         <BackgroundSVG2 />
       </section>
+      <AudioSection />
       <Newsletter />
       <Footer />
     </main>

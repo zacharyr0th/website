@@ -16,11 +16,13 @@ const BackgroundSVG2: React.FC = () => {
         x="0"
         y="0"
         width="20"
-        height="20"
+        height="21"
         patternUnits="userSpaceOnUse"
       >
-        <rect x="0" y="0" width="10" height="10" fill="var(--color-primary)" opacity="0.08" />
+        <rect x="0" y="0" width="10" height="10" fill="var(--color-primary)" opacity="0.1" />
         <circle cx="15" cy="5" r="2" fill="var(--color-accent)" opacity="0.15" />
+        
+       
       </pattern>
       <rect width="200" height="100" fill="url(#geometricPattern)">
         <animateTransform
@@ -33,6 +35,7 @@ const BackgroundSVG2: React.FC = () => {
         />
       </rect>
     </svg>
+    
   );
 };
 

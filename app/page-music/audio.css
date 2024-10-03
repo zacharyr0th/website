@@ -4,7 +4,7 @@
 
 @layer components {
   .audio-container {
-    @apply min-h-screen flex flex-col;
+    @apply full-height flex flex-col;
   }
 
   .audio-main {

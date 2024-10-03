@@ -1,0 +1,285 @@
+.gameContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @apply full-height;
+  background-color: #121212;
+  color: #d0d0d0;
+  font-family: var(--font-family);
+  padding: 2rem;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1000px;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: inherit;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.contentContainer {
+  display: flex;
+  flex: 1;
+  padding: 2rem;
+  text-align: left;
+}
+
+.leftSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-right: 2rem;
+  justify-content: space-between;
+}
+
+.rightSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  padding: 1.5rem 0;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.subtitle {
+  margin-bottom: 1rem;
+}
+
+.scoreDisplay {
+  font-size: 1.5rem;
+  color: var(--color-text-secondary);
+}
+
+.highScoreDisplay {
+  font-size: 1.2rem;
+  color: var(--color-accent);
+}
+
+.rulesSection {
+  background-color: rgba(26, 26, 26, 0.5);
+  border-radius: 15px;
+  padding: 1.5rem;
+}
+
+.rulesTitle {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-text-secondary);
+}
+
+.rulesList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.ruleItem {
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.ruleItem::before {
+  content: '•';
+  margin-right: 0.8rem;
+  color: var(--color-accent);
+  font-size: 1.4rem;
+}
+
+.gameBoard {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+  gap: 1px;
+  background-color: rgba(26, 26, 26, 0.5);
+  border: 2px solid var(--color-border);
+  border-radius: 15px;
+  aspect-ratio: 1 / 1;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 100%;
+}
+
+.cell {
+  aspect-ratio: 1 / 1;
+  border-radius: 4px;
+  transition: all 0.1s ease;
+}
+
+.snake {
+  background-color: var(--snake-color);
+}
+
+.food {
+  background-color: var(--color-accent);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.gameOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gameOverModal {
+  background-color: #121212;
+  padding: 3rem;
+  border-radius: 15px;
+  text-align: center;
+  animation: modalAppear 0.3s ease-out;
+  color: white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes modalAppear {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.gameOverModal h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--color-accent);
+}
+
+.gameOverModal p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #d0d0d0;
+}
+
+.scoreSection {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.scoreSection p {
+  margin: 0.5rem 0;
+}
+
+.newHighScore {
+  color: #ffd700;
+  font-weight: bold;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all var(--transition-duration);
+  background-color: var(--color-accent);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.button span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.button:hover {
+  background-color: white;
+  color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.button.active {
+  background-color: white;
+  color: var(--color-accent);
+}
+
+.button.active:hover {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+.overlayButton {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 1rem 2rem;
+  border: 2px solid white;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.overlayButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.startOverlay,
+.pauseOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.startOverlay {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.pauseOverlay {
+  background-color: rgba(0, 0, 0, 0.5);
+}

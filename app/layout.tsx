@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import ErrorBoundaryClient from '@/components/ErrorBoundaryClient';
+import ErrorBoundaryClient from '@/app/components/common/ErrorBoundaryClient';
 import StyledComponentsRegistry from '@/lib/registry';
 import '@/styles/globals.css';
 

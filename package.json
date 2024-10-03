@@ -19,6 +19,8 @@
     "dompurify": "^3.1.6",
     "framer-motion": "^11.3.28",
     "gray-matter": "^4.0.3",
+    "i18next-browser-languagedetector": "^8.0.0",
+    "i18next-resources-to-backend": "^1.2.1",
     "isomorphic-dompurify": "^2.14.0",
     "jszip": "^3.10.1",
     "lucide-react": "^0.427.0",

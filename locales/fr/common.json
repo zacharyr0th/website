@@ -3,7 +3,9 @@
   "nav": {
     "projects": "Projets",
     "writing": "Écriture",
-    "audio": "Audio"
+    "audio": "Audio",
+    "about": "À propos",
+    "contact": "Contact"
   },
   "hero": {
     "greeting": "Bonjour, je suis",
@@ -15,15 +17,18 @@
     "description": "Je suis passionné par l'intersection de la technologie, de l'écriture et de la musique. Mon travail explore comment ces domaines peuvent se combiner pour créer des expériences uniques et significatives."
   },
   "projects": {
-    "title": "Projets",
+    "title": "Mes Projets",
+    "description": "Voici quelques-uns des projets sur lesquels j'ai travaillé.",
     "viewAll": "Voir tous les projets"
   },
   "writing": {
-    "title": "Écriture",
+    "title": "Mes Écrits",
+    "description": "Découvrez mes derniers articles et billets de blog.",
     "viewAll": "Voir tous les articles"
   },
   "audio": {
-    "title": "Audio",
+    "title": "Contenu Audio",
+    "description": "Écoutez mes podcasts et projets audio.",
     "viewAll": "Voir tout le contenu audio"
   },
   "newsletter": {
@@ -34,7 +39,7 @@
   },
   "footer": {
     "copyright": "© 2023 Zachary Roth. Tous droits réservés.",
-    "privacy": "Politique de confidentialité",
-    "terms": "Conditions d'utilisation"
+    "privacy": "Politique de Confidentialité",
+    "terms": "Conditions d'Utilisation"
   }
 }

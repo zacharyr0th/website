@@ -1,20 +1,21 @@
 import { Dispatch, SetStateAction } from 'react';
 
-type ContentType = 'article' | 'review' | 'interview' | 'sheet-music';
-type AudioType = 'composition' | 'dataset' | 'recording' | 'sheet-music' | 'theory';
-
-type LanguageCode = string;
-type Url = string;
+export const ContentTypes = ['article', 'review', 'interview'] as const;
+export const AudioTypes = ['composition', 'dataset', 'recording', 'theory'] as const;
+export type ContentType = typeof ContentTypes[number];
+export type AudioType = typeof AudioTypes[number];
+export type LanguageCode = 'en' | 'es' | 'fr' | 'de' | 'it' | 'ja' | 'ko' | 'zh';
+export type Url = string & { readonly brand: unique symbol };
 
 interface SEOData {
   metaTitle?: string;
   metaDescription?: string;
   canonicalUrl?: Url;
-  keywords?: string[];
+  keywords?: readonly string[];
   structuredData?: Record<string, unknown>;
   lastModified?: string;
   socialShareImage?: Url;
-  alternateLanguages?: Record<LanguageCode, Url>;
+  alternateLanguages?: Readonly<Record<LanguageCode, Url>>;
 }
 
 interface BaseItem {
@@ -23,10 +24,10 @@ interface BaseItem {
   title: string;
   content: string;
   author: string;
-  date: string;
+  date: string; 
   language: LanguageCode;
-  image: Url;
-  tags?: string[];
+  image?: Url; 
+  tags?: readonly string[];
 }
 
 export interface ContentItem extends BaseItem, SEOData {
@@ -35,30 +36,23 @@ export interface ContentItem extends BaseItem, SEOData {
   subtitle?: string;
   imageCaption?: string;
   description?: string;
-  readTime?: string | number;
+  readTime?: number;
   likes?: number;
   comments?: number;
   shares?: number;
   bookAuthor?: string;
   composer?: string;
-  fileType?: string;
 }
 
 export interface AudioItem extends BaseItem {
   type: AudioType;
   artist?: string;
-  duration: string;
+  duration: string; 
   fileType: string;
   fileSize: number;
 }
 
-export type Content = ContentItem;
-
-export const validContentTypes: readonly ContentType[] = ['article', 'review', 'interview'];
-
-export interface SearchParams {
-  [key: string]: string | string[] | undefined;
-}
+export type SearchParams = Readonly<Record<string, string | readonly string[] | undefined>>;
 
 export interface WritingPageProps {
   searchParams: SearchParams;
@@ -66,7 +60,7 @@ export interface WritingPageProps {
 
 export interface WritingPageClientProps {
   initialContent: ContentItem[];
-  contentType?: Exclude<ContentType, 'sheet-music'>;
+  contentType?: ContentType; 
 }
 
 export interface FeaturedSectionProps {
@@ -90,7 +84,7 @@ export interface FeaturedCardProps {
   article: ContentItem;
 }
 
-export type WritingContentType = 'all' | Exclude<ContentType, 'sheet-music'>;
+export type WritingContentType = 'all' | ContentType; 
 
 export interface WritingMetadata {
   slug: string;
@@ -119,18 +113,44 @@ export interface FeaturedWritingItem {
 export type FeaturedWriting = FeaturedWritingItem[];
 
 export interface FooterProps {
-  setTheme: Dispatch<SetStateAction<string>>;
+  changeLanguage: ChangeLanguageFunction;
 }
 
-// Add this new type
-export interface CustomNavigateOptions extends NavigateOptions {
-  locale?: string;
-}
-
-// Update the changeLanguage function type
 export type ChangeLanguageFunction = (lng: string) => void;
 
 export interface NavigationProps {
-  setTheme: (theme: string) => void;
-  changeLanguage: ChangeLanguageFunction;
+  setTheme: Dispatch<SetStateAction<string>>;
 }
+
+export interface NavItem {
+  label: string;
+  href: string;
+}
+
+export const navItems: NavItem[] = [
+  { label: 'projects', href: '#project' },
+  { label: 'writing', href: '#writing' },
+  { label: 'audio', href: '#audio' },
+];
+
+export interface Project {
+  id: number;
+  title: string;
+  logo: string;
+  description: string;
+  link: string;
+}
+
+export interface ProjectsPageProps {
+  theme: string;
+  setTheme: Dispatch<SetStateAction<string>>;
+}
+
+export interface ProjectCardProps {
+  project: Project;
+  isActive: boolean;
+  onKeyDown: (e: React.KeyboardEvent) => void;
+}
+
+export type ProjectRef = HTMLDivElement | null;
+export type ProjectRefs = React.MutableRefObject<ProjectRef[]>;

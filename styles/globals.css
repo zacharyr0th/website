@@ -4,15 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Core */
 @import './base.css';
 @import './utilities.css';
-@import './variables.css';
-
-/* Global */
-@import './accessibility.css';
-@import './layout.css';
-
-/* Special */
-@import './print.css';
 @import './themes.css';

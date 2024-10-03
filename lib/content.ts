@@ -1,24 +1,20 @@
 import { promises as fs } from 'fs';
 import path from 'path';
-import { addMetadataToFile } from './fileMetadata';
 import { ContentItem } from './types';
 
 export async function getContentItems(
-  type: 'article' | 'review' | 'interview' | 'sheet-music' | undefined
+  type: 'article' | 'review' | 'interview' | undefined
 ): Promise<ContentItem[]> {
   const directories = type
-    ? [type === 'sheet-music' ? 'sheet-music' : type + 's']
-    : ['articles', 'reviews', 'interviews', 'sheet-music'];
+    ? [type + 's']
+    : ['articles', 'reviews', 'interviews'];
   const contentDirectory = path.join(process.cwd(), 'public', 'content', 'writing');
 
   const allItems: ContentItem[] = [];
   const usedIds = new Set();
 
   for (const dir of directories) {
-    const fullPath =
-      dir === 'sheet-music'
-        ? path.join(process.cwd(), 'content', 'audio', 'sheet-music')
-        : path.join(contentDirectory, dir);
+    const fullPath = path.join(contentDirectory, dir);
     console.log('Checking directory:', fullPath);
 
     try {
@@ -32,60 +28,34 @@ export async function getContentItems(
     console.log(`Found ${files.length} files in ${dir}:`, files);
 
     for (const file of files) {
-      if (
-        file.endsWith('.tsx') ||
-        (dir === 'sheet-music' && ['.pdf', '.mscz', '.zip'].includes(path.extname(file)))
-      ) {
+      if (file.endsWith('.tsx')) {
         const filePath = path.join(fullPath, file);
-        let data: any = {};
+        let data: Record<string, unknown> = {};
         let content = '';
 
-        if (dir === 'sheet-music') {
-          // For sheet music files, create minimal metadata
-          data = {
-            id: path.parse(file).name,
-            slug: path.parse(file).name,
-            title: path.parse(file).name,
-            type: 'sheet-music',
-            fileType: path.extname(file).slice(1),
-          };
+        const fileContents = await fs.readFile(filePath, 'utf8');
+        const metadataMatch = fileContents.match(
+          /export\s+const\s+metadata\s*:\s*ContentItem\s*=\s*({[\s\S]*?});/
+        );
 
-          // Add metadata to the file
+        if (metadataMatch) {
+          const metadataString = metadataMatch[1];
           try {
-            await addMetadataToFile(filePath, {
-              composer: data.composer || 'Unknown',
-              name: data.title,
-              tags: data.tags || [],
-            });
+            data = eval(`(${metadataString})`);
           } catch (error) {
-            console.error(`Failed to add metadata to file: ${filePath}`, error);
-            // Continue processing other files even if metadata addition fails for one
-          }
-        } else if (file.endsWith('.tsx')) {
-          const fileContents = await fs.readFile(filePath, 'utf8');
-          const metadataMatch = fileContents.match(
-            /export\s+const\s+metadata\s*:\s*ContentItem\s*=\s*({[\s\S]*?});/
-          );
-
-          if (metadataMatch) {
-            const metadataString = metadataMatch[1];
-            try {
-              data = eval(`(${metadataString})`);
-            } catch (error) {
-              console.warn(`Failed to parse metadata for file: ${file}`, error);
-              continue;
-            }
-          } else {
-            console.warn(`No metadata found for file: ${file}`);
+            console.warn(`Failed to parse metadata for file: ${file}`, error);
             continue;
           }
+        } else {
+          console.warn(`No metadata found for file: ${file}`);
+          continue;
+        }
 
-          const contentMatch = fileContents.match(/<article>([\s\S]*?)<\/article>/);
-          if (contentMatch) {
-            content = contentMatch[1].trim();
-          } else {
-            console.warn(`No content found for file: ${file}`);
-          }
+        const contentMatch = fileContents.match(/<article>([\s\S]*?)<\/article>/);
+        if (contentMatch) {
+          content = contentMatch[1].trim();
+        } else {
+          console.warn(`No content found for file: ${file}`);
         }
 
         // Add language detection
@@ -116,10 +86,7 @@ export async function getContentItems(
           allItems.push({
             ...data,
             content,
-            type:
-              dir === 'sheet-music'
-                ? 'sheet-music'
-                : (dir.slice(0, -1) as 'article' | 'review' | 'interview'),
+            type: dir.slice(0, -1) as 'article' | 'review' | 'interview',
             image: imageExists ? data.image : '/images/placeholder.webp',
             language: data.language || 'en', // Ensure language is always set
           });
@@ -140,29 +107,10 @@ export async function getReviewItems(): Promise<ContentItem[]> {
 
 export async function getContentItem(slug: string): Promise<ContentItem | null> {
   const allItems = await getContentItems(undefined);
-  return allItems.find((item) => item.slug === slug);
+  return allItems.find((item) => item.slug === slug) || null;
 }
 
 export async function getAllContentSlugs(): Promise<string[]> {
   const contentItems = await getContentItems(undefined);
-  const regularSlugs = contentItems.map((item) => item.slug);
-
-  const sheetMusicDir = path.join(process.cwd(), 'content', 'audio', 'sheet-music');
-  let sheetMusicSlugs: string[] = [];
-
-  try {
-    const sheetMusicFiles = await fs.readdir(sheetMusicDir);
-    sheetMusicSlugs = sheetMusicFiles
-      .filter((file) => ['.pdf', '.mscz', '.zip'].includes(path.extname(file)))
-      .map((file) => path.parse(file).name);
-    console.log(`Found ${sheetMusicSlugs.length} sheet music files`);
-  } catch (error) {
-    if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
-      console.warn(`Sheet music directory not found: ${sheetMusicDir}`);
-    } else {
-      console.error(`Error reading sheet music directory: ${error}`);
-    }
-  }
-
-  return [...regularSlugs, ...sheetMusicSlugs];
+  return contentItems.map((item) => item.slug);
 }

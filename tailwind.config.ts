@@ -5,32 +5,45 @@ const config: Config = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './styles/**/*.css',
   ],
   theme: {
     extend: {
-      fontFamily: {
-        inter: ['Inter', 'sans-serif'],
-      },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
       colors: {
-        primary: {
-          bg: 'var(--primary-bg)',
-          text: 'var(--primary-text)',
-        },
-        accent: 'var(--accent-color)',
-        secondary: 'var(--secondary-color)',
-        background: 'var(--background-color)',
-        text: 'var(--text-color)',
+        primary: 'var(--color-primary)',
+        secondary: 'var(--color-secondary)',
+        accent: 'var(--color-accent)',
+        'text-primary': 'var(--color-text-primary)',
+        'text-secondary': 'var(--color-text-secondary)',
+        background: 'var(--color-background)',
+        surface: 'var(--color-surface)',
+        error: 'var(--color-error)',
+        success: 'var(--color-success)',
+        warning: 'var(--color-warning)',
+        info: 'var(--color-info)',
+      },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+      },
+      fontSize: {
+        base: 'var(--font-size-base)',
+      },
+      lineHeight: {
+        base: 'var(--line-height-base)',
+      },
+      spacing: {
+        'xs': 'var(--spacing-xs)',
+        'sm': 'var(--spacing-sm)',
+        'md': 'var(--spacing-md)',
+        'lg': 'var(--spacing-lg)',
+        'xl': 'var(--spacing-xl)',
       },
       borderRadius: {
-        DEFAULT: 'var(--border-radius)',
+        'sm': 'var(--border-radius-sm)',
+        'md': 'var(--border-radius-md)',
+        'lg': 'var(--border-radius-lg)',
       },
-      transitionDuration: {
-        DEFAULT: 'var(--transition-duration)',
+      boxShadow: {
+        DEFAULT: 'var(--box-shadow)',
       },
     },
   },

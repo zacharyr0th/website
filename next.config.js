@@ -1,6 +1,4 @@
 /** @type {import('next').NextConfig} */
-const { i18n } = require('./next-i18next.config');
-
 const nextConfig = {
   reactStrictMode: true,
   compiler: {
@@ -12,7 +10,10 @@ const nextConfig = {
     minimumCacheTTL: 60,
     formats: ['image/webp'],
   },
-  i18n,
+  i18n: {
+    locales: ['en', 'es', 'fr'],
+    defaultLocale: 'en',
+  },
 };
 
 module.exports = nextConfig;

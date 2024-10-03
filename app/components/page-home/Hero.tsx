@@ -5,7 +5,7 @@ const Hero: React.FC = () => (
   <section>
     <div className="flex flex-row min-h-[200vh]">
       <div className="w-1/2 flex flex-col">
-        <div className="h-screen flex flex-col justify-center sticky top-0 ml-8">
+        <div className="h-screen flex flex-col justify-center sticky top-0 ml-12">
           <h1
             className="text-6xl font-bold leading-tight tracking-tighter mb-8"
             style={{ color: 'var(--color-text-primary)' }}
@@ -49,28 +49,25 @@ const Hero: React.FC = () => (
           </div>
         </div>
 
-        <div className="ml-8 mr-6 mt-10">
+        <div className="ml-12 mr-6 mt-10">
           <div className="mb-12">
             <h2
               className="text-2xl font-semibold mb-4"
               style={{ color: 'var(--color-text-primary)' }}
             >
-              Facilitating Innovation
+              Professional Experience
             </h2>
             <p
               className="text-base max-w-xl leading-relaxed mb-4"
               style={{ color: 'var(--color-text-secondary)' }}
             >
-              We actively invest in the boldest and most pioneering founders, as well as emerging
-              fund managers with differentiated investment theses and value propositions.
+              Currently serving as Head of Growth, DeFi & AI at Aptos Labs (Oct 2023 - Present), following my role as Developer Ecosystems Manager (May 2023 - Sep 2023). At Aptos, I focus on identifying and nurturing groundbreaking projects in the DeFi and AI spaces, involving strategic partnerships and ecosystem development.
             </p>
             <p
               className="text-base max-w-xl leading-relaxed"
               style={{ color: 'var(--color-text-secondary)' }}
             >
-              By leveraging our business partnerships with Bybit, Mantle, and a broad network of
-              portfolio companies and funds, we help founders transform their groundbreaking ideas
-              into reality.
+              Previously, as Product Manager at Solrise Finance (Aug 2021 - Jan 2023), I led product strategy for innovative blockchain solutions, enhanced user experiences, and developed comprehensive user-facing content.
             </p>
           </div>
 
@@ -79,15 +76,13 @@ const Hero: React.FC = () => (
               className="text-2xl font-semibold mb-4"
               style={{ color: 'var(--color-text-primary)' }}
             >
-              Cross-chain Experience
+              Additional Experience
             </h2>
             <p
               className="text-base max-w-xl leading-relaxed"
               style={{ color: 'var(--color-text-secondary)' }}
             >
-              anchor capital providers are the co-founders of Bybit. Mirana also acts as the
-              Operating Fund Partner for the Mantle Eco Fund, strategically investing to catalyze
-              the growth of the Mantle Ecosystem.
+              As Senior Analyst at N2 Communications (Jan 2020 - Jan 2023), I contributed to raising over $2 billion for private equity ventures, enhanced investor relations through comprehensive reporting, and provided strategic guidance on global regulatory landscapes, particularly in the evolving crypto sector.
             </p>
           </div>
         </div>
