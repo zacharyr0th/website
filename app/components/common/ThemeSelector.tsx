@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { FaSun, FaMoon, FaUmbrellaBeach, FaWater, FaAdjust } from 'react-icons/fa';
+import { FaSun, FaMoon, FaUmbrellaBeach, FaAdjust } from 'react-icons/fa';
 
-const THEMES = ['light', 'dark', 'sepia', 'ocean', 'high-contrast'] as const;
+const THEMES = ['light', 'dark', 'sepia', 'high-contrast'] as const;
 type Theme = (typeof THEMES)[number];
 
 const THEME_ICONS: Record<Theme, React.ReactElement> = {
   light: <FaSun />,
   dark: <FaMoon />,
   sepia: <FaUmbrellaBeach />,
-  ocean: <FaWater />,
   'high-contrast': <FaAdjust />,
 };
 
@@ -48,7 +47,7 @@ const ThemeSelector: React.FC<ThemeSelectorProps> = ({ setTheme }) => {
       className="btn btn-primary text-2xl flex items-center justify-center rounded-full"
       style={{
         backgroundColor: 'var(--color-primary)',
-        color: 'var(--color-text-light)',
+        color: ['dark', 'high-contrast'].includes(currentTheme) ? 'var(--color-light)' : 'var(--color-background)',
         padding: 'var(--spacing-sm)',
         borderRadius: 'var(--border-radius-lg)',
         boxShadow: 'var(--box-shadow)',

@@ -128,9 +128,9 @@ export interface NavItem {
 }
 
 export const navItems: NavItem[] = [
-  { label: 'projects', href: '#project' },
-  { label: 'writing', href: '#writing' },
-  { label: 'audio', href: '#audio' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Writing', href: '/writing' },
+  { label: 'Audio', href: '/audio' },
 ];
 
 export interface Project {

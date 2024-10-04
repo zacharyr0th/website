@@ -7,7 +7,6 @@ import Learning from './components/page-home/Learning';
 import BackgroundSVG2 from './components/page-home/BackgroundSVG2';
 import Newsletter from './components/page-home/Newsletter';
 import Footer from './components/common/Footer';
-import AudioSection from './components/page-home/AudioSection';
 
 export default function Home() {
   const [theme, setTheme] = useState('theme-light');
@@ -23,7 +22,6 @@ export default function Home() {
       <section className="relative h-[100vh] w-full">
         <BackgroundSVG2 />
       </section>
-      <AudioSection />
       <Newsletter />
       <Footer />
     </main>

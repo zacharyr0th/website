@@ -2,40 +2,57 @@ import React from 'react';
 
 const BackgroundSVG2: React.FC = () => {
   return (
-    <svg
-      viewBox="0 0 100 100"
-      className="absolute top-0 left-0 right-0 w-full h-[calc(100%-4rem)]"
-      preserveAspectRatio="xMidYMid slice"
-    >
-      {/* Background */}
-      <rect x="0" y="0" width="100" height="100" fill="var(--color-background)" />
-
-      {/* Abstract geometric pattern */}
-      <pattern
-        id="geometricPattern"
-        x="0"
-        y="0"
-        width="20"
-        height="21"
-        patternUnits="userSpaceOnUse"
-      >
-        <rect x="0" y="0" width="10" height="10" fill="var(--color-primary)" opacity="0.1" />
-        <circle cx="15" cy="5" r="2" fill="var(--color-accent)" opacity="0.15" />
+    <div className="relative h-full w-full overflow-hidden">
+      <style jsx>{`
+        @keyframes backgroundMove {
+          0% {
+            transform: translate(0, 0);
+          }
+          100% {
+            transform: translate(-750%, -750%);
+          }
+        }
+        .animate-background-move {
+          animation: backgroundMove 300s linear infinite;
+        }
+        .text-shadow-subtle {
+          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+      `}</style>
+      <svg
+        className="absolute inset-0 w-full h-full"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1000 1000"
         
-       
-      </pattern>
-      <rect width="200" height="100" fill="url(#geometricPattern)">
-        <animateTransform
-          attributeName="transform"
-          type="translate"
-          from="0 0"
-          to="-100 0"
-          dur="30s"
-          repeatCount="indefinite"
+        preserveAspectRatio="xMidYMid slice"
+      >
+        <defs>
+          {/* Keep existing defs */}
+        </defs>
+        <rect
+          width="1600%"
+          height="1600%"
+          fill="url(#stainedGlass)"
+          className="animate-background-move"
         />
-      </rect>
-    </svg>
-    
+        
+        {/* Dark overlay with further reduced opacity */}
+        <rect width="100%" height="100%" fill="rgba(0, 0, 0, 0.4)" />
+      </svg>
+      
+      {/* Text content */}
+      <div className="absolute inset-0 flex flex-col justify-center items-center p-8">
+        <div className="max-w-4xl w-full">
+          <h2 className="text-sm uppercase tracking-wider mb-2" style={{ color: 'var(--color-accent)' }}>Thesis</h2>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-shadow-subtle" style={{ color: 'var(--color-surface)' }}>
+            The world needs permissionless markets
+          </h1>
+          <p className="text-lg text-shadow-subtle" style={{ color: 'var(--color-text-secondary)' }}>
+            and blockchains put everyone on the same page.
+          </p>
+        </div>
+      </div>
+    </div>
   );
 };
 

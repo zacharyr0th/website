@@ -1,24 +1,20 @@
 import React from 'react';
 import Link from 'next/link';
 import { FaLinkedin, FaXTwitter, FaGithub } from 'react-icons/fa6';
-import { useTranslation } from 'next-i18next';
-import LanguageSelector from './LanguageSelector';
 
 export const Footer: React.FC = () => {
-  const { t } = useTranslation('common');
-
   return (
-    <footer className="bg-[var(--color-surface)] text-sm py-6 px-6">
-      <div className="max-w-6xl mx-auto flex flex-col items-center space-y-4">
-        <div className="flex items-center justify-center w-full">
+    <footer className="bg-[var(--color-surface)] text-sm pb-8 px-6">
+      <div className="max-w-6xl mx-auto flex flex-col items-center space-y-6">
+        <div className="flex items-center justify-center space-x-4 mb-2">
           {[
-            { href: 'https://x.com/zacharyr0th', Icon: FaXTwitter, label: t('footer.x_profile') },
+            { href: 'https://x.com/zacharyr0th', Icon: FaXTwitter, label: 'X Profile' },
             {
               href: 'https://www.linkedin.com/in/zacharyr0th',
               Icon: FaLinkedin,
-              label: t('footer.linkedin_profile'),
+              label: 'LinkedIn Profile',
             },
-            { href: 'https://www.github.com/zacharyr0th', Icon: FaGithub, label: t('footer.github_profile') },
+            { href: 'https://www.github.com/zacharyr0th', Icon: FaGithub, label: 'GitHub Profile' },
           ].map(({ href, Icon, label }) => (
             <Link
               key={href}
@@ -26,15 +22,14 @@ export const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors mx-2"
+              className="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors"
             >
               <Icon size={32} />
             </Link>
           ))}
-          <LanguageSelector />
         </div>
         <p className="text-[var(--color-text-secondary)]">
-          &copy; {new Date().getFullYear()} {t('footer.copyright')}
+          &copy; {new Date().getFullYear()}
         </p>
       </div>
     </footer>

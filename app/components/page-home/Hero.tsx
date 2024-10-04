@@ -1,5 +1,6 @@
 import React from 'react';
 import BackgroundSVG from './BackgroundSVG';
+import Image from 'next/image';
 
 const Hero: React.FC = () => (
   <section>
@@ -30,7 +31,7 @@ const Hero: React.FC = () => (
               className="px-6 py-2 rounded-full transition-colors duration-300"
               style={{
                 backgroundColor: 'var(--color-primary)',
-                color: 'var(--color-text-accent)',
+                color: 'var(--color-white)',
                 boxShadow: 'var(--box-shadow)',
               }}
             >
@@ -55,20 +56,32 @@ const Hero: React.FC = () => (
               className="text-2xl font-semibold mb-4"
               style={{ color: 'var(--color-text-primary)' }}
             >
-              Professional Experience
+              Hyper-growth Experience
             </h2>
             <p
-              className="text-base max-w-xl leading-relaxed mb-4"
+              className="text-base max-w-xl leading-relaxed mb-6"
               style={{ color: 'var(--color-text-secondary)' }}
             >
-              Currently serving as Head of Growth, DeFi & AI at Aptos Labs (Oct 2023 - Present), following my role as Developer Ecosystems Manager (May 2023 - Sep 2023). At Aptos, I focus on identifying and nurturing groundbreaking projects in the DeFi and AI spaces, involving strategic partnerships and ecosystem development.
+              Having been involved in crypto since 2019, I&apos;ve had the privilege to work in 4 of the highest-growing ecosystems of all time - Bitcoin, Ethereum, Solana, and Aptos.
             </p>
-            <p
-              className="text-base max-w-xl leading-relaxed"
-              style={{ color: 'var(--color-text-secondary)' }}
-            >
-              Previously, as Product Manager at Solrise Finance (Aug 2021 - Jan 2023), I led product strategy for innovative blockchain solutions, enhanced user experiences, and developed comprehensive user-facing content.
-            </p>
+            <div className="flex justify-between items-center max-w-xs py-2">
+              {['bitcoin', 'ethereum', 'solana', 'aptos'].map((logo) => (
+                <div
+                  key={logo}
+                  className="w-18 h-18 rounded-full overflow-hidden bg-background flex items-center justify-center"
+                  style={{ boxShadow: 'var(--box-shadow)' }}
+                >
+                  <Image
+                    src={`/logos/${logo}-logo.webp`}
+                    alt={`${logo.charAt(0).toUpperCase() + logo.slice(1)} Logo`}
+                    width={60}
+                    height={60}
+                    className="object-contain"
+                    style={logo === 'bitcoin' ? { transform: 'scale(2)' } : {}}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
 
           <div>
@@ -76,15 +89,37 @@ const Hero: React.FC = () => (
               className="text-2xl font-semibold mb-4"
               style={{ color: 'var(--color-text-primary)' }}
             >
-              Additional Experience
+              On-chain PMF
             </h2>
             <p
               className="text-base max-w-xl leading-relaxed"
               style={{ color: 'var(--color-text-secondary)' }}
             >
-              As Senior Analyst at N2 Communications (Jan 2020 - Jan 2023), I contributed to raising over $2 billion for private equity ventures, enhanced investor relations through comprehensive reporting, and provided strategic guidance on global regulatory landscapes, particularly in the evolving crypto sector.
+              As a builder, power user, and seasoned investor, I specialize in identifying product-market fit and advising on how to use on-chain technology to build superior products and services.
             </p>
           </div>
+
+
+          <div className="my-12">
+            <h2
+              className="text-2xl font-semibold mb-4"
+              style={{ color: 'var(--color-text-primary)' }}
+            >
+              High Signal
+            </h2>
+            <p
+              className="text-base max-w-xl leading-relaxed mb-4"
+              style={{ color: 'var(--color-text-secondary)' }}
+            >
+               Occasionally, I turn complex concepts across technology and finance into actionable insights. 
+              </p>
+              <p
+              className="text-base max-w-xl leading-relaxed mb-4"
+              style={{ color: 'var(--color-text-secondary)' }}
+            >Read some of my work here.</p>
+      
+          </div>
+
         </div>
       </div>
 
