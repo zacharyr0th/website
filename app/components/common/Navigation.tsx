@@ -31,7 +31,7 @@ const Navigation: React.FC<NavigationProps> = ({ setTheme }) => {
           {navItems.map(({ label, href }) => (
             <li key={label}>
               <Link
-                href={label.toLowerCase() === 'projects' ? '/projects' : href}
+                href={href}
                 className="px-4 py-2 rounded-full transition-all duration-300"
                 style={{
                   backgroundColor: 'var(--color-surface)',
