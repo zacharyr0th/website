@@ -2,44 +2,28 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { NavigationProps, navItems } from '@/lib/types';
-import ThemeSelector from './ThemeSelector';
 import { usePathname } from 'next/navigation';
+import { NavigationProps, NavItem } from '@/lib/types';
+import { navItems, NavButton } from '@/lib/constants';
+import ThemeSelector from './ThemeSelector';
 
 const Navigation: React.FC<NavigationProps> = ({ setTheme }) => {
   const pathname = usePathname();
-  const showHomeButton = ['/projects', '/writing', '/audio'].includes(pathname);
+  const showHomeButton = navItems.some(item => item.href === pathname);
 
   return (
     <>
       {showHomeButton && (
-        <Link
-          href="/"
-          className="fixed top-0 left-0 m-6 z-10 px-4 py-2 rounded-full transition-all duration-300 flex items-center justify-center"
-          style={{
-            backgroundColor: 'var(--color-surface)',
-            color: 'var(--color-text-secondary)',
-            boxShadow: 'var(--box-shadow)',
-            fontWeight: 600, // This explicitly sets the font weight to semibold
-          }}
-        >
-          Z
+        <Link href="/" className="fixed top-0 left-0 m-6 z-10">
+          <NavButton variant="secondary">Z</NavButton>
         </Link>
       )}
       <nav className="fixed top-0 right-0 m-6 z-10">
         <ul className="flex items-center space-x-2 text-sm">
-          {navItems.map(({ label, href }) => (
+          {navItems.map(({ label, href }: NavItem) => (
             <li key={label}>
-              <Link
-                href={href}
-                className="px-4 py-2 rounded-full transition-all duration-300"
-                style={{
-                  backgroundColor: 'var(--color-surface)',
-                  color: 'var(--color-text-secondary)',
-                  boxShadow: 'var(--box-shadow)',
-                }}
-              >
-                {label.charAt(0).toUpperCase() + label.slice(1)}
+              <Link href={href}>
+                <NavButton variant="tertiary">{label}</NavButton>
               </Link>
             </li>
           ))}

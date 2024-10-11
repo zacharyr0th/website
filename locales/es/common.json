@@ -1,48 +1,48 @@
 {
-    "title": "Sitio Web de Zachary Roth",
-    "nav": {
-      "projects": "Proyectos",
-      "writing": "Escritura",
-      "audio": "Audio",
-      "about": "Acerca de",
-      "contact": "Contacto"
-    },
-    "home": {
-      "welcome": "¡Bienvenido a mi sitio web personal!",
-      "intro": "Soy Zachary Roth, un desarrollador y creador apasionado."
-    },
-    "projects": {
-      "title": "Mis Proyectos",
-      "description": "Aquí hay algunos de los proyectos en los que he trabajado."
-    },
-    "writing": {
-      "title": "Mi Escritura",
-      "description": "Echa un vistazo a mis últimos artículos y publicaciones de blog."
-    },
-    "audio": {
-      "title": "Contenido de Audio",
-      "description": "Escucha mis podcasts y proyectos de audio."
-    },
-    "about": {
-      "title": "Acerca de Mí",
-      "description": "Aprende más sobre mi experiencia e intereses."
-    },
-    "contact": {
-      "title": "Ponte en Contacto",
-      "description": "No dudes en contactarme para colaboraciones o consultas.",
-      "email": "Correo electrónico",
-      "social": {
-        "twitter": "Twitter",
-        "linkedin": "LinkedIn",
-        "github": "GitHub"
-      }
-    },
-    "footer": {
-      "copyright": "Todos los derechos reservados.",
-      "x_profile": "Perfil de X",
-      "linkedin_profile": "Perfil de LinkedIn",
-      "github_profile": "Perfil de GitHub",
-      "privacy": "Política de Privacidad",
-      "terms": "Términos de Servicio"
+  "title": "Sitio Web de Zachary Roth",
+  "nav": {
+    "projects": "Proyectos",
+    "writing": "Escritura",
+    "audio": "Audio",
+    "about": "Acerca de",
+    "contact": "Contacto"
+  },
+  "home": {
+    "welcome": "¡Bienvenido a mi sitio web personal!",
+    "intro": "Soy Zachary Roth, un desarrollador y creador apasionado."
+  },
+  "projects": {
+    "title": "Mis Proyectos",
+    "description": "Aquí hay algunos de los proyectos en los que he trabajado."
+  },
+  "writing": {
+    "title": "Mi Escritura",
+    "description": "Echa un vistazo a mis últimos artículos y publicaciones de blog."
+  },
+  "audio": {
+    "title": "Contenido de Audio",
+    "description": "Escucha mis podcasts y proyectos de audio."
+  },
+  "about": {
+    "title": "Acerca de Mí",
+    "description": "Aprende más sobre mi experiencia e intereses."
+  },
+  "contact": {
+    "title": "Ponte en Contacto",
+    "description": "No dudes en contactarme para colaboraciones o consultas.",
+    "email": "Correo electrónico",
+    "social": {
+      "twitter": "Twitter",
+      "linkedin": "LinkedIn",
+      "github": "GitHub"
     }
+  },
+  "footer": {
+    "copyright": "Todos los derechos reservados.",
+    "x_profile": "Perfil de X",
+    "linkedin_profile": "Perfil de LinkedIn",
+    "github_profile": "Perfil de GitHub",
+    "privacy": "Política de Privacidad",
+    "terms": "Términos de Servicio"
   }
+}

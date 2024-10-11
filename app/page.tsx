@@ -3,13 +3,14 @@
 import React, { useState } from 'react';
 import Navigation from './components/common/Navigation';
 import Hero from './components/page-home/Hero';
-import Learning from './components/page-home/Learning';
-import BackgroundSVG2 from './components/page-home/BackgroundSVG2';
+import Main from './components/page-home/Main';
+import BackgroundSVG2 from './components/page-home/ThesisBackground';
 import Newsletter from './components/page-home/Newsletter';
 import Footer from './components/common/Footer';
+import { Theme } from '@/lib/types';
 
 export default function Home() {
-  const [theme, setTheme] = useState('theme-light');
+  const [theme, setTheme] = useState<Theme>('light');
 
   return (
     <main
@@ -18,7 +19,7 @@ export default function Home() {
     >
       <Navigation setTheme={setTheme} />
       <Hero />
-      <Learning />
+      <Main />
       <section className="relative h-[100vh] w-full">
         <BackgroundSVG2 />
       </section>

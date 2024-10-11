@@ -44,6 +44,7 @@
   --color-info: #1976d2;
 
   --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --heading-color: var(--color-surface);
 }
 
 /* Theme: Dark */
@@ -59,6 +60,8 @@
   --color-success: #2ecc71;
   --color-warning: #f39c12;
   --color-info: #3498db;
+
+  --heading-color: var(--color-white);
 }
 
 /* Theme: Sepia */
@@ -79,21 +82,22 @@
   --border-radius-sm: 2px;
   --border-radius-md: 4px;
   --border-radius-lg: 6px;
+  --heading-color: var(--color-surface);
 }
 
 /* Theme: High Contrast */
 .theme-high-contrast {
-  --color-primary: #0066CC;
-  --color-secondary: #FF9900;
-  --color-accent: #FFFF00;
-  --color-text-primary: #FFFFFF;
-  --color-text-secondary: #E0E0E0;
+  --color-primary: #0066cc;
+  --color-secondary: #ff9900;
+  --color-accent: #ffff00;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #e0e0e0;
   --color-background: #000000;
-  --color-surface: #1A1A1A;
-  --color-error: #FF3333;
-  --color-success: #33FF33;
-  --color-warning: #FFCC00;
-  --color-info: #00CCFF;
+  --color-surface: #1a1a1a;
+  --color-error: #ff3333;
+  --color-success: #33ff33;
+  --color-warning: #ffcc00;
+  --color-info: #00ccff;
 
   --box-shadow: 0 0 0 2px var(--color-accent);
   --border-radius-sm: 4px;

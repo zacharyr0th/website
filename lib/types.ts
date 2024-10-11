@@ -1,13 +1,11 @@
 import { Dispatch, SetStateAction } from 'react';
 
-export const ContentTypes = ['article', 'review', 'interview'] as const;
-export const AudioTypes = ['composition', 'dataset', 'recording', 'theory'] as const;
-export type ContentType = typeof ContentTypes[number];
-export type AudioType = typeof AudioTypes[number];
+export type ContentType = 'article' | 'review' | 'interview';
+export type AudioType = 'composition' | 'dataset' | 'recording' | 'theory';
 export type LanguageCode = 'en' | 'es' | 'fr' | 'de' | 'it' | 'ja' | 'ko' | 'zh';
 export type Url = string & { readonly brand: unique symbol };
 
-interface SEOData {
+type SEOData = {
   metaTitle?: string;
   metaDescription?: string;
   canonicalUrl?: Url;
@@ -16,21 +14,21 @@ interface SEOData {
   lastModified?: string;
   socialShareImage?: Url;
   alternateLanguages?: Readonly<Record<LanguageCode, Url>>;
-}
+};
 
-interface BaseItem {
+type BaseItem = {
   id: string;
   slug: string;
   title: string;
   content: string;
   author: string;
-  date: string; 
+  date: string;
   language: LanguageCode;
-  image?: Url; 
+  image?: Url;
   tags?: readonly string[];
-}
+};
 
-export interface ContentItem extends BaseItem, SEOData {
+export type ContentItem = BaseItem & SEOData & {
   type: ContentType;
   pageViews: number;
   subtitle?: string;
@@ -42,115 +40,128 @@ export interface ContentItem extends BaseItem, SEOData {
   shares?: number;
   bookAuthor?: string;
   composer?: string;
-}
+};
 
-export interface AudioItem extends BaseItem {
+export type AudioItem = BaseItem & {
   type: AudioType;
   artist?: string;
-  duration: string; 
+  duration: string;
   fileType: string;
   fileSize: number;
-}
+};
 
 export type SearchParams = Readonly<Record<string, string | readonly string[] | undefined>>;
 
-export interface WritingPageProps {
+export type WritingPageProps = {
   searchParams: SearchParams;
-}
+};
 
-export interface WritingPageClientProps {
+export type WritingPageClientProps = {
   initialContent: ContentItem[];
-  contentType?: ContentType; 
-}
+  contentType?: ContentType;
+};
 
-export interface FeaturedSectionProps {
+export type FeaturedSectionProps = {
   content: FeaturedWriting;
-}
+};
 
-export interface CategoriesProps {
+export type CategoriesProps = {
   activeCategory: string;
   setActiveCategory: (category: string) => void;
-}
+};
 
-export interface ContentGridProps {
+export type ContentGridProps = {
   content: ContentItem[];
-}
+};
 
-export interface ArticleCardProps {
+export type ArticleCardProps = {
   article: Pick<ContentItem, 'title' | 'subtitle' | 'slug' | 'image' | 'type'>;
-}
+};
 
-export interface FeaturedCardProps {
+export type FeaturedCardProps = {
   article: ContentItem;
-}
+};
 
-export type WritingContentType = 'all' | ContentType; 
+export type WritingContentType = 'all' | ContentType;
 
-export interface WritingMetadata {
+export type WritingMetadata = {
   slug: string;
   title: string;
-}
+};
 
-export interface RecommendedWritingContent {
+export type RecommendedWritingContent = {
   title: string;
   image: Url;
   link: Url;
-}
+};
 
-export interface Category {
+export type Category = {
   id: string;
   name: string;
-}
+};
 
-export interface FeaturedWritingItem {
+export type FeaturedWritingItem = {
   id: string;
   title: string;
   subtitle: string;
   image: string;
   link: string;
-}
+};
 
 export type FeaturedWriting = FeaturedWritingItem[];
 
-export interface FooterProps {
+export type FooterProps = {
   changeLanguage: ChangeLanguageFunction;
-}
+};
 
 export type ChangeLanguageFunction = (lng: string) => void;
 
-export interface NavigationProps {
-  setTheme: Dispatch<SetStateAction<string>>;
-}
+export type NavigationProps = {
+  setTheme: React.Dispatch<React.SetStateAction<Theme>>;
+};
 
-export interface NavItem {
+export type NavItem = {
   label: string;
   href: string;
-}
+};
 
-export const navItems: NavItem[] = [
-  { label: 'Projects', href: '/projects' },
-  { label: 'Writing', href: '/writing' },
-  { label: 'Audio', href: '/audio' },
-];
-
-export interface Project {
+export type Project = {
   id: number;
   title: string;
   logo: string;
   description: string;
   link: string;
-}
+};
 
-export interface ProjectsPageProps {
+export type ProjectsPageProps = {
   theme: string;
   setTheme: Dispatch<SetStateAction<string>>;
-}
+};
 
-export interface ProjectCardProps {
+export type ProjectCardProps = {
   project: Project;
   isActive: boolean;
   onKeyDown: (e: React.KeyboardEvent) => void;
-}
+};
 
 export type ProjectRef = HTMLDivElement | null;
 export type ProjectRefs = React.MutableRefObject<ProjectRef[]>;
+
+export type ButtonProps = {
+  primary?: boolean;
+  secondary?: boolean;
+  children: React.ReactNode;
+  onClick?: () => void;
+  className?: string;
+};
+
+export type Theme = 'light' | 'dark' | 'sepia' | 'high-contrast';
+
+export type Direction = 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';
+
+// Add this to the existing types
+export type NavButtonType = 'primary' | 'secondary' | 'tertiary';
+
+export type NavButtonProps = ButtonProps & {
+  variant: NavButtonType;
+};
