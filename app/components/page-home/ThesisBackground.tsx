@@ -35,18 +35,16 @@ const ThesisBackground: React.FC = () => (
     <div className="absolute inset-0 flex flex-col justify-center items-center p-8">
       <div className="max-w-4xl w-full">
         <h2
-          className="text-sm uppercase tracking-wider mb-2"
-          style={{ color: 'var(--color-accent)' }}
+          className="text-sm uppercase tracking-wider mb-2 text-accent"
         >
           Thesis
         </h2>
         <h1
-          className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-shadow-subtle"
-          style={{ color: 'var(--heading-color)' }}
+          className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-shadow-subtle text-surface"
         >
           The world needs permissionless markets
         </h1>
-        <p className="text-lg" style={{ color: 'var(--heading-color)' }}>
+        <p className="text-lg text-surface">
           and blockchains put everyone on the same page.
         </p>
       </div>

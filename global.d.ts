@@ -4,12 +4,10 @@
 
 declare module 'isomorphic-dompurify';
 declare module 'dompurify';
-declare module 'hoist-non-react-statics';
 declare module 'js-yaml';
 declare module 'json-schema';
 declare module 'json5';
 declare module 'prop-types';
 declare module 'semver';
-declare module 'styled-components';
 declare module 'stylis';
 declare module 'trusted-types';

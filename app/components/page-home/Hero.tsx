@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import BackgroundSVG from './HeroBackground';
-import { heroContent, Button } from '@/lib/constants';
+import { heroContent } from '@/lib/constants';
 
 const Hero: React.FC = memo(() => (
   <section className="flex flex-row min-h-[200vh]">
@@ -41,8 +41,28 @@ const StickyHeader: React.FC = () => (
       </a>
     </p>
     <div className="flex space-x-4">
-      <Button primary>Connect</Button>
-      <Button secondary>Bio</Button>
+      <button
+        className="px-6 py-2 rounded-full transition-colors duration-300"
+        style={{
+          backgroundColor: 'var(--color-primary)',
+          color: 'var(--color-white)',
+          boxShadow: 'var(--box-shadow)',
+        }}
+      >
+        Connect
+      </button>
+      <Link href="/bio">
+        <button
+          className="px-6 py-2 rounded-full transition-colors duration-300"
+          style={{
+            backgroundColor: 'var(--color-surface)',
+            color: 'var(--color-text-secondary)',
+            border: '1px solid var(--color-secondary)',
+          }}
+        >
+          Bio
+        </button>
+      </Link>
     </div>
   </div>
 );
@@ -86,8 +106,8 @@ const ChainLogo: React.FC<{ logo: string }> = memo(({ logo }) => (
     <Image
       src={`/logos/${logo}-logo.webp`}
       alt={`${logo.charAt(0).toUpperCase() + logo.slice(1)} Logo`}
-      width={60}
-      height={60}
+      width={50}
+      height={50}
       className="object-contain"
       style={logo === 'bitcoin' ? { transform: 'scale(2)' } : {}}
     />

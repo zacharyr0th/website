@@ -108,17 +108,17 @@ export const heroContent = {
     {
       title: 'Cross-chain Experience',
       content:
-        "Having been involved in crypto since 2019, I've had the privilege to work in 4 of the highest-growing ecosystems of our time - Bitcoin, Ethereum, Solana, and Aptos.",
+        "Since 2019, I've been involved with projects across multiple blockchain ecosystems including Bitcoin, Ethereum, Solana, and Aptos.",
     },
     {
-      title: 'Product Market Fit',
+      title: 'Growth Specialist',
       content:
-        'As a builder, power user, and seasoned investor, I specialize in identifying product-market fit and advising on how to use on-chain technology to build superior products and services.',
+        'My work involves evaluating market needs and guiding DeFi and AI teams on leveraging on-chain solutions to enhance their products and services.',
     },
     {
-      title: 'High Signal',
+      title: 'Writer',
       content:
-        'Occasionally, I turn complex technological and financial concepts into actionable insights which you can read about here.',
+        'I write about technology and finance, aiming to explain complex topics in an accessible way. You can find my articles here.',
     },
   ],
   chainLogos: ['bitcoin', 'ethereum', 'solana', 'aptos'],

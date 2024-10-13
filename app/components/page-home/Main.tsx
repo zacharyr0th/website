@@ -35,11 +35,29 @@ const Main: React.FC = () => (
               </p>
               <div className="mt-auto flex flex-wrap gap-2">
                 <Link href={project.articleLink} target="_blank" rel="noopener noreferrer">
-                  <NavButton variant="primary">Read Article</NavButton>
+                  <button
+                    className="px-6 py-2 rounded-full transition-colors duration-300"
+                    style={{
+                      backgroundColor: 'var(--color-primary)',
+                      color: 'var(--color-white)',
+                      boxShadow: 'var(--box-shadow)',
+                    }}
+                  >
+                    Learn More
+                  </button>
                 </Link>
                 {project.githubLink && (
                   <Link href={project.githubLink} target="_blank" rel="noopener noreferrer">
-                    <NavButton variant="secondary">View on GitHub</NavButton>
+                    <button
+                      className="px-6 py-2 rounded-full transition-colors duration-300"
+                      style={{
+                        backgroundColor: 'var(--color-surface)',
+                        color: 'var(--color-text-secondary)',
+                        border: '1px solid var(--color-secondary)',
+                      }}
+                    >
+                      View on GitHub
+                    </button>
                   </Link>
                 )}
               </div>

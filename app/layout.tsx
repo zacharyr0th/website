@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import ErrorBoundaryClient from '@/app/components/common/ErrorBoundaryClient';
-import StyledComponentsRegistry from '@/lib/registry';
 import '@/styles/globals.css';
 
 export const metadata: Metadata = {
@@ -15,11 +14,9 @@ function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html>
       <body>
-        <StyledComponentsRegistry>
           <ErrorBoundaryClient>
             <main>{children}</main>
           </ErrorBoundaryClient>
-        </StyledComponentsRegistry>
       </body>
     </html>
   );
