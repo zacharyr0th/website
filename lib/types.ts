@@ -28,19 +28,20 @@ type BaseItem = {
   tags?: readonly string[];
 };
 
-export type ContentItem = BaseItem & SEOData & {
-  type: ContentType;
-  pageViews: number;
-  subtitle?: string;
-  imageCaption?: string;
-  description?: string;
-  readTime?: number;
-  likes?: number;
-  comments?: number;
-  shares?: number;
-  bookAuthor?: string;
-  composer?: string;
-};
+export type ContentItem = BaseItem &
+  SEOData & {
+    type: ContentType;
+    pageViews: number;
+    subtitle?: string;
+    imageCaption?: string;
+    description?: string;
+    readTime?: number;
+    likes?: number;
+    comments?: number;
+    shares?: number;
+    bookAuthor?: string;
+    composer?: string;
+  };
 
 export type AudioItem = BaseItem & {
   type: AudioType;

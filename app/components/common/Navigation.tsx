@@ -9,7 +9,7 @@ import ThemeSelector from './ThemeSelector';
 
 const Navigation: React.FC<NavigationProps> = ({ setTheme }) => {
   const pathname = usePathname();
-  const showHomeButton = navItems.some(item => item.href === pathname);
+  const showHomeButton = navItems.some((item) => item.href === pathname);
 
   return (
     <>

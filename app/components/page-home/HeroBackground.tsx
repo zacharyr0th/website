@@ -4,8 +4,12 @@ const HeroBackground: React.FC = () => (
   <>
     <style jsx>{`
       @keyframes backgroundMove {
-        0% { transform: translate(0, 0); }
-        100% { transform: translate(-750%, -750%); }
+        0% {
+          transform: translate(0, 0);
+        }
+        100% {
+          transform: translate(-750%, -750%);
+        }
       }
       .animate-background-move {
         animation: backgroundMove 300s linear infinite;
@@ -19,7 +23,12 @@ const HeroBackground: React.FC = () => (
     >
       <defs>
         <filter id="noise">
-          <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.65"
+            numOctaves="3"
+            stitchTiles="stitch"
+          />
           <feColorMatrix type="saturate" values="0.1" />
         </filter>
         <pattern id="stainedGlass" width="200" height="200" patternUnits="userSpaceOnUse">
@@ -30,7 +39,14 @@ const HeroBackground: React.FC = () => (
           <polygon points="50,100 150,100 200,200 100,200" fill="url(#gradient4)" />
         </pattern>
         {['primary', 'secondary', 'accent', 'surface'].map((color, index) => (
-          <linearGradient key={color} id={`gradient${index + 1}`} x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient
+            key={color}
+            id={`gradient${index + 1}`}
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="100%"
+          >
             <stop offset="0%" style={{ stopColor: `var(--color-${color})`, stopOpacity: 0.8 }} />
             <stop offset="100%" style={{ stopColor: `var(--color-${color})`, stopOpacity: 0.6 }} />
           </linearGradient>

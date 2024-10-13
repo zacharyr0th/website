@@ -101,37 +101,44 @@ export const DEFAULT_LANGUAGE = 'en';
 export const SUPPORTED_FILE_TYPES = ['mp3', 'wav', 'ogg'];
 
 export const heroContent = {
-  name: "Zachary Roth",
-  title: "Head of Growth, DeFi & AI @ ",
-  aptosLink: "https://aptoslabs.com/",
+  name: 'Zachary Roth',
+  title: 'Head of Growth, DeFi & AI @ ',
+  aptosLink: 'https://aptoslabs.com/',
   sections: [
     {
-      title: "Cross-chain Experience",
-      content: "Having been involved in crypto since 2019, I've had the privilege to work in 4 of the highest-growing ecosystems of our time - Bitcoin, Ethereum, Solana, and Aptos."
+      title: 'Cross-chain Experience',
+      content:
+        "Having been involved in crypto since 2019, I've had the privilege to work in 4 of the highest-growing ecosystems of our time - Bitcoin, Ethereum, Solana, and Aptos.",
     },
     {
-      title: "Product Market Fit",
-      content: "As a builder, power user, and seasoned investor, I specialize in identifying product-market fit and advising on how to use on-chain technology to build superior products and services."
+      title: 'Product Market Fit',
+      content:
+        'As a builder, power user, and seasoned investor, I specialize in identifying product-market fit and advising on how to use on-chain technology to build superior products and services.',
     },
     {
-      title: "High Signal",
-      content: "Occasionally, I turn complex technological and financial concepts into actionable insights which you can read about here."
-    }
+      title: 'High Signal',
+      content:
+        'Occasionally, I turn complex technological and financial concepts into actionable insights which you can read about here.',
+    },
   ],
-  chainLogos: ['bitcoin', 'ethereum', 'solana', 'aptos']
+  chainLogos: ['bitcoin', 'ethereum', 'solana', 'aptos'],
 };
 
 export const Button: React.FC<ButtonProps> = ({ primary, secondary, children }) => (
   <button
     className={`px-6 py-2 rounded-full transition-colors duration-300 ${
-      primary ? 'bg-primary text-[var(--color-white)] shadow-[var(--box-shadow)]' :
-      secondary ? 'bg-surface text-text-secondary border border-secondary' :
-      'bg-background text-text-primary'
+      primary
+        ? 'bg-primary text-[var(--color-white)] shadow-[var(--box-shadow)]'
+        : secondary
+        ? 'bg-surface text-text-secondary border border-secondary'
+        : 'bg-background text-text-primary'
     }`}
-    style={{
-      '--box-shadow': 'var(--box-shadow)',
-      '--border-radius': 'var(--border-radius-md)',
-    } as React.CSSProperties}
+    style={
+      {
+        '--box-shadow': 'var(--box-shadow)',
+        '--border-radius': 'var(--border-radius-md)',
+      } as React.CSSProperties
+    }
   >
     {children}
   </button>
@@ -140,13 +147,20 @@ export const Button: React.FC<ButtonProps> = ({ primary, secondary, children }) 
 export const NavButton: React.FC<NavButtonProps> = ({ variant, children, ...props }) => (
   <button
     className={`px-4 py-2 rounded-full transition-all duration-300 ${
-      variant === 'primary' ? 'bg-primary text-[var(--color-white)]' :
-      variant === 'secondary' ? 'bg-surface text-text-secondary' :
-      'bg-background text-text-primary'
+      variant === 'primary'
+        ? 'bg-primary text-[var(--color-white)]'
+        : variant === 'secondary'
+        ? 'bg-surface text-text-secondary'
+        : 'bg-background text-text-primary'
     } hover:opacity-90`}
     style={{
-      backgroundColor: `var(--color-${variant === 'primary' ? 'primary' : variant === 'secondary' ? 'surface' : 'background'})`,
-      color: variant === 'primary' ? 'var(--color-white)' : `var(--color-text-${variant === 'secondary' ? 'secondary' : 'primary'})`,
+      backgroundColor: `var(--color-${
+        variant === 'primary' ? 'primary' : variant === 'secondary' ? 'surface' : 'background'
+      })`,
+      color:
+        variant === 'primary'
+          ? 'var(--color-white)'
+          : `var(--color-text-${variant === 'secondary' ? 'secondary' : 'primary'})`,
       boxShadow: 'var(--box-shadow)',
     }}
     {...props}

@@ -33,7 +33,10 @@ const StickyHeader: React.FC = () => (
     </h1>
     <p className="text-lg mb-6 max-w-xl tracking-wide text-text-secondary">
       {heroContent.title}{' '}
-      <a href={heroContent.aptosLink} className="hover:underline transition-colors duration-300 text-accent">
+      <a
+        href={heroContent.aptosLink}
+        className="hover:underline transition-colors duration-300 text-accent"
+      >
         Aptos Labs
       </a>
     </p>
@@ -47,11 +50,7 @@ const StickyHeader: React.FC = () => (
 const MainContent: React.FC = memo(() => (
   <div className="ml-12 mr-6 mt-10">
     {heroContent.sections.map((section, index) => (
-      <ContentSection
-        key={section.title}
-        title={section.title}
-        content={section.content}
-      >
+      <ContentSection key={section.title} title={section.title} content={section.content}>
         {index === 0 && <ChainLogos />}
       </ContentSection>
     ))}
@@ -60,7 +59,11 @@ const MainContent: React.FC = memo(() => (
 
 MainContent.displayName = 'MainContent';
 
-const ContentSection: React.FC<{ title: string; content: React.ReactNode; children?: React.ReactNode }> = ({ title, content, children }) => (
+const ContentSection: React.FC<{
+  title: string;
+  content: React.ReactNode;
+  children?: React.ReactNode;
+}> = ({ title, content, children }) => (
   <div className="mb-12">
     <h2 className="text-2xl font-semibold mb-4 text-text-primary">{title}</h2>
     <p className="text-base max-w-xl leading-relaxed mb-6 text-text-secondary">{content}</p>
@@ -79,9 +82,7 @@ const ChainLogos: React.FC = memo(() => (
 ChainLogos.displayName = 'ChainLogos';
 
 const ChainLogo: React.FC<{ logo: string }> = memo(({ logo }) => (
-  <div
-    className="w-18 h-18 rounded-full overflow-hidden bg-background flex items-center justify-center shadow-custom"
-  >
+  <div className="w-18 h-18 rounded-full overflow-hidden bg-background flex items-center justify-center shadow-custom">
     <Image
       src={`/logos/${logo}-logo.webp`}
       alt={`${logo.charAt(0).toUpperCase() + logo.slice(1)} Logo`}

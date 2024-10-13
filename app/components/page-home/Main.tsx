@@ -34,19 +34,11 @@ const Main: React.FC = () => (
                 {project.description}
               </p>
               <div className="mt-auto flex flex-wrap gap-2">
-                <Link
-                  href={project.articleLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Link href={project.articleLink} target="_blank" rel="noopener noreferrer">
                   <NavButton variant="primary">Read Article</NavButton>
                 </Link>
                 {project.githubLink && (
-                  <Link
-                    href={project.githubLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <Link href={project.githubLink} target="_blank" rel="noopener noreferrer">
                     <NavButton variant="secondary">View on GitHub</NavButton>
                   </Link>
                 )}
@@ -87,11 +79,7 @@ const Main: React.FC = () => (
                 {article.description}
               </p>
               <div className="mt-auto">
-                <Link
-                  href={article.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Link href={article.link} target="_blank" rel="noopener noreferrer">
                   <NavButton variant="primary">Read Article</NavButton>
                 </Link>
               </div>

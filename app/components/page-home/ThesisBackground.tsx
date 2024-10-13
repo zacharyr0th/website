@@ -4,8 +4,12 @@ const ThesisBackground: React.FC = () => (
   <div className="relative h-full w-full overflow-hidden">
     <style jsx>{`
       @keyframes backgroundMove {
-        0% { transform: translate(0, 0); }
-        100% { transform: translate(-750%, -750%); }
+        0% {
+          transform: translate(0, 0);
+        }
+        100% {
+          transform: translate(-750%, -750%);
+        }
       }
       .animate-background-move {
         animation: backgroundMove 300s linear infinite;
@@ -42,10 +46,7 @@ const ThesisBackground: React.FC = () => (
         >
           The world needs permissionless markets
         </h1>
-        <p
-          className="text-lg"
-          style={{ color: 'var(--heading-color)' }}
-        >
+        <p className="text-lg" style={{ color: 'var(--heading-color)' }}>
           and blockchains put everyone on the same page.
         </p>
       </div>
