@@ -53,3 +53,7 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
+
+# Config files
+.prettierignore
+.prettierrc

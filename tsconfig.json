@@ -1,30 +1,45 @@
 {
   "compilerOptions": {
+    // Language and Environment
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "typeRoots": ["./node_modules/@types", "./types"],
-    "types": ["node", "react", "react-dom"],
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
+    "jsx": "preserve",
+
+    // Modules
     "module": "esnext",
     "moduleResolution": "bundler",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    },
+
+    // JavaScript Support
+    "allowJs": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
+
+    // Emit
+    "noEmit": true,
     "incremental": true,
+
+    // Type Checking
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+
+    // Completeness
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+
+    // Type Declarations
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "types": ["node", "react", "react-dom"],
+
+    // Plugins
     "plugins": [
       {
         "name": "next"
       }
-    ],
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./*"]
-    }
+    ]
   },
   "include": [
     "next-env.d.ts",
@@ -33,6 +48,6 @@
     ".next/types/**/*.ts",
     "lib/updateSheetMusicCatalog.mts",
     "global.d.ts"
-  ],
+, "../tailwind.config.ts"  ],
   "exclude": ["node_modules"]
 }

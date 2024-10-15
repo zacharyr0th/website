@@ -7,7 +7,7 @@ type ThemeSelectorProps = {
 };
 
 const ThemeSelector: React.FC<ThemeSelectorProps> = ({ setTheme }) => {
-  const [currentTheme, setCurrentTheme] = useState<Theme>('light');
+  const [currentTheme, setCurrentTheme] = useState<Theme>('dark');
 
   const applyTheme = useCallback(
     (newTheme: Theme) => {
@@ -19,15 +19,13 @@ const ThemeSelector: React.FC<ThemeSelectorProps> = ({ setTheme }) => {
   );
 
   useEffect(() => {
-    const savedTheme = (localStorage.getItem('theme') as Theme) || 'light';
+    const savedTheme = (localStorage.getItem('theme') as Theme) || 'dark';
     setCurrentTheme(savedTheme);
     applyTheme(savedTheme);
   }, [applyTheme]);
 
   const cycleTheme = useCallback(() => {
-    const currentIndex = THEMES.indexOf(currentTheme);
-    const nextIndex = (currentIndex + 1) % THEMES.length;
-    const nextTheme = THEMES[nextIndex];
+    const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
     setCurrentTheme(nextTheme);
     applyTheme(nextTheme);
   }, [currentTheme, applyTheme]);
@@ -38,9 +36,7 @@ const ThemeSelector: React.FC<ThemeSelectorProps> = ({ setTheme }) => {
       className="btn btn-primary text-2xl flex items-center justify-center rounded-full"
       style={{
         backgroundColor: 'var(--color-primary)',
-        color: ['dark', 'high-contrast'].includes(currentTheme)
-          ? 'var(--color-light)'
-          : 'var(--color-background)',
+        color: currentTheme === 'dark' ? 'var(--color-light)' : 'var(--color-background)',
         padding: 'var(--spacing-sm)',
         borderRadius: 'var(--border-radius-lg)',
         boxShadow: 'var(--box-shadow)',

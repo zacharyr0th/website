@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import Navigation from '../components/common/Navigation';
-import Footer from '../components/common/Footer';
+import Navigation from '../../components/common/Navigation';
+import Footer from '../../components/common/Footer';
 import { Theme } from '@/lib/types';
 
 export default function WritingPortfolioPage() {

@@ -8,15 +8,16 @@ const HeroBackground: React.FC = () => (
           transform: translate(0, 0);
         }
         100% {
-          transform: translate(-750%, -750%);
+          transform: translate(-50%, -50%);
         }
       }
       .animate-background-move {
-        animation: backgroundMove 240s linear infinite;
+        animation: backgroundMove 30s linear infinite;
+        will-change: transform;
       }
     `}</style>
     <svg
-      className="absolute inset-0 w-full h-full"
+      className="absolute inset-0 w-full h-full overflow-hidden"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 1000 1000"
       preserveAspectRatio="xMidYMid slice"
@@ -53,10 +54,12 @@ const HeroBackground: React.FC = () => (
         ))}
       </defs>
       <rect
-        width="1600%"
-        height="1600%"
+        width="400%"
+        height="400%"
         fill="url(#stainedGlass)"
         className="animate-background-move"
+        x="-50%"
+        y="-50%"
       />
       <rect width="100%" height="100%" fill="rgba(0, 0, 0, 0.1)" />
     </svg>

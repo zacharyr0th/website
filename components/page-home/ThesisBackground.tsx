@@ -12,7 +12,8 @@ const ThesisBackground: React.FC = () => (
         }
       }
       .animate-background-move {
-        animation: backgroundMove 300s linear infinite;
+        animation: backgroundMove 30s linear infinite;
+        will-change: transform;
       }
       .text-shadow-subtle {
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
@@ -52,7 +53,7 @@ const ThesisBackground: React.FC = () => (
         fill="url(#stainedGlass)"
         className="animate-background-move"
       />
-      <rect width="100%" height="100%" fill="rgba(0, 0, 0, 0.3)" />
+      <rect width="100%" height="100%" fill="rgba(0, 0, 0, 0.2)" />
     </svg>
     <div className="absolute inset-0 flex flex-col justify-center items-center p-8">
       <div className="max-w-4xl w-full">

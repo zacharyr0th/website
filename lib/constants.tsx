@@ -1,19 +1,15 @@
 import React from 'react';
-import { FaSun, FaMoon, FaUmbrellaBeach, FaAdjust } from 'react-icons/fa';
-import { Theme, NavItem } from './types';
-import { ButtonProps, NavButtonProps } from '@/lib/types';
+import { FaSun, FaMoon } from 'react-icons/fa';
+import { Theme, ButtonProps, NavButtonProps, ContentType, AudioType, NavItem } from './types';
 
+export const THEMES: readonly Theme[] = ['light', 'dark'];
 export const THEME_ICONS: Record<Theme, React.ReactElement> = {
   light: <FaSun />,
   dark: <FaMoon />,
-  sepia: <FaUmbrellaBeach />,
-  'high-contrast': <FaAdjust />,
 };
 
-export const THEMES = ['light', 'dark', 'sepia', 'high-contrast'] as const;
-
-export const ContentTypes = ['article', 'review', 'interview'] as const;
-export const AudioTypes = ['composition', 'dataset', 'recording', 'theory'] as const;
+export const ContentTypes: readonly ContentType[] = ['article', 'review', 'interview'];
+export const AudioTypes: readonly AudioType[] = ['composition', 'dataset', 'recording', 'theory'];
 
 export const navItems: NavItem[] = [
   { label: 'Projects', href: '/projects' },
@@ -95,21 +91,22 @@ export const BREAKPOINTS = {
   xl: 1280,
 };
 
+// API and content-related constants
 export const API_ENDPOINTS = {
   content: '/api/content',
   projects: '/api/projects',
   audio: '/api/audio',
 };
 
+export const MAX_CONTENT_LENGTH = 1000;
+export const SUPPORTED_FILE_TYPES = ['mp3', 'wav', 'ogg'];
+
+// Social media links
 export const SOCIAL_LINKS = {
   twitter: 'https://twitter.com/yourusername',
   github: 'https://github.com/yourusername',
   linkedin: 'https://linkedin.com/in/yourusername',
 };
-
-export const MAX_CONTENT_LENGTH = 1000;
-export const DEFAULT_LANGUAGE = 'en';
-export const SUPPORTED_FILE_TYPES = ['mp3', 'wav', 'ogg'];
 
 export const heroContent = {
   name: 'Zachary Roth',

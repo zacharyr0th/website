@@ -2,7 +2,6 @@ import { Dispatch, SetStateAction } from 'react';
 
 export type ContentType = 'article' | 'review' | 'interview';
 export type AudioType = 'composition' | 'dataset' | 'recording' | 'theory';
-export type LanguageCode = 'en' | 'es' | 'fr' | 'de' | 'it' | 'ja' | 'ko' | 'zh';
 export type Url = string & { readonly brand: unique symbol };
 
 type SEOData = {
@@ -13,7 +12,6 @@ type SEOData = {
   structuredData?: Record<string, unknown>;
   lastModified?: string;
   socialShareImage?: Url;
-  alternateLanguages?: Readonly<Record<LanguageCode, Url>>;
 };
 
 type BaseItem = {
@@ -23,7 +21,6 @@ type BaseItem = {
   content: string;
   author: string;
   date: string;
-  language: LanguageCode;
   image?: Url;
   tags?: readonly string[];
 };
@@ -111,11 +108,7 @@ export type FeaturedWritingItem = {
 
 export type FeaturedWriting = FeaturedWritingItem[];
 
-export type FooterProps = {
-  changeLanguage: ChangeLanguageFunction;
-};
-
-export type ChangeLanguageFunction = (lng: string) => void;
+export type FooterProps = {};
 
 export type NavigationProps = {
   setTheme: React.Dispatch<React.SetStateAction<Theme>>;
@@ -156,11 +149,10 @@ export type ButtonProps = {
   className?: string;
 };
 
-export type Theme = 'light' | 'dark' | 'sepia' | 'high-contrast';
+export type Theme = 'light' | 'dark';
 
 export type Direction = 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';
 
-// Add this to the existing types
 export type NavButtonType = 'primary' | 'secondary' | 'tertiary';
 
 export interface NavButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {

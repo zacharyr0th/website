@@ -10,10 +10,6 @@ const nextConfig = {
     minimumCacheTTL: 60,
     formats: ['image/webp'],
   },
-  i18n: {
-    locales: ['en', 'es', 'fr'],
-    defaultLocale: 'en',
-  },
 };
 
 module.exports = nextConfig;
