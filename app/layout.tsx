@@ -14,9 +14,9 @@ function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html>
       <body>
-          <ErrorBoundaryClient>
-            <main>{children}</main>
-          </ErrorBoundaryClient>
+        <ErrorBoundaryClient>
+          <main>{children}</main>
+        </ErrorBoundaryClient>
       </body>
     </html>
   );

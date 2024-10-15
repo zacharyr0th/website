@@ -12,7 +12,7 @@ const HeroBackground: React.FC = () => (
         }
       }
       .animate-background-move {
-        animation: backgroundMove 300s linear infinite;
+        animation: backgroundMove 240s linear infinite;
       }
     `}</style>
     <svg

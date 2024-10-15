@@ -23,7 +23,7 @@ const Navigation: React.FC<NavigationProps> = ({ setTheme }) => {
           {navItems.map(({ label, href }: NavItem) => (
             <li key={label}>
               <Link href={href}>
-                <NavButton variant="tertiary">{label}</NavButton>
+                <NavButton variant="secondary">{label}</NavButton>
               </Link>
             </li>
           ))}

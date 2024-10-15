@@ -1,8 +1,7 @@
 import React from 'react';
 import { FaSun, FaMoon, FaUmbrellaBeach, FaAdjust } from 'react-icons/fa';
-import { Theme, NavItem, Project } from './types';
-import { ButtonProps } from '@/lib/types';
-import { NavButtonProps } from '@/lib/types';
+import { Theme, NavItem } from './types';
+import { ButtonProps, NavButtonProps } from '@/lib/types';
 
 export const THEME_ICONS: Record<Theme, React.ReactElement> = {
   light: <FaSun />,
@@ -26,34 +25,46 @@ export const learningProjects = [
   {
     title: 'zacharyr0th.com',
     description: 'This website is fully open sourced and built with Next.js.',
+    technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
+    features: ['Responsive design', 'Dark mode', 'SEO optimization'],
     articleLink: 'https://example.com/article1',
     githubLink: 'https://github.com/yourusername/zacharyr0th.com',
   },
   {
     title: 'simple-os',
     description: 'A minimalist operating system built from scratch.',
+    technologies: ['C', 'Assembly', 'QEMU'],
+    features: ['Bootloader', 'Kernel', 'Basic shell'],
     articleLink: 'https://example.com/article2',
     githubLink: 'https://github.com/yourusername/simple-os',
   },
   {
     title: 'casino-time',
     description: 'Provably fair, permissionless gambling on the Aptos blockchain.',
+    technologies: ['Move', 'React', 'Aptos SDK'],
+    features: ['Smart contracts', 'Random number generation', 'User-friendly interface'],
     articleLink: 'https://example.com/article3',
   },
   {
     title: 'muisc-ide',
     description: 'An ai-assisted IDE for practicing, researching, and composing music.',
+    technologies: ['Electron', 'React', 'TensorFlow.js', 'Web Audio API'],
+    features: ['AI-powered suggestions', 'Real-time audio processing', 'Sheet music visualization'],
     articleLink: 'https://example.com/article4',
     githubLink: 'https://github.com/yourusername/muisc-ide',
   },
   {
     title: 'privvy',
     description: 'A DEX with private transactions by default on the Aleo blockchain.',
+    technologies: ['Aleo', 'Zero-knowledge proofs', 'React'],
+    features: ['Private swaps', 'Liquidity pools', 'Decentralized order book'],
     articleLink: 'https://example.com/article5',
   },
   {
     title: 'toml-tools',
     description: "Utilities for working with Electric Capital's crypto-ecosystems repo.",
+    technologies: ['Python', 'TOML', 'Git'],
+    features: ['TOML parsing', 'Ecosystem data analysis', 'Automated updates'],
     articleLink: 'https://example.com/article6',
     githubLink: 'https://github.com/yourusername/toml-tools',
   },
@@ -106,19 +117,19 @@ export const heroContent = {
   aptosLink: 'https://aptoslabs.com/',
   sections: [
     {
-      title: 'Cross-chain Experience',
+      title: 'Ecosystem Analyst',
       content:
-        "Since 2019, I've been involved with projects across multiple blockchain ecosystems including Bitcoin, Ethereum, Solana, and Aptos.",
+        'Seasoned analyst and builder with experience across multiple hyper-growth blockchain ecosystems including Bitcoin, Ethereum, Solana, and Aptos.',
     },
     {
-      title: 'Growth Specialist',
+      title: 'Market Strategist',
       content:
-        'My work involves evaluating market needs and guiding DeFi and AI teams on leveraging on-chain solutions to enhance their products and services.',
+        'My work involves identifying market opportunities and guiding DeFi and AI teams on leveraging on-chain solutions to enhance their products and services. ',
     },
     {
       title: 'Writer',
       content:
-        'I write about technology and finance, aiming to explain complex topics in an accessible way. You can find my articles here.',
+        'I write about technology and finance, aiming to explain complex topics in an accessible way. You can find my articles here, alongside a few book reviews.',
     },
   ],
   chainLogos: ['bitcoin', 'ethereum', 'solana', 'aptos'],

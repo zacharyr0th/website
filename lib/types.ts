@@ -163,6 +163,6 @@ export type Direction = 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';
 // Add this to the existing types
 export type NavButtonType = 'primary' | 'secondary' | 'tertiary';
 
-export type NavButtonProps = ButtonProps & {
-  variant: NavButtonType;
-};
+export interface NavButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'primary' | 'secondary' | 'default';
+}

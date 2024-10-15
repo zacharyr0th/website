@@ -6,8 +6,8 @@ const BioPage: React.FC = () => {
       <h1 className="text-3xl font-bold mb-4">Bio</h1>
       <div className="prose">
         <p>
-          Welcome to my bio page. Here you can add information about yourself,
-          your background, interests, and achievements.
+          Welcome to my bio page. Here you can add information about yourself, your background,
+          interests, and achievements.
         </p>
         {/* Add more content here */}
       </div>
@@ -16,4 +16,3 @@ const BioPage: React.FC = () => {
 };
 
 export default BioPage;
-
