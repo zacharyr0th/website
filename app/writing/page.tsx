@@ -6,26 +6,25 @@ import Navigation from '@/components/common/Navigation';
 import Footer from '@/components/common/Footer';
 import { Theme, Article } from '@/lib/types';
 import ArticleGrid from '@/components/page-writing/ArticleGrid';
-import FeaturedSection from '@/components/page-writing/FeaturedSection';
-import CategoryFilter from '@/components/page-writing/CategoryFilter';
+import Hero from '@/components/page-writing/Hero';
+import ArchiveSection from '@/components/page-writing/ArchiveSection';
 import { getFeaturedArticles, getAllArticles } from '@/lib/articleUtils';
 
 export default function WritingPage() {
   const [theme, setTheme] = useState<Theme>('light');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [currentFeaturedIndex, setCurrentFeaturedIndex] = useState(0);
-  const [sideArticles, setSideArticles] = useState<Article[]>([]);
   const [randomArticles, setRandomArticles] = useState<Article[]>([]);
 
   const allArticles = useMemo(() => getAllArticles(), []);
   const featuredArticles = useMemo(() => getFeaturedArticles(), []);
-  const categories = useMemo(
-    () => [
-      'all',
-      ...Array.from(new Set(allArticles.map((article) => article.category || 'Uncategorized'))),
-    ],
-    [allArticles]
-  );
+
+  const categories = useMemo(() => {
+    const uniqueCategories = Array.from(
+      new Set(allArticles.map((article) => article.category || 'Uncategorized'))
+    );
+    return ['all', ...uniqueCategories];
+  }, [allArticles]);
 
   const filteredArticles = useMemo(
     () =>
@@ -39,23 +38,9 @@ export default function WritingPage() {
     const availableArticles = allArticles.filter(
       (article) => article.id !== featuredArticles[currentFeaturedIndex].id
     );
-    const randomArticles = availableArticles
-      .sort(() => 0.5 - Math.random())
-      .slice(0, 3);
-    setRandomArticles(randomArticles);
+    const newRandomArticles = availableArticles.sort(() => 0.5 - Math.random()).slice(0, 3);
+    setRandomArticles(newRandomArticles);
   }, [allArticles, featuredArticles, currentFeaturedIndex]);
-
-  const nextFeaturedArticle = useCallback(() => {
-    setCurrentFeaturedIndex((prevIndex) => (prevIndex + 1) % featuredArticles.length);
-    refreshRandomSelection();
-  }, [featuredArticles.length, refreshRandomSelection]);
-
-  const prevFeaturedArticle = useCallback(() => {
-    setCurrentFeaturedIndex(
-      (prevIndex) => (prevIndex - 1 + featuredArticles.length) % featuredArticles.length
-    );
-    refreshRandomSelection();
-  }, [featuredArticles.length, refreshRandomSelection]);
 
   useEffect(() => {
     refreshRandomSelection();
@@ -75,23 +60,19 @@ export default function WritingPage() {
         </motion.h1>
 
         {featuredArticles.length > 0 && (
-          <FeaturedSection
-            primaryArticle={featuredArticles[currentFeaturedIndex]}
-            sideArticles={sideArticles}
-            randomArticles={randomArticles}
-            onRefreshRandomSelection={refreshRandomSelection}
-            featuredArticles={featuredArticles}
-            currentFeaturedIndex={currentFeaturedIndex}
-            onNextArticle={nextFeaturedArticle}
-            onPrevArticle={prevFeaturedArticle}
-          />
+          <div className="max-w-7xl mx-auto mb-12">
+            <Hero
+              primaryArticle={featuredArticles[currentFeaturedIndex]}
+              featuredArticles={randomArticles}
+              onRefreshRandomSelection={refreshRandomSelection}
+            />
+            <ArchiveSection
+              categories={categories}
+              selectedCategory={selectedCategory}
+              onCategoryChange={setSelectedCategory}
+            />
+          </div>
         )}
-
-        <CategoryFilter
-          categories={categories}
-          selectedCategory={selectedCategory}
-          onCategoryChange={setSelectedCategory}
-        />
 
         <ArticleGrid articles={filteredArticles} />
       </div>

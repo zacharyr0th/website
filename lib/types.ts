@@ -81,6 +81,8 @@ export type ContentGridProps = {
 
 export type ArticleCardProps = {
   article: Pick<ContentItem, 'title' | 'subtitle' | 'slug' | 'image' | 'type'>;
+  className?: string;
+  variant?: 'featured' | 'side';
 };
 
 export type FeaturedCardProps = {
