@@ -1,60 +1,101 @@
 'use client';
 
-import React, { useState } from 'react';
-import Navigation from '../../components/common/Navigation';
-import Footer from '../../components/common/Footer';
-import { Theme } from '@/lib/types';
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import Navigation from '@/components/common/Navigation';
+import Footer from '@/components/common/Footer';
+import { Theme, Article } from '@/lib/types';
+import ArticleGrid from '@/components/page-writing/ArticleGrid';
+import FeaturedSection from '@/components/page-writing/FeaturedSection';
+import CategoryFilter from '@/components/page-writing/CategoryFilter';
+import { getFeaturedArticles, getAllArticles } from '@/lib/articleUtils';
 
-export default function WritingPortfolioPage() {
+export default function WritingPage() {
   const [theme, setTheme] = useState<Theme>('light');
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [currentFeaturedIndex, setCurrentFeaturedIndex] = useState(0);
+  const [sideArticles, setSideArticles] = useState<Article[]>([]);
+  const [randomArticles, setRandomArticles] = useState<Article[]>([]);
+
+  const allArticles = useMemo(() => getAllArticles(), []);
+  const featuredArticles = useMemo(() => getFeaturedArticles(), []);
+  const categories = useMemo(
+    () => [
+      'all',
+      ...Array.from(new Set(allArticles.map((article) => article.category || 'Uncategorized'))),
+    ],
+    [allArticles]
+  );
+
+  const filteredArticles = useMemo(
+    () =>
+      selectedCategory === 'all'
+        ? allArticles
+        : allArticles.filter((article) => article.category === selectedCategory),
+    [selectedCategory, allArticles]
+  );
+
+  const refreshRandomSelection = useCallback(() => {
+    const availableArticles = allArticles.filter(
+      (article) => article.id !== featuredArticles[currentFeaturedIndex].id
+    );
+    const randomArticles = availableArticles
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 3);
+    setRandomArticles(randomArticles);
+  }, [allArticles, featuredArticles, currentFeaturedIndex]);
+
+  const nextFeaturedArticle = useCallback(() => {
+    setCurrentFeaturedIndex((prevIndex) => (prevIndex + 1) % featuredArticles.length);
+    refreshRandomSelection();
+  }, [featuredArticles.length, refreshRandomSelection]);
+
+  const prevFeaturedArticle = useCallback(() => {
+    setCurrentFeaturedIndex(
+      (prevIndex) => (prevIndex - 1 + featuredArticles.length) % featuredArticles.length
+    );
+    refreshRandomSelection();
+  }, [featuredArticles.length, refreshRandomSelection]);
+
+  useEffect(() => {
+    refreshRandomSelection();
+  }, [refreshRandomSelection]);
 
   return (
-    <main
-      className={`flex flex-col w-auto min-h-screen overflow-x-hidden pt-16 font-mono ${theme}`}
-      style={{ backgroundColor: 'var(--color-background)' }}
-    >
+    <main className={`flex flex-col w-full min-h-screen font-mono ${theme}`}>
       <Navigation setTheme={setTheme} />
-      <div className="flex-grow container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold mb-6">Writing</h1>
-        <p className="text-xl mb-8">Actionable Insights</p>
+      <div className="flex-grow container mx-auto px-24 py-24 max-w-6xl">
+        <motion.h1
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-5xl font-bold mb-12 text-text-primary"
+        >
+          Writing
+        </motion.h1>
 
-        <section className="mb-12">
-          <h2 className="text-2xl font-semibold mb-4">Featured Works</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Add your featured writing pieces here */}
-            <WritingCard
-              title="The Art of Storytelling"
-              excerpt="An exploration of narrative techniques..."
-            />
-            <WritingCard title="Poetry in Motion" excerpt="A collection of verses inspired by..." />
-            <WritingCard
-              title="Tech Insights"
-              excerpt="Analysis of emerging technologies and their impact..."
-            />
-          </div>
-        </section>
+        {featuredArticles.length > 0 && (
+          <FeaturedSection
+            primaryArticle={featuredArticles[currentFeaturedIndex]}
+            sideArticles={sideArticles}
+            randomArticles={randomArticles}
+            onRefreshRandomSelection={refreshRandomSelection}
+            featuredArticles={featuredArticles}
+            currentFeaturedIndex={currentFeaturedIndex}
+            onNextArticle={nextFeaturedArticle}
+            onPrevArticle={prevFeaturedArticle}
+          />
+        )}
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">About Me</h2>
-          <p className="text-lg">
-            I'm a passionate writer with a keen interest in [your interests/specialties]. My work
-            spans across various genres and topics, always aiming to engage and inspire readers.
-          </p>
-        </section>
+        <CategoryFilter
+          categories={categories}
+          selectedCategory={selectedCategory}
+          onCategoryChange={setSelectedCategory}
+        />
+
+        <ArticleGrid articles={filteredArticles} />
       </div>
       <Footer />
     </main>
-  );
-}
-
-function WritingCard({ title, excerpt }: { title: string; excerpt: string }) {
-  return (
-    <div className="border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
-      <p className="text-gray-600">{excerpt}</p>
-      <a href="#" className="text-blue-500 hover:underline mt-2 inline-block">
-        Read more
-      </a>
-    </div>
   );
 }

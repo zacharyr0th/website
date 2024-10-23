@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 
-export type ContentType = 'article' | 'review' | 'interview';
+export type ContentType = 'article' | 'review' | 'project';
 export type AudioType = 'composition' | 'dataset' | 'recording' | 'theory';
 export type Url = string & { readonly brand: unique symbol };
 
@@ -60,7 +60,14 @@ export type WritingPageClientProps = {
 };
 
 export type FeaturedSectionProps = {
-  content: FeaturedWriting;
+  primaryArticle: Article;
+  sideArticles: Article[];
+  randomArticles: Article[];
+  onRefreshRandomSelection: () => void;
+  featuredArticles: Article[];
+  currentFeaturedIndex: number;
+  onNextArticle: () => void;
+  onPrevArticle: () => void;
 };
 
 export type CategoriesProps = {
@@ -128,8 +135,8 @@ export type Project = {
 };
 
 export type ProjectsPageProps = {
-  theme: string;
-  setTheme: Dispatch<SetStateAction<string>>;
+  theme: Theme;
+  setTheme: Dispatch<SetStateAction<Theme>>;
 };
 
 export type ProjectCardProps = {
@@ -156,5 +163,38 @@ export type Direction = 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';
 export type NavButtonType = 'primary' | 'secondary' | 'tertiary';
 
 export interface NavButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'default';
+  variant: 'primary' | 'secondary' | 'default';
+  children: React.ReactNode;
+}
+
+// Add these new types
+export type LearningProject = {
+  id: string;
+  title: string;
+  description: string;
+  technologies?: string[];
+  features?: string[];
+  articleLink: string;
+  githubLink?: string;
+  demoLink?: string;
+  lastUpdated: string;
+};
+
+export type ProjectPanelsProps = {
+  visibleProjects: number;
+};
+
+export type HeroProps = {
+  theme: Theme;
+};
+export interface Article {
+  id: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  image: string;
+  category: string;
+  date: string;
+  slug: string;
+  link: string;
 }

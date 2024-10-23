@@ -1,6 +1,14 @@
 import React from 'react';
 import { FaSun, FaMoon } from 'react-icons/fa';
-import { Theme, ButtonProps, NavButtonProps, ContentType, AudioType, NavItem } from './types';
+import {
+  Theme,
+  ButtonProps,
+  NavButtonProps,
+  ContentType,
+  AudioType,
+  NavItem,
+  LearningProject,
+} from './types';
 
 export const THEMES: readonly Theme[] = ['light', 'dark'];
 export const THEME_ICONS: Record<Theme, React.ReactElement> = {
@@ -8,7 +16,7 @@ export const THEME_ICONS: Record<Theme, React.ReactElement> = {
   dark: <FaMoon />,
 };
 
-export const ContentTypes: readonly ContentType[] = ['article', 'review', 'interview'];
+export const ContentTypes: readonly ContentType[] = ['article', 'review', 'project'];
 export const AudioTypes: readonly AudioType[] = ['composition', 'dataset', 'recording', 'theory'];
 
 export const navItems: NavItem[] = [
@@ -17,52 +25,85 @@ export const navItems: NavItem[] = [
   { label: 'Audio', href: '/audio' },
 ];
 
-export const learningProjects = [
+export const learningProjects: LearningProject[] = [
   {
+    id: 'zacharyr0th-com',
     title: 'zacharyr0th.com',
-    description: 'This website is fully open sourced and built with Next.js.',
+    description:
+      'This website is fully open-sourced and built with Next.js, showcasing modern web development practices.',
     technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
-    features: ['Responsive design', 'Dark mode', 'SEO optimization'],
-    articleLink: 'https://example.com/article1',
-    githubLink: 'https://github.com/yourusername/zacharyr0th.com',
+    features: ['Responsive design', 'Multiple Themes', 'SEO optimization', 'Content management'],
+    articleLink: 'https://zacharyr0th.com/projects/website',
+    githubLink: 'https://github.com/zacharyr0th/website',
+    demoLink: '',
+    lastUpdated: '2023-04-15',
   },
   {
-    title: 'simple-os',
-    description: 'A minimalist operating system built from scratch.',
-    technologies: ['C', 'Assembly', 'QEMU'],
-    features: ['Bootloader', 'Kernel', 'Basic shell'],
-    articleLink: 'https://example.com/article2',
-    githubLink: 'https://github.com/yourusername/simple-os',
+    id: 'simple-os',
+    title: 'SimpleOS',
+    description:
+      'A minimalist operating system built from scratch to understand low-level system architecture.',
+    technologies: ['C', 'Assembly', 'QEMU', 'Make'],
+    features: ['Bootloader', 'Kernel', 'Basic shell', 'Memory management', 'Interrupt handling'],
+    articleLink: 'https://zacharyr0th.com/projects/simple-os',
+    githubLink: 'https://github.com/zacharyr0th/simple-os',
+    demoLink: '',
+    lastUpdated: '2023-03-20',
   },
   {
-    title: 'casino-time',
-    description: 'Provably fair, permissionless gambling on the Aptos blockchain.',
-    technologies: ['Move', 'React', 'Aptos SDK'],
-    features: ['Smart contracts', 'Random number generation', 'User-friendly interface'],
-    articleLink: 'https://example.com/article3',
+    id: 'casino-time',
+    title: 'CasinoTime',
+    description: 'Provably fair, permissionless gambling platform on the Aptos blockchain.',
+    technologies: ['Move', 'React', 'Aptos SDK', 'Aptos Randomness', 'Zero-knowledge proofs'],
+    features: [
+      'Smart contracts',
+      'Random number generation',
+      'User-friendly interface',
+      'Multiple game types',
+    ],
+    articleLink: 'https://zacharyr0th.com/projects/casino-time',
+    githubLink: '',
+    demoLink: '',
+    lastUpdated: '2023-04-01',
   },
   {
-    title: 'muisc-ide',
-    description: 'An ai-assisted IDE for practicing, researching, and composing music.',
-    technologies: ['Electron', 'React', 'TensorFlow.js', 'Web Audio API'],
-    features: ['AI-powered suggestions', 'Real-time audio processing', 'Sheet music visualization'],
-    articleLink: 'https://example.com/article4',
-    githubLink: 'https://github.com/yourusername/muisc-ide',
+    id: 'music-ide',
+    title: 'MusicIDE',
+    description: 'An AI-assisted IDE for practicing, researching, and composing music.',
+    technologies: ['Electron', 'React', 'TensorFlow.js', 'Web Audio API', 'TypeScript'],
+    features: [
+      'AI-powered suggestions',
+      'Advanced Music Theory',
+      'Sheet music visualization',
+      'Knowledge Base',
+    ],
+    articleLink: 'https://zacharyr0th.com/projects/music-ide',
+    githubLink: '',
+    demoLink: '',
+    lastUpdated: '2023-03-10',
   },
   {
-    title: 'privvy',
-    description: 'A DEX with private transactions by default on the Aleo blockchain.',
-    technologies: ['Aleo', 'Zero-knowledge proofs', 'React'],
-    features: ['Private swaps', 'Liquidity pools', 'Decentralized order book'],
-    articleLink: 'https://example.com/article5',
+    id: 'privvy',
+    title: 'Privvy',
+    description:
+      'A decentralized exchange (DEX) with private transactions by default on the Aleo blockchain.',
+    technologies: ['Aleo', 'Zero-knowledge proofs', 'React', 'TypeScript'],
+    features: ['Private swaps', 'Liquidity pools'],
+    articleLink: 'https://zacharyr0th.com/projects/privvy',
+    githubLink: '',
+    demoLink: '',
+    lastUpdated: '2023-02-28',
   },
   {
-    title: 'toml-tools',
-    description: "Utilities for working with Electric Capital's crypto-ecosystems repo.",
-    technologies: ['Python', 'TOML', 'Git'],
-    features: ['TOML parsing', 'Ecosystem data analysis', 'Automated updates'],
-    articleLink: 'https://example.com/article6',
-    githubLink: 'https://github.com/yourusername/toml-tools',
+    id: 'toml-tools',
+    title: 'TOML Tools',
+    description: "Utilities for working with Electric Capital's crypto-ecosystems repository.",
+    technologies: ['Python', 'TOML', 'Git', 'GitHub Actions'],
+    features: ['TOML parsing', 'Web Scraping', 'Data analysis', 'Data visualization'],
+    articleLink: 'https://zacharyr0th.com/projects/toml-tools',
+    githubLink: 'https://github.com/zacharyroth/toml-tools',
+    demoLink: '',
+    lastUpdated: '2023-04-10',
   },
 ];
 
@@ -74,7 +115,7 @@ export const writingProjects = [
   },
   {
     title: 'Easy Money & Veblen Goods',
-    description: 'Second order effects of printing money.',
+    description: 'Second order effects of money printing.',
     link: 'https://example.com/minimalist-os',
   },
   {
@@ -108,6 +149,29 @@ export const SOCIAL_LINKS = {
   linkedin: 'https://linkedin.com/in/yourusername',
 };
 
+export const getTextColor = (backgroundColor: string): string => {
+  // Define an array of light background colors
+  const lightColors = [
+    'var(--color-background)',
+    'var(--color-surface)',
+    'var(--color-muted)',
+    'var(--color-subtle)',
+    'var(--color-privvy)',
+  ];
+
+  // Define an array of medium background colors
+  const mediumColors = ['var(--color-border)', 'var(--color-input)'];
+
+  if (lightColors.includes(backgroundColor)) {
+    return 'text-gray-900 dark:text-gray-100';
+  } else if (mediumColors.includes(backgroundColor)) {
+    return 'text-gray-100 dark:text-gray-900';
+  } else {
+    // For dark colors and any other colors not explicitly handled
+    return 'text-gray-100';
+  }
+};
+
 export const heroContent = {
   name: 'Zachary Roth',
   title: 'Head of Growth, DeFi & AI @ ',
@@ -116,17 +180,20 @@ export const heroContent = {
     {
       title: 'Ecosystem Analyst',
       content:
-        'Seasoned analyst and builder with experience across multiple hyper-growth blockchain ecosystems including Bitcoin, Ethereum, Solana, and Aptos.',
+        'Seasoned analyst and builder with experience across multiple hyper-growth blockchain ecosystems - Bitcoin, Ethereum, Solana, and Aptos.',
+      backgroundColor: 'var(--color-primary)',
     },
     {
       title: 'Market Strategist',
       content:
         'My work involves identifying market opportunities and guiding DeFi and AI teams on leveraging on-chain solutions to enhance their products and services. ',
+      backgroundColor: 'var(--color-secondary)',
     },
     {
       title: 'Writer',
       content:
         'I write about technology and finance, aiming to explain complex topics in an accessible way. You can find my articles here, alongside a few book reviews.',
+      backgroundColor: 'var(--color-accent)',
     },
   ],
   chainLogos: ['bitcoin', 'ethereum', 'solana', 'aptos'],
@@ -176,3 +243,15 @@ export const NavButton: React.FC<NavButtonProps> = ({ variant, children, ...prop
     {children}
   </button>
 );
+
+// Add this new constant
+export const VISIBLE_PROJECTS = 6;
+
+export const colorVariables = [
+  'var(--color-primary)',
+  'var(--color-secondary)',
+  'var(--color-accent)',
+  'var(--color-text-primary)',
+  'var(--color-text-secondary)',
+  'var(--color-surface)',
+] as const;

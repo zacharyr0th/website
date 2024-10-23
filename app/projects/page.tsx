@@ -17,7 +17,7 @@ export default function ProjectsPage() {
     >
       <Navigation setTheme={setTheme} />
       <div className="flex-grow px-4 sm:px-6 md:px-8 py-8">
-        <Hero />
+        <Hero theme={theme} setTheme={setTheme} />
       </div>
       <Footer />
     </main>

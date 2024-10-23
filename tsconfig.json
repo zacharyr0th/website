@@ -47,7 +47,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "lib/updateSheetMusicCatalog.mts",
-    "global.d.ts"
-, "../tailwind.config.ts"  ],
+    "global.d.ts",
+    "../tailwind.config.ts"
+  ],
   "exclude": ["node_modules"]
 }
