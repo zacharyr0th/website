@@ -4,11 +4,16 @@ import matter from 'gray-matter';
 import { marked } from 'marked';
 import { notFound } from 'next/navigation';
 import ArticleContent from './ArticleContent';
-import { Article } from '@/lib/types';
+import type { Article } from '@/lib/types';
 
 interface Frontmatter {
   title: string;
   date: string;
+  excerpt?: string;
+  image?: string;
+  imageAlt?: string;
+  category?: string;
+  featured?: boolean;
 }
 
 interface ArticleProps {
@@ -29,24 +34,22 @@ export default async function Article({ params }: ArticleProps) {
     
     const htmlContent = await marked.parse(content);
 
-    // Create an Article object that matches the Article type
     const article: Article = {
       id: slug,
       slug,
       title: frontmatter.title,
-      excerpt: '', // Add an excerpt if available
+      excerpt: frontmatter.excerpt || content.slice(0, 150) + '...',
       content: htmlContent,
       image: {
-        src: '', // Add image source if available
-        alt: '', // Add image alt text if available
+        src: frontmatter.image || '/misc/placeholder.webp',
+        alt: frontmatter.imageAlt || frontmatter.title,
       },
-      category: '', // Add category if available
+      category: frontmatter.category || 'Uncategorized',
       date: frontmatter.date,
       link: `/writing/${slug}`,
       frontmatter: {
-        title: frontmatter.title,
-        date: frontmatter.date,
-        // Add any other frontmatter fields you're using
+        ...frontmatter,
+        featured: frontmatter.featured || false,
       },
     };
 

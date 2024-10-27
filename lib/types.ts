@@ -205,6 +205,7 @@ export interface Article {
   frontmatter: {
     title: string;
     date: string;
+    featured: boolean;
     // Add any other frontmatter fields you might use
   };
 }

@@ -23,7 +23,7 @@ export default function WritingPage() {
     fetchData();
   }, []);
 
-  const featuredArticles = allArticles.filter(article => article.frontmatter?.featured).slice(0, 3);
+  const featuredArticles = allArticles.filter(article => article.frontmatter.featured).slice(0, 3);
   const primaryArticle = featuredArticles[0] || allArticles[0];
 
   const categories = ['all', ...Array.from(

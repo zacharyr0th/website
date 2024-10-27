@@ -27,7 +27,11 @@ export function getAllArticles(): Article[] {
       category: frontmatter.category || 'Uncategorized',
       date: frontmatter.date,
       link: `/writing/${slug}`,
-      frontmatter,
+      frontmatter: {
+        title: frontmatter.title,
+        date: frontmatter.date,
+        featured: frontmatter.featured || false,
+      },
     };
   });
 
