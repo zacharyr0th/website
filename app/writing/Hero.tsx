@@ -17,13 +17,23 @@ export default function Hero({ primaryArticle, featuredArticles, onRefresh }: He
       <div className="space-y-4">
         <div className="flex justify-between items-center mb-2">
           <h2 className="text-xl font-semibold text-text-primary">Random Selection</h2>
-          <button onClick={onRefresh} className="text-accent hover:text-accent-dark">
+          <button 
+            onClick={onRefresh} 
+            className="text-accent hover:text-accent-dark"
+            aria-label="Refresh random articles"
+          >
             <RefreshIcon className="w-5 h-5" />
           </button>
         </div>
-        {featuredArticles.map((article) => (
-          <ArticleCard key={article.id} article={article} variant="side" />
-        ))}
+        {featuredArticles.length === 0 ? (
+          <p className="text-text-secondary">No articles available.</p>
+        ) : (
+          <div className="space-y-4">
+            {featuredArticles.map((article) => (
+              <ArticleCard key={article.id} article={article} variant="side" />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

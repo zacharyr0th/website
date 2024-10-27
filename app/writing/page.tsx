@@ -18,12 +18,14 @@ export default function WritingPage() {
     async function fetchData() {
       const { allArticles } = await WritingPageServer();
       setAllContent(allArticles);
-      setRandomContent(getRandomContent(allArticles, 3));
+      // Make sure we pass non-featured articles to random selection
+      const nonFeaturedArticles = allArticles.filter(article => !article.frontmatter?.featured);
+      setRandomContent(getRandomContent(nonFeaturedArticles, 3));
     }
     fetchData();
   }, []);
 
-  const featuredContent = allContent.filter(item => item.frontmatter?.featured).slice(0, 3);
+  const featuredContent = allContent.filter(item => item.frontmatter?.featured);
   const primaryContent = featuredContent[0] || allContent[0];
 
   const tags = ['all', ...Array.from(
@@ -53,8 +55,8 @@ export default function WritingPage() {
         {primaryContent && (
           <div className="max-w-7xl mx-auto mb-12">
             <Hero
-              primaryArticle={convertToArticle(primaryContent)}
-              featuredArticles={featuredContent.map(convertToArticle)}
+              primaryArticle={primaryContent}
+              featuredArticles={randomContent}
               onRefresh={handleRefreshRandom}
             />
           </div>
@@ -73,8 +75,10 @@ export default function WritingPage() {
 }
 
 function getRandomContent(content: Article[], count: number): Article[] {
+  if (content.length === 0) return [];
   const shuffled = [...content].sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, count);
+  // Return all available articles if less than count
+  return shuffled.slice(0, Math.min(count, content.length));
 }
 
 function convertToArticle(content: Article): Article {

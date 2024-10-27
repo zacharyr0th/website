@@ -42,7 +42,7 @@ export default function ArticleContent({ article }: ArticleContentProps) {
             )}
           </figure>
         )}
-        <div className="bg-surface rounded-xl overflow-hidden shadow-lg border border-gray-700 p-8">
+        <div className="bg-background rounded-xl overflow-hidden">
           <div
             className="prose prose-lg max-w-none text-text-primary"
             dangerouslySetInnerHTML={{ __html: article.content }}
