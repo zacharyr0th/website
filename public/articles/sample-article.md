@@ -1,7 +1,9 @@
 ---
 title: "Sample Article"
 date: "2024-10-25"
-image: /public/misc/placeholder.webp
+image: /misc/placeholder.webp
+description: "This is a sample article that demonstrates how markdown files are rendered in our Next.js application."
+tags: ["sample"]
 ---
 
 # Sample Article

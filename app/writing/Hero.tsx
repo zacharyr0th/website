@@ -2,13 +2,13 @@ import React from 'react';
 import { Article } from '@/lib/types';
 import ArticleCard from './ArticleCard';
 
-interface HeroProps {
+type HeroProps = {
   primaryArticle: Article;
   featuredArticles: Article[];
   onRefresh: () => void;
-}
+};
 
-const Hero: React.FC<HeroProps> = ({ primaryArticle, featuredArticles, onRefresh }) => {
+export default function Hero({ primaryArticle, featuredArticles, onRefresh }: HeroProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div className="md:col-span-2">
@@ -27,7 +27,7 @@ const Hero: React.FC<HeroProps> = ({ primaryArticle, featuredArticles, onRefresh
       </div>
     </div>
   );
-};
+}
 
 const RefreshIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" {...props}>
@@ -39,5 +39,3 @@ const RefreshIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     />
   </svg>
 );
-
-export default Hero;

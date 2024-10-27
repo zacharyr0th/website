@@ -59,7 +59,19 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article, variant = 'default' 
       )}
       <div className={styles.content}>
         <h3 className={styles.title}>{article.title}</h3>
-        <p className={styles.excerpt}>{article.excerpt}</p>
+        <p className={styles.excerpt}>{article.description}</p>
+        {article.tags && article.tags.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-4">
+            {article.tags.map((tag) => (
+              <span
+                key={tag}
+                className="px-2 py-1 text-xs rounded-full bg-accent/10 text-accent"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
         <Link href={article.link} className={styles.link}>
           {variant === 'side' ? 'Read More' : 'Read Article'}
         </Link>

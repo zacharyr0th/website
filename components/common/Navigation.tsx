@@ -7,9 +7,8 @@ import { NavigationProps, NavItem } from '@/lib/types';
 import { navItems, NavButton } from '@/lib/constants';
 import ThemeSelector from './ThemeSelector';
 
-const Navigation: React.FC<NavigationProps> = ({ setTheme }) => {
+const Navigation: React.FC<NavigationProps> = ({ setTheme, showHomeButton = false }) => {
   const pathname = usePathname();
-  const showHomeButton = navItems.some((item) => item.href === pathname);
 
   return (
     <>
@@ -23,12 +22,12 @@ const Navigation: React.FC<NavigationProps> = ({ setTheme }) => {
           {navItems.map(({ label, href }: NavItem) => (
             <li key={label}>
               <Link href={href}>
-                <NavButton variant="secondary">{label}</NavButton>
+                <NavButton variant="secondary" active={pathname === href}>{label}</NavButton>
               </Link>
             </li>
           ))}
           <li>
-            <ThemeSelector setTheme={setTheme} />
+            <ThemeSelector setTheme={(theme) => setTheme(theme)} />
           </li>
         </ul>
       </nav>

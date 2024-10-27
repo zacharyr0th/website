@@ -2,12 +2,12 @@ import React from 'react';
 import { FaSun, FaMoon } from 'react-icons/fa';
 import {
   Theme,
-  ButtonProps,
-  NavButtonProps,
   ContentType,
   AudioType,
   NavItem,
   LearningProject,
+  ButtonProps,
+  NavButtonProps
 } from './types';
 
 export const THEMES: readonly Theme[] = ['light', 'dark'];
@@ -30,9 +30,9 @@ export const learningProjects: LearningProject[] = [
     id: 'zacharyr0th-com',
     title: 'zacharyr0th.com',
     description:
-      'This website is fully open-sourced and built with Next.js, showcasing modern web development practices.',
+      'This portfolio website is fully open-sourced and showcases modern web development practices. Fork it on Github, its easy to edit.',
     technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
-    features: ['Responsive design', 'Multiple Themes', 'SEO optimization', 'Content management'],
+    features: ['Responsive design', 'Multiple Color Schemes', 'SEO optimization', 'Content management'],
     articleLink: 'https://zacharyr0th.com/projects/website',
     githubLink: 'https://github.com/zacharyr0th/website',
     demoLink: '',
@@ -42,7 +42,7 @@ export const learningProjects: LearningProject[] = [
     id: 'simple-os',
     title: 'SimpleOS',
     description:
-      'A minimalist operating system built from scratch to understand low-level system architecture.',
+      'A minimalist operating system built from scratch. The intention was to better understand low-level system architecture.',
     technologies: ['C', 'Assembly', 'QEMU', 'Make'],
     features: ['Bootloader', 'Kernel', 'Basic shell', 'Memory management', 'Interrupt handling'],
     articleLink: 'https://zacharyr0th.com/projects/simple-os',
@@ -53,13 +53,14 @@ export const learningProjects: LearningProject[] = [
   {
     id: 'casino-time',
     title: 'CasinoTime',
-    description: 'Provably fair, permissionless gambling platform on the Aptos blockchain.',
-    technologies: ['Move', 'React', 'Aptos SDK', 'Aptos Randomness', 'Zero-knowledge proofs'],
+    description: 'Provably fair, permissionless gambling platform on the Aptos blockchain featuring verifiable randomness, zero-knowledge proofs and more.',
+    technologies: ['Move', 'React', 'Aptos Typescript SDK', 'Aptos Randomness', 'Zero-knowledge proofs'],
     features: [
       'Smart contracts',
-      'Random number generation',
+      'Randomness',
       'User-friendly interface',
-      'Multiple game types',
+      'Blackjack, Slots, Roullette',  
+      'Multi-player Poker',
     ],
     articleLink: 'https://zacharyr0th.com/projects/casino-time',
     githubLink: '',
@@ -69,13 +70,13 @@ export const learningProjects: LearningProject[] = [
   {
     id: 'music-ide',
     title: 'MusicIDE',
-    description: 'An AI-assisted IDE for practicing, researching, and composing music.',
+    description: 'An AI-assisted IDE for practicing, researching, and composing music. Think Cursor + Musescore + Synthesia.',
     technologies: ['Electron', 'React', 'TensorFlow.js', 'Web Audio API', 'TypeScript'],
     features: [
       'AI-powered suggestions',
       'Advanced Music Theory',
       'Sheet music visualization',
-      'Knowledge Base',
+      'Music Knowledge Base',      
     ],
     articleLink: 'https://zacharyr0th.com/projects/music-ide',
     githubLink: '',
@@ -86,7 +87,7 @@ export const learningProjects: LearningProject[] = [
     id: 'privvy',
     title: 'Privvy',
     description:
-      'A decentralized exchange (DEX) with private transactions by default on the Aleo blockchain.',
+      'A decentralized exchange (DEX) with private transactions implemented by default on the Aleo blockchain.',
     technologies: ['Aleo', 'Zero-knowledge proofs', 'React', 'TypeScript'],
     features: ['Private swaps', 'Liquidity pools'],
     articleLink: 'https://zacharyr0th.com/projects/privvy',
@@ -97,9 +98,9 @@ export const learningProjects: LearningProject[] = [
   {
     id: 'toml-tools',
     title: 'TOML Tools',
-    description: "Utilities for working with Electric Capital's crypto-ecosystems repository.",
-    technologies: ['Python', 'TOML', 'Git', 'GitHub Actions'],
-    features: ['TOML parsing', 'Web Scraping', 'Data analysis', 'Data visualization'],
+    description: "Various utilities for working with the .toml files in Electric Capital's crypto-ecosystems repository.",
+    technologies: ['Python', 'TOML', 'Data Analysis'],
+    features: ['TOML parsing', 'Data visualization', 'Report Generation'],
     articleLink: 'https://zacharyr0th.com/projects/toml-tools',
     githubLink: 'https://github.com/zacharyroth/toml-tools',
     demoLink: '',
@@ -144,9 +145,9 @@ export const SUPPORTED_FILE_TYPES = ['mp3', 'wav', 'ogg'];
 
 // Social media links
 export const SOCIAL_LINKS = {
-  twitter: 'https://twitter.com/yourusername',
-  github: 'https://github.com/yourusername',
-  linkedin: 'https://linkedin.com/in/yourusername',
+  twitter: 'https://twitter.com/zacharyr0th',
+  github: 'https://github.com/zacharyr0th',
+  linkedin: 'https://linkedin.com/in/zacharyr0th',
 };
 
 export const getTextColor = (backgroundColor: string): string => {
@@ -180,26 +181,26 @@ export const heroContent = {
     {
       title: 'Ecosystem Analyst',
       content:
-        'Experienced analyst and builder with a background in several rapidly growing blockchain ecosystems, including Bitcoin, Ethereum, Solana, and Aptos.',
+        'Curious analyst and builder with experience across the Bitcoin, Ethereum, Solana, and Aptos ecosystems.',
       backgroundColor: 'var(--color-primary)',
     },
     {
       title: 'Market Strategist',
       content:
-        'I focus on identifying market opportunities and advising DeFi and AI teams on how to utilize on-chain solutions to improve their products and services.',
+        'My focus involves identifying market opportunities and advising teams on how to utilize on-chain solutions to improve their products and services.',
       backgroundColor: 'var(--color-secondary)',
     },
     {
       title: 'Writer',
       content:
-        'I write about technology and finance, striving to make complex topics more understandable. My articles, along with some book reviews, can be found here.',
+        'I write about technology and finance, bringing a wide-ranging perspective to each topic. My articles and book reviews can be found here.',
       backgroundColor: 'var(--color-accent)',
     },
   ],
   chainLogos: ['bitcoin', 'ethereum', 'solana', 'aptos'],
 };
 
-export const Button: React.FC<ButtonProps> = ({ primary, secondary, children }) => (
+export const Button: React.FC<ButtonProps> = ({ primary, secondary, children, ...props }) => (
   <button
     className={`px-6 py-2 rounded-full transition-colors duration-300 ${
       primary
@@ -219,7 +220,7 @@ export const Button: React.FC<ButtonProps> = ({ primary, secondary, children }) 
   </button>
 );
 
-export const NavButton: React.FC<NavButtonProps> = ({ variant, children, ...props }) => (
+export const NavButton: React.FC<NavButtonProps> = ({ variant, children, active, ...props }) => (
   <button
     className={`px-4 py-2 rounded-full transition-all duration-300 ${
       variant === 'primary'
@@ -244,7 +245,6 @@ export const NavButton: React.FC<NavButtonProps> = ({ variant, children, ...prop
   </button>
 );
 
-// Add this new constant
 export const VISIBLE_PROJECTS = 6;
 
 export const colorVariables = [

@@ -3,31 +3,41 @@ import { Article } from '@/lib/types';
 import ArticleCard from './ArticleCard';
 
 interface ArchiveSectionProps {
-  categories: string[];
-  selectedCategory: string;
-  onCategoryChange: (category: string) => void;
-  articles?: Article[];
+  content: Article[];  // Changed from ContentItem[] to Article[]
+  tags: string[];
+  selectedTag: string;
+  onTagChange: (tag: string) => void;
 }
 
 const ArchiveSection: React.FC<ArchiveSectionProps> = ({
-  categories,
-  selectedCategory,
-  onCategoryChange,
-  articles = [],
-}) => (
-  <section className="mt-12">
-    <h3 className="text-2xl font-semibold mb-4 text-[var(--color-text-primary)]">Archives</h3>
-    <div className="flex justify-between items-center mb-8">
-      <CategoryButtons
-        categories={categories}
-        selectedCategory={selectedCategory}
-        onCategoryChange={onCategoryChange}
-      />
-      <SearchButton />
-    </div>
-    <ArticleGrid articles={articles} />
-  </section>
-);
+  selectedTag,
+  onTagChange,
+  content = [],
+}) => {
+  // Get unique tags from all articles
+  const allTags = React.useMemo(() => {
+    const tags = new Set(['all']);
+    content.forEach(article => {
+      article.tags.forEach(tag => tags.add(tag));
+    });
+    return Array.from(tags);
+  }, [content]);
+
+  return (
+    <section className="mt-12">
+      <h3 className="text-2xl font-semibold mb-4 text-[var(--color-text-primary)]">Archives</h3>
+      <div className="flex justify-between items-center mb-8">
+        <CategoryButtons
+          categories={allTags}
+          selectedCategory={selectedTag}
+          onCategoryChange={onTagChange}
+        />
+        <SearchButton />
+      </div>
+      <ArticleGrid articles={content} />
+    </section>
+  );
+};
 
 interface CategoryButtonsProps {
   categories: string[];

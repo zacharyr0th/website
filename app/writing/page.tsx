@@ -3,44 +3,44 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Navigation from '@/components/common/Navigation';
 import Footer from '@/components/common/Footer';
-import { Article, Theme } from '@/lib/types';
+import { ContentItem, Theme, Article } from '@/lib/types';
 import Hero from './Hero';
 import ArchiveSection from './ArchiveSection';
 import WritingPageServer from './WritingPageServer';
 
 export default function WritingPage() {
-  const [allArticles, setAllArticles] = useState<Article[]>([]);
+  const [allContent, setAllContent] = useState<Article[]>([]);
   const [theme, setTheme] = useState<Theme>('light');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [randomArticles, setRandomArticles] = useState<Article[]>([]);
+  const [selectedTag, setSelectedTag] = useState('all');
+  const [randomContent, setRandomContent] = useState<Article[]>([]);
 
   useEffect(() => {
     async function fetchData() {
       const { allArticles } = await WritingPageServer();
-      setAllArticles(allArticles);
-      setRandomArticles(getRandomArticles(allArticles, 3));
+      setAllContent(allArticles);
+      setRandomContent(getRandomContent(allArticles, 3));
     }
     fetchData();
   }, []);
 
-  const featuredArticles = allArticles.filter(article => article.frontmatter.featured).slice(0, 3);
-  const primaryArticle = featuredArticles[0] || allArticles[0];
+  const featuredContent = allContent.filter(item => item.frontmatter?.featured).slice(0, 3);
+  const primaryContent = featuredContent[0] || allContent[0];
 
-  const categories = ['all', ...Array.from(
-    new Set(allArticles.map((article) => article.category || 'Uncategorized'))
+  const tags = ['all', ...Array.from(
+    new Set(allContent.flatMap(item => item.tags || []))
   )];
 
-  const filteredArticles = selectedCategory === 'all'
-    ? allArticles
-    : allArticles.filter(article => article.category === selectedCategory);
+  const filteredContent = selectedTag === 'all'
+    ? allContent
+    : allContent.filter(item => item.tags?.includes(selectedTag));
 
-  const handleCategoryChange = useCallback((category: string) => {
-    setSelectedCategory(category);
+  const handleTagChange = useCallback((tag: string) => {
+    setSelectedTag(tag);
   }, []);
 
   const handleRefreshRandom = useCallback(() => {
-    setRandomArticles(getRandomArticles(allArticles, 3));
-  }, [allArticles]);
+    setRandomContent(getRandomContent(allContent, 3));
+  }, [allContent]);
 
   return (
     <main className="flex flex-col w-full min-h-screen font-mono">
@@ -50,21 +50,21 @@ export default function WritingPage() {
           Writing
         </h1>
 
-        {primaryArticle && (
+        {primaryContent && (
           <div className="max-w-7xl mx-auto mb-12">
             <Hero
-              primaryArticle={primaryArticle}
-              featuredArticles={randomArticles}
+              primaryArticle={convertToArticle(primaryContent)}
+              featuredArticles={featuredContent.map(convertToArticle)}
               onRefresh={handleRefreshRandom}
             />
           </div>
         )}
 
         <ArchiveSection
-          categories={categories}
-          selectedCategory={selectedCategory}
-          onCategoryChange={handleCategoryChange}
-          articles={filteredArticles}
+          tags={tags}
+          selectedTag={selectedTag}
+          onTagChange={handleTagChange}
+          content={filteredContent.map(convertToArticle)}
         />
       </div>
       <Footer />
@@ -72,7 +72,11 @@ export default function WritingPage() {
   );
 }
 
-function getRandomArticles(articles: Article[], count: number): Article[] {
-  const shuffled = [...articles].sort(() => 0.5 - Math.random());
+function getRandomContent(content: Article[], count: number): Article[] {
+  const shuffled = [...content].sort(() => 0.5 - Math.random());
   return shuffled.slice(0, count);
+}
+
+function convertToArticle(content: Article): Article {
+  return content;
 }

@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction } from 'react';
 export type ContentType = 'article' | 'review' | 'project';
 export type AudioType = 'composition' | 'dataset' | 'recording' | 'theory';
 export type Url = string & { readonly brand: unique symbol };
+export type Theme = 'light' | 'dark';
 
 type SEOData = {
   metaTitle?: string;
@@ -25,20 +26,28 @@ type BaseItem = {
   tags?: readonly string[];
 };
 
-export type ContentItem = BaseItem &
-  SEOData & {
-    type: ContentType;
-    pageViews: number;
-    subtitle?: string;
-    imageCaption?: string;
-    description?: string;
-    readTime?: number;
-    likes?: number;
-    comments?: number;
-    shares?: number;
-    bookAuthor?: string;
-    composer?: string;
+export type ContentItem = BaseItem & SEOData & {
+  type: ContentType;
+  pageViews: number;
+  subtitle?: string;
+  imageCaption?: string;
+  description: string;
+  readTime?: number;
+  likes?: number;
+  comments?: number;
+  shares?: number;
+  bookAuthor?: string;
+  composer?: string;
+  image: {
+    src: string;
+    alt: string;
   };
+  frontmatter?: {
+    title: string;
+    date: string;
+    featured: boolean;
+  };
+};
 
 export type AudioItem = BaseItem & {
   type: AudioType;
@@ -120,7 +129,8 @@ export type FeaturedWriting = FeaturedWritingItem[];
 export type FooterProps = {};
 
 export type NavigationProps = {
-  setTheme: React.Dispatch<React.SetStateAction<Theme>>;
+  setTheme: Dispatch<SetStateAction<Theme>>;
+  showHomeButton?: boolean;
 };
 
 export type NavItem = {
@@ -158,15 +168,9 @@ export type ButtonProps = {
   className?: string;
 };
 
-export type Theme = 'light' | 'dark';
-
-export type Direction = 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';
-
-export type NavButtonType = 'primary' | 'secondary' | 'tertiary';
-
-export interface NavButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant: 'primary' | 'secondary' | 'default';
-  children: React.ReactNode;
+export interface NavButtonProps extends ButtonProps {
+  variant: 'primary' | 'secondary';
+  active?: boolean;
 }
 
 // Add these new types
@@ -187,13 +191,16 @@ export type ProjectPanelsProps = {
 };
 
 export type HeroProps = {
-  theme: Theme;
+  primaryArticle: Article;
+  featuredArticles: Article[];
+  onRefresh: () => void;
 };
+
 export interface Article {
   id: string;
   slug: string;
   title: string;
-  excerpt: string;
+  description: string;
   content: string;
   image: {
     src: string;
@@ -202,10 +209,17 @@ export interface Article {
   category: string;
   date: string;
   link: string;
+  tags: readonly string[]; // Changed from string[] to match ContentItem's readonly string[]
   frontmatter: {
     title: string;
     date: string;
     featured: boolean;
-    // Add any other frontmatter fields you might use
   };
 }
+
+export type WritingProject = {
+  id: string;
+  title: string;
+  description: string;
+  link: string;
+};

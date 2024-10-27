@@ -6,6 +6,17 @@ import { Article } from '@/lib/types';
 
 const articlesDirectory = path.join(process.cwd(), 'public/articles');
 
+interface Frontmatter {
+  title: string;
+  date: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+  category?: string;
+  featured?: boolean;
+  tags?: string[];
+}
+
 export async function GET() {
   try {
     const articles = await getAllArticles();
@@ -29,7 +40,7 @@ async function getAllArticles(): Promise<Article[]> {
         id: slug,
         slug,
         title: frontmatter.title,
-        excerpt: frontmatter.excerpt || content.slice(0, 150) + '...',
+        description: frontmatter.description || content.slice(0, 150) + '...', // Changed from excerpt
         content,
         image: {
           src: frontmatter.image || '/public/misc/placeholder.webp',
@@ -37,6 +48,7 @@ async function getAllArticles(): Promise<Article[]> {
         },
         category: frontmatter.category || 'Uncategorized',
         date: frontmatter.date,
+        tags: frontmatter.tags || [], // Added tags
         link: `/writing/${slug}`,
         frontmatter: {
           title: frontmatter.title,

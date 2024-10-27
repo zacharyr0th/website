@@ -3,17 +3,18 @@ import path from 'path';
 import matter from 'gray-matter';
 import { marked } from 'marked';
 import { notFound } from 'next/navigation';
-import ArticleContent from './ArticleContent';
+import ArticleContent from '@/app/writing/[slug]/ArticleContent';
 import type { Article } from '@/lib/types';
 
 interface Frontmatter {
   title: string;
   date: string;
-  excerpt?: string;
+  description?: string;
   image?: string;
   imageAlt?: string;
   category?: string;
   featured?: boolean;
+  tags?: string[];
 }
 
 interface ArticleProps {
@@ -38,7 +39,7 @@ export default async function Article({ params }: ArticleProps) {
       id: slug,
       slug,
       title: frontmatter.title,
-      excerpt: frontmatter.excerpt || content.slice(0, 150) + '...',
+      description: frontmatter.description || content.slice(0, 150) + '...',
       content: htmlContent,
       image: {
         src: frontmatter.image || '/misc/placeholder.webp',
@@ -46,6 +47,7 @@ export default async function Article({ params }: ArticleProps) {
       },
       category: frontmatter.category || 'Uncategorized',
       date: frontmatter.date,
+      tags: frontmatter.tags || [],
       link: `/writing/${slug}`,
       frontmatter: {
         ...frontmatter,
