@@ -41,37 +41,43 @@ const StickyHeader: React.FC = () => (
       </a>
     </p>
     <div className="flex space-x-4">
-      <button
-        className="px-6 py-2 rounded-full transition-colors duration-300"
-        style={{
-          backgroundColor: 'var(--color-primary)',
-          color: 'var(--color-white)',
-          boxShadow: 'var(--box-shadow)',
-        }}
-      >
-        Connect
-      </button>
-      <Link href="/bio">
-        <button
-          className="px-6 py-2 rounded-full transition-colors duration-300"
-          style={{
-            backgroundColor: 'var(--color-surface)',
-            color: 'var(--color-text-secondary)',
-            border: '1px solid var(--color-secondary)',
-          }}
-        >
-          Bio
-        </button>
+      <Button variant="primary">Connect</Button>
+      <Link href="/bio" passHref>
+        <Button variant="secondary">Bio</Button>
       </Link>
     </div>
   </div>
 );
 
+const Button: React.FC<{ variant: 'primary' | 'secondary'; children: React.ReactNode }> = ({ variant, children }) => {
+  const styles = {
+    primary: {
+      backgroundColor: 'var(--color-primary)',
+      color: 'var(--color-white)',
+      boxShadow: 'var(--box-shadow)',
+    },
+    secondary: {
+      backgroundColor: 'var(--color-surface)',
+      color: 'var(--color-text-secondary)',
+      border: '1px solid var(--color-secondary)',
+    },
+  };
+
+  return (
+    <button
+      className={`px-6 py-2 rounded-full transition-colors duration-300`}
+      style={variant === 'primary' ? styles.primary : styles.secondary}
+    >
+      {children}
+    </button>
+  );
+};
+
 const MainContent: React.FC = memo(() => (
   <div className="ml-12 mr-6 mt-10">
-    {heroContent.sections.map((section, index) => (
+    {heroContent.sections.map((section) => (
       <ContentSection key={section.title} title={section.title} content={section.content}>
-        {index === 0 && <ChainLogos />}
+        {section.title === heroContent.sections[0].title && <ChainLogos />}
       </ContentSection>
     ))}
   </div>
@@ -108,8 +114,7 @@ const ChainLogo: React.FC<{ logo: string }> = memo(({ logo }) => (
       alt={`${logo.charAt(0).toUpperCase() + logo.slice(1)} Logo`}
       width={50}
       height={50}
-      className="object-contain"
-      style={logo === 'bitcoin' ? { transform: 'scale(2)' } : {}}
+      className={`object-contain ${logo === 'bitcoin' ? 'scale-[2]' : ''}`}
     />
   </div>
 ));

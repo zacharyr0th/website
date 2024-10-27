@@ -180,19 +180,19 @@ export const heroContent = {
     {
       title: 'Ecosystem Analyst',
       content:
-        'Seasoned analyst and builder with experience across multiple hyper-growth blockchain ecosystems - Bitcoin, Ethereum, Solana, and Aptos.',
+        'Experienced analyst and builder with a background in several rapidly growing blockchain ecosystems, including Bitcoin, Ethereum, Solana, and Aptos.',
       backgroundColor: 'var(--color-primary)',
     },
     {
       title: 'Market Strategist',
       content:
-        'My work involves identifying market opportunities and guiding DeFi and AI teams on leveraging on-chain solutions to enhance their products and services. ',
+        'I focus on identifying market opportunities and advising DeFi and AI teams on how to utilize on-chain solutions to improve their products and services.',
       backgroundColor: 'var(--color-secondary)',
     },
     {
       title: 'Writer',
       content:
-        'I write about technology and finance, aiming to explain complex topics in an accessible way. You can find my articles here, alongside a few book reviews.',
+        'I write about technology and finance, striving to make complex topics more understandable. My articles, along with some book reviews, can be found here.',
       backgroundColor: 'var(--color-accent)',
     },
   ],

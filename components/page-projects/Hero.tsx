@@ -4,20 +4,38 @@ import {
   learningProjects,
   Button,
   VISIBLE_PROJECTS,
-  colorVariables,
-  getTextColor,
 } from '@/lib/constants';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 import { ProjectsPageProps, ProjectPanelsProps, LearningProject } from '@/lib/types';
 
-const Hero: React.FC<ProjectsPageProps> = memo(() => {
+// Define color pairs for light mode
+const lightColorPairs = [
+  { background: 'var(--color-primary)', text: 'var(--color-white)' },
+  { background: 'var(--color-secondary)', text: 'var(--color-white)' },
+  { background: 'var(--color-accent)', text: 'var(--color-white)' },
+  { background: 'var(--color-surface)', text: 'var(--color-text-primary)' },
+  { background: 'var(--color-background)', text: 'var(--color-text-primary)' },
+];
+
+// Define color pairs for dark mode
+const darkColorPairs = [
+  { background: 'var(--color-primary)', text: 'var(--color-white)' },
+  { background: 'var(--color-secondary)', text: 'var(--color-white)' },
+  { background: 'var(--color-accent)', text: 'var(--color-white)' },
+  { background: 'var(--color-surface)', text: 'var(--color-text-primary)' },
+  { background: 'var(--color-background)', text: 'var(--color-text-primary)' },
+];
+
+const Hero: React.FC<ProjectsPageProps> = memo(({ theme }) => {
+  const colorPairs = theme === 'dark' ? darkColorPairs : lightColorPairs;
+
   return (
     <section className="flex flex-row min-h-screen bg-background">
       <div className="w-1/2 flex flex-col">
         <HeroContent />
       </div>
       <div className="w-1/2 relative h-screen overflow-hidden">
-        <ProjectPanels visibleProjects={VISIBLE_PROJECTS} />
+        <ProjectPanels visibleProjects={VISIBLE_PROJECTS} colorPairs={colorPairs} />
       </div>
     </section>
   );
@@ -43,7 +61,7 @@ const StickyHeader: React.FC = () => (
   </div>
 );
 
-const ProjectPanels: React.FC<ProjectPanelsProps> = ({ visibleProjects }) => {
+const ProjectPanels: React.FC<ProjectPanelsProps & { colorPairs: typeof lightColorPairs }> = ({ visibleProjects, colorPairs }) => {
   const [expandedPanel, setExpandedPanel] = useState(0);
   const [startIndex, setStartIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -78,9 +96,8 @@ const ProjectPanels: React.FC<ProjectPanelsProps> = ({ visibleProjects }) => {
         {learningProjects
           .slice(startIndex, startIndex + visibleProjects)
           .map((project: LearningProject, index: number) => {
-            const colorIndex = (startIndex + index) % colorVariables.length;
-            const bookColor = colorVariables[colorIndex];
-            const textColorClass = getTextColor(bookColor);
+            const colorIndex = (startIndex + index) % colorPairs.length;
+            const { background, text } = colorPairs[colorIndex];
 
             return (
               <div
@@ -89,7 +106,8 @@ const ProjectPanels: React.FC<ProjectPanelsProps> = ({ visibleProjects }) => {
                   expandedPanel === index ? 'flex-grow' : ''
                 }`}
                 style={{
-                  backgroundColor: bookColor,
+                  backgroundColor: background,
+                  color: text,
                   width: expandedPanel === index ? '300px' : `${bookWidth}px`,
                   minWidth: expandedPanel === index ? '300px' : `${bookWidth}px`,
                   transition: 'var(--transition-speed)',
@@ -101,14 +119,12 @@ const ProjectPanels: React.FC<ProjectPanelsProps> = ({ visibleProjects }) => {
                     expandedPanel === index ? 'block' : 'hidden'
                   }`}
                 >
-                  <h2 className={`text-2xl font-bold mb-4 ${textColorClass}`}>{project.title}</h2>
-                  <p className={`text-sm mb-6 ${textColorClass} opacity-90`}>
-                    {project.description}
-                  </p>
+                  <h2 className="text-2xl font-bold mb-4">{project.title}</h2>
+                  <p className="text-sm mb-6 opacity-90">{project.description}</p>
 
                   {/* Technologies section */}
-                  <div className={`mb-6 ${textColorClass}`}>
-                    <h3 className={`text-lg font-semibold mb-2 ${textColorClass}`}>Technologies</h3>
+                  <div className="mb-6">
+                    <h3 className="text-lg font-semibold mb-2">Technologies</h3>
                     <ul className="list-disc list-inside text-sm">
                       {project.technologies?.map((tech, i) => (
                         <li key={i}>{tech}</li>
@@ -117,8 +133,8 @@ const ProjectPanels: React.FC<ProjectPanelsProps> = ({ visibleProjects }) => {
                   </div>
 
                   {/* Key Features section */}
-                  <div className={`mb-6 ${textColorClass}`}>
-                    <h3 className={`text-lg font-semibold mb-2 ${textColorClass}`}>Key Features</h3>
+                  <div className="mb-6">
+                    <h3 className="text-lg font-semibold mb-2">Key Features</h3>
                     <ul className="list-disc list-inside text-sm">
                       {project.features?.map((feature, i) => (
                         <li key={i}>{feature}</li>
@@ -130,7 +146,7 @@ const ProjectPanels: React.FC<ProjectPanelsProps> = ({ visibleProjects }) => {
                   {project.articleLink && (
                     <Link
                       href={project.articleLink}
-                      className={`${textColorClass} hover:underline text-sm block mb-3 transition-colors duration-200 hover:text-accent`}
+                      className="hover:underline text-sm block mb-3 transition-opacity duration-200 hover:opacity-80"
                     >
                       Read Article
                     </Link>
@@ -138,7 +154,7 @@ const ProjectPanels: React.FC<ProjectPanelsProps> = ({ visibleProjects }) => {
                   {project.githubLink && (
                     <Link
                       href={project.githubLink}
-                      className={`${textColorClass} hover:underline text-sm block transition-colors duration-200 hover:text-accent`}
+                      className="hover:underline text-sm block transition-opacity duration-200 hover:opacity-80"
                     >
                       View on GitHub
                     </Link>
@@ -150,7 +166,7 @@ const ProjectPanels: React.FC<ProjectPanelsProps> = ({ visibleProjects }) => {
                   }`}
                 >
                   <span
-                    className={`${textColorClass} text-sm font-bold transform -rotate-90 whitespace-nowrap`}
+                    className="text-sm font-bold transform -rotate-90 whitespace-nowrap"
                   >
                     {project.title}
                   </span>
@@ -162,7 +178,7 @@ const ProjectPanels: React.FC<ProjectPanelsProps> = ({ visibleProjects }) => {
       {startIndex > 0 && (
         <Button
           onClick={handlePrev}
-          className="absolute left-2 bg-surface rounded-full p-2 shadow-md hover:bg-accent transition-colors duration-200"
+          className="absolute left-2 bg-surface rounded-full p-2 hover:bg-accent transition-colors duration-200"
         >
           <ChevronLeftIcon className="h-6 w-6 text-text-primary" />
         </Button>
@@ -170,7 +186,7 @@ const ProjectPanels: React.FC<ProjectPanelsProps> = ({ visibleProjects }) => {
       {startIndex < learningProjects.length - visibleProjects && (
         <Button
           onClick={handleNext}
-          className="absolute right-6 bg-surface rounded-full p-2 shadow-md hover:bg-accent transition-colors duration-200"
+          className="absolute right-6 bg-surface rounded-full p-2 hover:bg-accent transition-colors duration-200"
         >
           <ChevronRightIcon className="h-6 w-6 text-text-primary" />
         </Button>

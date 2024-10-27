@@ -3,40 +3,42 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Article } from '@/lib/types';
 
-type Variant = 'default' | 'featured' | 'side';
-
 interface ArticleCardProps {
   article: Article;
-  variant?: Variant;
+  variant?: 'default' | 'featured' | 'side';
 }
 
-const variantStyles: Record<Variant, {
+const variantStyles: Record<'default' | 'featured' | 'side', {
   card: string;
   imageContainer: string;
+  content: string;
   title: string;
   excerpt: string;
   link: string;
 }> = {
   default: {
-    card: 'bg-surface rounded-md shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300',
+    card: 'bg-surface rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300',
     imageContainer: 'w-full h-48 relative',
-    title: 'text-xl font-semibold mb-3 text-text-primary',
+    content: 'p-4',
+    title: 'text-xl font-semibold mb-2 text-text-primary',
     excerpt: 'text-text-secondary text-sm mb-4',
     link: 'inline-block px-4 py-2 bg-accent text-white rounded-md hover:bg-accent-dark transition-colors duration-200',
   },
   featured: {
-    card: 'bg-surface rounded-md overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full relative',
+    card: 'bg-surface rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300',
     imageContainer: 'w-full h-64 relative',
+    content: 'p-6',
     title: 'text-2xl font-bold mb-3 text-text-primary',
     excerpt: 'text-text-secondary mb-4',
     link: 'inline-block px-4 py-2 bg-accent text-white rounded-md hover:bg-accent-dark transition-colors duration-200',
   },
   side: {
-    card: 'group',
+    card: 'flex items-center space-x-4',
     imageContainer: 'hidden',
-    title: 'text-lg font-semibold mb-2 text-text-primary group-hover:text-accent transition-colors duration-200',
-    excerpt: 'text-text-secondary text-sm mb-2',
-    link: 'text-accent group-hover:text-accent-dark transition-colors duration-200 text-sm',
+    content: '',
+    title: 'text-lg font-semibold mb-1 text-text-primary',
+    excerpt: 'text-text-secondary text-sm',
+    link: 'text-accent hover:underline',
   },
 };
 
@@ -47,19 +49,19 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article, variant = 'default' 
     <div className={styles.card}>
       {variant !== 'side' && (
         <div className={styles.imageContainer}>
-          {article.image.startsWith('/') ? (
-            <Image src={article.image} alt={article.title} layout="fill" objectFit="cover" />
-          ) : (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={article.image} alt={article.title} className="w-full h-full object-cover" />
-          )}
+          <Image 
+            src={article.image.src} 
+            alt={article.image.alt} 
+            fill
+            style={{ objectFit: 'cover' }}
+          />
         </div>
       )}
-      <div className={variant === 'side' ? '' : 'p-6'}>
+      <div className={styles.content}>
         <h3 className={styles.title}>{article.title}</h3>
         <p className={styles.excerpt}>{article.excerpt}</p>
         <Link href={article.link} className={styles.link}>
-          {variant === 'side' ? 'Read more →' : 'Read Article'}
+          {variant === 'side' ? 'Read More' : 'Read Article'}
         </Link>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Newsletter = () => {
+const Newsletter: React.FC = () => {
   const [email, setEmail] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -25,8 +25,7 @@ const Newsletter = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              // Add this line to handle the extra attribute
-              data-np-autofill-field-type="email"
+              data-np-autofill-field-type="email" // Attribute for autofill handling
             />
             <button
               className="bg-[var(--color-accent)] text-[var(--color-text-primary)] px-4 py-2 rounded text-sm transition-colors duration-200 hover:bg-opacity-80"

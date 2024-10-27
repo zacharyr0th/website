@@ -191,12 +191,20 @@ export type HeroProps = {
 };
 export interface Article {
   id: string;
+  slug: string;
   title: string;
   excerpt: string;
   content: string;
-  image: string;
+  image: {
+    src: string;
+    alt: string;
+  };
   category: string;
   date: string;
-  slug: string;
   link: string;
+  frontmatter: {
+    title: string;
+    date: string;
+    // Add any other frontmatter fields you might use
+  };
 }

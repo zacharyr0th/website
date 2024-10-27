@@ -1,82 +1,78 @@
 'use client';
 
-import React, { useState, useMemo, useCallback, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState, useCallback } from 'react';
 import Navigation from '@/components/common/Navigation';
 import Footer from '@/components/common/Footer';
-import { Theme, Article } from '@/lib/types';
-import ArticleGrid from '@/components/page-writing/ArticleGrid';
-import Hero from '@/components/page-writing/Hero';
-import ArchiveSection from '@/components/page-writing/ArchiveSection';
-import { getFeaturedArticles, getAllArticles } from '@/lib/articleUtils';
+import { Article, Theme } from '@/lib/types';
+import Hero from './Hero';
+import ArchiveSection from './ArchiveSection';
+import WritingPageServer from './WritingPageServer';
 
 export default function WritingPage() {
+  const [allArticles, setAllArticles] = useState<Article[]>([]);
   const [theme, setTheme] = useState<Theme>('light');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [currentFeaturedIndex, setCurrentFeaturedIndex] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState('all');
   const [randomArticles, setRandomArticles] = useState<Article[]>([]);
 
-  const allArticles = useMemo(() => getAllArticles(), []);
-  const featuredArticles = useMemo(() => getFeaturedArticles(), []);
+  useEffect(() => {
+    async function fetchData() {
+      const { allArticles } = await WritingPageServer();
+      setAllArticles(allArticles);
+      setRandomArticles(getRandomArticles(allArticles, 3));
+    }
+    fetchData();
+  }, []);
 
-  const categories = useMemo(() => {
-    const uniqueCategories = Array.from(
-      new Set(allArticles.map((article) => article.category || 'Uncategorized'))
-    );
-    return ['all', ...uniqueCategories];
+  const featuredArticles = allArticles.filter(article => article.frontmatter?.featured).slice(0, 3);
+  const primaryArticle = featuredArticles[0] || allArticles[0];
+
+  const categories = ['all', ...Array.from(
+    new Set(allArticles.map((article) => article.category || 'Uncategorized'))
+  )];
+
+  const filteredArticles = selectedCategory === 'all'
+    ? allArticles
+    : allArticles.filter(article => article.category === selectedCategory);
+
+  const handleCategoryChange = useCallback((category: string) => {
+    setSelectedCategory(category);
+  }, []);
+
+  const handleRefreshRandom = useCallback(() => {
+    setRandomArticles(getRandomArticles(allArticles, 3));
   }, [allArticles]);
 
-  const filteredArticles = useMemo(
-    () =>
-      selectedCategory === 'all'
-        ? allArticles
-        : allArticles.filter((article) => article.category === selectedCategory),
-    [selectedCategory, allArticles]
-  );
-
-  const refreshRandomSelection = useCallback(() => {
-    const availableArticles = allArticles.filter(
-      (article) => article.id !== featuredArticles[currentFeaturedIndex].id
-    );
-    const newRandomArticles = availableArticles.sort(() => 0.5 - Math.random()).slice(0, 3);
-    setRandomArticles(newRandomArticles);
-  }, [allArticles, featuredArticles, currentFeaturedIndex]);
-
-  useEffect(() => {
-    refreshRandomSelection();
-  }, [refreshRandomSelection]);
-
   return (
-    <main className={`flex flex-col w-full min-h-screen font-mono ${theme}`}>
+    <main className="flex flex-col w-full min-h-screen font-mono">
       <Navigation setTheme={setTheme} />
       <div className="flex-grow container mx-auto px-24 py-24 max-w-6xl">
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-5xl font-bold mb-12 text-text-primary"
-        >
+        <h1 className="text-5xl font-bold mb-12 text-text-primary">
           Writing
-        </motion.h1>
+        </h1>
 
-        {featuredArticles.length > 0 && (
+        {primaryArticle && (
           <div className="max-w-7xl mx-auto mb-12">
             <Hero
-              primaryArticle={featuredArticles[currentFeaturedIndex]}
+              primaryArticle={primaryArticle}
               featuredArticles={randomArticles}
-              onRefreshRandomSelection={refreshRandomSelection}
-            />
-            <ArchiveSection
-              categories={categories}
-              selectedCategory={selectedCategory}
-              onCategoryChange={setSelectedCategory}
+              onRefresh={handleRefreshRandom}
             />
           </div>
         )}
 
-        <ArticleGrid articles={filteredArticles} />
+        <ArchiveSection
+          categories={categories}
+          selectedCategory={selectedCategory}
+          onCategoryChange={handleCategoryChange}
+          articles={filteredArticles}
+        />
       </div>
       <Footer />
     </main>
   );
+}
+
+function getRandomArticles(articles: Article[], count: number): Article[] {
+  const shuffled = [...articles].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
 }

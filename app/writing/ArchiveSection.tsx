@@ -35,11 +35,7 @@ interface CategoryButtonsProps {
   onCategoryChange: (category: string) => void;
 }
 
-const CategoryButtons: React.FC<CategoryButtonsProps> = ({
-  categories,
-  selectedCategory,
-  onCategoryChange,
-}) => (
+const CategoryButtons: React.FC<CategoryButtonsProps> = React.memo(({ categories, selectedCategory, onCategoryChange }) => (
   <div className="flex flex-wrap gap-2">
     {categories.map((category) => (
       <CategoryButton
@@ -51,7 +47,7 @@ const CategoryButtons: React.FC<CategoryButtonsProps> = ({
       </CategoryButton>
     ))}
   </div>
-);
+));
 
 interface CategoryButtonProps {
   children: React.ReactNode;
@@ -59,25 +55,27 @@ interface CategoryButtonProps {
   onClick: () => void;
 }
 
-const CategoryButton: React.FC<CategoryButtonProps> = ({ children, active, onClick }) => (
+const buttonStyles = `
+  px-4 py-2 rounded-lg text-sm transition-colors
+`;
+
+const CategoryButton: React.FC<CategoryButtonProps> = React.memo(({ children, active, onClick }) => (
   <button
     onClick={onClick}
-    className={`
-      px-4 py-2 rounded-lg text-sm transition-colors
-      ${
-        active
-          ? 'bg-[var(--color-primary)] text-[var(--color-white)]'
-          : 'bg-[var(--color-secondary)]/10 text-[var(--color-text-secondary)] hover:bg-[var(--color-secondary)]/20'
-      }
-    `}
+    className={`${buttonStyles} ${
+      active
+        ? 'bg-[var(--color-primary)] text-[var(--color-white)]'
+        : 'bg-[var(--color-secondary)]/10 text-[var(--color-text-secondary)] hover:bg-[var(--color-secondary)]/20'
+    }`}
+    aria-label={`Select category ${children}`}
   >
     {children}
   </button>
-);
+));
 
 const SearchButton: React.FC = () => (
   <button
-    className="px-4 py-2 rounded-lg text-sm transition-colors border border-[var(--color-text-secondary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-secondary)]/10"
+    className={`${buttonStyles} border border-[var(--color-text-secondary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-secondary)]/10`}
     aria-label="Search articles"
   >
     <SearchIcon className="w-5 h-5" />
@@ -105,7 +103,7 @@ interface ArticleGridProps {
   articles: Article[];
 }
 
-const ArticleGrid: React.FC<ArticleGridProps> = ({ articles }) => (
+const ArticleGrid: React.FC<ArticleGridProps> = React.memo(({ articles }) =>
   articles.length > 0 ? (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {articles.map((article) => (

@@ -16,6 +16,7 @@ const HeroBackground: React.FC = () => (
         will-change: transform;
       }
     `}</style>
+    
     <svg
       className="absolute inset-0 w-full h-full overflow-hidden"
       xmlns="http://www.w3.org/2000/svg"
@@ -32,13 +33,12 @@ const HeroBackground: React.FC = () => (
           />
           <feColorMatrix type="saturate" values="0.1" />
         </filter>
+        
         <pattern id="stainedGlass" width="200" height="200" patternUnits="userSpaceOnUse">
           <rect width="200" height="200" fill="#000" filter="url(#noise)" opacity="0.05" />
-          <polygon points="0,0 100,0 150,100 50,100" fill="url(#gradient1)" />
-          <polygon points="100,0 200,0 200,100 150,100" fill="url(#gradient2)" />
-          <polygon points="0,100 50,100 100,200 0,200" fill="url(#gradient3)" />
-          <polygon points="50,100 150,100 200,200 100,200" fill="url(#gradient4)" />
+          {generatePolygons()}
         </pattern>
+
         {['primary', 'secondary', 'accent', 'surface'].map((color, index) => (
           <linearGradient
             key={color}
@@ -53,6 +53,8 @@ const HeroBackground: React.FC = () => (
           </linearGradient>
         ))}
       </defs>
+
+      {/* Main animated rectangle */}
       <rect
         width="400%"
         height="400%"
@@ -61,8 +63,19 @@ const HeroBackground: React.FC = () => (
         x="-50%"
         y="-50%"
       />
-      <rect width="100%" height="100%" fill="rgba(0, 0, 0, 0.1)" />
+
+      {/* Overlay for darkening effect */}
+      <rect width="100%" height="100%" fill="rgba(0, 0, 0, 0.05)" />
     </svg>
+  </>
+);
+
+const generatePolygons = () => (
+  <>
+    <polygon points="0,0 100,0 150,100 50,100" fill="url(#gradient1)" />
+    <polygon points="100,0 200,0 200,100 150,100" fill="url(#gradient2)" />
+    <polygon points="0,100 50,100 100,200 0,200" fill="url(#gradient3)" />
+    <polygon points="50,100 150,100 200,200 100,200" fill="url(#gradient4)" />
   </>
 );
 

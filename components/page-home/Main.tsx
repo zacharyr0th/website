@@ -39,7 +39,7 @@ const Main: React.FC = () => (
                 </Link>
                 {project.githubLink && (
                   <Link href={project.githubLink} target="_blank" rel="noopener noreferrer">
-                    <NavButton variant="secondary">View on GitHub</NavButton>
+                    <NavButton variant="secondary" style={{ backgroundColor: 'var(--color-surface)', color: 'var(--color-text-on-secondary)' }}>View on GitHub</NavButton>
                   </Link>
                 )}
               </div>

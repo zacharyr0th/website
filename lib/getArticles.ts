@@ -31,7 +31,7 @@ export function getAllArticles(): Article[] {
     };
   });
 
-  return allArticles.sort((a, b) => (new Date(b.date) > new Date(a.date) ? -1 : 1));
+  return allArticles.sort((a, b) => (new Date(b.date) > new Date(a.date) ? 1 : -1));
 }
 
 export function getFeaturedArticles(): Article[] {
