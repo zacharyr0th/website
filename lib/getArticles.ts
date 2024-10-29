@@ -41,5 +41,5 @@ export function getAllArticles(): Article[] {
 
 export function getFeaturedArticles(): Article[] {
   const allArticles = getAllArticles();
-  return allArticles.filter(article => article.frontmatter?.featured).slice(0, 3);
+  return allArticles.filter((article) => article.frontmatter?.featured).slice(0, 3);
 }

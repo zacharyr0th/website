@@ -1,9 +1,9 @@
 ---
-title: "Blockchains in Africa"
-date: "2024-10-25"
+title: 'Blockchains in Africa'
+date: '2024-10-25'
 image: /images/ba-0.webp
 description: "Interesting tidbits about Africa's blockchain adoption."
-tags: ["Crypto"]
+tags: ['Crypto']
 ---
 
 # Blockchains in Africa: An Emerging Trend

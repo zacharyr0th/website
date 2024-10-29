@@ -18,7 +18,7 @@ export function getAllArticles(): Article[] {
       id: slug,
       slug,
       title: frontmatter.title,
-      description: frontmatter.excerpt || content.slice(0, 150) + '...', 
+      description: frontmatter.excerpt || content.slice(0, 150) + '...',
       content,
       image: {
         src: frontmatter.image || DEFAULT_IMAGE,
@@ -27,7 +27,7 @@ export function getAllArticles(): Article[] {
       category: frontmatter.category || 'Uncategorized',
       date: frontmatter.date,
       link: `/writing/${slug}`,
-      tags: frontmatter.tags || [], 
+      tags: frontmatter.tags || [],
       frontmatter: {
         title: frontmatter.title,
         date: frontmatter.date,
@@ -41,5 +41,5 @@ export function getAllArticles(): Article[] {
 
 export function getFeaturedArticles(): Article[] {
   const allArticles = getAllArticles();
-  return allArticles.filter(article => article.frontmatter.featured).slice(0, 3);
+  return allArticles.filter((article) => article.frontmatter.featured).slice(0, 3);
 }

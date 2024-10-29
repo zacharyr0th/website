@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import ErrorBoundaryClient from '@/components/common/ErrorBoundaryClient';
+import ErrorBoundaryClient from '@/app/components/common/ErrorBoundaryClient';
 import '@/styles/globals.css';
 
 export const metadata: Metadata = {

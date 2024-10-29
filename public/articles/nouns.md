@@ -1,9 +1,9 @@
 ---
-title: "Nouns"
-date: "2024-10-25"
+title: 'Nouns'
+date: '2024-10-25'
 image: /images/nouns-0.webp
-description: "They get more decentralized every day."
-tags: ["Crypto"]
+description: 'They get more decentralized every day.'
+tags: ['Crypto']
 ---
 
 import React from 'react';
@@ -11,8 +11,6 @@ import React from 'react';
 import { ContentItem } from '../../../lib/types';
 
 import Image from 'next/image';
-
-  
 
 export const metadata: ContentItem = {
 
@@ -53,8 +51,6 @@ content: '',
 language: 'en',
 
 };
-
-  
 
 const Nouns: React.FC = () => {
 
@@ -213,7 +209,5 @@ make it timeless? Who cares.
 );
 
 };
-
-  
 
 export default Nouns;

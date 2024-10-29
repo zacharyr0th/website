@@ -4,9 +4,9 @@ import React, { useState, memo } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import Navigation from '../../components/common/Navigation';
+import Navigation from '../components/common/Navigation';
 import { Theme } from '@/lib/types';
-import Footer from '../../components/common/Footer';
+import Footer from '../components/common/Footer';
 import { VISIBLE_PROJECTS, getTextColor } from '@/lib/constants';
 
 const categories = [

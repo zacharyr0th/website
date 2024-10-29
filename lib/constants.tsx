@@ -7,7 +7,7 @@ import {
   NavItem,
   LearningProject,
   ButtonProps,
-  NavButtonProps
+  NavButtonProps,
 } from './types';
 
 export const THEMES: readonly Theme[] = ['light', 'dark'];
@@ -32,7 +32,12 @@ export const learningProjects: LearningProject[] = [
     description:
       'This portfolio website is fully open-sourced and showcases modern web development practices. Fork it on Github, its easy to edit.',
     technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
-    features: ['Responsive design', 'Multiple Color Schemes', 'SEO optimization', 'Content management'],
+    features: [
+      'Responsive design',
+      'Multiple Color Schemes',
+      'SEO optimization',
+      'Content management',
+    ],
     articleLink: 'https://zacharyr0th.com/projects/website',
     githubLink: 'https://github.com/zacharyr0th/website',
     demoLink: '',
@@ -53,13 +58,20 @@ export const learningProjects: LearningProject[] = [
   {
     id: 'casino-time',
     title: 'CasinoTime',
-    description: 'Provably fair, permissionless gambling platform on the Aptos blockchain featuring verifiable randomness, zero-knowledge proofs and more.',
-    technologies: ['Move', 'React', 'Aptos Typescript SDK', 'Aptos Randomness', 'Zero-knowledge proofs'],
+    description:
+      'Provably fair, permissionless gambling platform on the Aptos blockchain featuring verifiable randomness, zero-knowledge proofs and more.',
+    technologies: [
+      'Move',
+      'React',
+      'Aptos Typescript SDK',
+      'Aptos Randomness',
+      'Zero-knowledge proofs',
+    ],
     features: [
       'Smart contracts',
       'Randomness',
       'User-friendly interface',
-      'Blackjack, Slots, Roullette',  
+      'Blackjack, Slots, Roullette',
       'Multi-player Poker',
     ],
     articleLink: 'https://zacharyr0th.com/projects/casino-time',
@@ -70,13 +82,14 @@ export const learningProjects: LearningProject[] = [
   {
     id: 'music-ide',
     title: 'MusicIDE',
-    description: 'An AI-assisted IDE for practicing, researching, and composing music. Think Cursor + Musescore + Synthesia.',
+    description:
+      'An AI-assisted IDE for practicing, researching, and composing music. Think Cursor + Musescore + Synthesia.',
     technologies: ['Electron', 'React', 'TensorFlow.js', 'Web Audio API', 'TypeScript'],
     features: [
       'AI-powered suggestions',
       'Advanced Music Theory',
       'Sheet music visualization',
-      'Music Knowledge Base',      
+      'Music Knowledge Base',
     ],
     articleLink: 'https://zacharyr0th.com/projects/music-ide',
     githubLink: '',
@@ -98,7 +111,8 @@ export const learningProjects: LearningProject[] = [
   {
     id: 'toml-tools',
     title: 'TOML Tools',
-    description: "Various utilities for working with the .toml files in Electric Capital's crypto-ecosystems repository.",
+    description:
+      "Various utilities for working with the .toml files in Electric Capital's crypto-ecosystems repository.",
     technologies: ['Python', 'TOML', 'Data Analysis'],
     features: ['TOML parsing', 'Data visualization', 'Report Generation'],
     articleLink: 'https://zacharyr0th.com/projects/toml-tools',
@@ -200,7 +214,7 @@ export const heroContent = {
   chainLogos: ['bitcoin', 'ethereum', 'solana', 'aptos'],
 };
 
-export const Button: React.FC<ButtonProps> = ({ primary, secondary, children, ...props }) => (
+export const Button: React.FC<ButtonProps> = ({ primary, secondary, children }) => (
   <button
     className={`px-6 py-2 rounded-full transition-colors duration-300 ${
       primary
@@ -220,7 +234,7 @@ export const Button: React.FC<ButtonProps> = ({ primary, secondary, children, ..
   </button>
 );
 
-export const NavButton: React.FC<NavButtonProps> = ({ variant, children, active, ...props }) => (
+export const NavButton: React.FC<NavButtonProps> = ({ variant, children, ...props }) => (
   <button
     className={`px-4 py-2 rounded-full transition-all duration-300 ${
       variant === 'primary'

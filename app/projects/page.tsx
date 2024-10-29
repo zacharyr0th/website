@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import Navigation from '../../components/common/Navigation';
+import Navigation from '../components/common/Navigation';
 import { Theme } from '@/lib/types';
 
-import Hero from '../../components/page-projects/Hero';
-import Footer from '../../components/common/Footer';
+import Hero from '../components/page-projects/Hero';
+import Footer from '../components/common/Footer';
 
 export default function ProjectsPage() {
   const [theme, setTheme] = useState<Theme>('light');

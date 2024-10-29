@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { THEME_ICONS, THEMES } from '@/lib/constants';
+import { THEME_ICONS } from '@/lib/constants';
 import { Theme } from '@/lib/types';
 
 type ThemeSelectorProps = {

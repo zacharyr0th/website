@@ -1,9 +1,9 @@
 ---
-title: "SimpleOS"
-date: "2024-10-25"
+title: 'SimpleOS'
+date: '2024-10-25'
 image: /images/simpleos-0.webp
 description: "Waiting in the airport because of Microsoft's BSOD, exploring the idea of multi-tiered kernels."
-tags: ["Tech"]
+tags: ['Tech']
 ---
 
 # A Simple Operating System
@@ -28,13 +28,13 @@ Like many security products, CrowdStrike's Falcon sensor operates at the kernel 
 
 A kernel is the core of an operating system, providing essential services to other programs. There are many different types of kernels, including monolithic, micro, hybrid, exo, and nano - all with their own pros and cons.
 
-| Type | Description | Pros | Cons |
-|------|-------------|------|------|
-| Monolithic Kernels | Run all OS services in kernel space | High performance, efficient | Large size, potential system-wide crashes |
-| Microkernels | Most services run in user space | Enhanced stability and security | Lower performance |
-| Hybrid Kernels | Balance between monolithic and microkernels | Optimized performance and modularity | Increased complexity |
-| Exokernels | Gives programs direct control instead of relying on the kernel | High performance, efficient | Increased complexity |
-| Nanokernels | Offer bare minimum services for hardware management | Minimal attack surface, highly specialized | Limited functionality, not suitable for general-purpose use |
+| Type               | Description                                                    | Pros                                       | Cons                                                        |
+| ------------------ | -------------------------------------------------------------- | ------------------------------------------ | ----------------------------------------------------------- |
+| Monolithic Kernels | Run all OS services in kernel space                            | High performance, efficient                | Large size, potential system-wide crashes                   |
+| Microkernels       | Most services run in user space                                | Enhanced stability and security            | Lower performance                                           |
+| Hybrid Kernels     | Balance between monolithic and microkernels                    | Optimized performance and modularity       | Increased complexity                                        |
+| Exokernels         | Gives programs direct control instead of relying on the kernel | High performance, efficient                | Increased complexity                                        |
+| Nanokernels        | Offer bare minimum services for hardware management            | Minimal attack surface, highly specialized | Limited functionality, not suitable for general-purpose use |
 
 ## Multi-Tier Kernels
 

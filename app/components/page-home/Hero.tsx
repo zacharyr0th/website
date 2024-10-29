@@ -49,7 +49,10 @@ const StickyHeader: React.FC = () => (
   </div>
 );
 
-const Button: React.FC<{ variant: 'primary' | 'secondary'; children: React.ReactNode }> = ({ variant, children }) => {
+const Button: React.FC<{ variant: 'primary' | 'secondary'; children: React.ReactNode }> = ({
+  variant,
+  children,
+}) => {
   const styles = {
     primary: {
       backgroundColor: 'var(--color-primary)',

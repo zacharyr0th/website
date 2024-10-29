@@ -17,12 +17,14 @@ const Navigation: React.FC<NavigationProps> = ({ setTheme, showHomeButton = fals
           <NavButton variant="secondary">Z</NavButton>
         </Link>
       )}
-      <nav className="fixed top-0 right-0 m-6 z-10">
+      <nav className="fixed top-0 right-0 m-8 z-10">
         <ul className="flex items-center space-x-2 text-sm">
           {navItems.map(({ label, href }: NavItem) => (
             <li key={label}>
               <Link href={href}>
-                <NavButton variant="secondary" active={pathname === href}>{label}</NavButton>
+                <NavButton variant="secondary" active={pathname === href}>
+                  {label}
+                </NavButton>
               </Link>
             </li>
           ))}

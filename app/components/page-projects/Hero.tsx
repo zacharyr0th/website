@@ -1,10 +1,6 @@
 import React, { memo, useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import {
-  learningProjects,
-  Button,
-  VISIBLE_PROJECTS,
-} from '@/lib/constants';
+import { learningProjects, Button, VISIBLE_PROJECTS } from '@/lib/constants';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 import { ProjectsPageProps, ProjectPanelsProps, LearningProject } from '@/lib/types';
 
@@ -61,7 +57,10 @@ const StickyHeader: React.FC = () => (
   </div>
 );
 
-const ProjectPanels: React.FC<ProjectPanelsProps & { colorPairs: typeof lightColorPairs }> = ({ visibleProjects, colorPairs }) => {
+const ProjectPanels: React.FC<ProjectPanelsProps & { colorPairs: typeof lightColorPairs }> = ({
+  visibleProjects,
+  colorPairs,
+}) => {
   const [expandedPanel, setExpandedPanel] = useState(0);
   const [startIndex, setStartIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -74,7 +73,7 @@ const ProjectPanels: React.FC<ProjectPanelsProps & { colorPairs: typeof lightCol
       const calculatedWidth = Math.floor(availableWidth / (visibleProjects - 1));
       setBookWidth(calculatedWidth);
     }
-  }, []);
+  }, [visibleProjects]);
 
   const handleNext = () => {
     setStartIndex((prevIndex) =>
@@ -165,9 +164,7 @@ const ProjectPanels: React.FC<ProjectPanelsProps & { colorPairs: typeof lightCol
                     expandedPanel === index ? 'hidden' : 'block'
                   }`}
                 >
-                  <span
-                    className="text-sm font-bold transform -rotate-90 whitespace-nowrap"
-                  >
+                  <span className="text-sm font-bold transform -rotate-90 whitespace-nowrap">
                     {project.title}
                   </span>
                 </div>

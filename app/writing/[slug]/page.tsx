@@ -32,7 +32,7 @@ export default async function Article({ params }: ArticleProps) {
     const fileContents = await fs.readFile(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
     const frontmatter = data as Frontmatter;
-    
+
     const htmlContent = await marked.parse(content);
 
     const article: Article = {
@@ -64,12 +64,12 @@ export default async function Article({ params }: ArticleProps) {
 
 export async function generateStaticParams() {
   const articlesDirectory = path.join(process.cwd(), 'public/articles');
-  
+
   try {
     const fileNames = await fs.readdir(articlesDirectory);
     return fileNames
-      .filter(fileName => fileName.endsWith('.md'))
-      .map(fileName => ({
+      .filter((fileName) => fileName.endsWith('.md'))
+      .map((fileName) => ({
         slug: fileName.replace(/\.md$/, ''),
       }));
   } catch (error) {

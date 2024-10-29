@@ -26,28 +26,29 @@ type BaseItem = {
   tags?: readonly string[];
 };
 
-export type ContentItem = BaseItem & SEOData & {
-  type: ContentType;
-  pageViews: number;
-  subtitle?: string;
-  imageCaption?: string;
-  description: string;
-  readTime?: number;
-  likes?: number;
-  comments?: number;
-  shares?: number;
-  bookAuthor?: string;
-  composer?: string;
-  image: {
-    src: string;
-    alt: string;
+export type ContentItem = BaseItem &
+  SEOData & {
+    type: ContentType;
+    pageViews: number;
+    subtitle?: string;
+    imageCaption?: string;
+    description: string;
+    readTime?: number;
+    likes?: number;
+    comments?: number;
+    shares?: number;
+    bookAuthor?: string;
+    composer?: string;
+    image: {
+      src: string;
+      alt: string;
+    };
+    frontmatter?: {
+      title: string;
+      date: string;
+      featured: boolean;
+    };
   };
-  frontmatter?: {
-    title: string;
-    date: string;
-    featured: boolean;
-  };
-};
 
 export type AudioItem = BaseItem & {
   type: AudioType;
@@ -126,7 +127,7 @@ export type FeaturedWritingItem = {
 
 export type FeaturedWriting = FeaturedWritingItem[];
 
-export type FooterProps = {};
+export type FooterProps = Record<string, never>;
 
 export type NavigationProps = {
   setTheme: Dispatch<SetStateAction<Theme>>;

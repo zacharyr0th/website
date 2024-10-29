@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { Article } from '@/lib/types';
-import ArticleCard from './ArticleCard';
+import dynamic from 'next/dynamic';
+
+const ArticleCard = dynamic(() => import('./ArticleCard'), { 
+  loading: () => <p>Loading...</p>
+});
 
 interface ArchiveSectionProps {
-  content: Article[];  // Changed from ContentItem[] to Article[]
+  content: Article[];
   tags: string[];
   selectedTag: string;
   onTagChange: (tag: string) => void;
@@ -13,15 +17,13 @@ const ArchiveSection: React.FC<ArchiveSectionProps> = ({
   selectedTag,
   onTagChange,
   content = [],
+  tags,
 }) => {
-  // Get unique tags from all articles
-  const allTags = React.useMemo(() => {
-    const tags = new Set(['all']);
-    content.forEach(article => {
-      article.tags.forEach(tag => tags.add(tag));
-    });
-    return Array.from(tags);
-  }, [content]);
+  const allTags = useMemo(() => {
+    return ['all', ...tags].filter((tag, index, self) => 
+      self.indexOf(tag) === index
+    );
+  }, [tags]);
 
   return (
     <section className="mt-12">
@@ -45,19 +47,22 @@ interface CategoryButtonsProps {
   onCategoryChange: (category: string) => void;
 }
 
-const CategoryButtons: React.FC<CategoryButtonsProps> = React.memo(({ categories, selectedCategory, onCategoryChange }) => (
-  <div className="flex flex-wrap gap-2">
-    {categories.map((category) => (
-      <CategoryButton
-        key={category}
-        active={category === selectedCategory}
-        onClick={() => onCategoryChange(category)}
-      >
-        {category.charAt(0).toUpperCase() + category.slice(1)}
-      </CategoryButton>
-    ))}
-  </div>
-));
+const CategoryButtons: React.FC<CategoryButtonsProps> = React.memo(
+  ({ categories, selectedCategory, onCategoryChange }) => (
+    <div className="flex flex-wrap gap-2">
+      {categories.map((category) => (
+        <CategoryButton
+          key={category}
+          active={category === selectedCategory}
+          onClick={() => onCategoryChange(category)}
+        >
+          {category.charAt(0).toUpperCase() + category.slice(1)}
+        </CategoryButton>
+      ))}
+    </div>
+  )
+);
+CategoryButtons.displayName = 'CategoryButtons';
 
 interface CategoryButtonProps {
   children: React.ReactNode;
@@ -69,30 +74,34 @@ const buttonStyles = `
   px-4 py-2 rounded-lg text-sm transition-colors
 `;
 
-const CategoryButton: React.FC<CategoryButtonProps> = React.memo(({ children, active, onClick }) => (
-  <button
-    onClick={onClick}
-    className={`${buttonStyles} ${
-      active
-        ? 'bg-[var(--color-primary)] text-[var(--color-white)]'
-        : 'bg-[var(--color-secondary)]/10 text-[var(--color-text-secondary)] hover:bg-[var(--color-secondary)]/20'
-    }`}
-    aria-label={`Select category ${children}`}
-  >
-    {children}
-  </button>
-));
+const CategoryButton: React.FC<CategoryButtonProps> = React.memo(
+  ({ children, active, onClick }) => (
+    <button
+      onClick={onClick}
+      className={`${buttonStyles} ${
+        active
+          ? 'bg-[var(--color-primary)] text-[var(--color-white)]'
+          : 'bg-[var(--color-secondary)]/10 text-[var(--color-text-secondary)] hover:bg-[var(--color-secondary)]/20'
+      }`}
+      aria-label={`Select category ${children}`}
+    >
+      {children}
+    </button>
+  )
+);
+CategoryButton.displayName = 'CategoryButton';
 
-const SearchButton: React.FC = () => (
+const SearchButton: React.FC = React.memo(() => (
   <button
     className={`${buttonStyles} border border-[var(--color-text-secondary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-secondary)]/10`}
     aria-label="Search articles"
   >
     <SearchIcon className="w-5 h-5" />
   </button>
-);
+));
+SearchButton.displayName = 'SearchButton';
 
-const SearchIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+const SearchIcon: React.FC<React.SVGProps<SVGSVGElement>> = React.memo((props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -107,22 +116,27 @@ const SearchIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
       d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
     />
   </svg>
-);
+));
+SearchIcon.displayName = 'SearchIcon';
 
 interface ArticleGridProps {
   articles: Article[];
 }
 
-const ArticleGrid: React.FC<ArticleGridProps> = React.memo(({ articles }) =>
-  articles.length > 0 ? (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {articles.map((article) => (
-        <ArticleCard key={article.id} article={article} />
+const ArticleGrid: React.FC<ArticleGridProps> = React.memo(({ articles }) => {
+  if (!articles.length) {
+    return <p className="text-[var(--color-text-secondary)]">No articles found.</p>;
+  }
+
+  return (
+    <div className="grid grid-cols-3 gap-4">
+      {articles.map((article, index) => (
+        <div key={index} className="p-4">
+          <ArticleCard article={article} />
+        </div>
       ))}
     </div>
-  ) : (
-    <p className="text-[var(--color-text-secondary)]">No articles found.</p>
-  )
-);
+  );
+});
 
 export default ArchiveSection;

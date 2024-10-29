@@ -16,7 +16,7 @@ const HeroBackground: React.FC = () => (
         will-change: transform;
       }
     `}</style>
-    
+
     <svg
       className="absolute inset-0 w-full h-full overflow-hidden"
       xmlns="http://www.w3.org/2000/svg"
@@ -33,7 +33,7 @@ const HeroBackground: React.FC = () => (
           />
           <feColorMatrix type="saturate" values="0.1" />
         </filter>
-        
+
         <pattern id="stainedGlass" width="200" height="200" patternUnits="userSpaceOnUse">
           <rect width="200" height="200" fill="#000" filter="url(#noise)" opacity="0.05" />
           {generatePolygons()}

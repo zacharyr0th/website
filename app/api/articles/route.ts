@@ -34,7 +34,9 @@ async function getAllArticles(): Promise<Article[]> {
       const slug = fileName.replace(/\.md$/, '');
       const fullPath = path.join(articlesDirectory, fileName);
       const fileContents = await fs.readFile(fullPath, 'utf8');
-      const { data: frontmatter, content } = matter(fileContents);
+      const matterResult = matter(fileContents);
+      const frontmatter = matterResult.data as Frontmatter;
+      const { content } = matterResult;
 
       return {
         id: slug,

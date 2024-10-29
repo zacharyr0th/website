@@ -1,29 +1,23 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
-import Navigation from '@/components/common/Navigation';
-import Footer from '@/components/common/Footer';
-import { Theme, Article } from '@/lib/types';
+import Footer from '@/app/components/common/Footer';
+import { Article } from '@/lib/types';
 
 interface ArticleContentProps {
   article: Article;
 }
 
 export default function ArticleContent({ article }: ArticleContentProps) {
-  const [theme, setTheme] = useState<Theme>('light');
-
   return (
     <main
-      className={`flex flex-col w-auto min-h-screen overflow-x-hidden font-mono ${theme}`}
+      className="flex flex-col w-auto min-h-screen overflow-x-hidden font-mono"
       style={{ backgroundColor: 'var(--color-background)' }}
     >
-      <Navigation setTheme={setTheme} showHomeButton={true} />
       <article className="flex-grow container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-24">
         <header className="mb-12">
-          <h1 className="text-5xl font-bold mb-4 text-text-primary">
-            {article.title}
-          </h1>
+          <h1 className="text-5xl font-bold mb-4 text-text-primary">{article.title}</h1>
           <p className="text-text-secondary">{article.date}</p>
         </header>
         {article.image && (

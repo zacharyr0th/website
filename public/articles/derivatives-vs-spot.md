@@ -1,9 +1,9 @@
 ---
-title: "Derivatives vs Spot"
-date: "2024-10-25"
+title: 'Derivatives vs Spot'
+date: '2024-10-25'
 image: /images/derivatives-0.webp
-description: "Who wins?"
-tags: ["Trading", "Crypto"]
+description: 'Who wins?'
+tags: ['Trading', 'Crypto']
 ---
 
 import React from 'react';
@@ -11,7 +11,6 @@ import React from 'react';
 import { ContentItem } from '../../../lib/types';
 
 import Image from 'next/image';
-
 
 export const metadata: ContentItem = {
 
@@ -42,8 +41,6 @@ readTime: 15,
 language: 'en',
 
 };
-
-  
 
 const Derivatives: React.FC = () => {
 
@@ -576,7 +573,5 @@ markets.
 );
 
 };
-
-  
 
 export default Derivatives;
