@@ -10,7 +10,12 @@
     "moduleResolution": "bundler",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@components/*": ["./components/*"],
+      "@styles/*": ["./styles/*"],
+      "@lib/*": ["./lib/*"],
+      "@utils/*": ["./utils/*"],
+      "@types/*": ["./types/*"]
     },
 
     // JavaScript Support
@@ -23,6 +28,23 @@
 
     // Type Checking
     "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "useUnknownInCatchVariables": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
 
@@ -31,8 +53,15 @@
     "esModuleInterop": true,
 
     // Type Declarations
-    "typeRoots": ["./node_modules/@types", "./types"],
-    "types": ["node", "react", "react-dom"],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"
+    ],
+    "types": [
+      "node",
+      "react",
+      "react-dom"
+    ],
 
     // Plugins
     "plugins": [
@@ -48,7 +77,7 @@
     ".next/types/**/*.ts",
     "lib/updateSheetMusicCatalog.mts",
     "global.d.ts",
-    "../tailwind.config.ts"
+    "tailwind.config.ts"
   ],
   "exclude": ["node_modules"]
 }

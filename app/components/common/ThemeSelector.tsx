@@ -33,7 +33,7 @@ const ThemeSelector: React.FC<ThemeSelectorProps> = ({ setTheme }) => {
   return (
     <button
       onClick={cycleTheme}
-      className="btn btn-primary text-2xl flex items-center justify-center rounded-full"
+      className="btn btn-primary text-2xl flex items-center justify-center rounded-full font-mono"
       style={{
         backgroundColor: 'var(--color-primary)',
         color: currentTheme === 'dark' ? 'var(--color-light)' : 'var(--color-background)',

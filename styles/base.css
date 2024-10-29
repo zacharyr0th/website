@@ -5,11 +5,11 @@
 @layer base {
   html {
     font-size: var(--font-size-base);
-    @apply h-full scroll-smooth;
+    @apply h-full scroll-smooth font-mono;
   }
 
   body {
-    @apply bg-background text-text-primary font-sans antialiased h-full m-0;
+    @apply bg-background text-text-primary font-mono antialiased h-full m-0;
     line-height: var(--line-height-base);
   }
 

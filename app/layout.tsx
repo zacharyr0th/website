@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import ErrorBoundaryClient from '@/app/components/common/ErrorBoundaryClient';
+import ThemeProvider from '@/app/components/common/ThemeProvider';
 import '@/styles/globals.css';
 
 export const metadata: Metadata = {
@@ -10,16 +11,16 @@ export const metadata: Metadata = {
   },
 };
 
-function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html>
+    <html lang="en">
       <body>
         <ErrorBoundaryClient>
-          <main>{children}</main>
+          <ThemeProvider>
+            <main>{children}</main>
+          </ThemeProvider>
         </ErrorBoundaryClient>
       </body>
     </html>
   );
 }
-
-export default RootLayout;

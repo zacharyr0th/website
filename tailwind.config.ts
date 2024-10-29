@@ -21,9 +21,7 @@ const config: Config = {
         warning: 'var(--color-warning)',
         info: 'var(--color-info)',
       },
-      fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-      },
+      
       fontSize: {
         base: 'var(--font-size-base)',
       },

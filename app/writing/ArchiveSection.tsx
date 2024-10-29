@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Article } from '@/lib/types';
 import dynamic from 'next/dynamic';
 
@@ -138,5 +138,6 @@ const ArticleGrid: React.FC<ArticleGridProps> = React.memo(({ articles }) => {
     </div>
   );
 });
+ArticleGrid.displayName = 'ArticleGrid';
 
 export default ArchiveSection;
