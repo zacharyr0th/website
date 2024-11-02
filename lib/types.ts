@@ -191,12 +191,6 @@ export type ProjectPanelsProps = {
   visibleProjects: number;
 };
 
-export type HeroProps = {
-  primaryArticle: Article;
-  featuredArticles: Article[];
-  onRefresh: () => void;
-};
-
 export interface Article {
   id: string;
   slug: string;
@@ -210,13 +204,19 @@ export interface Article {
   category: string;
   date: string;
   link: string;
-  tags: readonly string[]; // Changed from string[] to match ContentItem's readonly string[]
+  tags: readonly string[];
   frontmatter: {
     title: string;
     date: string;
     featured: boolean;
   };
 }
+
+export type HeroProps = {
+  primaryArticle: Article;
+  featuredArticles: Article[];
+  onRefresh: () => void;
+};
 
 export type WritingProject = {
   id: string;

@@ -34,7 +34,7 @@ const Navigation = ({ setTheme }: NavigationProps) => {
   ), [pathname]);
 
   const navClassNames = `
-    fixed top-0 right-0 m-8 z-10 p-3 rounded-xl 
+    fixed top-0 right-0 m-8 z-10  rounded-xl 
     transition-all duration-200
     ${isScrolled ? 'bg-background/75 backdrop-blur-lg shadow-xl' : ''}
   `.trim();

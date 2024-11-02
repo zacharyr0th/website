@@ -7,3 +7,11 @@
 @import './base.css';
 @import './utilities.css';
 @import './themes.css';
+
+body {
+  zoom: 0.9;
+}
+
+.content-spacing {
+  margin-top: var(--header-height);
+}

@@ -27,8 +27,8 @@ const HeroContent: React.FC = memo(() => (
 HeroContent.displayName = 'HeroContent';
 
 const StickyHeader: React.FC = () => (
-  <div className="h-screen flex flex-col justify-center sticky top-0 ml-12">
-    <h1 className="text-6xl font-bold leading-tight tracking-tighter mb-8 text-text-primary">
+  <div className="h-screen p-4 mb-12 flex flex-col justify-center sticky top-0 ml-12">
+    <h1 className="text-6xl font-bold leading-tight tracking-tighter mb-8 text-text-primary pt-4">
       {heroContent.name}
     </h1>
     <p className="text-lg mb-6 max-w-xl tracking-wide text-text-secondary">
@@ -78,9 +78,9 @@ const Button: React.FC<{ variant: 'primary' | 'secondary'; children: React.React
 
 const MainContent: React.FC = memo(() => (
   <div className="ml-12 mr-6 mt-10">
-    {heroContent.sections.map((section) => (
+    {heroContent.sections?.map((section) => (
       <ContentSection key={section.title} title={section.title} content={section.content}>
-        {section.title === heroContent.sections[0].title && <ChainLogos />}
+        {section.title === heroContent.sections?.[0]?.title && <ChainLogos />}
       </ContentSection>
     ))}
   </div>
