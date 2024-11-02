@@ -96,7 +96,13 @@ const ProjectPanels: React.FC<ProjectPanelsProps & { colorPairs: typeof lightCol
           .slice(startIndex, startIndex + visibleProjects)
           .map((project: LearningProject, index: number) => {
             const colorIndex = (startIndex + index) % colorPairs.length;
-            const { background, text } = colorPairs[colorIndex];
+            const colorPair = colorPairs[colorIndex];
+
+            if (!colorPair) {
+              return null; // or handle the error appropriately
+            }
+
+            const { background, text } = colorPair || { background: 'defaultBackground', text: 'defaultText' };
 
             return (
               <div
