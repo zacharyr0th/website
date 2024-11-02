@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 
-const Newsletter: React.FC = () => {
+const Newsletter: React.FC = memo(() => {
   const [email, setEmail] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault();
     console.log('Signing up with email:', email);
     setEmail('');
-  };
+  }, [email]);
 
   return (
-    <section className="bg-[var(--color-background)] py-16">
+    <section className="bg-[var(--color-background)] pt-16 pb-8">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8 text-[var(--color-text-primary)]">
           Subscribe for Updates
@@ -25,7 +25,7 @@ const Newsletter: React.FC = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              data-np-autofill-field-type="email" // Attribute for autofill handling
+              data-np-autofill-field-type="email"
             />
             <button
               className="bg-[var(--color-accent)] text-[var(--color-text-primary)] px-4 py-2 rounded text-sm transition-colors duration-200 hover:bg-opacity-80"
@@ -38,6 +38,6 @@ const Newsletter: React.FC = () => {
       </div>
     </section>
   );
-};
+});
 
 export default Newsletter;

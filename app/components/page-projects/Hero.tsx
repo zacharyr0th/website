@@ -102,7 +102,10 @@ const ProjectPanels: React.FC<ProjectPanelsProps & { colorPairs: typeof lightCol
               return null; // or handle the error appropriately
             }
 
-            const { background, text } = colorPair || { background: 'defaultBackground', text: 'defaultText' };
+            const { background, text } = colorPair || {
+              background: 'defaultBackground',
+              text: 'defaultText',
+            };
 
             return (
               <div
