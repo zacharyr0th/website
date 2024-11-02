@@ -21,7 +21,7 @@ const config: Config = {
         warning: 'var(--color-warning)',
         info: 'var(--color-info)',
       },
-      
+
       fontSize: {
         base: 'var(--font-size-base)',
       },

@@ -15,7 +15,7 @@ export const Footer: React.FC = () => {
   return (
     <footer className="bg-background text-sm py-8 px-6 mt-auto">
       <div className="container mx-auto flex flex-col items-center space-y-6">
-        <div className="flex items-center justify-center space-x-4 mb-2">
+        <div className="flex items-center justify-center space-x-4 mb-4">
           {socialLinks.map(({ href, Icon, label }) => (
             <Link
               key={href}

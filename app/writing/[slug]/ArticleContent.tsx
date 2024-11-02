@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { memo } from 'react';
 import Image from 'next/image';
 import Footer from '@/app/components/common/Footer';
 import { Article } from '@/lib/types';
@@ -9,22 +9,22 @@ interface ArticleContentProps {
   article: Article;
 }
 
-export default function ArticleContent({ article }: ArticleContentProps) {
+const ArticleContent: React.FC<ArticleContentProps> = memo(({ article }) => {
   return (
     <main
-      className="flex flex-col w-auto min-h-screen overflow-x-hidden font-mono"
+      className="flex flex-col w-full min-h-screen font-mono"
       style={{ backgroundColor: 'var(--color-background)' }}
     >
-      <article className="flex-grow container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-24">
+      <article className="flex-grow container mx-auto px-36 pt-36 pb-18 max-w-6xl">
         <header className="mb-12">
-          <h1 className="text-5xl font-bold mb-4 text-text-primary">{article.title}</h1>
+          <h1 className="text-5xl font-bold mb-12 text-text-primary">{article.title}</h1>
           <p className="text-text-secondary">{article.date}</p>
         </header>
         {article.image && (
           <figure className="mb-12">
             <Image
               src={article.image.src}
-              alt={article.image.alt}
+              alt={article.image.alt || 'Article image'}
               width={1200}
               height={600}
               className="rounded-xl shadow-lg"
@@ -46,4 +46,8 @@ export default function ArticleContent({ article }: ArticleContentProps) {
       <Footer />
     </main>
   );
-}
+});
+
+ArticleContent.displayName = 'ArticleContent';
+
+export default ArticleContent;

@@ -5,7 +5,7 @@ export type AudioType = 'composition' | 'dataset' | 'recording' | 'theory';
 export type Url = string & { readonly brand: unique symbol };
 export type Theme = 'light' | 'dark';
 
-type SEOData = {
+export type SEOData = {
   metaTitle?: string;
   metaDescription?: string;
   canonicalUrl?: Url;
@@ -15,7 +15,7 @@ type SEOData = {
   socialShareImage?: Url;
 };
 
-type BaseItem = {
+export type BaseItem = {
   id: string;
   slug: string;
   title: string;
@@ -174,7 +174,6 @@ export interface NavButtonProps extends ButtonProps {
   active?: boolean;
 }
 
-// Add these new types
 export type LearningProject = {
   id: string;
   title: string;

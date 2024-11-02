@@ -2,8 +2,8 @@ import React, { useMemo } from 'react';
 import { Article } from '@/lib/types';
 import dynamic from 'next/dynamic';
 
-const ArticleCard = dynamic(() => import('./ArticleCard'), { 
-  loading: () => <p>Loading...</p>
+const ArticleCard = dynamic(() => import('./ArticleCard'), {
+  loading: () => <p>Loading...</p>,
 });
 
 interface ArchiveSectionProps {
@@ -20,9 +20,7 @@ const ArchiveSection: React.FC<ArchiveSectionProps> = ({
   tags,
 }) => {
   const allTags = useMemo(() => {
-    return ['all', ...tags].filter((tag, index, self) => 
-      self.indexOf(tag) === index
-    );
+    return ['all', ...tags].filter((tag, index, self) => self.indexOf(tag) === index);
   }, [tags]);
 
   return (
