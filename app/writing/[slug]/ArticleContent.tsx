@@ -13,9 +13,9 @@ const ArticleContent: React.FC<ArticleContentProps> = memo(({ article }) => {
   return (
     <main
       className="flex flex-col w-full min-h-screen font-mono"
-      style={{ backgroundColor: 'var(--color-background)' }}
+      style={{ backgroundColor: 'var(--color-background)', padding: '2rem' }}
     >
-      <article className="flex-grow container mx-auto px-36 pt-36 pb-18 max-w-6xl">
+      <article className="flex-grow container mx-auto px-36 pt-36 pb-18 max-w-6xl space-y-12">
         <header className="mb-12">
           <h1 className="text-5xl font-bold mb-12 text-text-primary">{article.title}</h1>
           <p className="text-text-secondary">{article.date}</p>
@@ -39,6 +39,7 @@ const ArticleContent: React.FC<ArticleContentProps> = memo(({ article }) => {
         <div className="bg-background rounded-xl overflow-hidden">
           <div
             className="prose prose-lg max-w-none text-text-primary"
+            style={{ lineHeight: '1.75', marginBottom: '2rem' }}
             dangerouslySetInnerHTML={{ __html: article.content }}
           />
         </div>

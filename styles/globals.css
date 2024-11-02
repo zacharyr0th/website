@@ -15,3 +15,70 @@ body {
 .content-spacing {
   margin-top: var(--header-height);
 }
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 1.5em; /* Adjust as needed */
+  margin-bottom: 1.5em; /* Adjust as needed */
+}
+
+.prose {
+  max-width: 100%;
+  line-height: 1.75;
+  color: var(--color-text-primary);
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose p {
+  margin-bottom: 1em;
+}
+
+.prose img {
+  margin: 1em 0;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--box-shadow);
+}
+
+/* Add this to your globals.css file */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5em;
+}
+
+th, td {
+  padding: 0.75em;
+  text-align: left;
+  border-bottom: 1px solid var(--color-text-secondary);
+}
+
+th {
+  background-color: var(--color-surface);
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: var(--color-background);
+}
+
+tr:hover {
+  background-color: var(--color-accent);
+  color: var(--color-text-primary);
+}
+
+/* Add a thicker border to the right of the first column */
+th:first-child, td:first-child {
+  border-right: 1px solid var(--color-text-secondary);
+}
+
+.tldr-section {
+  background-color: var(--color-surface); /* Use a color variable or a specific color */
+  padding: 1em; /* Add padding for better readability */
+  border-radius: var(--border-radius-md); /* Optional: add rounded corners */
+  margin-bottom: 1.5em; /* Space it out from the next section */
+  color: var(--color-text-primary); /* Ensure text is readable */
+}
