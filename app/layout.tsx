@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   openGraph: {
     images: [{ url: '/profile-picture.webp', width: 256, height: 256, alt: 'Zachary Roth' }],
   },
+  metadataBase: new URL('https://zacharyr0th.com'),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

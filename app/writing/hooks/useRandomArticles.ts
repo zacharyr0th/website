@@ -17,7 +17,7 @@ export function useRandomArticles(articles: Article[], count: number) {
   // Initialize random articles when articles change
   useMemo(() => {
     refreshRandomArticles();
-  }, [articles, refreshRandomArticles]);
+  }, [refreshRandomArticles]);
 
   return { randomArticles, refreshRandomArticles };
 }

@@ -3,11 +3,14 @@ import React, { useState, useCallback, memo } from 'react';
 const Newsletter: React.FC = memo(() => {
   const [email, setEmail] = useState('');
 
-  const handleSubmit = useCallback((e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Signing up with email:', email);
-    setEmail('');
-  }, [email]);
+  const handleSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      console.log('Signing up with email:', email);
+      setEmail('');
+    },
+    [email]
+  );
 
   return (
     <section className="bg-[var(--color-background)] pt-16 pb-8">
@@ -39,5 +42,7 @@ const Newsletter: React.FC = memo(() => {
     </section>
   );
 });
+
+Newsletter.displayName = 'Newsletter';
 
 export default Newsletter;
