@@ -35,7 +35,7 @@ const PrimaryArticle = ({ article }: { article: Article }) => (
           />
         </div>
         <div className="mt-4 p-6">
-          {article.tags?.length > 0 && (
+          {article.tags && article.tags.length > 0 && (
             <div className="flex flex-wrap gap-1.5 mb-2" role="list" aria-label="Article tags">
               {article.tags.map((tag) => (
                 <span
@@ -78,7 +78,7 @@ const RandomSelection = ({
         <RefreshIcon className="w-8 h-8" />
       </button>
     </div>
-    <div className="space-y-2" role="list">
+    <div className="space-y-4" role="list">
       {articles.map((article) => (
         <FeaturedArticle key={article.id} article={article} />
       ))}
@@ -87,12 +87,12 @@ const RandomSelection = ({
 );
 
 const FeaturedArticle = ({ article }: { article: Article }) => (
-  <article role="listitem" className="h-40">
+  <article role="listitem" className="h-32">
     <Link
       href={article.link}
-      className="group flex gap-4 p-2 rounded-lg hover:bg-surface/50 transition-colors"
+      className="group flex gap-3 p-2 rounded-lg hover:bg-surface/50 transition-colors"
     >
-      <div className="relative w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden">
+      <div className="relative w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden">
         <Image src={article.image.src} alt={article.image.alt} fill className="object-cover" />
       </div>
       <div className="flex-1 min-w-0">

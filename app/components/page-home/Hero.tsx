@@ -28,7 +28,7 @@ HeroContent.displayName = 'HeroContent';
 
 const StickyHeader: React.FC = () => (
   <div className="h-screen p-4 mb-24 flex flex-col justify-center sticky top-0 ml-12">
-    <h1 className="text-6xl font-bold leading-tight tracking-tighter mb-8 text-text-primary pt-4">
+    <h1 className="text-6xl font-bold leading-tight tracking-tighter text-text-primary pt-24">
       {heroContent.name}
     </h1>
     <p className="text-lg mb-6 max-w-xl tracking-wide text-text-secondary">

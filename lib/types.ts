@@ -194,20 +194,27 @@ export interface Article {
   id: string;
   slug: string;
   title: string;
-  description: string;
+  subtitle?: string;
+  description?: string;
   content: string;
   image: {
     src: string;
     alt: string;
   };
-  category: string;
+  category?: string;
   date: string;
   link: string;
-  tags: readonly string[];
+  tags?: readonly string[];
   frontmatter: {
     title: string;
     date: string;
     featured: boolean;
+    subtitle?: string;
+    description?: string;
+    image?: string;
+    imageAlt?: string;
+    category?: string;
+    tags?: readonly string[];
   };
 }
 

@@ -5,49 +5,81 @@ import Image from 'next/image';
 import Footer from '@/app/components/common/Footer';
 import { Article } from '@/lib/types';
 
-interface ArticleContentProps {
-  article: Article;
-}
-
-const ArticleContent: React.FC<ArticleContentProps> = memo(({ article }) => {
-  return (
-    <main
-      className="flex flex-col w-full min-h-screen font-mono"
-      style={{ backgroundColor: 'var(--color-background)', padding: '2rem' }}
-    >
-      <article className="flex-grow container mx-auto px-36 pt-36 pb-18 max-w-6xl space-y-12">
-        <header className="mb-12">
-          <h1 className="text-5xl font-bold mb-12 text-text-primary">{article.title}</h1>
-          <p className="text-text-secondary">{article.date}</p>
-        </header>
-        {article.image && (
-          <figure className="mb-12">
-            <Image
-              src={article.image.src}
-              alt={article.image.alt || 'Article image'}
-              width={1200}
-              height={600}
-              className="rounded-xl shadow-lg"
-            />
-            {article.image.alt && (
-              <figcaption className="mt-2 text-center text-sm text-text-secondary">
-                {article.image.alt}
-              </figcaption>
-            )}
-          </figure>
+const ArticleContent = memo(({ article }: { article: Article }) => (
+  <main className="flex flex-col w-full min-h-screen font-mono" style={{
+    backgroundColor: 'var(--color-background)',
+    padding: 'var(--spacing-lg)',
+    fontFamily: 'var(--font-family-base)',
+  }}>
+    <article className="flex-grow container mx-auto px-48 pt-16 pb-18 max-w-5xl space-y-12 prose">
+      <header className="mb-12">
+        <h1 className="text-5xl mb-4" style={{ color: 'var(--color-text-primary)' }}>
+          {article.title}
+        </h1>
+        {article.subtitle && (
+          <h2 className="text-3xl font-thin mb-4" style={{ color: 'var(--color-text-secondary)' }}>
+            {article.subtitle}
+          </h2>
         )}
-        <div className="bg-background rounded-xl overflow-hidden">
-          <div
-            className="prose prose-lg max-w-none text-text-primary"
-            style={{ lineHeight: '1.75', marginBottom: '2rem' }}
-            dangerouslySetInnerHTML={{ __html: article.content }}
-          />
+        <div className="flex items-center">
+          <p style={{ color: 'var(--color-text-secondary)' }}>{article.date}</p>
+          {article.tags && (
+            <ul className="flex space-x-2 ml-4">
+              {article.tags.map((tag, index) => (
+                <li
+                  key={index}
+                  className="text-sm bg-gray-200 rounded-full px-3 py-1"
+                  style={{ color: 'var(--color-text-secondary)', backgroundColor: 'var(--color-surface)' }}
+                >
+                  {tag}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
-      </article>
-      <Footer />
-    </main>
-  );
-});
+      </header>
+      {article.image && (
+        <figure className="mb-12">
+          <Image
+            src={article.image.src}
+            alt={article.image.alt || 'Article image'}
+            width={1200}
+            height={600}
+            className="rounded-xl shadow-lg"
+          />
+        </figure>
+      )}
+      <div className="bg-background rounded-xl overflow-hidden">
+        <div
+          className="prose prose-lg max-w-none"
+          style={{
+            color: 'var(--color-text-primary)',
+            lineHeight: 'var(--line-height-base)',
+            marginBottom: 'var(--spacing-lg)',
+          }}
+          dangerouslySetInnerHTML={{ __html: article.content }}
+        />
+      </div>
+    </article>
+    <Footer />
+    <style jsx global>{`
+      .prose a {
+        text-decoration: underline;
+        color: var(--color-accent);
+      }
+      .prose ol {
+        list-style-type: decimal;
+        margin-left: 2em;
+        padding-left: 0.5em;
+      }
+      .prose ol li {
+        margin-bottom: 0.5em;
+        color: var(--color-text-primary);
+        line-height: 1.5;
+      }
+    `}</style>
+  </main>
+));
 
 ArticleContent.displayName = 'ArticleContent';
 

@@ -6,41 +6,23 @@ import { notFound } from 'next/navigation';
 import ArticleContent from '@/app/writing/[slug]/ArticleContent';
 import type { Article } from '@/lib/types';
 
-interface Frontmatter {
-  title: string;
-  date: string;
-  description?: string;
-  image?: string;
-  imageAlt?: string;
-  category?: string;
-  featured?: boolean;
-  tags?: string[];
-}
+const articlesDirectory = path.join(process.cwd(), 'public/articles');
 
-interface ArticleProps {
-  params: {
-    slug: string;
-  };
-}
-
-export default async function Article({ params }: ArticleProps) {
-  const { slug } = params;
-  const articlesDirectory = path.join(process.cwd(), 'public/articles');
-  const fullPath = path.join(articlesDirectory, `${slug}.md`);
-
+export default async function Article({ params: { slug } }: { params: { slug: string } }) {
   try {
-    const fileContents = await fs.readFile(fullPath, 'utf8');
+    const fileContents = await fs.readFile(path.join(articlesDirectory, `${slug}.md`), 'utf8');
     const { data, content } = matter(fileContents);
-    const frontmatter = data as Frontmatter;
-
-    const htmlContent = await marked.parse(content);
+    
+    // Cast frontmatter to match Article's frontmatter structure
+    const frontmatter = data as Article['frontmatter'];
 
     const article: Article = {
       id: slug,
       slug,
       title: frontmatter.title,
+      subtitle: frontmatter.subtitle || 'No subtitle available',
       description: frontmatter.description || content.slice(0, 150) + '...',
-      content: htmlContent,
+      content: await marked.parse(content),
       image: {
         src: frontmatter.image || '/misc/placeholder.webp',
         alt: frontmatter.imageAlt || frontmatter.title,
@@ -50,8 +32,15 @@ export default async function Article({ params }: ArticleProps) {
       tags: frontmatter.tags || [],
       link: `/writing/${slug}`,
       frontmatter: {
-        ...frontmatter,
+        title: frontmatter.title,
+        date: frontmatter.date,
         featured: frontmatter.featured || false,
+        ...(frontmatter.subtitle && { subtitle: frontmatter.subtitle }),
+        ...(frontmatter.description && { description: frontmatter.description }),
+        ...(frontmatter.image && { image: frontmatter.image }),
+        ...(frontmatter.imageAlt && { imageAlt: frontmatter.imageAlt }),
+        ...(frontmatter.category && { category: frontmatter.category }),
+        ...(frontmatter.tags && { tags: frontmatter.tags }),
       },
     };
 
@@ -63,13 +52,11 @@ export default async function Article({ params }: ArticleProps) {
 }
 
 export async function generateStaticParams() {
-  const articlesDirectory = path.join(process.cwd(), 'public/articles');
-
   try {
     const fileNames = await fs.readdir(articlesDirectory);
     return fileNames
-      .filter((fileName) => fileName.endsWith('.md'))
-      .map((fileName) => ({
+      .filter(fileName => fileName.endsWith('.md'))
+      .map(fileName => ({
         slug: fileName.replace(/\.md$/, ''),
       }));
   } catch (error) {

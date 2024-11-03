@@ -12,7 +12,7 @@ export default function ProjectsPage() {
 
   return (
     <main
-      className={`flex flex-col w-auto min-h-screen overflow-x-hidden font-mono ${theme}`}
+      className={`mt-8 flex flex-col w-auto min-h-screen overflow-x-hidden font-mono ${theme}`}
       style={{ backgroundColor: 'var(--color-background)' }}
     >
       <Navigation setTheme={setTheme} />

@@ -43,7 +43,7 @@ export default function WritingPage() {
 
   return (
     <main className="flex flex-col w-full min-h-screen font-mono">
-      <div className="flex-grow container mx-auto px-36 pt-36 pb-18 max-w-6xl">
+      <div className="flex-grow container mx-auto px-48 pt-36 pb-18 max-w-5xl">
         <h1 className="text-5xl font-bold mb-12 text-text-primary">Writing</h1>
 
         {primaryContent && (

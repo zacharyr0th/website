@@ -25,6 +25,7 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 100%;
   line-height: 1.75;
   color: var(--color-text-primary);
+  @apply font-mono;
 }
 
 .prose h1, .prose h2, .prose h3, .prose h4 {
@@ -48,6 +49,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 1.5em;
+  @apply font-mono;
 }
 
 th, td {
@@ -81,4 +83,5 @@ th:first-child, td:first-child {
   border-radius: var(--border-radius-md); /* Optional: add rounded corners */
   margin-bottom: 1.5em; /* Space it out from the next section */
   color: var(--color-text-primary); /* Ensure text is readable */
+  @apply font-mono;
 }
