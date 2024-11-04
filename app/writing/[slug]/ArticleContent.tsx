@@ -11,7 +11,7 @@ const ArticleContent = memo(({ article }: { article: Article }) => (
     padding: 'var(--spacing-lg)',
     fontFamily: 'var(--font-family-base)',
   }}>
-    <article className="flex-grow container mx-auto px-48 pt-16 pb-18 max-w-5xl space-y-12 prose">
+    <article className="flex-grow container mx-auto px-48 pt-16 pb-8 max-w-5xl prose">
       <header className="mb-12">
         <h1 className="text-5xl mb-4" style={{ color: 'var(--color-text-primary)' }}>
           {article.title}
@@ -39,7 +39,7 @@ const ArticleContent = memo(({ article }: { article: Article }) => (
         </div>
       </header>
       {article.image && (
-        <figure className="mb-12">
+        <figure className="mb-12 flex justify-center">
           <Image
             src={article.image.src}
             alt={article.image.alt || 'Article image'}
@@ -55,7 +55,7 @@ const ArticleContent = memo(({ article }: { article: Article }) => (
           style={{
             color: 'var(--color-text-primary)',
             lineHeight: 'var(--line-height-base)',
-            marginBottom: 'var(--spacing-lg)',
+            marginBottom: '0',
           }}
           dangerouslySetInnerHTML={{ __html: article.content }}
         />
@@ -66,6 +66,10 @@ const ArticleContent = memo(({ article }: { article: Article }) => (
       .prose a {
         text-decoration: underline;
         color: var(--color-accent);
+      }
+      .prose img {
+        margin-left: auto;
+        margin-right: auto;
       }
       .prose ol {
         list-style-type: decimal;

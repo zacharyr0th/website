@@ -2,212 +2,68 @@
 title: 'Nouns'
 date: '2024-10-25'
 image: /images/nouns-0.webp
-description: 'They get more decentralized every day.'
+subtitle: There is a new one every day.
+description: 'There is a new one every day.'
 tags: ['Crypto']
 ---
 
-import React from 'react';
+<style jsx>{`
+ .prose a {
+    text-decoration: underline;
+    color: var(--color-accent);
+ }
+ .prose ol {
+    list-style-type: decimal;
+    margin-left: 2em; /* Adjust as needed for indentation */
+    padding-left: 0.5em; /* Add padding if needed */
+ }
+ .prose ol li {
+    margin-bottom: 0.5em;
+    color: var(--color-text-primary);
+    line-height: 1.5; /* Adjust line height for better readability */
+ }
+`}</style>
 
-import { ContentItem } from '../../../lib/types';
+<div class="tldr-section">
 
-import Image from 'next/image';
+What do NounsDAO & John Cage have in common?
 
-export const metadata: ContentItem = {
+</div>
 
-id: 'nounsDAO',
+In 1985, contemporary composer John Cage wrote a solo piano piece called ASLSP (As Slow as Possible) that can last anywhere from 20 to 70 minutes. In 1987, Cage adapted it for organ, and in 2001 - 9 years after Cage's passing, a small German church constructed a customized organ to perform this piece over the next 639 years. The organizers chose this duration as that was the age of the church in question. The most recent notes, G# & E, were on September 5, 2020, and the next note, G#, will occur on February 5, 2022. The final note will take place on September 5, 2640. There will also be a new Noun auctioned off that day.
 
-slug: 'nounsDAO',
+NounsDAO is an NFT project built on Ethereum that harnesses time as a method of distribution and decentralization. Each Noun is a generative 32x32 pixel NFT comprising people, places, and things. Their features are chosen randomly and controlled by a smart contract that transfers the Noun to the winning bidder's wallet while simultaneously creating a new Noun for auction 24 hours later. 100% of the auction proceeds are deposited into the NounsDAO Treasury and governed by the collective of Noun NFT holders. At the time of writing, 24 Nouns control 3260.6022 Ethereum ($11,003,847.70 at a current ETH price of $3,374.79).
 
-title: 'NounsDAO',
+![NounsDAO](/images/nouns-3.webp)
 
-subtitle: 'The answer is time.',
+Since 100% of auction revenue gets deposited into the Treasury, the founders (Nounders) will be gifted every 10th Noun for the first five years.
 
-image: '/images/articles/nouns-1.webp',
+Rather than having a typical centralized command center, NounsDAO intends to enable all participants to have a substantial stake and say in a project's trajectory. With each passing day, the NounsDAO Treasury gets slightly more decentralized, and the previous Noun owners' say gets slightly more diluted.
 
-imageCaption: 'NounsDAO logo and John Cage portrait',
+## On-Chain Features
 
-pageViews: 0,
+To do everything that NounsDAO is doing, you need blockchain technology. Smart contracts govern the distribution and governance of the protocol and proposals to the NounsDAO, which require at least 5% of Nouns to be involved. Proposers can be one person, or it can be a group of people who all own Nouns. With a current average price of 135.86 ETH ($458,493.654), you need at least 679.29 ETH ($2,292,468.27) worth of Noun NFTs to submit a proposal.
 
-type: 'article',
+These proposals can be anything from donating to charities to changing the Nouns supply required to submit proposals. Given that this project is barely three weeks old, the community is still new, and the DAO has not had much time to submit and enact proposals.
 
-description: '',
+Although they have succeeded in doling out a total of 30 ETH ($101,243.70) to 6 different charities, and you can see that the 30 ETH have been disbursed in the internal transactions tab on the NounsDAO Treasury address on Etherscan. It's too bad governments don't have a public ledger for spending our money.
 
-author: 'Zachary Roth',
+![NounsDAO](/images/nouns-4.webp)
 
-date: '2021-08-31',
+## Derivatives
 
-tags: ['Blockchain', 'NFTs'],
+Below, you can see the hand-drawn Improper Noun set. The artist releases a new one daily and can be connected on Twitter here.
 
-readTime: 10,
+![NounsDAO](/images/nouns-5.webp)
 
-likes: 0,
+Here is a set of paintings designed using the AI process known as GAN. Connect with the Noun GAN Study artist here.
 
-comments: 0,
+![NounsDAO](/images/nouns-6.webp)
 
-shares: 0,
+### Its Interesting
 
-content: '',
+The elephant in the room is that the Nounders and their beneficiaries will have more control over the DAO than they should due to their receipt of every 10th Noun. Maybe a proposal to remove this stipulation will be made, but until then, that's always a risk.
 
-language: 'en',
+John Cage's ASLSP and NounsDAO both have a beginning, but only ASLSP has an end. Does that make Nouns more timeless? Who cares, someone paid 613.37 ETH ($1,848,531.57) for this.
 
-};
-
-const Nouns: React.FC = () => {
-
-return (
-
-<article>
-
-<Image src="/images/articles/nouns-2.webp" alt="NounsDAO" width={1000} height={1000} />
-
-<p>What do NounsDAO & John Cage have in common?</p>
-
-<p>
-
-In 1985, contemporary composer John Cage wrote a solo piano piece called ASLSP (As Slow as
-
-Possible) that can last anywhere from 20 to 70 minutes. In 1987, Cage adapted it for organ,
-
-and in 2001 - 9 years after Cage's passing, a small German church constructed a customized
-
-organ to perform this piece over the next 639 years. The organizers chose this duration as
-
-that was the age of the church in question. The most recent notes, G# & E, were on September
-
-5, 2020, and the next note, G#, will occur on February 5, 2022. The final note will take
-
-place on September 5, 2640. There will also be a new Noun auctioned off that day.
-
-</p>
-
-<p>
-
-NounsDAO is an NFT project built on Ethereum that harnesses time as a method of distribution
-
-and decentralization. Each Noun is a generative 32x32 pixel NFT comprising people, places,
-
-and things. Their features are random and controlled by a smart contract that transfers the
-
-Noun to the winning bidder's wallet while simultaneously creating a new Noun for auction 24
-
-hours later. 100% of the auction proceeds are deposited into the NounsDAO Treasury and
-
-governed by Noun NFT holders. At the time of writing, 24 Nouns control 3260.6022 Ethereum
-
-($11,003,847.70 at a current ETH price of $3,374.79).
-
-</p>
-
-<Image src="/images/articles/nouns-3.webp" alt="NounsDAO" width={1000} height={1000} />
-
-<p>
-
-Since 100% of auction revenue gets deposited into the Treasury, the founders (Nounders) will
-
-be gifted every 10th Noun for the first five years.
-
-</p>
-
-<p>
-
-Rather than having a typical centralized command center, NounsDAO intends to enable all participants
-
-to have a substantial stake and say in the trajectory of a project. With each passing day,
-
-the NounsDAO Treasury gets slightly more decentralized and the previous Noun owners' say
-
-gets slightly more diluted.
-
-</p>
-
-<h2>On-Chain Features</h2>
-
-<p>
-
-To do everything that NounsDAO is doing, you need blockchain technology. Smart contracts
-
-govern the distribution and governance of the protocol and proposals to the NounsDAO, which
-
-require at least 5% of Nouns to be involved. Proposers can be one person, or it can be a
-
-group of people who all own Nouns. With a current average price of 135.86 ETH
-
-($458,493.654), you need at least 679.29 ETH ($2,292,468.27) worth of Noun NFTs to submit a
-
-proposal.
-
-</p>
-
-<p>
-
-These proposals can be anything from donating to charities to changing the amount of Nouns
-
-supply required to submit proposals. Given that this project is barely three weeks old, the
-
-community is still new, and the DAO has not had much time to submit and enact proposals.
-
-</p>
-
-<p>
-
-Although they have succeeded in doling out a total of 30 ETH ($101,243.70) to 6 different
-
-charities, and you can see that the 30 ETH have been disbursed in the internal transactions
-
-tab on the NounsDAO Treasury address on Etherscan. It's too bad governments don't have a
-
-public ledger for spending our money.
-
-</p>
-
-<Image src="/images/articles/nouns-4.webp" alt="NounsDAO" width={1000} height={1000} />
-
-<h2>Derivatives</h2>
-
-<p>
-
-Below, you can see the hand-drawn Improper Noun set. The artist is releasing a new one daily
-
-and can be connected with on Twitter here.
-
-</p>
-
-<Image src="/images/articles/nouns-5.webp" alt="NounsDAO" width={1000} height={1000} />
-
-<p>
-
-Here is a set of paintings designed using the AI process known as GAN. Connect with the Noun
-
-GAN Study artist here.
-
-</p>
-
-<Image src="/images/articles/nouns-6.webp" alt="NounsDAO" width={1000} height={1000} />
-
-<h3>Its Interesting</h3>
-
-<p>
-
-The elephant in the room is that the Nounders and their beneficiaries will have more control over
-
-the DAO than they should due to their receipt of every 10th Noun. Maybe there will be a proposal to remove this
-
-stipulation but until then thats always a risk.
-
-</p>
-
-<p>
-
-John Cage's ASLSP and NounsDAO both have a beginning but only ASLSP has an end. Does that
-
-make it timeless? Who cares.
-
-</p>
-
-</article>
-
-);
-
-};
-
-export default Nouns;
+![NounsDAO](/images/nouns-2.webp)
