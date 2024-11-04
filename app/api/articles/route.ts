@@ -20,6 +20,7 @@ interface Frontmatter {
 export async function GET() {
   try {
     const articles = await getAllArticles();
+    console.log('Fetched articles:', articles);
     return NextResponse.json(articles);
   } catch (error) {
     console.error('Error fetching articles:', error);

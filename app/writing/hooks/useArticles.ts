@@ -10,7 +10,11 @@ export function useArticles() {
     async function fetchArticles() {
       try {
         const response = await fetch('/api/articles');
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status} ${response.statusText}`);
+        }
         const data = await response.json();
+        console.log('Fetched articles:', data);
         setArticles(data);
       } catch (err) {
         setError(err instanceof Error ? err : new Error('Failed to fetch articles'));

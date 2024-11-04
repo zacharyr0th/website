@@ -2,8 +2,8 @@
 title: 'Web 3'
 date: '2024-10-25'
 image: /misc/placeholder.webp
-subtitle: A path forward
-description: ""
+subtitle: Empowering Users and Reshaping the Digital Landscape
+description: "This article explores the transformative power of user-owned networks, open-source ideology, and innovative value generation. This comprehensive analysis delves into the technological and cultural shifts driving the next era of the internet, including cryptocurrencies, NFTs, DAOs, and decentralized finance."
 tags: ['Crypto', 'Tech']
 ---
 
@@ -26,13 +26,17 @@ tags: ['Crypto', 'Tech']
 
 <div class="tldr-section">
 
+Web 3 is a technical philosophy that has disrupted previous models of the internet by empowering users to take more ownership of the products they’re using. Some say it’s a fugazi, and others may define it differently than how you understand it, but there’s no denying that users’ relationship with the internet is changing.
+
 </div>
 
+## The Evolution of the Web
 
-https://sfblogprod.wpengine.com/wp-content/uploads/2022/01/image-1024x768.png
+![Web Evolution Image](/images/web-3-0.webp)
+
+### Web 1: The Unraveling and Web 2: The Crisis
+
 Web 1: The Unraveling and Web 2: The Crisis broke down the series of events, innovations, and issues that brought the internet to where it is today. Apparently, we live in a predominantly digital era, and most websites today still follow the Web 2 business model where the users are the ultimate product.
-
-Web 3, however, is a technical philosophy that has disrupted this model by empowering users to own the products they’re using, and it is a controversial topic at the moment. Some say it’s a myth, and others may define it differently than how you understand it, but there’s no denying that users’ relationship with the internet is changing.
 
 For clarity, below is a one-line description of each time period.
 
@@ -42,28 +46,44 @@ Web 2 = Content creation networks. (2004-Present)
 
 Web 3 = User-owned networks. (2017-Present)
 
+## The Challenges of Web 2
+
+![Challenges Image](/images/web-3-1.webp)
+
 Web 2 is the necessary bridge between Web 1 and Web 3, but it presents a pandora’s box of issues regarding privacy concerns, censorship, and content distribution. All of this stems from the centralized intermediaries that have become monopolies over the past few decades. They govern news feeds, browser searches, and how people connect and spend their time online.
+
+## The Promise of Web 3
+
+![Promise Image](/images/web-3-2.webp)
 
 This article is going to break down how users of Web 3 can own the networks they’re a part of, how open source ideology is transforming the fabric of the internet, and how Web 3 generates unforeseen value.
 
-A Way Forward
+## A Way Forward
+
 Throughout this deep dive series, different eras of the internet have been viewed through the lens of the Strauss-Howe Generational Theory, which details a recurring cycle of archetypal generations.
 
 These archetypes possess behavioral traits associated with the time period in which they grew up as the surrounding context and coming of age of these generations directly influence how they view the world and behave as adults.
 
-Artists & Heroes
+### Artists & Heroes
+
 According to the theory, the generation known as Artists grew up during the Crisis period (~2001-present), and we left off with them butting heads with the Hero generation who grew up during the Unraveling Period (~1982-2000). Heros like Mark Zuckerberg (Born 1982) and Evan Spiegal (Born 1990) are in monopolistic positions of power and are often unreflective and overbold.
 
 Artists, on the other hand, are known to grow up into thoughtful adults as they tend to emphasize equality and practicality in contrast to the chaotic indecisiveness they inherited from the context of their upbringing. The divide between these two groups is very much a result of the impending power transfers that Web 3 is enabling.
 
 Heroes are not in a position where they want to decentralize their control. Web 2 has worked out very well for those in power as magnificent amounts of wealth have been generated at the cost of users’ privacy and autonomy. The Artist archetypes who are participating in Web 3 see massive opportunity. However, most of the generation is still confined to the restraints of Web 2 due to their digital lives being maintained by Web 2 platforms.
 
-Assets & Valuations
+## Economic Context
+
+### Assets & Valuations
+
 Artists are growing up during a period in which asset valuations worldwide are at unprecedented levels. This is usually the case as global GDP grows, but the rate of change in the rise of asset prices has never been this parabolic. From a traditional economic standpoint, the fact that interest rates have been declining for multiple decades is also a sign of a fragile global economy.
 
 With stocks and risky assets at all-time highs and bonds and risk-free assets yielding all-time lows, where should all the money go?
 
-Crypto
+## The Role of Cryptocurrency
+
+### Crypto
+
 Decentralizing control and building new assets is one method of working around the present system. The crypto industry has introduced more innovation and financial products than most people can keep up with, and these assets serve entirely new use cases. They don’t fit the molds that traditional finance has come up with.
 
 Balaji Srinivasan has a great quote that sums up the enhancements being implemented:
@@ -72,67 +92,84 @@ Balaji Srinivasan has a great quote that sums up the enhancements being implemen
 
 Some tokens may have qualities that mimic securities, but they also have new attributes that regulatory frameworks have not defined. These qualities effectively enable users to own the networks they are a part of.
 
-User Owned Networks
+### User Owned Networks
+
 When the web was first envisioned, developers had a utopian perspective of free information, borderless interconnectivity, and individual solidarity. This was all good in theory, but in practice, the web ended up being controlled by a handful of companies who now have far too much influence on humanity’s trajectory. Web 3’s focus on decentralization and interoperability looks to dismantle this paradigm and usher in a more equitable and capable internet.
 
 You may think that user-owned networks have existed for a long time, given that you can invest in a company’s stock, but it’s not the same. Investing in companies requires far more barriers to entry than participating in a network does. This concept is best described with a simple thought experiment: Imagine being paid in Facebook shares based on the value you brought to the platform. Although it can be difficult to quantify value, this new user engagement model incentivizes value creation and ultimately beckons a better Facebook for all network users. This benefits the users and Facebook. Win-win. So why wouldn’t Facebook do this?
 
 First of all, Facebook went live in 2004, which was more than a decade before Ethereum’s private sale. Ethereum was the first programmable blockchain because it enabled smart contracts and its innovations were necessary for user-owned networks to be possible. Smart contracts allowed the ERC20 and ERC721 standards to exist, which have since changed the entire crypto landscape.
 
-ERC20 & ERC721 Standards
+### ERC20 & ERC721 Standards
+
 ERC20 tokens enabled anyone to deploy a fungible token to the Ethereum blockchain, and ERC721 tokens enabled anyone to deploy a *non-*fungible token (NFT) to the Ethereum blockchain.
 
 These standards have inspired others and have been implemented across other chains, including Solana, Terra, and Avalanche. In each of these cases, users can now own the network they are a part of – at least in some senses. No standards even remotely similar to these existed when Facebook hit the market, as there were no blockchains for these standards to operate on. Facebook has operated and helped pioneer the Web 2 model of generating cash flow which focuses on advertising monetization and collecting and selling user data.
 
-Cryptocurrency as Equity
+### Cryptocurrency as Equity
+
 If you go to most financial advisors right now and ask them how to position your portfolio with regard to cryptocurrencies and equities, your answer would probably be 95% equities and 5% crypto or even 0% crypto. This draws a clear line in the sand between cryptocurrencies and equities when they are more alike than they are different.
 
 Sure, some cryptocurrencies serve zero use cases and are nothing more than speculative instruments, but others are entire networks. If you were to invest in ETH, SOL, AVAX, or ALGO, you would own a piece of these networks, and this tradable ownership could be considered equity. Tokens, such as the ones conforming to the ERC20 standard, are built and deployed atop these networks. 
 
 Each of these tokens has its use case, tokenomics, and distribution schedule that should be diligently researched before being speculated upon.
 
-Fund Raising
+## Innovations in Fundraising
+
+![Fundraising Image](/images/web-3-3.webp)
+
+### Fund Raising
+
 Another vital component of Web 3 thus far has been the innovations in the fundraising industry. Traditionally, startup companies have either gone through a series of venture capital funding rounds or have been bootstrapped. This was until Mastercoin implemented the world’s first Initial Coin Offering (ICO) in 2013, an innovation that spurred the imagination of many investors later on during the 2017 ICO bubble.
 
 This bubble, which was relatively similar to the Tech Bubble but at a much smaller scale, displayed the excitement that people had in regard to how projects and companies could now raise money. Some were raising a lot of money, which attracted a few nefarious actors and influencers like John McAfee and Floyd Mayweather, who promoted garbage. The ICO industry has since evolved into multiple variations of ICOs that each serve different purposes. These will impact Web 3’s fundraising and development going forward.
 
 For the record, there are still **far too many nefarious influencers promoting garbage. Kim Kardashian promoted Ethereum Max. Influencers like BitBoy are constantly exposed to malfeasance. When money is involved, anything can happen, so be wary of who you follow.
 
-ICO / IDO / ITO / IAO / Etc.
+### ICO / IDO / ITO / IAO / Etc.
+
 ICOs are a spin-off of Initial Public Offerings (IPOs), the traditional method of large-scale fundraising for companies looking to enter the public markets. So, it’s not surprising that there are so many spin-offs of ICOs. These include but are not limited to the following:
 
-https://sfblogprod.wpengine.com/wp-content/uploads/2022/01/Screen-Shot-2022-01-14-at-14.02.53.png
-NFTs
+![ICO Image](/images/web-3-4.webp)
+
+### NFTs
+
 NFTs have endless utilities. Just think of them as a medium to facilitate digital ownership. Their fundraising potential has only begun to be tapped and will likely affect how many projects finance their operations.
 
-Aurory
+#### Aurory
+
 Aurory recently issued 10,000 Aurorians, becoming one of the most traded NFT projects on Solana. This resulted in 1,000 SOL (~$180,000) in minting sales and passive, perpetual income due to secondary sales.
 
 Then the developing team raised over $108 million with an IDO.
 
-
 Anyone who minted and held an Aurorian has experienced significant price appreciation, personal relationships with others who own (and perhaps identify) with Aurorians, and a financial stake in the project’s development.
 
-The Infinite Garden
+#### The Infinite Garden
+
 There is also a documentary being made titled Ethereum: The Infinite Garden that raised nearly 1,036 ETH, now valued at over $4 million, through the sales of NFTs associated with the movie.
 
+#### 3LAU
 
-3LAU
 Electronic music producer 3LAU decided to list his previously released album from several years ago for sale as an NFT, and he netted over $11 million. This has enabled him to finance current projects such as Royal.io, which is set to disrupt the royalty industry with NFTs.
 
-Grants
+## Grants and Funding
+
+### Grants
+
 Grants are great. They’ve historically been able to fund essential projects within academia and elsewhere but have recently kicked it up a notch due to crypto-related innovations like DAOs.
 
-Gitcoin
-Gitcoin was designed to enable the funding of public goods. These goods are often open-source software, so many grants go to coders, developers, and founders. Gitcoin grants are decided upon by the Gitcoin DAO, composed of GTC holders. Gitcoin’s definition of public goods is based on non-rivalrous and non-profitable endeavors, usually related to public digital infrastructure.
+### Gitcoin
 
+Gitcoin was designed to enable the funding of public goods. These goods are often open-source software, so many grants go to coders, developers, and founders. Gitcoin grants are decided upon by the Gitcoin DAO, composed of GTC holders. Gitcoin’s definition of public goods is based on non-rivalrous and non-profitable endeavors, usually related to public digital infrastructure.
 
 Gitcoin has instituted the use of quadratic funding, which in summary, is a format for projects with the most number of backers to have priority in regards to funding compared to projects with ample funding but fewer backers. For more detail, read Vitalik’s post on his website about it, and then read all of his other posts for good measure.
 
-Blockchain & Project Grants
+### Blockchain & Project Grants
+
 If you follow crypto-related content on LinkedIn and casually scroll through your newsfeed, you’ll be hard-pressed not to find articles related to new blockchain investment funds. Blockchains and DeFi projects are constantly doling out grants meant to help improve their surrounding ecosystem.
 
-Treasury Grants & DAOs
+### Treasury Grants & DAOs
+
 DAOs are still unproven, yet their utility and benefits seem very hopeful. Their legal status and funding mechanisms are still grey areas, although some have successfully implemented payments to participants and projects in their communities.
 
 My favorite example of this is NounsDAO.
@@ -141,13 +178,18 @@ NounsDAO is an ambitious NFT project going to Mint One Noun Every Day Forever. A
 
 This treasury is used to help build products and projects surrounding the Noun community, such as Nouns.com, a hot or not game between pairs of different Nouns, and even a hangout area built within the CryptoVoxels metaverse. They also decided to donate 30 ETH to charity, and you can see their record. Below is an image of transactions from their public treasury wallet.
 
-
 Imagine a crypto-friendly city like Miami, Lisbon, or New York deciding to level up its transparency and operate all financial transactions on a public blockchain. It probably won’t happen, but it could with a Web 3 framework.
 
-Open Source
+## Open Source and Interoperability
+
+![Open Source Image](/images/web-3-5.webp)
+
+### Open Source
+
 Blockchains are the fundamental settlement layers of all the Web 3 applications being built, and public blockchains are open source. These on-chain applications are also open source, which helps explain the ridiculous level of development that occurs within the crypto industry every year. Developers usually have access to the entire backend of an app, and functions can be forked, copied, and expanded upon.
 
-Money Legos
+### Money Legos
+
 Interoperability is the property of Web 3 that gives these DeFi applications the ability to interact with one another. You can now trustlessly and permissionlessly cultivate and manage your wealth.
 
 Utilizing DeFi, investors have many options to do everything from generating a yield on a borrowed asset while maintaining exposure to the collateral to supplying liquidity to an AMM that rewards them with trading fees. Yieldless and yield-bearing tokens are all interoperable together. Below is a simple example of how to do so.
@@ -156,14 +198,16 @@ Stake SOL using Marinade and receive mSOL.
 Deposit SOL/mSOL into a liquidity pool and earn trading fees.
 Voila, you are earning a yield (Transaction fees from the SOL/mSOL pool) on both a yieldless asset (SOL) and a yield-bearing asset (mSOL).
 
-Decentralized Dashboards
+### Decentralized Dashboards
+
 Money managers and banks custody assets and need ways of keeping tabs on them. While financial dashboards may not seem important to most people, they’re products that can lower one’s need for any bank or money manager. They’re tools for you to go bankless.
 
 DeFi enables you to do everything you can in traditional finance and more in a permissionless and trustless fashion. In Web 2 and traditional finance, you can connect your banking and investment accounts to dashboards like Mint and Copilot, but you have to divulge all your accounts’ information. In Web 3, you can have multiple wallets operating across multiple chains doing complicated activities such as liquidity providing, borrowing, or utilizing synthetic assets and have it all displayed within one interface.
 
 When you connect to a multichain wallet dashboard like DeBank, your activity will be present, filterable, and graphically represented. Other worthy dashboards include ApeBoard, YieldWatch, and SonarWatch. These dashboards not only give you the ability to self custody your money, but they do so without having any access to your information aside from your public wallet address and your blockchain balances.
 
-Forks
+### Forks
+
 Good artists borrow, and great artists steal.
 
 Pablo Picasso
@@ -173,35 +217,34 @@ An infamous example of a forked project is SushiSwap. During the DeFi Summer of 
 
 This drained a substantial volume from Uniswap, and they responded by issuing an airdrop of UNI tokens to anyone who had participated on the platform earlier. UNI token holders govern the platform, and UNI’s market capitalization has since risen to nearly $13 billion at the time of writing. SUSHIi’s market cap is just over $2 billion.
 
-Generating Value
-Uniswap and Sushi are great examples of how an open-source system promotes competition and innovation. Decentralized networks that run on cryptocurrencies have more utilitarian use cases than centralized networks without cryptocurrencies. Liquidity pools are an easy way to explain this.
+## Generating Value
 
-Liquidity Pools
+### Liquidity Pools
+
 To learn more about Liquidity Pools in detail, read this. For the sake of this article, you need to understand that liquidity pools enable anyone to provide liquidity for somebody else to trade off pseudonymously. In traditional finance, these liquidity providers are market makers.
 
 These pools generate trading fees transmitted to the liquidity providers and, in many cases, to a community-governed treasury. The liquidity providers are earning a yield that doesn’t exist for retail participants in traditional finance. Its creation is a byproduct of using non-custodial wallets and the AMMs built within liquidity pools.
 
 Below is a screenshot of Token Terminal’s home page, which displays the profitability metrics such as Price/Sales and Price/Earnings ratios of each DeFi protocol and underlying blockchain.
 
+## Moatless
 
-This value has been generated through the innovations that make up Web 3.
-
-Moatless
 Industries have been defined by centralized intermediaries building and investors obsessing over economic moats, which are facets of a business that separate it from others.
 
 Moats exist in Web 3 in theory but don’t serve the same purpose as in Web 1 and 2. Sure, innovation is incentivized and rewarded, but the competition is unbridled due to the open-source nature of development. When more eyes are looking at something, more mistakes are noticed.
 
 You’ll continue to hear stories of white-cap hackers that expose vulnerabilities in open-source protocols in return for a reward or just for the good of the community. This inadvertently generates massive amounts of value by securing the network.
 
-White Cap Hackers
-A hacker managed to steal over $600 million from the Polygon Layer 2 scaling solution, and it was all returned. The Polygon team then attempted to recruit said hacker, and he declined by responding with messages written into smart contracts such as the one below.
+### White Cap Hackers
 
+A hacker managed to steal over $600 million from the Polygon Layer 2 scaling solution, and it was all returned. The Polygon team then attempted to recruit said hacker, and he declined by responding with messages written into smart contracts such as the one below.
 
 Another hacker exposed an $850 million dollar vulnerability and was awarded a $2 million dollar bug bounty.
 
 This generation of value through white cap hacking and bug bounties was not an intended consequence of Web 3, but it is a happy accident. Unfortunately, black cap hacking is still an issue, as over 70 DeFi exploits have resulted in losses of over $1.5 billion.
 
-Final Thoughts
+## Final Thoughts
+
 While most of the world still operates under the umbrella that Web 2 is holding out, every day, more people are switching their desired use of the internet to function in ways that only Web 3 enables. Heroes are either adapting to this new paradigm or fighting it off. The Artist generation recognizes this along with the inherent issues of Web 2 and the immense value propositions of Web 3.
 
 It’s not just a complex web of financial and security-related innovation but an even more complex web of communities fusing to form a global perspective. This perspective is naturally more decentralized and permissionless than the centralized vision of Web 2, and it aligns more with the original, idealistic vision of the world wide web that the early developers had at the beginning of Web 1.
@@ -210,16 +253,3 @@ Some people doubt this new paradigm exists or has any legs to stand on in the sa
 
 The world has evolved and will continue to do so, but the implications will be staggering once Web 3’s innovations are adopted into the mainstream. This adoption may take a while due to governmental bodies, regulatory restrictions, and financial incumbents wanting to remain in control. Still, fortunately for the world, Web 3 is not just around the corner. It’s already here.
 
-Similar Posts
-Web 2: The Crisis
-Zachary
-Zachary
-14 January 2022
-51 min
-Web 2: The Crisis
-This article wraps up the 3 part series breaking down the state and function of the internet over time. While the previous articles focused on the cultural movements behind the internet, this one is more oriented towards some of the innovations that will likely define the future of the internet.
-
-Solflare
-Copyright © 2024 Solflare
-Still have questions?
-Want to just say hello?

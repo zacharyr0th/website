@@ -2,8 +2,8 @@
 title: 'Web 2'
 date: '2024-10-25'
 image: /misc/placeholder.webp
-subtitle: 
-description: ""
+subtitle: The Rise of User-Generated Content and the Dawn of Digital Empires
+description: "Explore the transformative era of Web 2.0, where social media and user-generated content reshaped our digital landscape. This article examines how platforms like Facebook and Twitter revolutionized online interaction, the rise of e-commerce giants, and the complex challenges of privacy, data ownership, and digital identity that emerged during this period."
 tags: ['Crypto', 'Tech']
 ---
 
@@ -33,7 +33,8 @@ This article will look at how these periods have been influenced by the generati
 
 Usage of the internet since the onset of Web 2 has been primarily oriented around user-generated content (social media & e-commerce), which has enabled monopolistic, rent-seeking intermediaries to take a stranglehold on physical and digital content distribution channels. Many companies have acquired undue influence concerning what billions of people see and buy.
 
-For clarity’s sake, below is a one-line description of each time period.
+## Web Eras Defined
+For clarity's sake, below is a one-line description of each time period.
 
 Web 1 = Content delivery networks. (1990-2004)
 
@@ -41,136 +42,116 @@ Web 2 = Content creation networks. (2004-Present)
 
 Web 3 = User-owned networks. (2017-Present)
 
-The Crisis
-For a deeper understanding of the cultural shifts underlying the advancements and applications of the internet, this series will distill a cross-generational perspective through the lens of the Strauss-Howe Generational Theory. To reiterate, this series does not argue for the validity of the theory, but rather it’s used to provide an anthropological angle from which we can view technological advancements. The theory details a recurring cycle of generations that introduce archetypes who possess behavioral traits associated with the time period in which they grew up.
+# Generational Context
 
-The world theoretically entered a Crisis phase with the onset of 9/11, although some argue it didn’t take full effect until around 2008 with the beginning of the Great Recession. This time period brought about an international war on terror, unprecedented military spending, global financial hardship, the rise of big tech, and political polarization unlike ever before as a result of social media and people obtaining their information online from a disparate web of subjective sources.
+## The Crisis
+For a deeper understanding of the cultural shifts underlying the advancements and applications of the internet, this series will distill a cross-generational perspective through the lens of the Strauss-Howe Generational Theory. To reiterate, this series does not argue for the validity of the theory, but rather it's used to provide an anthropological angle from which we can view technological advancements. The theory details a recurring cycle of generations that introduce archetypes who possess behavioral traits associated with the time period in which they grew up.
 
-Archetypes
+The world theoretically entered a Crisis phase with the onset of 9/11, although some argue it didn't take full effect until around 2008 with the beginning of the Great Recession. This time period brought about an international war on terror, unprecedented military spending, global financial hardship, the rise of big tech, and political polarization unlike ever before as a result of social media and people obtaining their information online from a disparate web of subjective sources.
+
+## Archetypes
 Each generation grows up in a different phase – either a High, an Awakening, an Unraveling, or a Crisis and the context of these phases inform the types of individuals who come out of them.
 
 Below is a chart explaining the different features and desires of the four archetypes in this theory. Each archetype is entirely informed by the time periods in which a generation was born, came of age, transitioned in midlife, and how they act and are perceived as elders.
 
-
-Artists & Heros
+## Artists & Heroes
 The generation of people born during a Crisis is referred to as Artists and are generally sensitive and overprotected as children yet very adaptive. Growing up during the Crisis phase presents many challenges, and, according to the theory, Artists are known to overcomplicate issues while coming to terms with their worldview. They do, however, grow up to be thoughtful, process-oriented adults.
 
-This is a helpful frame of reference to view the Artist generation’s starkly contrasting ideology to the previous Hero generation. Heros were born during the phase preceding the Crisis, known as the Unraveling, and are generally working under the doctrine of “moving fast and breaking things” because they grew up to be optimistic and overconfident leaders (e.g., Mark Zuckerberg).
+This is a helpful frame of reference to view the Artist generation's starkly contrasting ideology to the previous Hero generation. Heros were born during the phase preceding the Crisis, known as the Unraveling, and are generally working under the doctrine of "moving fast and breaking things" because they grew up to be optimistic and overconfident leaders (e.g., Mark Zuckerberg).
 
-Artists have a big chip on their shoulders. They need to rearrange the world’s complexity into a more consensus-oriented edifice and do so with flexible yet relatively indecisive methods. Examples of Artists in history include some of America’s founding fathers and former US president, Theodore Roosevelt. These individuals were “sensitive and complex social technicians, advocates of fair play and the politics of inclusion.” (Source)
+Artists have a big chip on their shoulders. They need to rearrange the world's complexity into a more consensus-oriented edifice and do so with flexible yet relatively indecisive methods. Examples of Artists in history include some of America's founding fathers and former US president, Theodore Roosevelt. These individuals were "sensitive and complex social technicians, advocates of fair play and the politics of inclusion." (Source)
 
-Crypto
-You may see where we’re going with this. Of course, every new generation grows up with more advanced technology than the last. Still, this most recent generation of artists grew up during the exponential internet adoption curve. Having a smartphone and social networks that highlight the inequality and calamities throughout every corner of the world has seriously impacted the Artist’s psyche and led to many unforeseen ramifications.
+# The Rise of Crypto
+You may see where we're going with this. Of course, every new generation grows up with more advanced technology than the last. Still, this most recent generation of artists grew up during the exponential internet adoption curve. Having a smartphone and social networks that highlight the inequality and calamities throughout every corner of the world has seriously impacted the Artist's psyche and led to many unforeseen ramifications.
 
-Given that the web was initially conceived as a decentralized resource but was stifled during Web 2, it’s not surprising to see the tenets of decentralization coming back in full force now within Web 3. Heroes, the ones still in charge during the Crisis phase, are less keen on decentralization because it would dethrone them from their puppet-master-like societal positions. Artists are keen on it because of their emphasis on equality. Their actions are increasingly moving towards a more decentralized world, and the crypto industry is not only an aspect of that, but it’s the essence of it.
+Given that the web was initially conceived as a decentralized resource but was stifled during Web 2, it's not surprising to see the tenets of decentralization coming back in full force now within Web 3. Heroes, the ones still in charge during the Crisis phase, are less keen on decentralization because it would dethrone them from their puppet-master-like societal positions. Artists are keen on it because of their emphasis on equality. Their actions are increasingly moving towards a more decentralized world, and the crypto industry is not only an aspect of that, but it's the essence of it.
 
-To better understand this transition from Web 1 to Web 3, let’s break down Web 2’s history and issues as it is a problematic and necessary bridge between generations and technologies.
+To better understand this transition from Web 1 to Web 3, let's break down Web 2's history and issues as it is a problematic and necessary bridge between generations and technologies.
 
-History
-Web 1’s innovations laid the groundwork for Web 2 in the sense that the necessary software and hardware-related infrastructures had been set in place. Bustling economies were sprouting from all angles of the internet, and many were excited about all the potential of this new interconnected world being built. Investors began throwing money at whatever internet companies they could until what became known as the Tech Bubble popped.
+# Web 2 Evolution
 
-The Tech Bubble
+## History
+Web 1's innovations laid the groundwork for Web 2 in the sense that the necessary software and hardware-related infrastructures had been set in place. Bustling economies were sprouting from all angles of the internet, and many were excited about all the potential of this new interconnected world being built. Investors began throwing money at whatever internet companies they could until what became known as the Tech Bubble popped.
+
+## The Tech Bubble
 Financial bubbles get a bad reputation because of the feral fervor and FOMO within them. Still, they are not often respected as the necessary component of technological adoption they are. Bubbles can show the masses the potential of something, but you need to know what parts will last.
 
 Many considered e-commerce a bubble until Amazon took over the commerce world. Similarly, many believed the crypto industry was a market bubble in 2017 as some far-fetched ideas were being speculated upon. While many of these ideas (like decentralized ride-sharing services) did not pan out, others, like NFTs and synthetic assets, have experienced mass adoption. They will likely disrupt many industries in the coming years.
 
-Technology doesn’t work how humans think. Humans think linearly, and technology operates exponentially. This exponentiality eradicates the tried and true investment trope of mean reversion because exponential averages always increase at exponential rates. To understand this from a high level, think about how semiconductors conform to Moore’s Law and technological networks conform to Metcalfe’s Law.
+Technology doesn't work how humans think. Humans think linearly, and technology operates exponentially. This exponentiality eradicates the tried and true investment trope of mean reversion because exponential averages always increase at exponential rates. To understand this from a high level, think about how semiconductors conform to Moore's Law and technological networks conform to Metcalfe's Law.
 
-Moore’s Law
-According to Moore’s law, the number of transistors in a dense integrated circuit (microchip) will double every two years. As you can see in the graph below, Moore’s law has been proven to be true since the onset of Intel’s microchips debuting in the early 1970s. These transistors improve computing power and ultimately enable technological advances that drive unforeseen societal changes across all industries.
+### Moore's Law
+According to Moore's law, the number of transistors in a dense integrated circuit (microchip) will double every two years. As you can see in the graph below, Moore's law has been proven to be true since the onset of Intel's microchips debuting in the early 1970s. These transistors improve computing power and ultimately enable technological advances that drive unforeseen societal changes across all industries.
 
+### Metcalfe's Law
+Metcalfe's Law defines the value of a telecommunications network as the squared product of the number of users in the network. In other words, Metcalfe's Law mathematically describes the power of network effects. As each new user is introduced to a network, they bring the capacity to introduce other new users and interact with the previous users. This creates an economy of interactions that exponentially expands as more people join the network while the cost of the network only increases linearly.
 
-Source
-Metcalfe’s Law
-Metcalfe’s Law defines the value of a telecommunications network as the squared product of the number of users in the network. In other words, Metcalfe’s Law mathematically describes the power of network effects. As each new user is introduced to a network, they bring the capacity to introduce other new users and interact with the previous users. This creates an economy of interactions that exponentially expands as more people join the network while the cost of the network only increases linearly.
+# Key Innovations
 
+## Social Media
+One of Web 1's most significant limitations was its static nature. Users could barely interact with sites, and aside from messaging, they could barely interact with each other. In 1999, Web 1 was compared to the embryo of the web to come, and the term Web 2 began circulating. The term has been defined in various ways, although the common understanding of it being related to user-generated content was widely understood when social media networks took over.
 
-Source
-Metcalfe’s Law describes an infinitely expanding economy of scale. The most obvious observations of Metcalfe’s Law can be found in social media networks.
-
-Social Media
-One of Web 1’s most significant limitations was its static nature. Users could barely interact with sites, and aside from messaging, they could barely interact with each other. In 1999, Web 1 was compared to the embryo of the web to come, and the term Web 2 began circulating. The term has been defined in various ways, although the common understanding of it being related to user-generated content was widely understood when social media networks took over.
-
-Social media is arguably the most influential innovation that has come out of Web 2. It involves psychology, human behavior, mob mentality, marketing, real news, fake news, artificial intelligence, politics, music, media, and every facet of human nature. Near the end of Web 1, MySpace and Facebook entered the scene, and nothing was ever the same. These were the first big social media networks that grabbed the world’s attention, and it was now easier than ever to stay connected with friends, family, and strangers.
+Social media is arguably the most influential innovation that has come out of Web 2. It involves psychology, human behavior, mob mentality, marketing, real news, fake news, artificial intelligence, politics, music, media, and every facet of human nature. Near the end of Web 1, MySpace and Facebook entered the scene, and nothing was ever the same. These were the first big social media networks that grabbed the world's attention, and it was now easier than ever to stay connected with friends, family, and strangers.
 
 Posting and interacting with the world not only opened doors to new creator economies but also affected the direction humanity had headed. The power of being able to learn anything and connect with anyone at any time has never been wielded by humans until now.
 
 Social media facilitated unprecedented content creation, curation, interaction, and even whistleblowing, as there were now countless avenues through which people could distill and obtain their information.
 
-Information Distillation
-If you look at old photographs of people on public transportation, you’ll often see everybody reading the same newspaper. This phenomenon instilled a homogeneity of ideas. 
+### Information Distillation
+If you look at old photographs of people on public transportation, you'll often see everybody reading the same newspaper. This phenomenon instilled a homogeneity of ideas. 
 
-
-Source
-It’s similar to how most people are now on their phones and have headphones on when riding public transportation, except now everyone is reading and listening to their own algorithmically curated news feeds. These news feeds disrupted big media because anyone could make a media channel and distill information to their following irrespective of their background or credentials.
+It's similar to how most people are now on their phones and have headphones on when riding public transportation, except now everyone is reading and listening to their own algorithmically curated news feeds. These news feeds disrupted big media because anyone could make a media channel and distill information to their following irrespective of their background or credentials.
 
 This affects how news is distributed and ingested and many other areas of society. Rather than every comedian trying to land a spot on Saturday Night Live or land a role in a big NBC network show that aired at 7 pm on Monday nights, for example, they can start a YouTube channel, a podcast, air their special on Netflix, or even star in their show offered by a streaming service.
 
 This societal change in information distillation was one of the first steps to decentralization, but we still have a long way to go.
 
-Ecommerce
-Web 2’s e-commerce innovations disrupted traditional commerce in unimaginable ways a few decades ago. Platforms like eBay, Etsy, Shopify, Amazon, Reverb, and thousands of other e-commerce websites enabled anyone to build their virtual store selling real-world goods and interact with other people’s stores. Until Web 2, massive manufacturing firms and distribution outlets controlled what was sold and how people could buy things.
+## Ecommerce
+Web 2's e-commerce innovations disrupted traditional commerce in unimaginable ways a few decades ago. Platforms like eBay, Etsy, Shopify, Amazon, Reverb, and thousands of other e-commerce websites enabled anyone to build their virtual store selling real-world goods and interact with other people's stores. Until Web 2, massive manufacturing firms and distribution outlets controlled what was sold and how people could buy things.
 
 While these firms still maintained market dominance in the form of their e-commerce stores, the playing field was much more level than it had been previously. There are countless stories of individuals building a niche store online and generating massive revenue. E-commerce has quickly become a standard operating procedure for celebrities with a devoted following.
 
-Ecommerce doesn’t only apply to real-world goods. It applies to any transaction made virtually. Disparate industries like gaming and sex work have been flipped upside down as platforms like Twitch and OnlyFans have generated hundreds of millions of dollars in paid subscriptions for their content creators. These platforms are entirely built on user-generated content and have their own novel sets of pros and cons, which are dealt with in Web 3.
+Ecommerce doesn't only apply to real-world goods. It applies to any transaction made virtually. Disparate industries like gaming and sex work have been flipped upside down as platforms like Twitch and OnlyFans have generated hundreds of millions of dollars in paid subscriptions for their content creators. These platforms are entirely built on user-generated content and have their own novel sets of pros and cons, which are dealt with in Web 3.
 
-Issues
-The internet experienced an explosive surge in users during the Web 2 period, so you can consider these issues to be growing pains.
+# Challenges and Issues
 
-Web 2’s Business Model
+## Web 2's Business Model
 The progress of Web 2 has brought about industry-changing platforms like Facebook, Amazon, and Google, which are very useful. Still, the users themselves are included as products in these business models.
 
-The more you peruse Facebook, the more Facebook knows about you and how to market to you. The same things go for any centralized platform. Amazon will let you sell products on their site, learn from you if you’re successful, and then implement what you did while placing your products behind their own in the search results.
+The more you peruse Facebook, the more Facebook knows about you and how to market to you. The same things go for any centralized platform. Amazon will let you sell products on their site, learn from you if you're successful, and then implement what you did while placing your products behind their own in the search results.
 
-These issues are readily apparent, and the Artist archetypes spearheading Web 3’s developments are highly aware of them.
+These issues are readily apparent, and the Artist archetypes spearheading Web 3's developments are highly aware of them.
 
-Privacy Concerns
+## Privacy Concerns
 When Web 2 platforms began being adopted by the masses, all seemed well and good. You could do all sorts of amazing things that were impossible only a few years prior. As these platforms matured, their unintended side effects became more evident. To the unsuspecting eye, these free platforms and all the free things you could do on them seemed like the product being offered.
 
 The reality is that the users of these platforms are the product, and there are very high costs to having your data measured and manipulated by centralized intermediaries.
 
-Hacks & Data Leaks
-Hacks and data leaks are common problems. Just a month or so ago, 7 million accounts on Robinhood had their data hacked and obtained by an anonymous third party. Other than changing its privacy policy and issuing an apology, there is nothing that Robinhood can do to right this wrong. They are not liable because they state the risk of these things happening in their terms and service. It’s the user’s fault for trusting Robinhood (especially after the Gamestop debacle).
+### Hacks & Data Leaks
+Hacks and data leaks are common problems. Just a month or so ago, 7 million accounts on Robinhood had their data hacked and obtained by an anonymous third party. Other than changing its privacy policy and issuing an apology, there is nothing that Robinhood can do to right this wrong. They are not liable because they state the risk of these things happening in their terms and service. It's the user's fault for trusting Robinhood (especially after the Gamestop debacle).
 
-Data Selling
+### Data Selling
 Have you ever Googled something you wanted to buy and suddenly had your Facebook feed filled with ads related to what you Googled? Facebook is known as one of the greediest data collectors as these social media, browser, and commerce apps track the activity of each other. They also partake in knowing what your friends are up to. If your Facebook friends have been searching for a couch to buy lately, the algorithms think you may be interested in purchasing a sofa too, and all of a sudden, there will be couches and loveseats for sale all over your feed.
 
 These centralized intermediaries will sell your data to other centralized intermediaries, and everyone is making money from you. The more you use these apps, the more money they earn and the more efficient they get at making it.
 
-Censorship
+## Censorship
 Blockchains and many of the innovations of Web 3 are very censorship-resistant, but Web 2 is quite the opposite. Given the influence these centralized intermediating monopolies possess, they can prevent you from using their services for any reason.
 
 This is a huge issue when it comes to free speech and whistle-blowing. Whistleblowers need free speech as their purpose is to publicly present data that has been locked behind closed doors by these centralized intermediaries and governing bodies.
 
-Fake News
-Web 2 enabled individuals to create content networks, drastically changing how society ingests said content. The ramifications of this paradigm shift are both positive and negative. It’s now easier than ever to fabricate news or share toxic worldviews with no consequence. Nefarious actors can infiltrate an emerging market and manipulate societal belief systems and political elections while extending a scathing distrust in centralized governance systems. This is a result of the decentralization of mass media – which along with these listed downsides, does have some significant benefits.
+## Fake News
+Web 2 enabled individuals to create content networks, drastically changing how society ingests said content. The ramifications of this paradigm shift are both positive and negative. It's now easier than ever to fabricate news or share toxic worldviews with no consequence. Nefarious actors can infiltrate an emerging market and manipulate societal belief systems and political elections while extending a scathing distrust in centralized governance systems. This is a result of the decentralization of mass media – which along with these listed downsides, does have some significant benefits.
 
-When everyone used to read the New York Times every day, everyone was ingesting the same content. If there was misinformation, it was easier to dissuade people from believing it. Now, hundreds of networks exploit the 24/7 news cycle to compete for users’ attention spans by creating clickbait, which is false, misleading, or unverified news meant to initiate engagement.
+When everyone used to read the New York Times every day, everyone was ingesting the same content. If there was misinformation, it was easier to dissuade people from believing it. Now, hundreds of networks exploit the 24/7 news cycle to compete for users' attention spans by creating clickbait, which is false, misleading, or unverified news meant to initiate engagement.
 
-It has been well-documented that negative and bombastic headlines spur digital engagement more than positive and objective ones within social media algorithms. This divides social sentiment and creates unhealthy dynamics between people that otherwise would have had nothing to do with one another. You can trace these engagement metrics back to the mid-1990s when Fox News and other media outlets began substituting objective anchors with subjective talking heads. With subjectivity, there’s always a plan.
+It has been well-documented that negative and bombastic headlines spur digital engagement more than positive and objective ones within social media algorithms. This divides social sentiment and creates unhealthy dynamics between people that otherwise would have had nothing to do with one another. You can trace these engagement metrics back to the mid-1990s when Fox News and other media outlets began substituting objective anchors with subjective talking heads. With subjectivity, there's always a plan.
 
-Final Thoughts
+# Final Thoughts
 An archetype will not give birth to a similar archetype but rather a contrasting one.
 
-The Hero generation disrupted the Nomad generation and began deconstructing and rebuilding the institutions built before them. Artists grew up in the Hero’s world and felt similar needs to deconstruct and rebuild, but with a more sensitive and equality-based perspective.
+The Hero generation disrupted the Nomad generation and began deconstructing and rebuilding the institutions built before them. Artists grew up in the Hero's world and felt similar needs to deconstruct and rebuild, but with a more sensitive and equality-based perspective.
 
-With all of Web 2’s downsides, and there are plenty, it truly is a marvel how interconnected the world has become over the last few decades. It has created trillions of dollars in market capitalization. It has minted more millionaires and billionaires than any other time period in history while enabling humans to have powers that could only be dreamed of a few decades ago. The Artist generation recognizes this progress along with the problematic caveats it entails.
+With all of Web 2's downsides, and there are plenty, it truly is a marvel how interconnected the world has become over the last few decades. It has created trillions of dollars in market capitalization. It has minted more millionaires and billionaires than any other time period in history while enabling humans to have powers that could only be dreamed of a few decades ago. The Artist generation recognizes this progress along with the problematic caveats it entails.
 
 As the financial world was crumbling during the Great Financial Crisis in 2008, an anonymous developer went by the name of Satoshi Nakamoto – who initiated the innovations that have led the crypto revolution to where it is today. As the inspiration for decentralization and user-owned networks spread, crypto and blockchain technologies were spurring in various directions before ultimately merging to form the foundation for the next leg up of internet adoption and capability.
-
-This next leg will be detailed in Web 3: A Path Forward.
-
-Similar Posts
-Web 1: The Unraveling
-Zachary
-Zachary
-11 January 2022
-36 min
-Web 1: The Unraveling
-Web 2: The Crisis is the followup article to Web 1: The Unraveling. Each of these iterations of the internet help describe its nature and function. This article breaks down the importance of the Web 2 era and how it set the stage for Web 3.
-
-Solflare
-Copyright © 2024 Solflare
-Still have questions?
-Want to just say hello?

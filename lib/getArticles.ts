@@ -18,6 +18,7 @@ export function getAllArticles(): Article[] {
       id: slug,
       slug,
       title: frontmatter.title,
+      subtitle: frontmatter.subtitle,
       description: frontmatter.excerpt || content.slice(0, 150) + '...',
       content,
       image: {
@@ -32,6 +33,7 @@ export function getAllArticles(): Article[] {
         title: frontmatter.title,
         date: frontmatter.date,
         featured: frontmatter.featured || false,
+        subtitle: frontmatter.subtitle,
       },
     };
   });
