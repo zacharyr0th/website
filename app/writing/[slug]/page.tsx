@@ -12,7 +12,7 @@ export default async function Article({ params: { slug } }: { params: { slug: st
   try {
     const fileContents = await fs.readFile(path.join(articlesDirectory, `${slug}.md`), 'utf8');
     const { data, content } = matter(fileContents);
-    
+
     // Cast frontmatter to match Article's frontmatter structure
     const frontmatter = data as Article['frontmatter'];
 
@@ -55,8 +55,8 @@ export async function generateStaticParams() {
   try {
     const fileNames = await fs.readdir(articlesDirectory);
     return fileNames
-      .filter(fileName => fileName.endsWith('.md'))
-      .map(fileName => ({
+      .filter((fileName) => fileName.endsWith('.md'))
+      .map((fileName) => ({
         slug: fileName.replace(/\.md$/, ''),
       }));
   } catch (error) {

@@ -2,8 +2,8 @@
 title: 'Web 3'
 date: '2024-10-25'
 image: /misc/placeholder.webp
-subtitle: Empowering Users and Reshaping the Digital Landscape
-description: "This article explores the transformative power of user-owned networks, open-source ideology, and innovative value generation. This comprehensive analysis delves into the technological and cultural shifts driving the next era of the internet, including cryptocurrencies, NFTs, DAOs, and decentralized finance."
+subtitle: 'Empowering Users and Reshaping the Digital Landscape'
+description: 'Empowering Users and Reshaping the Digital Landscape'
 tags: ['Crypto', 'Tech']
 ---
 
@@ -110,7 +110,7 @@ These standards have inspired others and have been implemented across other chai
 
 If you go to most financial advisors right now and ask them how to position your portfolio with regard to cryptocurrencies and equities, your answer would probably be 95% equities and 5% crypto or even 0% crypto. This draws a clear line in the sand between cryptocurrencies and equities when they are more alike than they are different.
 
-Sure, some cryptocurrencies serve zero use cases and are nothing more than speculative instruments, but others are entire networks. If you were to invest in ETH, SOL, AVAX, or ALGO, you would own a piece of these networks, and this tradable ownership could be considered equity. Tokens, such as the ones conforming to the ERC20 standard, are built and deployed atop these networks. 
+Sure, some cryptocurrencies serve zero use cases and are nothing more than speculative instruments, but others are entire networks. If you were to invest in ETH, SOL, AVAX, or ALGO, you would own a piece of these networks, and this tradable ownership could be considered equity. Tokens, such as the ones conforming to the ERC20 standard, are built and deployed atop these networks.
 
 Each of these tokens has its use case, tokenomics, and distribution schedule that should be diligently researched before being speculated upon.
 
@@ -124,7 +124,7 @@ Another vital component of Web 3 thus far has been the innovations in the fundra
 
 This bubble, which was relatively similar to the Tech Bubble but at a much smaller scale, displayed the excitement that people had in regard to how projects and companies could now raise money. Some were raising a lot of money, which attracted a few nefarious actors and influencers like John McAfee and Floyd Mayweather, who promoted garbage. The ICO industry has since evolved into multiple variations of ICOs that each serve different purposes. These will impact Web 3’s fundraising and development going forward.
 
-For the record, there are still **far too many nefarious influencers promoting garbage. Kim Kardashian promoted Ethereum Max. Influencers like BitBoy are constantly exposed to malfeasance. When money is involved, anything can happen, so be wary of who you follow.
+For the record, there are still \*\*far too many nefarious influencers promoting garbage. Kim Kardashian promoted Ethereum Max. Influencers like BitBoy are constantly exposed to malfeasance. When money is involved, anything can happen, so be wary of who you follow.
 
 ### ICO / IDO / ITO / IAO / Etc.
 
@@ -252,4 +252,3 @@ It’s not just a complex web of financial and security-related innovation but a
 Some people doubt this new paradigm exists or has any legs to stand on in the same way people doubt trusting a website with their credit card information. These are the same people who are right-clicking and saving NFTs while questioning any substance or potential value within them. We here at Solflare like the .jpegs.
 
 The world has evolved and will continue to do so, but the implications will be staggering once Web 3’s innovations are adopted into the mainstream. This adoption may take a while due to governmental bodies, regulatory restrictions, and financial incumbents wanting to remain in control. Still, fortunately for the world, Web 3 is not just around the corner. It’s already here.
-

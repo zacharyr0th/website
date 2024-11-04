@@ -24,6 +24,12 @@ const ArchiveSection: React.FC<ArchiveSectionProps> = ({
     return Array.from(uniqueTags);
   }, [tags]);
 
+  const sortedArticles = useMemo(() => {
+    return [...content]
+      .filter((article) => article && article.title)
+      .sort((a, b) => a.title.localeCompare(b.title));
+  }, [content]);
+
   return (
     <section className="mt-12">
       <h3 className="text-2xl font-semibold mb-4 text-[var(--color-text-primary)]">Archives</h3>
@@ -35,7 +41,7 @@ const ArchiveSection: React.FC<ArchiveSectionProps> = ({
         />
         <MemoizedSearchButton />
       </div>
-      <MemoizedArticleGrid articles={content} />
+      <MemoizedArticleGrid articles={sortedArticles} />
     </section>
   );
 };

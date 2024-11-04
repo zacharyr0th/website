@@ -104,6 +104,6 @@ To scale, Boson estimates they will need to handle, on average, ten transactions
 
 ![Boson Protocol 8](/images/bp-8.webp)
 
-Now that funds have been raised, the team assembled, and the strategy set, Boson has entered what it calls "hyper blitz scale mode" of development. For a detailed explanation of what hyper-blitz scaling means to Boson, refer to their Roadmap article on Medium. Time will tell if supply chains actually adopt models like this. 
+Now that funds have been raised, the team assembled, and the strategy set, Boson has entered what it calls "hyper blitz scale mode" of development. For a detailed explanation of what hyper-blitz scaling means to Boson, refer to their Roadmap article on Medium. Time will tell if supply chains actually adopt models like this.
 
 Let's hope so.

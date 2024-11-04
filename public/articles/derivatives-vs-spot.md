@@ -82,12 +82,12 @@ In other words, prices are rising. Real value can be measured by a notional valu
 
 ### Candy is not a Store of Value
 
-| Product | 2014 Weight | 2018 Weight | Change |
-|---------|-------------|-------------|--------|
-| Snickers (4 pack) | 232g | 167g | -28.1% |
-| Toblerone Milk Chocolate | 200g | 150g | -25.0% |
-| Twix Twin Bars (4 pack) | 200g | 160g | -20.0% |
-| Kit Kat Chunky | 48g | 40g | -16.7% |
+| Product                  | 2014 Weight | 2018 Weight | Change |
+| ------------------------ | ----------- | ----------- | ------ |
+| Snickers (4 pack)        | 232g        | 167g        | -28.1% |
+| Toblerone Milk Chocolate | 200g        | 150g        | -25.0% |
+| Twix Twin Bars (4 pack)  | 200g        | 160g        | -20.0% |
+| Kit Kat Chunky           | 48g         | 40g         | -16.7% |
 
 The notional value of these candies has not changed, yet the real value of what you are purchasing has declined substantially. This pattern of decreasing returns and increasing prices is common across many industries, such as education, groceries, commodities, ride-sharing services, and streaming platforms. It is not a specific issue, it's a systemic problem.
 

@@ -2,8 +2,8 @@
 title: 'Three Wallets'
 date: '2024-10-25'
 image: /misc/placeholder.webp
-subtitle: 
-description: ""
+subtitle: There is a new one every day.
+description: 'There is a new one every day.'
 tags: ['Crypto']
 ---
 
@@ -30,17 +30,16 @@ For the first time in history, you have the ability to control and safeguard you
 
 </div>
 
-
-To answer Raj’s question, this article will break down the first 3 wallet types that we think everyone should set up. 
+To answer Raj’s question, this article will break down the first 3 wallet types that we think everyone should set up.
 
 1. Banking
 2. DeFi Explorer / NFT Minter
 3. HODLer
-The benefits of self-custody are far-reaching. Rather than go into all of it here, the scope of this article will only require you to understand the following:
+   The benefits of self-custody are far-reaching. Rather than go into all of it here, the scope of this article will only require you to understand the following:
 
-Non-custodial wallets give only those with the Mnemonic / Recovery Phrase access to the funds within them. 
+Non-custodial wallets give only those with the Mnemonic / Recovery Phrase access to the funds within them.
 If you lose your Mnemonic / Recovery Phrase for a wallet, you lose access to the funds in that wallet and no one can recover them for you.
-If you connect your wallet to a sketchy website, your wallet could be drained entirely by a malicious person or bot. 
+If you connect your wallet to a sketchy website, your wallet could be drained entirely by a malicious person or bot.
 See Below.
 
 Wallet 1: Banking
@@ -56,7 +55,6 @@ Having all your CEX activity under one wallet will make it much easier for you t
 
 Some wallets even enable you to purchase tokens with a bank account or debit/credit card using a 3rd party provider like MoonPay. 😉
 
-
 When you keep your funds on blockchains, there are decentralized exchanges (DEXes) that operate using liquidity pools which you can use to swap tokens. If you are using Solflare, you can swap virtually any SPL token within the wallet itself so you don’t even need to connect to a 3rd party DEX.
 
 Aside from the times, you want to cash out into fiat through a centralized exchange, you could keep your entire portfolio on-chain using this wallet.
@@ -64,7 +62,7 @@ Aside from the times, you want to cash out into fiat through a centralized excha
 For the times you want to explore the DeFi and NFT ecosystems, use a different wallet meant for DeFi exploring and NFT minting.
 
 Wallet 2: DeFi Explorer / NFT Minter
-After you’ve set up your Banking wallet, set up a second one for any risky activity you want to partake in – it will very much be worth your while. 
+After you’ve set up your Banking wallet, set up a second one for any risky activity you want to partake in – it will very much be worth your while.
 
 If you are utilizing DeFi, you may unknowingly be depositing funds into an AUDITED BUT FAULTY contract that could potentially steal all of the tokens in your wallet. If you are trying to participate in a new NFT mint, you could be clicking on a link that says mint but is actually draining your wallet. It’s important to be wary of these possibilities.
 
@@ -79,15 +77,14 @@ If you want to move on from experimenting with small amounts of capital, it woul
 Wallet 3: HODLer
 This is the wallet that you should only check on every once in a while. As Bitcoiners would say, just keep stacking sats. They would also say HODL, which originated from this post and is often referenced as hold on for dear life.
 
+If you think DOGE is going to be worth $1,000 in the next few years but you are an inexperienced trader, why would you try to time the market? Just keep buying more DOGE whenever you have excess liquidity, or dollar cost average and HODL. This is definitely not financial advice.
 
-If you think DOGE is going to be worth $1,000 in the next few years but you are an inexperienced trader, why would you try to time the market? Just keep buying more DOGE whenever you have excess liquidity, or dollar cost average and HODL. This is definitely not financial advice. 
-
-The HODLer wallet is meant for you to use for assets that you think will retain or gain in value. These assets could be tokens like BTC, ETH, SOL, APE, etc or they can be NFTs like a CryptoPunk or DegenerateApe. 
+The HODLer wallet is meant for you to use for assets that you think will retain or gain in value. These assets could be tokens like BTC, ETH, SOL, APE, etc or they can be NFTs like a CryptoPunk or DegenerateApe.
 
 When you have a HODLer wallet, you can be sure you always have some liquidity somewhere (as long as what your HODLing stays liquid). Think of it as your ultimate savings account or even your retirement account.
 
 End
-These wallet purposes will cover the majority of use cases for non-advanced crypto users. 
+These wallet purposes will cover the majority of use cases for non-advanced crypto users.
 
 When you want to work with more exotic protocols and larger amounts of capital, there will be further security measures you should take into account that are not mentioned in this article. More on those security measures later!
 

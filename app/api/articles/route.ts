@@ -21,6 +21,10 @@ export async function GET() {
   try {
     const articles = await getAllArticles();
     console.log('Fetched articles:', articles);
+    console.log('Fetched articles:');
+    articles.forEach((article) => {
+      console.log(`- ${article.title}`);
+    });
     return NextResponse.json(articles);
   } catch (error) {
     console.error('Error fetching articles:', error);
@@ -43,7 +47,7 @@ async function getAllArticles(): Promise<Article[]> {
         id: slug,
         slug,
         title: frontmatter.title,
-        description: frontmatter.description || content.slice(0, 150) + '...', // Changed from excerpt
+        description: frontmatter.description || content.slice(0, 25) + '...', // Changed from excerpt
         content,
         image: {
           src: frontmatter.image || '/public/misc/placeholder.webp',

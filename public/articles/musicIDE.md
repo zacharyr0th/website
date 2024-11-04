@@ -3,7 +3,7 @@ title: 'MusicIDE'
 date: '2024-10-25'
 image: /misc/placeholder.webp
 subtitle: 'Cursor + Musescore for Research & Composition'
-description: 'An exploration of how Integrated Development Environments will transform the music production landscape.'
+description: 'Cursor + Musescore for Research & Composition.'
 tags: ['Music', 'AI']
 ---
 
@@ -36,7 +36,7 @@ With the advent of LLMs and AI wrappers, the barriers to entry in the world of t
 
 Dominant notation software like Sibelius is limited, static, and requires meticulous attention to detail throughout every step of the process. To substitute a Db Neopolitan 6 chord in first inversion across 18 instruments for the dominant chord in a symphonic score, the chord must be diagnosed, and each note must be inputted individually across the instruments. Editing this on paper is one thing, but in a notation program, it's so annoying. Keyboard shortcuts and MIDI input help, but we need more.
 
-With MusicIDE, a goal is to be able to prompt the system to do this in the same way that Cursor does - to generate and apply all the changes while giving me the option to further edit the changes before accepting them. This tool will know that you're in the key of C and will generate a Db chord with an F in the bass. To do that, it needs to understand what a Neopolitan chord is, what the six means, what the notes are in every key, and be able to substitute the current notes for the new ones across all the instruments. Traditionalists will say this is blasphemy, and they have a point but this isnt traditional music composition. 
+With MusicIDE, a goal is to be able to prompt the system to do this in the same way that Cursor does - to generate and apply all the changes while giving me the option to further edit the changes before accepting them. This tool will know that you're in the key of C and will generate a Db chord with an F in the bass. To do that, it needs to understand what a Neopolitan chord is, what the six means, what the notes are in every key, and be able to substitute the current notes for the new ones across all the instruments. Traditionalists will say this is blasphemy, and they have a point but this isnt traditional music composition.
 
 ### Generated Music?
 
@@ -46,8 +46,8 @@ Generated is the right word to use, but MusicIDE is going to be much more than a
 
 ### Applications
 
-The overarching goal is to aid individuals in Music Research and Composition by giving everyone the compositional and analytical tools that history's greatest musicologists, musicians, and composers have been working with. 
+The overarching goal is to aid individuals in Music Research and Composition by giving everyone the compositional and analytical tools that history's greatest musicologists, musicians, and composers have been working with.
 
-This means every open-source score, textbook, concept from music theory, and analytical resource can be built into the program to be used as context for learning, researching, and composing music. The longer-term roadmap for MusicIDE includes tools to learn music on the instrument of your choosing with the help of AR and guitar-hero-inspired visuals for the piano. 
+This means every open-source score, textbook, concept from music theory, and analytical resource can be built into the program to be used as context for learning, researching, and composing music. The longer-term roadmap for MusicIDE includes tools to learn music on the instrument of your choosing with the help of AR and guitar-hero-inspired visuals for the piano.
 
 Its important to emphasize that while AI is useful for generating templates, boilerplates, ideas, and implementations of ideas - ultimately the choices of AI-assisted composers is by the human - the tastemaker.

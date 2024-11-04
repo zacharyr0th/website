@@ -3,7 +3,7 @@ title: 'The Fundamental Flaw'
 date: '2024-10-25'
 image: /images/flaw-0.webp
 subtitle: Onboarding and Offboarding
-description: 'Onboarding and Offboarding'
+description: 'Onboarding and Offboarding...'
 tags: ['Crypto']
 ---
 
@@ -26,7 +26,7 @@ tags: ['Crypto']
 
 <div class="tldr-section">
 
-The fundamental flaw in blockchain adoption lies in the challenges of on and off-boarding users. The current financial and political infrastructure makes it difficult for people to enter and exit crypto ecosystems easily. 
+The fundamental flaw in blockchain adoption lies in the challenges of on and off-boarding users. The current financial and political infrastructure makes it difficult for people to enter and exit crypto ecosystems easily.
 
 This limitation, coupled with regulatory hurdles and public skepticism, presents a significant barrier to widespread adoption.
 

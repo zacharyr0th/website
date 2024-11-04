@@ -60,7 +60,7 @@ const PrimaryArticle: React.FC<{ article: Article }> = React.memo(({ article }) 
               {article.title}
             </h2>
             <p className="mt-2 text-var(--color-text-secondary) line-clamp-2">
-              {article.subtitle}
+              {article.description}
             </p>
           </div>
         </div>
@@ -96,30 +96,29 @@ const RandomSelection: React.FC<{
 
 RandomSelection.displayName = 'RandomSelection';
 
-const FeaturedArticle: React.FC<{ article: Article }> = React.memo(({ article }) => (
-  <article role="listitem" className="h-32">
-    <Link
-      href={article.link}
-      className="group flex gap-3 p-2 rounded-lg hover:bg-surface/50 transition-colors"
-    >
-      <div className="relative w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden">
-        <Image src={article.image.src} alt={article.image.alt} fill className="object-cover" />
-      </div>
-      <div className="flex-1 min-w-0">
-        <h3 className="font-medium text-text-primary transition-colors line-clamp-2 group-hover:text-accent">
-          {article.title}
-        </h3>
-        <p className="mt-1 text-sm text-var(--color-text-secondary) line-clamp-2">
-          {article.subtitle}
-        </p>
-        <span className="mt-2 inline-flex items-center text-sm text-var(--color-accent) font-medium transition-colors hover:text-accent">
-          Read more
-          <ArrowRightIcon className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-0.5" />
-        </span>
-      </div>
-    </Link>
-  </article>
-));
+const FeaturedArticle: React.FC<{ article: Article }> = React.memo(({ article }) => {
+  return (
+    <article role="listitem" className="h-32">
+      <Link
+        href={article.link}
+        className="group flex gap-3 p-2 rounded-lg hover:bg-surface/50 transition-colors"
+      >
+        <div className="relative w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden">
+          <Image src={article.image.src} alt={article.image.alt} fill className="object-cover" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <h3 className="font-medium text-text-primary transition-colors line-clamp-2 group-hover:text-accent">
+            {article.title}
+          </h3>
+          <span className="mt-2 inline-flex items-center text-sm text-var(--color-accent) font-medium transition-colors hover:text-accent">
+            Read more
+            <ArrowRightIcon className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-0.5" />
+          </span>
+        </div>
+      </Link>
+    </article>
+  );
+});
 
 FeaturedArticle.displayName = 'FeaturedArticle';
 

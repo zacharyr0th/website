@@ -30,6 +30,7 @@ LLMs introduce a new form of search. They can answer questions, provide summarie
 generate content based on learned data. They're the first real challenge to Google's
 long-standing dominance and are sure to cause turmoil in the search engine market in the
 coming years.
+
 </div>
 
 ## The AI Gold Rush
@@ -51,8 +52,8 @@ washing machines.
 But as Balaji put it:
 
 > "Not your API keys, not your AI."
-> 
-> — Balaji Srinivasan (@balajis) *February 24, 2023*
+>
+> — Balaji Srinivasan (@balajis) _February 24, 2023_
 
 Tech companies are feeling the competition. Google's co-founder, Sergey Brin, came out of
 the shadows to submit his first

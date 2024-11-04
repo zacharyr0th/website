@@ -6,11 +6,14 @@ import Footer from '@/app/components/common/Footer';
 import { Article } from '@/lib/types';
 
 const ArticleContent = memo(({ article }: { article: Article }) => (
-  <main className="flex flex-col w-full min-h-screen font-mono" style={{
-    backgroundColor: 'var(--color-background)',
-    padding: 'var(--spacing-lg)',
-    fontFamily: 'var(--font-family-base)',
-  }}>
+  <main
+    className="flex flex-col w-full min-h-screen font-mono"
+    style={{
+      backgroundColor: 'var(--color-background)',
+      padding: 'var(--spacing-lg)',
+      fontFamily: 'var(--font-family-base)',
+    }}
+  >
     <article className="flex-grow container mx-auto px-48 pt-16 pb-8 max-w-5xl prose">
       <header className="mb-12">
         <h1 className="text-5xl mb-4" style={{ color: 'var(--color-text-primary)' }}>
@@ -29,7 +32,10 @@ const ArticleContent = memo(({ article }: { article: Article }) => (
                 <li
                   key={index}
                   className="text-sm bg-gray-200 rounded-full px-3 py-1"
-                  style={{ color: 'var(--color-text-secondary)', backgroundColor: 'var(--color-surface)' }}
+                  style={{
+                    color: 'var(--color-text-secondary)',
+                    backgroundColor: 'var(--color-surface)',
+                  }}
                 >
                   {tag}
                 </li>
@@ -45,6 +51,7 @@ const ArticleContent = memo(({ article }: { article: Article }) => (
             alt={article.image.alt || 'Article image'}
             width={1200}
             height={600}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="rounded-xl shadow-lg"
           />
         </figure>

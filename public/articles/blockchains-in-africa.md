@@ -2,31 +2,31 @@
 title: 'Blockchains in Africa'
 date: '2024-10-25'
 image: /images/ba-0.webp
-subtitle: Notes on Adoption Efforts
-description: "Notes on Adoption Efforts"
+subtitle: 'Notes on Adoption Efforts'
+description: 'Notes on Adoption Efforts.'
 tags: ['Crypto']
 ---
 
 <style jsx>{`
- .prose a {
+  .prose a {
     text-decoration: underline;
     color: var(--color-accent);
- }
- .prose ol {
+  }
+  .prose ol {
     list-style-type: decimal;
     margin-left: 2em; /* Adjust as needed for indentation */
     padding-left: 0.5em; /* Add padding if needed */
- }
- .prose ol li {
+  }
+  .prose ol li {
     margin-bottom: 0.5em;
     color: var(--color-text-primary);
     line-height: 1.5; /* Adjust line height for better readability */
- }
+  }
 `}</style>
 
 <div class="tldr-section">
 
-Blockchain technology is gaining traction in Africa, offering innovative solutions to longstanding economic challenges although no single blockchain has been able to establish a strong footing in the region.
+Blockchain technology is gaining traction in Africa, offering innovative solutions to longstanding economic challenges, although no single blockchain has been able to establish a strong footing in the region.
 
 </div>
 
@@ -80,7 +80,7 @@ Rather than succumb to the external forces that the Chinese government has put o
 
 ## Blockchains as a Problem
 
-El Salvador adopted BTC as a domestic currency in June of 2021, and the results have been rather lackluster. At the time of writing, President Nayib Bukele and the El Salvadorian government are down about 30% on their purchase, and citizens are generally unhappy with the situation. Crypto Critics' Corner recorded four podcasts about this situation, and it seems all is not well. Those can be found here - [1](#), [2](#), [3](#), [4](#).  Just to note - they are biased no-coiners, so take it with a grain of salt, but to be fair, the IMF recently downgraded El Salvador's credit rating, and the rollout of Bitcoin's Lightning network has been met with significant resistance from vendors and individuals within the country.
+El Salvador adopted BTC as a domestic currency in June of 2021, and the results have been rather lackluster. At the time of writing, President Nayib Bukele and the El Salvadorian government are down about 30% on their purchase, and citizens are generally unhappy with the situation. Crypto Critics' Corner recorded four podcasts about this situation, and it seems all is not well. Those can be found here - [1](#), [2](#), [3](#), [4](#). Just to note - they are biased no-coiners, so take it with a grain of salt, but to be fair, the IMF recently downgraded El Salvador's credit rating, and the rollout of Bitcoin's Lightning network has been met with significant resistance from vendors and individuals within the country.
 
 It's also worth considering that Nayib "deployed the armed forces and civil police around and inside the Legislative Assembly" to "coerce the legislative branch to act on his crime bill."
 

@@ -53,7 +53,7 @@
     "esModuleInterop": true,
 
     // Type Declarations
-    "typeRoots": ["./node_modules/@types", "./types"],
+    "typeRoots": ["./node_modules/@types", "./lib"],
     "types": ["node", "react", "react-dom"],
 
     // Plugins

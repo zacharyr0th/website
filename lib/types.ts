@@ -230,3 +230,10 @@ export type WritingProject = {
   description: string;
   link: string;
 };
+
+export interface ArchiveSectionProps {
+  content: Article[];
+  tags: string[];
+  selectedTag: string;
+  onTagChange: (tag: string) => void;
+}
