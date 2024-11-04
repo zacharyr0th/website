@@ -64,7 +64,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
         />
       </div>
       <div className={styles.content}>
-        {article.tags?.length > 0 && (
+        {article.tags && article.tags.length > 0 && (
           <div className="flex flex-wrap gap-1.5 mb-2" role="list" aria-label="Article tags">
             {article.tags.slice(0, variant === 'featured' ? 3 : 2).map((tag) => (
               <span
