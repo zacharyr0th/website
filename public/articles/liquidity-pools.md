@@ -2,121 +2,177 @@
 title: 'Liquidity Pools'
 date: '2024-10-25'
 image: /misc/placeholder.webp
-subtitle:
+subtitle: 'What they are and why they work.'
 description: 'What they are and why they work.'
 tags: ['Crypto']
 ---
 
 <style jsx>{`
- .prose a {
+  .prose a {
     text-decoration: underline;
     color: var(--color-accent);
- }
- .prose ol {
+  }
+  .prose ol {
     list-style-type: decimal;
     margin-left: 2em; /* Adjust as needed for indentation */
     padding-left: 0.5em; /* Add padding if needed */
- }
- .prose ol li {
+  }
+  .prose ol li {
     margin-bottom: 0.5em;
     color: var(--color-text-primary);
     line-height: 1.5; /* Adjust line height for better readability */
- }
+  }
 `}</style>
 
 <div class="tldr-section">
 
-One of the most important innovations in decentralized finance (DeFi) is the liquidity pool. It eradicates the need for market makers, bootstraps liquidity for markets that may otherwise be illiquid, and introduces a novel way to generate yield on your assets.
+Liquidity pools enabled new forms of decentralized finance by eliminating the need for market makers, providing liquidity to otherwise illiquid markets, and offering new yield-generating opportunities. Unlike traditional order book systems used by exchanges like Binance and the NYSE, liquidity pools offer an innovative approach to trading.
 
-Liquidity pools are an alternative to the traditional order book structure of trading. Exchanges like Binance, Coinbase, New York Stock Exchange, and the Nasdaq utilize order books as their liquidity management method. Before we break down liquidity pools, let’s outline an order book.
+</div>
 
-Order Books
-An order book is the tried and true liquidity management method that has been globally implemented across exchanges for decades. They refer to the electronic lists of previously placed buy orders (bids) and sell orders (offers) of an asset at different price levels.
+## Order Books vs. Liquidity Pools
 
-The buyers are trying to pay the least amount possible, while the sellers are trying to sell for the highest amount possible. What exists in between the buyers and sellers is what’s called the spread.
+### Order Books
 
-When you buy a share of Apple, you must place a limit or market order. The limit order will be placed into the order book until it is canceled or filled at the listed price. A market order will jump the spread and pay/sell for the ‘best’ offer/bid.
+Order books are electronic lists of buy (bid) and sell (offer) orders for an asset at various price levels. Buyers aim to pay the least, while sellers seek the highest price, creating a spread between them. When trading, users place limits or market orders, which are executed at the best available price.
 
-In the US, the best bid and best offer refer to the NBBO standard enforced by the SEC, which requires brokers to guarantee that market buys are at the lowest possible price, and market sells are at the highest possible price.
+### Liquidity Pools
 
-What’s wrong with an order book?
+Liquidity pools, in contrast, operate on different principles. They are smart-contract-based token reserves that enable decentralized trading and yield generation. Liquid pools offer several advantages over traditional order book systems by automating the trading process and removing intermediaries.
 
-Bookmap’s visualization of an active order book
+<table>
+  <thead>
+    <tr>
+      <th>Benefit</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Continuous Liquidity</td>
+      <td>Pools provide constant liquidity, allowing trades to occur anytime without relying on matching buyers and sellers.</td>
+    </tr>
+    <tr>
+      <td>Simplified Trading</td>
+      <td>Users can swap tokens directly against the pool, eliminating the need to navigate complex order books.</td>
+    </tr>
+    <tr>
+      <td>Yield Generation</td>
+      <td>Liquidity providers earn fees by depositing assets into the pool, creating new passive income opportunities.</td>
+    </tr>
+    <tr>
+      <td>Market Accessibility</td>
+      <td>Pools enable trading for less popular or new tokens that might struggle to maintain liquidity in traditional markets.</td>
+    </tr>
+  </tbody>
+</table>
 
-The infrastructure behind traditional/centralized finance (TradFi or CeFi) requires excessive intermediaries. To facilitate a single trade, you will need at least a dozen different entities to be directly or indirectly involved. These include centralized exchanges (CEXes), market makers, prime brokers or high net-worth individuals who fund the market makers, custodians, etc.
+## The Issue with CLOBs
 
-This creates high entry barriers and high levels of informational asymmetry. Incentives are not aligned, and the retail investor is often hung out to dry.
+A typical central limit order book (CLOB) contains a labyrinth of intermediaries lurking beneath this seemingly efficient system. Traditional finance (TradFi) or centralized finance (CeFi) is a bureaucratic beast, requiring a small army of entities to execute a single trade. We're talking centralized exchanges (CEXes), market makers, deep-pocketed prime brokers, custodians, and others. This complex web creates a financial fortress with sky-high entry barriers and rampant information asymmetry.
 
-Here’s an Example
-What happens if you want to buy 150 shares of Apple for $130, but there are only 50 shares that people are willing to sell at that price, and the next available price people are ready to sell at is $131? This is where the market maker comes into play.
+Imagine you're looking to buy 150 Apple shares for $130 each, but there are only 50 shares up for grabs at that price, and the next batch is waiting to be bought at $131. Enter the market maker. These financial intermediaries conjure up liquidity and will happily provide those extra 100 shares, but don't expect charity - you'll be paying a premium for the privilege of accessing that trade at that exact moment in time.
 
-Market makers make markets by providing the remaining 100 shares to the buyer as long as the buyer is willing to pay more for the spread. This enables instantaneous, continuous trading. Since no one is willing to sell for less than $131, market makers could sell their Apple shares for $130.99 until someone is willing to sell for $130.99, etc. Market makers won’t just take undue amounts of risk to complete your trades. They may also trade against you.
+### Implications of Market Makers
 
-Now let’s say you sell your 100 shares. No trader on the other side is trying to buy them at the price you offered. The market maker buys them. The market maker then buys a put option, so they profit if the cost of their Apple shares declines. If the put becomes in the money, the market maker is incentivized to execute the option giving them 100 more shares to sell. They can now sell 100 shares onto the open market while retaining their original 100 shares. If the share price goes up, the market maker makes money; if the share price goes down, the market maker makes money.
+<table>
+  <thead>
+    <tr>
+      <th>Implication</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>The Information Advantage</td>
+      <td>Market makers gain a significant edge through their privileged position in the order book structure.</td>
+    </tr>
+    <tr>
+      <td>The True Cost of "Free" Trading</td>
+      <td>While platforms like Robinhood tout commission-free trading, there's more to the story.</td>
+    </tr>
+    <tr>
+      <td>Market Distortions</td>
+      <td>The symbiotic relationship between market makers and the broader market can lead to unnatural price movements.</td>
+    </tr>
+  </tbody>
+</table>
 
-You can see how deeply integrated, and necessary market makers have become in TradFi. Because of this order book structure, they are privy to much more information than retail traders. If a company like Robinhood states that they offer feeless trading, that is only partially true because they sell your trades to a market maker who then profits off this spread. The reflexive relationship between market makers and the market causes unnatural price action as derivatives have an outsized effect on the underlying asset’s price.
+### Enter Liquidity Pools: A Decentralized Alternative
 
-Cue Liquidity Pools
-Liquidity pools operate entirely on their own without the need for any market makers. They enable individuals to provide liquidity to traders by pooling tokens into a smart contract and proportionately distributing trading fees to liquidity providers.
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>No Middlemen</td>
+      <td>They operate without the need for traditional market makers, cutting out intermediaries.</td>
+    </tr>
+    <tr>
+      <td>Democratized Liquidity Provision</td>
+      <td>Anyone can become a liquidity provider by depositing tokens into a smart contract.</td>
+    </tr>
+    <tr>
+      <td>Automated Trading</td>
+      <td>Swaps occur directly with the pool, governed by smart contracts.</td>
+    </tr>
+    <tr>
+      <td>Proportional Rewards</td>
+      <td>Liquidity providers earn fees in proportion to their share of the pool.</td>
+    </tr>
+    <tr>
+      <td>Flexibility</td>
+      <td>Providers can exit by burning their LP tokens to reclaim their share of the pool plus accumulated fees.</td>
+    </tr>
+  </tbody>
+</table>
 
-How do they work?
-Liquidity providers deposit an equivalent value of two tokens; in return, they receive LP tokens in proportion to how much they deposit. Traders then swap tokens with the liquidity pools (funded by the liquidity providers), and the trading fees are proportionally distributed to the LP holders. The liquidity providers must burn LP tokens by selling them to the liquidity pool to take back the underlying liquidity and any accumulated swapping fees.
+## The AMM Formula: A Financial Balancing Act
 
-The formula
-Each swap adjusts the price via a deterministic algorithm called an automated market maker (AMM). Different protocols use different AMMs for other purposes but are fundamentally based on the same concept.
+At the heart of liquidity pools lies a deceptively simple formula: \( x * y = k \)
 
-x \* y =k
+- \( x \) and \( y \) represent the quantities of two tokens in the pool.
+- \( k \) is a constant that represents the pool's total liquidity.
 
-This formula describes the relationship between the assets deposited into liquidity pools. It implies that the quantity and value of token X must equal the amount and value of token Y, which enables a constant value of K representing the level of liquidity available.
+This formula ensures that as one token's quantity decreases, its price increases, maintaining a delicate balance within the pool.
 
-Arbitrage bots are incentivized to take advantage of any indiscretions between the price of the assets in the pool and the price of that same asset on another exchange. The first liquidity provider sets the price of the assets, and each swap after that will affect the asset’s prices, engaging the arb bots. If a trader wants to buy ETH with USDC, the trader will be depositing USDC into the liquidity pool while removing ETH.
+Any price discrepancy between the pool and external markets creates an arbitrage opportunity. Bots and savvy traders pounce on these differences, ensuring the pool's prices align with the broader market.
 
-Source
-The AMM asymptotically increases token prices as quantities decrease because the ratio of tokens within the pool dictates token prices.
+## Risks
 
-The Result
-This balance of consistent liquidity and accurate pricing enables users to trustlessly trade on decentralized exchanges (DEXes) simply by connecting to a non-custodial digital wallet. The days of needing to deal with market makers manipulating prices and taking advantage of illiquidity are over. You can now freely make a market for just about anything and rely on nothing but the trust of the underlying smart contract governing the transactions.
+Liquidity pools allow users to trade trustlessly on decentralized exchanges (DEXes) with nothing more than a non-custodial digital wallet but to be clear, DeFi is still an experimental technology at scale, and venturing into it exposes you to new, unavoidable risks.
 
-Larger liquidity pools enable larger trades, so many platforms have been incentivized to reward liquidity providers with extra tokens for providing liquidity. This process is called liquidity mining which can be very profitable and helped kickstart the DeFi Summer of 2020.
+<table>
+  <thead>
+    <tr>
+      <th>Risk</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Smart Contract Bugs</td>
+      <td>Even audited contracts can harbor nasty surprises.</td>
+    </tr>
+    <tr>
+      <td>Admin Key Risk</td>
+      <td>Too much-centralized control can put your assets in jeopardy.</td>
+    </tr>
+    <tr>
+      <td>Systemic Risk</td>
+      <td>From blockchain failures to stablecoin de-pegging, systemic shocks loom large.</td>
+    </tr>
+    <tr>
+      <td>Impermanent Loss</td>
+      <td>Potential loss from price fluctuations of assets in a liquidity pool compared to holding them outside the pool.</td>
+    </tr>
+  </tbody>
+</table>
 
-The Risks
-Although there have been vast amounts of progress and development in DeFi over the past few years, it still needs to be considered an unproven technology at scale. Doing anything in DeFi carries three risks you can’t avoid: smart contract bugs, admin key, and systemic risks.
+## Conclusion
 
-Smart contract bugs are vulnerabilities or errors encoded within the smart contracts governing your capital. Even audited smart contracts can contain these bugs, and the results can be disheartening. Admin key risk refers to the contract’s creators retaining too much control, which puts the assets within it at risk. Systemic risk can be anything from the blockchain you are using failing or even the price of stablecoins de-pegging from their intended values.
-
-Along with all of the above, engaging with liquidity pools entails one more risk that needs to be considered.
-
-Impermanent Loss
-Impermanent loss is a confusing name. It’s a result of one token’s price change affecting the aggregate value of the tokens in the liquidity pool.
-
-The loss becomes permanent once the LP tokens are sold back to the AMM. The loss can go away if the liquidity provider keeps holding the LP tokens and the token price returns to normal. Depending on when you deposit your tokens into a liquidity pool, having them sit boringly in your wallet may be more profitable.
-
-However, trading volumes and platform incentives may offset the impermanent loss. Understanding how price changes will affect the underlying liquidity you provide to any pool is essential.
-
-The Issues
-Liquidity pools are dynamic, powerful tools that can disrupt much of centralized finance. While there are benefits to trading with an order book or building a platform with one, there are also drawbacks.
-
-The new AMMs being designed are much more complicated than what has been explained above. The x\*y=k formula describes the relationship of a simple 2-asset liquidity pool. New pools can contain much more than two assets. Some may even be a hybrid of multiple AMMs to enhance liquidity in specific regions. This substantially lessens a trader’s losses due to slippage and enables pools with tokens pegged to each other (USDC/DAI, ETH/wETH) to experience less price variation.
-
-Liquidity providers can be inconsistent as well. As soon as they feel like it, they can leave. This makes the market they were providing liquidity to suddenly illiquid, and when this happens, prices crash if it’s a token that’s only traded on-chain.
-
-Final Thoughts
-TradFi requires too many intermediaries taking fees. Retail investors suffer from a lack of information and assets aren’t yielding what they used to while inflation is rampant. The order book has worked until now, but the convoluted system involved is ripe for innovation.
-
-Liquidity pools present an alternative that can help fix each of these problems. Not only do they enable permissionless trading, but they incentivize everybody to get involved. The barriers to entry are very low.
-
-If you understand this article, you can understand how to be a liquidity provider.
-
-Similar Posts
-What are SPL tokens?
-Zachary
-Zachary
-17 November 2021
-18 min
-What are SPL tokens?
-This article breaks down what liquidity pools are and what issues they address.
-
-Solflare
-Copyright © 2024 Solflare
-Still have questions?
-Want to just say hello?
+Despite these challenges, liquidity pools represent a powerful alternative to the fee-laden, opaque world of traditional finance. They democratize market-making, lower entry barriers, and offer a glimpse of a permissionless financial system. The future of finance is here, and it's open to all - just make sure to not keep all your eggs in one basket or liqudity pool. 

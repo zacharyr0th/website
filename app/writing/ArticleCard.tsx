@@ -43,7 +43,7 @@ const ArticleCard: React.FC<ArticleCardProps> = React.memo(({ article, variant =
   const styles = variantStyles[variant as keyof typeof variantStyles];
 
   const tagElements = useMemo(() => {
-    if (!article.tags?.length) return null;
+    if (!article.tags || article.tags.length === 0) return null;
 
     const tagsToShow = article.tags.slice(0, variant === 'featured' ? 3 : 2);
     return (
