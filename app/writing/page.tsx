@@ -72,15 +72,15 @@ export default function WritingPage() {
     if (isLoading) {
       return (
         <div className="flex-grow container mx-auto px-5 md:px-48 pt-8 md:pt-36 pb-8 md:pb-18 max-w-5xl">
-          <h1 className="text-5xl font-bold mb-12 text-text-primary">Writing</h1>
+          <h1 className="text-3xl md:text-5xl font-bold mb-12 text-text-primary">Writing</h1>
           <p>Loading articles...</p>
         </div>
       );
     }
 
     return (
-      <div className="flex-grow container mx-auto px-48 pt-36 pb-18 max-w-5xl">
-        <h1 className="text-5xl font-bold mb-12 text-text-primary">Writing</h1>
+      <div className="flex-grow container mx-auto px-5 md:px-48 pt-8 md:pt-36 pb-8 md:pb-18 max-w-5xl">
+        <h1 className="text-3xl md:text-5xl font-bold mb-12 text-text-primary">Writing</h1>
 
         {primaryContent && (
           <div className="max-w-7xl mx-auto mb-12">
