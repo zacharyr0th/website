@@ -190,6 +190,18 @@ export type ProjectPanelsProps = {
   visibleProjects: number;
 };
 
+export interface ArticleFrontmatter {
+  title: string;
+  date: string;
+  featured: boolean;
+  subtitle?: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+  category?: string;
+  tags?: readonly string[];
+}
+
 export interface Article {
   id: string;
   slug: string;
@@ -205,17 +217,7 @@ export interface Article {
   date: string;
   link: string;
   tags?: readonly string[];
-  frontmatter: {
-    title: string;
-    date: string;
-    featured: boolean;
-    subtitle?: string;
-    description?: string;
-    image?: string;
-    imageAlt?: string;
-    category?: string;
-    tags?: readonly string[];
-  };
+  frontmatter: ArticleFrontmatter;
 }
 
 export type HeroProps = {
