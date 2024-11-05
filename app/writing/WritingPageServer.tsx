@@ -2,18 +2,21 @@ import { Article } from '@/lib/types';
 
 async function getArticles(): Promise<Article[]> {
   try {
-    const res = await fetch('http://localhost:3000/api/articles', {
-      cache: 'no-store',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    // Determine the base URL based on the environment
+    const baseUrl = process.env.NODE_ENV === 'production' 
+      ? 'https://zacharyr0th.com'
+      : 'http://localhost:3000';
+    
+    const response = await fetch(`${baseUrl}/api/articles`, {
+      next: { revalidate: 3600 }, // Revalidate every hour
     });
-
-    if (!res.ok) {
-      throw new Error(`Failed to fetch articles: ${res.status} ${res.statusText}`);
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch articles');
     }
 
-    return res.json();
+    const articles = await response.json();
+    return articles;
   } catch (error) {
     console.error('Error fetching articles:', error);
     throw error;
