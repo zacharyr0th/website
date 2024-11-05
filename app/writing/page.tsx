@@ -12,25 +12,26 @@ export default function WritingPage() {
   const [randomContent, setRandomContent] = useState<Article[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const featuredContent = React.useMemo(() => 
-    allContent.filter((item) => item.frontmatter?.featured),
+  const featuredContent = React.useMemo(
+    () => allContent.filter((item) => item.frontmatter?.featured),
     [allContent]
   );
 
-  const primaryContent = React.useMemo(() => 
-    featuredContent[0] || allContent[0],
+  const primaryContent = React.useMemo(
+    () => featuredContent[0] || allContent[0],
     [featuredContent, allContent]
   );
 
-  const tags = React.useMemo(() => 
-    ['all', ...Array.from(new Set(allContent.flatMap((item) => item.tags || [])))],
+  const tags = React.useMemo(
+    () => ['all', ...Array.from(new Set(allContent.flatMap((item) => item.tags || [])))],
     [allContent]
   );
 
-  const filteredContent = React.useMemo(() =>
-    selectedTag === 'all'
-      ? allContent
-      : allContent.filter((item) => item.tags?.includes(selectedTag)),
+  const filteredContent = React.useMemo(
+    () =>
+      selectedTag === 'all'
+        ? allContent
+        : allContent.filter((item) => item.tags?.includes(selectedTag)),
     [selectedTag, allContent]
   );
 
@@ -53,8 +54,10 @@ export default function WritingPage() {
         }
         const articles = await response.json();
         setAllContent(articles);
-        
-        const nonFeaturedArticles = articles.filter((article: Article) => !article.frontmatter?.featured);
+
+        const nonFeaturedArticles = articles.filter(
+          (article: Article) => !article.frontmatter?.featured
+        );
         setRandomContent(getRandomContent(nonFeaturedArticles, 3));
       } catch (error) {
         console.error('Error fetching articles:', error);

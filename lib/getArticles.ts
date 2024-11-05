@@ -24,7 +24,10 @@ export function getAllArticles(): Article[] {
     const slug = fileName.replace(/\.md$/, '');
     const fullPath = path.join(articlesDirectory, fileName);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
-    const { data: frontmatter, content } = matter(fileContents) as { data: Frontmatter, content: string };
+    const { data: frontmatter, content } = matter(fileContents) as {
+      data: Frontmatter;
+      content: string;
+    };
 
     return {
       id: slug,

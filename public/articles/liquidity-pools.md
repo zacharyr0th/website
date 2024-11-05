@@ -133,7 +133,7 @@ Imagine you're looking to buy 150 Apple shares for $130 each, but there are only
 
 ## The AMM Formula: A Financial Balancing Act
 
-At the heart of liquidity pools lies a deceptively simple formula: \( x * y = k \)
+At the heart of liquidity pools lies a deceptively simple formula: \( x \* y = k \)
 
 - \( x \) and \( y \) represent the quantities of two tokens in the pool.
 - \( k \) is a constant that represents the pool's total liquidity.
@@ -175,4 +175,4 @@ Liquidity pools allow users to trade trustlessly on decentralized exchanges (DEX
 
 ## Conclusion
 
-Despite these challenges, liquidity pools represent a powerful alternative to the fee-laden, opaque world of traditional finance. They democratize market-making, lower entry barriers, and offer a glimpse of a permissionless financial system. The future of finance is here, and it's open to all - just make sure to not keep all your eggs in one basket or liqudity pool. 
+Despite these challenges, liquidity pools represent a powerful alternative to the fee-laden, opaque world of traditional finance. They democratize market-making, lower entry barriers, and offer a glimpse of a permissionless financial system. The future of finance is here, and it's open to all - just make sure to not keep all your eggs in one basket or liqudity pool.
