@@ -71,7 +71,7 @@ export default function WritingPage() {
   const renderContent = () => {
     if (isLoading) {
       return (
-        <div className="flex-grow container mx-auto px-48 pt-36 pb-18 max-w-5xl">
+        <div className="flex-grow container mx-auto px-4 md:px-48 pt-12 md:pt-36 pb-6 md:pb-18 max-w-5xl">
           <h1 className="text-5xl font-bold mb-12 text-text-primary">Writing</h1>
           <p>Loading articles...</p>
         </div>
