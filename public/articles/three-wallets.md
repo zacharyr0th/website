@@ -30,23 +30,27 @@ For the first time in history, you have the ability to control and safeguard you
 
 </div>
 
+## Introduction
+
 To answer Raj’s question, this article will break down the first 3 wallet types that we think everyone should set up.
 
 1. Banking
 2. DeFi Explorer / NFT Minter
 3. HODLer
-   The benefits of self-custody are far-reaching. Rather than go into all of it here, the scope of this article will only require you to understand the following:
 
-Non-custodial wallets give only those with the Mnemonic / Recovery Phrase access to the funds within them.
-If you lose your Mnemonic / Recovery Phrase for a wallet, you lose access to the funds in that wallet and no one can recover them for you.
-If you connect your wallet to a sketchy website, your wallet could be drained entirely by a malicious person or bot.
-See Below.
+The benefits of self-custody are far-reaching. Rather than go into all of it here, the scope of this article will only require you to understand the following:
 
-Wallet 1: Banking
+- Non-custodial wallets give only those with the Mnemonic / Recovery Phrase access to the funds within them.
+- If you lose your Mnemonic / Recovery Phrase for a wallet, you lose access to the funds in that wallet and no one can recover them for you.
+- If you connect your wallet to a sketchy website, your wallet could be drained entirely by a malicious person or bot.
+
+## Wallet 1: Banking
+
 This is your primary wallet. It should serve 2 purposes:
 
-Fiat On / Off-Ramp
-General Liquidity
+- Fiat On / Off-Ramp
+- General Liquidity
+
 A Banking Wallet would not be connecting to new and potentially risky DeFi / NFT protocols. Save that for your DeFi Explorer / NFT Minter wallet. This Banking wallet could be used for funding your other wallets but you don’t want to compromise your bank by using it for all your on-chain activity.
 
 Centralized Exchange (CEX) accounting methods are not standardized and can get very messy very quickly. To stay on top of your transactions (for both personal and tax-related reasons) it’s recommended that you use a single wallet to onboard and off-board tokens.
@@ -61,7 +65,8 @@ Aside from the times, you want to cash out into fiat through a centralized excha
 
 For the times you want to explore the DeFi and NFT ecosystems, use a different wallet meant for DeFi exploring and NFT minting.
 
-Wallet 2: DeFi Explorer / NFT Minter
+## Wallet 2: DeFi Explorer / NFT Minter
+
 After you’ve set up your Banking wallet, set up a second one for any risky activity you want to partake in – it will very much be worth your while.
 
 If you are utilizing DeFi, you may unknowingly be depositing funds into an AUDITED BUT FAULTY contract that could potentially steal all of the tokens in your wallet. If you are trying to participate in a new NFT mint, you could be clicking on a link that says mint but is actually draining your wallet. It’s important to be wary of these possibilities.
@@ -74,7 +79,8 @@ Keep the remaining 98.9 SOL in your Banking wallet. You can even stake it in the
 
 If you want to move on from experimenting with small amounts of capital, it would be best to understand the code behind the smart contracts you’re dealing with and work with more wallet types than are mentioned in this article.
 
-Wallet 3: HODLer
+## Wallet 3: HODLer
+
 This is the wallet that you should only check on every once in a while. As Bitcoiners would say, just keep stacking sats. They would also say HODL, which originated from this post and is often referenced as hold on for dear life.
 
 If you think DOGE is going to be worth $1,000 in the next few years but you are an inexperienced trader, why would you try to time the market? Just keep buying more DOGE whenever you have excess liquidity, or dollar cost average and HODL. This is definitely not financial advice.
@@ -83,21 +89,8 @@ The HODLer wallet is meant for you to use for assets that you think will retain 
 
 When you have a HODLer wallet, you can be sure you always have some liquidity somewhere (as long as what your HODLing stays liquid). Think of it as your ultimate savings account or even your retirement account.
 
-End
+## Conclusion
+
 These wallet purposes will cover the majority of use cases for non-advanced crypto users.
 
 When you want to work with more exotic protocols and larger amounts of capital, there will be further security measures you should take into account that are not mentioned in this article. More on those security measures later!
-
-Similar Posts
-What is a Mnemonic Phrase?
-Zachary
-Zachary
-23 March 2022
-19 min
-What is a Mnemonic Phrase?
-Raj asked a good question. This article is an answer to it.
-
-Solflare
-Copyright © 2024 Solflare
-Still have questions?
-Want to just say hello?
