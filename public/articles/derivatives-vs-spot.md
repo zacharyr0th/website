@@ -110,7 +110,7 @@ The thesis here is the sheer quantity of the value of side bets changes how the 
 
 It's similar to the reflexivity principle discussed by George Soros in his book the Alchemy of Finance (read my review here) or the concept of Gary as described by TV-friendly market maker and fund manager Cem Karsan. GO INTO DETAIL ON GARY HERE AND LINK SQUEEZE PAPER
 
-## The Observer Effect
+## Reflexivity: The Observer Effect
 
 Physicists deal with the same issues of reflexivity as financial markets, but in a more fundamental sense — the observer effect.
 
