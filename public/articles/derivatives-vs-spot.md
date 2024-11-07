@@ -26,19 +26,22 @@ tags: ['Trading', 'Crypto']
 
 <div class="tldr-section">
 
-Derivative markets significantly influence equity prices through market-maker actions. Real asset values differ from notional values due to monetary policy and crypto markets, while less affected by derivatives, face unique challenges from whale traders, such as illiquidity and volatility.
+Derivative markets significantly influence equity prices through market-maker actions. Real asset values differ from notional values due to monetary policy and market mechanics. While crypto markets are less affected by derivatives, they face unique challenges from well capitalized traders, resulting in illiquidity and volatility.
 
 </div>
 
-Carl Icahn and some deep-pocketed traders supposedly bought lots of 4050 puts when /ES was floating between 4150-4200 the other day.
+The recent S&P 500 futures (/ES) movement presents an interesting case study:
 
-Well, /ES dropped to 4050 the day the puts expired.
+<ol className="list-decimal pl-6 space-y-2">
+  <li>Large traders, reportedly including Carl Icahn, accumulated significant positions in 4050 puts</li>
+  <li>The market declined to precisely 4050 by expiration</li>
+  <li>Subsequently, these traders established new positions in 3950 puts for the following month</li>
+  <li>And sure enough - the market dropped again</li>
+</ol>
 
-Then it became known that the same trader(s) bought boatloads of the 3950 puts that expire next month. Sometimes, the market seems never to go up when big enough players are positioned for it to go down.
+The relationship between large options positions and market movements can appear to be more than coincidental. While it's impossible to definitively prove causation, the mechanics of dealer hedging combined with market psychology create conditions where large derivative positions can significantly influence the price action of spot assets.
 
-Why is that? Are they just hedging more prominent long positions? Are they taking advantage of option flows and the influential effects of dealer positioning?
-
-Let's look into it.
+Why is that? Let's look into it.
 
 ## Market Structure
 

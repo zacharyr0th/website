@@ -12,10 +12,13 @@ export default function WritingPage() {
   const [randomContent, setRandomContent] = useState<Article[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const featuredContent = React.useMemo(
-    () => allContent.filter((item) => item.frontmatter?.featured),
-    [allContent]
-  );
+  const featuredContent = React.useMemo(() => {
+    const derivativesArticle = allContent.find((item) => item.slug === 'derivatives-vs-spot');
+    if (derivativesArticle) {
+      return [derivativesArticle];
+    }
+    return allContent.filter((item) => item.frontmatter?.featured);
+  }, [allContent]);
 
   const primaryContent = React.useMemo(
     () => featuredContent[0] || allContent[0],

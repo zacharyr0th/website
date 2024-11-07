@@ -137,6 +137,7 @@ Then, the developing team raised over $108 million with an IDO.
 Anyone who minted and held an Aurorian has experienced significant price appreciation, personal relationships with others who own (and perhaps identify) with Aurorians, and a financial stake in the project's development.
 
 #### The Infinite Garden
+
 ![infinite Image](/images/web-3-2.webp)
 
 There is also a documentary titled Ethereum: The Infinite Garden that raised nearly 1,036 ETH, now valued at over $4 million, through the sales of NFTs associated with the movie.
@@ -152,6 +153,7 @@ If you follow crypto-related content on LinkedIn and casually scroll through you
 Grants are great. They've historically been able to fund essential projects within academia and elsewhere, but they've recently taken their funding game to the next level due to crypto-related innovations like DAOs.
 
 ### Gitcoin
+
 ![Fundraising Image](/images/web-3-3.webp)
 
 Gitcoin was designed to enable the funding of public goods. These goods are often open-source software, so many grants go to coders, developers, and founders. Gitcoin grants are decided upon by the Gitcoin DAO, which is composed of GTC holders. Gitcoin's definition of public goods is based on non-rivalrous and non-profitable endeavors, usually related to public digital infrastructure.

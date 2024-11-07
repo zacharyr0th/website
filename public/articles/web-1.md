@@ -136,7 +136,7 @@ The physical and digital infrastructure and the standards and protocols enacted 
 
 ## Deflationary Technology
 
-Technology is deflationary in many respects because it makes things easier and cheaper. 
+Technology is deflationary in many respects because it makes things easier and cheaper.
 
 ![Web Evolution Image](/images/web-1-4.webp)
 

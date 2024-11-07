@@ -34,7 +34,7 @@ export default async function Article({ params: { slug } }: { params: { slug: st
       frontmatter: {
         title: frontmatter.title,
         date: frontmatter.date,
-        featured: frontmatter.featured || false,
+        featured: slug === 'derivatives-vs-spot' || frontmatter.featured || false,
         ...(frontmatter.subtitle && { subtitle: frontmatter.subtitle }),
         ...(frontmatter.description && { description: frontmatter.description }),
         ...(frontmatter.image && { image: frontmatter.image }),
