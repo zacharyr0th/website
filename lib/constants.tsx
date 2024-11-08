@@ -282,4 +282,5 @@ export const RefreshIcon = React.memo((props: React.SVGProps<SVGSVGElement>) => 
     </svg>
   </span>
 ));
+RefreshIcon.displayName = 'RefreshIcon';
 
