@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useState, memo } from 'react';
-import Link from 'next/link';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Navigation from '../components/common/Navigation';
 import { Theme } from '@/lib/types';
 import Footer from '../components/common/Footer';
 import { VISIBLE_PROJECTS } from '@/lib/constants';
+import CategoryCard from './CategoryCard';
 
 const categories = [
   { title: 'Recordings', description: 'Full discography', slug: 'recordings' },
@@ -17,65 +17,20 @@ const categories = [
   { title: 'Archive', description: 'History', slug: 'archive' },
 ];
 
-const CategoryCard = memo(
-  ({
-    category,
-    index,
-  }: {
-    category: { title: string; description: string; slug: string };
-    index: number;
-  }) => (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-    >
-      <Link href={`/music/${category.slug}`} className="block">
-        <motion.div className="bg-inherit rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700 hover:bg-[#242424]">
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-text-primary mb-2">{category.title}</h2>
-            <p className="text-text-secondary mb-4">{category.description}</p>
-            <div className="text-accent hover:text-accent/80 inline-flex items-center">
-              View All
-              <svg
-                className="w-4 h-4 ml-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </div>
-          </div>
-          <div className="h-1 w-full bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300"></div>
-        </motion.div>
-      </Link>
-    </motion.div>
-  )
-);
-
-CategoryCard.displayName = 'CategoryCard';
-
-const MemoizedCategoryCard = memo(CategoryCard);
-MemoizedCategoryCard.displayName = 'MemoizedCategoryCard';
-
 const AudioPage = () => {
   const [, setTheme] = useState<Theme>('dark');
 
   return (
-    <main className="flex flex-col w-full min-h-screen font-mono">
-      <div className="flex-grow container mx-auto px-48 pt-36 pb-18 max-w-6xl">
+    <main 
+      className="flex flex-col w-full min-h-screen font-mono"
+      style={{ backgroundColor: 'var(--color-background)' }}
+    >
+      <div className="flex-grow container mx-auto px-48 pt-36 pb-18 max-w-4xl">
         <Navigation setTheme={setTheme} />
-        <h1 className="text-5xl font-bold mb-12 text-text-primary">Audio</h1>
+        <h1 style={{ color: 'var(--color-text-primary)' }} className="text-5xl font-bold mb-12">Audio</h1>
 
         <section>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
             {[1, 2, 3].map((item) => (
               <motion.div
                 key={item}
@@ -84,18 +39,20 @@ const AudioPage = () => {
                 transition={{ duration: 0.5, delay: item * 0.1 }}
               >
                 <iframe 
-                  style={{ border: 0, borderRadius: '0.375rem' }}
+                  style={{ 
+                    border: 0, 
+                    borderRadius: 'var(--border-radius-md)',
+                    boxShadow: 'var(--box-shadow)'
+                  }}
                   width="100%"
-                  height={item === 3 ? "470" : "442"}
-                  src={
-                    item === 1
-                      ? "https://bandcamp.com/EmbeddedPlayer/track=3262928599/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/"
-                      : item === 2
-                      ? "https://bandcamp.com/EmbeddedPlayer/track=2324363469/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/"
-                      : "https://bandcamp.com/EmbeddedPlayer/track=752272134/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/"
-                  }
+                  height="392"
+                  src={`https://bandcamp.com/EmbeddedPlayer/track=${
+                    item === 1 ? "3262928599" : 
+                    item === 2 ? "2324363469" : 
+                    "752272134"
+                  }/size=large/bgcol=${encodeURIComponent('var(--color-surface)')}/linkcol=${encodeURIComponent('var(--color-accent)')}/tracklist=false/transparent=true/`}
                   seamless
-                  className="shadow-md hover:shadow-lg transition-shadow duration-300"
+                  className="transition-shadow duration-300 hover:shadow-lg"
                 />
               </motion.div>
             ))}
@@ -103,10 +60,10 @@ const AudioPage = () => {
         </section>
 
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8 text-text-primary">Explore</h2>
+          <h2 style={{ color: 'var(--color-text-primary)' }} className="text-3xl font-bold mb-8">Explore</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {categories.slice(0, VISIBLE_PROJECTS).map((category, index) => (
-              <MemoizedCategoryCard key={category.slug} category={category} index={index} />
+              <CategoryCard key={category.slug} category={category} index={index} />
             ))}
           </div>
         </section>
