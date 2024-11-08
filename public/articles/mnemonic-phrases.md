@@ -96,6 +96,7 @@ Once BIP-32, 39, and 44 were widely implemented, users could access nearly a lim
 ## Further Reading
 
 ### Core BIP Documentation
+
 - [BIP-32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) - Hierarchical Deterministic Wallets
 - [BIP-39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki#Generating_the_mnemonic) - Mnemonic code for generating deterministic keys
 - [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) - Multi-Account Hierarchy for Deterministic Wallets

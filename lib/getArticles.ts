@@ -23,7 +23,7 @@ interface Frontmatter {
 
 export function getAllArticles(): Article[] {
   const fileNames = fs.readdirSync(ARTICLE_CONFIG.directory);
-  
+
   return fileNames
     .map((fileName) => {
       const slug = fileName.replace(/\.md$/, '');
@@ -44,8 +44,8 @@ export function getAllArticles(): Article[] {
 
 // Helper function to create article from frontmatter
 function createArticleFromFrontmatter(
-  frontmatter: Frontmatter, 
-  content: string, 
+  frontmatter: Frontmatter,
+  content: string,
   slug: string
 ): Omit<Article, 'id' | 'slug'> {
   return {

@@ -18,18 +18,16 @@ const CategoryCard = memo(({ category, index }: CategoryCardProps) => (
     transition={{ duration: 0.5, delay: index * 0.1 }}
   >
     <Link href={`/music/${category.slug}`} className="block">
-      <motion.div 
+      <motion.div
         className="rounded-xl overflow-hidden transition-all duration-300 border relative group hover:bg-[var(--color-primary)]"
         style={{
           backgroundColor: 'inherit',
           borderColor: 'var(--color-text-secondary)',
-          boxShadow: 'var(--box-shadow)'
+          boxShadow: 'var(--box-shadow)',
         }}
       >
         <div className="p-6">
-          <h2 
-            className="text-2xl font-semi-bold mb-2 text-[var(--color-text-primary)] group-hover:text-accent transition-colors"
-          >
+          <h2 className="text-2xl font-semi-bold mb-2 text-[var(--color-text-primary)] group-hover:text-accent transition-colors">
             {category.title}
           </h2>
           <p className="mb-4 text-[var(--color-text-secondary)]">{category.description}</p>
@@ -42,12 +40,7 @@ const CategoryCard = memo(({ category, index }: CategoryCardProps) => (
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </div>
         </div>

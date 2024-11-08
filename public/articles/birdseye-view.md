@@ -44,14 +44,13 @@ Blockchains, at their essence, are remarkably straightforward. They function as 
 
 While home to many reputable institutions and ethical professionals, the banking industry has a darker side that often operates behind closed doors. Major global banks have been implicated in numerous instances of rule-bending and outright violations, frequently escaping significant consequences due to the convoluted structure of the financial system.
 
-The revolving door between Wall Street and regulatory agencies further reinforces this apparent impunity. "Goldman" Gary Gensler, head of the SEC, accumulated an eye-popping nine-figure net worth before taking public office thanks to his multi-decade, loyal stint at Goldman Sachs. Jerome Powell, the head chairman of the US Federal Reserve, has a net worth estimated to be north of $50 million after he spent years working for various investment banks in New York City before moving on to the US Department of the Treasury in 1990. 
+The revolving door between Wall Street and regulatory agencies further reinforces this apparent impunity. "Goldman" Gary Gensler, head of the SEC, accumulated an eye-popping nine-figure net worth before taking public office thanks to his multi-decade, loyal stint at Goldman Sachs. Jerome Powell, the head chairman of the US Federal Reserve, has a net worth estimated to be north of $50 million after he spent years working for various investment banks in New York City before moving on to the US Department of the Treasury in 1990.
 
-There are apparent conflicts of interest. Even if those in charge of the rules are perfectly ethical, there is still ample room for unethical behavior by middlemen—banks, brokers, asset management firms, and any other business that requires customer deposits. 
+There are apparent conflicts of interest. Even if those in charge of the rules are perfectly ethical, there is still ample room for unethical behavior by middlemen—banks, brokers, asset management firms, and any other business that requires customer deposits.
 
 ## An Alternative
 
-Blockchains offer an alternative framework in that all transaction details can be made public, and all protocols are open source. Previous types of intermediaries have become obsolete. In contrast, new types of financial intermediaries must adhere to the overarching algocratic nature of decentralized systems and their underlying risks. 
-
+Blockchains offer an alternative framework in that all transaction details can be made public, and all protocols are open source. Previous types of intermediaries have become obsolete. In contrast, new types of financial intermediaries must adhere to the overarching algocratic nature of decentralized systems and their underlying risks.
 
 Its important to remember what we have to work with.
 
@@ -82,11 +81,11 @@ The Federal Reserve (FED) was established in 1913 as the third central banking s
 
 ![Fractional Reserve Banking](../images/fractional-reserve-banking.webp)
 
-In 1910, after helping bail out a particularly bad bank run, Chase Bank's founder, J.P. Morgan, and other high-ranking bankers secretly secluded themselves for 10 days to figure out how they could enhance the American banking system. This plan came to fruition three years later in the form of the Federal Reserve, a singular central bank for the USA. The FED can be considered a hybrid or different faction within the US government. 
+In 1910, after helping bail out a particularly bad bank run, Chase Bank's founder, J.P. Morgan, and other high-ranking bankers secretly secluded themselves for 10 days to figure out how they could enhance the American banking system. This plan came to fruition three years later in the form of the Federal Reserve, a singular central bank for the USA. The FED can be considered a hybrid or different faction within the US government.
 
 It's part of the US governmental purview, but Congress doesn't necessarily have to listen. Congress enacts fiscal policy, such as raising and lowering tax rates, while central banks, like the FED, enact monetary policy, such as raising and lowering interest rates. The two are often in cahoots.
 
-As the US gained a larger share of global dominance after the two World Wars, the FED's macroeconomic role only gained more prominence. Since the chart-breaking inflation metrics of the 1970s, the FED has generally enacted an expansionary monetary policy by lowering interest rates. 
+As the US gained a larger share of global dominance after the two World Wars, the FED's macroeconomic role only gained more prominence. Since the chart-breaking inflation metrics of the 1970s, the FED has generally enacted an expansionary monetary policy by lowering interest rates.
 
 ## Fed Balance Sheet vs. S&P 500
 
@@ -121,20 +120,22 @@ This means that fiat money will continue to devalue over time. For now, USD is a
 The chart below shows how much the value of $1 has declined from 1913 to 2013.
 ![Inflation Chart](../images/inflatoin.webp)
 
-TL;DR In today's terms, $1 in 1900 was equivalent to $26.14 in 2020, implying a 96.2% decrease in purchasing power. 
+TL;DR In today's terms, $1 in 1900 was equivalent to $26.14 in 2020, implying a 96.2% decrease in purchasing power.
 
 So, where does DeFi come in? It varies. If you're in one of the wealthier countries in the world, you may utilize DeFi as an alternative investment class. For those in less financially secure countries, you may be using DeFi because you don't have any other option.
 
 ## DeFi's Use Cases Today
 
 ### Stable Coins
+
 Let's say you live in Turkey. The Turkish Lira experienced a reported 78% inflation from 2021-2022. So, if the bank gives you back your deposit, your $100 worth of TRL will be roughly $22. This type of heartache used to be unavoidable for the global middle and lower classes, but now there's an alternative.
 
-Instead of using a soon-to-be-defunct domestic bank in a country with a falling currency, you can open a non-custodial wallet like Solflare and securely store infinite digital assets. This wallet isn't physical. You can bring it across borders by remembering your recovery phrase or keeping a copy of your private key. 
+Instead of using a soon-to-be-defunct domestic bank in a country with a falling currency, you can open a non-custodial wallet like Solflare and securely store infinite digital assets. This wallet isn't physical. You can bring it across borders by remembering your recovery phrase or keeping a copy of your private key.
 
 Operational security risks and other nuances need to be considered, but this example gives you an idea of what's possible. How easy is it to withdraw $25,000 from your bank? How easy is it to travel across violent borders with that $25,000—especially if that $25,000 worth of value is in a currency other than the USD? The answers are all that it is exceedingly difficult to do so without DeFi.
 
 ### Censorship Resistance
+
 Real estate debt levels and nationalized industry have taken a toll on the Chinese banking system, and some banks have already censored withdrawals. Chinese authorities recently switched some citizen health codes from Covid negative to positive (which effectively banned them from all public venues and transport systems) to prevent them from withdrawing from their bank. In May of 2022, it was reported that nearly 1 million Chinese customers were unable to withdraw money from bank accounts.
 
 Then tanks were deployed on the protesters who had their funds frozen.
@@ -143,9 +144,10 @@ Then tanks were deployed on the protesters who had their funds frozen.
 Regarding centralization and censorship, China is extreme, but the world operates on a spectrum. The need for DeFi also operates on that spectrum.
 
 ### Yield Generation
-Crypto has been iterating on its forms of yield generation for some time. Some of it is a positive byproduct of the tools used within DeFi, and some of the more centralized versions of it, like Celsius, are nothing but loosely regulated, falsely marketed, over-leveraged degeneracy. Using liquidity pools is one example of genuine yield generation that cuts out the middleman and allows regular people to profit from their digital assets. 
 
-AMMs are algorithms programmed atop a blockchain that lets you trade one digital asset for another using a pool of funds and a pricing mechanism. Liquidity providers are usually paid in one of two ways  with a share of the trading fees or an incentivized liquidity allocation. Incentivized liquidity allocations (liquidity mining campaigns) are unsustainable, but extending a percentage of trading fees to liquidity providers is not.
+Crypto has been iterating on its forms of yield generation for some time. Some of it is a positive byproduct of the tools used within DeFi, and some of the more centralized versions of it, like Celsius, are nothing but loosely regulated, falsely marketed, over-leveraged degeneracy. Using liquidity pools is one example of genuine yield generation that cuts out the middleman and allows regular people to profit from their digital assets.
+
+AMMs are algorithms programmed atop a blockchain that lets you trade one digital asset for another using a pool of funds and a pricing mechanism. Liquidity providers are usually paid in one of two ways with a share of the trading fees or an incentivized liquidity allocation. Incentivized liquidity allocations (liquidity mining campaigns) are unsustainable, but extending a percentage of trading fees to liquidity providers is not.
 
 Below is a list of the top 5 7-Day Average Fees metrics DEXes across various blockchains.
 ![Uniswap Stats](../images/uniswap.webp)
@@ -157,4 +159,3 @@ Ryan Selkis, the CEO of Messari, recently published a [thread](https://twitter.c
 ## Moving On
 
 There is much more to discuss concerning all the moving parts and issues involved with DeFi, but this course is just a 101. Having gotten this far in the system, you'll now understand enough to venture into the real world. The next chapter will give you all the necessary resources to onboard to DeFi and start self-custodying your assets.
-

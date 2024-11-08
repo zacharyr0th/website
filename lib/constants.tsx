@@ -210,12 +210,12 @@ export const heroContent = {
   chainLogos: ['bitcoin', 'ethereum', 'solana', 'aptos'],
 };
 
-export const Button: React.FC<ButtonProps> = ({ 
-  primary = false, 
-  secondary = false, 
-  children, 
+export const Button: React.FC<ButtonProps> = ({
+  primary = false,
+  secondary = false,
+  children,
   onClick,
-  className = '' 
+  className = '',
 }) => (
   <button
     onClick={onClick}
@@ -283,4 +283,3 @@ export const RefreshIcon = React.memo((props: React.SVGProps<SVGSVGElement>) => 
   </span>
 ));
 RefreshIcon.displayName = 'RefreshIcon';
-

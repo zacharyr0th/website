@@ -26,25 +26,26 @@ export type BaseMediaItem = {
   tags?: readonly string[];
 };
 
-export type ContentItem = BaseMediaItem & SEOData & {
-  type: ContentType;
-  pageViews: number;
-  description: string;
-  image: {
-    src: string;
-    alt: string;
+export type ContentItem = BaseMediaItem &
+  SEOData & {
+    type: ContentType;
+    pageViews: number;
+    description: string;
+    image: {
+      src: string;
+      alt: string;
+    };
+    // Optional fields grouped together
+    subtitle?: string;
+    imageCaption?: string;
+    readTime?: number;
+    likes?: number;
+    comments?: number;
+    shares?: number;
+    bookAuthor?: string;
+    composer?: string;
+    frontmatter?: ArticleFrontmatter;
   };
-  // Optional fields grouped together
-  subtitle?: string;
-  imageCaption?: string;
-  readTime?: number;
-  likes?: number;
-  comments?: number;
-  shares?: number;
-  bookAuthor?: string;
-  composer?: string;
-  frontmatter?: ArticleFrontmatter;
-};
 
 export type AudioItem = BaseMediaItem & {
   type: AudioType;
