@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import Navigation from '../components/common/Navigation';
 import { Theme } from '@/lib/types';
 import Footer from '../components/common/Footer';
-import { VISIBLE_PROJECTS } from '@/lib/constants';
+import { CONFIG } from '@/lib/constants';
 import CategoryCard from './CategoryCard';
 
 const categories = [
@@ -62,7 +62,7 @@ const AudioPage = () => {
         <section className="mb-16">
           <h2 style={{ color: 'var(--color-text-primary)' }} className="text-3xl font-bold mb-8">Explore</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {categories.slice(0, VISIBLE_PROJECTS).map((category, index) => (
+            {categories.slice(0, CONFIG.visibleProjects).map((category, index) => (
               <CategoryCard key={category.slug} category={category} index={index} />
             ))}
           </div>

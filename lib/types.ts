@@ -161,6 +161,8 @@ export interface ButtonProps {
   primary?: boolean;
   secondary?: boolean;
   children: React.ReactNode;
+  onClick?: () => void;
+  className?: string;
 }
 
 export interface NavButtonProps extends ButtonProps {

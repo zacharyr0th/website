@@ -19,7 +19,7 @@ const CategoryCard = memo(({ category, index }: CategoryCardProps) => (
   >
     <Link href={`/music/${category.slug}`} className="block">
       <motion.div 
-        className="rounded-xl overflow-hidden transition-all duration-300 border"
+        className="rounded-xl overflow-hidden transition-all duration-300 border relative group hover:bg-[var(--color-primary)]"
         style={{
           backgroundColor: 'inherit',
           borderColor: 'var(--color-text-secondary)',
@@ -27,12 +27,16 @@ const CategoryCard = memo(({ category, index }: CategoryCardProps) => (
         }}
       >
         <div className="p-6">
-          <h2 style={{ color: 'var(--color-text-primary)' }} className="text-2xl font-semi-bold mb-2">{category.title}</h2>
-          <p style={{ color: 'var(--color-text-secondary)' }} className="mb-4">{category.description}</p>
-          <div style={{ color: 'var(--color-accent)' }} className="inline-flex items-center">
+          <h2 
+            className="text-2xl font-semi-bold mb-2 text-[var(--color-text-primary)] group-hover:text-accent transition-colors"
+          >
+            {category.title}
+          </h2>
+          <p className="mb-4 text-[var(--color-text-secondary)]">{category.description}</p>
+          <div className="inline-flex items-center text-accent">
             View All
             <svg
-              className="w-4 h-4 ml-2"
+              className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-0.5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -47,7 +51,7 @@ const CategoryCard = memo(({ category, index }: CategoryCardProps) => (
             </svg>
           </div>
         </div>
-        <div className="h-1 w-full bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300"></div>
       </motion.div>
     </Link>
   </motion.div>
