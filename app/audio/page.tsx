@@ -3,7 +3,6 @@
 import React, { useState, memo } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import Navigation from '../components/common/Navigation';
 import { Theme } from '@/lib/types';
 import Footer from '../components/common/Footer';
@@ -75,7 +74,7 @@ const AudioPage = () => {
         <Navigation setTheme={setTheme} />
         <h1 className="text-5xl font-bold mb-12 text-text-primary">Audio</h1>
 
-        <section className="mb-16">
+        <section>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[1, 2, 3].map((item) => (
               <motion.div
@@ -83,27 +82,21 @@ const AudioPage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: item * 0.1 }}
-                className="bg-surface rounded-md overflow-hidden shadow-md"
               >
-                <Image
-                  src={`/misc/placeholder.webp`}
-                  alt={`Featured work ${item}`}
-                  width={400}
-                  height={225}
-                  className="w-full h-48 object-cover"
+                <iframe 
+                  style={{ border: 0, borderRadius: '0.375rem' }}
+                  width="100%"
+                  height={item === 3 ? "470" : "442"}
+                  src={
+                    item === 1
+                      ? "https://bandcamp.com/EmbeddedPlayer/track=3262928599/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/"
+                      : item === 2
+                      ? "https://bandcamp.com/EmbeddedPlayer/track=2324363469/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/"
+                      : "https://bandcamp.com/EmbeddedPlayer/track=752272134/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/"
+                  }
+                  seamless
+                  className="shadow-md hover:shadow-lg transition-shadow duration-300"
                 />
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2 text-text-primary">
-                    Featured Work {item}
-                  </h3>
-                  <p className="text-text-secondary mb-4">Brief description of the work...</p>
-                  <Link
-                    href={`/music/featured/${item}`}
-                    className="text-accent hover:text-accent/80"
-                  >
-                    Learn More
-                  </Link>
-                </div>
               </motion.div>
             ))}
           </div>
