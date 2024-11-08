@@ -1,6 +1,6 @@
 import React, { memo, useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { learningProjects, Button } from '@/lib/constants';
+import { learningProjects, Button, CONFIG } from '@/lib/constants';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 import { ProjectsPageProps, ProjectPanelsProps, LearningProject } from '@/lib/types';
 
@@ -22,9 +22,6 @@ const darkColorPairs = [
   { background: 'var(--color-background)', text: 'var(--color-text-primary)' },
 ];
 
-// Add constant at the top of the file
-const VISIBLE_PROJECTS = 6; // or whatever number you want to show
-
 const Hero: React.FC<ProjectsPageProps> = memo(({ theme }) => {
   const colorPairs = theme === 'dark' ? darkColorPairs : lightColorPairs;
 
@@ -34,7 +31,7 @@ const Hero: React.FC<ProjectsPageProps> = memo(({ theme }) => {
         <HeroContent />
       </div>
       <div className="w-1/2 relative h-screen overflow-hidden">
-        <ProjectPanels visibleProjects={VISIBLE_PROJECTS} colorPairs={colorPairs} />
+        <ProjectPanels visibleProjects={CONFIG.visibleProjects} colorPairs={colorPairs} />
       </div>
     </section>
   );
