@@ -15,7 +15,7 @@ export type SEOData = {
   socialShareImage?: Url;
 };
 
-export type BaseItem = {
+export type BaseMediaItem = {
   id: string;
   slug: string;
   title: string;
@@ -26,31 +26,27 @@ export type BaseItem = {
   tags?: readonly string[];
 };
 
-export type ContentItem = BaseItem &
-  SEOData & {
-    type: ContentType;
-    pageViews: number;
-    subtitle?: string;
-    imageCaption?: string;
-    description: string;
-    readTime?: number;
-    likes?: number;
-    comments?: number;
-    shares?: number;
-    bookAuthor?: string;
-    composer?: string;
-    image: {
-      src: string;
-      alt: string;
-    };
-    frontmatter?: {
-      title: string;
-      date: string;
-      featured: boolean;
-    };
+export type ContentItem = BaseMediaItem & SEOData & {
+  type: ContentType;
+  pageViews: number;
+  description: string;
+  image: {
+    src: string;
+    alt: string;
   };
+  // Optional fields grouped together
+  subtitle?: string;
+  imageCaption?: string;
+  readTime?: number;
+  likes?: number;
+  comments?: number;
+  shares?: number;
+  bookAuthor?: string;
+  composer?: string;
+  frontmatter?: ArticleFrontmatter;
+};
 
-export type AudioItem = BaseItem & {
+export type AudioItem = BaseMediaItem & {
   type: AudioType;
   artist?: string;
   duration: string;
@@ -161,13 +157,11 @@ export type ProjectCardProps = {
 export type ProjectRef = HTMLDivElement | null;
 export type ProjectRefs = React.MutableRefObject<ProjectRef[]>;
 
-export type ButtonProps = {
+export interface ButtonProps {
   primary?: boolean;
   secondary?: boolean;
   children: React.ReactNode;
-  onClick?: () => void;
-  className?: string;
-};
+}
 
 export interface NavButtonProps extends ButtonProps {
   variant: 'primary' | 'secondary';
@@ -207,7 +201,7 @@ export interface Article {
   slug: string;
   title: string;
   subtitle?: string;
-  description?: string;
+  description: string;
   content: string;
   image: {
     src: string;

@@ -92,3 +92,16 @@ For example, m/44'/60/' 0'/1’/8′ = The 9th address at change level 1 (addres
 Before BIP-32, burdensome tasks and financially insecure practices regarding digital wallets and derivation paths prevented many people who needed to be computer-savvy from participating.
 
 Once BIP-32, 39, and 44 were widely implemented, users could access nearly a limitless number of digital assets (tokens and NFTs) from one user-friendly mnemonic device. Thank BIP-32, 39, and 44.
+
+## Further Reading
+
+### Core BIP Documentation
+- [BIP-32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) - Hierarchical Deterministic Wallets
+- [BIP-39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki#Generating_the_mnemonic) - Mnemonic code for generating deterministic keys
+- [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) - Multi-Account Hierarchy for Deterministic Wallets
+- [BIP-39 Word Lists](https://github.com/bitcoin/bips/blob/master/bip-0039/bip-0039-wordlists.md)
+- [English Word List](https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt)
+- [Chinese Word List](https://github.com/bitcoin/bips/blob/master/bip-0039/chinese_simplified.txt)
+- [From Mnemonic Phrase to Address](https://blog.mycrypto.com/the-journey-from-mnemonic-phrase-to-address)
+- [PBKDF2 Hash Function](https://en.wikipedia.org/wiki/PBKDF2)
+- [Brute-force Attacks](https://en.wikipedia.org/wiki/Brute-force_attack)

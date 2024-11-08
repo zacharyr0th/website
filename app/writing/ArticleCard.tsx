@@ -11,31 +11,28 @@ interface ArticleCardProps {
 
 const variantStyles = {
   default: {
-    card: 'group relative bg-surface rounded-md overflow-hidden shadow-sm hover:shadow focus-within:ring-2 focus-within:ring-accent transition-all duration-300 transform hover:-translate-y-0.5 flex flex-col h-96',
+    card: 'group relative bg-[var(--color-surface)] backdrop-blur-sm rounded-md overflow-hidden hover:bg-[var(--color-primary)] transition-all duration-300 flex flex-col h-[360px]',
     imageContainer: 'aspect-[16/9] relative overflow-hidden flex-shrink-0',
-    content: 'flex-grow p-4 flex flex-col justify-between',
-    title:
-      'text-base font-semibold mb-2 text-text-primary group-hover:text-accent transition-colors duration-200 line-clamp-2',
-    excerpt: 'text-text-secondary text-xs mb-3 line-clamp-2',
-    link: 'inline-flex items-center gap-1.5 px-3 py-1.5 text-sm bg-accent text-white rounded hover:bg-accent-dark transition-all duration-200 hover:gap-2',
+    content: 'flex-grow p-[var(--spacing-md)] flex flex-col justify-between',
+    title: 'font-mono text-[var(--font-size-base)] font-bold mb-[var(--spacing-sm)] text-text-primary group-hover:text-accent transition-colors duration-200 line-clamp-2',
+    excerpt: 'text-text-secondary text-[calc(var(--font-size-base)-1px)] mb-[var(--spacing-md)] truncate-3-lines max-w-[150ch]',
+    link: 'inline-flex items-center gap-[var(--spacing-xs)] text-accent font-mono text-[calc(var(--font-size-base)-1px)] hover:text-accent-dark transition-all duration-200 hover:gap-[var(--spacing-sm)]',
   },
   featured: {
-    card: 'group relative bg-surface rounded-md overflow-hidden shadow hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-96',
+    card: 'group relative bg-[var(--color-surface)] backdrop-blur-sm rounded-md overflow-hidden hover:bg-[var(--color-primary)] transition-all duration-300 flex flex-col h-[400px]',
     imageContainer: 'aspect-[16/9] relative overflow-hidden flex-shrink-0',
-    content: 'flex-grow p-4 flex flex-col justify-between',
-    title:
-      'text-base font-semibold mb-2 text-text-primary group-hover:text-accent transition-colors duration-200 line-clamp-2',
-    excerpt: 'text-text-secondary text-xs mb-3 line-clamp-2',
-    link: 'inline-flex items-center gap-1.5 px-3 py-1.5 text-sm bg-accent text-white rounded hover:bg-accent-dark transition-all duration-200 hover:gap-2',
+    content: 'flex-grow p-[var(--spacing-md)] flex flex-col justify-between',
+    title: 'font-mono text-[calc(var(--font-size-base)+2px)] font-bold mb-[var(--spacing-sm)] text-text-primary group-hover:text-accent transition-colors duration-200 line-clamp-2',
+    excerpt: 'text-text-secondary text-[var(--font-size-base)] mb-[var(--spacing-md)] truncate-3-lines max-w-[150ch]',
+    link: 'inline-flex items-center gap-[var(--spacing-xs)] text-accent font-mono text-[var(--font-size-base)] hover:text-accent-dark transition-all duration-200 hover:gap-[var(--spacing-sm)]',
   },
   side: {
-    card: 'group flex items-start space-x-4 hover:bg-surface/50 rounded-md p-3 transition-all duration-200 flex-col h-96',
+    card: 'group flex gap-[var(--spacing-md)] bg-[var(--color-surface)] backdrop-blur-sm hover:bg-[var(--color-primary)] rounded-md p-[var(--spacing-sm)] transition-all duration-300',
     imageContainer: 'w-24 aspect-square relative flex-shrink-0 rounded overflow-hidden',
-    content: 'flex-grow flex-1 min-w-0 flex flex-col justify-between',
-    title:
-      'text-sm font-semibold mb-1 text-text-primary group-hover:text-accent transition-colors duration-200 line-clamp-2',
-    excerpt: 'text-text-secondary text-xs line-clamp-2',
-    link: 'inline-flex items-center gap-1 text-accent text-sm font-medium hover:gap-1.5 transition-all duration-200 mt-1.5',
+    content: 'flex-grow min-w-0 flex flex-col justify-between py-[var(--spacing-xs)]',
+    title: 'font-mono text-[var(--font-size-base)] font-bold mb-[var(--spacing-xs)] text-text-primary group-hover:text-accent transition-colors duration-200 line-clamp-2',
+    excerpt: 'text-text-secondary text-[calc(var(--font-size-base)-2px)] truncate-2-lines max-w-[100ch]',
+    link: 'mt-[var(--spacing-sm)] inline-flex items-center gap-[var(--spacing-xs)] text-accent font-mono text-[calc(var(--font-size-base)-2px)] hover:gap-[var(--spacing-sm)] transition-all duration-200',
   },
 };
 
@@ -47,12 +44,12 @@ const ArticleCard: React.FC<ArticleCardProps> = React.memo(({ article, variant =
 
     const tagsToShow = article.tags.slice(0, variant === 'featured' ? 3 : 2);
     return (
-      <div className="flex flex-wrap gap-1.5 mb-2" role="list" aria-label="Article tags">
+      <div className="flex flex-wrap gap-[var(--spacing-xs)] mb-[var(--spacing-sm)]" role="list" aria-label="Article tags">
         {tagsToShow.map((tag) => (
           <span
             key={tag}
             role="listitem"
-            className="px-1.5 py-0.5 text-sm font-medium rounded-full bg-accent/10 text-accent"
+            className="px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-[calc(var(--font-size-base)-2px)] font-mono rounded-full bg-accent/10 text-accent"
           >
             {tag}
           </span>
@@ -69,7 +66,7 @@ const ArticleCard: React.FC<ArticleCardProps> = React.memo(({ article, variant =
           alt={article.image.alt || 'Article image'}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover transition-transform duration-300 group-hover:scale-102"
+          className="object-cover transition-transform duration-[var(--transition-speed)] group-hover:scale-105"
         />
       </div>
       <div className={styles.content}>

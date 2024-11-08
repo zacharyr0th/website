@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import ErrorBoundaryClient from '@/app/components/common/ErrorBoundaryClient';
 import ThemeProvider from '@/app/components/common/ThemeProvider';
 import '@/styles/globals.css';
+import '@/styles/article.css';
 
 export const metadata: Metadata = {
   title: 'Zachary Roth - Technologist, Writer, Musician',

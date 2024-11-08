@@ -1,7 +1,6 @@
 import React from 'react';
 import { FaSun, FaMoon } from 'react-icons/fa';
 import {
-  Theme,
   ContentType,
   AudioType,
   NavItem,
@@ -10,11 +9,12 @@ import {
   NavButtonProps,
 } from './types';
 
-export const THEMES: readonly Theme[] = ['light', 'dark'];
-export const THEME_ICONS: Record<Theme, React.ReactElement> = {
+// Use const assertions for better type inference
+export const THEMES = ['light', 'dark'] as const;
+export const THEME_ICONS = {
   light: <FaSun />,
   dark: <FaMoon />,
-};
+} as const;
 
 export const ContentTypes: readonly ContentType[] = ['article', 'review', 'project'];
 export const AudioTypes: readonly AudioType[] = ['composition', 'dataset', 'recording', 'theory'];
@@ -125,37 +125,33 @@ export const learningProjects: LearningProject[] = [
 export const writingProjects = [
   {
     title: 'A Birdseye View',
-    description: 'Seeing the forest through the trees when it comes to blockchain adoption.',
-    link: 'https://zacharyr0th.com/writing/birdseye-view',
+    description: 'Seeing the forest through the trees.',
+    link: '/writing/birdseye-view',
   },
   {
     title: 'Easy Money & Veblen Goods',
     description: 'Second order effects of money printing.',
-    link: 'https://zacharyr0th.com/writing/easy-money-and-veblen-goods',
+    link: '/writing/easy-money-and-veblen-goods',
   },
   {
     title: 'Search Engine Turbulence',
     description: 'LLMs and the tumultuous future of search engines.',
-    link: 'https://zacharyr0th.com/writing/search-engine-turbulence',
+    link: '/writing/search-engine-turbulence',
   },
 ];
 
-export const BREAKPOINTS = {
-  sm: 640,
-  md: 768,
-  lg: 1024,
-  xl: 1280,
-};
-
-// API and content-related constants
-export const API_ENDPOINTS = {
-  content: '/api/content',
-  projects: '/api/projects',
-  audio: '/api/audio',
-};
-
-export const MAX_CONTENT_LENGTH = 1000;
-export const SUPPORTED_FILE_TYPES = ['mp3', 'wav', 'ogg'];
+// Consolidate related constants into objects
+export const CONFIG = {
+  maxContentLength: 1000,
+  supportedFileTypes: ['mp3', 'wav', 'ogg'] as const,
+  breakpoints: {
+    sm: 640,
+    md: 768,
+    lg: 1024,
+    xl: 1280,
+  },
+  visibleProjects: 6,
+} as const;
 
 // Social media links
 export const SOCIAL_LINKS = {
@@ -214,7 +210,7 @@ export const heroContent = {
   chainLogos: ['bitcoin', 'ethereum', 'solana', 'aptos'],
 };
 
-export const Button: React.FC<ButtonProps> = ({ primary, secondary, children }) => (
+export const Button: React.FC<ButtonProps> = ({ primary = false, secondary = false, children }) => (
   <button
     className={`px-6 py-2 rounded-full transition-colors duration-300 ${
       primary
@@ -259,18 +255,8 @@ export const NavButton: React.FC<NavButtonProps> = ({ variant, children, ...prop
   </button>
 );
 
-export const VISIBLE_PROJECTS = 6;
-
-export const colorVariables = [
-  'var(--color-primary)',
-  'var(--color-secondary)',
-  'var(--color-accent)',
-  'var(--color-text-primary)',
-  'var(--color-text-secondary)',
-  'var(--color-surface)',
-] as const;
-
-export const RefreshIcon = (props: React.SVGProps<SVGSVGElement>) => (
+// Memoize components that don't need frequent updates
+export const RefreshIcon = React.memo((props: React.SVGProps<SVGSVGElement>) => (
   <span style={{ display: 'inline-block', paddingRight: '8px', verticalAlign: 'middle' }}>
     <svg
       viewBox="0 0 24 24"
@@ -288,4 +274,5 @@ export const RefreshIcon = (props: React.SVGProps<SVGSVGElement>) => (
       />
     </svg>
   </span>
-);
+));
+

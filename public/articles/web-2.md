@@ -2,8 +2,8 @@
 title: 'Web 2'
 date: '2024-10-25'
 image: /misc/placeholder.webp
-subtitle: 'The Rise of User-Generated Content and the Dawn of Digital Empires'
-description: 'The Rise of User-Generated Content and the Dawn of Digital Empires'
+subtitle: 'The Rise of User-Generated Content and Digital Empires'
+description: 'The Rise of User-Generated Content and Digital Empires'
 tags: ['Crypto', 'Tech']
 ---
 

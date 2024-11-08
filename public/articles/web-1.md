@@ -2,9 +2,9 @@
 title: 'Web 1'
 date: '2024-10-25'
 image: /misc/placeholder.webp
-subtitle: 'The Rise of User-Generated Content and the Dawn of Digital Empires'
-description: 'The Rise of User-Generated Content and the Dawn of Digital Empires'
-tags: ['Crypto', 'Tech']
+subtitle: 'A Cross-Generational Perspective on the Birth of the Internet'
+description: 'A Cross-Generational Perspective on the Birth of the Internet'
+tags: ['Crypto', 'Tech', 'History']
 ---
 
 <style jsx>{`

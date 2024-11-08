@@ -2,8 +2,8 @@
 title: 'Web 3'
 date: '2024-10-25'
 image: /misc/placeholder.webp
-subtitle: 'Empowering Users and Reshaping the Digital Landscape'
-description: 'Empowering Users and Reshaping the Digital Landscape'
+subtitle: 'Empowering Users with New Tools for the Digital Economy'
+description: 'Empowering Users with New Tools for the Digital Economy'
 tags: ['Crypto', 'Tech']
 ---
 
