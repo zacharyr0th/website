@@ -31,7 +31,7 @@ Testing
 </div>
 Most people worldwide have at least one bank account, but millions don't. Being unbanked or underbanked can be very destabilizing because you have to safeguard or carry your assets with you at all times and pay for everything in cash.
 
-As blockchain technology has developed, anyone can generate a non-custodial wallet, which can serve as a decentralized bank, and an investment account. This eliminates the need for you to trust an intermediary to safeguard and give you access to your funds. In its current form, it's not for everyone, but for many - it's becoming a necessity.
+As blockchain technology has developed, anyone can generate a [non-custodial wallet](/writing/non-custodial-wallets), which can serve as a decentralized bank, and an investment account. This eliminates the need for you to trust an intermediary to safeguard and give you access to your funds. In its current form, it's not for everyone, but for many - it's becoming a necessity.
 
 No one can close your blockchain account, and no one has access to your funds other than you. You are nearly bankless, but you do need to configure on-boarding and off-boarding methods, which may require a bank. While a covetable aspect of a developed society, banking has its issues. This article breaks a few of them down and gets into the problems of being unbanked and the promise of going bankless.
 
@@ -104,7 +104,7 @@ It's counterintuitive, but you don't want to trust anyone regarding financial se
 
 What are Non-Custodial Wallets?
 
-Non-custodial wallets are immutable sources of record for your savings / HODL account. When you deposit money into any custodial account like a bank or centralized exchange, you trust this counterparty to honor your balance and access your funds. You don't have to trust any counterparty when using a non-custodial wallet. The blockchain collectively verifies your balance, and only those with the mnemonic can access a wallet.
+[Non-custodial wallets](/writing/non-custodial-wallets) are immutable sources of record for your savings / HODL account. When you deposit money into any custodial account like a bank or centralized exchange, you trust this counterparty to honor your balance and access your funds. You don't have to trust any counterparty when using a non-custodial wallet. The blockchain collectively verifies your balance, and only those with the mnemonic can access a wallet.
 
 This is why it's so important to understand and safeguard your mnemonic phrase!
 

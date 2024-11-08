@@ -126,17 +126,17 @@ export const writingProjects = [
   {
     title: 'A Birdseye View',
     description: 'Seeing the forest through the trees when it comes to blockchain adoption.',
-    link: 'https://zacharyr0th.com/birdseye-view',
+    link: 'https://zacharyr0th.com/writing/birdseye-view',
   },
   {
     title: 'Easy Money & Veblen Goods',
     description: 'Second order effects of money printing.',
-    link: 'https://example.com/minimalist-os',
+    link: 'https://zacharyr0th.com/writing/easy-money-and-veblen-goods',
   },
   {
     title: 'Search Engine Turbulence',
     description: 'LLMs and the tumultuous future of search engines.',
-    link: 'https://example.com/privacy-defi',
+    link: 'https://zacharyr0th.com/writing/search-engine-turbulence',
   },
 ];
 
