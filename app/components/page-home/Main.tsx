@@ -35,18 +35,18 @@ const Main: React.FC = () => (
               </p>
               <div className="mt-auto flex flex-wrap gap-2">
                 {project.articleLink && (
-                  <Link 
-                    href={project.articleLink as string} 
-                    target="_blank" 
+                  <Link
+                    href={project.articleLink as string}
+                    target="_blank"
                     rel="noopener noreferrer"
                   >
                     <NavButton variant="primary">Learn More</NavButton>
                   </Link>
                 )}
                 {project.githubLink && (
-                  <Link 
-                    href={project.githubLink as string} 
-                    target="_blank" 
+                  <Link
+                    href={project.githubLink as string}
+                    target="_blank"
                     rel="noopener noreferrer"
                   >
                     <NavButton variant="secondary">View on GitHub</NavButton>
