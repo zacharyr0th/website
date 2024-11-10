@@ -2,8 +2,8 @@
 title: 'Liquidity Pools'
 date: '2024-10-25'
 image: /misc/placeholder.webp
-subtitle: 'What they are and why they work.'
-description: 'What they are and why they work.'
+subtitle: 'An Alternative to Typical Market Makers'
+description: 'An Alternative to Typical Market Makers'
 tags: ['Crypto']
 ---
 

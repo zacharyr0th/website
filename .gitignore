@@ -57,3 +57,81 @@ Thumbs.db
 # Config files
 .prettierignore
 .prettierrc
+
+# Build and Bundler
+.turbo
+.swc/
+storybook-static/
+dist/
+*.tsbuildinfo
+
+# Cache
+.cache
+.eslintcache
+.stylelintcache
+*.cache
+.webpack/
+
+# Testing and Coverage
+__tests__/coverage/
+test-results/
+playwright-report/
+cypress/videos/
+cypress/screenshots/
+.nyc_output
+
+# Package Managers
+.pnpm-store/
+.npm
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+
+# IDE and Editor specific
+.history/
+*.sublime-project
+*.sublime-workspace
+.project
+.settings/
+.classpath
+*.code-workspace
+
+# Logs and Debugging
+debug.log
+.debug/
+*.heapsnapshot
+
+# Generated files
+public/sitemap*.xml
+public/robots.txt
+public/feed.xml
+public/sw.js
+public/workbox-*.js
+public/worker-*.js
+*.map
+
+# Environment
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# System Files
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+
+# Misc
+*.bak
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.directory

@@ -1,9 +1,9 @@
 ---
-title: 'Perpetual Futures Contracts'
+title: 'Perpetual Futures'
 date: '2024-10-25'
 image: /misc/placeholder.webp
-subtitle: 'What they are and why they work.'
-description: 'What they are and why they work.'
+subtitle: 'A New Financial Primitive'
+description: 'A New Financial Primitive'
 tags: ['Crypto', 'Trading']
 ---
 

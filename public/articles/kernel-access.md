@@ -1,9 +1,9 @@
 ---
-title: 'Programs Requesting Kernel Access'
+title: 'Kernel Access'
 date: '2024-10-25'
 image: /misc/placeholder.webp
-subtitle: Everything you need to worry about.
-description: 'Everything you need to worry about.'
+subtitle: Everything you need to worry about
+description: 'Everything you need to worry about'
 tags: ['Tech']
 ---
 

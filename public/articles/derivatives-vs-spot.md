@@ -2,7 +2,7 @@
 title: 'Derivatives vs Spot'
 date: '2024-10-25'
 image: /images/derivatives-0.webp
-subtitle: Market Structure & Price Discovery
+subtitle: 'Market Structure & Price Discovery'
 description: 'Market Structure & Price Discovery'
 tags: ['Trading', 'Crypto']
 ---

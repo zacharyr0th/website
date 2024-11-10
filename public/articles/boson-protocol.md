@@ -2,8 +2,8 @@
 title: 'Boson Protocol'
 date: '2024-10-25'
 image: /images/boson.webp
-subtitle: Tackling dEcommerce, one thing token at a time.
-description: 'Tackling dEcommerce, one thing token at a time.'
+subtitle: 'Tackling dEcommerce, one thing token at a time'
+description: 'Tackling dEcommerce, one thing token at a time'
 tags: ['Crypto']
 ---
 

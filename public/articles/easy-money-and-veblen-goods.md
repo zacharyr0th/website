@@ -2,8 +2,8 @@
 title: 'Easy Money and Veblen Goods'
 date: '2024-10-25'
 image: /misc/placeholder.webp
-subtitle: ''
-description: 'They become more desirable as they become more expensive.'
+subtitle: 'Assets become more desirable as they become more expensive'
+description: 'Assets become more desirable as they become more expensive'
 tags: ['Trading', 'Crypto']
 ---
 

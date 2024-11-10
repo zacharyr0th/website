@@ -30,7 +30,7 @@ export const learningProjects: LearningProject[] = [
     id: 'zacharyr0th-com',
     title: 'zacharyr0th.com',
     description:
-      'This portfolio website is fully open-sourced and showcases modern web development practices. Fork it on Github, its easy to edit.',
+      'This portfolio website is soon to be open-sourced and showcases modern web development practices and a content management system.',
     technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
     features: [
       'Responsive design',
@@ -38,7 +38,6 @@ export const learningProjects: LearningProject[] = [
       'SEO optimization',
       'Content management',
     ],
-    articleLink: 'https://zacharyr0th.com/projects/website',
     githubLink: 'https://github.com/zacharyr0th/website',
     demoLink: '',
     lastUpdated: '2023-04-15',
@@ -50,10 +49,10 @@ export const learningProjects: LearningProject[] = [
       'A minimalist operating system built from scratch. The intention was to better understand low-level system architecture.',
     technologies: ['C', 'Assembly', 'QEMU', 'Make'],
     features: ['Bootloader', 'Kernel', 'Basic shell', 'Memory management', 'Interrupt handling'],
-    articleLink: 'https://zacharyr0th.com/projects/simple-os',
     githubLink: 'https://github.com/zacharyr0th/simple-os',
     demoLink: '',
     lastUpdated: '2023-03-20',
+    articleLink: '/writing/simple-os',
   },
   {
     id: 'casino-time',
@@ -74,7 +73,6 @@ export const learningProjects: LearningProject[] = [
       'Blackjack, Slots, Roullette',
       'Multi-player Poker',
     ],
-    articleLink: 'https://zacharyr0th.com/projects/casino-time',
     githubLink: '',
     demoLink: '',
     lastUpdated: '2023-04-01',
@@ -91,10 +89,10 @@ export const learningProjects: LearningProject[] = [
       'Sheet music visualization',
       'Music Knowledge Base',
     ],
-    articleLink: 'https://zacharyr0th.com/projects/music-ide',
     githubLink: '',
     demoLink: '',
     lastUpdated: '2023-03-10',
+    articleLink: '/writing/musicide',
   },
   {
     id: 'privvy',
@@ -103,7 +101,6 @@ export const learningProjects: LearningProject[] = [
       'A decentralized exchange (DEX) with private transactions implemented by default on the Aleo blockchain.',
     technologies: ['Aleo', 'Zero-knowledge proofs', 'React', 'TypeScript'],
     features: ['Private swaps', 'Liquidity pools'],
-    articleLink: 'https://zacharyr0th.com/projects/privvy',
     githubLink: '',
     demoLink: '',
     lastUpdated: '2023-02-28',
@@ -115,7 +112,6 @@ export const learningProjects: LearningProject[] = [
       "Various utilities for working with the .toml files in Electric Capital's crypto-ecosystems repository.",
     technologies: ['Python', 'TOML', 'Data Analysis'],
     features: ['TOML parsing', 'Data visualization', 'Report Generation'],
-    articleLink: 'https://zacharyr0th.com/projects/toml-tools',
     githubLink: 'https://github.com/zacharyroth/toml-tools',
     demoLink: '',
     lastUpdated: '2023-04-10',
@@ -203,7 +199,7 @@ export const heroContent = {
     {
       title: 'Writer',
       content:
-        'I write about technology and finance, bringing a wide-ranging perspective to each topic. My articles and book reviews can be found here.',
+        'I write about technology and finance, bringing a wide-ranging perspective to each topic.',
       backgroundColor: 'var(--color-accent)',
     },
   ],

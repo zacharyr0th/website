@@ -4,7 +4,7 @@ date: '2024-10-25'
 image: /misc/placeholder.webp
 subtitle: 'A Cross-Generational Perspective on the Birth of the Internet'
 description: 'A Cross-Generational Perspective on the Birth of the Internet'
-tags: ['Crypto', 'Tech', 'History']
+tags: ['Crypto', 'Tech']
 ---
 
 <style jsx>{`

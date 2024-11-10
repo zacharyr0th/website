@@ -2,8 +2,8 @@
 title: 'Search Engine Turbulence'
 date: '2024-10-25'
 image: /images/bing-0.webp
-subtitle: LLMs and the Tumultuous Future of Search Engines
-description: 'LLMs and the Tumultuous Future of Search Engines.'
+subtitle: 'LLMs and the Tumultuous Future of Search Engines'
+description: 'LLMs and the Tumultuous Future of Search Engines'
 tags: ['AI']
 ---
 

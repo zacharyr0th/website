@@ -177,7 +177,7 @@ export type LearningProject = {
   description: string;
   technologies?: string[];
   features?: string[];
-  articleLink: string;
+  articleLink?: string;
   githubLink?: string;
   demoLink?: string;
   lastUpdated: string;

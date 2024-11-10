@@ -3,7 +3,7 @@ title: 'Blockchains in Africa'
 date: '2024-10-25'
 image: /images/ba-0.webp
 subtitle: 'Notes on Adoption Efforts'
-description: 'Notes on Adoption Efforts.'
+description: 'Notes on Adoption Efforts'
 tags: ['Crypto']
 ---
 
