@@ -14,25 +14,40 @@ tags: ['Crypto']
  }
  .prose ol {
     list-style-type: decimal;
-    margin-left: 2em; /* Adjust as needed for indentation */
-    padding-left: 0.5em; /* Add padding if needed */
+    margin-left: 2em;
+    padding-left: 0.5em;
  }
  .prose ol li {
     margin-bottom: 0.5em;
     color: var(--color-text-primary);
-    line-height: 1.5; /* Adjust line height for better readability */
+    line-height: 1.5;
+ }
+ .prose ul {
+    list-style-type: disc;
+    margin-left: 1.5em;
+    padding-left: 0.5em;
+ }
+ .prose ul li {
+    margin-bottom: 0.5em;
+    color: var(--color-text-primary);
+    line-height: 1.5;
  }
 `}</style>
 
 <div class="tldr-section">
 
+DeFi ecosystems are not just an assortment of financial services but an interconnected web of permission-less systems. The essence of these applications is token utility and interoperability. 
+
 </div>
 
-DeFi ecosystems are not just an assortment of financial services but an interconnected web of permission-less systems. The essence of these applications is token utility and interoperability, which we'll focus on in this chapter.
+To start undersanding DeFi, it's essential to understand the fundamental building blocks that make these systems possible. At the core of the crypto ecosystem lies a crucial distinction between different types of digital assets, each serving unique purposes.
 
-# Coins and Tokens
+The distinction between coins and tokens, while not strictly technical or universally adopted, provides a helpful framework for understanding crypto assets.
 
-Coins are the native currencies of blockchains, used to pay transaction fees (like ETH for Ethereum, SOL for Solana, etc.). Tokens, on the other hand, are smart contracts deployed on top of these blockchains. They can be either fungible (like ERC20 tokens) or non-fungible (NFTs), each serving different purposes through their programmable nature.
+| Type | Description |
+|------|-------------|
+| Coins | Native currencies of blockchains, used to pay transaction fees (like ETH for Ethereum, SOL for Solana, etc.) |
+| Tokens | Smart contracts deployed on top of blockchains. Can be either fungible (like ERC20 tokens) or non-fungible (NFTs), each serving different purposes through their programmable nature |
 
 # Smart Contracts and Tokenomics
 
@@ -40,52 +55,124 @@ Smart contracts are self-executing programs that enable token functionality and 
 
 # Stable Coins
 
-Stablecoins are among the highest-priority issues in the regulatory landscape. They are intended to retain a peg to another asset, such as a USD. The biggest stablecoins in the world are USDT and USDC, amounting to roughly $100 billion in combined value. Each of these coins is intended to be worth $1 at all times and enable all the benefits blockchains offer.
+Stablecoins are among the highest-priority issues in the regulatory landscape. They are intended to retain a peg to another asset, such as a USD and the biggest stablecoins in the world are USDT and USDC, amounting to roughly $100 billion in combined value. 
 
-There are three primary types of stablecoins.
+Three variations of stablecoins have gained prominence.
 
-Asset-backed—USDT and USDC are examples of asset-backed stablecoins, where a supposed $1 or $1 worth of assets backs every stablecoin.
-Over-collateralized – MakerDAO's DAI is an example of an over-collateralized stablecoin. Users can deposit volatile collateral like BTC on the Maker platform and receive DAI in return. To receive $100 worth of DAI, for example, a user will need to deposit $200 worth of BTC (assuming that the loan-to-value ratio is 2:1). If BTC drops in value to the point where you are unable to trade it back for your DAI (LTV ratios fluctuate based on market supply and demand dynamics so this liquidation point can change).
-Algorithmic—Algorithmic coins are inherently more risky than the above stablecoins, but there are a few out there that seem to work. It is still being determined if this model is scalable. Terra Classic was a $60 billion example of an algorithmic stablecoin that did not work and was a predictable culprit in an algorithmic stablecoin death spiral.
-Other stablecoins are out there, but most fall into one of the above categories and are tied to 1 USD. Sure, you could tie a stablecoin to 2 USD or 1,000,000 USD. You could make a new cryptocurrency, call it PIE, and peg it to $3.1415926535 – although the ticker PIE has already been taken.
+| Type | Description | Examples | Risk Level |
+|------|-------------|----------|------------|
+| Asset-backed | Each token is backed by $1 or $1 worth of assets in reserve | USDT, USDC | Low |
+| Over-collateralized | Users deposit excess collateral (e.g., $200 worth of BTC for $100 DAI) to mint stablecoins. Collateral ratios fluctuate based on market conditions | MakerDAO's DAI | Medium |
+| Algorithmic | Uses smart contracts and market incentives to maintain the peg without direct collateral backing | Terra Classic (failed) | High |
 
-There are stable coins pegged to the EUR, AUD, etc., but most of the volume and use cases involve USD-based stablecoins.
+Other stablecoins are out there, but most fall into one of the above categories and are tied to 1 USD. While it's possible to peg stablecoins to other values (like 2 USD or even $3.1415926535), most stablecoins focus on maintaining a 1:1 peg with USD. There are also stablecoins pegged to other currencies like EUR and AUD, but USD-based stablecoins dominate in terms of volume and use cases.
 
 # DeFi
 
-Decentralized Finance (DeFi) highlights the difference between owning and possessing something. In traditional finance (TradFi), you trust intermediaries to do things right for you every step of the way.
+In traditional finance (TradFi), they've built an entire system on layers of trust in intermediaries. The likelihood of nefarious behavior in your banking system really depends on where you live - and Defi seeks to give everyone an equal opportunity at financial sovereignty and independence.
 
-Here are some examples of that:
+Consider these everyday scenarios in traditional finance:
 
-Every time you log into your account, you trust your bank to tell you your accurate balance and give you access. However, the bank can also do whatever it wants with your money without telling you.
-With every trade you make on a brokerage, you trust that you're getting the right price and that the exchange you're trading with is not front-running you.
-Every time you buy something with a funded debit or credit card, you trust that the bank will transfer the money from your account to the vendor's account accordingly and that the vendor will accept the transfer.
-Whenever you attempt to open an account for any financial product or service, you ask permission to do so.
-In most parts of the world, this trust is taken for granted. This level of trust is too high in other parts of the world that have experienced currency failures, uncapped businesses, and banking corruption. Even in developed financial economies, this trust becomes a liability. If dirt hits the fan, do you trust your exchange to let you withdraw your money?
+<ol class="detailed-list">
+    <li>
+        <strong>Banking Access</strong>
+        <ul>
+            <li>You trust bank-displayed balances blindly</li>
+            <li>Banks can secretly:
+                <ul>
+                    <li>Lend your money without notice</li>
+                    <li>Freeze accounts arbitrarily</li>
+                    <li>Manipulate transaction records</li>
+                    <li>Change terms of service</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>Trading Integrity</strong>
+        <ul>
+            <li>Every brokerage trade requires trust in:
+                <ul>
+                    <li>Accurate price execution</li>
+                    <li>Fair order processing</li>
+                    <li>Complete transaction transparency</li>
+                    <li>Protection from front-running</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>Payment Processing</strong>
+        <ul>
+            <li>A single card transaction involves multiple trust points:
+                <ul>
+                    <li>Your bank's fund release</li>
+                    <li>Payment network's processing</li>
+                    <li>Merchant bank's acceptance</li>
+                    <li>Various intermediary handlers</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>Financial Services</strong>
+        <ul>
+            <li>Traditional finance gatekeepers control:
+                <ul>
+                    <li>Access to financial products</li>
+                    <li>Service availability</li>
+                    <li>Account approval processes</li>
+                    <li>Transaction limits</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ol>
 
-DeFi has a tumultuous and weathered history but is now a massive hundred-billion-dollar market with room to grow. TradFi markets are worth hundreds of trillions.
+<div class="prose">
 
-# Price Action
+### The Global Trust Divide
 
-Crypto began as a single blockchain and a single currency. As several projects like MasterCoin and ColoredCoins popped up, Ethereum became the only one with staying power.
+In developed economies, trust in financial institutions is often taken for granted. However, recent history has shown that no financial system is immune to crisis:
 
+#### Developing Economies Face:
+- Hyperinflation and currency collapses (Venezuela, Zimbabwe)
+- Sudden bank nationalizations
+- Rampant financial corruption
+- Arbitrary asset seizures and capital controls
+- Limited access to basic banking services
+
+#### Developed Economies Experience:
+- Bank runs and failures (2008 Financial Crisis)
+- Account freezes during political unrest
+- Payment censorship
+- Trading halts during market volatility
+- Negative interest rates on savings accounts
+</div>
+
+<div></div>
+
+### Price Action Preceding Innovation
 Ethereum paved the way for decentralized projects to bootstrap their funding rounds by issuing tokens in their 2014 ICO (Initial Coin Offering), leading to the ICO mania in 2017. Much has been documented about this time period as it was rife with scams and bewitching celebrities attempting cash grabs while the price of Ethereum soared to nearly $1500 and Bitcoin to almost $20,000.
 
-In the following years, Ethereum crashed to less than $100, and Bitcoin fell to $3200 during the COVID drop in March 2020. Then it was up only, down only, then up only, and now down only again.
+In the following years, Ethereum crashed to less than $100, and Bitcoin fell to $3200 during the COVID drop in March 2020. Then it was up only, down only, then up only, and yada yada.
 
-The macroeconomic environment is continually finding itself in unprecedented territory, so it will be interesting to see how Bitcoin's price and the cryptocurrency market react in the upcoming decades. Again, crypto is barely a teenager and has many uphill battles.
+Price movements historically drive public interest in cryptocurrency. While the 2020 DeFi Summer coincided with Bitcoin's dramatic price recovery, this correlation mainly affected user adoption. Behind the scenes, developers had been consistently building and improving DeFi infrastructure since 2017, regardless of market conditions.
 
-# DeFi Summer & The Standard Stack
+# Defi Summer & The Standard Stack
 
 As Bitcoin and Ethereum recovered during the remainder of 2020 after the COVID drop in March, something called DeFi Summer took off. This movement has been in the background since 2017. Protocols like Uniswap, MakerDAO, Curve, Yearn, and Aave took off on Ethereum, enabling the world's first decentralized lending, borrowing, and trading markets.
 
-Millions and billions of dollars poured into these protocols and other applications.
+This period was rampant with innovation and, at the same time, speculation. Prices were rising at unsustainable rates, and some protocols were failing while their tokens were going to zero. Ecosystems have collectively evolved to establish a core set of essential financial services that are now considered fundamental building blocks. 
 
-This period was rampant with innovation and, at the same time, speculation. Prices were rising at unsustainable rates, and some protocols were failing while their tokens were going to zero. DeFi protocols like the ones listed above – with some staying power – have inspired thousands of blockchain applications to be built across dozens of blockchains.
+These services typically include:
+1. Decentralized Exchanges (DEX) for token swapping
+2. Lending and borrowing protocols
+3. Liquidity pools and yield farming
+4. Stablecoin mechanisms
+5. Asset bridging solutions
 
-There is a group of financial services that DeFi protocols inhabit that are mirrored on one new blockchain after the next. They have become the standard stack. Without the basic DeFi layer, blockchains are considered to be lacking. This is why you'll see so many protocols that do the same thing on different blockchains.
-
-Oddly enough, Bitcoin does not have a developed DeFi network. Although possible, the code is not built to foster DeFi, and the development community surrounding Bitcoin is not keen on enabling it.
+They form what's known as the "DeFi stack" - a foundational layer that new blockchains must implement to be considered viable for modern decentralized applications. When a new blockchain launches, developers typically prioritize building these core services first, which explains why you'll find similar protocols (like Uniswap-style DEXes or Aave-like lending platforms) replicated across different blockchain ecosystems.
 
 # Case Study
 
@@ -97,26 +184,20 @@ If you submit a trade and Jupiter finds two ways to do it, you'll be presented w
 
 ## ETrade vs Jupiter Aggregator Comparison
 
-ETrade (CEX):
-- Complex account opening process (documentation, verification)
-- Multi-day waiting periods
-- Limited trading hours
-- Centralized custody and market makers
-- Payment for order flow (PFOF) model
-
-Jupiter (DEX):
-- Simple wallet connection
-- Immediate trading capability
-- 24/7 operation
-- Non-custodial
-- Automated market makers (AMMs)
+| Feature | ETrade (CEX) | Jupiter (DEX) |
+|---------|--------------|---------------|
+| Account Setup | Complex account opening process (documentation, verification) | Simple wallet connection |
+| Trading Timeline | Multi-day waiting periods | Immediate trading capability |
+| Availability | Limited trading hours | 24/7 operation |
+| Custody | Centralized custody and market makers | Non-custodial |
+| Market Making | Payment for order flow (PFOF) model | Automated market makers (AMMs) |
 
 # Conclusion
 
 DeFi is powerful, yet it is still only a toddler, and there are growing pains. There have been dozens, if not hundreds, of blockchain applications and exploits, and if you want to get involved, you need to know what you're doing. The remainder of this course focuses on the media's media's buzzwords – NFTs and DAOs. What is essential to consider is these sub-industries within crypto are just logical extensions of what DeFi can do.
 
-Just remember:
-
 Consensus methods are the foundation of blockchains.
+
 Blockchains are the foundations of DeFi.
-DeFi is the foundation of NFTs and DAOs.
+
+DeFi is the foundation of everything else.

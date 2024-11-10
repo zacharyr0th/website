@@ -88,6 +88,65 @@ const ArticleContent = memo(({ article }: { article: Article }) => (
         color: var(--color-text-primary);
         line-height: 1.5;
       }
+      .prose .detailed-list {
+        list-style-type: decimal;
+        margin-left: 0;
+        padding-left: 0;
+        counter-reset: item;
+      }
+      .prose .detailed-list > li {
+        display: block;
+        margin-bottom: 1.5em;
+        padding: 1em;
+        background: var(--color-surface);
+        border-radius: 8px;
+        position: relative;
+      }
+      .prose .detailed-list > li::before {
+        content: counter(item) ".";
+        counter-increment: item;
+        position: absolute;
+        left: -2.5em;
+        top: 0.8em;
+        font-weight: bold;
+        color: var(--color-accent);
+      }
+      .prose .detailed-list ul {
+        list-style-type: none;
+        margin: 0.5em 0;
+        padding-left: 1em;
+      }
+      .prose .detailed-list ul ul {
+        margin: 0.25em 0;
+        padding-left: 1.5em;
+      }
+      .prose .detailed-list ul li::before {
+        content: "•";
+        color: var(--color-accent);
+        font-weight: bold;
+        display: inline-block;
+        width: 1em;
+        margin-left: -1em;
+      }
+      .prose .detailed-list ul ul li::before {
+        content: "◦";
+      }
+      .prose .detailed-list strong {
+        color: var(--color-accent);
+        display: block;
+        margin-bottom: 0.5em;
+        font-size: 1.1em;
+      }
+      .prose ul {
+        list-style-type: disc;
+        margin-left: 2em;
+        padding-left: 0.5em;
+      }
+      .prose ul li {
+        margin-bottom: 0.5em;
+        color: var(--color-text-primary);
+        line-height: 1.5;
+      }
     `}</style>
   </main>
 ));
