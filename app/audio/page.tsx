@@ -49,12 +49,8 @@ const AudioPage = () => {
                   width="100%"
                   height="392"
                   src={`https://bandcamp.com/EmbeddedPlayer/track=${
-                    item === 1 ? '3262928599' : item === 2 ? '2324363469' : '752272134'
-                  }/size=large/bgcol=${encodeURIComponent(
-                    'var(--color-surface)'
-                  )}/linkcol=${encodeURIComponent(
-                    'var(--color-accent)'
-                  )}/tracklist=false/transparent=true/`}
+                    item === 1 ? '3262928599' : item === 2 ? '2324363469' : '3766185999'
+                  }/size=large/bgcol=333333/linkcol=ffffff/tracklist=false/transparent=true/`}
                   seamless
                   className="transition-shadow duration-300 hover:shadow-lg"
                 />
