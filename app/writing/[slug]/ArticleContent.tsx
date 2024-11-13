@@ -103,7 +103,7 @@ const ArticleContent = memo(({ article }: { article: Article }) => (
         position: relative;
       }
       .prose .detailed-list > li::before {
-        content: counter(item) ".";
+        content: counter(item) '.';
         counter-increment: item;
         position: absolute;
         left: -2.5em;
@@ -121,7 +121,7 @@ const ArticleContent = memo(({ article }: { article: Article }) => (
         padding-left: 1.5em;
       }
       .prose .detailed-list ul li::before {
-        content: "•";
+        content: '•';
         color: var(--color-accent);
         font-weight: bold;
         display: inline-block;
@@ -129,7 +129,7 @@ const ArticleContent = memo(({ article }: { article: Article }) => (
         margin-left: -1em;
       }
       .prose .detailed-list ul ul li::before {
-        content: "◦";
+        content: '◦';
       }
       .prose .detailed-list strong {
         color: var(--color-accent);
