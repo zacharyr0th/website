@@ -64,7 +64,7 @@ const Navigation = ({ setTheme }: NavigationProps) => {
         className={`flex items-center space-x-3 text-base transition-all duration-200 ${scrolledClass} rounded-xl`}
         style={{ padding: '0 10px', backgroundColor: 'transparent' }}
       >
-        <ul className="flex items-center space-x-3">
+        <ul className="flex items-center space-x-3 max-sm:justify-center max-sm:w-full">
           {navItems.map(renderNavItem)}
           <li>
             <div className="p-2">

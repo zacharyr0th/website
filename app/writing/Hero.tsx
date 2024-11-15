@@ -7,7 +7,7 @@ import { RefreshIcon } from '../../lib/constants';
 
 const Hero: React.FC<HeroProps> = React.memo(({ primaryArticle, featuredArticles, onRefresh }) => (
   <section
-    className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8"
+    className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 pt-6 sm:pt-8"
     aria-label="Featured Articles"
   >
     <PrimaryArticle article={primaryArticle} />
