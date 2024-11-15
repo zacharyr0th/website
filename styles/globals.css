@@ -30,7 +30,7 @@ h6 {
   max-width: 100%;
   line-height: 1.75;
   color: var(--color-text-primary);
-  @apply font-mono;
+  @apply font-mono px-4 sm:px-0;
 }
 
 .prose h1,
@@ -49,6 +49,9 @@ h6 {
   margin: 1em 0;
   border-radius: var(--border-radius-md);
   box-shadow: var(--box-shadow);
+  max-width: 100%;
+  height: auto;
+  margin: 1em auto;
 }
 
 /* Add this to your globals.css file */
@@ -108,4 +111,13 @@ td:first-child {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* Adjust table display for mobile */
+@media (max-width: 640px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
 }

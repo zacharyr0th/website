@@ -14,20 +14,20 @@ const ArticleContent = memo(({ article }: { article: Article }) => (
       fontFamily: 'var(--font-family-base)',
     }}
   >
-    <article className="flex-grow container mx-auto px-48 pt-16 pb-8 max-w-5xl prose">
-      <header className="mb-12">
-        <h1 className="text-5xl mb-4" style={{ color: 'var(--color-text-primary)' }}>
+    <article className="flex-grow container mx-auto px-4 sm:px-6 md:px-8 lg:px-48 pt-8 sm:pt-16 pb-8 max-w-5xl prose">
+      <header className="mb-8 sm:mb-12">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl mb-4" style={{ color: 'var(--color-text-primary)' }}>
           {article.title}
         </h1>
         {article.subtitle && (
-          <h2 className="text-3xl font-thin mb-4" style={{ color: 'var(--color-text-secondary)' }}>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-thin mb-4" style={{ color: 'var(--color-text-secondary)' }}>
             {article.subtitle}
           </h2>
         )}
-        <div className="flex items-center">
+        <div className="flex flex-wrap items-center gap-4">
           <p style={{ color: 'var(--color-text-secondary)' }}>{article.date}</p>
           {article.tags && (
-            <ul className="flex space-x-2 ml-4">
+            <ul className="flex flex-wrap gap-2">
               {article.tags.map((tag, index) => (
                 <li
                   key={index}
