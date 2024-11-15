@@ -12,11 +12,11 @@ export default function ProjectsPage() {
 
   return (
     <main
-      className={`mt-8 flex flex-col w-auto min-h-screen overflow-x-hidden font-mono ${theme}`}
+      className={`mt-4 sm:mt-8 flex flex-col w-auto min-h-screen overflow-x-hidden font-mono ${theme}`}
       style={{ backgroundColor: 'var(--color-background)' }}
     >
       <Navigation setTheme={setTheme} />
-      <div className="flex-grow px-4 sm:px-6 md:px-8 py-8">
+      <div className="flex-grow px-2 sm:px-6 md:px-8 py-4 sm:py-8">
         <Hero theme={theme} setTheme={setTheme} />
       </div>
       <Footer />

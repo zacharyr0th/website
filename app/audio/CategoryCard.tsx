@@ -13,28 +13,32 @@ interface CategoryCardProps {
 
 const CategoryCard = memo(({ category, index }: CategoryCardProps) => (
   <motion.div
-    initial={{ y: 20 }}
-    animate={{ y: 0 }}
-    transition={{ duration: 0.5, delay: index * 0.1 }}
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.4, delay: index * 0.1 }}
+    className="w-full h-full"
   >
-    <Link href={`/music/${category.slug}`} className="block">
+    <Link href={`/music/${category.slug}`} className="block h-full">
       <motion.div
-        className="rounded-xl overflow-hidden transition-all duration-300 border relative group hover:bg-[var(--color-primary)]"
+        className="rounded-lg overflow-hidden transition-all duration-300 border relative group hover:bg-[var(--color-primary)] h-[120px] w-full"
         style={{
-          backgroundColor: 'inherit',
-          borderColor: 'var(--color-text-secondary)',
-          boxShadow: 'var(--box-shadow)',
+          backgroundColor: 'var(--color-background)',
+          borderColor: 'var(--color-border)',
+          boxShadow: 'var(--shadow-sm)',
         }}
       >
-        <div className="p-6">
-          <h2 className="text-2xl font-semi-bold mb-2 text-[var(--color-text-primary)] group-hover:text-accent transition-colors">
-            {category.title}
-          </h2>
-          <p className="mb-4 text-[var(--color-text-secondary)]">{category.description}</p>
-          <div className="inline-flex items-center text-accent">
-            View All
+        <div className="p-4 flex flex-col h-full">
+          <div className="flex items-baseline mb-2">
+            <h2 className="text-xl font-medium text-[var(--color-text-primary)] group-hover:text-accent transition-colors">
+              {category.title}
+            </h2>
+            <span className="ml-2 text-sm text-[var(--color-text-secondary)]">(Coming Soon)</span>
+          </div>
+          <p className="mb-auto text-[var(--color-text-secondary)] text-sm">{category.description}</p>
+          <div className="inline-flex items-center text-accent opacity-60 cursor-not-allowed">
+            Work in Progress
             <svg
-              className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-0.5"
+              className="w-4 h-4 ml-1.5 transition-transform group-hover:translate-x-0.5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
