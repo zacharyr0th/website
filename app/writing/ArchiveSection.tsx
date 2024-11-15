@@ -147,7 +147,7 @@ const ArticleGrid: React.FC<ArticleGridProps> = React.memo(({ articles }) => {
   }
 
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
       {articles.map((article) => (
         <div key={article.id} className="p-4">
           <ArticleCard article={article} />
