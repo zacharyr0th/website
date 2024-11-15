@@ -12,7 +12,7 @@ export default function Home() {
     <main className="flex flex-col w-auto full-height overflow-x-hidden font-mono">
       <Hero />
       <Main />
-      <section className="relative h-[100vh] w-full">
+      <section className="relative w-full">
         <BackgroundSVG2 />
       </section>
       <Newsletter />
