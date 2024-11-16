@@ -38,7 +38,7 @@ export const learningProjects: LearningProject[] = [
       'SEO optimization',
       'Content management',
     ],
-    githubLink: 'https://github.com/zacharyr0th/website',
+    githubLink: '',
     demoLink: '',
     lastUpdated: '2023-04-15',
   },
