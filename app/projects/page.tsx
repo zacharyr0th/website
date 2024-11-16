@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Navigation from '../components/common/Navigation';
 import { Theme } from '@/lib/types';
 
@@ -11,10 +11,7 @@ export default function ProjectsPage() {
   const [theme, setTheme] = useState<Theme>('light');
 
   return (
-    <main
-      className={`mt-4 sm:mt-8 flex flex-col w-auto min-h-screen overflow-x-hidden font-mono ${theme}`}
-      style={{ backgroundColor: 'var(--color-background)' }}
-    >
+    <main className="flex flex-col w-full min-h-screen font-mono">
       <Navigation setTheme={setTheme} />
       <div className="flex-grow px-2 sm:px-6 md:px-8 py-4 sm:py-8">
         <Hero theme={theme} setTheme={setTheme} />

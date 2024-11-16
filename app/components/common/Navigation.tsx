@@ -19,7 +19,7 @@ const Navigation = ({ setTheme }: NavigationProps) => {
 
   const renderNavItem = useCallback(
     ({ label, href }: NavItem) => (
-      <li key={label}>
+      <li key={label} className={pathname === href && pathname !== '/' ? 'max-sm:hidden' : ''}>
         <Link href={href}>
           <NavButton variant="secondary" active={pathname === href}>
             {label}
@@ -30,44 +30,27 @@ const Navigation = ({ setTheme }: NavigationProps) => {
     [pathname]
   );
 
-  const scrolledClass = isScrolled ? 'backdrop-blur-lg' : '';
+  const scrolledClass = isScrolled ? 'bg-background/80 backdrop-blur-lg' : 'bg-transparent';
 
   return (
-    <nav className="fixed top-0 right-0 left-0 m-8 z-10 flex items-center justify-between">
+    <nav className="fixed top-0 right-0 left-0 m-8 z-50 flex items-center justify-center max-sm:m-4">
       {pathname !== '/' && (
-        <div
-          className="flex items-center justify-center rounded-full"
-          style={{ width: '40px', height: '40px', margin: '0 20px' }}
-        >
+        <div className={`max-sm:absolute max-sm:left-0 rounded-xl ${scrolledClass}`}>
           <Link href="/" style={{ textDecoration: 'none' }}>
-            <div
-              style={{
-                width: '40px',
-                height: '40px',
-                backgroundColor: 'var(--color-primary)',
-                color: 'var(--color-white)',
-                borderRadius: '50%',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                fontSize: '20px',
-                fontWeight: 'bold',
-              }}
-            >
+            <NavButton variant="secondary" active={pathname === '/'}>
               Z
-            </div>
+            </NavButton>
           </Link>
         </div>
       )}
-      <div className="flex-grow" />
+      <div className="flex-grow max-sm:hidden" />
       <div
-        className={`flex items-center space-x-3 text-base transition-all duration-200 ${scrolledClass} rounded-xl`}
-        style={{ padding: '0 10px', backgroundColor: 'transparent' }}
+        className={`flex items-center space-x-4 text-base transition-all duration-200 ${scrolledClass} rounded-xl p-2 max-sm:p-3`}
       >
-        <ul className="flex items-center space-x-3 max-sm:justify-center max-sm:w-full">
+        <ul className="flex items-center space-x-3 max-sm:space-x-2 max-sm:justify-end max-sm:w-full">
           {navItems.map(renderNavItem)}
           <li>
-            <div className="p-2">
+            <div className="p-2 max-sm:p-1">
               <ThemeSelector setTheme={setTheme} />
             </div>
           </li>

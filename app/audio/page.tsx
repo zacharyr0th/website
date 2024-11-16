@@ -22,7 +22,7 @@ const AudioPage = () => {
 
   return (
     <main className="flex flex-col w-full min-h-screen font-mono">
-      <div className="flex-grow container mx-auto px-5 md:px-48 pt-8 md:pt-36 pb-8 md:pb-18 max-w-5xl">
+      <div className="flex-grow container mx-auto px-5 md:px-48 pt-32 md:pt-36 pb-8 md:pb-18 max-w-5xl">
         <Navigation setTheme={setTheme} />
         <h1 
           style={{ color: 'var(--color-text-primary)' }} 

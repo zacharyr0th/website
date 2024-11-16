@@ -74,7 +74,7 @@ export default function WritingPage() {
   const renderContent = () => {
     if (isLoading) {
       return (
-        <div className="flex-grow container mx-auto px-5 md:px-48 pt-8 md:pt-36 pb-8 md:pb-18 max-w-5xl">
+        <div className="flex-grow container mx-auto px-5 md:px-48 pt-32 md:pt-36 pb-8 md:pb-18 max-w-5xl">
           <h1 className="text-3xl md:text-5xl font-bold mb-12 text-text-primary">Writing</h1>
           <p>Loading articles...</p>
         </div>
@@ -82,7 +82,7 @@ export default function WritingPage() {
     }
 
     return (
-      <div className="flex-grow container mx-auto px-5 md:px-48 pt-8 md:pt-36 pb-8 md:pb-18 max-w-5xl">
+      <div className="flex-grow container mx-auto px-5 md:px-48 pt-32 md:pt-36 pb-8 md:pb-18 max-w-5xl">
         <h1 className="text-3xl md:text-5xl font-bold mb-12 text-text-primary">Writing</h1>
 
         {primaryContent && (
