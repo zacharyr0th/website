@@ -23,7 +23,7 @@ const Newsletter: React.FC = memo(() => {
             <input
               className="flex-grow bg-transparent text-[var(--color-text-primary)] mr-3 py-1 px-2 leading-tight focus:outline-none"
               type="email"
-              placeholder="Enter your email"
+              placeholder="Coming Soon"
               aria-label="Email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
