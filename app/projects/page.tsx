@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import Navigation from '../components/common/Navigation';
 import { Theme } from '@/lib/types';
 

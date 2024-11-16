@@ -1,11 +1,11 @@
-import React, { memo, useState, useEffect } from 'react';
+import React, { memo, useState } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
-import { learningProjects, CONFIG } from '@/lib/constants';
+import { motion } from 'framer-motion';
+import { learningProjects } from '@/lib/constants';
 import { ProjectsPageProps, LearningProject } from '@/lib/types';
 import { GitHubIcon, ArticleIcon } from '../icons';
 
-const Hero: React.FC<ProjectsPageProps> = memo(({ theme }) => {
+const Hero: React.FC<ProjectsPageProps> = memo(() => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
 
   return (
@@ -42,7 +42,7 @@ const ProjectCard: React.FC<{
   isSelected: boolean;
   onClick: () => void;
   isGridView: boolean;
-}> = memo(({ project, isSelected, onClick, isGridView }) => {
+}> = memo(({ project, isSelected, }) => {
   return (
     <motion.div
       layout
@@ -60,11 +60,11 @@ const ProjectCard: React.FC<{
       </div>
 
       {/* Tech Stack - Fixed Height */}
-      <div className="flex flex-wrap gap-2 min-h-[48px] mb-6">
+      <div className="flex flex-wrap gap-2 h-[88px] mb-6 overflow-hidden">
         {project.technologies?.map((tech) => (
           <span
             key={tech}
-            className="px-3 py-1.5 rounded-md bg-surface-accent text-text-primary text-sm font-medium border border-border/50"
+            className="px-3 py-1.5 rounded-md bg-surface-accent text-text-primary text-sm font-medium border border-border/50 h-[32px] flex items-center"
           >
             {tech}
           </span>
