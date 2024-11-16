@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useCallback } from 'react';
+import { motion } from 'framer-motion';
 import Footer from '@/app/components/common/Footer';
 import { Article } from '@/lib/types';
 import Hero from './Hero';
@@ -75,7 +76,14 @@ export default function WritingPage() {
     if (isLoading) {
       return (
         <div className="flex-grow container mx-auto px-5 md:px-48 pt-32 md:pt-36 pb-8 md:pb-18 max-w-5xl">
-          <h1 className="text-3xl md:text-5xl font-bold mb-12 text-text-primary">Writing</h1>
+          <motion.h1 
+            className="text-3xl md:text-5xl font-bold mb-12 text-text-primary"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            Writing
+          </motion.h1>
           <p>Loading articles...</p>
         </div>
       );
@@ -83,33 +91,51 @@ export default function WritingPage() {
 
     return (
       <div className="flex-grow container mx-auto px-5 md:px-48 pt-32 md:pt-36 pb-8 md:pb-18 max-w-5xl">
-        <h1 className="text-3xl md:text-5xl font-bold mb-12 text-text-primary">Writing</h1>
+        <motion.h1 
+          className="text-3xl md:text-5xl font-bold mb-12 text-text-primary"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          Writing
+        </motion.h1>
 
-        {primaryContent && (
-          <div className="max-w-7xl mx-auto mb-12">
-            <Hero
-              primaryArticle={primaryContent}
-              featuredArticles={randomContent}
-              onRefresh={handleRefreshRandom}
-            />
-          </div>
-        )}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          {primaryContent && (
+            <div className="max-w-7xl mx-auto mb-12">
+              <Hero
+                primaryArticle={primaryContent}
+                featuredArticles={randomContent}
+                onRefresh={handleRefreshRandom}
+              />
+            </div>
+          )}
 
-        <ArchiveSection
-          tags={tags}
-          selectedTag={selectedTag}
-          onTagChange={handleTagChange}
-          content={filteredContent}
-        />
+          <ArchiveSection
+            tags={tags}
+            selectedTag={selectedTag}
+            onTagChange={handleTagChange}
+            content={filteredContent}
+          />
+        </motion.div>
       </div>
     );
   };
 
   return (
-    <main className="flex flex-col w-full min-h-screen font-mono">
+    <motion.main 
+      className="flex flex-col w-full min-h-screen font-mono"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       {renderContent()}
       <Footer />
-    </main>
+    </motion.main>
   );
 }
 

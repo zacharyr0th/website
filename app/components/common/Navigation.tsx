@@ -47,7 +47,7 @@ const Navigation = ({ setTheme }: NavigationProps) => {
       <div
         className={`flex items-center space-x-4 text-base transition-all duration-200 ${scrolledClass} rounded-xl p-2 max-sm:p-3`}
       >
-        <ul className="flex items-center space-x-3 max-sm:space-x-2 max-sm:justify-end max-sm:w-full">
+        <ul className="flex items-center space-x-3 max-sm:space-x-1 max-sm:justify-end max-sm:w-full">
           {navItems.map(renderNavItem)}
           <li>
             <div className="p-2 max-sm:p-1">
