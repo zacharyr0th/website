@@ -15,7 +15,7 @@ function ProfileImage() {
         priority
         quality={90}
       />
-      <input 
+      <input
         type="file"
         accept="image/*"
         aria-label="Upload profile picture"

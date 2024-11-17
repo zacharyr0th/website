@@ -76,7 +76,7 @@ export default function WritingPage() {
     if (isLoading) {
       return (
         <div className="flex-grow container mx-auto px-5 md:px-48 pt-32 md:pt-36 pb-8 md:pb-18 max-w-5xl">
-          <motion.h1 
+          <motion.h1
             className="text-3xl md:text-5xl font-bold mb-12 text-text-primary"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -91,7 +91,7 @@ export default function WritingPage() {
 
     return (
       <div className="flex-grow container mx-auto px-5 md:px-48 pt-32 md:pt-36 pb-8 md:pb-18 max-w-5xl">
-        <motion.h1 
+        <motion.h1
           className="text-3xl md:text-5xl font-bold mb-12 text-text-primary"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -100,7 +100,7 @@ export default function WritingPage() {
           Writing
         </motion.h1>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
@@ -127,7 +127,7 @@ export default function WritingPage() {
   };
 
   return (
-    <motion.main 
+    <motion.main
       className="flex flex-col w-full min-h-screen font-mono"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}

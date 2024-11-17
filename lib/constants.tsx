@@ -9,6 +9,7 @@ import {
   NavButtonProps,
   ProjectCategory,
   ThemeColors,
+  WritingCategory,
 } from './types';
 
 // Use const assertions for better type inference
@@ -343,7 +344,8 @@ export const ANIMATIONS = {
 export const SEO_DEFAULTS = {
   titleTemplate: '%s | Zachary Roth',
   defaultTitle: 'Zachary Roth - Technologist, Writer, & Musician',
-  defaultDescription: 'Personal portfolio and blog featuring projects, articles, and audio content.',
+  defaultDescription:
+    'Personal portfolio and blog featuring projects, articles, and audio content.',
   siteUrl: 'https://zacharyr0th.com',
   openGraph: {
     type: 'website',
@@ -356,60 +358,66 @@ export const SEO_DEFAULTS = {
 export const BIO_DATA = {
   name: 'Zachary Roth',
   title: 'Technologist, Writer, & Musician',
-  intro: "Since 2019, I've been involved with projects across multiple hyper-growth blockchain ecosystems including Bitcoin, Ethereum, Solana, and Aptos. My work involves identifying market opportunities and guiding DeFi and AI teams on leveraging on-chain solutions to enhance their products and services on Aptos, the world's highest performing blockchain.",
-  
+  intro:
+    "Since 2019, I've been involved with projects across multiple hyper-growth blockchain ecosystems including Bitcoin, Ethereum, Solana, and Aptos. My work involves identifying market opportunities and guiding DeFi and AI teams on leveraging on-chain solutions to enhance their products and services on Aptos, the world's highest performing blockchain.",
+
   experience: [
     {
-      date: "May 2023 - Present",
-      title: "Head of Growth, DeFi & AI",
-      company: "Aptos Labs",
+      date: 'May 2023 - Present',
+      title: 'Head of Growth, DeFi & AI',
+      company: 'Aptos Labs',
       description: [
         "Leading strategic development in DeFi and AI sectors at the world's highest performing blockchain",
-        "Facilitating blockchain integration solutions and ecosystem growth",
-        "Managing developer ecosystems and partnerships"
-      ]
+        'Facilitating blockchain integration solutions and ecosystem growth',
+        'Managing developer ecosystems and partnerships',
+      ],
     },
     {
-      date: "2022 - 2023",
-      title: "Product Manager",
-      company: "Solrise Finance",
+      date: '2022 - 2023',
+      title: 'Product Manager',
+      company: 'Solrise Finance',
       description: [
-        "Led product strategy for non-custodial fund management and trading competitions",
-        "Created technical documentation and educational content",
-        "Developed comprehensive user content including onboarding materials",
-        "Authored 14-part course on blockchain and DeFi fundamentals"
-      ]
+        'Led product strategy for non-custodial fund management and trading competitions',
+        'Created technical documentation and educational content',
+        'Developed comprehensive user content including onboarding materials',
+        'Authored 14-part course on blockchain and DeFi fundamentals',
+      ],
     },
     {
-      date: "2020 - 2023",
-      title: "Senior Analyst",
-      company: "N2 Communications",
+      date: '2020 - 2023',
+      title: 'Senior Analyst',
+      company: 'N2 Communications',
       description: [
-        "Contributed to capital raising initiatives exceeding $2B",
-        "Advised on crypto and commodity investments analysis",
-        "Managed regulatory compliance initiatives"
-      ]
-    }
+        'Contributed to capital raising initiatives exceeding $2B',
+        'Advised on crypto and commodity investments analysis',
+        'Managed regulatory compliance initiatives',
+      ],
+    },
   ] as const,
 
   skills: [
     {
-      category: "Programming & Development",
-      skills: ["Python", "TypeScript", "C", "Next.js", "React", "Tailwind CSS", "SCAMP", "Git"]
+      category: 'Programming & Development',
+      skills: ['Python', 'TypeScript', 'C', 'Next.js', 'React', 'Tailwind CSS', 'SCAMP', 'Git'],
     },
     {
-      category: "Blockchain & DeFi",
-      skills: ["Move", "Solidity", "Rust", "Smart Contracts", "DeFi Architecture", "Analytics"]
+      category: 'Blockchain & DeFi',
+      skills: ['Move', 'Solidity', 'Rust', 'Smart Contracts', 'DeFi Architecture', 'Analytics'],
     },
     {
-      category: "Business & Communication",
-      skills: ["Technical Writing", "Strategic Planning", "Partnership Development", "Product Management"]
-    }
+      category: 'Business & Communication',
+      skills: [
+        'Technical Writing',
+        'Strategic Planning',
+        'Partnership Development',
+        'Product Management',
+      ],
+    },
   ] as const,
 } as const;
 
 // Move the blur class definition to constants
 export const NAV_BLUR_CLASSES = {
   scrolled: 'bg-background/80 backdrop-blur-lg',
-  transparent: 'bg-transparent'
+  transparent: 'bg-transparent',
 } as const;

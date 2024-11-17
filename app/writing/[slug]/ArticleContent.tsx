@@ -16,11 +16,17 @@ const ArticleContent = memo(({ article }: { article: Article }) => (
   >
     <article className="flex-grow container mx-auto px-4 sm:px-6 md:px-8 lg:px-48 pt-8 sm:pt-16 pb-8 max-w-5xl prose">
       <header className="mb-8 sm:mb-12">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl mb-4" style={{ color: 'var(--color-text-primary)' }}>
+        <h1
+          className="text-3xl sm:text-4xl md:text-5xl mb-4"
+          style={{ color: 'var(--color-text-primary)' }}
+        >
           {article.title}
         </h1>
         {article.subtitle && (
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-thin mb-4" style={{ color: 'var(--color-text-secondary)' }}>
+          <h2
+            className="text-xl sm:text-2xl md:text-3xl font-thin mb-4"
+            style={{ color: 'var(--color-text-secondary)' }}
+          >
             {article.subtitle}
           </h2>
         )}

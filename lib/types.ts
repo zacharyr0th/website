@@ -237,7 +237,15 @@ export interface ArchiveSectionProps {
   onTagChange: (tag: string) => void;
 }
 
-export type ThemeColor = 'primary' | 'secondary' | 'accent' | 'background' | 'surface' | 'muted' | 'subtle' | 'privvy';
+export type ThemeColor =
+  | 'primary'
+  | 'secondary'
+  | 'accent'
+  | 'background'
+  | 'surface'
+  | 'muted'
+  | 'subtle'
+  | 'privvy';
 export type ThemeColors = {
   primary: string;
   secondary: string;
@@ -283,7 +291,6 @@ export type ThemeIcons = {
 export type WritingCategory = {
   id: string;
   name: string;
-  description?: string;
   slug: string;
 };
 
@@ -309,12 +316,12 @@ export type ExperienceItem = {
   date: string;
   title: string;
   company: string;
-  description: string[];
+  description: readonly string[] | string[];
 };
 
 export type SkillCategory = {
   category: string;
-  skills: string[];
+  skills: readonly string[] | string[];
 };
 
 export type SectionProps = {
@@ -329,5 +336,8 @@ export type TimelineItemProps = {
 };
 
 export type SkillCategoryProps = {
-  category: SkillCategory;
+  category: {
+    category: string;
+    skills: readonly string[] | string[];
+  };
 };

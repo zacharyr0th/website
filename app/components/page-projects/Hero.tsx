@@ -18,10 +18,7 @@ const Hero: React.FC<ProjectsPageProps> = memo(() => {
         </div>
 
         {/* Projects Grid */}
-        <motion.div
-          layout
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
-        >
+        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {learningProjects.map((project, index) => (
             <ProjectCard
               key={project.title}
@@ -42,7 +39,7 @@ const ProjectCard: React.FC<{
   isSelected: boolean;
   onClick: () => void;
   isGridView: boolean;
-}> = memo(({ project, isSelected, }) => {
+}> = memo(({ project, isSelected }) => {
   return (
     <motion.div
       layout

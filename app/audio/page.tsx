@@ -21,7 +21,7 @@ const AudioPage = () => {
   const [, setTheme] = useState<Theme>('dark');
 
   return (
-    <motion.main 
+    <motion.main
       className="flex flex-col w-full min-h-screen font-mono"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -29,8 +29,8 @@ const AudioPage = () => {
     >
       <div className="flex-grow container mx-auto px-5 md:px-48 pt-32 md:pt-36 pb-8 md:pb-18 max-w-5xl">
         <Navigation setTheme={setTheme} />
-        <motion.h1 
-          style={{ color: 'var(--color-text-primary)' }} 
+        <motion.h1
+          style={{ color: 'var(--color-text-primary)' }}
           className="text-3xl md:text-5xl font-bold mb-12 text-text-primary"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -69,8 +69,8 @@ const AudioPage = () => {
         </section>
 
         <section className="mb-12 md:mb-18">
-          <h2 
-            style={{ color: 'var(--color-text-primary)' }} 
+          <h2
+            style={{ color: 'var(--color-text-primary)' }}
             className="text-2xl md:text-3xl font-bold mb-8"
           >
             Explore

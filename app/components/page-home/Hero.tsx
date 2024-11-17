@@ -6,7 +6,10 @@ import { heroContent } from '@/lib/constants';
 
 const Hero: React.FC = memo(() => (
   <section className="relative min-h-[200vh]">
-    <div className="hidden lg:block absolute inset-y-0 left-0 w-1/2 z-10" style={{ backgroundColor: 'var(--color-background)' }} />
+    <div
+      className="hidden lg:block absolute inset-y-0 left-0 w-1/2 z-10"
+      style={{ backgroundColor: 'var(--color-background)' }}
+    />
     <div className="w-full lg:w-1/2 flex flex-col relative z-20">
       <HeroContent />
     </div>

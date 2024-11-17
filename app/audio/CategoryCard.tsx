@@ -34,7 +34,9 @@ const CategoryCard = memo(({ category, index }: CategoryCardProps) => (
             </h2>
             <span className="ml-2 text-sm text-[var(--color-text-secondary)]">(Coming Soon)</span>
           </div>
-          <p className="mb-auto text-[var(--color-text-secondary)] text-sm">{category.description}</p>
+          <p className="mb-auto text-[var(--color-text-secondary)] text-sm">
+            {category.description}
+          </p>
           <div className="inline-flex items-center text-accent opacity-60 cursor-not-allowed">
             Work in Progress
             <svg
