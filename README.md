@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Zachary Roth's Personal Website
 
-## Getting Started
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-First, run the development server:
+> A modern, performant personal website built with Next.js, TypeScript, and Tailwind CSS. 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Overview
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Design & User Experience
+- Responsive design optimized for all device sizes
+- Dark/light theme support with smooth transitions
+- Modern animations powered by Framer Motion
+- Clean typography using Space Mono font family
+- Custom color schemes and CSS variables for consistent styling
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### SEO & Performance
+- Optimized metadata for better search engine visibility
+- Fast page loads with static generation
+- Image optimization
+- Semantic HTML structure
+- Mobile-first responsive design
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Content Features
+- Markdown-based API with frontmatter support
+- Tag-based categorization
+- Rich content formatting with custom styling
 
-## Learn More
+## Development
 
-To learn more about Next.js, take a look at the following resources:
+### Technology Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Category | Technologies |
+|----------|--------------|
+| Frontend | Next.js 14, React 18, TypeScript |
+| Styling | Tailwind CSS, CSS Variables |
+| Animation | Framer Motion |
+| Performance | Sharp, Static Generation |
+| Development | ESLint, Prettier |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Project Structure
 
-## Deploy on Vercel
+| Directory | Purpose |
+|-----------|---------|
+| `/app` | Next.js app router pages and components |
+| `/lib` | Utility functions, types, and constants |
+| `/public` | Static assets and articles |
+| `/styles` | Global CSS and theme configurations |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Create production build |
+| `npm run start` | Start production server |
+| `npm run all` | Clean install and build |
