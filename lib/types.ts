@@ -236,3 +236,98 @@ export interface ArchiveSectionProps {
   selectedTag: string;
   onTagChange: (tag: string) => void;
 }
+
+export type ThemeColor = 'primary' | 'secondary' | 'accent' | 'background' | 'surface' | 'muted' | 'subtle' | 'privvy';
+export type ThemeColors = {
+  primary: string;
+  secondary: string;
+  accent: string;
+  background: string;
+  surface: string;
+  muted: string;
+  subtle: string;
+  privvy: string;
+};
+
+export type HeroSection = {
+  title: string;
+  content: string;
+  backgroundColor: string;
+};
+
+export type HeroContent = {
+  name: string;
+  title: string;
+  aptosLink: string;
+  sections: HeroSection[];
+  chainLogos: readonly string[];
+};
+
+export type Breakpoint = 'sm' | 'md' | 'lg' | 'xl';
+export type Breakpoints = Record<Breakpoint, number>;
+
+export type Config = {
+  readonly maxContentLength: number;
+  readonly supportedFileTypes: readonly string[];
+  readonly breakpoints: Readonly<Breakpoints>;
+  readonly visibleProjects: number;
+};
+
+export type SocialPlatform = 'twitter' | 'github' | 'linkedin';
+export type SocialLinks = Record<SocialPlatform, string>;
+
+export type ThemeIcons = {
+  readonly [K in Theme]: React.ReactElement;
+};
+
+export type WritingCategory = {
+  id: string;
+  name: string;
+  description?: string;
+  slug: string;
+};
+
+export type WritingTag = {
+  id: string;
+  name: string;
+  count: number;
+};
+
+export type ProjectStatus = 'active' | 'completed' | 'archived';
+export type ProjectCategory = 'web' | 'blockchain' | 'ai' | 'system' | 'tools';
+
+export type ProjectMetadata = {
+  status: ProjectStatus;
+  category: ProjectCategory;
+  startDate: string;
+  endDate?: string;
+  teamSize?: number;
+  role?: string;
+};
+
+export type ExperienceItem = {
+  date: string;
+  title: string;
+  company: string;
+  description: string[];
+};
+
+export type SkillCategory = {
+  category: string;
+  skills: string[];
+};
+
+export type SectionProps = {
+  title: string;
+  children: React.ReactNode;
+  className?: string;
+};
+
+export type TimelineItemProps = {
+  item: ExperienceItem;
+  index: number;
+};
+
+export type SkillCategoryProps = {
+  category: SkillCategory;
+};

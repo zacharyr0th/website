@@ -45,7 +45,7 @@
   --color-info: #1976d2;
 
   --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --heading-color: var(--color-surface);
+  --heading-color: var(--color-text-primary);
 }
 
 /* Theme: Dark */

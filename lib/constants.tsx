@@ -7,6 +7,8 @@ import {
   LearningProject,
   ButtonProps,
   NavButtonProps,
+  ProjectCategory,
+  ThemeColors,
 } from './types';
 
 // Use const assertions for better type inference
@@ -61,7 +63,7 @@ export const learningProjects: LearningProject[] = [
       "Various utilities for working with the .toml files in Electric Capital's crypto-ecosystems repository.",
     technologies: ['Python', 'TOML', 'Data Analysis'],
     features: ['TOML parsing', 'Data visualization', 'Report Generation'],
-    githubLink: 'https://github.com/zacharyroth/toml-tools',
+    githubLink: 'https://github.com/zacharyr0th/toml-tools',
     demoLink: '',
     lastUpdated: '2023-04-10',
   },
@@ -279,3 +281,135 @@ export const RefreshIcon = React.memo((props: React.SVGProps<SVGSVGElement>) => 
   </span>
 ));
 RefreshIcon.displayName = 'RefreshIcon';
+
+// Add color scheme constants
+export const COLORS: ThemeColors = {
+  primary: 'var(--color-primary)',
+  secondary: 'var(--color-secondary)',
+  accent: 'var(--color-accent)',
+  background: 'var(--color-background)',
+  surface: 'var(--color-surface)',
+  muted: 'var(--color-muted)',
+  subtle: 'var(--color-subtle)',
+  privvy: 'var(--color-privvy)',
+} as const;
+
+// Add layout constants
+export const LAYOUT = {
+  maxWidth: 'max-w-7xl',
+  containerPadding: 'px-4 sm:px-6 lg:px-8',
+  sectionSpacing: 'py-12 md:py-16 lg:py-20',
+  borderRadius: {
+    sm: 'var(--border-radius-sm)',
+    md: 'var(--border-radius-md)',
+    lg: 'var(--border-radius-lg)',
+    full: 'var(--border-radius-full)',
+  },
+} as const;
+
+// Add media query helpers
+export const MEDIA_QUERIES = {
+  sm: `(min-width: ${CONFIG.breakpoints.sm}px)`,
+  md: `(min-width: ${CONFIG.breakpoints.md}px)`,
+  lg: `(min-width: ${CONFIG.breakpoints.lg}px)`,
+  xl: `(min-width: ${CONFIG.breakpoints.xl}px)`,
+} as const;
+
+// Add writing categories
+export const WRITING_CATEGORIES: WritingCategory[] = [
+  { id: 'tech', name: 'Technology', slug: 'tech' },
+  { id: 'blockchain', name: 'Blockchain', slug: 'blockchain' },
+  { id: 'finance', name: 'Finance', slug: 'finance' },
+  { id: 'music', name: 'Music', slug: 'music' },
+] as const;
+
+// Add project categories
+export const PROJECT_CATEGORIES: Record<ProjectCategory, string> = {
+  web: 'Web Development',
+  blockchain: 'Blockchain',
+  ai: 'Artificial Intelligence',
+  system: 'System Programming',
+  tools: 'Developer Tools',
+} as const;
+
+// Add animation constants
+export const ANIMATIONS = {
+  fadeIn: 'animate-fadeIn',
+  slideIn: 'animate-slideIn',
+  transition: 'transition-all duration-300',
+} as const;
+
+// Add SEO defaults
+export const SEO_DEFAULTS = {
+  titleTemplate: '%s | Zachary Roth',
+  defaultTitle: 'Zachary Roth - Technologist, Writer, & Musician',
+  defaultDescription: 'Personal portfolio and blog featuring projects, articles, and audio content.',
+  siteUrl: 'https://zacharyr0th.com',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    site_name: 'Zachary Roth',
+  },
+} as const;
+
+// Add bio page constants
+export const BIO_DATA = {
+  name: 'Zachary Roth',
+  title: 'Technologist, Writer, & Musician',
+  intro: "Since 2019, I've been involved with projects across multiple hyper-growth blockchain ecosystems including Bitcoin, Ethereum, Solana, and Aptos. My work involves identifying market opportunities and guiding DeFi and AI teams on leveraging on-chain solutions to enhance their products and services on Aptos, the world's highest performing blockchain.",
+  
+  experience: [
+    {
+      date: "May 2023 - Present",
+      title: "Head of Growth, DeFi & AI",
+      company: "Aptos Labs",
+      description: [
+        "Leading strategic development in DeFi and AI sectors at the world's highest performing blockchain",
+        "Facilitating blockchain integration solutions and ecosystem growth",
+        "Managing developer ecosystems and partnerships"
+      ]
+    },
+    {
+      date: "2022 - 2023",
+      title: "Product Manager",
+      company: "Solrise Finance",
+      description: [
+        "Led product strategy for non-custodial fund management and trading competitions",
+        "Created technical documentation and educational content",
+        "Developed comprehensive user content including onboarding materials",
+        "Authored 14-part course on blockchain and DeFi fundamentals"
+      ]
+    },
+    {
+      date: "2020 - 2023",
+      title: "Senior Analyst",
+      company: "N2 Communications",
+      description: [
+        "Contributed to capital raising initiatives exceeding $2B",
+        "Advised on crypto and commodity investments analysis",
+        "Managed regulatory compliance initiatives"
+      ]
+    }
+  ] as const,
+
+  skills: [
+    {
+      category: "Programming & Development",
+      skills: ["Python", "TypeScript", "C", "Next.js", "React", "Tailwind CSS", "SCAMP", "Git"]
+    },
+    {
+      category: "Blockchain & DeFi",
+      skills: ["Move", "Solidity", "Rust", "Smart Contracts", "DeFi Architecture", "Analytics"]
+    },
+    {
+      category: "Business & Communication",
+      skills: ["Technical Writing", "Strategic Planning", "Partnership Development", "Product Management"]
+    }
+  ] as const,
+} as const;
+
+// Move the blur class definition to constants
+export const NAV_BLUR_CLASSES = {
+  scrolled: 'bg-background/80 backdrop-blur-lg',
+  transparent: 'bg-transparent'
+} as const;
