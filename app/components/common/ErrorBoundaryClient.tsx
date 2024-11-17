@@ -32,7 +32,7 @@ const ErrorFallback = memo(({ error, resetErrorBoundary }: FallbackProps) => (
       color: 'var(--color-text-secondary)',
       marginBottom: 'var(--spacing-md)',
     }}>
-      Don't worry, we've been notified and are working on it. You can:
+      Don&apos;t worry, we&apos;ve been notified and are working on it. You can:
     </p>
 
     <ul style={{

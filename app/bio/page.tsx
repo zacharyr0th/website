@@ -112,7 +112,7 @@ const BioPage = () => {
         <div className="space-y-8">
           <Section>
             <p style={{ color: 'var(--color-text-primary)' }} className="text-gray-700 dark:text-gray-300 leading-relaxed">
-            Since 2019, I&apos;ve been involved with projects across multiple hyper-growth blockchain ecosystems including Bitcoin, Ethereum, Solana, and Aptos. My work involves identifying market opportunities and guiding DeFi and AI teams on leveraging on-chain solutions to enhance their products and services on Aptos, the world's highest performing blockchain.
+            Since 2019, I&apos;ve been involved with projects across multiple hyper-growth blockchain ecosystems including Bitcoin, Ethereum, Solana, and Aptos. My work involves identifying market opportunities and guiding DeFi and AI teams on leveraging on-chain solutions to enhance their products and services on Aptos, the world&apos;s highest performing blockchain.
             </p>
           </Section>
 
