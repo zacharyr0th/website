@@ -373,7 +373,7 @@ export const BIO_DATA = {
       ],
     },
     {
-      date: '2022 - 2023',
+      date: '2021 - 2023',
       title: 'Product Manager',
       company: 'Solrise Finance',
       description: [
