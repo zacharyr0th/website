@@ -1,8 +1,9 @@
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import BackgroundSVG from './HeroBackground';
 import { heroContent } from '@/lib/constants';
+import ConnectModal from '../../components/common/Connect';
 
 const Hero: React.FC = memo(() => (
   <section className="relative min-h-[200vh]">
@@ -30,33 +31,39 @@ const HeroContent: React.FC = memo(() => (
 
 HeroContent.displayName = 'HeroContent';
 
-const StickyHeader: React.FC = () => (
-  <div className="h-screen p-4 mb-24 flex flex-col justify-center sticky top-0 ml-12">
-    <h1 className="text-6xl font-bold leading-tight tracking-tighter text-text-primary pt-12 lg:pt-24">
-      {heroContent.name}
-    </h1>
-    <p className="text-lg mb-6 max-w-xl tracking-wide text-text-secondary">
-      {heroContent.title}{' '}
-      <a
-        href={heroContent.aptosLink}
-        className="hover:underline transition-colors duration-300 text-accent"
-      >
-        Aptos Labs
-      </a>
-    </p>
-    <div className="flex space-x-4">
-      <Button variant="primary">Connect</Button>
-      <Link href="/bio" passHref>
-        <Button variant="secondary">Bio</Button>
-      </Link>
-    </div>
-  </div>
-);
+const StickyHeader: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-const Button: React.FC<{ variant: 'primary' | 'secondary'; children: React.ReactNode }> = ({
-  variant,
-  children,
-}) => {
+  return (
+    <div className="h-screen p-4 mb-24 flex flex-col justify-center sticky top-0 ml-12">
+      <h1 className="text-6xl font-bold leading-tight tracking-tighter text-text-primary pt-12 lg:pt-24">
+        {heroContent.name}
+      </h1>
+      <p className="text-lg mb-6 max-w-xl tracking-wide text-text-secondary">
+        {heroContent.title}{' '}
+        <a
+          href={heroContent.aptosLink}
+          className="hover:underline transition-colors duration-300 text-accent"
+        >
+          Aptos Labs
+        </a>
+      </p>
+      <div className="flex space-x-4">
+        <Button variant="primary" onClick={() => setIsModalOpen(true)}>Connect</Button>
+        <Link href="/bio" passHref>
+          <Button variant="secondary">Bio</Button>
+        </Link>
+      </div>
+      <ConnectModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+    </div>
+  );
+};
+
+const Button: React.FC<{
+  variant: 'primary' | 'secondary';
+  children: React.ReactNode;
+  onClick?: () => void;
+}> = ({ variant, children, onClick }) => {
   const styles = {
     primary: {
       backgroundColor: 'var(--color-primary)',
@@ -74,6 +81,8 @@ const Button: React.FC<{ variant: 'primary' | 'secondary'; children: React.React
     <button
       className={`px-6 py-2 rounded-full transition-colors duration-300`}
       style={variant === 'primary' ? styles.primary : styles.secondary}
+      onClick={onClick}
+      type="button"
     >
       {children}
     </button>

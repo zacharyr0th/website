@@ -363,24 +363,21 @@ export const BIO_DATA = {
 
   experience: [
     {
-      date: 'May 2023 - Present',
-      title: 'Head of Growth, DeFi & AI',
+      date: '2023 onwards',
+      title: 'Building DeFi & AI @ Aptos Labs',
       company: 'Aptos Labs',
       description: [
-        "Leading strategic development in DeFi and AI sectors at the world's highest performing blockchain",
-        'Facilitating blockchain integration solutions and ecosystem growth',
-        'Managing developer ecosystems and partnerships',
+        'Leading growth initiatives to bring DeFi and AI capabilities to the Aptos ecosystem.'
       ],
     },
     {
       date: '2021 - 2023',
-      title: 'Product Manager',
+      title: 'Product @ Solrise Finance',
       company: 'Solrise Finance',
       description: [
-        'Led product strategy for non-custodial fund management and trading competitions',
-        'Created technical documentation and educational content',
-        'Developed comprehensive user content including onboarding materials',
-        'Authored 14-part course on blockchain and DeFi fundamentals',
+        'Created educational content to make DeFi more accessible',
+        'Led comprehensive user interviews',
+        'Managed product roadmaps and technical documentation'
       ],
     },
     {
@@ -388,9 +385,9 @@ export const BIO_DATA = {
       title: 'Senior Analyst',
       company: 'N2 Communications',
       description: [
-        'Contributed to capital raising initiatives exceeding $2B',
-        'Advised on crypto and commodity investments analysis',
-        'Managed regulatory compliance initiatives',
+        'Helped companies navigate the intersection of traditional finance and crypto, from capital formation to regulatory compliance',
+        'Analyzed market opportunities across both digital assets and physical commodities',
+        'Supporting over $2B in fundraising initiatives'
       ],
     },
   ] as const,
@@ -402,7 +399,7 @@ export const BIO_DATA = {
     },
     {
       category: 'Blockchain & DeFi',
-      skills: ['Move', 'Solidity', 'Rust', 'Smart Contracts', 'DeFi Architecture', 'Analytics'],
+      skills: ['Move', 'Solidity', 'Rust', 'DeFi Architecture', 'Analytics'],
     },
     {
       category: 'Business & Communication',

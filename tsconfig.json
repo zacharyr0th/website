@@ -2,30 +2,42 @@
   "compilerOptions": {
     // Language and Environment
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "jsx": "preserve",
-
     // Modules
     "module": "esnext",
     "moduleResolution": "bundler",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
-      "@components/*": ["./components/*"],
-      "@styles/*": ["./styles/*"],
-      "@lib/*": ["./lib/*"],
-      "@utils/*": ["./utils/*"],
-      "@types/*": ["./types/*"]
+      "@/*": [
+        "./*"
+      ],
+      "@components/*": [
+        "./components/*"
+      ],
+      "@styles/*": [
+        "./styles/*"
+      ],
+      "@lib/*": [
+        "./lib/*"
+      ],
+      "@utils/*": [
+        "./utils/*"
+      ],
+      "@types/*": [
+        "./types/*"
+      ]
     },
-
     // JavaScript Support
     "allowJs": true,
     "resolveJsonModule": true,
-
     // Emit
     "noEmit": true,
     "incremental": true,
-
     // Type Checking
     "strict": true,
     "noImplicitAny": true,
@@ -47,15 +59,19 @@
     "allowUnreachableCode": false,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
-
     // Completeness
     "skipLibCheck": true,
     "esModuleInterop": true,
-
     // Type Declarations
-    "typeRoots": ["./node_modules/@types", "./lib"],
-    "types": ["node", "react", "react-dom"],
-
+    "typeRoots": [
+      "./node_modules/@types",
+      "./lib"
+    ],
+    "types": [
+      "node",
+      "react",
+      "react-dom"
+    ],
     // Plugins
     "plugins": [
       {
@@ -72,5 +88,7 @@
     "global.d.ts",
     "tailwind.config.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

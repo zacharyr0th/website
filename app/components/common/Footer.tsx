@@ -1,5 +1,6 @@
+'use client';
+
 import React from 'react';
-import Link from 'next/link';
 import { FaLinkedin, FaXTwitter, FaGithub } from 'react-icons/fa6';
 import { SOCIAL_LINKS } from '@/lib/constants';
 
@@ -12,21 +13,23 @@ const socialLinks = [
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
+  const handleSocialClick = (href: string) => {
+    window.open(href, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <footer className="bg-background text-sm py-8 px-6 mt-auto">
       <div className="container mx-auto flex flex-col items-center space-y-6">
         <div className="flex items-center justify-center space-x-4 mb-4">
           {socialLinks.map(({ href, Icon, label }) => (
-            <Link
+            <button
               key={href}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={() => handleSocialClick(href)}
               aria-label={label}
               className="text-text-secondary hover:text-accent transition-colors"
             >
               <Icon size={32} />
-            </Link>
+            </button>
           ))}
         </div>
         <p className="text-text-secondary">&copy; {currentYear}</p>

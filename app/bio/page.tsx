@@ -132,7 +132,7 @@ const BioPage = () => {
                   key={index}
                   item={{
                     ...item,
-                    description: Array.from(item.description),
+                    description: item.description,
                   }}
                   index={index}
                 />
@@ -140,15 +140,15 @@ const BioPage = () => {
             </div>
           </Section>
 
-          {/* Skills section */}
-          <Section title="Skills">
+          {/* Technical Expertise section */}
+          <Section title="Competencies">
             <div className="space-y-6">
               {BIO_DATA.skills.map((category) => (
                 <SkillCategory
                   key={category.category}
                   category={{
                     category: category.category,
-                    skills: Array.from(category.skills),
+                    skills: category.skills,
                   }}
                 />
               ))}
