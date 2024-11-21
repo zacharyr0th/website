@@ -21,12 +21,12 @@ const PrimaryArticle: React.FC<{ article: Article }> = React.memo(({ article }) 
   const tagElements = useMemo(() => {
     if (!article.tags || article.tags.length === 0) return null;
     return (
-      <div className="flex flex-wrap gap-1.5 mb-2" role="list" aria-label="Article tags">
+      <div className="flex flex-wrap gap-2 mb-3" role="list" aria-label="Article tags">
         {article.tags.map((tag) => (
           <span
             key={tag}
             role="listitem"
-            className="px-1.5 py-0.5 text-sm font-medium rounded-full bg-accent/10 text-accent"
+            className="py-0.5 text-[12px] tracking-wide font-medium rounded-full bg-accent/10 text-accent"
           >
             {tag}
           </span>
@@ -54,8 +54,10 @@ const PrimaryArticle: React.FC<{ article: Article }> = React.memo(({ article }) 
               className="object-cover"
             />
           </div>
-          <div className="mt-4 p-6">
-            {tagElements}
+          <div className="mt-4 p-6 flex flex-col">
+            <div className="flex items-center h-4 mb-3">
+              {tagElements}
+            </div>
             <h2 className="text-2xl font-bold text-var(--color-text-primary) group-hover:text-var(--color-accent) transition-colors">
               {article.title}
             </h2>
@@ -74,25 +76,31 @@ PrimaryArticle.displayName = 'PrimaryArticle';
 const RandomSelection: React.FC<{
   articles: Article[];
   onRefresh: () => void;
-}> = React.memo(({ articles, onRefresh }) => (
-  <aside className="lg:col-span-5">
-    <div className="flex justify-between items-center mb-4">
-      <h2 className="text-2xl font-semibold text-var(--color-text-primary)">Random Selection</h2>
-      <button
-        onClick={onRefresh}
-        className="p-2 text-accent hover:text-accent-dark rounded-full hover:bg-accent/5 transition-colors focus-visible:outline-accent focus-visible:outline-2"
-        aria-label="Refresh random articles"
-      >
-        <RefreshIcon className="w-8 h-8" />
-      </button>
-    </div>
-    <div className="space-y-4" role="list">
-      {articles.map((article) => (
-        <FeaturedArticle key={article.id} article={article} />
-      ))}
-    </div>
-  </aside>
-));
+}> = React.memo(({ articles, onRefresh }) => {
+  const filteredArticles = articles.filter(article => 
+    article.title !== "Derivatives vs Spot"
+  );
+
+  return (
+    <aside className="lg:col-span-5">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-2xl font-semibold text-var(--color-text-primary)">Random Selection</h2>
+        <button
+          onClick={onRefresh}
+          className="p-2 text-accent hover:text-accent-dark rounded-full hover:bg-accent/5 transition-colors focus-visible:outline-accent focus-visible:outline-2"
+          aria-label="Refresh random articles"
+        >
+          <RefreshIcon className="w-8 h-8" />
+        </button>
+      </div>
+      <div className="space-y-4" role="list">
+        {filteredArticles.map((article) => (
+          <FeaturedArticle key={article.id} article={article} />
+        ))}
+      </div>
+    </aside>
+  );
+});
 
 RandomSelection.displayName = 'RandomSelection';
 

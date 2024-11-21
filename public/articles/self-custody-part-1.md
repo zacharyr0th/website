@@ -4,7 +4,7 @@ date: '2024-10-25'
 image: /misc/placeholder.webp
 subtitle: More Power, More Responsibility
 description: 'More Power, More Responsibility'
-tags: ['Trading', 'Crypto']
+tags: ['Crypto']
 ---
 
 <style jsx>{`

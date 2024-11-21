@@ -14,13 +14,13 @@ tags: ['Crypto']
  }
  .prose ol {
     list-style-type: decimal;
-    margin-left: 2em; /* Adjust as needed for indentation */
-    padding-left: 0.5em; /* Add padding if needed */
+    margin-left: 2em; 
+    padding-left: 0.5em; 
  }
  .prose ol li {
     margin-bottom: 0.5em;
     color: var(--color-text-primary);
-    line-height: 1.5; /* Adjust line height for better readability */
+    line-height: 1.5; 
  }
  .prose ol li ul {
     margin-top: 0.5em;

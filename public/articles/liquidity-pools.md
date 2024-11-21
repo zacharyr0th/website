@@ -4,7 +4,7 @@ date: '2024-10-25'
 image: /misc/placeholder.webp
 subtitle: 'An Alternative to Typical Market Makers'
 description: 'An Alternative to Typical Market Makers'
-tags: ['Crypto']
+tags: ['Crypto', 'Trading']
 ---
 
 <style jsx>{`
