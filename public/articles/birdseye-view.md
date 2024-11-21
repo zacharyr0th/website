@@ -2,8 +2,8 @@
 title: "A Bird's Eye View"
 date: '2024-10-25'
 image: /misc/placeholder.webp
-subtitle: 'Seeing the forest through the trees'
-description: 'Seeing the forest through the trees'
+subtitle: 'Seeing the Forest Through the Trees'
+description: 'Seeing the Forest Through the Trees'
 tags: ['Crypto']
 ---
 

@@ -2,8 +2,8 @@
 title: 'Proof of History'
 date: '2024-10-25'
 image: /misc/placeholder.webp
-subtitle: How Solana tells time
-description: 'How Solana tells time'
+subtitle: How Solana Tells Time
+description: 'How Solana Tells Time'
 tags: ['Crypto']
 ---
 

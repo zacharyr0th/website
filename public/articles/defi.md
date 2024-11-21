@@ -2,8 +2,8 @@
 title: 'Defi'
 date: '2024-10-25'
 image: /misc/placeholder.webp
-subtitle: Understanding the Building Blocks of Decentralized Finance
-description: 'Understanding the Building Blocks of Decentralized Finance'
+subtitle: Global, Permissionless Finance
+description: 'Global, Permissionless Finance'
 tags: ['Crypto']
 ---
 

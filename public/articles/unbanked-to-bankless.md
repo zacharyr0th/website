@@ -2,7 +2,7 @@
 title: 'Unbanked to Bankless'
 date: '2024-10-25'
 image: /misc/placeholder.webp
-subtitle: 'Crypto fixes this'
+subtitle: Crypto fixes this
 description: 'Crypto fixes this'
 tags: ['Crypto']
 ---

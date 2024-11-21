@@ -1,9 +1,9 @@
 ---
-title: 'Self Custody: Part 2'
+title: 'Self Custody: Part 1'
 date: '2024-10-25'
 image: /misc/placeholder.webp
-subtitle: Market Structure & Price Discovery
-description: 'Market Structure & Price Discovery'
+subtitle: More Power, More Responsibility
+description: 'More Power, More Responsibility'
 tags: ['Trading', 'Crypto']
 ---
 

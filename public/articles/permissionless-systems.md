@@ -2,7 +2,7 @@
 title: 'Permissionless Systems'
 date: '2024-10-25'
 image: /misc/placeholder.webp
-subtitle: 'Understanding DeFi, NFTs, and DAOs.'
+subtitle: 'Understanding DeFi, NFTs, and DAOs'
 description: 'Understanding DeFi, NFTs, and DAOs'
 tags: ['Crypto']
 ---

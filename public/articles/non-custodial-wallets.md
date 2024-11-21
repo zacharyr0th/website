@@ -2,7 +2,7 @@
 title: 'Non-Custodial Wallets'
 date: '2024-10-25'
 image: /images/wgpcgr.webp
-subtitle: A Primer on Self Custody
+subtitle: 'A Primer on Self Custody'
 description: 'A Primer on Self Custody'
 tags: ['Crypto']
 ---

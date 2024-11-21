@@ -3,7 +3,7 @@ title: 'The Fundamental Flaw'
 date: '2024-10-25'
 image: /images/flaw-0.webp
 subtitle: Onboarding and Offboarding
-description: 'Onboarding and Offboarding...'
+description: 'Onboarding and Offboarding'
 tags: ['Crypto']
 ---
 

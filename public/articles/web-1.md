@@ -2,8 +2,8 @@
 title: 'Web 1'
 date: '2024-10-25'
 image: /misc/placeholder.webp
-subtitle: 'A Cross-Generational Perspective on the Birth of the Internet'
-description: 'A Cross-Generational Perspective on the Birth of the Internet'
+subtitle: Content Delivery Networks
+description: 'Content Delivery Networks'
 tags: ['Crypto', 'Tech']
 ---
 

@@ -1,9 +1,9 @@
 ---
-title: 'Self Custody: Part 1'
+title: 'Self Custody: Part 2'
 date: '2024-10-25'
 image: /misc/placeholder.webp
-subtitle: Understanding the Building Blocks of Decentralized Finance
-description: 'Understanding the Building Blocks of Decentralized Finance'
+subtitle: Opportunities and Consequences
+description: 'Opportunities and Consequences'
 tags: ['Crypto']
 ---
 

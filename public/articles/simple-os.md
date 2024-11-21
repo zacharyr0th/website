@@ -2,8 +2,8 @@
 title: 'SimpleOS'
 date: '2024-10-25'
 image: /images/simpleos-0.webp
-subtitle: 'BSOD and the need for a multi-layered kernel'
-description: 'BSOD and the need for a multi-layered kernel'
+subtitle: 'BSOD and the Need for a Multi-Layered Kernel'
+description: 'BSOD and the Need for a Multi-Layered Kernel'
 tags: ['Tech']
 ---
 

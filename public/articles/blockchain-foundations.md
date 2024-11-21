@@ -2,8 +2,8 @@
 title: 'Blockchain Foundations'
 date: '2024-10-25'
 image: /misc/placeholder.webp
-subtitle: 'Understanding the Building Blocks of Blockchain Technology'
-description: 'Understanding the Building Blocks of Blockchain Technology'
+subtitle: 'Understanding the Building Blocks'
+description: 'Understanding the Building Blocks'
 tags: ['Crypto']
 ---
 
@@ -58,7 +58,7 @@ On other blockchains, transaction fees can quickly go into the dozens and hundre
 
 Bitcoin was initially intended to be a peer-to-peer medium of exchange, although its narrative has switched mainly to that of a global store of value. Countries that use their proprietary currency other than the big six (USD—United States Dollar, CAD—Canadian Dollar, EUR—Euro, AUS—Australian Dollar, JPY—Japanese Yen, and GBP—British Pound) are subject to grave risks imposed by the arbiters of the big six.
 
-Rather than hold onto, for example – the Turkish Lira or South African Rand and have their spending power decline over time, many have fled to BTC or other cryptocurrencies that enable pseudonymous, secure transfers of value and opportunities for capital appreciation. Bitcoin, for example, increased in value by 6,965,454,545.45% between 2010 and 2021.
+Rather than hold onto, for example ��� the Turkish Lira or South African Rand and have their spending power decline over time, many have fled to BTC or other cryptocurrencies that enable pseudonymous, secure transfers of value and opportunities for capital appreciation. Bitcoin, for example, increased in value by 6,965,454,545.45% between 2010 and 2021.
 
 Its low was $0.00099, and the all-time high was $$68,958.
 

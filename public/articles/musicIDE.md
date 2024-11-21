@@ -2,8 +2,8 @@
 title: 'MusicIDE'
 date: '2024-10-25'
 image: /misc/placeholder.webp
-subtitle: 'Cursor + Musescore for Research & Composition'
-description: 'Cursor + Musescore for Research & Composition'
+subtitle: 'Cursor + Musescore for Research + Composition'
+description: 'Cursor + Musescore for Research + Composition'
 tags: ['Music', 'AI']
 ---
 

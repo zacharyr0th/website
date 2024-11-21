@@ -2,8 +2,8 @@
 title: 'Nouns'
 date: '2024-10-25'
 image: /images/nouns-0.webp
-subtitle: 'There is a new one every day'
-description: 'There is a new one every day'
+subtitle: 'There is a New One Every Day'
+description: 'There is a New One Every Day'
 tags: ['Crypto']
 ---
 

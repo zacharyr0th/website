@@ -2,8 +2,8 @@
 title: 'Web 3'
 date: '2024-10-25'
 image: /misc/placeholder.webp
-subtitle: 'Empowering Users with New Tools for the Digital Economy'
-description: 'Empowering Users with New Tools for the Digital Economy'
+subtitle: User-owned Networks
+description: 'User-owned Networks'
 tags: ['Crypto', 'Tech']
 ---
 
