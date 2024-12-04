@@ -5,7 +5,7 @@ import '@/styles/globals.css';
 import '@/styles/article.css';
 
 export const metadata: Metadata = {
-  title: 'Zachary Roth - Technologist, Writer, Musician',
+  title: 'Zachary Roth',
   description: 'Personal website of Zachary Roth',
   openGraph: {
     images: [{ url: '/profile-picture.webp', width: 256, height: 256, alt: 'Zachary Roth' }],
