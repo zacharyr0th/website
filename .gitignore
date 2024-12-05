@@ -1,11 +1,12 @@
-# === Development ===
+# =================================================================
+# Core Development
+# =================================================================
+
 # Dependencies
 node_modules/
+bower_components/
 .pnp/
 .pnp.js
-.yarn/install-state.gz
-.pnpm-store/
-.npm/
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
@@ -13,61 +14,180 @@ node_modules/
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
+.pnpm-store/
+.npm/
 
 # Environment Variables
 .env*
 !.env.example
 .env.local
 .env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# === Build and Compilation ===
+# =================================================================
+# Build and Output
+# =================================================================
+
 # Next.js
 .next/
+.next-*/
+next-env.d.ts
+.serverless/
+.serverless_nextjs/
+public/_next/
+.lighthouse/
+_next/
+.next-server/
+.next-prerendered/
+.next-static/
+.next-dynamic/
+.next-build-manifest/
+.next-trace
+.next-stats/
+
+# Build Directories
 out/
 build/
 dist/
+dist_electron/
+out_electron/
+.output/
+.build/
 storybook-static/
 
-# TypeScript
-*.tsbuildinfo
-next-env.d.ts
+# Generated Files
+*.bundle.js
+*.chunk.js
+*.min.js
+*.min.css
+*.d.ts
+*.d.ts.map
+types/generated/
+generated/
+__generated__/
+build-manifest.json
+prerender-manifest.json
+routes-manifest.json
+stats.json
+bundle-stats.json
 
-# Bundler
+# =================================================================
+# Framework Specific
+# =================================================================
+
+# React & Next.js Related
+.remix/
+remix.env.d.ts
+
+# Other Frameworks
+.angular/
+.svelte-kit/
+.meteor/
+.quasar/
+.sapper/
+.redwood/
+.blitz/
+.nx/
+.astro/
+.nuxt/
+.vuepress/
+.docz/
+.gatsby/
+.gridsome/
+.umi/
+.umi-production/
+
+# =================================================================
+# Development Tools
+# =================================================================
+
+# Bundlers and Build Tools
 .turbo/
 .swc/
 .webpack/
+.parcel-cache/
+.rollup.cache/
+.esbuild/
+.vite/
+.grunt/
+.gulp/
 
-# === Testing and Coverage ===
+# Testing and Coverage
 coverage/
+.coverage/
 __tests__/coverage/
 test-results/
 playwright-report/
 cypress/
 .nyc_output/
 jest-report/
+/test-results/
+/playwright/results/
+/cypress/videos/
+/cypress/screenshots/
+.jest-cache/
+jest.results.json
 
-# === Cache and Temporary ===
+# Storybook
+.storybook-out
+storybook-static/
+build-storybook.log
+.storybook/
+
+# Cache and Temporary
 .cache/
 .eslintcache
 .stylelintcache
 *.cache
 tmp/
 temp/
-*.tmp
-*.temp
+[Tt]emp/
+.mf/
+.temp/
+.tmp/
+.tempfiles/
+.cacache/
 
-# === Logs and Debugging ===
-logs/
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-debug.log
-.debug/
-*.heapsnapshot
-report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+# =================================================================
+# Version Control and Deployment
+# =================================================================
 
-# === IDE and Editors ===
+# Vercel
+.vercel/
+.vercel
+.now
+.deployment
+.vercelignore
+.nowignore
+_vercel/
+.vercel.json
+.vercel.app
+.vercel-*
+vercel.json
+
+# Other Deployment
+.netlify/
+.firebase/
+.elasticbeanstalk/
+.cloud/
+.gcloud/
+.aws/
+.azure/
+
+# CI/CD
+.github/workflows/*.yml
+.gitlab-ci.yml
+.travis.yml
+.circleci/
+.jenkins/
+.buddy/
+
+# =================================================================
+# IDE and Editors
+# =================================================================
+
 # VSCode
 .vscode/
 *.code-workspace
@@ -79,31 +199,37 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 *.ipr
 *.iws
 
-# Sublime Text
+# Other Editors
 *.sublime-project
 *.sublime-workspace
-
-# Vim
 *.swp
 *.swo
 *~
+.project
+.classpath
+.settings/
+.ionide/
 
-# === Generated Files ===
-# Next.js/Static Files
-public/sitemap*.xml
-public/robots.txt
-public/feed.xml
-public/sw.js
-public/workbox-*.js
-public/worker-*.js
-*.map
+# =================================================================
+# Logs and Debugging
+# =================================================================
 
-# Prisma
-.prisma/
-prisma/*.db
-*.prisma.backup
+# Log Files
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+debug.log
+.debug/
+*.heapsnapshot
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+.error.log
 
-# === OS Generated ===
+# =================================================================
+# OS Generated Files
+# =================================================================
+
 # macOS
 .DS_Store
 ._*
@@ -121,27 +247,11 @@ $RECYCLE.BIN/
 .fuse_hidden*
 .nfs*
 
-# === Project Specific ===
-# Config files
-.prettierignore
-.prettierrc
-.eslintrc
-.stylelintrc
-.babelrc
-.browserslistrc
+# =================================================================
+# Project Assets and Media
+# =================================================================
 
-# Documentation
-docs/_build/
-.docusaurus/
-.cache-loader/
-
-# Media and Assets
-*.mp4
-*.tiff
-*.avi
-*.flv
-*.mov
-*.wmv
+# Images
 *.ai
 *.bmp
 *.eps
@@ -160,25 +270,94 @@ docs/_build/
 *.svgz
 *.wbmp
 *.webp
+
+# Video
+*.mp4
+*.tiff
+*.avi
+*.flv
+*.mov
+*.wmv
+
+# 3D and Design
 *.blend
 *.blend1
 
-# Database
+# =================================================================
+# Database and Storage
+# =================================================================
+
+# Database Files
 *.sqlite
 *.sqlite3
 *.db
+*.sqlite-journal
+*.db-journal
 
-# Secrets and Keys
+# Prisma
+.prisma/
+prisma/*.db
+*.prisma.backup
+
+# =================================================================
+# Security and Certificates
+# =================================================================
+
+# Certificates and Keys
 *.pem
 *.cert
 *.key
 *.p12
 *.pfx
+*.crt
+*.csr
+*.p7b
+*.p7c
+*.p8
+*.keystore
+*.jks
 
-# Backup Files
+# =================================================================
+# Mobile Development
+# =================================================================
+
+.expo/
+*.apk
+*.aab
+*.ipa
+.gradle/
+android/app/build/
+ios/Pods/
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.xcworkspace/
+*.xcuserstate
+xcuserdata/
+
+# =================================================================
+# Package Management
+# =================================================================
+
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+.pnpm-debug.log
+.npm-debug.log
+.yarn-debug.log
+.yarn-error.log
+
+# =================================================================
+# Backup and Version Files
+# =================================================================
+
 *.bak
 *.gho
 *.ori
 *.orig
 *.old
 *.rej
+*~
+*.bak.*
+.#*
