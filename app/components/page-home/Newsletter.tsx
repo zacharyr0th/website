@@ -1,15 +1,41 @@
 import React, { useState, useCallback, memo } from 'react';
 
+interface NewsletterFormState {
+  email: string;
+  isSubmitting: boolean;
+}
+
+const initialState: NewsletterFormState = {
+  email: '',
+  isSubmitting: false,
+};
+
 const Newsletter: React.FC = memo(() => {
-  const [email, setEmail] = useState('');
+  const [{ email, isSubmitting }, setState] = useState<NewsletterFormState>(initialState);
+
+  const handleEmailChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setState((prev) => ({ ...prev, email: value }));
+  }, []);
 
   const handleSubmit = useCallback(
-    (e: React.FormEvent) => {
+    async (e: React.FormEvent) => {
       e.preventDefault();
-      console.log('Signing up with email:', email);
-      setEmail('');
+
+      if (!email || isSubmitting) return;
+
+      try {
+        setState((prev) => ({ ...prev, isSubmitting: true }));
+        // TODO: Implement actual newsletter signup
+        await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API call
+        console.log('Signing up with email:', email);
+        setState(initialState);
+      } catch (error) {
+        console.error('Newsletter signup failed:', error);
+        setState((prev) => ({ ...prev, isSubmitting: false }));
+      }
     },
-    [email]
+    [email, isSubmitting]
   );
 
   return (
@@ -26,15 +52,17 @@ const Newsletter: React.FC = memo(() => {
               placeholder="Coming Soon"
               aria-label="Email address"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleEmailChange}
               required
+              disabled={isSubmitting}
               data-np-autofill-field-type="email"
             />
             <button
-              className="bg-[var(--color-accent)] text-[var(--color-text-primary)] px-4 py-2 rounded text-sm transition-colors duration-200 hover:bg-opacity-80"
+              className="bg-[var(--color-accent)] text-[var(--color-text-primary)] px-4 py-2 rounded text-sm transition-colors duration-200 hover:bg-opacity-80 disabled:opacity-50 disabled:cursor-not-allowed"
               type="submit"
+              disabled={isSubmitting}
             >
-              Sign Up
+              {isSubmitting ? 'Signing up...' : 'Sign Up'}
             </button>
           </div>
         </form>

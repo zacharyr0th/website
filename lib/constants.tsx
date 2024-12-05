@@ -123,21 +123,24 @@ export const learningProjects: LearningProject[] = [
 
 export const writingProjects = [
   {
+    id: 'birdseye-view',
     title: 'A Birdseye View',
     description: 'Seeing the forest through the trees.',
     link: '/writing/birdseye-view',
   },
   {
+    id: 'easy-money',
     title: 'Easy Money & Veblen Goods',
     description: 'Second order effects of money printing.',
     link: '/writing/easy-money-and-veblen-goods',
   },
   {
+    id: 'search-engine',
     title: 'Search Engine Turbulence',
     description: 'LLMs and the tumultuous future of search engines.',
     link: '/writing/search-engine-turbulence',
   },
-];
+] as const;
 
 // Consolidate related constants into objects
 export const CONFIG = {
@@ -157,7 +160,8 @@ export const SOCIAL_LINKS = {
   twitter: 'https://twitter.com/zacharyr0th',
   github: 'https://github.com/zacharyr0th',
   linkedin: 'https://linkedin.com/in/zacharyr0th',
-};
+  email: 'mailto:zacharyroth@pm.me',
+} as const;
 
 export const getTextColor = (backgroundColor: string): string => {
   // Define an array of light background colors
@@ -367,7 +371,7 @@ export const BIO_DATA = {
       title: 'Building DeFi & AI @ Aptos Labs',
       company: 'Aptos Labs',
       description: [
-        'Leading growth initiatives to bring DeFi and AI capabilities to the Aptos ecosystem.'
+        'Leading growth initiatives to bring DeFi and AI capabilities to the Aptos ecosystem.',
       ],
     },
     {
@@ -377,7 +381,7 @@ export const BIO_DATA = {
       description: [
         'Created educational content to make DeFi more accessible',
         'Led comprehensive user interviews',
-        'Managed product roadmaps and technical documentation'
+        'Managed product roadmaps and technical documentation',
       ],
     },
     {
@@ -387,7 +391,7 @@ export const BIO_DATA = {
       description: [
         'Helped companies navigate the intersection of traditional finance and crypto, from capital formation to regulatory compliance',
         'Analyzed market opportunities across both digital assets and physical commodities',
-        'Supporting over $2B in fundraising initiatives'
+        'Supporting over $2B in fundraising initiatives',
       ],
     },
   ] as const,

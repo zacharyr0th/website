@@ -1,162 +1,156 @@
 'use client';
 
-import React, { memo } from 'react';
+import React, { memo, useMemo, useEffect, useCallback } from 'react';
 import Image from 'next/image';
+import DOMPurify from 'dompurify';
+import { ErrorBoundary } from 'react-error-boundary';
 import Footer from '@/app/components/common/Footer';
-import { Article } from '@/lib/types';
+import ArticleSwitcher from './ArticleSwitcher';
+import { ArticleContentProps, ErrorFallbackProps } from '../types';
+import styles from './article.module.css';
 
-const ArticleContent = memo(({ article }: { article: Article }) => (
-  <main
-    className="flex flex-col w-full min-h-screen font-mono"
-    style={{
-      backgroundColor: 'var(--color-background)',
-      padding: 'var(--spacing-lg)',
-      fontFamily: 'var(--font-family-base)',
-    }}
-  >
-    <article className="flex-grow container mx-auto px-4 sm:px-6 md:px-8 lg:px-48 pt-8 sm:pt-16 pb-8 max-w-5xl prose">
-      <header className="mb-8 sm:mb-12">
-        <h1
-          className="text-3xl sm:text-4xl md:text-5xl mb-4"
-          style={{ color: 'var(--color-text-primary)' }}
-        >
-          {article.title}
-        </h1>
-        {article.subtitle && (
-          <h2
-            className="text-xl sm:text-2xl md:text-3xl font-thin mb-4"
-            style={{ color: 'var(--color-text-secondary)' }}
-          >
-            {article.subtitle}
-          </h2>
-        )}
-        <div className="flex flex-wrap items-center gap-4">
-          <p style={{ color: 'var(--color-text-secondary)' }}>{article.date}</p>
-          {article.tags && (
-            <ul className="flex flex-wrap gap-2">
-              {article.tags.map((tag, index) => (
-                <li
-                  key={index}
-                  className="text-sm bg-gray-200 rounded-full px-3 py-1"
-                  style={{
-                    color: 'var(--color-text-secondary)',
-                    backgroundColor: 'var(--color-surface)',
-                  }}
-                >
-                  {tag}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      </header>
-      {article.image && (
-        <figure className="mb-12 flex justify-center">
-          <Image
-            src={article.image.src}
-            alt={article.image.alt || 'Article image'}
-            width={1200}
-            height={600}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="rounded-xl shadow-lg"
-          />
-        </figure>
-      )}
-      <div className="bg-background rounded-xl overflow-hidden">
-        <div
-          className="prose prose-lg max-w-none"
-          style={{
-            color: 'var(--color-text-primary)',
-            lineHeight: 'var(--line-height-base)',
-            marginBottom: '0',
-          }}
-          dangerouslySetInnerHTML={{ __html: article.content }}
-        />
-      </div>
-    </article>
-    <Footer />
-    <style jsx global>{`
-      .prose a {
-        text-decoration: underline;
-        color: var(--color-accent);
-      }
-      .prose img {
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .prose ol {
-        list-style-type: decimal;
-        margin-left: 2em;
-        padding-left: 0.5em;
-      }
-      .prose ol li {
-        margin-bottom: 0.5em;
-        color: var(--color-text-primary);
-        line-height: 1.5;
-      }
-      .prose .detailed-list {
-        list-style-type: decimal;
-        margin-left: 0;
-        padding-left: 0;
-        counter-reset: item;
-      }
-      .prose .detailed-list > li {
-        display: block;
-        margin-bottom: 1.5em;
-        padding: 1em;
-        background: var(--color-surface);
-        border-radius: 8px;
-        position: relative;
-      }
-      .prose .detailed-list > li::before {
-        content: counter(item) '.';
-        counter-increment: item;
-        position: absolute;
-        left: -2.5em;
-        top: 0.8em;
-        font-weight: bold;
-        color: var(--color-accent);
-      }
-      .prose .detailed-list ul {
-        list-style-type: none;
-        margin: 0.5em 0;
-        padding-left: 1em;
-      }
-      .prose .detailed-list ul ul {
-        margin: 0.25em 0;
-        padding-left: 1.5em;
-      }
-      .prose .detailed-list ul li::before {
-        content: '•';
-        color: var(--color-accent);
-        font-weight: bold;
-        display: inline-block;
-        width: 1em;
-        margin-left: -1em;
-      }
-      .prose .detailed-list ul ul li::before {
-        content: '◦';
-      }
-      .prose .detailed-list strong {
-        color: var(--color-accent);
-        display: block;
-        margin-bottom: 0.5em;
-        font-size: 1.1em;
-      }
-      .prose ul {
-        list-style-type: disc;
-        margin-left: 2em;
-        padding-left: 0.5em;
-      }
-      .prose ul li {
-        margin-bottom: 0.5em;
-        color: var(--color-text-primary);
-        line-height: 1.5;
-      }
-    `}</style>
-  </main>
+// Optimized Error Fallback component
+const ErrorFallback = memo(({ error }: ErrorFallbackProps) => (
+  <div className="text-red-500 p-4 rounded-lg bg-red-50 border border-red-200">
+    <h2 className="text-lg font-semibold mb-2">Something went wrong</h2>
+    <pre className="text-sm overflow-auto">{error.message}</pre>
+  </div>
 ));
 
-ArticleContent.displayName = 'ArticleContent';
+ErrorFallback.displayName = 'ErrorFallback';
 
-export default ArticleContent;
+// Optimized Header component
+const ArticleHeader = memo(({ article }: ArticleContentProps) => (
+  <header className="mb-8 sm:mb-12">
+    <h1 className={`text-3xl sm:text-4xl md:text-5xl mb-4 ${styles.title}`}>{article.title}</h1>
+    {article.subtitle && (
+      <h2 className={`text-xl sm:text-2xl md:text-3xl font-thin mb-4 ${styles.subtitle}`}>
+        {article.subtitle}
+      </h2>
+    )}
+    <div className="flex flex-wrap items-center gap-4">
+      <time dateTime={article.date} className={styles.date}>
+        {new Date(article.date).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })}
+      </time>
+      {article.tags && article.tags.length > 0 && (
+        <ul className="flex flex-wrap gap-2">
+          {article.tags.map((tag) => (
+            <li key={tag} className={`text-sm rounded-full px-3 py-1 ${styles.tag}`}>
+              {tag}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </header>
+));
+
+ArticleHeader.displayName = 'ArticleHeader';
+
+// Optimized ArticleImage component
+const ArticleImage = memo(({ image }: { image: { src: string; alt: string } }) => (
+  <div className="relative w-full h-64 sm:h-96 mb-8">
+    <Image
+      src={image.src}
+      alt={image.alt}
+      fill
+      className="object-cover rounded-lg"
+      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 640px, 1024px"
+      priority
+    />
+  </div>
+));
+
+ArticleImage.displayName = 'ArticleImage';
+
+const ArticleContent: React.FC<ArticleContentProps> = ({ article }) => {
+  const sanitizedContent = useMemo(() => {
+    if (typeof window === 'undefined') return article.content;
+    return DOMPurify.sanitize(article.content, {
+      ALLOWED_TAGS: [
+        'p',
+        'h1',
+        'h2',
+        'h3',
+        'h4',
+        'h5',
+        'h6',
+        'ul',
+        'ol',
+        'li',
+        'a',
+        'strong',
+        'em',
+        'code',
+        'pre',
+        'img',
+      ],
+      ALLOWED_ATTR: ['href', 'target', 'rel', 'src', 'alt', 'class', 'id'],
+      FORBID_TAGS: ['script', 'style', 'iframe', 'form', 'input'],
+      ADD_ATTR: ['target'],
+      FORCE_BODY: true,
+    });
+  }, [article.content]);
+
+  const processHeadings = useCallback(() => {
+    if (typeof window === 'undefined') return;
+
+    const articleContent = document.querySelector(`.${styles.content}`);
+    if (!articleContent) return;
+
+    const headings = articleContent.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    headings.forEach((heading) => {
+      if (heading.id) return;
+
+      const id =
+        heading.textContent
+          ?.toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/(^-|-$)/g, '') || '';
+
+      heading.id = id;
+
+      const anchor = document.createElement('a');
+      anchor.href = `#${id}`;
+      if (styles.headingAnchor) {
+        anchor.className = styles.headingAnchor;
+        anchor.innerHTML = '#';
+        heading.appendChild(anchor);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    processHeadings();
+  }, [sanitizedContent, processHeadings]);
+
+  if (!article.title) {
+    throw new Error('Article title is required');
+  }
+
+  return (
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <main className={`flex flex-col w-full min-h-screen font-mono ${styles.main}`}>
+        <article className={`${styles.article} prose`}>
+          <ArticleHeader article={article} />
+          {article.image && <ArticleImage image={article.image} />}
+
+          <div className="bg-background rounded-xl overflow-hidden">
+            <div
+              className={`prose prose-lg max-w-none ${styles.content} ${styles.prose}`}
+              dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+            />
+          </div>
+        </article>
+        {article.adjacentArticles && <ArticleSwitcher {...article.adjacentArticles} />}
+        <Footer />
+      </main>
+    </ErrorBoundary>
+  );
+};
+
+export default memo(ArticleContent);

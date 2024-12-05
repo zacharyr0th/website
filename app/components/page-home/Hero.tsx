@@ -1,38 +1,98 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import BackgroundSVG from './HeroBackground';
 import { heroContent } from '@/lib/constants';
 import ConnectModal from '../../components/common/Connect';
 
-const Hero: React.FC = memo(() => (
-  <section className="relative min-h-[200vh]">
-    <div
-      className="hidden lg:block absolute inset-y-0 left-0 w-1/2 z-10"
-      style={{ backgroundColor: 'var(--color-background)' }}
+// Extract button styles to prevent recreation
+const buttonStyles = {
+  primary: {
+    backgroundColor: 'var(--color-primary)',
+    color: 'var(--color-white)',
+    boxShadow: 'var(--box-shadow)',
+  },
+  secondary: {
+    backgroundColor: 'var(--color-surface)',
+    color: 'var(--color-text-secondary)',
+    border: '1px solid var(--color-secondary)',
+  },
+} as const;
+
+// Memoize Button component
+const Button = memo<{
+  variant: 'primary' | 'secondary';
+  children: React.ReactNode;
+  onClick?: () => void;
+}>(({ variant, children, onClick }) => (
+  <button
+    className="px-6 py-2 rounded-full transition-colors duration-300"
+    style={buttonStyles[variant]}
+    onClick={onClick}
+    type="button"
+  >
+    {children}
+  </button>
+));
+Button.displayName = 'Button';
+
+// Memoize ChainLogo component with proper type
+const ChainLogo = memo<{ logo: string }>(({ logo }) => (
+  <div className="w-18 h-18 rounded-full overflow-hidden bg-background flex items-center justify-center shadow-custom">
+    <Image
+      src={`/logos/${logo}-logo.webp`}
+      alt={`${logo.charAt(0).toUpperCase() + logo.slice(1)} Logo`}
+      width={50}
+      height={50}
+      className={`object-contain ${logo === 'bitcoin' ? 'scale-[2]' : ''}`}
     />
-    <div className="w-full lg:w-1/2 flex flex-col relative z-20">
-      <HeroContent />
-    </div>
-    <div className="absolute top-0 right-0 w-full lg:w-1/2 h-[200vh] block">
-      <BackgroundSVG />
-    </div>
-  </section>
+  </div>
 ));
+ChainLogo.displayName = 'ChainLogo';
 
-Hero.displayName = 'Hero';
-
-const HeroContent: React.FC = memo(() => (
-  <>
-    <StickyHeader />
-    <MainContent />
-  </>
+// Memoize ChainLogos component
+const ChainLogos = memo(() => (
+  <div className="flex justify-between items-center max-w-xs py-2">
+    {heroContent.chainLogos.map((logo) => (
+      <ChainLogo key={logo} logo={logo} />
+    ))}
+  </div>
 ));
+ChainLogos.displayName = 'ChainLogos';
 
-HeroContent.displayName = 'HeroContent';
+// Memoize ContentSection
+const ContentSection = memo<{
+  title: string;
+  content: React.ReactNode;
+  children?: React.ReactNode;
+}>(({ title, content, children }) => (
+  <div className="mb-12">
+    <h2 className="text-2xl font-semibold mb-4 text-text-primary">{title}</h2>
+    <p className="text-base max-w-xl leading-relaxed mb-6 text-text-secondary">{content}</p>
+    {children}
+  </div>
+));
+ContentSection.displayName = 'ContentSection';
 
-const StickyHeader: React.FC = () => {
+// Memoize MainContent
+const MainContent = memo(() => (
+  <div className="lg:bg-transparent bg-background w-screen relative left-1/2 -translate-x-1/2">
+    <div className="ml-12 mr-6 pt-10">
+      {heroContent.sections?.map((section) => (
+        <ContentSection key={section.title} title={section.title} content={section.content}>
+          {section.title === heroContent.sections?.[0]?.title && <ChainLogos />}
+        </ContentSection>
+      ))}
+    </div>
+  </div>
+));
+MainContent.displayName = 'MainContent';
+
+// Optimize StickyHeader with useCallback
+const StickyHeader = memo(() => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleOpenModal = useCallback(() => setIsModalOpen(true), []);
+  const handleCloseModal = useCallback(() => setIsModalOpen(false), []);
 
   return (
     <div className="h-screen p-4 mb-24 flex flex-col justify-center sticky top-0 ml-12">
@@ -49,94 +109,43 @@ const StickyHeader: React.FC = () => {
         </a>
       </p>
       <div className="flex space-x-4">
-        <Button variant="primary" onClick={() => setIsModalOpen(true)}>Connect</Button>
+        <Button variant="primary" onClick={handleOpenModal}>
+          Connect
+        </Button>
         <Link href="/bio" passHref>
           <Button variant="secondary">Bio</Button>
         </Link>
       </div>
-      <ConnectModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <ConnectModal isOpen={isModalOpen} onClose={handleCloseModal} />
     </div>
   );
-};
+});
+StickyHeader.displayName = 'StickyHeader';
 
-const Button: React.FC<{
-  variant: 'primary' | 'secondary';
-  children: React.ReactNode;
-  onClick?: () => void;
-}> = ({ variant, children, onClick }) => {
-  const styles = {
-    primary: {
-      backgroundColor: 'var(--color-primary)',
-      color: 'var(--color-white)',
-      boxShadow: 'var(--box-shadow)',
-    },
-    secondary: {
-      backgroundColor: 'var(--color-surface)',
-      color: 'var(--color-text-secondary)',
-      border: '1px solid var(--color-secondary)',
-    },
-  };
-
-  return (
-    <button
-      className={`px-6 py-2 rounded-full transition-colors duration-300`}
-      style={variant === 'primary' ? styles.primary : styles.secondary}
-      onClick={onClick}
-      type="button"
-    >
-      {children}
-    </button>
-  );
-};
-
-const MainContent: React.FC = memo(() => (
-  <div className="lg:bg-transparent bg-background w-screen relative left-1/2 -translate-x-1/2">
-    <div className="ml-12 mr-6 pt-10">
-      {heroContent.sections?.map((section) => (
-        <ContentSection key={section.title} title={section.title} content={section.content}>
-          {section.title === heroContent.sections?.[0]?.title && <ChainLogos />}
-        </ContentSection>
-      ))}
-    </div>
-  </div>
+// Memoize HeroContent
+const HeroContent = memo(() => (
+  <>
+    <StickyHeader />
+    <MainContent />
+  </>
 ));
+HeroContent.displayName = 'HeroContent';
 
-MainContent.displayName = 'MainContent';
-
-const ContentSection: React.FC<{
-  title: string;
-  content: React.ReactNode;
-  children?: React.ReactNode;
-}> = ({ title, content, children }) => (
-  <div className="mb-12">
-    <h2 className="text-2xl font-semibold mb-4 text-text-primary">{title}</h2>
-    <p className="text-base max-w-xl leading-relaxed mb-6 text-text-secondary">{content}</p>
-    {children}
-  </div>
-);
-
-const ChainLogos: React.FC = memo(() => (
-  <div className="flex justify-between items-center max-w-xs py-2">
-    {heroContent.chainLogos.map((logo) => (
-      <ChainLogo key={logo} logo={logo} />
-    ))}
-  </div>
-));
-
-ChainLogos.displayName = 'ChainLogos';
-
-const ChainLogo: React.FC<{ logo: string }> = memo(({ logo }) => (
-  <div className="w-18 h-18 rounded-full overflow-hidden bg-background flex items-center justify-center shadow-custom">
-    <Image
-      src={`/logos/${logo}-logo.webp`}
-      alt={`${logo.charAt(0).toUpperCase() + logo.slice(1)} Logo`}
-      width={50}
-      height={50}
-      className={`object-contain ${logo === 'bitcoin' ? 'scale-[2]' : ''}`}
+// Main Hero component
+const Hero = memo(() => (
+  <section className="relative min-h-[200vh]">
+    <div
+      className="hidden lg:block absolute inset-y-0 left-0 w-1/2 z-10"
+      style={{ backgroundColor: 'var(--color-background)' }}
     />
-  </div>
+    <div className="w-full lg:w-1/2 flex flex-col relative z-20">
+      <HeroContent />
+    </div>
+    <div className="absolute top-0 right-0 w-full lg:w-1/2 h-[200vh] block">
+      <BackgroundSVG />
+    </div>
+  </section>
 ));
+Hero.displayName = 'Hero';
 
-ChainLogo.displayName = 'ChainLogo';
-
-export default memo(Hero);
+export default Hero;

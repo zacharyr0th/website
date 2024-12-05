@@ -199,6 +199,12 @@ export interface ArticleFrontmatter {
   tags?: readonly string[];
 }
 
+export interface AdjacentArticle {
+  slug: string;
+  title: string;
+  date: string;
+}
+
 export interface Article {
   id: string;
   slug: string;
@@ -215,6 +221,10 @@ export interface Article {
   link: string;
   tags?: readonly string[];
   frontmatter: ArticleFrontmatter;
+  adjacentArticles?: {
+    prev: AdjacentArticle | null;
+    next: AdjacentArticle | null;
+  };
 }
 
 export type HeroProps = {

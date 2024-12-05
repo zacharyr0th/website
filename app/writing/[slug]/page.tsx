@@ -4,49 +4,81 @@ import matter from 'gray-matter';
 import { marked } from 'marked';
 import { notFound } from 'next/navigation';
 import ArticleContent from '@/app/writing/[slug]/ArticleContent';
-import type { Article } from '@/lib/types';
+import type { Article, AdjacentArticle, ArticleFrontmatter } from '../types';
 
 const articlesDirectory = path.join(process.cwd(), 'public/articles');
 
-export default async function Article({ params: { slug } }: { params: { slug: string } }) {
+async function getAdjacentArticles(
+  currentSlug: string
+): Promise<{ prev: AdjacentArticle | null; next: AdjacentArticle | null }> {
+  const files = await fs.readdir(articlesDirectory);
+  const articles = await Promise.all(
+    files
+      .filter((file) => file.endsWith('.md'))
+      .map(async (file) => {
+        const content = await fs.readFile(path.join(articlesDirectory, file), 'utf8');
+        const { data } = matter(content) as { data: { date: string; title: string } };
+        return {
+          slug: file.replace(/\.md$/, ''),
+          date: data.date,
+          title: data.title,
+        } as AdjacentArticle;
+      })
+  );
+
+  // Sort articles by date, newest first
+  articles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  const currentIndex = articles.findIndex((article) => article.slug === currentSlug);
+
+  return {
+    prev: currentIndex < articles.length - 1 ? articles[currentIndex + 1] ?? null : null,
+    next: currentIndex > 0 ? articles[currentIndex - 1] ?? null : null,
+  };
+}
+
+export default async function ArticlePage({ params: { slug } }: { params: { slug: string } }) {
   try {
     const fileContents = await fs.readFile(path.join(articlesDirectory, `${slug}.md`), 'utf8');
     const { data, content } = matter(fileContents);
 
-    // Cast frontmatter to match Article's frontmatter structure
-    const frontmatter = data as Article['frontmatter'];
+    if (!data) {
+      throw new Error('No frontmatter found in article');
+    }
+
+    // Type assertion with validation
+    const frontmatter = data as ArticleFrontmatter;
+
+    // Get adjacent articles
+    const adjacentArticles = await getAdjacentArticles(slug);
+
+    // Convert markdown to HTML
+    const htmlContent = await marked(content);
 
     const article: Article = {
       id: slug,
       slug,
       title: frontmatter.title,
-      subtitle: frontmatter.subtitle || 'No subtitle available',
-      description: frontmatter.description || content.slice(0, 150) + '...',
-      content: await marked.parse(content),
+      description: frontmatter.description || '',
+      content: htmlContent,
       image: {
         src: frontmatter.image || '/misc/placeholder.webp',
         alt: frontmatter.imageAlt || frontmatter.title,
       },
       category: frontmatter.category || 'Uncategorized',
       date: frontmatter.date,
-      tags: frontmatter.tags || [],
       link: `/writing/${slug}`,
-      frontmatter: {
-        title: frontmatter.title,
-        date: frontmatter.date,
-        featured: slug === 'derivatives-vs-spot' || frontmatter.featured || false,
-        ...(frontmatter.subtitle && { subtitle: frontmatter.subtitle }),
-        ...(frontmatter.description && { description: frontmatter.description }),
-        ...(frontmatter.image && { image: frontmatter.image }),
-        ...(frontmatter.imageAlt && { imageAlt: frontmatter.imageAlt }),
-        ...(frontmatter.category && { category: frontmatter.category }),
-        ...(frontmatter.tags && { tags: frontmatter.tags }),
-      },
+      frontmatter,
+      ...(frontmatter.subtitle && { subtitle: frontmatter.subtitle }),
+      ...(frontmatter.tags && {
+        tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [frontmatter.tags],
+      }),
+      ...(adjacentArticles && { adjacentArticles }),
     };
 
     return <ArticleContent article={article} />;
   } catch (error) {
-    console.error(`Error loading article: ${error}`);
+    console.error('Error loading article:', error);
     notFound();
   }
 }

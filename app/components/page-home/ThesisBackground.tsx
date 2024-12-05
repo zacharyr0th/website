@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-const ThesisBackground: React.FC = () => (
+const COLORS = ['primary', 'secondary', 'accent', 'surface'] as const;
+
+const ThesisBackground: React.FC = memo(() => (
   <div className="relative h-screen w-full overflow-hidden">
     <style jsx>{`
       @keyframes backgroundMove {
@@ -14,6 +16,8 @@ const ThesisBackground: React.FC = () => (
       .animate-background-move {
         animation: backgroundMove 30s linear infinite;
         will-change: transform;
+        backface-visibility: hidden;
+        transform-style: preserve-3d;
       }
       .text-shadow-subtle {
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
@@ -24,16 +28,23 @@ const ThesisBackground: React.FC = () => (
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 1000 1000"
       preserveAspectRatio="xMidYMid slice"
+      aria-hidden="true"
     >
       <defs>
-        <pattern id="stainedGlass" width="200" height="200" patternUnits="userSpaceOnUse">
+        <pattern
+          id="stainedGlass"
+          width="200"
+          height="200"
+          patternUnits="userSpaceOnUse"
+          patternTransform="rotate(0)"
+        >
           <rect width="200" height="200" fill="#000" opacity="0.05" />
           <polygon points="0,0 100,0 150,100 50,100" fill="url(#gradient1)" />
           <polygon points="100,0 200,0 200,100 150,100" fill="url(#gradient2)" />
           <polygon points="0,100 50,100 100,200 0,200" fill="url(#gradient3)" />
           <polygon points="50,100 150,100 200,200 100,200" fill="url(#gradient4)" />
         </pattern>
-        {['primary', 'secondary', 'accent', 'surface'].map((color, index) => (
+        {COLORS.map((color, index) => (
           <linearGradient
             key={color}
             id={`gradient${index + 1}`}
@@ -41,6 +52,7 @@ const ThesisBackground: React.FC = () => (
             y1="0%"
             x2="100%"
             y2="100%"
+            gradientUnits="userSpaceOnUse"
           >
             <stop offset="0%" style={{ stopColor: `var(--color-${color})`, stopOpacity: 0.8 }} />
             <stop offset="100%" style={{ stopColor: `var(--color-${color})`, stopOpacity: 0 }} />
@@ -65,6 +77,8 @@ const ThesisBackground: React.FC = () => (
       </div>
     </div>
   </div>
-);
+));
+
+ThesisBackground.displayName = 'ThesisBackground';
 
 export default ThesisBackground;

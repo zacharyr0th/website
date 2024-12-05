@@ -32,19 +32,19 @@
 
 /* Theme: Default (Light) */
 :root {
-  --color-primary: #546e7a;
-  --color-secondary: #78909c;
-  --color-accent: #26a69a;
-  --color-text-primary: #37474f;
-  --color-text-secondary: #607d8b;
-  --color-background: #f5e9d6;
-  --color-surface: #fff8e1;
-  --color-error: #d32f2f;
-  --color-success: #388e3c;
-  --color-warning: #f57c00;
-  --color-info: #1976d2;
+  --color-primary: #455a64;
+  --color-secondary: #546e7a;
+  --color-accent: #00897b;
+  --color-text-primary: #263238;
+  --color-text-secondary: #455a64;
+  --color-background: #e1d5c4;
+  --color-surface: #f2e6cf;
+  --color-error: #c62828;
+  --color-success: #2e7d32;
+  --color-warning: #ef6c00;
+  --color-info: #1565c0;
 
-  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
   --heading-color: var(--color-text-primary);
 }
 

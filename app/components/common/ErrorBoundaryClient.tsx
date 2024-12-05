@@ -2,136 +2,89 @@
 
 import React, { memo, useCallback } from 'react';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
+import styles from './ErrorBoundaryClient.module.css';
 
-const ErrorFallback = memo(({ error, resetErrorBoundary }: FallbackProps) => (
-  <div
-    role="alert"
-    style={{
-      padding: 'var(--spacing-lg)',
-      borderRadius: 'var(--border-radius-md)',
-      backgroundColor: 'var(--color-surface)',
-      boxShadow: 'var(--box-shadow)',
-      maxWidth: 'min(calc(var(--max-content-width) * 0.7), 42rem)',
-      margin: `${`var(--spacing-xl)`} auto`,
-      border: '1px solid var(--color-error)',
-      animation: 'slideIn 0.3s ease-out',
-    }}
-  >
-    <h2
-      style={{
-        fontSize: 'calc(var(--font-size-base) * 1.5)',
-        fontFamily: 'var(--font-family-base)',
-        color: 'var(--color-error)',
-        marginBottom: 'var(--spacing-md)',
-        animation: 'fadeIn 0.4s ease-out',
-      }}
-    >
-      <span style={{ marginRight: 'var(--spacing-sm)' }}>⚠️</span>
-      Oops! Something went wrong
-    </h2>
+interface ErrorFallbackProps extends FallbackProps {
+  error: Error;
+}
 
-    <p
-      style={{
-        color: 'var(--color-text-secondary)',
-        marginBottom: 'var(--spacing-md)',
-      }}
-    >
-      Don&apos;t worry, we&apos;ve been notified and are working on it. You can:
-    </p>
+const ErrorFallback = memo(({ error, resetErrorBoundary }: ErrorFallbackProps) => {
+  const logError = useCallback(() => {
+    // You can implement your error logging logic here
+    console.error('Error caught by boundary:', error);
+  }, [error]);
 
-    <ul
-      style={{
-        listStyle: 'disc inside',
-        marginBottom: 'var(--spacing-md)',
-        color: 'var(--color-text-secondary)',
-      }}
-    >
-      <li>Try again using the button below</li>
-      <li>Refresh the page</li>
-      <li>Contact support if the problem persists</li>
-    </ul>
+  React.useEffect(() => {
+    logError();
+  }, [logError]);
 
-    {process.env.NODE_ENV === 'development' && (
-      <details
-        style={{
-          marginBottom: 'var(--spacing-md)',
-          animation: 'fadeIn 0.5s ease-out',
-        }}
+  return (
+    <div role="alert" className={styles.errorContainer}>
+      <h2 className={styles.errorTitle}>
+        <span className={styles.errorIcon}>⚠️</span>
+        Oops! Something went wrong
+      </h2>
+
+      <p className={styles.description}>
+        Don&apos;t worry, we&apos;ve been notified and are working on it. You can:
+      </p>
+
+      <ul className={styles.bulletList}>
+        <li>Try again using the button below</li>
+        <li>Refresh the page</li>
+        <li>Contact support if the problem persists</li>
+      </ul>
+
+      {process.env.NODE_ENV === 'development' && (
+        <details className={styles.details}>
+          <summary className={styles.summary}>Technical Details</summary>
+          <div className={styles.detailsContent}>
+            <p className={styles.errorMessage}>{error.message}</p>
+            <pre className={styles.errorStack}>{error.stack}</pre>
+          </div>
+        </details>
+      )}
+
+      <button
+        onClick={resetErrorBoundary}
+        className={styles.retryButton}
+        aria-label="Try again"
       >
-        <summary
-          style={{
-            cursor: 'pointer',
-            color: 'var(--color-info)',
-            transition: 'all var(--transition-speed)',
-            padding: 'var(--spacing-sm)',
-            borderRadius: 'var(--border-radius-sm)',
-          }}
-        >
-          Technical Details
-        </summary>
-        <div
-          style={{
-            marginTop: 'var(--spacing-sm)',
-            padding: 'var(--spacing-md)',
-            backgroundColor: 'var(--color-background)',
-            borderRadius: 'var(--border-radius-sm)',
-          }}
-        >
-          <p
-            style={{
-              fontFamily: 'var(--font-family-base)',
-              fontSize: 'calc(var(--font-size-base) * 0.9)',
-              marginBottom: 'var(--spacing-sm)',
-            }}
-          >
-            {error.message}
-          </p>
-          <pre
-            style={{
-              whiteSpace: 'pre-wrap',
-              fontFamily: 'var(--font-family-base)',
-              fontSize: 'calc(var(--font-size-base) * 0.9)',
-              color: 'var(--color-text-secondary)',
-            }}
-          >
-            {error.stack}
-          </pre>
-        </div>
-      </details>
-    )}
-
-    <button
-      onClick={resetErrorBoundary}
-      style={{
-        backgroundColor: 'var(--color-primary)',
-        color: 'var(--color-white)',
-        padding: `var(--spacing-sm) var(--spacing-md)`,
-        borderRadius: 'var(--border-radius-sm)',
-        fontFamily: 'var(--font-family-base)',
-        transition: `background-color var(--transition-speed)`,
-        cursor: 'pointer',
-      }}
-      onMouseOver={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-secondary)')}
-      onMouseOut={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-primary)')}
-    >
-      Try Again
-    </button>
-  </div>
-));
+        Try Again
+      </button>
+    </div>
+  );
+});
 
 ErrorFallback.displayName = 'ErrorFallback';
 
-const ErrorBoundaryClient: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+interface ErrorBoundaryClientProps {
+  children: React.ReactNode;
+  onError?: (error: Error, info: React.ErrorInfo) => void;
+}
+
+const ErrorBoundaryClient: React.FC<ErrorBoundaryClientProps> = ({ children, onError }) => {
   const handleReset = useCallback(() => {
     localStorage.clear();
     window.location.reload();
   }, []);
 
+  const handleError = useCallback((error: Error, info: React.ErrorInfo) => {
+    // You can implement your error logging logic here
+    console.error('Error caught by boundary:', error);
+    console.error('Component stack:', info.componentStack);
+    onError?.(error, info);
+  }, [onError]);
+
   return (
-    <ErrorBoundary FallbackComponent={ErrorFallback} onReset={handleReset}>
+    <ErrorBoundary 
+      FallbackComponent={ErrorFallback} 
+      onReset={handleReset}
+      onError={handleError}
+    >
       {children}
     </ErrorBoundary>
   );
 };
 
-export default ErrorBoundaryClient;
+export default memo(ErrorBoundaryClient);

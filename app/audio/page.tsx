@@ -1,9 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import Navigation from '../components/common/Navigation';
-import { Theme } from '@/lib/types';
 import Footer from '../components/common/Footer';
 import { CONFIG } from '@/lib/constants';
 import CategoryCard from './CategoryCard';
@@ -18,23 +16,20 @@ const categories = [
 ];
 
 const AudioPage = () => {
-  const [, setTheme] = useState<Theme>('dark');
-
   return (
-    <motion.main
-      className="flex flex-col w-full min-h-screen font-mono"
+    <motion.div
+      className="flex flex-col w-full min-h-screen font-mono bg-gradient-to-b from-background to-surface/30"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
       <div className="flex-grow container mx-auto px-5 md:px-48 pt-32 md:pt-36 pb-8 md:pb-18 max-w-5xl">
-        <Navigation setTheme={setTheme} />
         <motion.h1
           style={{ color: 'var(--color-text-primary)' }}
-          className="text-3xl md:text-5xl font-bold mb-12 text-text-primary"
-          initial={{ opacity: 0, y: -20 }}
+          className="text-3xl md:text-5xl font-bold mb-6 text-text-primary"
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.5 }}
         >
           Audio
         </motion.h1>
@@ -83,10 +78,8 @@ const AudioPage = () => {
         </section>
       </div>
       <Footer />
-    </motion.main>
+    </motion.div>
   );
 };
-
-AudioPage.displayName = 'AudioPage';
 
 export default AudioPage;
