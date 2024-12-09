@@ -20,7 +20,7 @@ const CategoryButton = React.memo<{
 }>(({ children, active, onClick }) => (
   <button
     onClick={onClick}
-    className={`px-4 py-2 rounded-lg text-sm ${
+    className={`px-4 py-2 rounded-lg text-sm font-medium ${
       active
         ? 'bg-[var(--color-primary)] text-[var(--color-white)]'
         : 'bg-[var(--color-surface)] text-[var(--color-text-secondary)]'
@@ -38,7 +38,7 @@ const CategoryButtons = React.memo<{
   selectedCategory: string;
   onCategoryChange: (category: string) => void;
 }>(({ categories, selectedCategory, onCategoryChange }) => (
-  <div className="flex flex-wrap gap-[var(--spacing-xs)]">
+  <div className="flex flex-wrap gap-3">
     {categories.map((category) => (
       <CategoryButton
         key={category}
@@ -52,31 +52,26 @@ const CategoryButtons = React.memo<{
 ));
 CategoryButtons.displayName = 'CategoryButtons';
 
-const ArticleGrid = React.memo<{ 
-  articles: Article[]; 
+const ArticleGrid = React.memo<{
+  articles: Article[];
   selectedTag: string;
-}>(
-  ({ articles }) => {
-    if (!articles.length) {
-      return <p className="text-[var(--color-text-secondary)]">No articles found.</p>;
-    }
-
-    return (
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-[var(--spacing-md)]">
-        {articles.map((article) => (
-          <div 
-            key={article.id} 
-            className="p-[var(--spacing-md)] transition-all duration-[var(--transition-speed)] ease-in-out hover:-translate-y-1"
-          >
-            <div className="h-full transform transition-all duration-[var(--transition-speed)] ease-in-out hover:shadow-[var(--box-shadow)] rounded-[var(--border-radius-lg)]">
-              <ArticleCard article={article} />
-            </div>
-          </div>
-        ))}
-      </div>
-    );
+}>(({ articles }) => {
+  if (!articles.length) {
+    return <p className="text-[var(--color-text-secondary)]">No articles found.</p>;
   }
-);
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-[var(--spacing-md)]">
+      {articles.map((article) => (
+        <div key={article.id} className="p-[var(--spacing-md)]">
+          <div className="h-full rounded-[var(--border-radius-lg)] bg-[var(--color-surface)]">
+            <ArticleCard article={article} />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+});
 ArticleGrid.displayName = 'ArticleGrid';
 
 const ArchiveHeader = React.memo<{
@@ -84,16 +79,16 @@ const ArchiveHeader = React.memo<{
   selectedCategory: string;
   onCategoryChange: (category: string) => void;
 }>(({ categories, selectedCategory, onCategoryChange }) => (
-  <>
-    <h3 className="text-2xl font-semibold mb-[var(--spacing-md)] text-[var(--heading-color)]">Archives</h3>
-    <div className="flex justify-between items-center mb-[var(--spacing-xl)]">
-      <CategoryButtons
-        categories={categories}
-        selectedCategory={selectedCategory}
-        onCategoryChange={onCategoryChange}
-      />
-    </div>
-  </>
+  <div className="mb-[var(--spacing-xl)]">
+    <h3 className="text-4xl font-semibold mb-[var(--spacing-md)] text-[var(--heading-color)]">
+      Archives
+    </h3>
+    <CategoryButtons
+      categories={categories}
+      selectedCategory={selectedCategory}
+      onCategoryChange={onCategoryChange}
+    />
+  </div>
 ));
 ArchiveHeader.displayName = 'ArchiveHeader';
 
@@ -113,11 +108,14 @@ const ArchiveSection: React.FC<ArchiveSectionProps> = ({
     return content.filter((article) => article.tags?.includes(selectedTag));
   }, [content, selectedTag]);
 
-  const headerProps = useMemo(() => ({
-    categories: allTags,
-    selectedCategory: selectedTag,
-    onCategoryChange: onTagChange,
-  }), [allTags, selectedTag, onTagChange]);
+  const headerProps = useMemo(
+    () => ({
+      categories: allTags,
+      selectedCategory: selectedTag,
+      onCategoryChange: onTagChange,
+    }),
+    [allTags, selectedTag, onTagChange]
+  );
 
   return (
     <section className="mt-12">

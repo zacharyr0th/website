@@ -78,7 +78,11 @@ const ArticleCard = React.memo(({ article, variant = 'default' }: ArticleCardPro
             src={article.image.src}
             alt={article.image.alt || ''}
             fill
-            sizes={variant === 'side' ? '120px' : '(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'}
+            sizes={
+              variant === 'side'
+                ? '120px'
+                : '(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
+            }
             className="object-cover brightness-[0.98]"
             priority={variant === 'featured'}
           />

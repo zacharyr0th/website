@@ -10,19 +10,25 @@ const socialLinks = [
   { href: SOCIAL_LINKS.github, Icon: FaGithub, label: 'GitHub Profile' },
 ] as const;
 
-const SocialButton = memo(({ href, Icon, label }: {
-  href: string;
-  Icon: React.ComponentType<{ size: number }>;
-  label: string;
-}) => (
-  <button
-    onClick={() => window.open(href, '_blank', 'noopener,noreferrer')}
-    aria-label={label}
-    className="text-text-secondary hover:text-accent transition-colors focus:outline-none focus:ring-2 focus:ring-accent rounded-full p-1"
-  >
-    <Icon size={32} />
-  </button>
-));
+const SocialButton = memo(
+  ({
+    href,
+    Icon,
+    label,
+  }: {
+    href: string;
+    Icon: React.ComponentType<{ size: number }>;
+    label: string;
+  }) => (
+    <button
+      onClick={() => window.open(href, '_blank', 'noopener,noreferrer')}
+      aria-label={label}
+      className="text-text-secondary hover:text-accent transition-colors focus:outline-none focus:ring-2 focus:ring-accent rounded-full p-1"
+    >
+      <Icon size={32} />
+    </button>
+  )
+);
 
 SocialButton.displayName = 'SocialButton';
 
@@ -37,9 +43,7 @@ export const Footer = memo(() => {
             <SocialButton key={props.href} {...props} />
           ))}
         </div>
-        <p className="text-text-secondary">
-          &copy; {currentYear}
-        </p>
+        <p className="text-text-secondary">&copy; {currentYear}</p>
       </div>
     </footer>
   );

@@ -10,7 +10,7 @@ import {
   ProjectCategory,
   ThemeColors,
   WritingCategory,
-} from './types';
+} from '../../lib/types';
 
 // Use const assertions for better type inference
 export const THEMES = ['light', 'dark'] as const;

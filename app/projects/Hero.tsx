@@ -68,9 +68,9 @@ const ProjectCard = memo<ProjectCardProps>(({ project, index, onSelect, theme })
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, delay: index * 0.1 }
+      transition: { duration: 0.5, delay: index * 0.1 },
     },
-    exit: { opacity: 0, y: -20 }
+    exit: { opacity: 0, y: -20 },
   };
 
   const LinkComponent = useCallback(({ href, children, disabled = false }: LinkComponentProps) => {
@@ -108,15 +108,18 @@ const ProjectCard = memo<ProjectCardProps>(({ project, index, onSelect, theme })
         shadow-[var(--box-shadow)] transition-all duration-[var(--transition-speed)]
         p-6 md:p-8 flex flex-col h-full
         cursor-pointer hover:shadow-xl border-2
-        ${theme === 'dark' 
-          ? 'border-[var(--color-secondary)]/10' 
-          : 'border-[var(--color-accent)]'
+        ${theme === 'dark' ? 'border-[var(--color-secondary)]/10' : 'border-[var(--color-accent)]'}
+        ${
+          theme === 'dark'
+            ? 'hover:bg-[var(--color-surface)]/90'
+            : 'hover:bg-[var(--color-surface)]/70'
         }
-        ${theme === 'dark' ? 'hover:bg-[var(--color-surface)]/90' : 'hover:bg-[var(--color-surface)]/70'}
       `}
     >
       <div className="mb-6">
-        <h2 className="text-2xl font-bold mb-3 text-[var(--color-text-primary)]">{project.title}</h2>
+        <h2 className="text-2xl font-bold mb-3 text-[var(--color-text-primary)]">
+          {project.title}
+        </h2>
         <p className="text-[var(--color-text-secondary)] leading-relaxed">{project.description}</p>
       </div>
 
@@ -125,9 +128,10 @@ const ProjectCard = memo<ProjectCardProps>(({ project, index, onSelect, theme })
           <span
             key={tech}
             className={`px-3 py-1.5 rounded-md text-accent text-sm font-medium 
-                       border-2 backdrop-blur-sm ${theme === 'dark' 
-                         ? 'border-[var(--color-secondary)]/10' 
-                         : 'border-[var(--color-accent)]'
+                       border-2 backdrop-blur-sm ${
+                         theme === 'dark'
+                           ? 'border-[var(--color-secondary)]/10'
+                           : 'border-[var(--color-accent)]'
                        }`}
           >
             {tech}
@@ -153,12 +157,16 @@ const ProjectCard = memo<ProjectCardProps>(({ project, index, onSelect, theme })
       <div className="flex gap-4 pt-4 border-t border-border/30">
         <LinkComponent href={project.githubLink || ''} disabled={!project.githubLink}>
           <GitHubIcon className="w-5 h-5 group-hover:text-accent" />
-          <span className="group-hover:text-accent">{project.githubLink ? 'View Code' : 'Coming Soon'}</span>
+          <span className="group-hover:text-accent">
+            {project.githubLink ? 'View Code' : 'Coming Soon'}
+          </span>
         </LinkComponent>
-        
+
         <LinkComponent href={project.articleLink || ''} disabled={!project.articleLink}>
           <ArticleIcon className="w-5 h-5 group-hover:text-accent" />
-          <span className="group-hover:text-accent">{project.articleLink ? 'Read More' : 'Coming Soon'}</span>
+          <span className="group-hover:text-accent">
+            {project.articleLink ? 'Read More' : 'Coming Soon'}
+          </span>
         </LinkComponent>
       </div>
     </motion.div>

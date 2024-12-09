@@ -61,16 +61,16 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
   // Only clone elements after component is mounted to avoid hydration issues
   const childrenWithTheme = React.Children.map(children, (child) => {
     if (!mounted) return child;
-    
+
     if (React.isValidElement(child)) {
       const type = child.type;
       // Check if it's a function component and cast it to access displayName
-      const isClientComponent = 
-        typeof type === 'function' && 
+      const isClientComponent =
+        typeof type === 'function' &&
         // Use type assertion to safely check displayName
-        ((type as { displayName?: string }).displayName?.startsWith('Client') || 
-         type.toString().includes('use client'));
-      
+        ((type as { displayName?: string }).displayName?.startsWith('Client') ||
+          type.toString().includes('use client'));
+
       if (isClientComponent) {
         return React.cloneElement(child as React.ReactElement<ThemedComponentProps>, { theme });
       }

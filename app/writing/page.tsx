@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Footer from '@/app/components/common/Footer';
 import ThemeProvider from '@/app/components/common/ThemeProvider';
 import { Article } from './types';
@@ -58,23 +58,25 @@ const ErrorState = ({ error }: { error: Error }) => (
 );
 
 // Memoized Hero component wrapper
-const MemoizedHero = React.memo(({ 
-  primaryArticle, 
-  randomContent, 
-  onRefresh 
-}: { 
-  primaryArticle: Article; 
-  randomContent: Article[]; 
-  onRefresh: () => void;
-}) => (
-  <div className="max-w-7xl mx-auto mb-12">
-    <Hero
-      primaryArticle={primaryArticle}
-      featuredArticles={randomContent}
-      onRefresh={onRefresh}
-    />
-  </div>
-));
+const MemoizedHero = React.memo(
+  ({
+    primaryArticle,
+    randomContent,
+    onRefresh,
+  }: {
+    primaryArticle: Article;
+    randomContent: Article[];
+    onRefresh: () => void;
+  }) => (
+    <div className="max-w-7xl mx-auto mb-12">
+      <Hero
+        primaryArticle={primaryArticle}
+        featuredArticles={randomContent}
+        onRefresh={onRefresh}
+      />
+    </div>
+  )
+);
 MemoizedHero.displayName = 'MemoizedHero';
 
 export default function WritingPage() {
@@ -168,22 +170,12 @@ export default function WritingPage() {
             />
           )}
 
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={selectedTag}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
-            >
-              <ArchiveSection
-                tags={tags}
-                selectedTag={selectedTag}
-                onTagChange={handleTagChange}
-                content={allContent}
-              />
-            </motion.div>
-          </AnimatePresence>
+          <ArchiveSection
+            tags={tags}
+            selectedTag={selectedTag}
+            onTagChange={handleTagChange}
+            content={allContent}
+          />
         </div>
         <Footer />
       </ThemeProvider>

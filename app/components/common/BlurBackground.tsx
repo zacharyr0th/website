@@ -16,10 +16,13 @@ const BlurBackground: React.FC<BlurBackgroundProps> = ({ children, className = '
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
-      
+
       if (elementRef.current) {
         const rect = elementRef.current.getBoundingClientRect();
-        const elementsUnderneath = document.elementsFromPoint(rect.x + rect.width / 2, rect.y + rect.height + 1);
+        const elementsUnderneath = document.elementsFromPoint(
+          rect.x + rect.width / 2,
+          rect.y + rect.height + 1
+        );
         setHasBackground(elementsUnderneath.length > 2); // More than just body and our element
       }
     };
@@ -39,9 +42,9 @@ const BlurBackground: React.FC<BlurBackgroundProps> = ({ children, className = '
   };
 
   return (
-    <div 
+    <div
       ref={elementRef}
-      className={`rounded-xl px-4 py-3 max-sm:px-3 ${className}`} 
+      className={`rounded-xl px-4 py-3 max-sm:px-3 ${className}`}
       style={backgroundStyle}
     >
       {children}
@@ -49,4 +52,4 @@ const BlurBackground: React.FC<BlurBackgroundProps> = ({ children, className = '
   );
 };
 
-export default BlurBackground; 
+export default BlurBackground;

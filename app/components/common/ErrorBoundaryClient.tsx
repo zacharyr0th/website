@@ -45,11 +45,7 @@ const ErrorFallback = memo(({ error, resetErrorBoundary }: ErrorFallbackProps) =
         </details>
       )}
 
-      <button
-        onClick={resetErrorBoundary}
-        className={styles.retryButton}
-        aria-label="Try again"
-      >
+      <button onClick={resetErrorBoundary} className={styles.retryButton} aria-label="Try again">
         Try Again
       </button>
     </div>
@@ -69,19 +65,18 @@ const ErrorBoundaryClient: React.FC<ErrorBoundaryClientProps> = ({ children, onE
     window.location.reload();
   }, []);
 
-  const handleError = useCallback((error: Error, info: React.ErrorInfo) => {
-    // You can implement your error logging logic here
-    console.error('Error caught by boundary:', error);
-    console.error('Component stack:', info.componentStack);
-    onError?.(error, info);
-  }, [onError]);
+  const handleError = useCallback(
+    (error: Error, info: React.ErrorInfo) => {
+      // You can implement your error logging logic here
+      console.error('Error caught by boundary:', error);
+      console.error('Component stack:', info.componentStack);
+      onError?.(error, info);
+    },
+    [onError]
+  );
 
   return (
-    <ErrorBoundary 
-      FallbackComponent={ErrorFallback} 
-      onReset={handleReset}
-      onError={handleError}
-    >
+    <ErrorBoundary FallbackComponent={ErrorFallback} onReset={handleReset} onError={handleError}>
       {children}
     </ErrorBoundary>
   );

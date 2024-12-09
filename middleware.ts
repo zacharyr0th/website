@@ -1,66 +1,100 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
-import { Ratelimit } from '@upstash/ratelimit'
-import { Redis } from '@upstash/redis'
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { corsMiddleware } from './lib/cors';
+import { applySecurityHeaders, RATE_LIMIT_CONFIG } from './lib/security';
+import { logger } from './lib/logger';
 
-// Create a new ratelimiter that allows 10 requests per 10 seconds
-const ratelimit = new Ratelimit({
-  redis: Redis.fromEnv(),
-  limiter: Ratelimit.slidingWindow(10, '10 s'),
-  analytics: true,
-})
+// Simple in-memory store for rate limiting
+// Note: In production, use Redis or similar for distributed systems
+const rateLimit = new Map<string, { count: number; timestamp: number }>();
+
+function isRateLimited(request: NextRequest): boolean {
+  const key = request.headers.get('x-forwarded-for') || 'unknown';
+  const now = Date.now();
+  const windowStart = now - RATE_LIMIT_CONFIG.windowMs;
+
+  // Clean up old entries
+  Array.from(rateLimit.entries()).forEach(([k, v]) => {
+    if (v.timestamp < windowStart) {
+      rateLimit.delete(k);
+    }
+  });
+
+  const currentLimit = rateLimit.get(key);
+  if (!currentLimit) {
+    rateLimit.set(key, { count: 1, timestamp: now });
+    return false;
+  }
+
+  if (currentLimit.timestamp < windowStart) {
+    rateLimit.set(key, { count: 1, timestamp: now });
+    return false;
+  }
+
+  if (currentLimit.count >= RATE_LIMIT_CONFIG.max) {
+    logger('warn', `Rate limit exceeded for IP: ${key}`);
+    return true;
+  }
+
+  currentLimit.count++;
+  return false;
+}
 
 export async function middleware(request: NextRequest) {
-  // Only apply middleware to /api/articles
-  if (request.nextUrl.pathname.startsWith('/api/articles')) {
-    // Get IP address for rate limiting
-    const ip = request.ip ?? '127.0.0.1'
-    
-    // Skip origin check in development
-    if (process.env.NODE_ENV !== 'development') {
-      // Check if request is from same origin
-      const origin = request.headers.get('origin')
-      const host = request.headers.get('host')
-      
-      const isFromSameOrigin = origin 
-        ? new URL(origin).host === host
-        : false
+  // Create base response
+  let response = NextResponse.next();
 
-      if (!isFromSameOrigin) {
-        return new NextResponse(
-          JSON.stringify({ error: 'Unauthorized' }), 
-          { 
-            status: 403,
-            headers: { 'content-type': 'application/json' },
-          }
-        )
-      }
+  // Apply security headers to all responses
+  response = applySecurityHeaders(response);
+
+  // Only apply API-specific middleware to /api routes
+  if (request.nextUrl.pathname.startsWith('/api')) {
+    // Apply CORS
+    const corsResponse = corsMiddleware(request);
+    if (corsResponse.status !== 200) {
+      return applySecurityHeaders(corsResponse);
     }
 
-    // Rate limiting check
-    const { success, limit, reset, remaining } = await ratelimit.limit(
-      `ratelimit_${ip}`
-    )
-    
-    if (!success) {
-      return new NextResponse(
-        JSON.stringify({ error: 'Too many requests' }), 
-        { 
+    // Check rate limit for API routes
+    if (isRateLimited(request)) {
+      return applySecurityHeaders(
+        new NextResponse(JSON.stringify(RATE_LIMIT_CONFIG.message), {
           status: 429,
           headers: {
             'content-type': 'application/json',
-            'x-ratelimit-limit': limit.toString(),
-            'x-ratelimit-remaining': remaining.toString(),
-            'x-ratelimit-reset': reset.toString(),
+            'retry-after': (RATE_LIMIT_CONFIG.windowMs / 1000).toString(),
           },
+        })
+      );
+    }
+
+    // Additional API-specific security for /api/articles
+    if (request.nextUrl.pathname.startsWith('/api/articles')) {
+      // Skip origin check in development
+      if (process.env.NODE_ENV !== 'development') {
+        const origin = request.headers.get('origin');
+        const host = request.headers.get('host');
+        const isFromSameOrigin = origin ? new URL(origin).host === host : false;
+
+        if (!isFromSameOrigin) {
+          logger('warn', `Unauthorized access attempt from origin: ${origin}`);
+          return applySecurityHeaders(
+            new NextResponse(JSON.stringify({ error: 'Unauthorized' }), {
+              status: 403,
+              headers: { 'content-type': 'application/json' },
+            })
+          );
         }
-      )
+      }
     }
   }
 
-  return NextResponse.next()
+  return response;
 }
 
 export const config = {
-  matcher: '/api/articles/:path*',
-} 
+  matcher: [
+    // Apply to all routes
+    '/(.*)',
+  ],
+};

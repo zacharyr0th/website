@@ -29,7 +29,11 @@ const Navigation: React.FC<NavigationProps> = ({ showHomeButton = false, themeBu
   );
 
   return (
-    <nav className={`fixed top-0 right-0 left-0 mx-8 mt-8 mb-32 z-50 flex items-center ${pathname === '/' ? 'justify-end' : 'justify-between'} max-sm:mx-4 max-sm:mt-4 max-sm:mb-24`}>
+    <nav
+      className={`fixed top-0 right-0 left-0 mx-8 mt-8 mb-32 z-50 flex items-center ${
+        pathname === '/' ? 'justify-end' : 'justify-between'
+      } max-sm:mx-4 max-sm:mt-4 max-sm:mb-24`}
+    >
       {/* Left side - Z button */}
       {showHomeButton && pathname !== '/' && (
         <BlurBackground>
@@ -48,9 +52,7 @@ const Navigation: React.FC<NavigationProps> = ({ showHomeButton = false, themeBu
         <ul className="flex items-center space-x-4 max-sm:space-x-2">
           {navItems.map(renderNavItem)}
           <li>
-            <div className="px-2 max-sm:px-1">
-              {themeButton}
-            </div>
+            <div className="px-2 max-sm:px-1">{themeButton}</div>
           </li>
         </ul>
       </BlurBackground>
