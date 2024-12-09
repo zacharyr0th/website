@@ -5,12 +5,16 @@ import matter from 'gray-matter';
 import { Article } from '@/lib/types';
 import { logger, logError } from '@/lib/logger';
 import { withMonitoring } from '@/lib/monitoring';
+import { headers } from 'next/headers';
 
 const articlesDirectory =
   process.env.ARTICLES_DIRECTORY || path.join(process.cwd(), 'public/articles');
 const VALID_FILE_EXTENSION = '.md';
 const MAX_DESCRIPTION_LENGTH = 160;
 const MAX_FILE_SIZE = parseInt(process.env.MAX_FILE_SIZE || '1048576', 10);
+
+// Add allowed origin constant
+const ALLOWED_ORIGIN = 'https://zacharyr0th.com';
 
 interface Frontmatter {
   title: string;
@@ -47,6 +51,20 @@ type ProcessedArticle = {
 export async function GET() {
   return withMonitoring('GET /api/articles', async () => {
     try {
+      // Check origin
+      const headersList = headers();
+      const origin = headersList.get('origin');
+      
+      // Allow requests with no origin (same-origin requests)
+      // or requests from the allowed domain
+      if (origin && !origin.startsWith(ALLOWED_ORIGIN)) {
+        logger('warn', `Unauthorized request from origin: ${origin}`);
+        return NextResponse.json(
+          { error: 'Unauthorized' },
+          { status: 403 }
+        );
+      }
+
       // Verify articles directory exists
       try {
         await fs.access(articlesDirectory);
