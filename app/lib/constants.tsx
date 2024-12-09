@@ -248,17 +248,17 @@ export const NavButton = React.forwardRef<HTMLButtonElement, NavButtonProps>(
         variant === 'primary'
           ? 'bg-primary text-[var(--color-white)]'
           : variant === 'secondary'
-          ? 'bg-surface text-text-secondary'
+          ? 'bg-secondary text-[var(--color-white)]'
           : 'bg-background text-text-primary'
       } hover:opacity-90 ${active ? 'opacity-100' : 'opacity-80'}`}
       style={{
         backgroundColor: `var(--color-${
-          variant === 'primary' ? 'primary' : variant === 'secondary' ? 'surface' : 'background'
+          variant === 'primary' ? 'primary' : variant === 'secondary' ? 'secondary' : 'background'
         })`,
         color:
-          variant === 'primary'
+          variant === 'primary' || variant === 'secondary'
             ? 'var(--color-white)'
-            : `var(--color-text-${variant === 'secondary' ? 'secondary' : 'primary'})`,
+            : `var(--color-text-primary)`,
         boxShadow: 'var(--box-shadow)',
       }}
       {...props}

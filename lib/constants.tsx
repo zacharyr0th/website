@@ -36,7 +36,7 @@ export const learningProjects: LearningProject[] = [
       'Modern, open-source portfolio showcasing Next.js best practices with dynamic content management and theme customization.',
     technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
     features: ['Responsive design', 'Dynamic theming', 'SEO optimization', 'Markdown-based CMS'],
-    githubLink: '',
+    githubLink: 'https://github.com/zacharyr0th/website',
     demoLink: '',
     lastUpdated: '2023-04-15',
   },
