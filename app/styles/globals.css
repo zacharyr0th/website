@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './base.css';
+@import './utilities.css';
+@import './themes.css';
+
+body {
+  zoom: 0.9;
+}
+
+.content-spacing {
+  margin-top: var(--header-height);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 1.5em; /* Adjust as needed */
+  margin-bottom: 1.5em; /* Adjust as needed */
+}
+
+.prose {
+  max-width: 100%;
+  line-height: 1.75;
+  color: var(--color-text-primary);
+  @apply font-mono px-4 sm:px-0;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose p {
+  margin-bottom: 1em;
+}
+
+.prose img {
+  margin: 1em 0;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--box-shadow);
+  max-width: 100%;
+  height: auto;
+  margin: 1em auto;
+}
+
+/* Add this to your globals.css file */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5em;
+  @apply font-mono;
+}
+
+th,
+td {
+  padding: 0.75em;
+  text-align: left;
+  border-bottom: 1px solid var(--color-text-secondary);
+}
+
+th {
+  background-color: var(--color-surface);
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: var(--color-background);
+}
+
+tr:hover {
+  background-color: var(--color-accent);
+  color: var(--color-text-primary);
+}
+
+/* Add a thicker border to the right of the first column */
+th:first-child,
+td:first-child {
+  border-right: 1px solid var(--color-text-secondary);
+}
+
+.tldr-section {
+  background-color: var(--color-surface); /* Use a color variable or a specific color */
+  padding: 1em; /* Add padding for better readability */
+  border-radius: var(--border-radius-md); /* Optional: add rounded corners */
+  margin-bottom: 1.5em; /* Space it out from the next section */
+  color: var(--color-text-primary); /* Ensure text is readable */
+  @apply font-mono;
+}
+
+.truncate-2-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.truncate-3-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Adjust table display for mobile */
+@media (max-width: 640px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
