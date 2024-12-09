@@ -3,6 +3,57 @@ import ErrorBoundaryClient from '@/app/components/common/ErrorBoundaryClient';
 import ThemeProvider from '@/app/components/common/ThemeProvider';
 import '@/styles/globals.css';
 
+// Create a script that will run before other scripts and block wallet injections
+const walletBlockerScript = `
+  (function() {
+    // Block wallet injections
+    const walletProperties = ['ethereum', 'solana', 'phantom'];
+    
+    // Create immutable empty objects for each wallet property
+    walletProperties.forEach(prop => {
+      try {
+        Object.defineProperty(window, prop, {
+          value: {},
+          configurable: false,
+          writable: false,
+          enumerable: false
+        });
+      } catch (e) {
+        // If property already exists, try to freeze it
+        if (window[prop]) {
+          Object.freeze(window[prop]);
+        }
+      }
+    });
+
+    // Block common injection methods
+    window.addEventListener('DOMContentLoaded', function() {
+      // Prevent script injection
+      const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.addedNodes.length) {
+            mutation.addedNodes.forEach(function(node) {
+              if (node.tagName === 'SCRIPT' && 
+                  (node.src.includes('inpage') || 
+                   node.src.includes('wallet') ||
+                   node.src.includes('ethereum') ||
+                   node.src.includes('solana') ||
+                   node.src.includes('phantom'))) {
+                node.remove();
+              }
+            });
+          }
+        });
+      });
+
+      observer.observe(document.documentElement, {
+        childList: true,
+        subtree: true
+      });
+    });
+  })();
+`;
+
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
@@ -45,6 +96,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Run wallet blocker before anything else */}
+        <script dangerouslySetInnerHTML={{ __html: walletBlockerScript }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>

@@ -13,8 +13,21 @@ const VALID_FILE_EXTENSION = '.md';
 const MAX_DESCRIPTION_LENGTH = 160;
 const MAX_FILE_SIZE = parseInt(process.env.MAX_FILE_SIZE || '1048576', 10);
 
-// Add allowed origin constant
-const ALLOWED_ORIGIN = 'https://zacharyr0th.com';
+// Helper to check if request is from same origin
+function isSameOrigin(headersList: Headers): boolean {
+  const origin = headersList.get('origin');
+  if (!origin) return true; // Same origin requests may not have origin header
+
+  const host = headersList.get('host');
+  if (!host) return false;
+
+  try {
+    const originHost = new URL(origin).host;
+    return host === originHost;
+  } catch {
+    return false;
+  }
+}
 
 interface Frontmatter {
   title: string;
@@ -51,18 +64,12 @@ type ProcessedArticle = {
 export async function GET() {
   return withMonitoring('GET /api/articles', async () => {
     try {
-      // Check origin
       const headersList = headers();
-      const origin = headersList.get('origin');
-      
-      // Allow requests with no origin (same-origin requests)
-      // or requests from the allowed domain
-      if (origin && !origin.startsWith(ALLOWED_ORIGIN)) {
-        logger('warn', `Unauthorized request from origin: ${origin}`);
-        return NextResponse.json(
-          { error: 'Unauthorized' },
-          { status: 403 }
-        );
+
+      // Only check origin in production
+      if (process.env.NODE_ENV === 'production' && !isSameOrigin(headersList)) {
+        logger('warn', `Unauthorized request from different origin`);
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
       }
 
       // Verify articles directory exists

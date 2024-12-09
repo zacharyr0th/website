@@ -1,90 +1,68 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { corsMiddleware } from './lib/cors';
-import { applySecurityHeaders, RATE_LIMIT_CONFIG } from './lib/security';
-import { logger } from './lib/logger';
 
-// Simple in-memory store for rate limiting
-// Note: In production, use Redis or similar for distributed systems
-const rateLimit = new Map<string, { count: number; timestamp: number }>();
+// Helper to check if request is from same origin
+function isSameOrigin(request: NextRequest): boolean {
+  const origin = request.headers.get('origin');
+  if (!origin) return true; // Same origin requests may not have origin header
 
-function isRateLimited(request: NextRequest): boolean {
-  const key = request.headers.get('x-forwarded-for') || 'unknown';
-  const now = Date.now();
-  const windowStart = now - RATE_LIMIT_CONFIG.windowMs;
-
-  // Clean up old entries
-  Array.from(rateLimit.entries()).forEach(([k, v]) => {
-    if (v.timestamp < windowStart) {
-      rateLimit.delete(k);
-    }
-  });
-
-  const currentLimit = rateLimit.get(key);
-  if (!currentLimit) {
-    rateLimit.set(key, { count: 1, timestamp: now });
+  try {
+    const url = new URL(request.url);
+    const requestHost = url.host;
+    const originHost = new URL(origin).host;
+    return requestHost === originHost;
+  } catch {
     return false;
   }
-
-  if (currentLimit.timestamp < windowStart) {
-    rateLimit.set(key, { count: 1, timestamp: now });
-    return false;
-  }
-
-  if (currentLimit.count >= RATE_LIMIT_CONFIG.max) {
-    logger('warn', `Rate limit exceeded for IP: ${key}`);
-    return true;
-  }
-
-  currentLimit.count++;
-  return false;
 }
 
-export async function middleware(request: NextRequest) {
-  // Create base response
-  let response = NextResponse.next();
+export function middleware(request: NextRequest) {
+  // Get the response
+  const response = NextResponse.next();
+  const headers = response.headers;
 
-  // Apply security headers to all responses
-  response = applySecurityHeaders(response);
+  // Content Security Policy
+  headers.set(
+    'Content-Security-Policy',
+    [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      "img-src 'self' data: https: blob:",
+      "font-src 'self' https://fonts.gstatic.com",
+      "connect-src 'self' https://zacharyr0th.com https://*.zacharyr0th.com",
+      "frame-ancestors 'none'",
+      "base-uri 'self'",
+      "form-action 'self'",
+    ].join('; ')
+  );
 
-  // Only apply API-specific middleware to /api routes
-  if (request.nextUrl.pathname.startsWith('/api')) {
-    // Apply CORS
-    const corsResponse = corsMiddleware(request);
-    if (corsResponse.status !== 200) {
-      return applySecurityHeaders(corsResponse);
-    }
+  // Other security headers
+  headers.set('X-Frame-Options', 'DENY');
+  headers.set('X-Content-Type-Options', 'nosniff');
+  headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+  headers.set('X-XSS-Protection', '1; mode=block');
+  headers.set(
+    'Permissions-Policy',
+    'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()'
+  );
 
-    // Check rate limit for API routes
-    if (isRateLimited(request)) {
-      return applySecurityHeaders(
-        new NextResponse(JSON.stringify(RATE_LIMIT_CONFIG.message), {
-          status: 429,
-          headers: {
-            'content-type': 'application/json',
-            'retry-after': (RATE_LIMIT_CONFIG.windowMs / 1000).toString(),
-          },
-        })
-      );
-    }
+  // Handle CORS
+  const origin = request.headers.get('origin');
 
-    // Additional API-specific security for /api/articles
-    if (request.nextUrl.pathname.startsWith('/api/articles')) {
-      // Skip origin check in development
-      if (process.env.NODE_ENV !== 'development') {
-        const origin = request.headers.get('origin');
-        const host = request.headers.get('host');
-        const isFromSameOrigin = origin ? new URL(origin).host === host : false;
+  // If it's same origin or no origin, don't set CORS headers
+  if (!isSameOrigin(request) && origin) {
+    // For API routes
+    if (request.nextUrl.pathname.startsWith('/api')) {
+      headers.set('Access-Control-Allow-Origin', origin);
+      headers.set('Access-Control-Allow-Credentials', 'true');
+      headers.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+      headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
-        if (!isFromSameOrigin) {
-          logger('warn', `Unauthorized access attempt from origin: ${origin}`);
-          return applySecurityHeaders(
-            new NextResponse(JSON.stringify({ error: 'Unauthorized' }), {
-              status: 403,
-              headers: { 'content-type': 'application/json' },
-            })
-          );
-        }
+      // Handle preflight requests
+      if (request.method === 'OPTIONS') {
+        headers.set('Access-Control-Max-Age', '86400');
+        return new NextResponse(null, { headers });
       }
     }
   }
@@ -92,9 +70,15 @@ export async function middleware(request: NextRequest) {
   return response;
 }
 
+// Specify which paths to run the middleware on
 export const config = {
   matcher: [
-    // Apply to all routes
-    '/(.*)',
+    /*
+     * Match all request paths except for the ones starting with:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    '/((?!_next/static|_next/image|favicon.ico).*)',
   ],
 };
