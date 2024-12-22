@@ -1,10 +1,15 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import Hero from './Hero';
+import dynamic from 'next/dynamic';
 import Footer from '../components/common/Footer';
 import ThemeProvider from '../components/common/ThemeProvider';
+
+// Dynamically import Hero component
+const Hero = dynamic(() => import('./Hero'), {
+  loading: () => <div className="animate-pulse h-screen bg-surface/30" />
+});
 
 export default function ProjectsPage() {
   return (
@@ -12,10 +17,12 @@ export default function ProjectsPage() {
       className="flex flex-col w-full min-h-screen font-mono bg-gradient-to-b from-background to-surface/30"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.5, ease: 'easeInOut' }}
     >
       <ThemeProvider>
-        <Hero theme="dark" />
+        <Suspense fallback={<div className="animate-pulse h-screen bg-surface/30" />}>
+          <Hero theme="dark" />
+        </Suspense>
         <Footer />
       </ThemeProvider>
     </motion.div>

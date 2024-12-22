@@ -67,33 +67,16 @@ const ArticleImage = memo(({ image }: { image: { src: string; alt: string } }) =
 
 ArticleImage.displayName = 'ArticleImage';
 
-const ArticleContent: React.FC<ArticleContentProps> = ({ article }) => {
+const ArticleContent = ({ article }: ArticleContentProps) => {
   const sanitizedContent = useMemo(() => {
     if (typeof window === 'undefined') return article.content;
-    return DOMPurify.sanitize(article.content, {
-      ALLOWED_TAGS: [
-        'p',
-        'h1',
-        'h2',
-        'h3',
-        'h4',
-        'h5',
-        'h6',
-        'ul',
-        'ol',
-        'li',
-        'a',
-        'strong',
-        'em',
-        'code',
-        'pre',
-        'img',
-      ],
-      ALLOWED_ATTR: ['href', 'target', 'rel', 'src', 'alt', 'class', 'id'],
-      FORBID_TAGS: ['script', 'style', 'iframe', 'form', 'input'],
-      ADD_ATTR: ['target'],
-      FORCE_BODY: true,
+    
+    // Configure DOMPurify to allow classes
+    const clean = DOMPurify.sanitize(article.content, {
+      ADD_ATTR: ['class'],
+      ADD_TAGS: ['div'],
     });
+    return clean;
   }, [article.content]);
 
   const processHeadings = useCallback(() => {
@@ -138,13 +121,10 @@ const ArticleContent: React.FC<ArticleContentProps> = ({ article }) => {
         <article className={`${styles.article} prose`}>
           <ArticleHeader article={article} />
           {article.image && <ArticleImage image={article.image} />}
-
-          <div className="bg-background rounded-xl overflow-hidden">
-            <div
-              className={`prose prose-lg max-w-none ${styles.content} ${styles.prose}`}
-              dangerouslySetInnerHTML={{ __html: sanitizedContent }}
-            />
-          </div>
+          <div
+            className={`prose prose-lg max-w-none ${styles.content} ${styles.prose}`}
+            dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+          />
         </article>
         {article.adjacentArticles && <ArticleSwitcher {...article.adjacentArticles} />}
         <Footer />

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { learningProjects } from '@/lib/constants';
 import { LearningProject, Theme } from '@/lib/types';
-import { GitHubIcon, ArticleIcon } from '../components/icons';
+import { GitHubIcon, ArticleIcon } from '@/lib/constants';
 
 interface HeroProps {
   theme: Theme;

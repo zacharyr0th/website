@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { SOCIAL_LINKS, COLORS, ANIMATIONS } from '@/lib/constants';
 import { FaLinkedin, FaXTwitter, FaEnvelope, FaXmark } from 'react-icons/fa6';
 
@@ -11,42 +11,36 @@ const ConnectModal: React.FC<ConnectModalProps> = ({ isOpen, onClose }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const linkedInButtonRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
+  const handleEscape = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'Escape') onClose();
+  }, [onClose]);
 
-    const handleClickOutside = (event: MouseEvent) => {
-      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-        onClose();
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener('keydown', handleEscape);
-      document.addEventListener('mousedown', handleClickOutside);
-      linkedInButtonRef.current?.focus();
+  const handleClickOutside = useCallback((event: MouseEvent) => {
+    if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+      onClose();
     }
+  }, [onClose]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    document.addEventListener('keydown', handleEscape);
+    document.addEventListener('mousedown', handleClickOutside);
+    linkedInButtonRef.current?.focus();
 
     return () => {
       document.removeEventListener('keydown', handleEscape);
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, handleEscape, handleClickOutside]);
 
   if (!isOpen) return null;
 
-  const handleLinkedInClick = () => {
-    window.open(SOCIAL_LINKS.linkedin, '_blank', 'noopener,noreferrer');
+  const openSocialLink = (url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
-  const handleXClick = () => {
-    window.open(SOCIAL_LINKS.twitter, '_blank', 'noopener,noreferrer');
-  };
-
-  const handleEmailClick = () => {
-    window.location.href = SOCIAL_LINKS.email;
-  };
+  const commonButtonStyles = "p-3 sm:p-4 rounded-full text-white transition-all duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95";
 
   return (
     <div
@@ -72,25 +66,25 @@ const ConnectModal: React.FC<ConnectModalProps> = ({ isOpen, onClose }) => {
         <div className="flex justify-center items-center gap-4 sm:gap-6">
           <button
             ref={linkedInButtonRef}
-            onClick={handleLinkedInClick}
-            className="p-3 sm:p-4 rounded-full bg-[#0077b5] text-white hover:bg-[#006396] transition-all duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95"
+            onClick={() => openSocialLink(SOCIAL_LINKS.linkedin)}
+            className={`${commonButtonStyles} bg-[#0077b5] hover:bg-[#006396]`}
             aria-label="LinkedIn Profile"
           >
             <FaLinkedin className="w-6 h-6 sm:w-7 sm:h-7" />
           </button>
 
           <button
-            onClick={handleXClick}
-            className="p-3 sm:p-4 rounded-full bg-black text-white hover:bg-zinc-800 transition-all duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95"
+            onClick={() => openSocialLink(SOCIAL_LINKS.twitter)}
+            className={`${commonButtonStyles} bg-black hover:bg-zinc-800`}
             aria-label="X (Twitter) Profile"
           >
             <FaXTwitter className="w-6 h-6 sm:w-7 sm:h-7" />
           </button>
 
           <button
-            onClick={handleEmailClick}
+            onClick={() => {window.location.href = SOCIAL_LINKS.email}}
             style={{ backgroundColor: COLORS.accent }}
-            className="p-3 sm:p-4 rounded-full text-white transition-all duration-200 transform hover:scale-105 hover:shadow-lg hover:opacity-90 active:scale-95"
+            className={`${commonButtonStyles} hover:opacity-90`}
             aria-label="Send Email"
           >
             <FaEnvelope className="w-6 h-6 sm:w-7 sm:h-7" />
@@ -101,4 +95,4 @@ const ConnectModal: React.FC<ConnectModalProps> = ({ isOpen, onClose }) => {
   );
 };
 
-export default ConnectModal;
+export default React.memo(ConnectModal);

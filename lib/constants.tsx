@@ -1,5 +1,6 @@
 import React from 'react';
-import { FaSun, FaMoon } from 'react-icons/fa';
+import { FaSun, FaMoon, FaGithub } from 'react-icons/fa';
+import { HiDocument } from 'react-icons/hi';
 import {
   ContentType,
   AudioType,
@@ -416,3 +417,6 @@ export const NAV_BLUR_CLASSES = {
   scrolled: 'bg-background/80 backdrop-blur-lg',
   transparent: 'bg-transparent',
 } as const;
+
+export const GitHubIcon = FaGithub;
+export const ArticleIcon = HiDocument;

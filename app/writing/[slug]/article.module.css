@@ -82,16 +82,55 @@
   height: auto;
 }
 
-.prose ol {
+.prose ol,
+.prose ul {
   list-style-type: decimal;
   margin-left: 2em;
   padding-left: 0.5em;
 }
 
-.prose ol li {
+.prose ol li,
+.prose ul li {
   margin-bottom: 0.5em;
   color: var(--color-text-primary);
   line-height: 1.5;
+}
+
+.prose ul {
+  list-style-type: disc;
+}
+
+.prose ol li ul,
+.prose ul li ul {
+  margin-top: 0.5em;
+  margin-left: 1em;
+}
+
+.prose ol li ul li,
+.prose ul li ul li {
+  margin-bottom: 0.25em;
+}
+
+.prose ol li ul li ul,
+.prose ul li ul li ul {
+  margin-left: 2em;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+}
+
+.prose th,
+.prose td {
+  padding: 0.75em;
+  border: 1px solid var(--color-border);
+}
+
+.prose th {
+  background-color: var(--color-surface);
+  font-weight: bold;
 }
 
 .prose .detailedList {
@@ -149,18 +188,6 @@
   display: block;
   margin-bottom: 0.5em;
   font-size: 1.1em;
-}
-
-.prose ul {
-  list-style-type: disc;
-  margin-left: 2em;
-  padding-left: 0.5em;
-}
-
-.prose ul li {
-  margin-bottom: 0.5em;
-  color: var(--color-text-primary);
-  line-height: 1.5;
 }
 
 .navigation {
@@ -272,4 +299,78 @@
 .content h5,
 .content h6 {
   position: relative;
+}
+
+.tldrSection {
+  background-color: var(--color-surface);
+  padding: 1.5em;
+  margin: 2em 0;
+  border-radius: 8px;
+  border-left: 4px solid var(--color-accent);
+}
+
+/* Table styles */
+.tableWrapper {
+  overflow-x: auto;
+  margin: 2rem 0;
+  border-radius: 8px;
+  background-color: var(--color-surface);
+  width: 100%;
+  display: block;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-family-base);
+  min-width: 600px;
+  margin: 0;
+}
+
+.table th {
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  font-weight: 600;
+  text-align: left;
+  padding: 1rem;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table tr:nth-child(even) {
+  background-color: var(--color-background);
+}
+
+.table tr:hover {
+  background-color: var(--color-surface);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+  .tableWrapper {
+    margin: 1rem -1rem;
+    width: calc(100% + 2rem);
+    border-radius: 0;
+  }
+}
+
+/* Remove any conflicting styles */
+:global(.prose) .table {
+  margin: 0;
+  border: none;
+}
+
+:global(.prose) .table th,
+:global(.prose) .table td {
+  border: none;
+  margin: 0;
 }

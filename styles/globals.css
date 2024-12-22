@@ -54,42 +54,6 @@ h6 {
   margin: 1em auto;
 }
 
-/* Add this to your globals.css file */
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 1.5em;
-  @apply font-mono;
-}
-
-th,
-td {
-  padding: 0.75em;
-  text-align: left;
-  border-bottom: 1px solid var(--color-text-secondary);
-}
-
-th {
-  background-color: var(--color-surface);
-  font-weight: bold;
-}
-
-tr:nth-child(even) {
-  background-color: var(--color-background);
-}
-
-tr:hover {
-  background-color: var(--color-accent);
-  color: var(--color-text-primary);
-}
-
-/* Add a thicker border to the right of the first column */
-th:first-child,
-td:first-child {
-  border-right: 1px solid var(--color-text-secondary);
-}
-
 .tldr-section {
   background-color: var(--color-surface); /* Use a color variable or a specific color */
   padding: 1em; /* Add padding for better readability */

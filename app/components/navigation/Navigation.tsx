@@ -4,8 +4,9 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useCallback } from 'react';
 import { NavItem } from '@/lib/types';
-import { navItems, NavButton } from '@/lib/constants';
+import { navItems } from '@/lib/constants';
 import BlurBackground from './BlurBackground';
+import NavButton from './NavButton';
 
 interface NavigationProps {
   showHomeButton?: boolean;

@@ -26,15 +26,15 @@ tags: ['Crypto']
 
 <div class="tldr-section">
 
-Blockchains are ever-expanding ledgers of transactions. They have a handful of qualities that differentiate them from traditional computing networks, and they open doors to new ways of doing things. They're intended to be censorship-resistant, immutable record sources with interoperable capabilities. They are unchangeable in that these transactions can not be reversed, and they are interoperable in that blockchain accounts can seamlessly interact with other accounts and applications.
+Blockchains are ever-expanding ledgers of transactions that have distinct features and functionalities which differentiate them from traditional computing networks. As a result, they open doors to new ways of doing things and this article explores the foundational knowledge required to understand them from the ground up. 
 
 </div>
 
-Transactions on a blockchain are grouped into blocks and verified by a distributed network of computers that earn money for participating in the verification process. Distributed means that these computers are not governed by any central entity but rather by a widespread collection of individual entities. This network collectively creates a public ledger that can be indexed and searched with extreme detail. Anything that happens on a public blockchain is immediately and immutably a part of the public record.
+The impl of a blockchain is for transactions to be Transactions are grouped into blocks and verified by a distributed network of computers that earn money for participating in the verification process. Distributed means that these computers are not governed by any central entity but rather by a widespread collection of individual entities. This network collectively creates a public ledger that can be indexed and searched with extreme detail. Anything that happens on a public blockchain is immediately and immutably a part of the public record.
 
 ## Accounts & Wallets
 
-Each account on a blockchain is accessed with a digital wallet. Accounts hold an individual or entity's tokens, which can be freely transferred between wallets and interact with applications that are compatible with the wallet. These applications can be financial or used for gaming, messaging, and virtually anything else.
+Each account is accessed with a digital wallet. Accounts hold an individual or entity's tokens, which can be freely transferred between wallets and interact with applications that are compatible with the wallet. These applications can be financial or used for gaming, messaging, and virtually anything else.
 
 Unlike traditional markets, blockchains operate all day, so on-chain markets run 24/7, and anyone with a wallet can participate.
 
@@ -72,7 +72,7 @@ When outcomes are uncertain – such as when a supply chain crisis, a war, or a 
 
 ## Mimetic Desire
 
-Physical gold bars have outperformed most assets during periods of economic strife. Gold has become a haven asset as one of the oldest forms of human currency. It's important to understand that money flows from speculative investments to safe-haven assets doesn't happen automatically. It's a result of trader psychology being influenced by mimetic desire, and it happens slowly, then all at once—similar to how risk works—stairway up, elevator down.
+Physical gold bars have historically outperformed most assets during periods of economic strife. As a result, gold has become a haven asset in the eyes of asset managers. It's important to understand that money flows from speculative investments to safe-haven assets doesn't happen automatically. It's a result of trader psychology being influenced by mimetic desire, and it happens slowly, then all at once.
 
 Other than its use in jewelry and select manufacturing, gold is perceived to exist outside of the traditional financial system, although banks are the largest owners of it. Derivatives are constantly used to manipulate their price, so that is a relatively naïve assumption. Below is one of the many headlines detailing big bank baboonery. In this instance, JPM Chase had to pay a $920 million fine.
 
@@ -85,16 +85,12 @@ What if everyone thought silver was a better store of value, or tungsten, or rho
 
 Narratives drive markets as much as fear and uncertainty do. Although gold hasn't been a practical currency in hundreds, if not thousands, of years in most places, big banks, and asset managers still recommend it as a haven asset worthy of 1-5% of a traditional financial nest egg in the off-chance that calamity happens.
 
-This narrative that it stores its value in times of distress is just that – a narrative. It will work until it doesn't. If rarity or scarcity is the argument, there are more scarce assets on this planet that could replace gold if the narrative shifted—Bitcoin is one of them.
+The narrative that it stores its value in times of distress is just that – a narrative. It will work until it doesn't. If rarity or scarcity is the argument, there are more scarce assets on this planet that could replace gold if the narrative shifted—Bitcoin is one of them.
 
-As proposed in the white paper, Bitcoin was initially conceived as a peer-to-peer method of exchange. It has since become part of the larger store of value narrative to which gold can attribute its declining relevance, except this time—it's digital. Bitcoin has been referred to as Digital Gold by many investors and mainstream media pundits, partially because that's the most digestible explanation they can come up with and partially because it's true.
-
-It's not the whole story behind what, how, and why Bitcoin came to be, but it's a good and intense story. Traditional investors can now fathom investing 1-5% of their portfolio into Bitcoin, and more progressive investors have a new lens through which to view markets.
+As proposed in the white paper, Bitcoin was initially conceived as a peer-to-peer method of exchange. It has since become part of the larger store of value narrative to which gold can attribute its declining relevance, except this time—it's digital. Bitcoin has been referred to as Digital Gold by many investors and mainstream media pundits, partially because that's the most digestible explanation they can come up with for its sucess, and partially because it's true.
 
 ## Censorship Resistance
 
 Some blockchains, particularly the privacy ones listed above, are intended to resist censorship. The goal is for anyone to build and use them. There are no credit checks; the only requirement to open a digital wallet is an internet connection.
 
-The reality of censorship resistance in crypto is that some blockchains do a better job than others. The blockchain industry is barely a teenager, and there are many schools of thought regarding how it should operate. Maximalism, tribalism, and investor bias contribute to a never-ending conversation on which consensus methods and blockchain infrastructure are the most secure and censorship-resistant.
-
-Blockchain technology and applications can be interpreted in many ways, so it's essential to consider all facets with an open mind.
+The reality of censorship resistance in crypto is that some blockchains do a better job than others. The blockchain industry is barely a teenager, and there are many schools of thought regarding how it should operate. Maximalism, tribalism, game theory, and investor bias contribute to a never-ending conversation on which consensus methods and blockchain infrastructure are the most secure and censorship-resistant.
