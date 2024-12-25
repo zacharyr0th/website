@@ -1,0 +1,52 @@
+#!/bin/bash
+
+source scripts/utils/logging.sh
+
+# Configuration
+BRANCH_NAME=$(git symbolic-ref --short HEAD)
+PROTECTED_BRANCHES="^(main|master|prod|production|staging|develop)$"
+
+# Check if we're pushing to a protected branch
+if [[ $BRANCH_NAME =~ $PROTECTED_BRANCHES ]]; then
+    info "Pushing to protected branch: $BRANCH_NAME"
+    
+    # Run security checks
+    if [ -f scripts/security/security.sh ]; then
+        info "Running security checks..."
+        bash scripts/security/security.sh audit || {
+            error "Security checks failed"
+            exit 1
+        }
+    fi
+    
+    # Run tests
+    info "Running tests..."
+    yarn test || {
+        error "Tests failed"
+        exit 1
+    }
+    
+    # Run type checking
+    info "Running type checks..."
+    yarn type-check || {
+        error "Type checking failed"
+        exit 1
+    }
+    
+    # Run linting
+    info "Running linter..."
+    yarn lint || {
+        error "Linting failed"
+        exit 1
+    }
+    
+    # Check for sensitive files
+    info "Checking for sensitive files..."
+    if git diff --cached --name-only | grep -E '\.env|\.key|\.pem|\.pfx|\.p12|\.cert|id_rsa|\.password|\.secret'; then
+        error "Attempting to push sensitive files"
+        exit 1
+    fi
+fi
+
+info "Pre-push checks passed"
+exit 0 

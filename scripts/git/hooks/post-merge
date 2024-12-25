@@ -1,0 +1,65 @@
+#!/bin/bash
+
+source scripts/utils/logging.sh
+
+# Check if package files changed
+check_dependencies() {
+    if git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD | grep -E "^(package\.json|yarn\.lock)$" > /dev/null; then
+        info "Dependencies changed. Installing updates..."
+        yarn install || {
+            error "Failed to install dependencies"
+            exit 1
+        }
+        info "Dependencies updated successfully"
+    fi
+}
+
+# Check if environment example changed
+check_env() {
+    if git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD | grep "^.env.example$" > /dev/null; then
+        info "Environment example changed. Checking for new variables..."
+        
+        if [ -f .env ] && [ -f .env.example ]; then
+            # Get all variable names from both files
+            local env_vars=$(grep -oE '^[A-Za-z0-9_]+=' .env | sed 's/=$//')
+            local example_vars=$(grep -oE '^[A-Za-z0-9_]+=' .env.example | sed 's/=$//')
+            
+            # Find missing variables
+            local missing_vars=()
+            for var in $example_vars; do
+                if ! echo "$env_vars" | grep -q "^$var$"; then
+                    missing_vars+=("$var")
+                fi
+            done
+            
+            # Notify about missing variables
+            if [ ${#missing_vars[@]} -ne 0 ]; then
+                warn "New environment variables found: ${missing_vars[*]}"
+                warn "Please update your .env file accordingly"
+            fi
+        else
+            warn "Environment files not found. Run setup script to initialize them."
+        fi
+    fi
+}
+
+# Check if database migrations changed
+check_migrations() {
+    if git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD | grep -E "^migrations/" > /dev/null; then
+        warn "Database migrations changed. Please run migrations if needed."
+    fi
+}
+
+# Main process
+main() {
+    info "Running post-merge checks..."
+    
+    # Run checks
+    check_dependencies
+    check_env
+    check_migrations
+    
+    info "Post-merge checks completed"
+}
+
+main 
