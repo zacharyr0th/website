@@ -1,6 +1,18 @@
 export const SOCIAL_LINKS = {
-    twitter: 'https://twitter.com/zacharyr0th',
-    github: 'https://github.com/zacharyr0th',
-    linkedin: 'https://linkedin.com/in/zacharyr0th',
-    email: 'mailto:zacharyroth@pm.me',
-  } as const;
+  twitter: {
+    url: 'https://twitter.com/zacharyr0th',
+    label: 'Twitter',
+  },
+  github: {
+    url: 'https://github.com/zacharyr0th',
+    label: 'GitHub',
+  },
+  linkedin: {
+    url: 'https://linkedin.com/in/zacharyr0th',
+    label: 'LinkedIn',
+  },
+  email: {
+    url: 'mailto:zacharyroth@pm.me',
+    label: 'Email',
+  },
+} as const;

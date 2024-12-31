@@ -1,192 +1,89 @@
+/**
+ * Articles API Route
+ *
+ * This endpoint handles article retrieval with the following features:
+ * - Static generation with hourly revalidation
+ * - Markdown processing with frontmatter validation
+ * - Security measures including:
+ *   - Path traversal protection
+ *   - File size limits
+ *   - Draft article filtering in production
+ * - Error handling and monitoring
+ *
+ * @see {@link lib/markdown.ts} for Markdown processing
+ * @see {@link lib/cache.ts} for cache configuration
+ * @see {@link middleware.ts} for rate limiting and security headers
+ */
+
 import { NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
-import { Article } from '@/lib/types';
-import { logger, logError } from '@/lib/logger';
-import { withMonitoring } from '@/lib/monitoring';
-import { headers } from 'next/headers';
+import { Article } from '@/app/lib/types/types';
+import { logger, logError } from '@/app/lib/utils/logger';
+import { withMonitoring } from '@/app/lib/utils/monitoring';
+import { ARTICLE_CONFIG } from '@/app/lib/config/articles';
+import { validateFrontmatter, createArticleFromFrontmatter } from '@/app/lib/utils/articles';
 
-const articlesDirectory =
-  process.env.ARTICLES_DIRECTORY || path.join(process.cwd(), 'public/articles');
-const VALID_FILE_EXTENSION = '.md';
-const MAX_DESCRIPTION_LENGTH = 160;
-const MAX_FILE_SIZE = parseInt(process.env.MAX_FILE_SIZE || '1048576', 10);
-
-// Helper to check if request is from same origin
-function isSameOrigin(headersList: Headers): boolean {
-  const origin = headersList.get('origin');
-  if (!origin) return true; // Same origin requests may not have origin header
-
-  const host = headersList.get('host');
-  if (!host) return false;
-
-  try {
-    const originHost = new URL(origin).host;
-    return host === originHost;
-  } catch {
-    return false;
-  }
-}
-
-interface Frontmatter {
-  title: string;
-  date: string;
-  description?: string;
-  image?: string;
-  imageAlt?: string;
-  category?: string;
-  featured?: boolean;
-  tags?: string[];
-}
-
-type ProcessedArticle = {
-  id: string;
-  slug: string;
-  title: string;
-  description: string;
-  content: string;
-  image: {
-    src: string;
-    alt: string;
-  };
-  category: string;
-  date: string;
-  tags: string[];
-  link: string;
-  frontmatter: {
-    title: string;
-    date: string;
-    featured: boolean;
-  };
-};
+export const dynamic = 'force-static';
+export const revalidate = 3600; // Revalidate every hour
 
 export async function GET() {
   return withMonitoring('GET /api/articles', async () => {
     try {
-      const headersList = headers();
-
-      // Only check origin in production
-      if (process.env.NODE_ENV === 'production' && !isSameOrigin(headersList)) {
-        logger('warn', `Unauthorized request from different origin`);
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
-      }
-
       // Verify articles directory exists
       try {
-        await fs.access(articlesDirectory);
+        await fs.access(ARTICLE_CONFIG.directory);
       } catch (error) {
         logError(error, 'Articles directory not found');
         return NextResponse.json({ error: 'Articles directory not found' }, { status: 404 });
       }
 
-      const articles = await getAllArticles();
+      const fileNames = await fs.readdir(ARTICLE_CONFIG.directory);
+      const validFiles = fileNames.filter((fileName) => fileName.endsWith('.md'));
+
+      const articlesPromises = validFiles.map(async (fileName) => {
+        try {
+          const slug = fileName.replace(/\.md$/, '');
+          const fullPath = path.join(ARTICLE_CONFIG.directory, fileName);
+
+          // Validate file path
+          const realPath = await fs.realpath(fullPath);
+          if (!realPath.startsWith(await fs.realpath(ARTICLE_CONFIG.directory))) {
+            throw new Error('Invalid file path');
+          }
+
+          // Check file size
+          const stats = await fs.stat(fullPath);
+          if (stats.size > ARTICLE_CONFIG.maxFileSize) {
+            throw new Error(`File ${fileName} exceeds maximum allowed size`);
+          }
+
+          const fileContents = await fs.readFile(fullPath, 'utf8');
+          const { data, content } = matter(fileContents);
+          const validatedFrontmatter = validateFrontmatter(data);
+
+          // Skip draft articles in production
+          if (process.env.NODE_ENV === 'production' && validatedFrontmatter.draft) {
+            return null;
+          }
+
+          return createArticleFromFrontmatter(validatedFrontmatter, content, slug);
+        } catch (error) {
+          logError(error, `Error processing article ${fileName}`);
+          return null;
+        }
+      });
+
+      const articles = (await Promise.all(articlesPromises))
+        .filter((article: Article | null): article is Article => article !== null)
+        .sort((a: Article, b: Article) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
       logger('info', `Successfully fetched ${articles.length} articles`);
       return NextResponse.json(articles);
     } catch (error) {
       logError(error, 'Error fetching articles');
       return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
     }
-  });
-}
-
-function isValidDate(dateString: string): boolean {
-  const date = new Date(dateString);
-  return date instanceof Date && !isNaN(date.getTime());
-}
-
-function sanitizeContent(content: string): string {
-  // Remove HTML tags and normalize whitespace
-  return content
-    .replace(/<[^>]*>/g, '')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
-
-function createDescription(content: string, frontmatterDescription?: string): string {
-  if (frontmatterDescription) {
-    return frontmatterDescription.slice(0, MAX_DESCRIPTION_LENGTH);
-  }
-  const sanitizedContent = sanitizeContent(content);
-  return sanitizedContent.length > MAX_DESCRIPTION_LENGTH
-    ? sanitizedContent.slice(0, MAX_DESCRIPTION_LENGTH) + '...'
-    : sanitizedContent;
-}
-
-async function getAllArticles(): Promise<Article[]> {
-  return withMonitoring('getAllArticles', async () => {
-    const fileNames = await fs.readdir(articlesDirectory);
-    const validFiles = fileNames.filter(
-      (fileName) => fileName.endsWith(VALID_FILE_EXTENSION) && !fileName.includes('..')
-    );
-
-    const articles = await Promise.all(
-      validFiles.map(async (fileName) => {
-        try {
-          const slug = fileName.replace(/\.md$/, '');
-          const fullPath = path.join(articlesDirectory, fileName);
-
-          // Validate file path
-          const realPath = await fs.realpath(fullPath);
-          if (!realPath.startsWith(await fs.realpath(articlesDirectory))) {
-            throw new Error('Invalid file path');
-          }
-
-          // Check file size
-          const stats = await fs.stat(fullPath);
-          if (stats.size > MAX_FILE_SIZE) {
-            throw new Error(`File ${fileName} exceeds maximum allowed size`);
-          }
-
-          const fileContents = await fs.readFile(fullPath, 'utf8');
-          const matterResult = matter(fileContents);
-          const frontmatter = matterResult.data as Frontmatter;
-          const { content } = matterResult;
-
-          if (!frontmatter.title || typeof frontmatter.title !== 'string') {
-            throw new Error(`Invalid or missing title in ${fileName}`);
-          }
-          if (!frontmatter.date || !isValidDate(frontmatter.date)) {
-            throw new Error(`Invalid or missing date in ${fileName}`);
-          }
-
-          const tags = Array.isArray(frontmatter.tags) ? frontmatter.tags : [];
-
-          const processedArticle: ProcessedArticle = {
-            id: slug,
-            slug,
-            title: frontmatter.title.trim(),
-            description: createDescription(content, frontmatter.description),
-            content: sanitizeContent(content),
-            image: {
-              src: frontmatter.image || '/public/misc/placeholder.webp',
-              alt: (frontmatter.imageAlt || frontmatter.title).trim(),
-            },
-            category: (frontmatter.category || 'Uncategorized').trim(),
-            date: frontmatter.date,
-            tags: tags.map((tag) => tag.trim()),
-            link: `/writing/${encodeURIComponent(slug)}`,
-            frontmatter: {
-              title: frontmatter.title.trim(),
-              date: frontmatter.date,
-              featured: Boolean(frontmatter.featured),
-            },
-          };
-
-          return processedArticle;
-        } catch (error) {
-          logError(error, `Error processing ${fileName}`);
-          return null;
-        }
-      })
-    );
-
-    const validArticles = articles.filter(
-      (article): article is ProcessedArticle => article !== null
-    );
-
-    return validArticles.sort(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-    ) as Article[];
   });
 }

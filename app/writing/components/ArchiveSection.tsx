@@ -1,128 +1,27 @@
-import React, { useMemo } from 'react';
-import { ArchiveSectionProps, Article } from '@/lib/types';
-import dynamic from 'next/dynamic';
+'use client';
 
-const ArticleCard = dynamic(() => import('./ArticleCard'), {
-  ssr: true,
-  loading: () => (
-    <div className="p-4 border rounded-lg">
-      <div className="h-40 bg-[var(--color-surface)] rounded-lg mb-4"></div>
-      <div className="h-4 bg-[var(--color-surface)] rounded w-3/4 mb-2"></div>
-      <div className="h-4 bg-[var(--color-surface)] rounded w-1/2"></div>
-    </div>
-  ),
-});
+import React, { memo } from 'react';
+import { Article } from '@/app/lib/types/types';
+import { ArticleCard } from './ArticleCard';
 
-const CategoryButton = React.memo<{
-  children: React.ReactNode;
-  active?: boolean;
-  onClick: () => void;
-}>(({ children, active, onClick }) => (
-  <button
-    onClick={onClick}
-    className={`px-4 py-2 rounded-lg text-sm font-medium ${
-      active
-        ? 'bg-[var(--color-primary)] text-[var(--color-white)]'
-        : 'bg-[var(--color-surface)] text-[var(--color-text-secondary)]'
-    }`}
-    aria-label={`Select category ${children}`}
-    aria-pressed={active}
-  >
-    {children}
-  </button>
-));
-CategoryButton.displayName = 'CategoryButton';
-
-const CategoryButtons = React.memo<{
-  categories: string[];
-  selectedCategory: string;
-  onCategoryChange: (category: string) => void;
-}>(({ categories, selectedCategory, onCategoryChange }) => (
-  <div className="flex flex-wrap gap-3">
-    {categories.map((category) => (
-      <CategoryButton
-        key={category}
-        active={category === selectedCategory}
-        onClick={() => onCategoryChange(category)}
-      >
-        {category.charAt(0).toUpperCase() + category.slice(1)}
-      </CategoryButton>
-    ))}
-  </div>
-));
-CategoryButtons.displayName = 'CategoryButtons';
-
-const ArticleGrid = React.memo<{
+interface ArchiveSectionProps {
   articles: Article[];
-  selectedTag: string;
-}>(({ articles }) => {
-  if (!articles.length) {
-    return <p className="text-[var(--color-text-secondary)]">No articles found.</p>;
-  }
+}
+
+export const ArchiveSection = memo<ArchiveSectionProps>(({ articles }) => {
+  const archiveArticles = articles.slice(1);
+  if (archiveArticles.length === 0) return null;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-[var(--spacing-md)]">
-      {articles.map((article) => (
-        <div key={article.id} className="p-[var(--spacing-md)]">
-          <div className="h-full rounded-[var(--border-radius-lg)] bg-[var(--color-surface)]">
-            <ArticleCard article={article} />
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-});
-ArticleGrid.displayName = 'ArticleGrid';
-
-const ArchiveHeader = React.memo<{
-  categories: string[];
-  selectedCategory: string;
-  onCategoryChange: (category: string) => void;
-}>(({ categories, selectedCategory, onCategoryChange }) => (
-  <div className="mb-[var(--spacing-xl)]">
-    <h3 className="text-4xl font-semibold mb-[var(--spacing-md)] text-[var(--heading-color)]">
-      Archives
-    </h3>
-    <CategoryButtons
-      categories={categories}
-      selectedCategory={selectedCategory}
-      onCategoryChange={onCategoryChange}
-    />
-  </div>
-));
-ArchiveHeader.displayName = 'ArchiveHeader';
-
-const ArchiveSection: React.FC<ArchiveSectionProps> = ({
-  selectedTag,
-  onTagChange,
-  content = [],
-  tags,
-}) => {
-  const allTags = useMemo(() => {
-    const uniqueTags = new Set(['all', ...tags]);
-    return Array.from(uniqueTags);
-  }, [tags]);
-
-  const filteredArticles = useMemo(() => {
-    if (selectedTag === 'all') return content;
-    return content.filter((article) => article.tags?.includes(selectedTag));
-  }, [content, selectedTag]);
-
-  const headerProps = useMemo(
-    () => ({
-      categories: allTags,
-      selectedCategory: selectedTag,
-      onCategoryChange: onTagChange,
-    }),
-    [allTags, selectedTag, onTagChange]
-  );
-
-  return (
-    <section className="mt-12">
-      <ArchiveHeader {...headerProps} />
-      <ArticleGrid articles={filteredArticles} selectedTag={selectedTag} />
+    <section className="space-y-8">
+      <h2 className="text-3xl font-bold">Archive</h2>
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {archiveArticles.map((article) => (
+          <ArticleCard key={article.slug} article={article} />
+        ))}
+      </div>
     </section>
   );
-};
+});
 
-export default React.memo(ArchiveSection);
+ArchiveSection.displayName = 'ArchiveSection';

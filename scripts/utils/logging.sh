@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # ANSI color codes
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+BLUE=$'\033[0;34m'
+GREEN=$'\033[0;32m'
+YELLOW=$'\033[1;33m'
+RED=$'\033[0;31m'
+NC=$'\033[0m' # No Color
 
-# Log levels as integers (macOS compatible)
+# Get log level as integer
 get_log_level() {
     case "$1" in
         "DEBUG") echo "0" ;;
@@ -18,49 +18,48 @@ get_log_level() {
     esac
 }
 
+# Get color for log level
+get_log_color() {
+    case "$1" in
+        "DEBUG") echo "$BLUE" ;;
+        "INFO") echo "$GREEN" ;;
+        "WARN") echo "$YELLOW" ;;
+        "ERROR") echo "$RED" ;;
+        *) echo "$GREEN" ;; # Default to green
+    esac
+}
+
 # Current log level (can be overridden by environment)
 CURRENT_LOG_LEVEL=$(get_log_level "${LOG_LEVEL:-INFO}")
 
-# Generic log function
+# Generic log function with built-in sanitization
 log() {
     local level=$1
-    local color=$2
-    local message=$3
+    local message=$2
     local level_num=$(get_log_level "$level")
+    local color=$(get_log_color "$level")
     
     if [ "$level_num" -ge "$CURRENT_LOG_LEVEL" ]; then
-        # Get timestamp in ISO 8601 format
-        local timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-        printf "${color}[%s] [%s] %s${NC}\n" "$timestamp" "$level" "$message" >&2
+        # Sanitize the message
+        message=$(echo "$message" | sed -E '
+            s/password=.[^[:space:]]*/password=****/g;
+            s/token=.[^[:space:]]*/token=****/g;
+            s/key=.[^[:space:]]*/key=****/g;
+            s/secret=.[^[:space:]]*/secret=****/g
+        ')
+        
+        printf "${color}[%s] [%s] %s${NC}\n" \
+            "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
+            "$level" \
+            "$message" >&2
     fi
 }
 
 # Convenience functions for different log levels
-debug() {
-    log "DEBUG" "$BLUE" "$1"
-}
-
-info() {
-    log "INFO" "$GREEN" "$1"
-}
-
-warn() {
-    log "WARN" "$YELLOW" "$1"
-}
-
-error() {
-    log "ERROR" "$RED" "$1"
-}
-
-# Function to sanitize sensitive data from logs
-sanitize_log() {
-    local message=$1
-    # Remove common sensitive patterns
-    echo "$message" | sed -E 's/password=.[^[:space:]]*/password=****/g' \
-                   | sed -E 's/token=.[^[:space:]]*/token=****/g' \
-                   | sed -E 's/key=.[^[:space:]]*/key=****/g' \
-                   | sed -E 's/secret=.[^[:space:]]*/secret=****/g'
-}
+debug() { log "DEBUG" "$1"; }
+info()  { log "INFO" "$1"; }
+warn()  { log "WARN" "$1"; }
+error() { log "ERROR" "$1"; }
 
 # Export functions
-export -f log debug info warn error sanitize_log 
+export -f log debug info warn error get_log_level get_log_color 

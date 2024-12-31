@@ -1,5 +1,6 @@
-/* Base colors */
+/* Base Variables */
 :root {
+  /* Base colors */
   --color-white: #ffffff;
   --color-black: #000000;
 
@@ -30,8 +31,8 @@
   --max-content-width: 1200px;
 }
 
-/* Theme: Default (Light) */
-:root {
+/* Theme: Light */
+[data-theme="light"] {
   --color-primary: #455a64;
   --color-secondary: #546e7a;
   --color-accent: #00897b;
@@ -49,7 +50,7 @@
 }
 
 /* Theme: Dark */
-.theme-dark {
+[data-theme="dark"] {
   --color-primary: #2c3e50;
   --color-secondary: #34495e;
   --color-accent: #3498db;
@@ -62,5 +63,6 @@
   --color-warning: #f39c12;
   --color-info: #3498db;
 
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   --heading-color: var(--color-white);
 }

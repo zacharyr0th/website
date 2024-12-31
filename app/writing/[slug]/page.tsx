@@ -1,82 +1,40 @@
 import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
-import { marked } from 'marked';
+import { serialize } from 'next-mdx-remote/serialize';
 import { notFound } from 'next/navigation';
-import ArticleContent from '@/app/writing/[slug]/ArticleContent';
-import type { Article, AdjacentArticle, ArticleFrontmatter } from '../types';
+import { validateFrontmatter, createArticleFromFrontmatter } from '@/app/lib/utils/articles';
+import ArticleContent from './ArticleContent';
 
 const articlesDirectory = path.join(process.cwd(), 'public/articles');
 
-async function getAdjacentArticles(
-  currentSlug: string
-): Promise<{ prev: AdjacentArticle | null; next: AdjacentArticle | null }> {
-  const files = await fs.readdir(articlesDirectory);
-  const articles = await Promise.all(
-    files
-      .filter((file) => file.endsWith('.md'))
-      .map(async (file) => {
-        const content = await fs.readFile(path.join(articlesDirectory, file), 'utf8');
-        const { data } = matter(content) as { data: { date: string; title: string } };
-        return {
-          slug: file.replace(/\.md$/, ''),
-          date: data.date,
-          title: data.title,
-        } as AdjacentArticle;
-      })
-  );
-
-  // Sort articles by date, newest first
-  articles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-  const currentIndex = articles.findIndex((article) => article.slug === currentSlug);
-
-  return {
-    prev: currentIndex < articles.length - 1 ? articles[currentIndex + 1] ?? null : null,
-    next: currentIndex > 0 ? articles[currentIndex - 1] ?? null : null,
-  };
+interface ArticlePageProps {
+  params: { slug: string };
 }
 
-export default async function ArticlePage({ params: { slug } }: { params: { slug: string } }) {
+export default async function ArticlePage({ params: { slug } }: ArticlePageProps) {
   try {
-    const fileContents = await fs.readFile(path.join(articlesDirectory, `${slug}.md`), 'utf8');
+    const filePath = path.join(articlesDirectory, `${slug}.md`);
+    const fileContents = await fs.readFile(filePath, 'utf8');
     const { data, content } = matter(fileContents);
 
-    if (!data) {
-      throw new Error('No frontmatter found in article');
-    }
-
-    // Type assertion with validation
-    const frontmatter = data as ArticleFrontmatter;
-
-    // Get adjacent articles
-    const adjacentArticles = await getAdjacentArticles(slug);
-
-    // Convert markdown to HTML
-    const htmlContent = await marked(content);
-
-    const article: Article = {
-      id: slug,
-      slug,
-      title: frontmatter.title,
-      description: frontmatter.description || '',
-      content: htmlContent,
-      image: {
-        src: frontmatter.image || '/misc/placeholder.webp',
-        alt: frontmatter.imageAlt || frontmatter.title,
+    const validatedFrontmatter = validateFrontmatter(data);
+    const article = createArticleFromFrontmatter(validatedFrontmatter, content, slug);
+    const serializedContent = await serialize(content, {
+      parseFrontmatter: false,
+      mdxOptions: {
+        remarkPlugins: [],
+        rehypePlugins: [],
       },
-      category: frontmatter.category || 'Uncategorized',
-      date: frontmatter.date,
-      link: `/writing/${slug}`,
-      frontmatter,
-      ...(frontmatter.subtitle && { subtitle: frontmatter.subtitle }),
-      ...(frontmatter.tags && {
-        tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [frontmatter.tags],
-      }),
-      ...(adjacentArticles && { adjacentArticles }),
-    };
+    });
 
-    return <ArticleContent article={article} />;
+    return (
+      <div className="content-page font-mono bg-gradient-to-b from-background to-surface/30">
+        <main className="container mx-auto">
+          <ArticleContent article={article} serializedContent={serializedContent} />
+        </main>
+      </div>
+    );
   } catch (error) {
     console.error('Error loading article:', error);
     notFound();
@@ -92,7 +50,7 @@ export async function generateStaticParams() {
         slug: fileName.replace(/\.md$/, ''),
       }));
   } catch (error) {
-    console.error(`Error generating static params: ${error}`);
+    console.error('Error generating static params:', error);
     return [];
   }
 }

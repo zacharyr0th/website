@@ -1,35 +1,50 @@
-# Build output
+###############################################
+# Build and Output
+###############################################
+
+# Build Directories
 .next/
 out/
 build/
 dist/
+.turbo/
+storybook-static/
+
+# Generated Files
+package-lock.json
+yarn.lock
+public/sitemap*.xml
+public/robots.txt
+public/feed.xml
+
+###############################################
+# Dependencies and Cache
+###############################################
 
 # Dependencies
 node_modules/
 
-# Cache
+# Cache and Temporary
 .cache/
 .eslintcache
+.next/cache/
+.swc/
+tsconfig.tsbuildinfo
+*.log
+*.cache
 
-# Misc
-.DS_Store
-*.pem
+###############################################
+# Development Tools
+###############################################
 
-# Debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# IDE and Editor
+.idea/
+.vscode/
+*.sublime-*
+*.swp
+*.swo
 
-# Local env files
-.env*.local
-
-# Vercel
-.vercel
-
-# Coverage
-coverage/
-
-# PWA files
+# PWA Files
 **/public/sw.js
 **/public/workbox-*.js
 **/public/worker-*.js
@@ -37,66 +52,69 @@ coverage/
 **/public/workbox-*.js.map
 **/public/worker-*.js.map
 
-# Generated files
-package-lock.json
-yarn.lock
+###############################################
+# Testing and Documentation
+###############################################
 
-# IDE and Editor files
-.idea/
-.vscode/
-*.sublime-*
-*.swp
-*.swo
-
-# Testing and Coverage
+# Testing
 __tests__/coverage/
 test-results/
 playwright-report/
 cypress/videos/
 cypress/screenshots/
+coverage/
 
-# Build and Output directories
-.turbo/
-storybook-static/
-public/sitemap*.xml
-public/robots.txt
-public/feed.xml
-
-# Cache and Temporary files
-.next/cache/
-.swc/
-tsconfig.tsbuildinfo
-.eslintcache
-*.log
-*.cache
-
-# Generated API documentation
+# Documentation
 docs/
 api-docs/
 typedoc/
 
-# Environment and Configuration files
+###############################################
+# Configuration and Environment
+###############################################
+
+# Environment Files
 .env
 .env.*
 !.env.example
-.npmrc
+.env*.local
 
-# Package manager files
+# Package Manager
+.npmrc
 pnpm-lock.yaml
 bun.lockb
 .pnp.*
 .yarn/
 
-# CDN and Asset files
+###############################################
+# Assets and Content
+###############################################
+
+# Static Assets
 public/assets/
 public/static/
 dist/assets/
 
-# Markdown files (optional, if you don't want to format them)
-*.md
-CHANGELOG.md
-LICENSE.md
+###############################################
+# Type Definitions
+###############################################
 
-# Generated type definitions
+# TypeScript
 *.d.ts
 next-env.d.ts
+
+###############################################
+# Misc
+###############################################
+
+# System Files
+.DS_Store
+*.pem
+
+# Debug Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Deployment
+.vercel

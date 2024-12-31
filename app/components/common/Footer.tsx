@@ -2,7 +2,7 @@
 
 import React, { memo } from 'react';
 import { FaLinkedin, FaXTwitter, FaGithub } from 'react-icons/fa6';
-import { SOCIAL_LINKS } from '@/lib/constants';
+import { SOCIAL_LINKS } from '@/app/lib/constants/constants';
 
 const socialLinks = [
   { href: SOCIAL_LINKS.twitter, Icon: FaXTwitter, label: 'X Profile' },
@@ -33,7 +33,11 @@ const SocialButton = memo(
 SocialButton.displayName = 'SocialButton';
 
 export const Footer = memo(() => {
-  const currentYear = new Date().getFullYear();
+  const [year, setYear] = React.useState('');
+
+  React.useEffect(() => {
+    setYear(new Date().getFullYear().toString());
+  }, []);
 
   return (
     <footer className="bg-background text-sm py-8 px-6 mt-auto">
@@ -43,7 +47,7 @@ export const Footer = memo(() => {
             <SocialButton key={props.href} {...props} />
           ))}
         </div>
-        <p className="text-text-secondary">&copy; {currentYear}</p>
+        <p className="text-text-secondary">&copy; {year}</p>
       </div>
     </footer>
   );

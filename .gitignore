@@ -1,364 +1,165 @@
-# =================================================================
-# Core Development
-# =================================================================
+###############################################
+# Security and Credentials (Highest Priority)
+###############################################
+
+# Secrets and Environment
+**/.env*
+!**/.env.example
+**/.credentials/
+**/*secret*
+**/*private*
+**/*.{token,jwt}
+**/*password*
+**/*pass*
+**/*pwd*
+
+# Certificates, Keys and Authentication
+**/*.{pem,key,crt,cer,der,p12,pfx,p7b,p7c,keystore,jks,asc,enc,sig,sign,signature,gpg}
+**/id_{rsa,dsa,ed25519,ecdsa}*
+**/.{ssh,gnupg,gpg}/
+**/*htpasswd
+**/*htaccess
+
+# Service Account Credentials
+**/*{-service-account,-adminsdk,cloud-credentials,api-keys,oauth-tokens,client_secret}*.json
+**/{gcloud,firebase,aws,azure}*.json
+
+###############################################
+# Backups and Logs
+###############################################
+
+# Backup Files
+**/backups/
+**/*.{backup,bak,old}
+**/*backup*/
+**/security/{backup*,*.bak,*.old,logs}/
+**/config/{backup*,*.bak}
+**/scripts/security/{backup*,*.bak}
+**/*.security.backup
+**/security{-,_}{log,backup}*
+**/config{-,_}backup*/
+
+# Logs and Debug
+**/logs/
+**/*.log
+**/debug*/
+**/crash-reports/
+**/*.{stackdump,heapdump}
+**/core.*
+
+###############################################
+# Development Environment
+###############################################
 
 # Dependencies
 node_modules/
-bower_components/
-.pnp/
-.pnp.js
 .yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
+!.yarn/{patches,plugins,releases,sdks,versions}
 .pnp.*
 .pnpm-store/
-.npm/
+{package,pnpm,yarn}-lock.{json,yaml}
+**/*.{pnpm-debug.log,yarn-integrity,npm-debug.log}*
 
-# Environment Variables
-.env*
-!.env.example
-.env.local
-.env.*.local
-.env.development.local
-.env.test.local
-.env.production.local
+# IDE and Editors
+**/.{vscode,vscode-server,idea,vim,nvim,atom,history}/
+**/*.{sublime-*,code-workspace}
+**/.{settings,project,classpath}
+**/*.{swp,swo}
 
-# =================================================================
-# Build and Output
-# =================================================================
+###############################################
+# Build and Compilation
+###############################################
 
-# Next.js
+# Build Output
 .next/
-.next-*/
-next-env.d.ts
-.serverless/
-.serverless_nextjs/
-public/_next/
-.lighthouse/
-_next/
-.next-server/
-.next-prerendered/
-.next-static/
-.next-dynamic/
-.next-build-manifest/
-.next-trace
-.next-stats/
-
-# Build Directories
 out/
+dist*/
 build/
-dist/
-dist_electron/
-out_electron/
 .output/
-.build/
-storybook-static/
+**/*.{bundle,chunk,min}.{js,ts}
+**/generated/
+**/__generated__/
+**/*-manifest.json
+**/stats*.json
 
-# Generated Files
-*.bundle.js
-*.chunk.js
-*.min.js
-*.min.css
-*.d.ts
-*.d.ts.map
-types/generated/
-generated/
-__generated__/
-build-manifest.json
-prerender-manifest.json
-routes-manifest.json
-stats.json
-bundle-stats.json
-
-# =================================================================
 # Framework Specific
-# =================================================================
-
-# React & Next.js Related
-.remix/
-remix.env.d.ts
-
-# Other Frameworks
-.angular/
-.svelte-kit/
-.meteor/
-.quasar/
-.sapper/
-.redwood/
-.blitz/
-.nx/
-.astro/
-.nuxt/
-.vuepress/
-.docz/
-.gatsby/
-.gridsome/
-.umi/
-.umi-production/
-
-# =================================================================
-# Development Tools
-# =================================================================
-
-# Bundlers and Build Tools
-.turbo/
-.swc/
-.webpack/
-.parcel-cache/
-.rollup.cache/
-.esbuild/
-.vite/
-.grunt/
-.gulp/
-
-# Testing and Coverage
-coverage/
-.coverage/
-__tests__/coverage/
-test-results/
-playwright-report/
-cypress/
-.nyc_output/
-jest-report/
-/test-results/
-/playwright/results/
-/cypress/videos/
-/cypress/screenshots/
-.jest-cache/
-jest.results.json
-
-# Storybook
-.storybook-out
-storybook-static/
-build-storybook.log
-.storybook/
+**/.{angular,svelte-kit,nuxt,remix,astro,docz,gatsby,gridsome,meteor,quasar,redwood,nx,vuepress}/
 
 # Cache and Temporary
-.cache/
-.eslintcache
-.stylelintcache
-*.cache
-tmp/
-temp/
-[Tt]emp/
-.mf/
-.temp/
-.tmp/
-.tempfiles/
-.cacache/
+**/.{cache,turbo,swc,webpack,parcel-cache}/
+**/.*cache
+**/{tmp,temp}/
+**/*.{tmp,temp}
 
-# =================================================================
-# Version Control and Deployment
-# =================================================================
+###############################################
+# Deployment and Infrastructure
+###############################################
 
-# Vercel
-.vercel/
-.vercel
-.now
-.deployment
-.vercelignore
-.nowignore
-_vercel/
-.vercel.json
-.vercel.app
-.vercel-*
-vercel.json
+# Cloud Services
+**/.{vercel,netlify,serverless,amplify,docker}/
+**/kubernetes/
+**/k8s/
+**/.{aws,azure,gcloud,terraform}/
+**/*.tfstate
+**/*.tfvars
 
-# Other Deployment
-.netlify/
-.firebase/
-.elasticbeanstalk/
-.cloud/
-.gcloud/
-.aws/
-.azure/
-
-# CI/CD
-.github/workflows/*.yml
-.gitlab-ci.yml
-.travis.yml
-.circleci/
-.jenkins/
-.buddy/
-
-# =================================================================
-# IDE and Editors
-# =================================================================
-
-# VSCode
-.vscode/
-*.code-workspace
-.history/
-
-# JetBrains
-.idea/
-*.iml
-*.ipr
-*.iws
-
-# Other Editors
-*.sublime-project
-*.sublime-workspace
-*.swp
-*.swo
-*~
-.project
-.classpath
-.settings/
-.ionide/
-
-# =================================================================
-# Logs and Debugging
-# =================================================================
-
-# Log Files
-logs/
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-debug.log
-.debug/
-*.heapsnapshot
-report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
-.error.log
-
-# =================================================================
-# OS Generated Files
-# =================================================================
-
-# macOS
-.DS_Store
-._*
-.Spotlight-V100
-.Trashes
-
-# Windows
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-$RECYCLE.BIN/
-
-# Linux
-.directory
-.fuse_hidden*
-.nfs*
-
-# =================================================================
-# Project Assets and Media
-# =================================================================
-
-# Images
-*.ai
-*.bmp
-*.eps
-*.gif
-*.ico
-*.jng
-*.jp2
-*.jpg
-*.jpeg
-*.jpx
-*.jxr
-*.pdf
-*.psb
-*.psd
-*.svg
-*.svgz
-*.wbmp
-*.webp
-
-# Video
-*.mp4
-*.tiff
-*.avi
-*.flv
-*.mov
-*.wmv
-
-# 3D and Design
-*.blend
-*.blend1
-
-# =================================================================
-# Database and Storage
-# =================================================================
-
-# Database Files
-*.sqlite
-*.sqlite3
-*.db
-*.sqlite-journal
-*.db-journal
-
-# Prisma
-.prisma/
-prisma/*.db
-*.prisma.backup
-
-# =================================================================
-# Security and Certificates
-# =================================================================
-
-# Certificates and Keys
-*.pem
-*.cert
-*.key
-*.p12
-*.pfx
-*.crt
-*.csr
-*.p7b
-*.p7c
-*.p8
-*.keystore
-*.jks
-
-# =================================================================
 # Mobile Development
-# =================================================================
+**/.expo/
+**/*.{apk,aab,ipa}
+**/.gradle/
+**/ios/Pods/
+**/*.{keystore,jks,p12}
+**/google-services.json
+**/GoogleService-Info.plist
+**/*.{mobileprovision,provisionprofile}
 
-.expo/
-*.apk
-*.aab
-*.ipa
-.gradle/
-android/app/build/
-ios/Pods/
-*.pbxuser
-*.mode1v3
-*.mode2v3
-*.perspectivev3
-*.xcworkspace/
-*.xcuserstate
-xcuserdata/
+###############################################
+# Testing and Documentation
+###############################################
 
-# =================================================================
-# Package Management
-# =================================================================
+# Testing
+**/coverage/
+**/test-results/
+**/{playwright,cypress}-report/
+**/.nyc_output/
+**/jest*/
+**/__snapshots__/
+**/*.snap
+**/.{vitest,hypothesis,pytest_cache}/
 
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
-.pnpm-debug.log
-.npm-debug.log
-.yarn-debug.log
-.yarn-error.log
+###############################################
+# System Files
+###############################################
 
-# =================================================================
-# Backup and Version Files
-# =================================================================
+# OS Generated
+**/.DS_Store
+**/._*
+**/Thumbs.db
+**/ehthumbs.db
+**/Desktop.ini
+**/$RECYCLE.BIN/
+**/.directory
 
-*.bak
-*.gho
-*.ori
-*.orig
-*.old
-*.rej
-*~
-*.bak.*
-.#*
-.env
+# Media and Binary
+**/*.{ai,bmp,eps,gif,ico,jng,jp2,jpg,jpeg,jpx,jxr,pdf,psb,psd,svg,svgz,wbmp,webp}
+**/*.{mp4,tiff,avi,flv,mov,wmv}
+**/*.blend*
+
+###############################################
+# Project Specific
+###############################################
+
+# Public Assets
+/public/sitemap*.xml
+/public/robots.txt
+/public/feed.xml
+
+# Allowed Config Files (Exceptions)
+!tailwind.config.{js,ts}
+!postcss.config.js
+!.eslintrc.{js,json}
+!.prettierrc
+!next.config.js
+!vite.config.js
+!webpack.config.js
+!jest.config.js

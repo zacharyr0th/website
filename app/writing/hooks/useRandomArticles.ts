@@ -1,46 +1,65 @@
-import { useState, useCallback, useEffect } from 'react';
-import { Article } from '../types';
+import { useMemo, useCallback } from 'react';
+import type { Article } from '@/app/lib/types/types';
 
-export function useRandomArticles(
-  articles: Article[],
-  primaryArticleId: string
-): { randomArticles: Article[]; refreshRandomArticles: () => void } {
-  const [randomArticles, setRandomArticles] = useState<Article[]>([]);
+const RANDOM_ARTICLES_CONFIG = {
+  count: 3,
+} as const;
 
-  const getRandomArticles = useCallback(() => {
-    const availableArticles = articles.filter(
-      (article) => !article.frontmatter?.featured && article.id !== primaryArticleId
-    );
+function seededShuffle<T>(array: T[], seed: number): T[] {
+  const shuffled = [...array];
+  let currentIndex = shuffled.length;
 
-    const shuffleArray = (array: Article[]) => {
-      const shuffled = [...array];
-      for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        const temp = shuffled[i]!;
-        shuffled[i] = shuffled[j]!;
-        shuffled[j] = temp;
+  // Generate random numbers based on seed
+  const seededRandom = () => {
+    seed = (seed * 9301 + 49297) % 233280;
+    return seed / 233280;
+  };
+
+  while (currentIndex !== 0) {
+    const randomIndex = Math.floor(seededRandom() * currentIndex);
+    currentIndex -= 1;
+    [shuffled[currentIndex], shuffled[randomIndex]] = [
+      shuffled[randomIndex]!,
+      shuffled[currentIndex]!,
+    ];
+  }
+
+  return shuffled;
+}
+
+function filterArticles(articles: Article[], primaryArticleId: string): Article[] {
+  return articles.filter(
+    (article) =>
+      !article.frontmatter?.featured &&
+      article.id !== primaryArticleId &&
+      !article.frontmatter?.draft
+  );
+}
+
+export function useRandomArticles(articles: Article[], primaryArticleId: string) {
+  const availableArticles = useMemo(
+    () => filterArticles(articles, primaryArticleId),
+    [articles, primaryArticleId]
+  );
+
+  const getRandomArticles = useCallback(
+    (seed: number = Date.now()) => {
+      if (availableArticles.length === 0) {
+        console.warn('No articles available for randomization');
+        return [];
       }
-      return shuffled;
-    };
 
-    const FIXED_COUNT = 3;
-    const shuffled = shuffleArray(availableArticles);
+      const shuffled = seededShuffle(availableArticles, seed);
+      return shuffled.slice(0, Math.min(RANDOM_ARTICLES_CONFIG.count, shuffled.length));
+    },
+    [availableArticles]
+  );
 
-    const result: Article[] = [];
-    for (let i = 0; i < FIXED_COUNT; i++) {
-      result.push(shuffled[i % shuffled.length]!);
-    }
+  const initialRandomArticles = useMemo(() => getRandomArticles(), [getRandomArticles]);
 
-    return result;
-  }, [articles, primaryArticleId]);
-
-  useEffect(() => {
-    setRandomArticles(getRandomArticles());
-  }, [getRandomArticles]);
-
-  const refreshRandomArticles = useCallback(() => {
-    setRandomArticles(getRandomArticles());
-  }, [getRandomArticles]);
-
-  return { randomArticles, refreshRandomArticles };
+  return {
+    randomArticles: initialRandomArticles,
+    refreshRandomArticles: () => getRandomArticles(Date.now()),
+    isLoading: false,
+  };
 }

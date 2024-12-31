@@ -1,97 +1,101 @@
 'use client';
 
-import React, { useState, useCallback, useEffect } from 'react';
-import Navigation from '../navigation/Navigation';
-import { Theme } from '@/lib/types';
-import { THEME_ICONS } from '@/lib/constants';
+import React, { useState, useCallback, useEffect, memo } from 'react';
+import Navigation from './navigation/Navigation';
+import Footer from './Footer';
+import type { Theme } from '@/app/lib/types/types';
+import { FaSun, FaMoon } from 'react-icons/fa';
 
 type ThemeButtonProps = {
   currentTheme: Theme;
   onClick: () => void;
 };
 
-interface ThemedComponentProps {
-  theme?: Theme;
-  children?: React.ReactNode;
-  className?: string;
-  style?: React.CSSProperties;
-}
-
-const ThemeButton = ({ currentTheme, onClick }: ThemeButtonProps) => (
+const ThemeButton = memo(({ currentTheme, onClick }: ThemeButtonProps) => (
   <button
     onClick={onClick}
-    className="btn btn-primary text-2xl flex items-center justify-center rounded-full font-mono"
-    style={{
-      backgroundColor: 'var(--color-primary)',
-      color: currentTheme === 'dark' ? 'var(--color-light)' : 'var(--color-background)',
-      padding: 'var(--spacing-sm)',
-      borderRadius: 'var(--border-radius-lg)',
-      boxShadow: 'var(--box-shadow)',
-      transition: 'all var(--transition-speed) ease-in-out',
-    }}
-    aria-label={`Current theme: ${currentTheme}. Click to change theme.`}
+    className="flex items-center justify-center text-2xl hover:opacity-80 transition-opacity duration-300"
+    aria-label={`Current theme: ${currentTheme}. Click to toggle theme.`}
   >
-    {THEME_ICONS[currentTheme]}
+    {currentTheme === 'dark' ? <FaMoon /> : <FaSun />}
   </button>
-);
+));
+
+ThemeButton.displayName = 'ThemeButton';
+
+const THEME_STORAGE_KEY = 'theme';
+const DARK_SCHEME_QUERY = '(prefers-color-scheme: dark)';
 
 export default function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>('dark');
   const [mounted, setMounted] = useState(false);
 
   const applyTheme = useCallback((newTheme: Theme) => {
-    document.body.className = `theme-${newTheme}`;
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
+    try {
+      document.documentElement.setAttribute('data-theme', newTheme);
+      document.documentElement.style.colorScheme = newTheme;
+      setTheme(newTheme);
+      localStorage.setItem(THEME_STORAGE_KEY, newTheme);
+    } catch (e) {
+      console.warn('Failed to apply theme:', e);
+      setTheme(newTheme);
+    }
   }, []);
 
   useEffect(() => {
-    setMounted(true);
-    const savedTheme = (localStorage.getItem('theme') as Theme) || 'dark';
-    applyTheme(savedTheme);
+    const mediaQuery = window.matchMedia(DARK_SCHEME_QUERY);
+    
+    const handleSystemThemeChange = (e: MediaQueryListEvent) => {
+      const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) as Theme | null;
+      if (!savedTheme) {
+        applyTheme(e.matches ? 'dark' : 'light');
+      }
+    };
+
+    mediaQuery.addEventListener('change', handleSystemThemeChange);
+    return () => mediaQuery.removeEventListener('change', handleSystemThemeChange);
   }, [applyTheme]);
 
-  const cycleTheme = useCallback(() => {
-    const nextTheme = theme === 'dark' ? 'light' : 'dark';
-    applyTheme(nextTheme);
+  useEffect(() => {
+    try {
+      const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) as Theme | null;
+      const prefersDark = window.matchMedia(DARK_SCHEME_QUERY).matches;
+      const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+      applyTheme(initialTheme);
+    } catch (e) {
+      console.warn('Failed to initialize theme:', e);
+      applyTheme('dark');
+    } finally {
+      setMounted(true);
+    }
+  }, [applyTheme]);
+
+  const toggleTheme = useCallback(() => {
+    applyTheme(theme === 'dark' ? 'light' : 'dark');
   }, [theme, applyTheme]);
 
-  const themeButton = <ThemeButton currentTheme={theme} onClick={cycleTheme} />;
-
-  // Only clone elements after component is mounted to avoid hydration issues
-  const childrenWithTheme = React.Children.map(children, (child) => {
-    if (!mounted) return child;
-
-    if (React.isValidElement(child)) {
-      const type = child.type;
-      // Check if it's a function component and cast it to access displayName
-      const isClientComponent =
-        typeof type === 'function' &&
-        // Use type assertion to safely check displayName
-        ((type as { displayName?: string }).displayName?.startsWith('Client') ||
-          type.toString().includes('use client'));
-
-      if (isClientComponent) {
-        return React.cloneElement(child as React.ReactElement<ThemedComponentProps>, { theme });
-      }
-    }
-    return child;
-  });
-
-  // Only render children after mounting to avoid hydration issues
   if (!mounted) {
     return (
-      <>
-        <Navigation showHomeButton themeButton={themeButton} />
-        {children}
-      </>
+      <div className="flex flex-col min-h-screen">
+        <Navigation showHomeButton themeButton={<div className="w-8 h-8" />} />
+        <main className="flex-1">
+          <div style={{ visibility: 'hidden' }}>{children}</div>
+        </main>
+        <Footer />
+      </div>
     );
   }
 
   return (
-    <>
-      <Navigation showHomeButton themeButton={themeButton} />
-      {childrenWithTheme}
-    </>
+    <div className="flex flex-col min-h-screen">
+      <Navigation
+        showHomeButton
+        themeButton={<ThemeButton currentTheme={theme} onClick={toggleTheme} />}
+      />
+      <main className="flex-1">
+        {children}
+      </main>
+      <Footer />
+    </div>
   );
 }

@@ -1,29 +1,36 @@
 @tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 @layer base {
   html {
     font-size: var(--font-size-base);
-    @apply h-full scroll-smooth font-mono;
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-base);
+    @apply h-full scroll-smooth antialiased;
   }
 
   body {
-    @apply bg-background text-text-primary font-mono antialiased h-full m-0;
-    line-height: var(--line-height-base);
+    @apply bg-background text-text-primary font-mono h-full m-0;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
   #root {
     @apply flex flex-col min-h-screen;
   }
 
+  /* Typography */
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    @apply font-bold text-text-primary tracking-wide mb-2;
+    @apply font-bold tracking-wide;
+    color: var(--heading-color);
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
   }
 
   h1 {
@@ -45,74 +52,48 @@
     @apply text-base;
   }
 
+  /* Links */
+  a {
+    @apply text-accent hover:opacity-80;
+    transition: opacity var(--transition-speed) ease-in-out;
+  }
+
+  /* Media Elements */
   img {
     @apply max-w-full h-auto;
-  }
-}
-
-@layer components {
-  .full-height {
-    @apply flex flex-col min-h-screen;
+    object-fit: contain;
   }
 
-  .video-container {
-    @apply relative pb-[56.25%] h-0 overflow-hidden;
+  /* Chain Logo specific styles */
+  .chain-logo {
+    @apply relative w-12 h-12 rounded-full overflow-hidden bg-black !important;
+    aspect-ratio: 1 / 1;
+    mask-image: radial-gradient(circle, black 100%, transparent 100%);
+    -webkit-mask-image: radial-gradient(circle, black 100%, transparent 100%);
   }
 
-  .video-container iframe,
-  .video-container object,
-  .video-container embed {
-    @apply absolute top-0 left-0 w-full h-full;
+  .chain-logo img {
+    @apply w-full h-full object-contain;
   }
 
-  .profile-picture {
-    @apply w-64 h-64 mx-auto mb-6 rounded-full overflow-hidden;
-  }
-
-  .profile-name {
-    @apply text-4xl font-bold mb-2;
-  }
-
-  .profile-title {
-    @apply text-lg text-text-secondary;
-  }
-
-  .card {
-    @apply bg-surface rounded-md shadow-md overflow-hidden;
-  }
-
-  .card-header {
-    @apply p-4 border-b border-text-secondary/10;
-  }
-
-  .card-body {
-    @apply p-4;
-  }
-
-  .card-footer {
-    @apply p-4 border-t border-text-secondary/10;
-  }
-
-  .btn {
-    @apply inline-block py-2 px-4 rounded font-semibold text-center cursor-pointer transition-colors duration-200;
-  }
-
-  .btn-primary {
-    @apply bg-accent text-text-primary hover:bg-accent hover:opacity-80;
-  }
-}
-
-@layer utilities {
+  /* Content Containers */
   .container {
-    @apply w-full mx-auto;
+    @apply w-full mx-auto px-4;
     max-width: var(--max-content-width);
   }
 
-  .row {
-    @apply flex flex-wrap -mx-2;
+  .content-spacing {
+    margin-top: var(--header-height);
   }
 
-  .col {
-    @apply flex-grow-0 flex-shrink-0 basis-0 px-2;
+  /* Content page layout - increase specificity and force the styles */
+  .content-page {
+    @apply flex flex-col w-full min-h-screen !important;
+    padding-top: calc(var(--header-height) + 4rem) !important; /* Increased padding and forced */
+  }
+
+  /* Ensure proper nesting of main content */
+  .content-page > main {
+    @apply flex-1;
   }
 }

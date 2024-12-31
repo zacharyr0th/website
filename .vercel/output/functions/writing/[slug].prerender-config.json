@@ -1,0 +1,24 @@
+{
+  "type": "Prerender",
+  "expiration": 1,
+  "group": 33,
+  "bypassToken": "5d67b62329cb98f2b82eb20e67e79c9c",
+  "experimentalBypassFor": [
+    {
+      "type": "header",
+      "key": "Next-Action"
+    },
+    {
+      "type": "header",
+      "key": "content-type",
+      "value": "multipart/form-data;.*"
+    }
+  ],
+  "fallback": null,
+  "initialHeaders": {
+    "vary": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+  },
+  "allowQuery": [
+    "nxtPslug"
+  ]
+}

@@ -1,51 +1,44 @@
-import { useState, useEffect, useCallback } from 'react';
-import { Article } from '../types';
+import useSWR from 'swr';
+import type { Article } from '@/app/lib/types/types';
 
-export function useArticles(): {
-  articles: Article[];
-  isLoading: boolean;
-  error: Error | null;
-  refreshArticles: () => Promise<void>;
-} {
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
+const CACHE_CONFIG = {
+  revalidateOnFocus: false,
+  revalidateOnReconnect: false,
+  refreshInterval: 0,
+} as const;
 
-  const fetchArticles = useCallback(async () => {
-    try {
-      const cached = sessionStorage.getItem('articles');
-      if (cached) {
-        setArticles(JSON.parse(cached));
-        setIsLoading(false);
-        return;
-      }
+async function fetchArticles(): Promise<Article[]> {
+  const response = await fetch('/api/articles', {
+    headers: {
+      Accept: 'application/json',
+      'Cache-Control': 'no-cache',
+    },
+  });
 
-      const response = await fetch('/api/articles');
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status} ${response.statusText}`);
-      }
-      const data = await response.json();
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
 
-      sessionStorage.setItem('articles', JSON.stringify(data));
-      setArticles(data);
-    } catch (err) {
-      setError(err instanceof Error ? err : new Error('Failed to fetch articles'));
-      sessionStorage.removeItem('articles');
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+  const data = await response.json();
+  if (!Array.isArray(data)) {
+    throw new Error('Invalid response format');
+  }
 
-  useEffect(() => {
-    fetchArticles();
-  }, [fetchArticles]);
+  return data;
+}
 
-  const refreshArticles = useCallback(async () => {
-    setIsLoading(true);
-    setError(null);
-    sessionStorage.removeItem('articles');
-    await fetchArticles();
-  }, [fetchArticles]);
+export function useArticles() {
+  const { data, error, isLoading, mutate } = useSWR<Article[], Error>(
+    '/api/articles',
+    fetchArticles,
+    CACHE_CONFIG
+  );
 
-  return { articles, isLoading, error, refreshArticles };
+  return {
+    articles: data || [],
+    isLoading,
+    error,
+    refreshArticles: () => mutate(),
+    lastUpdated: data ? new Date() : null,
+  };
 }

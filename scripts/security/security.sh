@@ -1,269 +1,138 @@
 #!/bin/bash
+set -euo pipefail
 
 source scripts/utils/logging.sh
+source scripts/security/config.sh
 
 # Configuration
-TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-BACKUP_DIR="backups/security"
-LOG_FILE="logs/security_${TIMESTAMP}.log"
+readonly TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+readonly BACKUP_DIR="backups/security"
+readonly LOG_FILE="logs/security_${TIMESTAMP}.log"
+readonly TEMP_DIR=$(mktemp -d)
+trap 'rm -rf "${TEMP_DIR}"' EXIT
 
-# Create necessary directories
-mkdir -p "$BACKUP_DIR" "$(dirname "$LOG_FILE")"
-
-# Check security requirements
 check_requirements() {
-    info "Checking security requirements..."
-    
-    # Check required tools
-    local required_tools=("openssl" "git" "npm" "yarn" "node" "jq")
+    info "Checking project requirements..."
     local missing_tools=()
     
-    for tool in "${required_tools[@]}"; do
+    # Check for essential global tools
+    for tool in "node" "npm" "git"; do
         if ! command -v "$tool" >/dev/null 2>&1; then
             missing_tools+=("$tool")
         fi
     done
-    
-    if [ ${#missing_tools[@]} -ne 0 ]; then
-        error "Missing required tools: ${missing_tools[*]}"
-        return 1
-    fi
-    
-    info "All security requirements met"
-}
 
-# Manage file permissions
-manage_permissions() {
-    info "Managing file permissions..."
-    
-    # Secure sensitive files
-    chmod 600 .env* 2>/dev/null || true
-    chmod 600 *.pem 2>/dev/null || true
-    chmod 600 *.key 2>/dev/null || true
-    
-    # Secure config directories
-    chmod 700 config 2>/dev/null || true
-    chmod 700 .git 2>/dev/null || true
-    
-    # Secure scripts
-    chmod 755 scripts/**/*.sh 2>/dev/null || true
-    
-    info "File permissions updated"
-}
-
-# Manage Git security
-manage_git_security() {
-    info "Managing Git security..."
-    
-    # Check for sensitive files
-    local sensitive_patterns=(".env" "*.key" "*.pem" "*.pfx" "*.p12" "*.cert" "id_rsa" "*.password" "*.secret")
-    local found_files=()
-    
-    for pattern in "${sensitive_patterns[@]}"; do
-        while IFS= read -r file; do
-            if [ -n "$file" ]; then
-                found_files+=("$file")
-            fi
-        done < <(git ls-files "$pattern" 2>/dev/null)
+    # Check for project tools in node_modules/.bin
+    local project_tools=("rimraf" "prettier" "tsc" "eslint" "next")
+    for tool in "${project_tools[@]}"; do
+        if [ ! -x "node_modules/.bin/$tool" ]; then
+            warn "Local tool not found: $tool (running npm install might fix this)"
+        fi
     done
     
-    if [ ${#found_files[@]} -ne 0 ]; then
-        error "Found sensitive files in Git: ${found_files[*]}"
-        warn "Consider removing these files and adding them to .gitignore"
+    # Verify Node.js version
+    local node_version
+    node_version=$(node -v | cut -d'v' -f2)
+    if ! command -v node >/dev/null 2>&1 || ! [[ "$(printf '%s\n' "$REQUIRED_NODE_VERSION" "$node_version" | sort -V | head -n1)" = "$REQUIRED_NODE_VERSION" ]]; then
+        error "Node.js version must be >=${REQUIRED_NODE_VERSION} (current: $node_version)"
+        return 1
     fi
-    
-    # Update .gitignore if needed
-    if [ ! -f .gitignore ]; then
-        cat > .gitignore << EOF
-# Security-related
-.env*
-*.key
-*.pem
-*.pfx
-*.p12
-*.cert
-id_rsa*
-*.password
-*.secret
 
-# Dependencies
-node_modules/
-.next/
-.cache/
-dist/
-build/
-
-# Logs
-logs/
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Runtime data
-pids/
-*.pid
-*.seed
-*.pid.lock
-
-# Testing
-coverage/
-.nyc_output/
-
-# IDEs and editors
-.idea/
-.vscode/
-*.swp
-*.swo
-*~
-
-# OS-specific
-.DS_Store
-Thumbs.db
-EOF
-        info "Created secure .gitignore file"
+    # Verify npm version
+    local npm_version
+    npm_version=$(npm -v)
+    if ! command -v npm >/dev/null 2>&1 || ! [[ "$(printf '%s\n' "$REQUIRED_NPM_VERSION" "$npm_version" | sort -V | head -n1)" = "$REQUIRED_NPM_VERSION" ]]; then
+        error "npm version must be >=${REQUIRED_NPM_VERSION} (current: $npm_version)"
+        return 1
     fi
+
+    [ ${#missing_tools[@]} -ne 0 ] && {
+        error "Missing required global tools: ${missing_tools[*]}"
+        return 1
+    }
     
-    info "Git security managed"
+    info "All requirements met"
 }
 
-# Manage dependencies security
 manage_dependencies() {
     info "Managing dependencies security..."
     
     # Backup package files
-    cp package.json "$BACKUP_DIR/package.json.${TIMESTAMP}.bak" 2>/dev/null || true
-    cp package-lock.json "$BACKUP_DIR/package-lock.json.${TIMESTAMP}.bak" 2>/dev/null || true
-    cp yarn.lock "$BACKUP_DIR/yarn.lock.${TIMESTAMP}.bak" 2>/dev/null || true
+    cp package.json "${BACKUP_DIR}/package.json.${TIMESTAMP}.bak" 2>/dev/null || true
+    cp package-lock.json "${BACKUP_DIR}/package-lock.json.${TIMESTAMP}.bak" 2>/dev/null || true
     
-    # Run security audit
-    yarn audit
+    # Run security checks
+    info "Running npm security audit..."
+    npm audit
+
+    # Add automatic update option
+    if [[ "${AUTO_UPDATE:-false}" == "true" ]]; then
+        info "Automatically updating packages..."
+        npm audit fix || true
+        npm update || true
+        npm install || true
+    else
+        info "Checking for outdated packages..."
+        npm outdated || true
+    fi
     
-    # Check for outdated packages
-    yarn outdated
+    info "Running type check..."
+    npm run check || true
     
     info "Dependencies security checked"
 }
 
-# Check security headers
-check_headers() {
-    info "Checking security headers..."
+manage_permissions() {
+    info "Managing file permissions..."
     
-    # Add security headers to next.config.js if it exists
-    if [ -f next.config.js ]; then
-        local config_content
-        config_content=$(cat next.config.js)
-        
-        if ! grep -q "Security headers" next.config.js; then
-            cat > next.config.js << 'EOF'
+    # Use FILES_TO_SECURE from config.sh
+    for entry in "${FILES_TO_SECURE[@]}"; do
+        IFS=':' read -r pattern mode <<< "$entry"
+        chmod "$mode" $pattern 2>/dev/null || true
+    done
+    info "File permissions updated"
+}
+
+check_headers() {
+    info "Checking Next.js security headers..."
+    [ -f next.config.js ] && ! grep -q "Security headers" next.config.js && {
+        cat > next.config.js << 'EOF'
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async headers() {
-    return [
-      {
-        source: '/:path*',
-        headers: [
-          {
-            key: 'X-DNS-Prefetch-Control',
-            value: 'on'
-          },
-          {
-            key: 'Strict-Transport-Security',
-            value: 'max-age=31536000; includeSubDomains'
-          },
-          {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN'
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff'
-          },
-          {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block'
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin'
-          },
-          {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=()'
-          }
-        ]
-      }
-    ]
-  }
+    return [{
+      source: '/:path*',
+      headers: [
+        { key: 'X-DNS-Prefetch-Control', value: 'on' },
+        { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains' },
+        { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+        { key: 'X-Content-Type-Options', value: 'nosniff' },
+        { key: 'X-XSS-Protection', value: '1; mode=block' },
+        { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+        { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' }
+      ]
+    }]
+  },
+  poweredByHeader: false,
 }
-
 module.exports = nextConfig
 EOF
-            info "Added security headers to next.config.js"
-        fi
-    fi
-    
+        info "Added security headers to next.config.js"
+    }
     info "Security headers checked"
 }
 
-# Manage Vercel environment
-manage_vercel() {
-    info "Managing Vercel environment..."
-    
-    # Check for Vercel CLI
-    if ! command -v vercel >/dev/null 2>&1; then
-        warn "Vercel CLI not found. Installing..."
-        yarn global add vercel
-    fi
-    
-    # Check for vercel.json
-    if [ ! -f vercel.json ]; then
-        cat > vercel.json << EOF
-{
-  "github": {
-    "silent": true
-  },
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        }
-      ]
-    }
-  ]
-}
-EOF
-        info "Created secure vercel.json configuration"
-    fi
-    
-    info "Vercel environment managed"
-}
-
-# Show help
 show_help() {
     cat << EOF
-Security Management Script
+Next.js Project Security Management Script
 
 Usage: $0 <command> [options]
 
 Commands:
-    audit               - Run security audit
-    permissions         - Manage file permissions
-    git                - Manage Git security
-    deps               - Manage dependencies security
-    headers            - Check security headers
-    vercel             - Manage Vercel environment
+    audit               - Run full security audit
+    check              - Check requirements and dependencies
+    headers            - Check Next.js security headers
+    permissions        - Manage file permissions
     help               - Show this help message
 
 Options:
@@ -272,55 +141,36 @@ Options:
 
 Examples:
     $0 audit
-    $0 permissions --force
-    $0 git --backup
+    $0 check
+    $0 headers
 EOF
 }
 
-# Main process
 main() {
-    local command=$1
-    shift
+    # Parse options
+    AUTO_UPDATE=false
     
-    case $command in
+    while [[ "$#" -gt 0 ]]; do
+        case $1 in
+            --auto-update) AUTO_UPDATE=true; shift ;;
+            audit|check|headers|permissions|help) CMD="$1"; shift ;;
+            *) error "Unknown parameter: $1"; show_help; exit 1 ;;
+        esac
+    done
+
+    case ${CMD:-help} in
         "audit")
-            check_requirements
-            manage_permissions
-            manage_git_security
-            manage_dependencies
-            check_headers
-            manage_vercel
-            ;;
-        "permissions")
-            manage_permissions
-            ;;
-        "git")
-            manage_git_security
-            ;;
-        "deps")
-            manage_dependencies
-            ;;
-        "headers")
+            check_requirements && 
+            manage_permissions && 
+            manage_dependencies && 
             check_headers
             ;;
-        "vercel")
-            manage_vercel
-            ;;
-        "help"|"")
-            show_help
-            ;;
-        *)
-            error "Unknown command: $command"
-            show_help
-            exit 1
-            ;;
+        "check") check_requirements ;;
+        "headers") check_headers ;;
+        "permissions") manage_permissions ;;
+        "help"|"") show_help ;;
+        *) error "Unknown command: $1"; show_help; exit 1 ;;
     esac
 }
 
-# Parse command line arguments
-if [ $# -eq 0 ]; then
-    show_help
-    exit 1
-fi
-
-main "$@" 
+[[ "${BASH_SOURCE[0]}" == "${0}" ]] && main "$@" 

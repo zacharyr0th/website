@@ -1,0 +1,112 @@
+###############################################
+# Security-Critical (Never Deploy These)
+###############################################
+
+# Credentials and Secrets
+.env*
+!.env.example
+.aws/
+.azure/
+.gcloud/
+.credentials/
+.netrc
+*.[sS][sS][hH]/
+.gnupg/
+.gpg/
+.pgp/
+*.{pem,key,p12,pfx,cer,crt,der,keystore,jks}
+*-service-account*.json
+*-adminsdk*.json
+gcloud*.json
+firebase*.json
+aws*.json
+azure*.json
+*.token
+secrets.*
+private.*
+
+###############################################
+# Development Only
+###############################################
+
+# Version Control
+.git/
+.github/
+.gitlab/
+.gitignore
+.gitattributes
+.gitmodules
+
+# Testing
+__tests__/
+test/
+tests/
+*.test.*
+*.spec.*
+coverage/
+cypress/
+playwright/
+jest/
+
+# Development Configs
+.eslintrc*
+.prettierrc*
+.editorconfig
+tsconfig.tsbuildinfo
+*.config.js
+!next.config.js
+!svelte.config.js
+!nuxt.config.js
+!vite.config.js
+!postcss.config.js
+!tailwind.config.js
+
+# IDE and Editor
+.vscode/
+.idea/
+*.sublime-*
+.project
+.settings/
+
+###############################################
+# Build and Dependencies
+###############################################
+
+# Dependencies
+node_modules/
+.pnp/
+.yarn/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Development Cache
+.next/cache/
+.vercel/cache/
+.turbo/
+.cache/
+
+# Logs and Debug
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+###############################################
+# Misc
+###############################################
+
+# Temporary Files
+.DS_Store
+Thumbs.db
+*.tmp
+*.temp
+.tmp/
+temp/
+
+# Documentation
+CONTRIBUTING.md
+CHANGELOG.md
+README.md
+docs/

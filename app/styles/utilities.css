@@ -1,242 +1,128 @@
-/* utilities.css */
+@tailwind utilities;
 
-.text-balance {
-  text-wrap: balance;
-}
-
-/* Spacing utilities */
-.space-y-16 > :not([hidden]) ~ :not([hidden]) {
-  --space-y: 4rem;
-  margin-top: var(--space-y);
-}
-
-.space-x-6 > :not([hidden]) ~ :not([hidden]) {
-  --space-x: 1.5rem;
-  margin-left: var(--space-x);
-}
-
-.space-y-8 > :not([hidden]) ~ :not([hidden]) {
-  --space-y: 2rem;
-  margin-top: var(--space-y);
-}
-
-.space-x-4 > :not([hidden]) ~ :not([hidden]) {
-  --space-x: 1rem;
-  margin-left: var(--space-x);
-}
-
-/* Background utilities */
-.bg-darker-blue {
-  background-color: var(--color-accent);
-}
-
-.bg-gradient {
-  background-image: linear-gradient(to right, var(--color-primary), var(--color-secondary));
-}
-
-/* Animation keyframes */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+@layer utilities {
+  /* Text utilities */
+  .text-balance {
+    text-wrap: balance;
   }
-  to {
-    opacity: 1;
+  .text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
+  .truncate-2-lines {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
-  to {
-    opacity: 0;
+  .truncate-3-lines {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
-}
 
-@keyframes slideInFromLeft {
-  from {
-    transform: translateX(-100%);
+  /* Spacing */
+  .space-y-8 > :not([hidden]) ~ :not([hidden]) {
+    margin-block-start: var(--spacing-lg);
   }
-  to {
-    transform: translateX(0);
+  .space-y-16 > :not([hidden]) ~ :not([hidden]) {
+    margin-block-start: var(--spacing-xl);
   }
-}
-
-/* Animation classes */
-.animate-fadeIn,
-.fade-in {
-  animation: fadeIn var(--transition-duration, 0.5s) ease-in-out;
-}
-
-.fade-out {
-  animation: fadeOut var(--transition-duration, 0.5s) ease-in-out;
-}
-
-.slide-in-left {
-  animation: slideInFromLeft var(--transition-duration, 0.5s) ease-in-out;
-}
-
-/* Transition utilities */
-.transition-all {
-  transition: all var(--transition-duration, 0.3s) ease-in-out;
-}
-
-.transition-opacity {
-  transition: opacity var(--transition-duration, 0.5s) ease-in-out;
-}
-
-/* Scrollbar styles */
-.hover-scroll {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  transition: scrollbar-width 0.3s ease;
-}
-
-.hover-scroll::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-  transition: width 0.3s ease, height 0.3s ease;
-}
-
-.hover-scroll:hover {
-  scrollbar-width: thin;
-  scrollbar-color: var(--scrollbar-color, #4a4a4a) transparent;
-}
-
-.hover-scroll:hover::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-.hover-scroll:hover::-webkit-scrollbar-thumb {
-  background-color: var(--scrollbar-color, #4a4a4a);
-  border-radius: 3px;
-}
-
-/* Text utilities */
-.text-truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-left {
-  text-align: left;
-}
-
-.text-right {
-  text-align: right;
-}
-
-.font-bold {
-  font-weight: 700;
-}
-
-.font-semibold {
-  font-weight: 600;
-}
-
-.text-sm {
-  font-size: 0.875rem;
-}
-
-.text-base {
-  font-size: 1rem;
-}
-
-.text-lg {
-  font-size: 1.125rem;
-}
-
-.text-xl {
-  font-size: 1.25rem;
-}
-
-.text-2xl {
-  font-size: 1.5rem;
-}
-
-/* Layout utilities */
-.flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.aspect-ratio-16-9 {
-  aspect-ratio: 16 / 9;
-}
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* Flexbox utilities */
-.flex {
-  display: flex;
-}
-
-.flex-col {
-  flex-direction: column;
-}
-
-.items-center {
-  align-items: center;
-}
-
-.justify-center {
-  justify-content: center;
-}
-
-.justify-between {
-  justify-content: space-between;
-}
-
-/* Width utilities */
-.w-full {
-  width: 100%;
-}
-
-.max-w-full {
-  max-width: 100%;
-}
-
-/* Responsive utilities */
-.hidden {
-  display: none;
-}
-
-@media (min-width: 640px) {
-  .sm\:block {
-    display: block;
+  .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+    margin-inline-start: var(--spacing-md);
   }
-}
-
-@media (min-width: 768px) {
-  .md\:block {
-    display: block;
+  .space-x-6 > :not([hidden]) ~ :not([hidden]) {
+    margin-inline-start: var(--spacing-lg);
   }
-}
 
-@media (min-width: 1024px) {
-  .lg\:block {
-    display: block;
+  /* Layout */
+  .flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-}
 
-/* Add this at the end of your utilities.css file */
-.pt-4 {
-  padding-top: 4rem;
+  /* Dimensions */
+  .aspect-ratio-16-9 {
+    aspect-ratio: 16 / 9;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  @keyframes slideInFromLeft {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn var(--transition-speed) ease-in-out forwards;
+  }
+  .fade-out {
+    animation: fadeOut var(--transition-speed) ease-in-out forwards;
+  }
+  .slide-in-left {
+    animation: slideInFromLeft var(--transition-speed) ease-in-out forwards;
+  }
+
+  /* Scrollbar */
+  .hover-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    transition: scrollbar-width var(--transition-speed) ease-in-out;
+  }
+  .hover-scroll::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+  .hover-scroll:hover {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-text-secondary) transparent;
+  }
+  .hover-scroll:hover::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .hover-scroll:hover::-webkit-scrollbar-thumb {
+    background-color: var(--color-text-secondary);
+    border-radius: var(--border-radius-sm);
+  }
+
+  /* Accessibility */
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Responsive */
+  @media (min-width: 640px) {
+    .sm\:block {
+      display: block;
+    }
+  }
+  @media (min-width: 768px) {
+    .md\:block {
+      display: block;
+    }
+  }
+  @media (min-width: 1024px) {
+    .lg\:block {
+      display: block;
+    }
+  }
 }

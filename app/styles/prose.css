@@ -1,0 +1,37 @@
+@tailwind components;
+
+@layer components {
+  /* Prose Styles */
+  .prose {
+    @apply max-w-none leading-relaxed font-mono;
+    color: var(--color-text-primary);
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+    }
+
+    p {
+      margin-bottom: 1em;
+    }
+
+    img {
+      @apply my-4 rounded shadow-md;
+      max-width: 100%;
+      height: auto;
+    }
+
+    pre {
+      @apply rounded-lg p-5 my-5;
+      background-color: var(--color-surface);
+    }
+
+    code {
+      @apply rounded-md px-2 py-1;
+      background-color: var(--color-surface);
+    }
+  }
+}

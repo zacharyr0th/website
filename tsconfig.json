@@ -1,28 +1,9 @@
 {
   "compilerOptions": {
-    // Language and Environment
-    "target": "es5",
+    "target": "es2022",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "jsx": "preserve",
-    // Modules
     "module": "esnext",
     "moduleResolution": "bundler",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./*"],
-      "@components/*": ["./components/*"],
-      "@styles/*": ["./styles/*"],
-      "@lib/*": ["./lib/*"],
-      "@utils/*": ["./utils/*"],
-      "@types/*": ["./types/*"]
-    },
-    // JavaScript Support
-    "allowJs": true,
-    "resolveJsonModule": true,
-    // Emit
-    "noEmit": true,
-    "incremental": true,
-    // Type Checking
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
@@ -41,29 +22,41 @@
     "noImplicitOverride": true,
     "allowUnusedLabels": false,
     "allowUnreachableCode": false,
-    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "checkJs": true,
     "isolatedModules": true,
-    // Completeness
-    "skipLibCheck": true,
     "esModuleInterop": true,
-    // Type Declarations
-    "typeRoots": ["./node_modules/@types", "./lib"],
-    "types": ["node", "react", "react-dom"],
-    // Plugins
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "noEmit": true,
     "plugins": [
       {
         "name": "next"
       }
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "@components/*": ["./app/components/*"],
+      "@lib/*": ["./app/lib/*"],
+      "@styles/*": ["./app/styles/*"],
+      "@utils/*": ["./app/lib/utils/*"],
+      "@constants/*": ["./app/lib/constants/*"],
+      "@types/*": ["./app/lib/types/*"]
+    }
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "lib/updateSheetMusicCatalog.mts",
-    "global.d.ts",
-    "tailwind.config.ts"
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    "lib/**/*.ts",
+    "lib/**/*.tsx"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist", ".next", "out"]
 }
