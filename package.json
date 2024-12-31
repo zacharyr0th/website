@@ -33,7 +33,6 @@
     "react-error-boundary": "^5.0.0",
     "react-icons": "^5.0.0",
     "remark-gfm": "^4.0.0",
-    "styled-jsx": "5.1.1",
     "swr": "^2.2.4"
   },
   "devDependencies": {
