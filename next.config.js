@@ -15,5 +15,9 @@ const nextConfig = {
     }]
   },
   poweredByHeader: false,
+  webpack: (config, { isServer }) => {
+    config.resolve.alias['styled-jsx'] = require.resolve('styled-jsx');
+    return config;
+  },
 }
 module.exports = nextConfig
