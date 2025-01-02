@@ -39,13 +39,13 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
+      "@/*": ["./app/*"],
       "@components/*": ["./app/components/*"],
       "@lib/*": ["./app/lib/*"],
       "@styles/*": ["./app/styles/*"],
-      "@utils/*": ["app/lib/security/*"],
-      "@constants/*": ["./app/lib/constants/*"],
-      "@types/*": ["./app/lib/types/*"]
+      "@api/*": ["./app/api/*"],
+      "@projects/*": ["./app/projects/*"],
+      "@writing/*": ["./app/writing/*"]
     },
     "types": ["react", "react-dom"]
   },
