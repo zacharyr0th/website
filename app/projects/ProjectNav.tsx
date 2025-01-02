@@ -1,5 +1,5 @@
 import React, { memo, useCallback } from 'react';
-import { NavButton } from '@/app/components/common/buttons';
+import { NavButton } from '../components/common/buttons';
 
 const PROJECT_CATEGORIES = {
   crypto: 'Crypto',

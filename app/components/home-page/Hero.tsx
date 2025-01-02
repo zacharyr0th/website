@@ -4,8 +4,8 @@ import React, { memo, useState, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import BackgroundSVG from './backgrounds/HeroBackground';
-import ConnectModal from '@/app/components/common/misc/ConnectModal';
-import { ActionButton } from '@/app/components/common/buttons';
+import ConnectModal from '../common/misc/ConnectModal';
+import { ActionButton } from '../common/buttons';
 
 const heroContent = {
   name: 'Zachary Roth',
