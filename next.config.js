@@ -4,13 +4,17 @@ const nextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
+    styledComponents: true,
   },
   experimental: {
     optimizeCss: false,
   },
   webpack: (config) => {
-    config.resolve.fallback = { fs: false };
+    config.resolve.fallback = { 
+      fs: false,
+      'styled-jsx': require.resolve('styled-jsx'),
+      'styled-jsx/style': require.resolve('styled-jsx/style'),
+    };
     return config;
   },
 };

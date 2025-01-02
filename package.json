@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "npm ci --legacy-peer-deps && npm rebuild && next build",
+    "build": "rm -rf node_modules/.cache && npm install && next build",
     "start": "next start",
     "check": "tsc --noEmit && next lint --fix && prettier --write .",
     "prepare": "husky install",
