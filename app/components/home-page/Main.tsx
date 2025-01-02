@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import Link from 'next/link';
 import { PROJECTS, WRITING_PROJECTS } from '@/app/projects/projects';
-import ProjectCard from '@/app/projects/ProjectCard';
+import ProjectCard from '../../projects/ProjectCard';
 
 interface WritingCardProps {
   article: {

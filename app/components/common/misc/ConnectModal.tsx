@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useCallback, memo } from 'react';
-import { SOCIAL_LINKS } from '@/app/lib/social';
+import { SOCIAL_LINKS } from '../../../lib/social';
 import { FaXmark } from 'react-icons/fa6';
 import { IconButton } from '../buttons';
 
