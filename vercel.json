@@ -1,7 +1,13 @@
 {
   "version": 2,
   "buildCommand": "npm run build",
-  "installCommand": "npm ci",
+  "installCommand": "npm ci --legacy-peer-deps",
   "framework": "nextjs",
-  "outputDirectory": ".next"
+  "outputDirectory": ".next",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ]
 }
