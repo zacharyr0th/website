@@ -15,7 +15,7 @@ interface CategoryCardProps {
 const CategoryCard = memo(({ category, index }: CategoryCardProps) => {
   const variants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 }
+    visible: { opacity: 1, y: 0 },
   };
 
   return (
@@ -41,12 +41,12 @@ const CategoryCard = memo(({ category, index }: CategoryCardProps) => {
                 {category.title}
               </h2>
               {category.status === 'coming-soon' && (
-                <span className="text-xs sm:text-sm text-[var(--color-text-secondary)]">(Coming Soon)</span>
+                <span className="text-xs sm:text-sm text-[var(--color-text-secondary)]">
+                  (Coming Soon)
+                </span>
               )}
             </div>
-            <p className="text-sm text-[var(--color-text-secondary)]">
-              {category.description}
-            </p>
+            <p className="text-sm text-[var(--color-text-secondary)]">{category.description}</p>
             <div className="inline-flex items-center text-accent/40 text-sm mb-4">
               Work in Progress
               <svg
@@ -57,7 +57,12 @@ const CategoryCard = memo(({ category, index }: CategoryCardProps) => {
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
               </svg>
             </div>
           </div>

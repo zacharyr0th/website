@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import type { Article } from '@/app/lib/types/types';
+import type { Article } from '@/app/writing/types';
 
 const CACHE_CONFIG = {
   revalidateOnFocus: false,

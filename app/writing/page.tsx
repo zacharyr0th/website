@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { Metadata } from 'next';
-import { getArticles } from '@/app/lib/core/getArticles';
+import { getArticles } from './articles';
 import { Hero } from './components/Hero';
 import { ArchiveSection } from './components/ArchiveSection';
 
@@ -24,7 +24,7 @@ export default async function WritingPage() {
 
   return (
     <div className="content-page font-mono bg-gradient-to-b from-background to-surface/30 min-h-screen pb-24">
-      <main className="container mx-auto px-6 sm:px-8">
+      <main className="container mx-auto px-6 sm:px-8 pt-24 sm:pt-36">
         <div className="max-w-6xl mx-auto">
           <header className="mb-8">
             <h1 className="text-4xl md:text-5xl font-bold">Writing</h1>

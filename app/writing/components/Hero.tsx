@@ -4,22 +4,22 @@ import React, { useState, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaArrowsRotate } from 'react-icons/fa6';
-import { Article } from '@/app/lib/types/types';
+import { Article } from '@/app/writing/types';
 import { ArticleCard } from './ArticleCard';
 
-const ArticleImage = React.memo<{ image: Article['image'], className?: string, sizes?: string }>(
+const ArticleImage = React.memo<{ image: Article['image']; className?: string; sizes?: string }>(
   ({ image, className, sizes }) => {
     if (!image) return null;
-    
+
     return (
       <div className={`relative rounded-lg overflow-hidden ${className || ''}`}>
         <Image
           src={image.src}
-          alt={image.alt || ''}
+          alt={image.alt}
           fill
           className="object-cover transition-transform group-hover:scale-105"
-          sizes={sizes}
-          priority={!sizes}
+          sizes={sizes || '(max-width: 768px) 100vw, 50vw'}
+          priority
         />
       </div>
     );
@@ -33,9 +33,7 @@ const FeaturedArticle = React.memo<{ article: Article }>(({ article }) => (
     href={article.link || '#'}
     className="group relative flex flex-col h-[500px] p-6 rounded-2xl bg-surface/50 hover:bg-surface transition-colors"
   >
-    {article.image && (
-      <ArticleImage image={article.image} className="flex-1" />
-    )}
+    {article.image && <ArticleImage image={article.image} className="flex-1" />}
 
     <div className="flex flex-col gap-2 mt-4">
       <h2 className="text-2xl font-semibold group-hover:text-accent transition-colors">
@@ -97,26 +95,29 @@ const RandomSelection = React.memo<{ articles: Article[]; onRefresh: () => void 
 
 RandomSelection.displayName = 'RandomSelection';
 
+// Stable sort for initial render
+const getInitialArticles = (articles: Article[], featured: Article, count: number) => {
+  return articles.filter((article) => article.slug !== featured.slug).slice(0, count);
+};
+
+// Random sort for client-side refresh
 const getRandomArticles = (articles: Article[], featured: Article, count: number) => {
-  const featuredSlug = featured.slug;
-  const shuffled = articles
-    .filter((article) => article.slug !== featuredSlug)
+  return articles
+    .filter((article) => article.slug !== featured.slug)
     .sort(() => Math.random() - 0.5)
     .slice(0, count);
-
-  return shuffled;
 };
 
 export const Hero: React.FC<{ articles: Article[] }> = React.memo(({ articles }) => {
   const featured = articles[0];
-  
+
   const featuredArticles = React.useMemo(
     () => articles.filter((article) => article.frontmatter.featured),
     [articles]
   );
 
   const [randomArticles, setRandomArticles] = useState(() =>
-    featured ? getRandomArticles(articles, featured, 3) : []
+    featured ? getInitialArticles(articles, featured, 3) : []
   );
 
   const handleRefresh = useCallback(() => {

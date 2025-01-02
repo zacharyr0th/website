@@ -17,22 +17,23 @@
     "reset": "npm run clean && npm cache clean --force && npm install && npm install && npm run build"
   },
   "dependencies": {
-    "@mdx-js/loader": "^3.1.0",
-    "@mdx-js/mdx": "^3.1.0",
-    "@mdx-js/react": "^3.1.0",
-    "@next/mdx": "^15.1.3",
+    "@tailwindcss/typography": "^0.5.15",
     "@types/lodash": "^4.17.13",
+    "@vercel/analytics": "^1.4.1",
+    "caniuse-lite": "^1.0.30001690",
+    "clsx": "^2.1.1",
     "framer-motion": "^11.0.0",
     "gray-matter": "^4.0.3",
     "lodash": "^4.17.21",
     "lucide-react": "^0.469.0",
-    "next": "^14.2.22",
-    "next-mdx-remote": "^4.4.1",
+    "next": "14.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-error-boundary": "^5.0.0",
     "react-icons": "^5.0.0",
+    "remark": "^15.0.1",
     "remark-gfm": "^4.0.0",
+    "remark-html": "^16.0.1",
     "swr": "^2.2.4"
   },
   "devDependencies": {
@@ -45,9 +46,9 @@
     "@types/react-dom": "^18.2.0",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
-    "autoprefixer": "^10.4.17",
+    "autoprefixer": "^10.4.20",
     "eslint": "^8.57.1",
-    "eslint-config-next": "^14.2.22",
+    "eslint-config-next": "14.1.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.8.0",
@@ -55,14 +56,14 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "glob": "^11.0.0",
     "husky": "^9.0.0",
-    "postcss": "^8.4.33",
+    "postcss": "^8.4.49",
     "postcss-import": "^16.1.0",
     "postcss-nesting": "^13.0.1",
     "prettier": "^3.4.2",
     "rimraf": "^6.0.1",
     "tailwindcss": "^3.4.0",
     "turbo": "^2.3.3",
-    "typescript": "5.7.2"
+    "typescript": "5.3.3"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

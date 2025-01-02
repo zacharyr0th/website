@@ -19,11 +19,14 @@ import { NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
-import { Article } from '@/app/lib/types/types';
-import { logger, logError } from '@/app/lib/utils/logger';
-import { withMonitoring } from '@/app/lib/utils/monitoring';
-import { ARTICLE_CONFIG } from '@/app/lib/config/articles';
-import { validateFrontmatter, createArticleFromFrontmatter } from '@/app/lib/utils/articles';
+import { Article } from '@/app/writing/types';
+import {
+  ARTICLE_CONFIG,
+  validateFrontmatter,
+  createArticleFromFrontmatter,
+} from '@/app/writing/articles';
+import { logger, logError } from '@/app/lib/security/logger';
+import { withMonitoring } from '@/app/lib/security/monitoring';
 
 export const dynamic = 'force-static';
 export const revalidate = 3600; // Revalidate every hour

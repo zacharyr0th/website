@@ -2,11 +2,8 @@ import type { Config } from 'tailwindcss';
 
 const config: Config = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx,css}',
   ],
-  darkMode: ['class', '[data-theme="dark"]'],
   theme: {
     extend: {
       colors: {
@@ -21,18 +18,9 @@ const config: Config = {
         success: 'var(--color-success)',
         warning: 'var(--color-warning)',
         info: 'var(--color-info)',
-        muted: 'var(--color-muted)',
-        subtle: 'var(--color-subtle)',
-        border: 'var(--color-border)',
       },
       fontFamily: {
-        sans: ['Space Mono', 'monospace'],
-      },
-      fontSize: {
-        base: 'var(--font-size-base)',
-      },
-      lineHeight: {
-        base: 'var(--line-height-base)',
+        mono: ['Space Mono', 'monospace'],
       },
       spacing: {
         xs: 'var(--spacing-xs)',
@@ -45,14 +33,13 @@ const config: Config = {
         sm: 'var(--border-radius-sm)',
         md: 'var(--border-radius-md)',
         lg: 'var(--border-radius-lg)',
-        full: 'var(--border-radius-full)',
       },
       boxShadow: {
         DEFAULT: 'var(--box-shadow)',
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 };
 
 export default config;

@@ -9,45 +9,41 @@ const AUDIO_CATEGORIES = [
     title: 'Recordings',
     description: 'Full discography',
     slug: 'recordings',
-    status: 'coming-soon'
+    status: 'coming-soon',
   },
   {
     title: 'Compositions',
     description: 'Originals',
     slug: 'compositions',
-    status: 'coming-soon'
+    status: 'coming-soon',
   },
   {
     title: 'Theory',
     description: 'Mainly exploratory',
     slug: 'theory',
-    status: 'coming-soon'
+    status: 'coming-soon',
   },
   {
     title: 'Sheet Music',
     description: 'Useful notation',
     slug: 'sheet-music',
-    status: 'coming-soon'
+    status: 'coming-soon',
   },
   {
     title: 'Datasets',
     description: 'With many usecases',
     slug: 'datasets',
-    status: 'coming-soon'
+    status: 'coming-soon',
   },
   {
     title: 'Archive',
     description: 'History',
     slug: 'archive',
-    status: 'coming-soon'
-  }
+    status: 'coming-soon',
+  },
 ] as const;
 
-const BANDCAMP_TRACKS = [
-  { id: '3262928599' },
-  { id: '2324363469' },
-  { id: '3766185999' },
-];
+const BANDCAMP_TRACKS = [{ id: '3262928599' }, { id: '2324363469' }, { id: '3766185999' }];
 
 export default function AudioPageClient() {
   return (

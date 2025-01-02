@@ -2,50 +2,38 @@
 
 import React from 'react';
 import Image from 'next/image';
-import type { MDXRemoteSerializeResult } from 'next-mdx-remote';
-import type { Article } from '@/app/lib/types/types';
-import dynamic from 'next/dynamic';
-import styles from './article.module.css';
-
-const MDXContent = dynamic(() => import('./MDXContent'), {
-  ssr: false,
-  loading: () => <div>Loading...</div>
-});
+import type { Article } from '../types';
 
 interface ArticleContentProps {
   article: Article;
-  serializedContent: MDXRemoteSerializeResult;
+  contentHtml: string;
 }
 
-const ArticleContent = ({ article, serializedContent }: ArticleContentProps) => {
+export default function ArticleContent({ article, contentHtml }: ArticleContentProps) {
   return (
-    <article className={styles.article}>
-      <header className={styles.header}>
-        <h1 className={styles.title}>
-          {article.title}
-        </h1>
-        {article.description && (
-          <p className={styles.description}>
-            {article.description}
-          </p>
-        )}
-        {article.frontmatter?.image && (
-          <div className={styles.featuredImage}>
-            <Image
-              src={article.frontmatter.image.src}
-              alt={article.frontmatter.image.alt || article.title}
-              width={1200}
-              height={675}
-              priority
-              className={styles.image}
-            />
-          </div>
-        )}
-      </header>
-
-      <MDXContent serializedContent={serializedContent} />
-    </article>
+    <div className="content-page font-mono bg-gradient-to-b from-background to-surface/30">
+      <main className="container mx-auto pt-24 sm:pt-36">
+        <article className="prose prose-lg max-w-none">
+          <header>
+            <h1 className="text-4xl font-bold mb-4">{article.title}</h1>
+            {article.description && (
+              <p className="text-xl text-text-secondary mb-8">{article.description}</p>
+            )}
+            {article.frontmatter.image && (
+              <div className="relative w-full aspect-video mb-8">
+                <Image
+                  src={article.frontmatter.image.src}
+                  alt={article.frontmatter.image.alt}
+                  fill
+                  className="rounded-lg object-cover"
+                  priority
+                />
+              </div>
+            )}
+          </header>
+          <div className="markdown-content" dangerouslySetInnerHTML={{ __html: contentHtml }} />
+        </article>
+      </main>
+    </div>
   );
-};
-
-export default ArticleContent; 
+}

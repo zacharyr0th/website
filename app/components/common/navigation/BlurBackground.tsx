@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState, useRef, useMemo, useCallback, CSSProperties } from 'react';
-import debounce from 'lodash/debounce';
+import { useEffect, useState, useRef } from 'react';
+import { CSSProperties } from 'react';
 
 interface BlurBackgroundProps {
   children: React.ReactNode;
@@ -9,57 +9,42 @@ interface BlurBackgroundProps {
 }
 
 const BlurBackground: React.FC<BlurBackgroundProps> = ({ children, className = '' }) => {
-  const [blurState, setBlurState] = useState({ scrollY: 0, hasBackground: false });
+  const [scrollY, setScrollY] = useState(0);
+  const [hasBackground, setHasBackground] = useState(false);
   const elementRef = useRef<HTMLDivElement>(null);
 
-  const handleScroll = useCallback(() => {
-    if (elementRef.current) {
-      const rect = elementRef.current.getBoundingClientRect();
-      const elementsUnderneath = document.elementsFromPoint(
-        rect.x + rect.width / 2,
-        rect.y + rect.height + 1
-      );
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
 
-      setBlurState({
-        scrollY: window.scrollY,
-        hasBackground: elementsUnderneath.length > 2,
-      });
-    }
+      if (elementRef.current) {
+        const rect = elementRef.current.getBoundingClientRect();
+        const elementsUnderneath = document.elementsFromPoint(
+          rect.x + rect.width / 2,
+          rect.y + rect.height + 1
+        );
+        setHasBackground(elementsUnderneath.length > 2); // More than just body and our element
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Initial check
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const debouncedHandleScroll = useMemo(
-    () => debounce(handleScroll, 100, { leading: true, maxWait: 200 }),
-    [handleScroll]
-  );
-
-  useEffect(() => {
-    window.addEventListener('scroll', debouncedHandleScroll, { passive: true });
-    handleScroll(); // Initial check
-
-    return () => {
-      debouncedHandleScroll.cancel();
-      window.removeEventListener('scroll', debouncedHandleScroll);
-    };
-  }, [debouncedHandleScroll, handleScroll]);
-
-  const blurValue = Math.min(blurState.scrollY / 100, 1) * (blurState.hasBackground ? 1 : 0);
-
-  const backgroundStyle: CSSProperties = useMemo(
-    () => ({
-      backgroundColor: `rgba(var(--background), ${Math.min(0.8 * blurValue, 0.8)})`,
-      backdropFilter: `blur(${blurValue * 8}px)`,
-      WebkitBackdropFilter: `blur(${blurValue * 8}px)`,
-      position: 'relative',
-      zIndex: 1,
-      border: '1px solid rgba(var(--background), 0.1)',
-    }),
-    [blurValue]
-  );
+  const blurValue = Math.min(scrollY / 100, 1) * (hasBackground ? 1 : 0);
+  const backgroundStyle: CSSProperties = {
+    backgroundColor: `rgb(var(--background) / ${Math.min(0.8 * blurValue, 0.8)})`,
+    backdropFilter: `blur(${blurValue * 8}px)`,
+    WebkitBackdropFilter: `blur(${blurValue * 8}px)`,
+    position: 'relative',
+    zIndex: 1,
+  };
 
   return (
     <div
       ref={elementRef}
-      className={`rounded-3xl px-4 py-2.5 max-sm:px-3 ${className}`}
+      className={`rounded-3xl px-4 py-3 max-sm:px-3 ${className}`}
       style={backgroundStyle}
     >
       {children}

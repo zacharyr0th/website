@@ -43,10 +43,11 @@
       "@components/*": ["./app/components/*"],
       "@lib/*": ["./app/lib/*"],
       "@styles/*": ["./app/styles/*"],
-      "@utils/*": ["./app/lib/utils/*"],
+      "@utils/*": ["app/lib/security/*"],
       "@constants/*": ["./app/lib/constants/*"],
       "@types/*": ["./app/lib/types/*"]
-    }
+    },
+    "types": ["react", "react-dom"]
   },
   "include": [
     "next-env.d.ts",

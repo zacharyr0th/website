@@ -1,18 +1,29 @@
 import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
-import { serialize } from 'next-mdx-remote/serialize';
+import { remark } from 'remark';
+import html from 'remark-html';
 import { notFound } from 'next/navigation';
-import { validateFrontmatter, createArticleFromFrontmatter } from '@/app/lib/utils/articles';
+import { validateFrontmatter, createArticleFromFrontmatter } from '../articles';
 import ArticleContent from './ArticleContent';
+import { Metadata } from 'next';
 
 const articlesDirectory = path.join(process.cwd(), 'public/articles');
 
-interface ArticlePageProps {
+interface Props {
   params: { slug: string };
 }
 
-export default async function ArticlePage({ params: { slug } }: ArticlePageProps) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const slug = String(params.slug);
+  return {
+    title: `${slug} | Writing | Zachary Roth`,
+  };
+}
+
+export default async function Page({ params }: Props) {
+  const slug = String(params.slug);
+
   try {
     const filePath = path.join(articlesDirectory, `${slug}.md`);
     const fileContents = await fs.readFile(filePath, 'utf8');
@@ -20,21 +31,11 @@ export default async function ArticlePage({ params: { slug } }: ArticlePageProps
 
     const validatedFrontmatter = validateFrontmatter(data);
     const article = createArticleFromFrontmatter(validatedFrontmatter, content, slug);
-    const serializedContent = await serialize(content, {
-      parseFrontmatter: false,
-      mdxOptions: {
-        remarkPlugins: [],
-        rehypePlugins: [],
-      },
-    });
 
-    return (
-      <div className="content-page font-mono bg-gradient-to-b from-background to-surface/30">
-        <main className="container mx-auto">
-          <ArticleContent article={article} serializedContent={serializedContent} />
-        </main>
-      </div>
-    );
+    const processedContent = await remark().use(html).process(content);
+    const contentHtml = processedContent.toString();
+
+    return <ArticleContent article={article} contentHtml={contentHtml} />;
   } catch (error) {
     console.error('Error loading article:', error);
     notFound();

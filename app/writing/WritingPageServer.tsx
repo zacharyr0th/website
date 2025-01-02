@@ -1,4 +1,4 @@
-import { Article } from '@/app/lib/types/types';
+import { Article } from './articles';
 import { headers } from 'next/headers';
 
 const FETCH_TIMEOUT_MS = 5000; // 5 seconds timeout
@@ -10,7 +10,7 @@ interface FetchArticlesOptions {
 }
 
 async function getArticles(options: FetchArticlesOptions = {}): Promise<Article[]> {
-  const headersList = headers();
+  const headersList = await headers();
   const host = headersList.get('host') || 'localhost:3000';
   const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
   const url = `${protocol}://${host}/api/articles`;

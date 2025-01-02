@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Article } from '@/app/lib/types/types';
+import { Article } from '@/app/writing/types';
 
 export const ArticleCard = memo<{ article: Article }>(({ article }) => (
   <Link

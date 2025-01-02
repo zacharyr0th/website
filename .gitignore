@@ -163,3 +163,290 @@ build/
 !vite.config.js
 !webpack.config.js
 !jest.config.js
+
+# TypeScript
+**/*.tsbuildinfo
+**/.tscache/
+**/tsconfig.tsbuildinfo
+
+# Next.js Specific
+**/.next-cache/
+**/next-env.d.ts
+**/.vercel/
+.vercelignore
+
+# Development Tools
+**/.husky/
+**/.lint-staged/
+**/.commitlintrc
+**/.czrc
+**/.release-it.json
+**/.size-limit.json
+
+# Local Development
+**/.env.local
+**/.env.development.local
+**/.env.test.local
+**/.env.production.local
+
+# Turborepo
+**/.turbo/
+**/turbo.json
+
+# Misc
+**/.history/
+**/.temp/
+**/*.bak
+**/*.orig
+**/*.rej
+**/*.patch
+**/.eslintcache
+**/.stylelintcache
+**/.dccache
+
+# Additional IDE
+**/.fleet/
+**/.vs/
+**/.nova/
+**/.webstorm/
+
+# Additional Logs
+**/*.debug.log
+**/*.error.log
+**/*.access.log
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/lerna-debug.log*
+
+# Additional Build
+**/.rollup.cache/
+**/.vite/
+**/storybook-static/
+**/.storybook-out/
+**/public/storybook/
+
+# Performance and Profiling
+**/bench/
+**/benchmark/
+**/.clinic/
+**/profile/
+**/*.{cpu,memory}.profile
+**/*.heapsnapshot
+**/flamegraph.{html,svg}
+
+# Package Manager Specific
+**/.npm/
+**/.yarn/
+**/.yalc/
+**/bower_components/
+**/.package-lock.json
+**/.yarn-metadata.json
+**/.yarnrc
+**/.npmrc
+!**/.npmrc.example
+
+# Documentation and Examples
+**/docs/_build/
+**/site/
+**/_site/
+**/examples/**/*.env
+**/examples/**/node_modules/
+**/samples/**/*.env
+**/samples/**/node_modules/
+
+# Database and Storage
+**/*.{db,sqlite,sqlite3}
+**/*.{mdb,ldb}
+**/.dynamodb/
+**/.localstack/
+**/redis-data/
+**/mongodb/
+**/*.{rdb,aof}
+
+# Tooling and Analysis
+**/.scannerwork/
+**/.sonar/
+**/.lighthouse/
+**/.webpack.stats.json
+**/.bundle-stats.json
+**/.size-snapshot.json
+**/.eslint-output/
+**/.stylelint-output/
+**/.typescript-output/
+
+# Browser and Frontend
+**/.chrome/
+**/.firefox/
+**/.safari/
+**/.browserslist-stats.json
+**/.lighthouse/
+**/browser-logs/
+**/.browser-cache/
+
+# Temporary and Runtime
+**/run/
+**/.pid/
+**/*.pid
+**/*.sock
+**/.socket/
+**/.tmp.*
+**/*~
+**/*#
+**/.#*
+
+# Container and VM
+**/.vagrant/
+**/.virtualbox/
+**/*.{vmdk,vdi,hdd}
+**/docker-compose.override.yml
+**/.docker/
+
+# Additional Next.js
+**/.next-server/
+**/.next-plugins/
+**/.next-telemetry/
+**/.next/**/*.map
+**/.next/**/*.hot-update.*
+
+# Additional React/Frontend
+**/.storybook-static/
+**/.style-dictionary/
+**/.css-modules.json
+**/.sass-cache/
+**/.less-cache/
+**/.styled-components/
+
+# Optimization and Minification
+**/*.min.{js,css,html}
+**/*.opt.{js,css,html}
+**/*.bundle.{js,css}
+**/*.chunk.{js,css}
+**/*.gzip
+**/*.br
+**/*.map
+
+# AI and Machine Learning
+**/.tensorboard/
+**/.weights/
+**/checkpoints/
+**/*.onnx
+**/*.tflite
+**/*.h5
+**/*.keras
+**/*.pt
+**/*.pth
+**/*.mlmodel
+**/wandb/
+**/.neptune/
+**/.dvc/
+
+# API Development
+**/swagger-ui/
+**/openapi/
+**/.postman/
+**/.insomnia/
+**/api-docs/
+**/*.postman_collection.json
+**/*.insomnia.json
+**/*swagger*.{json,yaml,yml}
+**/*openapi*.{json,yaml,yml}
+
+# Cloud Development
+**/.serverless/
+**/.chalice/
+**/.claudia/
+**/.apex/
+**/.pulumi/
+**/.cdk/
+**/cdk.out/
+**/.sam/
+**/sam-out/
+**/*.tfstate.backup
+**/*.tfplan
+**/.terraform.lock.hcl
+
+# Security and Compliance
+**/.snyk
+**/.auth/
+**/.cert/
+**/*.pem.encrypted
+**/*.key.encrypted
+**/.vault/
+**/.secrets/
+**/security-reports/
+**/.dast/
+**/.sast/
+**/.pen-test/
+**/.audit/
+
+# Monitoring and Analytics
+**/.newrelic/
+**/.datadog/
+**/.sentry/
+**/.elastic/
+**/.grafana/
+**/.prometheus/
+**/monitoring/
+**/.traces/
+**/.metrics/
+
+# Asset Processing
+**/.imagemin/
+**/.svgo/
+**/.fontello/
+**/sprites/
+**/.assets-cache/
+**/.image-cache/
+**/.font-cache/
+**/.video-cache/
+**/.audio-cache/
+**/*.{min.svg,min.png,min.jpg,min.jpeg}
+**/*.{webp,avif}
+
+# Framework Extensions
+**/.nuxt/
+**/.remix/
+**/.blitz/
+**/.redwood/
+**/.gatsby/
+**/.docusaurus/
+**/.eleventy/
+**/.astro/
+**/.nextra/
+**/.contentlayer/
+
+# Development Utilities
+**/.depcruise/
+**/.depcheck/
+**/.madge/
+**/.bundlesize/
+**/.size-limit/
+**/.performance/
+**/.benchmark/
+**/.load-test/
+**/.stress-test/
+**/.k6/
+**/.artillery/
+
+# Code Quality
+**/.quality/
+**/.codeclimate/
+**/.codacy/
+**/.sonarqube/
+**/.coverage/
+**/.complexity/
+**/.maintainability/
+**/.reliability/
+**/.security/
+**/.accessibility/
+
+# Internationalization
+**/.translations/
+**/.locale/
+**/.i18n-cache/
+**/*.pot
+**/*.mo
+**/*.po
+**/locale-backup/
+**/translations-backup/

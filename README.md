@@ -71,18 +71,21 @@ app/
 ## Features
 
 ### Content Management
+
 - **MDX Support**: Write content in MDX with full React component support
 - **Static Generation**: Pre-render pages at build time for optimal performance
 - **Dynamic Imports**: Lazy load components and modules as needed
 - **Image Optimization**: Automatic image optimization and responsive images
 
 ### UI/UX
+
 - **Dark Mode**: System-aware dark mode with smooth transitions
 - **Animations**: Smooth page transitions and micro-interactions
 - **Responsive Design**: Mobile-first approach with dynamic layouts
 - **Accessibility**: WCAG 2.1 AA compliant with full keyboard navigation
 
 ### Development
+
 - **Type Safety**: Strict TypeScript configuration with comprehensive types
 - **Code Quality**: ESLint and Prettier with custom rule sets
 - **Git Hooks**: Husky for pre-commit linting and formatting
@@ -135,10 +138,12 @@ app/
 ## Development
 
 ### Prerequisites
+
 - Node.js >= 20.0.0
 - npm >= 10.0.0
 
 ### Environment Setup
+
 ```bash
 # Copy environment variables
 cp .env.example .env
@@ -152,6 +157,7 @@ NEXT_PUBLIC_GA_ID=             # Google Analytics ID
 ```
 
 ### Available Scripts
+
 ```bash
 npm run dev          # Start development server (port 3000)
 npm run build        # Create production build
@@ -174,6 +180,7 @@ npm run reset        # Complete reset and rebuild
 MIT License · [View License](./LICENSE)
 
 ### Core Dependencies
+
 | Package         | Version   | Purpose     | Config                                       |
 | --------------- | --------- | ----------- | -------------------------------------------- |
 | `next`          | `14.2.22` | Framework   | [`next.config.js`](./next.config.js)         |
@@ -182,15 +189,16 @@ MIT License · [View License](./LICENSE)
 | `framer-motion` | `11.0.0`  | Animations  | [`lib/constants.tsx`](./lib/constants.tsx)   |
 | `typescript`    | `5.7.2`   | Type System | [`tsconfig.json`](./tsconfig.json)           |
 | `mdx-remote`    | `4.4.1`   | MDX Support | [`next.config.js`](./next.config.js)         |
-| `swr`          | `2.2.4`   | Data Fetch  | [`lib/api`](./lib/api)                      |
+| `swr`           | `2.2.4`   | Data Fetch  | [`lib/api`](./lib/api)                       |
 
 ### Development Dependencies
-| Package      | Version  | Purpose    |
-| ------------ | -------- | ---------- |
-| `eslint`     | `8.57.0` | Linting    |
-| `prettier`   | `3.4.2`  | Formatting |
-| `husky`      | `9.0.0`  | Git Hooks  |
-| `turbo`      | `2.3.3`  | Build Tool |
+
+| Package    | Version  | Purpose    |
+| ---------- | -------- | ---------- |
+| `eslint`   | `8.57.0` | Linting    |
+| `prettier` | `3.4.2`  | Formatting |
+| `husky`    | `9.0.0`  | Git Hooks  |
+| `turbo`    | `2.3.3`  | Build Tool |
 
 ## Contributing
 
