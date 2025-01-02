@@ -4,7 +4,7 @@ import React, { useCallback, memo, useLayoutEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { NavItem } from './constants';
-import { NavButton } from '@/app/components/common/buttons/NavButton';
+import { NavButton } from '@/components/common/buttons/NavButton';
 import BlurBackground from './BlurBackground';
 
 interface NavigationProps {

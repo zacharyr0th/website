@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Navigation from '@/app/components/common/navigation/Navigation';
-import Footer from '@/app/components/common/misc/Footer';
-import ClientErrorBoundary from '@/app/components/error/ClientErrorBoundary';
+import Navigation from '@/components/common/navigation/Navigation';
+import Footer from '@/components/common/misc/Footer';
+import ClientErrorBoundary from '@/components/error/ClientErrorBoundary';
 
 export default function ClientWrapper({ children }: { children: React.ReactNode }) {
   const [isClient, setIsClient] = useState(false);
