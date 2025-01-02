@@ -2,7 +2,9 @@ import type { Config } from 'tailwindcss';
 
 const config: Config = {
   content: [
-    './app/**/*.{js,ts,jsx,tsx,mdx,css}',
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
@@ -19,8 +21,12 @@ const config: Config = {
         warning: 'var(--color-warning)',
         info: 'var(--color-info)',
       },
-      fontFamily: {
-        mono: ['Space Mono', 'monospace'],
+
+      fontSize: {
+        base: 'var(--font-size-base)',
+      },
+      lineHeight: {
+        base: 'var(--line-height-base)',
       },
       spacing: {
         xs: 'var(--spacing-xs)',
@@ -39,7 +45,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [],
 };
 
 export default config;

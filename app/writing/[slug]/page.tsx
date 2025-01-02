@@ -10,18 +10,18 @@ import { Metadata } from 'next';
 
 const articlesDirectory = path.join(process.cwd(), 'public/articles');
 
-interface Props {
-  params: { slug: string };
+interface PageParams {
+  slug: string;
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: PageParams }): Promise<Metadata> {
   const slug = String(params.slug);
   return {
     title: `${slug} | Writing | Zachary Roth`,
   };
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page({ params }: { params: PageParams }) {
   const slug = String(params.slug);
 
   try {
@@ -42,7 +42,7 @@ export default async function Page({ params }: Props) {
   }
 }
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<PageParams[]> {
   try {
     const fileNames = await fs.readdir(articlesDirectory);
     return fileNames

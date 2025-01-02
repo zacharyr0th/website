@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from 'react';
-import type { Article } from '@/app/writing/types';
+import type { Article } from '../types';
 
 const RANDOM_ARTICLES_CONFIG = {
   count: 3,

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { memo } from 'react';
-import { Article } from '@/app/writing/types';
+import { Article } from '../types';
 import { ArticleCard } from './ArticleCard';
 
 interface ArchiveSectionProps {

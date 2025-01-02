@@ -2,7 +2,7 @@
 
 import React, { memo } from 'react';
 import { FaLinkedin, FaXTwitter, FaGithub } from 'react-icons/fa6';
-import { SOCIAL_LINKS } from '@lib/social';
+import { SOCIAL_LINKS } from '../../../lib/social';
 import { IconButton } from '../buttons';
 
 const socialLinks = [

@@ -11,19 +11,23 @@ interface BlurBackgroundProps {
 const BlurBackground: React.FC<BlurBackgroundProps> = ({ children, className = '' }) => {
   const [scrollY, setScrollY] = useState(0);
   const [hasBackground, setHasBackground] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const elementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      if (typeof window !== 'undefined') {
+        setScrollY(window.scrollY);
 
-      if (elementRef.current) {
-        const rect = elementRef.current.getBoundingClientRect();
-        const elementsUnderneath = document.elementsFromPoint(
-          rect.x + rect.width / 2,
-          rect.y + rect.height + 1
-        );
-        setHasBackground(elementsUnderneath.length > 2); // More than just body and our element
+        if (elementRef.current) {
+          const rect = elementRef.current.getBoundingClientRect();
+          const elementsUnderneath = document.elementsFromPoint(
+            rect.x + rect.width / 2,
+            rect.y + rect.height + 1
+          );
+          setHasBackground(elementsUnderneath.length > 2); // More than just body and our element
+        }
       }
     };
 
@@ -31,6 +35,14 @@ const BlurBackground: React.FC<BlurBackgroundProps> = ({ children, className = '
     handleScroll(); // Initial check
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  if (!mounted) {
+    return (
+      <div className={`rounded-3xl px-4 py-3 max-sm:px-3 ${className}`}>
+        {children}
+      </div>
+    );
+  }
 
   const blurValue = Math.min(scrollY / 100, 1) * (hasBackground ? 1 : 0);
   const backgroundStyle: CSSProperties = {
@@ -51,5 +63,7 @@ const BlurBackground: React.FC<BlurBackgroundProps> = ({ children, className = '
     </div>
   );
 };
+
+BlurBackground.displayName = 'BlurBackground';
 
 export default BlurBackground;

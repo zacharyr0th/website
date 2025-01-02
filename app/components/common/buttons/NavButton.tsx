@@ -1,12 +1,11 @@
 import React from 'react';
 import { BaseButton, BaseButtonProps } from './BaseButton';
 
-// Extract button styles to prevent recreation
 const buttonStyles = {
   default: (active: boolean | undefined) => ({
     backgroundColor: active ? 'var(--color-surface)' : 'transparent',
-    color: 'var(--color-text-secondary)',
-    border: active ? '1px solid var(--color-secondary)' : 'none',
+    color: active ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
+    border: active ? '1px solid var(--color-accent)' : '1px solid transparent',
   }),
 } as const;
 
@@ -19,7 +18,9 @@ export const NavButton = React.forwardRef<HTMLButtonElement, NavButtonProps>(
     return (
       <BaseButton
         ref={ref}
-        className={`px-6 py-2 rounded-full transition-colors duration-300 hover:bg-surface/10 ${className}`}
+        className={`px-4 py-1.5 rounded-full transition-all duration-300 hover:bg-surface/10 hover:text-text-primary ${
+          active ? 'shadow-sm' : ''
+        } ${className}`}
         style={buttonStyles[variant](active)}
         {...props}
       />

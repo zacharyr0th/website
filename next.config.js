@@ -1,34 +1,35 @@
-const path = require('path');
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
-  poweredByHeader: false,
   reactStrictMode: true,
-  compiler: {
-    styledComponents: true,
-  },
-  experimental: {
-    optimizeCss: false
-  },
+  poweredByHeader: false,
+  transpilePackages: ['react-icons'],
   webpack: (config) => {
-    config.resolve.fallback = { 
-      fs: false,
-      'styled-jsx': require.resolve('styled-jsx'),
-      'styled-jsx/style': require.resolve('styled-jsx/style'),
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      module: 'empty',
+      dgram: 'empty',
+      dns: 'mock',
+      fs: 'empty',
+      http2: 'empty',
+      net: 'empty',
+      tls: 'empty',
+      child_process: 'empty',
     };
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      '@': path.join(__dirname, './app'),
-      '@components': path.join(__dirname, './app/components'),
-      '@lib': path.join(__dirname, './app/lib'),
-      '@styles': path.join(__dirname, './app/styles'),
-      '@api': path.join(__dirname, './app/api'),
-      '@projects': path.join(__dirname, './app/projects'),
-      '@writing': path.join(__dirname, './app/writing'),
-    }
     return config;
   },
+  // Security-focused redirects
+  redirects: async () => [
+    {
+      source: '/:path*/index.html',
+      destination: '/:path*',
+      permanent: true,
+    },
+    {
+      source: '/:path*.html',
+      destination: '/:path*',
+      permanent: true,
+    },
+  ],
 };
 
 module.exports = nextConfig;

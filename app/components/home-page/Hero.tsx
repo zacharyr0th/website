@@ -1,6 +1,6 @@
 'use client';
 
-import React, { memo, useState, useCallback } from 'react';
+import React, { memo, useState, useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import BackgroundSVG from './backgrounds/HeroBackground';
@@ -72,12 +72,26 @@ const ContentSection = memo<ContentSectionProps>(({ title, content, children }) 
     {children}
   </div>
 ));
+ContentSection.displayName = 'ContentSection';
 
 const StickyHeader = memo(() => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleOpenModal = useCallback(() => setIsModalOpen(true), []);
   const handleCloseModal = useCallback(() => setIsModalOpen(false), []);
+
+  if (!mounted) {
+    return (
+      <div className="h-screen px-6 sm:px-12 ml-4 sm:ml-8 lg:ml-16 flex flex-col justify-center sticky top-0 z-30">
+        <div className="opacity-0">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="h-screen px-6 sm:px-12 ml-4 sm:ml-8 lg:ml-16 flex flex-col justify-center sticky top-0 z-30">
@@ -109,6 +123,7 @@ const StickyHeader = memo(() => {
     </div>
   );
 });
+StickyHeader.displayName = 'StickyHeader';
 
 const MainContent = memo(() => {
   const isFirstSection = useCallback(
@@ -132,6 +147,7 @@ const MainContent = memo(() => {
     </div>
   );
 });
+MainContent.displayName = 'MainContent';
 
 const HeroContent = memo(() => (
   <>

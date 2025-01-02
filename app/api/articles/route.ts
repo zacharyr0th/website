@@ -24,7 +24,7 @@ import {
   ARTICLE_CONFIG,
   validateFrontmatter,
   createArticleFromFrontmatter,
-} from '@writing/articles';
+} from '../../writing/articles';
 import { logger, logError } from '../../lib/security/logger';
 import { withMonitoring } from '../../lib/security/monitoring';
 

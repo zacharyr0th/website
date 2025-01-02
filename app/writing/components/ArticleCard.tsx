@@ -1,7 +1,9 @@
+'use client';
+
 import React, { memo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Article } from '@/app/writing/types';
+import { Article } from '../types';
 
 export const ArticleCard = memo<{ article: Article }>(({ article }) => (
   <Link

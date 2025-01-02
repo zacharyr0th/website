@@ -1,9 +1,29 @@
 {
   "compilerOptions": {
-    "target": "es2022",
+    // Language and Environment
+    "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
+    "jsx": "preserve",
+    // Modules
     "module": "esnext",
     "moduleResolution": "bundler",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "@components/*": ["./components/*"],
+      "@styles/*": ["./styles/*"],
+      "@lib/*": ["./lib/*"],
+      "@utils/*": ["./utils/*"],
+      "@types/*": ["./types/*"],
+      "@projects/*": ["./app/projects/*"]
+    },
+    // JavaScript Support
+    "allowJs": true,
+    "resolveJsonModule": true,
+    // Emit
+    "noEmit": true,
+    "incremental": true,
+    // Type Checking
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
@@ -22,42 +42,29 @@
     "noImplicitOverride": true,
     "allowUnusedLabels": false,
     "allowUnreachableCode": false,
-    "resolveJsonModule": true,
-    "allowJs": true,
-    "checkJs": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "noEmit": true,
+    "isolatedModules": true,
+    // Completeness
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    // Type Declarations
+    "typeRoots": ["./node_modules/@types", "./lib"],
+    "types": ["node", "react", "react-dom"],
+    // Plugins
     "plugins": [
       {
         "name": "next"
       }
-    ],
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./app/*"],
-      "@components/*": ["./app/components/*"],
-      "@lib/*": ["./app/lib/*"],
-      "@styles/*": ["./app/styles/*"],
-      "@api/*": ["./app/api/*"],
-      "@projects/*": ["./app/projects/*"],
-      "@writing/*": ["./app/writing/*"]
-    },
-    "types": ["react", "react-dom"]
+    ]
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/**/*.ts",
-    "app/**/*.tsx",
-    "lib/**/*.ts",
-    "lib/**/*.tsx"
+    "lib/updateSheetMusicCatalog.mts",
+    "global.d.ts",
+    "tailwind.config.ts"
   ],
-  "exclude": ["node_modules", "dist", ".next", "out"]
+  "exclude": ["node_modules"]
 }

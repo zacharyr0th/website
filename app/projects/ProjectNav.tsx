@@ -1,12 +1,6 @@
 import React, { memo, useCallback } from 'react';
 import { NavButton } from '../components/common/buttons';
-
-const PROJECT_CATEGORIES = {
-  crypto: 'Crypto',
-  ai: 'AI',
-  web: 'WebDev',
-  devtools: 'DevTools',
-} as const;
+import { PROJECT_CATEGORIES } from './projects';
 
 interface ProjectNavProps {
   selectedCategory: string;

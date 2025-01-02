@@ -9,11 +9,11 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "rm -rf node_modules/.cache && npm install && next build",
+    "build": "next build",
     "start": "next start",
     "check": "tsc --noEmit && next lint --fix && prettier --write .",
     "clean": "npx rimraf .next node_modules dist out package-lock.json",
-    "reset": "npm run clean && npm cache clean --force && npm install && npm install && npm run build"
+    "reset": "npm run clean && npm cache clean --force && npm install && npm run build"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.15",
@@ -25,11 +25,11 @@
     "gray-matter": "^4.0.3",
     "lodash": "^4.17.21",
     "lucide-react": "^0.469.0",
-    "next": "^14.2.22",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "next": "^13.5.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "react-error-boundary": "^5.0.0",
-    "react-icons": "^5.0.0",
+    "react-icons": "^5.4.0",
     "remark": "^15.0.1",
     "remark-gfm": "^4.0.0",
     "remark-html": "^16.0.1",
@@ -46,7 +46,7 @@
     "@typescript-eslint/parser": "^7.18.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^8.57.1",
-    "eslint-config-next": "14.1.0",
+    "eslint-config-next": "^14.1.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.8.0",
@@ -59,6 +59,7 @@
     "prettier": "^3.4.2",
     "rimraf": "^6.0.1",
     "tailwindcss": "^3.4.0",
+    "tailwindcss-animate": "^1.0.7",
     "typescript": "5.3.3"
   },
   "lint-staged": {

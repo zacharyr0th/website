@@ -4,7 +4,7 @@ import React, { useState, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaArrowsRotate } from 'react-icons/fa6';
-import { Article } from '@/app/writing/types';
+import { Article } from '../types';
 import { ArticleCard } from './ArticleCard';
 
 const ArticleImage = React.memo<{ image: Article['image']; className?: string; sizes?: string }>(

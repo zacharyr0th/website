@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useCallback, memo, useLayoutEffect, useState } from 'react';
+import React, { useCallback, memo, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { NavItem } from './constants';
-import { NavButton } from '@/components/common/buttons/NavButton';
+import { NavButton } from '../buttons/NavButton';
 import BlurBackground from './BlurBackground';
 
 interface NavigationProps {
@@ -33,7 +33,7 @@ function Navigation({ showHomeButton = false, themeButton }: NavigationProps) {
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setMounted(true);
   }, []);
 
@@ -43,7 +43,11 @@ function Navigation({ showHomeButton = false, themeButton }: NavigationProps) {
   );
 
   if (!mounted) {
-    return null;
+    return (
+      <nav className="fixed top-0 right-0 left-0 mx-8 mt-8 mb-32 z-50 flex items-center justify-end max-sm:mx-4 max-sm:mt-4 max-sm:mb-24">
+        <div className="opacity-0">Loading...</div>
+      </nav>
+    );
   }
 
   const isHomePage = pathname === '/';
@@ -54,7 +58,6 @@ function Navigation({ showHomeButton = false, themeButton }: NavigationProps) {
         isHomePage ? 'justify-end' : 'justify-between'
       } max-sm:mx-4 max-sm:mt-4 max-sm:mb-24`}
     >
-      {/* Left side - Z button */}
       {showHomeButton && !isHomePage && (
         <BlurBackground>
           <div className="px-2 max-sm:px-1">
@@ -67,7 +70,6 @@ function Navigation({ showHomeButton = false, themeButton }: NavigationProps) {
         </BlurBackground>
       )}
 
-      {/* Right side - nav items and theme button */}
       <BlurBackground className="flex items-center space-x-4 text-base transition-all duration-200">
         <ul className="flex items-center space-x-4 max-sm:space-x-2">
           {navItems.map(renderNavItem)}
