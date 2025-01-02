@@ -21,7 +21,7 @@ const heroContent = {
     {
       title: 'Market Strategist',
       content:
-        'My focus involves identifying market opportunities and advising teams on how to utilize on-chain solutions to improve their products and services.',
+        'My focus involves identifying market opportunities and advising teams on how to utilize on-chain solutions to improve their products and services. ',
       backgroundColor: 'var(--color-secondary)',
     },
     {
