@@ -1,3 +1,5 @@
+const path = require('path');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
@@ -7,8 +9,7 @@ const nextConfig = {
     styledComponents: true,
   },
   experimental: {
-    optimizeCss: false,
-    appDir: true,
+    optimizeCss: false
   },
   webpack: (config) => {
     config.resolve.fallback = { 
