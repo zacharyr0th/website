@@ -1,25 +1,24 @@
-type SiteMetadata = {
-  siteName: string;
-  siteUrl: string;
-  description: string;
-  defaultTitle: string;
-  defaultDescription: string;
-  defaultImage: string;
-  defaultKeywords: string[];
+import type { Metadata, Viewport } from 'next';
+
+export const SITE_METADATA: Metadata = {
+  title: 'Zachary Tyler Roth - Software Engineer',
+  description: 'Software engineer focused on building beautiful, performant, and accessible web applications.',
+  keywords: ['software engineer', 'web development', 'react', 'nextjs', 'typescript'],
+  openGraph: {
+    title: 'Zachary Tyler Roth - Software Engineer',
+    description: 'Software engineer focused on building beautiful, performant, and accessible web applications.',
+    url: 'https://zacharytylerroth.com',
+    siteName: 'Zachary Tyler Roth',
+    images: [
+      {
+        url: '/images/og-image.png',
+      },
+    ],
+    type: 'website',
+  },
 };
 
-export const SITE_METADATA: SiteMetadata = {
-  siteName: 'Zachary Tyler Roth',
-  siteUrl: 'https://zacharytylerroth.com',
-  description: 'Personal website and portfolio of Zachary Tyler Roth',
-  defaultTitle: 'Zachary Tyler Roth - Software Engineer',
-  defaultDescription:
-    'Software engineer focused on building beautiful, performant, and accessible web applications.',
-  defaultImage: '/images/og-image.png',
-  defaultKeywords: ['software engineer', 'web development', 'react', 'nextjs', 'typescript'],
-} as const;
-
-export const SITE_VIEWPORT = {
+export const SITE_VIEWPORT: Viewport = {
   width: 'device-width',
   initialScale: 1,
   minimumScale: 1,

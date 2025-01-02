@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from 'next';
-import { SITE_METADATA, SITE_VIEWPORT } from '@/app/lib/layout/metadata';
-import '@/app/styles/globals.css';
+import { SITE_METADATA, SITE_VIEWPORT } from '@lib/layout/metadata';
+import '@styles/globals.css';
 import { Analytics } from '@vercel/analytics/react';
-import ClientWrapper from '@/app/components/layout/ClientWrapper';
+import ClientWrapper from '@components/layout/ClientWrapper';
 
 export const viewport: Viewport = SITE_VIEWPORT;
 export const metadata: Metadata = SITE_METADATA;
