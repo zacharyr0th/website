@@ -53,13 +53,6 @@ jest/
 .prettierrc*
 .editorconfig
 tsconfig.tsbuildinfo
-*.config.js
-!next.config.js
-!svelte.config.js
-!nuxt.config.js
-!vite.config.js
-!postcss.config.js
-!tailwind.config.js
 
 # IDE and Editor
 .vscode/
@@ -73,10 +66,8 @@ tsconfig.tsbuildinfo
 ###############################################
 
 # Dependencies
-node_modules/
 .pnp/
 .yarn/
-package-lock.json
 yarn.lock
 pnpm-lock.yaml
 
@@ -108,5 +99,4 @@ temp/
 # Documentation
 CONTRIBUTING.md
 CHANGELOG.md
-README.md
 docs/
