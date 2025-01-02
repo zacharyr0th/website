@@ -12,7 +12,6 @@
     "build": "rm -rf node_modules/.cache && npm install && next build",
     "start": "next start",
     "check": "tsc --noEmit && next lint --fix && prettier --write .",
-    "prepare": "husky install",
     "clean": "npx rimraf .next node_modules dist out package-lock.json",
     "reset": "npm run clean && npm cache clean --force && npm install && npm install && npm run build"
   },
@@ -38,8 +37,6 @@
     "swr": "^2.2.4"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.0.0",
-    "@commitlint/config-conventional": "^19.0.0",
     "@eslint/config-array": "^0.19.1",
     "@eslint/object-schema": "^2.1.5",
     "@types/node": "20.17.10",
@@ -56,7 +53,6 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "glob": "^11.0.0",
-    "husky": "^9.0.0",
     "postcss": "^8.4.49",
     "postcss-import": "^16.1.0",
     "postcss-nesting": "^13.0.1",
