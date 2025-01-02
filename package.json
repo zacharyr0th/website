@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "npm install && next build",
+    "build": "npm ci && next build",
     "start": "next start",
     "check": "tsc --noEmit && next lint --fix && prettier --write .",
     "prepare": "husky install",
@@ -34,7 +34,7 @@
     "remark": "^15.0.1",
     "remark-gfm": "^4.0.0",
     "remark-html": "^16.0.1",
-    "styled-jsx": "^5.1.2",
+    "styled-jsx": "5.1.2",
     "swr": "^2.2.4"
   },
   "devDependencies": {
