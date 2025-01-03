@@ -1,6 +1,6 @@
 import './styles/globals.css';
 import Navigation from './components/navigation/Navigation';
-import Footer from './components/misc/Footer';
+import ConditionalFooter from './components/ConditionalFooter';
 import { metadata } from './lib/metadata'
 
 export { metadata }
@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="relative flex min-h-screen flex-col max-w-[100vw]">
           {children}
         </main>
-        <Footer />
+        <ConditionalFooter />
       </body>
     </html>
   );

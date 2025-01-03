@@ -16,7 +16,7 @@ interface NavigationProps {
 const NavLink = memo(({ label, href, active }: NavItem & { active: boolean }) => (
   <li className={active ? 'max-sm:hidden' : ''}>
     <Link href={href}>
-      <NavButton variant="default" active={active}>
+      <NavButton active={active}>
         {label}
       </NavButton>
     </Link>
@@ -30,7 +30,7 @@ const NavContent = memo(({ pathname, themeButton, showHomeButton }: { pathname: 
       <div className="max-sm:hidden">
         <BlurBackground>
           <Link href="/" style={{ textDecoration: 'none' }}>
-            <NavButton variant="default" active={pathname === '/'}>
+            <NavButton active={pathname === '/'}>
               <span className="uppercase text-2xl">z</span>
             </NavButton>
           </Link>
@@ -43,7 +43,7 @@ const NavContent = memo(({ pathname, themeButton, showHomeButton }: { pathname: 
         {showHomeButton && pathname !== '/' && (
           <li className="sm:hidden">
             <Link href="/" style={{ textDecoration: 'none' }}>
-              <NavButton variant="default" active={pathname === '/'}>
+              <NavButton active={pathname === '/'}>
                 <span className="uppercase text-2xl">z</span>
               </NavButton>
             </Link>

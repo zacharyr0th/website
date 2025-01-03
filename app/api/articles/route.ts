@@ -11,9 +11,8 @@ import { NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
-import { Article } from '../../writing/types';
+import { Article, ARTICLE_CONFIG } from '../../writing/types';
 import {
-  ARTICLE_CONFIG,
   validateFrontmatter,
   createArticleFromFrontmatter,
 } from '../../writing/articles';

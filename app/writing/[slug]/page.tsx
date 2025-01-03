@@ -11,22 +11,33 @@ import { validateFrontmatter, createArticleFromFrontmatter } from '../articles';
 import ArticleContent from './ArticleContent';
 import { Metadata } from 'next';
 import { cache } from 'react';
+import { ARTICLE_CONFIG } from '../types';
 
-const articlesDirectory = path.join(process.cwd(), 'public/articles');
+const articlesDirectory = path.join(process.cwd(), ARTICLE_CONFIG.directory);
 
 interface PageParams {
   slug: string;
 }
 
-// Cache markdown processing
+// Enhanced markdown processor with better configuration
 const processMarkdown = cache(async (content: string) => {
   const result = await remark()
     .use(remarkParse)
     .use(remarkGfm)
     .use(remarkImages)
-    .use(html, { sanitize: false })
+    .use(html)
     .process(content);
-  return result.toString();
+
+  return result.toString()
+    // Add responsive image classes
+    .replace(/<img/g, '<img class="responsive-image" loading="lazy"')
+    // Add figure classes
+    .replace(/<figure/g, '<figure class="image-figure"')
+    // Add caption classes
+    .replace(/<figcaption/g, '<figcaption class="image-caption"')
+    // Add syntax highlighting classes
+    .replace(/<pre><code class="language-(\w+)">/g, (_, lang) => 
+      `<pre><code class="language-${lang} syntax-highlighted">`);
 });
 
 // Cache article loading

@@ -1,83 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { Article, ArticleFrontmatter, RawFrontmatter, ARTICLE_CONFIG } from './types';
 
-// Types
-export interface ArticleImage {
-  src: string;
-  alt: string;
-}
-
-export interface ArticleFrontmatter {
-  title: string;
-  date: string;
-  description?: string;
-  category?: string;
-  tags?: string[];
-  image?: ArticleImage;
-  featured?: boolean;
-  draft?: boolean;
-}
-
-export interface Article {
-  id: string;
-  slug: string;
-  title: string;
-  content: string;
-  date: string;
-  description?: string;
-  category?: string;
-  tags?: string[];
-  image?: ArticleImage;
-  link: string;
-  frontmatter: ArticleFrontmatter;
-}
-
-interface RawFrontmatter {
-  title?: string;
-  date?: string;
-  description?: string;
-  subtitle?: string;
-  category?: string;
-  tags?: string[];
-  image?: string | { src: string; alt?: string };
-  featured?: boolean;
-  draft?: boolean;
-}
-
-// Configuration
-export const ARTICLE_CONFIG = {
-  directory: path.join(process.cwd(), 'public/articles'),
-  maxDescriptionLength: 200,
-  maxTitleLength: 100,
-  maxFileSize: 1024 * 1024 * 5, // 5MB max file size
-  defaultImage: '/misc/placeholder.webp',
-  excerptLength: 150,
-  allowedCategories: [
-    'technology',
-    'finance',
-    'blockchain',
-    'development',
-    'tutorial',
-    'crypto',
-    'defi',
-    'analysis',
-  ] as const,
-  allowedTags: [
-    'web3',
-    'blockchain',
-    'defi',
-    'programming',
-    'tutorial',
-    'guide',
-    'analysis',
-    'opinion',
-    'crypto',
-    'finance',
-    'technology',
-    'development',
-  ] as const,
-} as const;
+const articlesDirectory = path.join(process.cwd(), ARTICLE_CONFIG.directory);
 
 // Utility Functions
 export function validateFrontmatter(data: unknown): ArticleFrontmatter {
@@ -198,13 +124,13 @@ export async function getArticles(): Promise<Article[]> {
   }
 
   try {
-    const fileNames = fs.readdirSync(ARTICLE_CONFIG.directory);
+    const fileNames = fs.readdirSync(articlesDirectory);
     const articles = fileNames
       .filter((fileName) => fileName.endsWith('.md'))
       .map((fileName) => {
         try {
           const slug = fileName.replace(/\.md$/, '');
-          const fullPath = path.join(ARTICLE_CONFIG.directory, fileName);
+          const fullPath = path.join(articlesDirectory, fileName);
           const fileContents = fs.readFileSync(fullPath, 'utf8');
           const { data, content } = matter(fileContents);
           const validatedFrontmatter = validateFrontmatter(data);

@@ -2,13 +2,8 @@
 
 import React, { memo } from 'react';
 import Image from 'next/image';
-import type { Article, ArticleImage as ArticleImageType } from '../types';
+import type { ArticleImage as ArticleImageType, ArticleContentProps } from '../types';
 import styles from '@/app/styles/article.module.css';
-
-interface ArticleContentProps {
-  article: Article;
-  contentHtml: string;
-}
 
 const ArticleHeader = memo<{ title: string; description: string | undefined }>(({ title, description }) => (
   <header className={styles.header}>
@@ -25,7 +20,7 @@ const ArticleImage = memo<{ image: ArticleImageType; title: string }>(({ image, 
       src={image.src}
       alt={image.alt || `Featured image for article: ${title}`}
       fill
-      className={styles.featuredImageInner}
+      className={`${styles.featuredImageInner} rounded-xl`}
       loading="lazy"
       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 800px, 1200px"
     />

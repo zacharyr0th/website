@@ -1,6 +1,6 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface CategoryCardProps {
   category: {
@@ -13,10 +13,10 @@ interface CategoryCardProps {
 }
 
 const CategoryCard = memo(({ category, index }: CategoryCardProps) => {
-  const variants = {
+  const variants = useMemo(() => ({
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
-  };
+  }), []);
 
   return (
     <motion.div
@@ -25,6 +25,7 @@ const CategoryCard = memo(({ category, index }: CategoryCardProps) => {
       animate="visible"
       transition={{ duration: 0.3, delay: index * 0.1 }}
       className="w-full h-full"
+      layout
     >
       <Link href={`/audio/${category.slug}`} className="block h-full" aria-label={category.title}>
         <motion.div
@@ -34,17 +35,25 @@ const CategoryCard = memo(({ category, index }: CategoryCardProps) => {
             borderColor: 'var(--color-border)',
             boxShadow: 'var(--shadow-sm)',
           }}
+          whileHover={{ scale: 1.01 }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
         >
           <div className="p-4 sm:p-6 flex flex-col h-full">
             <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-3">
               <h2 className="text-lg sm:text-xl font-medium text-[var(--color-text-primary)] group-hover:text-accent transition-colors">
                 {category.title}
               </h2>
-              {category.status === 'coming-soon' && (
-                <span className="text-xs sm:text-sm text-[var(--color-text-secondary)]">
-                  (Coming Soon)
-                </span>
-              )}
+              <AnimatePresence>
+                {category.status === 'coming-soon' && (
+                  <motion.span 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="text-xs sm:text-sm text-[var(--color-text-secondary)]"
+                  >
+                    (Coming Soon)
+                  </motion.span>
+                )}
+              </AnimatePresence>
             </div>
             <p className="text-sm text-[var(--color-text-secondary)]">{category.description}</p>
             <div className="inline-flex items-center text-accent/40 text-sm mb-4">
@@ -66,7 +75,14 @@ const CategoryCard = memo(({ category, index }: CategoryCardProps) => {
               </svg>
             </div>
           </div>
-          <div className="absolute bottom-0 left-0 right-0 h-0.5 sm:h-1 bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300" />
+          <div 
+            className="absolute inset-x-0 bottom-0 h-1.5 sm:h-2.5 bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300 rounded-b-lg" 
+            style={{ 
+              marginTop: '-1px',
+              borderBottomLeftRadius: '8px',
+              borderBottomRightRadius: '8px',
+            }}
+          />
         </motion.div>
       </Link>
     </motion.div>

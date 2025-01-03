@@ -11,7 +11,7 @@ const PAGE_SIZE = 20;
 // Error State
 const ErrorState = () => (
   <div 
-    className="bg-surface/50 rounded-xl p-8 space-y-4" 
+    className="bg-surface/50 rounded-xl p-8 space-y-4 shadow-article-image" 
     role="alert"
     aria-live="polite"
   >
@@ -25,7 +25,7 @@ const ErrorState = () => (
 // Empty State
 const EmptyState = () => (
   <div 
-    className="bg-surface/50 rounded-xl p-8 space-y-4"
+    className="bg-surface/50 rounded-xl p-8 space-y-4 shadow-article-image"
     role="status"
     aria-live="polite"
   >
@@ -36,10 +36,11 @@ const EmptyState = () => (
   </div>
 );
 
-// Cached article fetching
+// Cached article fetching with better error handling
 const getArticlesWithCache = cache(async () => {
   try {
     const articles = await getArticles();
+    console.log('Fetched articles:', articles.length); // Debug log
     return {
       articles,
       error: null,
@@ -61,11 +62,11 @@ export default async function WritingPage() {
       className="content-page font-mono bg-gradient-to-b from-background to-surface/30 min-h-screen pb-24"
       role="main"
     >
-      <main className="container mx-auto px-6 sm:px-8 pt-24 sm:pt-36">
-        <div style={{ maxWidth: 'var(--article-width)' }} className="mx-auto">
-          <header className="mb-8">
+      <main className="container-responsive pt-24 sm:pt-36">
+        <div className="mx-auto" style={{ maxWidth: 'var(--article-width)' }}>
+          <header className="mb-12">
             <h1 
-              className="text-4xl md:text-5xl font-bold"
+              className="text-4xl md:text-5xl font-bold text-text-primary heading-responsive"
               id="writing-header"
             >
               Writing
@@ -78,13 +79,27 @@ export default async function WritingPage() {
             <EmptyState />
           ) : (
             <div 
-              className="flex flex-col gap-32"
+              className="flex flex-col gap-4 sm:gap-8"
               aria-labelledby="writing-header"
             >
-              <Suspense fallback={<LoadingState label="Loading featured articles" height="h-[500px]" barCount={3} />}>
+              <Suspense fallback={
+                <LoadingState 
+                  label="Loading featured articles" 
+                  height="h-[500px]" 
+                  barCount={3}
+                  className="rounded-xl shadow-article-image" 
+                />
+              }>
                 <Hero articles={articles.slice(0, PAGE_SIZE)} />
               </Suspense>
-              <Suspense fallback={<LoadingState label="Loading article archive" height="h-96" barCount={4} />}>
+              <Suspense fallback={
+                <LoadingState 
+                  label="Loading article archive" 
+                  height="h-96" 
+                  barCount={4}
+                  className="rounded-xl shadow-article-image" 
+                />
+              }>
                 <ArchiveSection articles={articles.slice(0, PAGE_SIZE)} />
               </Suspense>
             </div>

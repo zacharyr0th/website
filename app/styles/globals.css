@@ -160,8 +160,11 @@
 
   /* Hover Effects */
   .hover-fade { @apply transition-opacity hover:opacity-80; }
-  .hover-lift { @apply transition-transform hover:-translate-y-0.5; }
   .hover-scale { @apply transition-transform hover:scale-105; }
+  .hover-bounce {
+    @apply transition-all duration-300 ease-in-out hover:scale-[1.02] hover:shadow-lg active:-translate-y-1 hover:cursor-pointer will-change-transform;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
 
   /* Typography */
   .text-balance { text-wrap: balance; }

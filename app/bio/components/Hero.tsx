@@ -3,50 +3,115 @@ import { motion } from 'framer-motion';
 import ProfileImage from '../../components/misc/ProfileImage';
 import { BIO, SOCIAL_LINKS } from '../constants';
 
+const springTransition = {
+  type: "spring",
+  stiffness: 200,
+  damping: 20
+};
+
 export const Hero = React.memo(() => (
   <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    className="flex flex-col md:flex-row gap-8 items-center mb-12"
+    className="relative flex flex-col md:flex-row gap-6 items-center rounded-xl p-6 mt-32 bg-surface/30 backdrop-blur-md border border-white/5 shadow-lg"
+    variants={{
+      hidden: { opacity: 0, y: 20 },
+      visible: { 
+        opacity: 1, 
+        y: 0,
+        transition: {
+          ...springTransition,
+          staggerChildren: 0.1
+        }
+      }
+    }}
   >
-    <ProfileImage />
-    <div className="text-center md:text-left max-w-2xl">
+    <motion.div
+      variants={{
+        hidden: { scale: 0.8, opacity: 0 },
+        visible: { 
+          scale: 1, 
+          opacity: 1,
+          transition: springTransition
+        }
+      }}
+      className="relative w-24 md:w-28"
+    >
+      <motion.div 
+        className="absolute -inset-1 bg-gradient-to-r from-accent/20 to-secondary/20 rounded-full blur-sm"
+        animate={{ 
+          scale: [1, 1.05, 1],
+          opacity: [0.5, 0.7, 0.5]
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      <ProfileImage size="sm" clickable={false} />
+    </motion.div>
+
+    <div className="flex-1 text-center md:text-left">
       <motion.h1
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-        className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary via-accent to-secondary 
-                   bg-clip-text text-transparent"
+        variants={{
+          hidden: { opacity: 0, y: 20 },
+          visible: { 
+            opacity: 1, 
+            y: 0,
+            transition: springTransition
+          }
+        }}
+        className="text-3xl sm:text-4xl font-bold mb-1 text-text-primary"
       >
         {BIO.name}
       </motion.h1>
       <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3 }}
-        className="text-xl mb-6 text-muted"
+        variants={{
+          hidden: { opacity: 0, y: 20 },
+          visible: { 
+            opacity: 1, 
+            y: 0,
+            transition: springTransition
+          }
+        }}
+        className="text-lg sm:text-xl mb-4 text-text-secondary"
       >
         {BIO.title}
       </motion.p>
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.4 }}
+        variants={{
+          hidden: { opacity: 0 },
+          visible: { 
+            opacity: 1,
+            transition: {
+              staggerChildren: 0.1,
+              delayChildren: 0.2
+            }
+          }
+        }}
         className="flex gap-4 justify-center md:justify-start"
       >
-        {SOCIAL_LINKS.map(({ icon: Icon, href, label }, index) => (
+        {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (
           <motion.a
             key={label}
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.1 }}
+            variants={{
+              hidden: { opacity: 0, scale: 0.8 },
+              visible: { 
+                opacity: 1, 
+                scale: 1,
+                transition: springTransition
+              }
+            }}
+            whileHover={{ 
+              scale: 1.1, 
+              y: -2,
+              transition: { type: "spring", stiffness: 400, damping: 10 }
+            }}
             whileTap={{ scale: 0.95 }}
-            className="text-2xl text-muted hover:text-accent transition-colors"
+            className="text-2xl text-text-secondary hover:text-accent transition-all duration-300"
             aria-label={label}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 + index * 0.1 }}
           >
             <Icon />
           </motion.a>

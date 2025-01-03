@@ -1,12 +1,8 @@
 'use client';
 
 import React, { memo, useMemo } from 'react';
-import { Article } from '../types';
+import { ArchiveSectionProps } from '../types';
 import { ArticleCard } from './ArticleCard';
-
-interface ArchiveSectionProps {
-  articles: Article[];
-}
 
 export const ArchiveSection = memo<ArchiveSectionProps>(({ articles }) => {
   const archiveArticles = useMemo(() => articles.slice(1), [articles]);
@@ -15,14 +11,28 @@ export const ArchiveSection = memo<ArchiveSectionProps>(({ articles }) => {
 
   return (
     <section className="space-y-8" aria-labelledby="archive-heading">
-      <h2 id="archive-heading" className="text-3xl font-bold">Archive</h2>
+      <div className="flex items-baseline justify-between">
+        <h2 
+          id="archive-heading" 
+          className="text-3xl font-bold text-text-primary heading-responsive"
+        >
+          Archive
+        </h2>
+        <span className="text-text-secondary text-sm">
+          {archiveArticles.length} articles
+        </span>
+      </div>
       <div 
-        className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+        className="grid-responsive"
         role="list"
         aria-label="Archive articles grid"
       >
         {archiveArticles.map((article) => (
-          <div key={article.slug} role="listitem">
+          <div 
+            key={article.slug} 
+            role="listitem" 
+            className="transform transition-base"
+          >
             <ArticleCard article={article} />
           </div>
         ))}

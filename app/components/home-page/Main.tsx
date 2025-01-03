@@ -2,6 +2,7 @@
 
 import React, { memo } from 'react';
 import Link from 'next/link';
+import { motion, useInView } from 'framer-motion';
 import { PROJECTS } from '@projects/projects';
 import ProjectCard from '../../projects/ProjectCard';
 
@@ -51,39 +52,100 @@ const WritingCard = memo(({ article }: WritingCardProps) => (
 
 WritingCard.displayName = 'WritingCard';
 
+const Section = memo(({ children, id, title, className }: { children: React.ReactNode, id: string, title: string, className: string }) => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  return (
+    <motion.section
+      ref={ref}
+      className={className}
+      aria-labelledby={id}
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <div className="max-w-5xl mx-auto">
+        <motion.h2 
+          id={id}
+          className="text-4xl font-bold mb-8 text-text-primary"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          {title}
+        </motion.h2>
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          {children}
+        </motion.div>
+      </div>
+    </motion.section>
+  );
+});
+
+Section.displayName = 'Section';
+
+const ProjectGrid = memo(({ projects }: { projects: typeof PROJECTS }) => {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 auto-rows-fr">
+      {projects.map((project) => (
+        <motion.div 
+          key={project.id}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
+          <ProjectCard project={project} />
+        </motion.div>
+      ))}
+    </div>
+  );
+});
+
+ProjectGrid.displayName = 'ProjectGrid';
+
+const WritingGrid = memo(({ articles }: { articles: typeof WRITING_PROJECTS }) => {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
+      {articles.map((article) => (
+        <motion.div 
+          key={article.link}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
+          <WritingCard article={article} />
+        </motion.div>
+      ))}
+    </div>
+  );
+});
+
+WritingGrid.displayName = 'WritingGrid';
+
 export const Main = memo(() => (
   <>
-    <section
+    <Section
+      id="section-always-building"
+      title="Always Building"
       className="w-full pt-16 pb-16 px-4 bg-background"
-      aria-labelledby="section-always-building"
     >
-      <div className="max-w-5xl mx-auto">
-        <h2 id="section-always-building" className="text-4xl font-bold mb-8 text-text-primary">
-          Always Building
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 auto-rows-fr">
-          {PROJECTS.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
-      </div>
-    </section>
+      <ProjectGrid projects={PROJECTS} />
+    </Section>
 
-    <section
+    <Section
+      id="section-sometimes-writing"
+      title="Sometimes Writing"
       className="w-full pt-16 pb-16 px-4 bg-surface"
-      aria-labelledby="section-sometimes-writing"
     >
-      <div className="max-w-5xl mx-auto">
-        <h2 id="section-sometimes-writing" className="text-4xl font-bold mb-8 text-text-primary">
-          Sometimes Writing
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
-          {WRITING_PROJECTS.map((article) => (
-            <WritingCard key={article.link} article={article} />
-          ))}
-        </div>
-      </div>
-    </section>
+      <WritingGrid articles={WRITING_PROJECTS} />
+    </Section>
   </>
 ));
 

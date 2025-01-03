@@ -1,10 +1,11 @@
 import React, { useState, MouseEvent } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, TargetAndTransition } from 'framer-motion';
 import Image from 'next/image';
 
 interface ProfileImageProps {
   size?: 'sm' | 'md' | 'lg';
   editable?: boolean;
+  clickable?: boolean;
   onImageChange?: (file: File) => void;
 }
 
@@ -14,10 +15,13 @@ const sizes = {
   lg: 'w-96',
 };
 
-const ProfileImage = ({ size = 'md', editable = false, onImageChange }: ProfileImageProps) => {
+const hoverScale: TargetAndTransition = { scale: 1.05 };
+const tapScale: TargetAndTransition = { scale: 0.95 };
+
+const ProfileImage = ({ size = 'md', editable = false, clickable = true, onImageChange }: ProfileImageProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleClick = () => setIsModalOpen(true);
+  const handleClick = () => clickable && setIsModalOpen(true);
   const handleClose = () => setIsModalOpen(false);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,9 +35,10 @@ const ProfileImage = ({ size = 'md', editable = false, onImageChange }: ProfileI
     <>
       <motion.div
         className={`profile-image relative aspect-square ${sizes[size]}`}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={clickable ? hoverScale : {}}
+        whileTap={clickable ? tapScale : {}}
         onClick={handleClick}
+        style={{ cursor: clickable ? 'pointer' : 'default' }}
       >
         <Image
           src="/misc/profile-picture.webp"

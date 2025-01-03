@@ -4,15 +4,17 @@ interface LoadingStateProps {
   label?: string;
   height?: string;
   barCount?: number;
+  className?: string;
 }
 
 export const LoadingState = ({
   label = 'Loading content',
   height = 'h-64',
   barCount = 2,
+  className = '',
 }: LoadingStateProps) => (
   <div className="animate-pulse space-y-8" aria-label={label}>
-    <div className={`${height} bg-surface/50 rounded-xl`} aria-hidden="true" />
+    <div className={`${height} bg-surface/50 rounded-xl ${className}`} aria-hidden="true" />
     <div className="space-y-4">
       {Array.from({ length: barCount }).map((_, i) => (
         <div

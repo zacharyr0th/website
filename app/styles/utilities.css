@@ -1,0 +1,138 @@
+@tailwind utilities;
+
+@layer utilities {
+  /* Transitions & Effects */
+  .transition-base {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  .hover-fade {
+    @apply transition-opacity hover:opacity-80;
+  }
+
+  .hover-lift {
+    @apply transition-transform hover:-translate-y-0.5;
+  }
+
+  .hover-scale {
+    @apply transition-transform hover:scale-105;
+  }
+
+  /* Text */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .truncate-lines {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .truncate-2 {
+    @apply truncate-lines;
+    -webkit-line-clamp: 2;
+  }
+
+  .truncate-3 {
+    @apply truncate-lines;
+    -webkit-line-clamp: 3;
+  }
+
+  /* Flexbox */
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+
+  .flex-between {
+    @apply flex justify-between items-center;
+  }
+
+  .flex-start {
+    @apply flex justify-start items-center;
+  }
+
+  .flex-end {
+    @apply flex justify-end items-center;
+  }
+
+  /* Grid */
+  .grid-auto-fit {
+    @apply grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  }
+
+  .grid-auto-fill {
+    @apply grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  }
+
+  /* Shadows */
+  .shadow-base {
+    box-shadow: var(--shadow-md);
+  }
+
+  .shadow-hover {
+    @apply transition-shadow duration-300;
+    &:hover {
+      box-shadow: var(--shadow-lg);
+    }
+  }
+
+  /* Touch */
+  .touch-target {
+    min-height: var(--min-touch-target);
+    min-width: var(--min-touch-target);
+  }
+
+  /* Container */
+  .content-container {
+    @apply mx-auto px-4;
+    max-width: var(--max-content-width);
+  }
+
+  .reading-container {
+    @apply mx-auto;
+    max-width: var(--max-reading-width);
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn var(--transition-speed) ease-in-out;
+}
+
+.fade-out {
+  animation: fadeOut var(--transition-speed) ease-in-out;
+}
+
+.slide-in {
+  animation: slideIn var(--transition-speed) ease-in-out;
+}

@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useCallback, memo, useMemo } from 'react';
+import React, { useState, useCallback, memo, useMemo } from 'react';
+import { motion, useInView } from 'framer-motion';
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -25,6 +26,8 @@ const initialState: NewsletterFormState = {
 
 export const Newsletter = memo(() => {
   const [{ email, status, message }, setState] = useState<NewsletterFormState>(initialState);
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const handleEmailChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -77,11 +80,28 @@ export const Newsletter = memo(() => {
 
   return (
     <section className="bg-[var(--color-background)] py-8 sm:py-16">
-      <div className="container mx-auto px-4 sm:px-6">
-        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 sm:mb-8 text-[var(--color-text-primary)]">
+      <motion.div 
+        ref={ref}
+        className="container mx-auto px-4 sm:px-6"
+        initial={{ opacity: 0, y: 30 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <motion.h2 
+          className="text-2xl sm:text-3xl font-bold text-center mb-6 sm:mb-8 text-[var(--color-text-primary)]"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
           Subscribe for Updates
-        </h2>
-        <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+        </motion.h2>
+        <motion.form 
+          onSubmit={handleSubmit} 
+          className="max-w-md mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
           <div className="flex flex-col space-y-4">
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center border-b border-[var(--color-secondary)] py-2 transition-colors duration-200 focus-within:border-accent">
               <input
@@ -109,8 +129,8 @@ export const Newsletter = memo(() => {
             </div>
             {message && <p className={messageClassName}>{message}</p>}
           </div>
-        </form>
-      </div>
+        </motion.form>
+      </motion.div>
     </section>
   );
 });
