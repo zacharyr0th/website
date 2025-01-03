@@ -450,3 +450,4 @@ build/
 **/*.po
 **/locale-backup/
 **/translations-backup/
+.vercel
