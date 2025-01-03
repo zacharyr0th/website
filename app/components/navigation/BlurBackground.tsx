@@ -56,26 +56,29 @@ const BlurBackground: React.FC<BlurBackgroundProps> = ({ children, className = '
     };
   }, []);
 
+  const sharedClassName = `rounded-3xl px-4 pt-4 flex items-center justify-center text-center ${className}`;
+
   if (!mounted) {
     return (
-      <div className={`rounded-3xl px-3 py-1 max-sm:px-2 flex items-center justify-center text-center ${className}`}>
+      <div className={sharedClassName}>
         {children}
       </div>
     );
   }
 
   const backgroundStyle: CSSProperties = {
-    backgroundColor: `rgb(var(--background) / ${hasBackground ? 0.8 : 0.1})`,
+    backgroundColor: `rgb(var(--background) / ${hasBackground ? 0.95 : 0.1})`,
     backdropFilter: `blur(${hasBackground ? blurIntensity * 12 : 4}px)`,
     WebkitBackdropFilter: `blur(${hasBackground ? blurIntensity * 12 : 4}px)`,
     position: 'relative',
     zIndex: 1,
+    color: hasBackground ? 'var(--color-text-primary)' : 'inherit',
   };
 
   return (
     <div
       ref={elementRef}
-      className={`rounded-3xl px-3 py-1 max-sm:px-2 flex items-center justify-center text-center ${className}`}
+      className={sharedClassName}
       style={backgroundStyle}
     >
       {children}

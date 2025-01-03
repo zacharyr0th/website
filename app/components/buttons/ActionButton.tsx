@@ -5,8 +5,7 @@ import { BaseButton, BaseButtonProps } from './BaseButton';
 const buttonStyles = {
   primary: {
     backgroundColor: 'var(--color-primary)',
-    color: 'var(--color-white)',
-    boxShadow: 'var(--box-shadow)',
+    color: 'var(--color-text-primary)',
   },
   secondary: {
     backgroundColor: 'var(--color-surface)',
@@ -24,7 +23,7 @@ export const ActionButton = React.forwardRef<HTMLButtonElement, ActionButtonProp
     return (
       <BaseButton
         ref={ref}
-        className={`px-6 py-2 rounded-full transition-colors duration-300 ${className}`}
+        className={`px-6 py-2 rounded-full transition-colors duration-300 w-full sm:w-auto ${className}`}
         style={buttonStyles[variant]}
         {...props}
       />
@@ -32,4 +31,4 @@ export const ActionButton = React.forwardRef<HTMLButtonElement, ActionButtonProp
   }
 );
 
-ActionButton.displayName = 'ActionButton';
+ActionButton.displayName = 'ActionButton'; 

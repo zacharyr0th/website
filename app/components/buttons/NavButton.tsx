@@ -1,35 +1,37 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { BaseButton, BaseButtonProps } from './BaseButton';
 
-const buttonStyles = {
-  default: (active: boolean | undefined) => ({
-    backgroundColor: active ? 'var(--color-surface)' : 'transparent',
-    color: active ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
-    border: active ? '1px solid var(--color-accent)' : '1px solid transparent',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: '2.5rem',
-  }),
-} as const;
+const getButtonStyle = (active: boolean | undefined) => ({
+  backgroundColor: active ? 'var(--color-surface)' : 'transparent',
+  color: active ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  minHeight: '2.5rem',
+});
 
 export interface NavButtonProps extends BaseButtonProps {
   variant?: 'default';
 }
 
-export const NavButton = React.forwardRef<HTMLButtonElement, NavButtonProps>(
-  ({ variant = 'default', active, className = '', ...props }, ref) => {
-    return (
-      <BaseButton
-        ref={ref}
-        className={`interactive-button px-3 py-1 rounded-full text-lg my-auto${
-          active ? 'shadow-sm' : ''
-        } ${className}`}
-        style={buttonStyles[variant](active)}
-        {...props}
-      />
-    );
-  }
+export const NavButton = React.memo(
+  React.forwardRef<HTMLButtonElement, NavButtonProps>(
+    ({ variant = 'default', active, className = '', ...props }, ref) => {
+      const style = useMemo(() => getButtonStyle(active), [active]);
+      const buttonClassName = `interactive-button px-3 rounded-full text-lg${
+        active ? ' shadow-sm' : ''
+      } ${className}`;
+
+      return (
+        <BaseButton
+          ref={ref}
+          className={buttonClassName}
+          style={style}
+          {...props}
+        />
+      );
+    }
+  )
 );
 
-NavButton.displayName = 'NavButton';
+NavButton.displayName = 'NavButton'; 

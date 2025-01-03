@@ -6,4 +6,4 @@ export interface ButtonProps {
   className?: string;
   size?: 'sm' | 'md' | 'lg';
   ariaLabel?: string;
-}
+} 

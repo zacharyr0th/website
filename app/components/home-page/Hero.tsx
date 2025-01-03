@@ -83,19 +83,15 @@ const StickyHeader = memo(() => {
           Aptos Labs
         </a>
       </p>
-      <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
-        <div className="w-full sm:w-auto">
-          <ActionButton variant="primary" onClick={handleOpenModal} size="md" className="w-full sm:w-auto">
-            Connect
+      <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+        <ActionButton variant="primary" onClick={handleOpenModal} size="md">
+          Connect
+        </ActionButton>
+        <Link href="/bio" passHref>
+          <ActionButton variant="secondary" size="md">
+            Bio
           </ActionButton>
-        </div>
-        <div className="w-full sm:w-auto">
-          <Link href="/bio" passHref className="w-full">
-            <ActionButton variant="secondary" size="md" className="w-full sm:w-auto">
-              Bio
-            </ActionButton>
-          </Link>
-        </div>
+        </Link>
       </div>
       <ConnectModal isOpen={isModalOpen} onClose={handleCloseModal} />
     </div>

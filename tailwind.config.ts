@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import type { PluginUtils } from 'tailwindcss/types/config';
 
 const config: Config = {
   content: [
@@ -21,65 +22,43 @@ const config: Config = {
         warning: 'var(--color-warning)',
         info: 'var(--color-info)',
       },
-      typography: {
+      typography: ({ theme }: PluginUtils) => ({
         DEFAULT: {
           css: {
-            color: 'var(--color-text-primary)',
+            '--tw-prose-body': 'var(--color-text-primary)',
+            '--tw-prose-headings': 'var(--color-text-primary)',
+            '--tw-prose-links': 'var(--color-accent)',
+            '--tw-prose-bold': 'var(--color-text-primary)',
+            '--tw-prose-quotes': 'var(--color-text-secondary)',
+            '--tw-prose-code': 'var(--color-text-primary)',
+            '--tw-prose-pre-code': 'var(--color-text-primary)',
+            '--tw-prose-pre-bg': 'var(--color-surface)',
             maxWidth: '100%',
-            h1: {
-              color: 'var(--color-text-primary)',
-            },
-            h2: {
-              color: 'var(--color-text-primary)',
-            },
-            h3: {
-              color: 'var(--color-text-primary)',
-            },
-            h4: {
-              color: 'var(--color-text-primary)',
-            },
-            p: {
-              color: 'var(--color-text-primary)',
-            },
             a: {
-              color: 'var(--color-accent)',
               '&:hover': {
                 color: 'var(--color-accent-hover)',
               },
             },
-            strong: {
-              color: 'var(--color-text-primary)',
-            },
-            blockquote: {
-              color: 'var(--color-text-secondary)',
-              borderLeftColor: 'var(--color-surface)',
-            },
             code: {
-              color: 'var(--color-text-primary)',
               backgroundColor: 'var(--color-surface)',
-              borderRadius: '0.375rem',
+              borderRadius: theme('borderRadius.md'),
               padding: '0.25rem 0.5rem',
-            },
-            'code::before': {
-              content: '""',
-            },
-            'code::after': {
-              content: '""',
-            },
-            pre: {
-              backgroundColor: 'var(--color-surface)',
-              color: 'var(--color-text-primary)',
-              borderRadius: '0.5rem',
+              '&::before': { content: '""' },
+              '&::after': { content: '""' },
             },
             img: {
-              borderRadius: '0.5rem',
-              marginTop: '2rem',
-              marginBottom: '2rem',
-              boxShadow: 'var(--shadow-lg)',
+              borderRadius: theme('borderRadius.xl'),
+              marginTop: theme('spacing.8'),
+              marginBottom: theme('spacing.8'),
+              boxShadow: theme('boxShadow.article-image'),
+              position: 'relative',
+              display: 'block',
+              width: '100%',
+              height: 'auto',
             },
           },
         },
-      },
+      }),
       fontSize: {
         base: 'var(--font-size-base)',
       },
@@ -100,6 +79,7 @@ const config: Config = {
       },
       boxShadow: {
         DEFAULT: 'var(--box-shadow)',
+        'article-image': '0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.05)',
       },
     },
   },

@@ -25,7 +25,7 @@ const ArticleImage = memo<{ image: ArticleImageType; title: string }>(({ image, 
       src={image.src}
       alt={image.alt || `Featured image for article: ${title}`}
       fill
-      className="object-cover"
+      className={styles.featuredImageInner}
       loading="lazy"
       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 800px, 1200px"
     />
