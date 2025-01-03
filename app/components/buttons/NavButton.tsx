@@ -10,7 +10,7 @@ const getButtonStyle = (active: boolean | undefined) => ({
   minHeight: '2.5rem',
 });
 
-interface NavButtonProps {
+export interface NavButtonProps {
   href?: string;
   children: React.ReactNode;
   className?: string;
