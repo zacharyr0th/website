@@ -12,9 +12,9 @@ const WRITING_PROJECTS = [
     link: '/writing/birdseye-view'
   },
   {
-    title: 'Building SimpleOS',
-    description: 'A deep dive into operating system development and low-level programming concepts.',
-    link: '/writing/simple-os'
+    title: 'Web 1',
+    description: 'A cross generational perspective on the internet.',
+    link: '/writing/web-1'
   },
   {
     title: 'MusicIDE',
