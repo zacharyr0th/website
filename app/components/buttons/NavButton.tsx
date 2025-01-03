@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { BaseButton } from './BaseButton';
+import { ButtonSize } from './BaseButton';
 
 const getButtonStyle = (active: boolean | undefined) => ({
   backgroundColor: active ? 'var(--color-surface)' : 'transparent',
@@ -15,11 +16,13 @@ export interface NavButtonProps {
   children: React.ReactNode;
   className?: string;
   active?: boolean;
+  onClick?: () => void;
+  size?: ButtonSize;
 }
 
 export const NavButton = React.memo(
   React.forwardRef<HTMLButtonElement, NavButtonProps>(
-    ({ active, className = '', ...props }, ref) => {
+    ({ active, className = '', size = 'md', ...props }, ref) => {
       const style = useMemo(() => getButtonStyle(active), [active]);
       const buttonClassName = `interactive-button px-3 rounded-full text-lg${
         active ? ' shadow-sm' : ''
@@ -30,6 +33,7 @@ export const NavButton = React.memo(
           ref={ref}
           className={buttonClassName}
           style={style}
+          size={size}
           {...props}
         />
       );

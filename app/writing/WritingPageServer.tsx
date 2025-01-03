@@ -1,4 +1,4 @@
-import { Article } from './articles';
+import type { Article } from './types';
 import { headers } from 'next/headers';
 
 const FETCH_TIMEOUT_MS = 5000; // 5 seconds timeout
