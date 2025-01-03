@@ -4,35 +4,9 @@ import React, { memo, useState, useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import BackgroundSVG from './backgrounds/HeroBackground';
-import ConnectModal from '../common/misc/ConnectModal';
-import { ActionButton } from '../common/buttons';
-
-const heroContent = {
-  name: 'Zachary Roth',
-  title: 'Head of Growth, DeFi & AI @ ',
-  aptosLink: 'https://aptoslabs.com/',
-  sections: [
-    {
-      title: 'Ecosystem Analyst',
-      content:
-        'Curious analyst and builder with experience across the Bitcoin, Ethereum, Solana, and Aptos ecosystems.',
-      backgroundColor: 'var(--color-primary)',
-    },
-    {
-      title: 'Market Strategist',
-      content:
-        'My focus involves identifying market opportunities and advising teams on how to utilize on-chain solutions to improve their products and services. ',
-      backgroundColor: 'var(--color-secondary)',
-    },
-    {
-      title: 'Writer',
-      content:
-        'I write about technology and finance, bringing a wide-ranging perspective to each topic.',
-      backgroundColor: 'var(--color-accent)',
-    },
-  ],
-  chainLogos: ['bitcoin', 'ethereum', 'solana', 'aptos'],
-};
+import ConnectModal from '../misc/ConnectModal';
+import { ActionButton } from '../buttons/ActionButton';
+import { heroContent } from './constants';
 
 const ChainLogo = memo<{ logo: string }>(({ logo }) => (
   <div className="chain-logo w-12 h-12">
@@ -109,15 +83,19 @@ const StickyHeader = memo(() => {
           Aptos Labs
         </a>
       </p>
-      <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
-        <ActionButton variant="primary" onClick={handleOpenModal} size="md">
-          Connect
-        </ActionButton>
-        <Link href="/bio" passHref>
-          <ActionButton variant="secondary" size="md">
-            Bio
+      <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
+        <div className="w-full sm:w-auto">
+          <ActionButton variant="primary" onClick={handleOpenModal} size="md" className="w-full sm:w-auto">
+            Connect
           </ActionButton>
-        </Link>
+        </div>
+        <div className="w-full sm:w-auto">
+          <Link href="/bio" passHref className="w-full">
+            <ActionButton variant="secondary" size="md" className="w-full sm:w-auto">
+              Bio
+            </ActionButton>
+          </Link>
+        </div>
       </div>
       <ConnectModal isOpen={isModalOpen} onClose={handleCloseModal} />
     </div>

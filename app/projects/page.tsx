@@ -42,10 +42,8 @@ export default function ProjectsPage() {
 
   const filteredProjects = useMemo(() => {
     if (selectedCategory === 'all') return PROJECTS;
-    return PROJECTS.filter(
-      (project) =>
-        project.category === selectedCategory ||
-        project.tags?.some((tag) => tag.toLowerCase().includes(selectedCategory))
+    return PROJECTS.filter((project) =>
+      project.categories.includes(selectedCategory as ProjectCategory)
     );
   }, [selectedCategory]);
 
@@ -61,7 +59,7 @@ export default function ProjectsPage() {
       variants={containerVariants}
     >
       <main className="container mx-auto px-6 sm:px-8 pt-24 sm:pt-36 pb-24">
-        <div className="max-w-6xl mx-auto space-y-8">
+        <div style={{ maxWidth: 'var(--article-width)' }} className="mx-auto space-y-8">
           <motion.header className="space-y-4" variants={itemVariants}>
             <h1 className="text-4xl md:text-5xl font-bold">Projects</h1>
           </motion.header>
@@ -74,7 +72,7 @@ export default function ProjectsPage() {
           </motion.div>
 
           <motion.div
-            className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+            className="grid gap-8 md:grid-cols-2"
             variants={containerVariants}
           >
             {filteredProjects.map((project) => (

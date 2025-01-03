@@ -21,7 +21,65 @@ const config: Config = {
         warning: 'var(--color-warning)',
         info: 'var(--color-info)',
       },
-
+      typography: {
+        DEFAULT: {
+          css: {
+            color: 'var(--color-text-primary)',
+            maxWidth: '100%',
+            h1: {
+              color: 'var(--color-text-primary)',
+            },
+            h2: {
+              color: 'var(--color-text-primary)',
+            },
+            h3: {
+              color: 'var(--color-text-primary)',
+            },
+            h4: {
+              color: 'var(--color-text-primary)',
+            },
+            p: {
+              color: 'var(--color-text-primary)',
+            },
+            a: {
+              color: 'var(--color-accent)',
+              '&:hover': {
+                color: 'var(--color-accent-hover)',
+              },
+            },
+            strong: {
+              color: 'var(--color-text-primary)',
+            },
+            blockquote: {
+              color: 'var(--color-text-secondary)',
+              borderLeftColor: 'var(--color-surface)',
+            },
+            code: {
+              color: 'var(--color-text-primary)',
+              backgroundColor: 'var(--color-surface)',
+              borderRadius: '0.375rem',
+              padding: '0.25rem 0.5rem',
+            },
+            'code::before': {
+              content: '""',
+            },
+            'code::after': {
+              content: '""',
+            },
+            pre: {
+              backgroundColor: 'var(--color-surface)',
+              color: 'var(--color-text-primary)',
+              borderRadius: '0.5rem',
+            },
+            img: {
+              borderRadius: '0.5rem',
+              marginTop: '2rem',
+              marginBottom: '2rem',
+              boxShadow: 'var(--shadow-lg)',
+            },
+          },
+        },
+      },
       fontSize: {
         base: 'var(--font-size-base)',
       },
@@ -45,7 +103,9 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 };
 
 export default config;

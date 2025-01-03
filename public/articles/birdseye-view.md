@@ -21,19 +21,15 @@ Conflicts of interest exist at every level, as evidenced by the current SEC chai
 
 ## For Reference
 
-<div className="tableWrapper">
-
-| Institution     | Total Regulatory Fines | Violations |
-| --------------- | ---------------------- | ---------- |
-| Bank of America | $82.7B                 | 214        |
-| JPMorgan Chase  | $35.7B                 | 158        |
-| Citigroup       | $25.4B                 | 122        |
-| Wells Fargo     | $21.3B                 | 181        |
-| Deutsche Bank   | $18.1B                 | 59         |
-| UBS             | $16.7B                 | 83         |
-| Goldman Sachs   | $16.3B                 | 44         |
-
-</div>
+| Institution | Total Regulatory Fines | Violations |
+|------------|----------------------|------------|
+| Bank of America | $82.7B | 214 |
+| JPMorgan Chase | $35.7B | 158 |
+| Citigroup | $25.4B | 122 |
+| Wells Fargo | $21.3B | 181 |
+| Deutsche Bank | $18.1B | 59 |
+| UBS | $16.7B | 83 |
+| Goldman Sachs | $16.3B | 44 |
 
 Not all banks are bad, just as not all DeFi protocols are good. The table above illustrates the scale of regulatory violations in traditional banking, highlighting why alternative financial systems have gained attention. Let's explore how we got here.
 

@@ -1,5 +1,5 @@
 import React, { memo, useCallback } from 'react';
-import { NavButton } from '../components/common/buttons';
+import { NavButton } from '../components/buttons/NavButton';
 import { PROJECT_CATEGORIES } from './projects';
 
 interface ProjectNavProps {

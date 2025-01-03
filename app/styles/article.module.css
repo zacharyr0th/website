@@ -1,0 +1,150 @@
+/* =================
+   Article Layout
+   ================= */
+.article {
+  @apply w-full mx-auto py-8 md:py-12;
+  max-width: var(--article-width);
+  padding: 0 var(--spacing-md);
+}
+
+.header {
+  @apply mb-8 text-center md:text-left;
+}
+
+.title {
+  @apply text-4xl md:text-5xl font-bold leading-tight mb-4;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.description {
+  @apply text-xl text-gray-400 mb-8 max-w-prose mx-auto md:mx-0;
+  text-wrap: balance;
+}
+
+/* =================
+   Featured Image
+   ================= */
+.featuredImage {
+  @apply mb-12 relative aspect-video overflow-hidden;
+}
+
+.featuredImage img {
+  @apply w-full h-full object-cover;
+}
+
+/* =================
+   Article Content
+   ================= */
+.content {
+  @apply prose prose-lg prose-invert max-w-none;
+}
+
+/* Typography */
+.content :global(h1),
+.content :global(h2),
+.content :global(h3),
+.content :global(h4),
+.content :global(h5),
+.content :global(h6) {
+  @apply font-mono font-bold text-gray-100 mt-8 mb-4;
+}
+
+.content :global(h1) { @apply text-4xl md:text-5xl; }
+.content :global(h2) { @apply text-3xl md:text-4xl; }
+.content :global(h3) { @apply text-2xl md:text-3xl; }
+.content :global(h4) { @apply text-xl md:text-2xl; }
+.content :global(h5) { @apply text-lg md:text-xl; }
+.content :global(h6) { @apply text-base md:text-lg; }
+
+/* Links */
+.content :global(a) {
+  @apply text-blue-400 transition-colors;
+}
+
+.content :global(a:hover) {
+  @apply text-blue-300;
+}
+
+/* Lists */
+.content :global(ul),
+.content :global(ol) {
+  @apply list-inside mb-6;
+}
+
+/* Code Blocks */
+.content :global(pre),
+.content :global(code) {
+  @apply font-mono bg-gray-800/50 px-1 py-0.5 rounded-lg;
+}
+
+/* Images */
+.content :global(img) {
+  @apply rounded-lg shadow-lg my-8 w-full h-auto;
+}
+
+.content :global(figure) {
+  @apply my-8;
+}
+
+.content :global(figure img) {
+  @apply my-0;
+}
+
+/* Tables */
+.content :global(table) {
+  @apply w-full border-collapse my-8 bg-black/20 rounded-xl overflow-hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.content :global(th),
+.content :global(td) {
+  @apply p-4 border-b border-neutral-800 text-left align-middle;
+}
+
+.content :global(td) {
+  @apply text-gray-300;
+}
+
+.content :global(th) {
+  @apply bg-black/50 text-gray-100 font-bold sticky top-0;
+  font-family: var(--font-mono);
+  letter-spacing: 0.025em;
+}
+
+.content :global(tr) {
+  @apply transition-colors border-l-2 border-l-transparent;
+}
+
+.content :global(tr:hover) {
+  @apply bg-white/5 border-l-accent;
+}
+
+.content :global(tr:last-child td) {
+  @apply border-b-0;
+}
+
+/* Table Wrapper for Responsiveness */
+.tableWrapper {
+  @apply w-full overflow-x-auto my-8 rounded-xl border border-neutral-800;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tableWrapper table {
+  @apply my-0;
+}
+
+/* Zebra striping */
+.content :global(tr:nth-child(even)) {
+  @apply bg-white/[0.02];
+}
+
+/* Compact tables */
+.content :global(table.compact) :global(th),
+.content :global(table.compact) :global(td) {
+  @apply p-2 text-sm;
+}
+
+/* TLDR Section */
+.tldrSection {
+  @apply bg-gray-800/50 p-6 rounded-lg mb-8 text-lg border border-gray-800;
+} 

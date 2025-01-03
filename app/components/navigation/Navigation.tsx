@@ -60,20 +60,18 @@ function Navigation({ showHomeButton = false, themeButton }: NavigationProps) {
     >
       {showHomeButton && !isHomePage && (
         <BlurBackground>
-          <div className="px-2 max-sm:px-1">
-            <Link href="/" style={{ textDecoration: 'none' }}>
-              <NavButton variant="default" active={isHomePage}>
-                <span className="text-3xl">Z</span>
-              </NavButton>
-            </Link>
-          </div>
+          <Link href="/" style={{ textDecoration: 'none' }}>
+            <NavButton variant="default" active={isHomePage}>
+              <span className="text-3xl">Z</span>
+            </NavButton>
+          </Link>
         </BlurBackground>
       )}
 
       <BlurBackground className="flex items-center space-x-4 text-base transition-all duration-200">
-        <ul className="flex items-center space-x-4 max-sm:space-x-2">
+        <ul className="flex items-center space-x-4 max-sm:space-x-2 px-2">
           {navItems.map(renderNavItem)}
-          <li>
+          <li className="flex items-center">
             <div className="px-2 max-sm:px-1">{themeButton}</div>
           </li>
         </ul>

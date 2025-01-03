@@ -1,67 +1,117 @@
-/* Tailwind directives */
+/**
+ * Global Styles
+ * 
+ * Structure:
+ * 1. Tailwind Directives
+ * 2. Theme Variables
+ * 3. Base Styles (@layer base)
+ * 4. Utility Classes (@layer utilities)
+ */
+
+/* =================
+   Tailwind Setup
+   ================= */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Theme variables */
+/* =================
+   Theme Variables
+   ================= */
 :root {
-  /* Colors - Core */
-  --color-primary: #2c3e50;
-  --color-secondary: #34495e;
-  --color-accent: #3498db;
+  /* Colors
+     Used for consistent theming across the application */
+  --color-primary: #2c3e50;    /* Main brand color */
+  --color-secondary: #34495e;  /* Secondary brand color */
+  --color-accent: #3498db;     /* Accent for CTAs and highlights */
   --color-accent-hover: #2980b9;
 
-  /* Colors - Text */
-  --color-text-primary: #ecf0f1;
-  --color-text-secondary: #bdc3c7;
+  /* Text Colors
+     Hierarchical text colors for different purposes */
+  --color-text-primary: #ecf0f1;   /* Main text color */
+  --color-text-secondary: #bdc3c7;  /* Secondary text, less emphasis */
 
-  /* Colors - Background */
-  --color-background: #1a1a1a;
-  --color-surface: #2c2c2c;
+  /* Background Colors
+     Dark theme background hierarchy */
+  --color-background: #1a1a1a;  /* Main background */
+  --color-surface: #2c2c2c;     /* Surface elements */
 
-  /* Colors - Status */
-  --color-error: #e74c3c;
-  --color-success: #2ecc71;
-  --color-warning: #f39c12;
-  --color-info: #3498db;
+  /* Status Colors
+     Used for feedback and states */
+  --color-error: #e74c3c;     /* Error states */
+  --color-success: #2ecc71;   /* Success feedback */
+  --color-warning: #f39c12;   /* Warning messages */
+  --color-info: #3498db;      /* Information states */
 
-  /* Typography */
+  /* Typography
+     Base font settings */
   --font-size-base: 0.9rem;
   --line-height-base: 1.5;
 
-  /* Spacing */
-  --spacing-2xs: 0.125rem;
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-  --spacing-2xl: 3rem;
-  --spacing-3xl: 4rem;
+  /* Spacing Scale
+     Consistent spacing units throughout the app */
+  --spacing-2xs: 0.125rem;  /* 2px */
+  --spacing-xs: 0.25rem;    /* 4px */
+  --spacing-sm: 0.5rem;     /* 8px */
+  --spacing-md: 1rem;       /* 16px */
+  --spacing-lg: 1.5rem;     /* 24px */
+  --spacing-xl: 2rem;       /* 32px */
+  --spacing-2xl: 3rem;      /* 48px */
+  --spacing-3xl: 4rem;      /* 64px */
 
-  /* Effects */
+  /* Effects
+     Shadows and transitions */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4);
   --transition-speed: 0.3s;
 
-  /* Borders */
+  /* Border Radii
+     Consistent corner rounding */
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 1rem;
   --radius-full: 9999px;
 
-  /* Layout */
+  /* Layout
+     Key layout measurements and constraints */
   --header-height: max(64px, 5vh);
   --footer-height: max(64px, 5vh);
   --max-content-width: min(1200px, 90vw);
   --max-reading-width: min(65ch, 100%);
+  --article-width: 800px;
   --sidebar-width: 280px;
   --min-touch-target: 44px;
+
+  /* Responsive Breakpoints
+     Used for consistent media query breakpoints */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* Container Widths
+     Max widths for different screen sizes */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1536px;
+
+  /* Safe Areas
+     Account for notches and system bars */
+  --safe-area-inset-top: env(safe-area-inset-top, 0px);
+  --safe-area-inset-right: env(safe-area-inset-right, 0px);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-inset-left: env(safe-area-inset-left, 0px);
 }
 
-/* Base styles */
+/* =================
+   Base Styles
+   ================= */
 @layer base {
+  /* Document Level Styles */
   html {
     font-size: 90%;
     -webkit-font-smoothing: antialiased;
@@ -74,58 +124,135 @@
     line-height: var(--line-height-base);
   }
 
-  /* Default link styles */
+  /* Typography
+     Base styles for text elements */
   a {
     @apply text-accent transition-colors hover:text-[var(--color-accent-hover)];
   }
 
-  /* Default heading styles */
   h1, h2, h3, h4, h5, h6 {
     @apply font-mono font-bold text-text-primary;
   }
 
-  h1 { @apply text-4xl md:text-5xl; }
-  h2 { @apply text-3xl md:text-4xl; }
-  h3 { @apply text-2xl md:text-3xl; }
-  h4 { @apply text-xl md:text-2xl; }
-  h5 { @apply text-lg md:text-xl; }
-  h6 { @apply text-base md:text-lg; }
+  /* Responsive heading sizes with improved spacing */
+  h1 { 
+    @apply text-4xl md:text-5xl mt-12 mb-8; 
+  }
 
-  /* Default button styles */
+  h2 { 
+    @apply text-3xl md:text-4xl mt-10 mb-6; 
+  }
+
+  h3 { 
+    @apply text-2xl md:text-3xl mt-8 mb-4; 
+  }
+
+  h4 { 
+    @apply text-xl md:text-2xl mt-6 mb-3; 
+  }
+
+  h5 { 
+    @apply text-lg md:text-xl mt-4 mb-2; 
+  }
+
+  h6 { 
+    @apply text-base md:text-lg mt-4 mb-2; 
+  }
+
+  /* First heading in a section should not have top margin */
+  :where(section, article, div) > h1:first-child,
+  :where(section, article, div) > h2:first-child,
+  :where(section, article, div) > h3:first-child,
+  :where(section, article, div) > h4:first-child,
+  :where(section, article, div) > h5:first-child,
+  :where(section, article, div) > h6:first-child {
+    @apply mt-0;
+  }
+
+  /* Form Elements */
   button {
     @apply font-mono;
   }
 
-  /* Default list styles */
+  /* Content Elements */
   ul, ol {
-    @apply list-inside;
+    @apply list-inside mb-6;
   }
 
-  /* Default code styles */
   pre, code {
-    @apply font-mono bg-surface px-1 py-0.5 rounded bg-opacity-50;
+    @apply font-mono bg-surface px-1 py-0.5 rounded-lg bg-opacity-50;
   }
 
-  /* Default table styles */
-  table {
-    @apply w-full border-collapse;
+  /* Global Image Styles */
+  img,
+  Image {
+    @apply w-full h-auto;
   }
 
-  th, td {
-    @apply p-2 border border-surface;
+  /* Image containers and figures */
+  figure,
+  .image-container {
+    @apply overflow-hidden;
   }
 
-  th {
-    @apply bg-surface text-text-primary font-bold;
+  /* Article Images */
+  article figure.featured {
+    @apply mb-12 relative aspect-video overflow-hidden;
+  }
+
+  article figure.featured img,
+  article figure.featured Image {
+    @apply w-full h-full object-cover;
+  }
+
+  /* Markdown Content Images */
+  .prose img,
+  article .prose img {
+    @apply my-8 w-full;
+  }
+
+  .prose figure,
+  article .prose figure {
+    @apply my-8;
+  }
+
+  .prose figure img,
+  article .prose figure img {
+    @apply my-0;
+  }
+
+  /* Tables with images */
+  .prose td img,
+  article .prose td img {
+    @apply my-0;
+  }
+
+  /* Profile Images - keeping rounded for profile pictures only */
+  .profile-image img,
+  .profile-image Image {
+    @apply rounded-full;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 640px) {
+    article {
+      @apply px-4;
+    }
   }
 }
 
-/* Utility classes */
+/* =================
+   Utility Classes
+   ================= */
 @layer utilities {
+  /* Transitions & Animations
+     Consistent motion effects */
   .transition-base {
     @apply transition-all duration-300 ease-in-out;
   }
 
+  /* Hover Interactions
+     Common hover state patterns */
   .hover-fade {
     @apply transition-opacity hover:opacity-80;
   }
@@ -138,6 +265,8 @@
     @apply transition-transform hover:scale-105;
   }
 
+  /* Typography Utilities
+     Text manipulation helpers */
   .text-balance {
     text-wrap: balance;
   }
@@ -158,6 +287,8 @@
     -webkit-line-clamp: 3;
   }
 
+  /* Flexbox Layouts
+     Common flex patterns */
   .flex-center {
     @apply flex justify-center items-center;
   }
@@ -174,6 +305,8 @@
     @apply flex justify-end items-center;
   }
 
+  /* Content Containers
+     Standardized width constraints */
   .content-container {
     @apply mx-auto px-4;
     max-width: var(--max-content-width);
@@ -184,6 +317,8 @@
     max-width: var(--max-reading-width);
   }
 
+  /* Scrollbar Modifiers
+     Control scrollbar visibility */
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -192,4 +327,123 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+  /* Responsive Container Classes */
+  .container-responsive {
+    @apply w-full mx-auto px-4;
+    max-width: min(var(--container-sm), 100vw - 2rem);
+  }
+
+  @screen sm {
+    .container-responsive {
+      max-width: min(var(--container-md), 100vw - 3rem);
+    }
+  }
+
+  @screen md {
+    .container-responsive {
+      max-width: min(var(--container-lg), 100vw - 4rem);
+    }
+  }
+
+  @screen lg {
+    .container-responsive {
+      max-width: min(var(--container-xl), 100vw - 5rem);
+    }
+  }
+
+  @screen xl {
+    .container-responsive {
+      max-width: min(var(--container-2xl), 100vw - 6rem);
+    }
+  }
+
+  /* Safe Area Utilities */
+  .safe-top {
+    padding-top: var(--safe-area-inset-top);
+  }
+
+  .safe-bottom {
+    padding-bottom: var(--safe-area-inset-bottom);
+  }
+
+  .safe-left {
+    padding-left: var(--safe-area-inset-left);
+  }
+
+  .safe-right {
+    padding-right: var(--safe-area-inset-right);
+  }
+
+  /* Touch Target Sizes */
+  .touch-target {
+    min-height: var(--min-touch-target);
+    min-width: var(--min-touch-target);
+  }
+
+  /* Responsive Typography */
+  .text-responsive {
+    font-size: clamp(1rem, 0.8rem + 1vw, 1.2rem);
+    line-height: 1.5;
+  }
+
+  .heading-responsive {
+    font-size: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+    line-height: 1.2;
+  }
+
+  /* Mobile-First Grid */
+  .grid-responsive {
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8;
+  }
+
+  /* Improved Mobile Navigation */
+  .mobile-nav {
+    @apply fixed bottom-0 left-0 right-0 bg-background border-t border-surface z-50 safe-bottom md:relative md:border-none;
+  }
+
+  /* Mobile-Friendly Buttons */
+  .button-mobile {
+    @apply touch-target flex items-center justify-center px-4 py-2 rounded-lg;
+  }
+
+  /* Responsive Spacing */
+  .section-spacing {
+    @apply py-8 px-4 sm:py-12 sm:px-6 lg:py-16 lg:px-8;
+  }
+
+  /* Responsive Images */
+  .image-responsive {
+    @apply w-full h-auto object-cover;
+    aspect-ratio: 16/9;
+  }
 }
+
+@layer components {
+  /* Tables */
+  .table-base {
+    @apply w-full border-collapse my-8 bg-black/20;
+  }
+
+  .table-wrapper {
+    @apply w-full overflow-x-auto my-8 rounded-lg border border-neutral-800;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-cell {
+    @apply p-4 border-b border-neutral-800 text-left;
+  }
+
+  .table-header {
+    @apply bg-black/50 text-text-primary font-bold sticky top-0;
+  }
+
+  .table-row {
+    @apply hover:bg-neutral-900/30 transition-colors;
+  }
+
+  .table-row:last-child .table-cell {
+    @apply border-b-0;
+  }
+}
+

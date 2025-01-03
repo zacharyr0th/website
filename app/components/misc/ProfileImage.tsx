@@ -30,7 +30,7 @@ const ProfileImage = ({ size = 'md', editable = false, onImageChange }: ProfileI
   return (
     <>
       <motion.div
-        className={`relative aspect-square ${sizes[size]}`}
+        className={`profile-image relative aspect-square ${sizes[size]}`}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={handleClick}
@@ -41,7 +41,7 @@ const ProfileImage = ({ size = 'md', editable = false, onImageChange }: ProfileI
           fill
           priority
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="rounded-full object-cover shadow-lg transition-all duration-300 hover:shadow-2xl"
+          className="object-cover shadow-lg transition-all duration-300 hover:shadow-2xl"
         />
         {editable && (
           <input
@@ -49,7 +49,7 @@ const ProfileImage = ({ size = 'md', editable = false, onImageChange }: ProfileI
             accept="image/*"
             onChange={handleFileChange}
             aria-label="Upload profile picture"
-            className="absolute inset-0 opacity-0 cursor-pointer rounded-full"
+            className="absolute inset-0 opacity-0 cursor-pointer"
           />
         )}
       </motion.div>
@@ -70,7 +70,7 @@ const ProfileImage = ({ size = 'md', editable = false, onImageChange }: ProfileI
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="relative aspect-square w-[80vh] max-w-3xl bg-surface p-4 rounded-2xl shadow-2xl"
+              className="profile-image relative aspect-square w-[80vh] max-w-3xl bg-surface p-4 rounded-2xl shadow-2xl"
               onClick={(e: MouseEvent) => e.stopPropagation()}
             >
               <Image
@@ -79,7 +79,7 @@ const ProfileImage = ({ size = 'md', editable = false, onImageChange }: ProfileI
                 fill
                 priority
                 sizes="80vh"
-                className="rounded-full object-cover shadow-lg"
+                className="object-cover shadow-lg"
               />
               <button
                 onClick={handleClose}

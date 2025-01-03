@@ -1,39 +1,59 @@
 'use client';
 
-import React from 'react';
+import React, { memo } from 'react';
 import Image from 'next/image';
-import type { Article } from '../types';
+import type { Article, ArticleImage as ArticleImageType } from '../types';
+import styles from '@/app/styles/article.module.css';
 
 interface ArticleContentProps {
   article: Article;
   contentHtml: string;
 }
 
-export default function ArticleContent({ article, contentHtml }: ArticleContentProps) {
+const ArticleHeader = memo<{ title: string; description: string | undefined }>(({ title, description }) => (
+  <header className={styles.header}>
+    <h1 className={styles.title}>{title}</h1>
+    {description && <p className={styles.description}>{description}</p>}
+  </header>
+));
+
+ArticleHeader.displayName = 'ArticleHeader';
+
+const ArticleImage = memo<{ image: ArticleImageType; title: string }>(({ image, title }) => (
+  <figure className={styles.featuredImage}>
+    <Image
+      src={image.src}
+      alt={image.alt || `Featured image for article: ${title}`}
+      fill
+      className="object-cover"
+      loading="lazy"
+      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 800px, 1200px"
+    />
+    <figcaption className="sr-only">{image.alt || `Featured image for article: ${title}`}</figcaption>
+  </figure>
+));
+
+ArticleImage.displayName = 'ArticleImage';
+
+const ArticleContent = memo<ArticleContentProps>(({ article, contentHtml }) => {
+  const { title, description, frontmatter } = article;
+  
   return (
     <div className="content-page font-mono bg-gradient-to-b from-background to-surface/30">
-      <main className="container mx-auto pt-24 sm:pt-36">
-        <article className="prose prose-lg max-w-none">
-          <header>
-            <h1 className="text-4xl font-bold mb-4">{article.title}</h1>
-            {article.description && (
-              <p className="text-xl text-text-secondary mb-8">{article.description}</p>
-            )}
-            {article.frontmatter.image && (
-              <div className="relative w-full aspect-video mb-8">
-                <Image
-                  src={article.frontmatter.image.src}
-                  alt={article.frontmatter.image.alt}
-                  fill
-                  className="rounded-lg object-cover"
-                  priority
-                />
-              </div>
-            )}
-          </header>
-          <div className="markdown-content" dangerouslySetInnerHTML={{ __html: contentHtml }} />
+      <main>
+        <article className={styles.article} aria-labelledby="article-title">
+          <ArticleHeader title={title} description={description} />
+          {frontmatter.image && <ArticleImage image={frontmatter.image} title={title} />}
+          <div 
+            className={styles.content}
+            dangerouslySetInnerHTML={{ __html: contentHtml }} 
+          />
         </article>
       </main>
     </div>
   );
-}
+});
+
+ArticleContent.displayName = 'ArticleContent';
+
+export default ArticleContent;

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useCallback, memo } from 'react';
-import { SOCIAL_LINKS } from '../../../lib/social';
+import { SOCIAL_LINKS } from '../lib/social';
 import { FaXmark } from 'react-icons/fa6';
-import { IconButton } from '../buttons';
+import { IconButton } from './buttons';
 
 interface ConnectModalProps {
   isOpen: boolean;
@@ -94,7 +94,7 @@ const ConnectModal: React.FC<ConnectModalProps> = memo(({ isOpen, onClose }) => 
         className="relative rounded-xl px-8 py-6 shadow-xl transform transition-transform duration-200"
       >
         <IconButton
-          variant="solid"
+          variant="primary"
           size="sm"
           onClick={onClose}
           className="absolute -top-3 -right-3 z-10 transition-transform duration-200 hover:scale-110"

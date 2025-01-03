@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import ProfileImage from '../../components/common/misc/ProfileImage';
+import ProfileImage from '../../components/misc/ProfileImage';
 import { BIO, SOCIAL_LINKS } from '../constants';
 
 export const Hero = React.memo(() => (

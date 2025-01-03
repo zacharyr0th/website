@@ -1,10 +1,12 @@
+'use client';
+
 import React from 'react';
-import Link from 'next/link';
 import { FaGithub, FaNewspaper, FaPlay } from 'react-icons/fa6';
-import { ProjectType } from './projects';
+import { IconButton } from '../components/buttons/IconButton';
+import { BaseProject } from './projects';
 
 interface ProjectCardProps {
-  project: ProjectType;
+  project: BaseProject;
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
@@ -21,7 +23,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
       <div>
         <div className="flex flex-wrap items-center gap-2">
-          {project.tags.map((tag) => (
+          {project.tags.map((tag: string) => (
             <span
               key={tag}
               className="inline-flex items-center px-2.5 py-1 text-xs font-medium bg-white/5 text-secondary/90 rounded-md"
@@ -29,30 +31,30 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               {tag}
             </span>
           ))}
-          <div className="flex gap-3 ml-auto">
+          <div className="flex ml-auto">
             {project.githubLink && (
-              <Link
-                href={project.githubLink}
-                className="text-secondary/60 hover:text-secondary/90 hover:bg-white/5 rounded-lg transition-colors hover:scale-110 transform p-1"
-              >
-                <FaGithub className="h-4 w-4" />
-              </Link>
+              <IconButton
+                icon={<FaGithub className="h-5 w-5" />}
+                onClick={() => window.open(project.githubLink, '_blank', 'noopener,noreferrer')}
+                ariaLabel="View project on GitHub"
+                className="text-secondary/60"
+              />
             )}
             {project.articleLink && (
-              <Link
-                href={project.articleLink}
-                className="text-secondary/60 hover:text-secondary/90 hover:bg-white/5 rounded-lg transition-colors hover:scale-110 transform p-1"
-              >
-                <FaNewspaper className="h-4 w-4" />
-              </Link>
+              <IconButton
+                icon={<FaNewspaper className="h-4 w-4" />}
+                onClick={() => window.open(project.articleLink, '_blank', 'noopener,noreferrer')}
+                ariaLabel="Read project article"
+                className="text-secondary/60"
+              />
             )}
             {project.demoLink && (
-              <Link
-                href={project.demoLink}
-                className="text-secondary/60 hover:text-secondary/90 hover:bg-white/5 rounded-lg transition-colors hover:scale-110 transform p-1"
-              >
-                <FaPlay className="h-4 w-4" />
-              </Link>
+              <IconButton
+                icon={<FaPlay className="h-4 w-4" />}
+                onClick={() => window.open(project.demoLink, '_blank', 'noopener,noreferrer')}
+                ariaLabel="View live demo"
+                className="text-secondary/60"
+              />
             )}
           </div>
         </div>

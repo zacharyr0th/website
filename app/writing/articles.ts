@@ -93,12 +93,12 @@ export function validateFrontmatter(data: unknown): ArticleFrontmatter {
     if (typeof image === 'string') {
       return {
         src: image,
-        alt: defaultAlt,
+        alt: `Featured image for article: ${defaultAlt}`,
       };
     }
     return {
       src: image.src,
-      alt: image.alt || defaultAlt,
+      alt: image.alt || `Featured image for article: ${defaultAlt}`,
     };
   };
 
@@ -186,35 +186,34 @@ export function createArticleFromFrontmatter(
   return article;
 }
 
-// Core Functions
-export async function getArticles(): Promise<Article[]> {
-  try {
-    console.log('Reading articles from:', ARTICLE_CONFIG.directory);
-    const fileNames = fs.readdirSync(ARTICLE_CONFIG.directory);
-    console.log('Found files:', fileNames);
+// Add memoization for getArticles
+let cachedArticles: Article[] | null = null;
+let lastFetchTime = 0;
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
+export async function getArticles(): Promise<Article[]> {
+  const now = Date.now();
+  if (cachedArticles && now - lastFetchTime < CACHE_DURATION) {
+    return cachedArticles;
+  }
+
+  try {
+    const fileNames = fs.readdirSync(ARTICLE_CONFIG.directory);
     const articles = fileNames
       .filter((fileName) => fileName.endsWith('.md'))
       .map((fileName) => {
         try {
-          console.log('Processing article:', fileName);
           const slug = fileName.replace(/\.md$/, '');
           const fullPath = path.join(ARTICLE_CONFIG.directory, fileName);
           const fileContents = fs.readFileSync(fullPath, 'utf8');
           const { data, content } = matter(fileContents);
-          console.log('Article frontmatter:', data);
-
           const validatedFrontmatter = validateFrontmatter(data);
 
-          // Skip draft articles in production
           if (process.env.NODE_ENV === 'production' && validatedFrontmatter.draft) {
-            console.log('Skipping draft article:', fileName);
             return null;
           }
 
-          const article = createArticleFromFrontmatter(validatedFrontmatter, content, slug);
-          console.log('Successfully processed article:', slug);
-          return article;
+          return createArticleFromFrontmatter(validatedFrontmatter, content, slug);
         } catch (error) {
           console.error(`Error processing article ${fileName}:`, error);
           return null;
@@ -223,7 +222,8 @@ export async function getArticles(): Promise<Article[]> {
       .filter((article): article is Article => article !== null)
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-    console.log('Total articles processed:', articles.length);
+    cachedArticles = articles;
+    lastFetchTime = now;
     return articles;
   } catch (error) {
     console.error('Error reading articles:', error);
