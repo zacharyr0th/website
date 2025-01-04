@@ -15,10 +15,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://fonts.googleapis.com" 
           crossOrigin="anonymous"
         />
-        <meta 
-          name="google-site-verification" 
-          content={process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION} 
-        />
         <link 
           rel="preconnect" 
           href="https://fonts.gstatic.com" 
