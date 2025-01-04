@@ -1,12 +1,12 @@
 ---
 title: 'Easy Money and Veblen Goods'
-date: '2024-10-25'
+date: '2023-12-31'
 image:
   src: '/misc/placeholder.webp'
   alt: 'Easy Money and Veblen Goods'
-subtitle: 'The Reflexivity of Value'
 description: 'The Reflexivity of Value'
-tags: ['Trading', 'Crypto']
+category: 'finance'
+tags: ['crypto', 'analysis']
 ---
 
 <style jsx>{`

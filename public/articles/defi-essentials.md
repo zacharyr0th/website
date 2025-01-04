@@ -4,9 +4,9 @@ date: '2024-10-25'
 image:
   src: '/misc/placeholder.webp'
   alt: 'Defi Essentials'
-subtitle: Essential Protocols for any Defi Ecosystem
 description: 'Essential Protocols for any Defi Ecosystem'
-tags: ['Crypto']
+category: 'defi'
+tags: ['crypto', 'defi']
 ---
 
 <style jsx>{`

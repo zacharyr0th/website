@@ -1,17 +1,21 @@
 import useSWR from 'swr';
+import { ARTICLE_CONFIG } from '../types';
 import type { Article } from '../types';
 
 const CACHE_CONFIG = {
   revalidateOnFocus: false,
   revalidateOnReconnect: false,
-  refreshInterval: 0,
+  refreshInterval: ARTICLE_CONFIG.cacheConfig.revalidateInterval,
+  dedupingInterval: ARTICLE_CONFIG.cacheConfig.staleWhileRevalidate,
 } as const;
 
 async function fetchArticles(): Promise<Article[]> {
   const response = await fetch('/api/articles', {
     headers: {
       Accept: 'application/json',
-      'Cache-Control': 'no-cache',
+    },
+    next: {
+      revalidate: ARTICLE_CONFIG.cacheConfig.revalidateInterval / 1000, // Convert to seconds for Next.js
     },
   });
 

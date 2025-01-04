@@ -3,7 +3,7 @@
 import React, { memo } from 'react';
 import Image from 'next/image';
 import type { ArticleImage as ArticleImageType, ArticleContentProps } from '../types';
-import styles from '@/app/styles/article.module.css';
+import styles from './article.module.css';
 
 const ArticleHeader = memo<{ title: string; description: string | undefined }>(({ title, description }) => (
   <header className={styles.header}>

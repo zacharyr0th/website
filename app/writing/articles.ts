@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { Article, ArticleFrontmatter, RawFrontmatter, ARTICLE_CONFIG } from './types';
+import { Article, ArticleFrontmatter, RawFrontmatter, ARTICLE_CONFIG, ArticleTag } from './types';
 
 const articlesDirectory = path.join(process.cwd(), ARTICLE_CONFIG.directory);
 
@@ -40,11 +40,31 @@ export function validateFrontmatter(data: unknown): ArticleFrontmatter {
   }
 
   if (rawData.category) {
-    frontmatter.category = rawData.category;
+    const category = rawData.category as string;
+    if (ARTICLE_CONFIG.allowedCategories.includes(category as typeof ARTICLE_CONFIG.allowedCategories[number])) {
+      frontmatter.category = category as typeof ARTICLE_CONFIG.allowedCategories[number];
+    } else {
+      console.warn(`Invalid category: ${category}`);
+    }
   }
 
-  if (rawData.tags) {
-    frontmatter.tags = rawData.tags;
+  if (rawData.tags && Array.isArray(rawData.tags)) {
+    // First validate and convert to lowercase
+    const normalizedTags = rawData.tags
+      .filter((tag): tag is string => typeof tag === 'string')
+      .map(tag => tag.toLowerCase());
+
+    // Then validate against allowed tags (which should be lowercase)
+    const validTags = normalizedTags.filter((tag): tag is ArticleTag => 
+      ARTICLE_CONFIG.allowedTags.map(t => t.toLowerCase()).includes(tag)
+    );
+    
+    if (validTags.length > 0) {
+      // Remove duplicates while maintaining the ArticleTag type
+      frontmatter.tags = Array.from(new Set(validTags));
+    } else {
+      console.warn(`No valid tags found in: ${rawData.tags.join(', ')}`);
+    }
   }
 
   const transformedImage = transformImage(rawData.image, rawData.title || 'Article image');
@@ -66,9 +86,6 @@ export function validateFrontmatter(data: unknown): ArticleFrontmatter {
     console.warn(`Description exceeds maximum length: ${frontmatter.description}`);
     frontmatter.description = frontmatter.description.slice(0, ARTICLE_CONFIG.maxDescriptionLength);
   }
-
-  // Convert tags to lowercase and remove duplicates
-  frontmatter.tags = Array.from(new Set((frontmatter.tags || []).map((tag) => tag.toLowerCase())));
 
   return frontmatter;
 }
@@ -146,7 +163,11 @@ export async function getArticles(): Promise<Article[]> {
         }
       })
       .filter((article): article is Article => article !== null)
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      .sort((a, b) => {
+        const dateA = a.date ? new Date(a.date).getTime() : 0;
+        const dateB = b.date ? new Date(b.date).getTime() : 0;
+        return dateB - dateA;
+      });
 
     cachedArticles = articles;
     lastFetchTime = now;

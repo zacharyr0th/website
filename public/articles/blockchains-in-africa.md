@@ -2,11 +2,11 @@
 title: 'Blockchains in Africa'
 date: '2024-10-25'
 image:
-  src: /images/ba-0.webp
+  src: '/images/ba-0.webp'
   alt: 'Blockchains in Africa'
-subtitle: 'Notes on Adoption Efforts'
 description: 'Notes on Adoption Efforts'
-tags: ['Crypto']
+category: 'crypto'
+tags: ['crypto']
 ---
 
 <style jsx>{`

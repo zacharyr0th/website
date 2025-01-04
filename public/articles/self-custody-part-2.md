@@ -1,12 +1,12 @@
 ---
 title: 'Self Custody: Part 2'
-date: '2024-10-25'
+date: '2023-12-31'
 image:
   src: '/misc/placeholder.webp'
   alt: 'Self Custody: Part 2'
-subtitle: Opportunities and Consequences
 description: 'Opportunities and Consequences'
-tags: ['Crypto']
+category: 'crypto'
+tags: ['crypto']
 ---
 
 <style jsx>{`

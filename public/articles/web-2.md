@@ -1,12 +1,12 @@
 ---
 title: 'Web 2'
-date: '2024-10-25'
+date: '2023-12-31'
 image:
   src: '/misc/placeholder.webp'
   alt: 'Web 2'
-subtitle: Content Creation Networks
 description: 'Content Creation Networks'
-tags: ['Crypto', 'Tech']
+category: 'technology'
+tags: ['crypto', 'technology']
 ---
 
 <style jsx>{`

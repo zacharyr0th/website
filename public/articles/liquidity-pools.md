@@ -1,12 +1,12 @@
 ---
 title: 'Liquidity Pools'
-date: '2024-10-25'
+date: '2023-12-31'
 image:
   src: '/misc/placeholder.webp'
   alt: 'Liquidity Pools'
-subtitle: 'An Alternative to Typical Market Makers'
 description: 'An Alternative to Typical Market Makers'
-tags: ['Crypto', 'Trading']
+category: 'defi'
+tags: ['defi', 'crypto']
 ---
 
 <style jsx>{`

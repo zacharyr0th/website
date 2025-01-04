@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import ProfileImage from '../../components/misc/ProfileImage';
-import { BIO, SOCIAL_LINKS } from '../constants';
+import { SOCIAL_LINKS, SocialLink } from '../../lib/social';
+import { BIO } from '../constants';
 
 const springTransition = {
   type: "spring",
@@ -90,7 +91,7 @@ export const Hero = React.memo(() => (
         }}
         className="flex gap-4 justify-center md:justify-start"
       >
-        {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (
+        {Object.values(SOCIAL_LINKS).map(({ icon: Icon, url: href, label }: SocialLink) => (
           <motion.a
             key={label}
             href={href}

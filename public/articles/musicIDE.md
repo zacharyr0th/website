@@ -1,12 +1,12 @@
 ---
 title: 'MusicIDE'
-date: '2024-10-25'
+date: '2023-12-31'
 image:
   src: '/misc/placeholder.webp'
   alt: 'MusicIDE'
-subtitle: 'Cursor + Musescore for Research + Composition'
 description: 'Cursor + Musescore for Research + Composition'
-tags: ['Music', 'AI']
+category: 'development'
+tags: ['technology', 'development']
 ---
 
 <style jsx>{`

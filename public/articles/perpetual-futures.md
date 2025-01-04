@@ -1,12 +1,12 @@
 ---
 title: 'Perpetual Futures'
-date: '2024-10-25'
+date: '2023-12-31'
 image:
   src: '/misc/placeholder.webp'
   alt: 'Perpetual Futures'
-subtitle: 'A New Financial Primitive'
 description: 'A New Financial Primitive'
-tags: ['Crypto', 'Trading']
+category: 'finance'
+tags: ['crypto', 'finance', 'defi']
 ---
 
 <style jsx>{`

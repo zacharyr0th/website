@@ -55,7 +55,11 @@ export async function GET() {
 
     const articles = (await Promise.all(articlesPromises))
       .filter((article: Article | null): article is Article => article !== null)
-      .sort((a: Article, b: Article) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      .sort((a: Article, b: Article) => {
+        const dateA = a.date ? new Date(a.date).getTime() : 0;
+        const dateB = b.date ? new Date(b.date).getTime() : 0;
+        return dateB - dateA;
+      });
 
     console.log(`Successfully fetched ${articles.length} articles`);
     return NextResponse.json(articles);

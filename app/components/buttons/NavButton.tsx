@@ -1,41 +1,44 @@
 import React, { useMemo } from 'react';
+import type { BaseButtonProps } from './constants';
 import { BaseButton } from './BaseButton';
-import { ButtonSize } from './BaseButton';
 
-const getButtonStyle = (active: boolean | undefined) => ({
-  backgroundColor: active ? 'var(--color-surface)' : 'transparent',
-  color: active ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  minHeight: '2.5rem',
-});
-
-export interface NavButtonProps {
+export interface NavButtonProps extends BaseButtonProps {
   href?: string;
   children: React.ReactNode;
-  className?: string;
   active?: boolean;
   onClick?: () => void;
-  size?: ButtonSize;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
 }
 
 export const NavButton = React.memo(
   React.forwardRef<HTMLButtonElement, NavButtonProps>(
-    ({ active, className = '', size = 'md', ...props }, ref) => {
-      const style = useMemo(() => getButtonStyle(active), [active]);
-      const buttonClassName = `interactive-button px-3 rounded-full text-lg${
-        active ? ' shadow-sm' : ''
-      } ${className}`;
+    ({ 
+      active,
+      children,
+      leftIcon,
+      rightIcon,
+      className = '',
+      ...props 
+    }, ref) => {
+      const style = useMemo(() => ({
+        backgroundColor: active ? 'var(--color-surface)' : 'transparent',
+        color: active ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
+      }), [active]);
 
       return (
         <BaseButton
           ref={ref}
-          className={buttonClassName}
+          className={`interactive-button px-3 text-lg${active ? ' shadow-sm' : ''} ${className}`}
           style={style}
-          size={size}
           {...props}
-        />
+        >
+          <span className="flex items-center gap-2">
+            {leftIcon}
+            {children}
+            {rightIcon}
+          </span>
+        </BaseButton>
       );
     }
   )

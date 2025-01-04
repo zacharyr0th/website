@@ -88,8 +88,10 @@ export default async function Page({ params }: { params: PageParams }) {
 
     return (
       <div className="content-page font-mono bg-gradient-to-b from-background to-surface/30">
-        <main className="container mx-auto px-6 sm:px-8 pt-24 sm:pt-36">
-          <ArticleContent article={processedArticle} contentHtml={processedContent} />
+        <main className="container mx-auto px-3 sm:px-6 md:px-8 pt-12 sm:pt-20 md:pt-28 pb-12 sm:pb-20 md:pb-28 max-w-[98vw] md:max-w-[90vw]">
+          <div className="mx-auto max-w-[var(--article-width)]">
+            <ArticleContent article={processedArticle} contentHtml={processedContent} />
+          </div>
         </main>
       </div>
     );

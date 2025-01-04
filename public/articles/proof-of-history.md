@@ -1,12 +1,12 @@
 ---
 title: 'Proof of History'
-date: '2024-10-25'
+date: '2023-12-31'
 image:
   src: '/misc/placeholder.webp'
   alt: 'Proof of History'
-subtitle: How Solana Tells Time
 description: 'How Solana Tells Time'
-tags: ['Crypto']
+category: 'crypto'
+tags: ['crypto', 'technology']
 ---
 
 <style jsx>{`

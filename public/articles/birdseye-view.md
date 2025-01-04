@@ -1,12 +1,12 @@
 ---
 title: "A Bird's Eye View"
-date: '2024-10-25'
+date: '2023-12-31'
 image:
   src: '/misc/placeholder.webp'
   alt: "A Bird's Eye View"
-subtitle: 'Seeing the Forest Through the Trees'
 description: 'Seeing the Forest Through the Trees'
-tags: ['Crypto']
+category: 'blockchain'
+tags: ['crypto', 'defi', 'technology']
 ---
 
 <div className="tldrSection">

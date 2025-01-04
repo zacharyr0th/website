@@ -1,12 +1,12 @@
 ---
 title: 'SimpleOS'
-date: '2024-10-25'
+date: '2023-12-31'
 image:
   src: /images/simpleos-0.webp
   alt: 'SimpleOS'
-subtitle: 'BSOD and the Need for a Multi-Layered Kernel'
 description: 'BSOD and the Need for a Multi-Layered Kernel'
-tags: ['Tech']
+category: 'technology'
+tags: ['technology', 'development']
 ---
 
 <style jsx>{`

@@ -2,11 +2,11 @@
 title: 'Boson Protocol'
 date: '2024-10-25'
 image:
-  src: /images/boson.webp
+  src: '/images/boson.webp'
   alt: 'Boson Protocol'
-subtitle: 'Tackling dEcommerce'
 description: 'Tackling dEcommerce'
-tags: ['Crypto']
+category: 'crypto'
+tags: ['crypto']
 ---
 
 <style jsx>{`

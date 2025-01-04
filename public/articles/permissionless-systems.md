@@ -1,12 +1,12 @@
 ---
 title: 'Permissionless Systems'
-date: '2024-10-25'
+date: '2023-12-31'
 image:
   src: '/misc/placeholder.webp'
   alt: 'Permissionless Systems'
-subtitle: 'Understanding DeFi, NFTs, and DAOs'
 description: 'Understanding DeFi, NFTs, and DAOs'
-tags: ['Crypto']
+category: 'defi'
+tags: ['defi', 'crypto']
 ---
 
 <style jsx>{`

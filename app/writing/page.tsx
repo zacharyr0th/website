@@ -1,22 +1,20 @@
 import React, { Suspense } from 'react';
-import { getArticles } from './articles';
+import { getArticles } from '../lib/articles';
 import { Hero } from './components/Hero';
 import { ArchiveSection } from './components/ArchiveSection';
-import { LoadingState } from '../components/misc/LoadingState';
+import { LoadingState } from '../lib/Loading';
+import { ARTICLE_CONFIG } from './types';
 import { cache } from 'react';
-
-// Constants
-const PAGE_SIZE = 20;
 
 // Error State
 const ErrorState = () => (
   <div 
-    className="bg-surface/50 rounded-xl p-8 space-y-4 shadow-article-image" 
+    className="bg-surface/50 rounded-xl p-6 sm:p-8 space-y-3 sm:space-y-4 shadow-article-image" 
     role="alert"
     aria-live="polite"
   >
-    <h2 className="text-2xl font-semibold text-text-primary">Error Loading Articles</h2>
-    <p className="text-text-secondary leading-relaxed">
+    <h2 className="text-xl sm:text-2xl font-semibold text-text-primary">Error Loading Articles</h2>
+    <p className="text-sm sm:text-base text-text-secondary leading-relaxed">
       There was a problem loading the articles. Please try again later.
     </p>
   </div>
@@ -25,12 +23,12 @@ const ErrorState = () => (
 // Empty State
 const EmptyState = () => (
   <div 
-    className="bg-surface/50 rounded-xl p-8 space-y-4 shadow-article-image"
+    className="bg-surface/50 rounded-xl p-6 sm:p-8 space-y-3 sm:space-y-4 shadow-article-image"
     role="status"
     aria-live="polite"
   >
-    <h2 className="text-2xl font-semibold text-text-primary">No Articles Found</h2>
-    <p className="text-text-secondary leading-relaxed">
+    <h2 className="text-xl sm:text-2xl font-semibold text-text-primary">No Articles Found</h2>
+    <p className="text-sm sm:text-base text-text-secondary leading-relaxed">
       Articles are currently being prepared. Check back soon for updates.
     </p>
   </div>
@@ -59,14 +57,14 @@ export default async function WritingPage() {
 
   return (
     <div 
-      className="content-page font-mono bg-gradient-to-b from-background to-surface/30 min-h-screen pb-24"
+      className="content-page font-mono bg-gradient-to-b from-background to-surface/30 min-h-screen pb-12 sm:pb-24"
       role="main"
     >
-      <main className="container-responsive pt-24 sm:pt-36">
+      <main className="container-responsive pt-16 sm:pt-24 md:pt-36 px-4 sm:px-6">
         <div className="mx-auto" style={{ maxWidth: 'var(--article-width)' }}>
-          <header className="mb-12">
+          <header className="mb-8 sm:mb-12">
             <h1 
-              className="text-4xl md:text-5xl font-bold text-text-primary heading-responsive"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold text-text-primary heading-responsive"
               id="writing-header"
             >
               Writing
@@ -85,22 +83,22 @@ export default async function WritingPage() {
               <Suspense fallback={
                 <LoadingState 
                   label="Loading featured articles" 
-                  height="h-[500px]" 
+                  height="h-[300px] sm:h-[400px] md:h-[500px]" 
                   barCount={3}
                   className="rounded-xl shadow-article-image" 
                 />
               }>
-                <Hero articles={articles.slice(0, PAGE_SIZE)} />
+                <Hero articles={articles.slice(0, ARTICLE_CONFIG.pagination.defaultPageSize)} />
               </Suspense>
               <Suspense fallback={
                 <LoadingState 
                   label="Loading article archive" 
-                  height="h-96" 
-                  barCount={4}
+                  height="h-[250px] sm:h-[300px] md:h-96" 
+                  barCount={3}
                   className="rounded-xl shadow-article-image" 
                 />
               }>
-                <ArchiveSection articles={articles.slice(0, PAGE_SIZE)} />
+                <ArchiveSection articles={articles.slice(0, ARTICLE_CONFIG.pagination.defaultPageSize)} />
               </Suspense>
             </div>
           )}

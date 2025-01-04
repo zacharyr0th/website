@@ -1,12 +1,12 @@
 ---
 title: 'Search Engine Turbulence'
-date: '2024-10-25'
+date: '2023-12-31'
 image:
   src: /images/bing-0.webp
   alt: 'Search Engine Turbulence'
-subtitle: 'LLMs and the Future of Search Engines'
 description: 'LLMs and the Future of Search Engines'
-tags: ['AI']
+category: 'technology'
+tags: ['technology', 'analysis']
 ---
 
 <style jsx>{`

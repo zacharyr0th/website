@@ -1,12 +1,12 @@
 ---
 title: 'Derivatives vs Spot'
-date: '2024-10-25'
+date: '2023-12-31'
 image:
   src: /images/derivatives-0.webp
   alt: 'Derivatives vs Spot'
-subtitle: 'Market Structure & Price Discovery'
 description: 'Market Structure & Price Discovery'
-tags: ['Trading', 'Crypto']
+category: 'finance'
+tags: ['crypto', 'analysis']
 ---
 
 <style jsx>{`

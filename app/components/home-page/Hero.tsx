@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import BackgroundSVG from './backgrounds/HeroBackground';
 import ConnectModal from '../misc/ConnectModal';
-import { ActionButton } from '../buttons/ActionButton';
+import { ActionButton } from '../buttons';
 import { heroContent } from './constants';
 import { pageTransition, sectionTransition } from '../../lib/animations';
 
@@ -131,7 +131,7 @@ const StickyHeader = memo(() => {
         </a>
       </motion.p>
       <motion.div 
-        className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4"
+        className="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0 sm:space-x-4"
         {...sectionTransition}
       >
         <ActionButton variant="primary" onClick={handleOpenModal} size="md">

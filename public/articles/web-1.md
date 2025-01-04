@@ -1,12 +1,23 @@
 ---
 title: 'Web 1'
-date: '2024-10-25'
+date: '2023-12-31'
 image:
   src: '/misc/placeholder.webp'
   alt: 'Web 1'
-subtitle: Content Delivery Networks
 description: 'Content Delivery Networks'
-tags: ['Crypto', 'Tech']
+category: 'technology'
+tags: ['crypto', 'technology']
+---
+
+---
+title: 'Self Custody: Part 2'
+date: '2023-12-31'
+image:
+  src: '/misc/placeholder.webp'
+  alt: 'Self Custody: Part 2'
+description: 'Opportunities and Consequences'
+category: 'crypto'
+tags: ['crypto']
 ---
 
 <style jsx>{`

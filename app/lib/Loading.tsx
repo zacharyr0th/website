@@ -7,6 +7,12 @@ interface LoadingStateProps {
   className?: string;
 }
 
+export const LoadingSpinner: React.FC = () => (
+  <span className="absolute inset-0 flex items-center justify-center">
+    <span className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+  </span>
+);
+
 export const LoadingState = ({
   label = 'Loading content',
   height = 'h-64',
@@ -28,3 +34,4 @@ export const LoadingState = ({
 );
 
 LoadingState.displayName = 'LoadingState';
+LoadingSpinner.displayName = 'LoadingSpinner'; 

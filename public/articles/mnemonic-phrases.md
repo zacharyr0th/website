@@ -1,12 +1,12 @@
 ---
 title: 'Mnemonic Phrases'
-date: '2024-10-25'
+date: '2023-12-31'
 image:
   src: '/misc/placeholder.webp'
   alt: 'Mnemonic Phrases'
-subtitle: 'AKA Seed Phrases'
 description: 'AKA Seed Phrases'
-tags: ['Crypto']
+category: 'crypto'
+tags: ['crypto']
 ---
 
 <style jsx>{`

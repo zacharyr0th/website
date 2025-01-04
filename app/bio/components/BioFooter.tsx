@@ -2,13 +2,12 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaLinkedin, FaXTwitter, FaGithub } from 'react-icons/fa6';
-import { SOCIAL_LINKS } from '../constants';
+import { SOCIAL_LINKS } from '../../lib/social';
 
 const socialLinks = [
-  { href: SOCIAL_LINKS[1].href, Icon: FaLinkedin, label: 'LinkedIn' },
-  { href: SOCIAL_LINKS[2].href, Icon: FaXTwitter, label: 'Twitter' },
-  { href: SOCIAL_LINKS[0].href, Icon: FaGithub, label: 'GitHub' },
+  { href: SOCIAL_LINKS.linkedin.url, Icon: SOCIAL_LINKS.linkedin.icon, label: SOCIAL_LINKS.linkedin.label },
+  { href: SOCIAL_LINKS.twitter.url, Icon: SOCIAL_LINKS.twitter.icon, label: SOCIAL_LINKS.twitter.label },
+  { href: SOCIAL_LINKS.github.url, Icon: SOCIAL_LINKS.github.icon, label: SOCIAL_LINKS.github.label },
 ] as const;
 
 export const BioFooter = React.memo(() => {

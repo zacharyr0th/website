@@ -4,7 +4,7 @@ import React, { memo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Article } from '../types';
-import styles from '@/app/styles/article.module.css';
+import styles from '@/app/writing/[slug]/article.module.css';
 
 export const ArticleCard = memo<{ article: Article }>(({ article }) => {
   const imageAlt = React.useMemo(() => {

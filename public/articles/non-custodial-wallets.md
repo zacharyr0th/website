@@ -1,12 +1,12 @@
 ---
 title: 'Non-Custodial Wallets'
-date: '2024-10-25'
+date: '2023-12-31'
 image:
   src: '/misc/placeholder.webp'
   alt: 'Non-Custodial Wallets'
-subtitle: 'A Primer on Self Custody'
 description: 'A Primer on Self Custody'
-tags: ['Crypto']
+category: 'crypto'
+tags: ['crypto']
 ---
 
 <style jsx>{`

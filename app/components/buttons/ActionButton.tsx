@@ -1,34 +1,34 @@
 import React from 'react';
-import { BaseButton, BaseButtonProps } from './BaseButton';
-
-// Extract button styles to prevent recreation
-const buttonStyles = {
-  primary: {
-    backgroundColor: 'var(--color-primary)',
-    color: 'var(--color-text-primary)',
-  },
-  secondary: {
-    backgroundColor: 'var(--color-surface)',
-    color: 'var(--color-text-secondary)',
-    border: '1px solid var(--color-secondary)',
-  },
-} as const;
+import type { BaseButtonProps } from './constants';
+import { BaseButton } from './BaseButton';
 
 export interface ActionButtonProps extends BaseButtonProps {
-  variant: 'primary' | 'secondary';
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
 }
 
 export const ActionButton = React.forwardRef<HTMLButtonElement, ActionButtonProps>(
-  ({ variant = 'primary', className = '', ...props }, ref) => {
-    return (
-      <BaseButton
-        ref={ref}
-        className={`px-6 py-2 rounded-full transition-colors duration-300 w-full sm:w-auto ${className}`}
-        style={buttonStyles[variant]}
-        {...props}
-      />
-    );
-  }
+  ({ 
+    children,
+    leftIcon,
+    rightIcon,
+    className = '',
+    variant = 'primary',
+    ...props 
+  }, ref) => (
+    <BaseButton
+      ref={ref}
+      className={`px-6 py-2 ${className}`}
+      variant={variant}
+      {...props}
+    >
+      <span className="flex items-center gap-2">
+        {leftIcon}
+        {children}
+        {rightIcon}
+      </span>
+    </BaseButton>
+  )
 );
 
 ActionButton.displayName = 'ActionButton'; 

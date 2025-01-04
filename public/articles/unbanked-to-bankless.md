@@ -1,12 +1,12 @@
 ---
 title: 'Unbanked to Bankless'
-date: '2024-10-25'
+date: '2023-12-31'
 image:
   src: '/misc/placeholder.webp'
   alt: 'Unbanked to Bankless'
-subtitle: Crypto fixes this
 description: 'Crypto fixes this'
-tags: ['Crypto']
+category: 'finance'
+tags: ['crypto', 'finance', 'defi']
 ---
 
 <style jsx>{`

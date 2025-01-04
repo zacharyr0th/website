@@ -29,8 +29,8 @@
   --color-info: #3498db;
 
   /* Typography */
-  --font-size-base: 0.9rem;
-  --line-height-base: 1.5;
+  --font-size-base: clamp(0.875rem, 1vw, 0.9rem);
+  --line-height-base: 1.6;
 
   /* Spacing */
   --spacing-unit: 0.25rem;
@@ -58,11 +58,11 @@
   --radius-full: 9999px;
 
   /* Layout */
-  --header-height: max(64px, 5vh);
-  --footer-height: max(64px, 5vh);
-  --max-content-width: min(1200px, 90vw);
-  --max-reading-width: min(65ch, 100%);
-  --article-width: 800px;
+  --header-height: max(56px, 4vh);
+  --footer-height: max(56px, 4vh);
+  --max-content-width: min(1200px, 95vw);
+  --max-reading-width: min(70ch, 98%);
+  --article-width: min(720px, 98%);
   --sidebar-width: 280px;
   --min-touch-target: 44px;
 

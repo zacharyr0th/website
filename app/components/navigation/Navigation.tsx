@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { NavItem } from './constants';
 import { navItems } from './constants';
-import { NavButton } from '../buttons/NavButton';
+import { NavButton } from '../buttons';
 import BlurBackground from './BlurBackground';
 
 interface NavigationProps {

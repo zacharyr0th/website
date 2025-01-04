@@ -1,12 +1,12 @@
 ---
 title: 'Defi'
-date: '2024-10-25'
+date: '2023-12-31'
 image:
   src: '/misc/placeholder.webp'
   alt: 'Defi'
-subtitle: Global, Permissionless Finance
 description: 'Global, Permissionless Finance'
-tags: ['Crypto']
+category: 'defi'
+tags: ['defi', 'crypto']
 ---
 
 <style jsx>{`

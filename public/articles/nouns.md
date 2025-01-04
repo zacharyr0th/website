@@ -1,12 +1,12 @@
 ---
 title: 'Nouns'
-date: '2024-10-25'
+date: '2023-12-31'
 image:
   src: /images/nouns-0.webp
   alt: 'Nouns'
-subtitle: 'There is a New One Every Day'
 description: 'There is a New One Every Day'
-tags: ['Crypto']
+category: 'crypto'
+tags: ['crypto']
 ---
 
 <style jsx>{`

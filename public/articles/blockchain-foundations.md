@@ -1,12 +1,12 @@
 ---
 title: 'Blockchain Foundations'
-date: '2024-10-25'
+date: '2023-12-31'
 image:
   src: '/misc/placeholder.webp'
   alt: 'Blockchain Foundations'
-subtitle: 'Understanding the Building Blocks'
 description: 'Understanding the Building Blocks'
-tags: ['Crypto']
+category: 'crypto'
+tags: ['crypto', 'guide']
 ---
 
 <style jsx>{`

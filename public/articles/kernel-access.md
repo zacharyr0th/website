@@ -1,12 +1,12 @@
 ---
 title: 'Kernel Access'
-date: '2024-10-25'
+date: '2023-12-31'
 image:
   src: '/misc/placeholder.webp'
   alt: 'Kernel Access'
-subtitle: Everything You Need to Worry About
 description: 'Everything You Need to Worry About'
-tags: ['Tech']
+category: 'technology'
+tags: ['programming', 'guide']
 ---
 
 <style jsx>{`

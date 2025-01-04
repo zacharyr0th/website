@@ -1,9 +1,6 @@
 import { useMemo, useCallback } from 'react';
+import { ARTICLE_CONFIG } from '../types';
 import type { Article } from '../types';
-
-const RANDOM_ARTICLES_CONFIG = {
-  count: 3,
-} as const;
 
 function seededShuffle<T>(array: T[], seed: number): T[] {
   const shuffled = [...array];
@@ -30,9 +27,9 @@ function seededShuffle<T>(array: T[], seed: number): T[] {
 function filterArticles(articles: Article[], primaryArticleId: string): Article[] {
   return articles.filter(
     (article) =>
-      !article.frontmatter?.featured &&
+      !article.frontmatter.featured &&
       article.id !== primaryArticleId &&
-      !article.frontmatter?.draft
+      !article.frontmatter.draft
   );
 }
 
@@ -50,7 +47,7 @@ export function useRandomArticles(articles: Article[], primaryArticleId: string)
       }
 
       const shuffled = seededShuffle(availableArticles, seed);
-      return shuffled.slice(0, Math.min(RANDOM_ARTICLES_CONFIG.count, shuffled.length));
+      return shuffled.slice(0, Math.min(ARTICLE_CONFIG.pagination.featuredCount, shuffled.length));
     },
     [availableArticles]
   );

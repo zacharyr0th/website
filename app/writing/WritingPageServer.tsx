@@ -1,80 +1,63 @@
-import type { Article } from './types';
+import type { Article, FetchArticlesOptions } from './types';
 import { headers } from 'next/headers';
 
 const FETCH_TIMEOUT_MS = 5000; // 5 seconds timeout
 const CACHE_REVALIDATE_SECONDS = 3600; // 1 hour cache
 
-interface FetchArticlesOptions {
-  signal?: AbortSignal;
-  cache?: RequestCache;
-}
+// Add memoization for the base URL construction
+const getBaseUrl = (headers: Headers): string => {
+  const host = headers.get('host') || 'localhost:3000';
+  const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
+  return `${protocol}://${host}`;
+};
 
 async function getArticles(options: FetchArticlesOptions = {}): Promise<Article[]> {
-  const headersList = await headers();
-  const host = headersList.get('host') || 'localhost:3000';
-  const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
-  const url = `${protocol}://${host}/api/articles`;
-
-  // Create abort controller for timeout
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
-
+  
   try {
-    const response = await fetch(url, {
-      next: {
-        revalidate: CACHE_REVALIDATE_SECONDS,
-        tags: ['articles'],
-      },
+    const headersList = headers();
+    const response = await fetch(`${getBaseUrl(headersList)}/api/articles`, {
+      next: { revalidate: CACHE_REVALIDATE_SECONDS, tags: ['articles'] },
       signal: options.signal || controller.signal,
       cache: options.cache || 'default',
-      headers: {
-        Accept: 'application/json',
-      },
+      headers: { Accept: 'application/json' },
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
 
     const data = await response.json();
-
-    // Type guard to ensure we have an array of articles
+    
     if (!Array.isArray(data)) {
       throw new TypeError('API response is not an array');
     }
 
-    // Validate each article has required fields
-    const articles = data.map((article) => {
-      if (!article.id || !article.title) {
+    return data.filter((article): article is Article => {
+      const isValid = article.id && article.title;
+      if (!isValid) {
         console.warn('Article missing required fields:', article);
       }
-      return article;
+      return isValid;
     });
-
-    return articles;
   } catch (error) {
     if (error instanceof Error) {
-      if (error.name === 'AbortError') {
-        console.error('Request timed out after', FETCH_TIMEOUT_MS, 'ms');
-        throw new Error('Failed to load articles: Request timed out');
-      }
-      console.error('Error fetching articles:', error.message);
-    } else {
-      console.error('Unknown error fetching articles:', error);
+      const message = error.name === 'AbortError'
+        ? `Failed to load articles: Request timed out after ${FETCH_TIMEOUT_MS}ms`
+        : `Failed to load articles: ${error.message}`;
+      console.error(message);
+      throw new Error(message);
     }
-    return [];
+    throw error;
   } finally {
     clearTimeout(timeoutId);
   }
 }
 
-export default async function WritingPageServer(): Promise<{
-  allArticles: Article[];
-  error: string | null;
-}> {
+export default async function WritingPageServer() {
   try {
     const allArticles = await getArticles();
-
     return {
       allArticles,
       error: allArticles.length === 0 ? 'Unable to load articles. Please try again later.' : null,

@@ -1,12 +1,12 @@
 ---
 title: 'Web 3'
-date: '2024-10-25'
+date: '2023-12-31'
 image:
   src: '/misc/placeholder.webp'
   alt: 'Web 3'
-subtitle: User-owned Networks
 description: 'User-owned Networks'
-tags: ['Crypto', 'Tech']
+category: 'technology'
+tags: ['crypto', 'technology']
 ---
 
 <style jsx>{`

@@ -1,12 +1,12 @@
 ---
 title: 'The Fundamental Flaw'
-date: '2024-10-25'
+date: '2023-12-31'
 image:
   src: /images/flaw-0.webp
   alt: 'The Fundamental Flaw'
-subtitle: Onboarding and Offboarding
 description: 'Onboarding and Offboarding'
-tags: ['Crypto']
+category: 'crypto'
+tags: ['crypto']
 ---
 
 <style jsx>{`
