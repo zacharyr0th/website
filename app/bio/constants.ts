@@ -8,7 +8,7 @@ export const BIO_SOCIAL_LINKS = [
 
 export const BIO = {
   name: 'Zachary Roth',
-  title: 'Technologist, Technical Writer, & Product Strategist',
+  title: 'Analyst, Strategist, Writer',
   location: 'San Francisco Bay Area',
   intro: `Since 2019, I've been involved with projects across multiple hyper-growth blockchain ecosystems including Bitcoin, Ethereum, Solana, and Aptos. My work involves identifying market opportunities and guiding DeFi and AI teams on leveraging on-chain solutions to enhance their products and services on Aptos, the world's highest performing blockchain.`,
   
@@ -63,7 +63,7 @@ export const BIO = {
   experience: [
     {
       date: '2023 onwards',
-      title: 'Senior DeFi Strategist',
+      title: 'Head of Growth, Defi & AI',
       company: 'Aptos Labs',
       description: [
         'Leading strategic initiatives to expand DeFi and AI capabilities within the Aptos ecosystem',
