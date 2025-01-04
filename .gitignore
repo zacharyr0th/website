@@ -154,6 +154,29 @@ build/
 /public/robots.txt
 /public/feed.xml
 
+# Generated Content
+/app/api/articles/generated/
+/app/writing/generated/
+/app/projects/generated/
+
+# Cache and Build
+.contentlayer/
+.mdx-data/
+.rss-data/
+
+# Project Specific Files
+**/.DS_Store
+**/.env.*
+!**/.env.example
+**/*.generated.*
+**/*.cache
+**/*.log
+**/*.temp
+**/*.tmp
+**/*.bak
+**/*.swp
+**/*.swo
+
 # Allowed Config Files (Exceptions)
 !tailwind.config.{js,ts}
 !postcss.config.js
