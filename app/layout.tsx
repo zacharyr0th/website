@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <meta 
           name="google-site-verification" 
-          content={process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION} 
+          content="WV7y_5dT5xmFX0gXGb4iLMr8dGRpsBT70Gp-57wyW_E"
         />
         <link 
           rel="preconnect" 
