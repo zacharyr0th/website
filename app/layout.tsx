@@ -2,6 +2,7 @@ import './styles/globals.css';
 import Navigation from './components/navigation/Navigation';
 import ConditionalFooter from './components/ConditionalFooter';
 import { metadata } from './lib/metadata'
+import Script from 'next/script'
 
 export { metadata }
 
@@ -13,6 +14,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="preconnect" 
           href="https://fonts.googleapis.com" 
           crossOrigin="anonymous"
+        />
+        <meta 
+          name="google-site-verification" 
+          content={process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION} 
         />
         <link 
           rel="preconnect" 
@@ -28,6 +33,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+        >
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
+          `}
+        </Script>
       </head>
       <body className="min-h-screen bg-background font-sans antialiased overflow-x-hidden">
         <Navigation showHomeButton />
