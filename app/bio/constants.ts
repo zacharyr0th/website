@@ -8,9 +8,9 @@ export const BIO_SOCIAL_LINKS = [
 
 export const BIO = {
   name: 'Zachary Roth',
-  title: 'Blockchain Technologist, Technical Writer, & Web3 Product Strategist',
+  title: 'Technologist, Technical Writer, & Product Strategist',
   location: 'San Francisco Bay Area',
-  intro: `With over 4 years of experience in blockchain technology and decentralized finance, I've been at the forefront of Web3 innovation across multiple ecosystems. My expertise spans from technical architecture and product strategy to ecosystem growth and developer relations. Currently focused on advancing DeFi and AI capabilities on the Aptos blockchain, I combine technical knowledge with strategic insight to bridge the gap between traditional finance and crypto-native solutions.`,
+  intro: `Since 2019, I've been involved with projects across multiple hyper-growth blockchain ecosystems including Bitcoin, Ethereum, Solana, and Aptos. My work involves identifying market opportunities and guiding DeFi and AI teams on leveraging on-chain solutions to enhance their products and services on Aptos, the world's highest performing blockchain.`,
   
   featuredProjects: [
     {
