@@ -37,31 +37,31 @@ export type ArticleCategory = (typeof ARTICLE_CONFIG.allowedCategories)[number];
 export type ArticleTag = (typeof ARTICLE_CONFIG.allowedTags)[number];
 
 /** Frontmatter metadata for articles */
-export type ArticleFrontmatter = Readonly<{
-  title: string;
-  date?: string;
-  description?: string;
-  category?: ArticleCategory;
-  tags?: readonly ArticleTag[];
-  image?: ArticleImage;
-  featured?: boolean;
-  draft?: boolean;
-}>;
+export type ArticleFrontmatter = {
+  readonly title: string;
+  readonly date: string;
+  readonly description?: string | undefined;
+  readonly category?: ArticleCategory | undefined;
+  readonly tags?: readonly ArticleTag[] | undefined;
+  readonly image?: ArticleImage | undefined;
+  readonly featured: boolean;
+  readonly draft: boolean;
+};
 
 /** Complete article data structure */
-export type Article = Readonly<{
-  id: string;
-  slug: string;
-  title: string;
-  content: string;
-  description?: string;
-  date?: string;
-  link: string;
-  category?: ArticleCategory;
-  tags?: readonly ArticleTag[];
-  image?: ArticleImage;
-  frontmatter: ArticleFrontmatter;
-}>;
+export type Article = {
+  readonly id: string;
+  readonly slug: string;
+  readonly title: string;
+  readonly content: string;
+  readonly link: string;
+  readonly frontmatter: ArticleFrontmatter;
+  readonly description: string | undefined;
+  readonly date: string | undefined;
+  readonly category: ArticleCategory | undefined;
+  readonly tags: readonly ArticleTag[] | undefined;
+  readonly image: ArticleImage | undefined;
+};
 
 /** Raw frontmatter before processing */
 export type RawFrontmatter = Readonly<{

@@ -2,7 +2,7 @@
 
 import React, { memo, useCallback } from 'react';
 import { NavButton } from '../../components/buttons';
-import { ARTICLE_CONFIG, ArticleCategory } from '../types';
+import { ARTICLE_CONFIG } from '../types';
 
 interface WritingNavProps {
   selectedCategory: string;

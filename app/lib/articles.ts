@@ -8,12 +8,6 @@
  * - Managing article caching for performance
  * - Sorting articles by date
  * - Filtering featured articles
- * 
- * The system supports:
- * - Type-safe category and tag validation
- * - Image transformation and validation
- * - Draft article filtering in production
- * - In-memory caching with configurable intervals
  */
 
 import fs from 'fs';
@@ -33,76 +27,49 @@ import {
 // In-memory cache
 let articleCache: ArticleCache | null = null;
 
-function transformImage(
-  image: string | ArticleImage | undefined,
-  defaultAlt: string
-): ArticleImage | undefined {
-  if (!image) return undefined;
-  if (typeof image === 'string') {
-    return {
-      src: image,
-      alt: `Featured image for article: ${defaultAlt}`,
-    };
-  }
-  return {
-    src: image.src,
-    alt: image.alt || `Featured image for article: ${defaultAlt}`,
-  };
-}
-
-function isValidCategory(category: string): category is ArticleCategory {
-  return (ARTICLE_CONFIG.allowedCategories as readonly string[]).includes(category.toLowerCase());
-}
-
-function isValidTag(tag: string): tag is ArticleTag {
-  return (ARTICLE_CONFIG.allowedTags as readonly string[]).includes(tag.toLowerCase());
-}
-
 export function validateFrontmatter(data: unknown): ArticleFrontmatter {
   const rawData = data as RawFrontmatter;
   
-  if (!rawData.title) {
-    throw new Error('Article title is required');
-  }
+  const transformImage = (
+    image: string | { src: string; alt?: string } | undefined,
+    defaultAlt: string
+  ): ArticleImage | undefined => {
+    if (!image) return undefined;
+    if (typeof image === 'string') {
+      return {
+        src: image,
+        alt: `Featured image for article: ${defaultAlt}`,
+      };
+    }
+    return {
+      src: image.src,
+      alt: image.alt || `Featured image for article: ${defaultAlt}`,
+    };
+  };
 
-  const frontmatter: ArticleFrontmatter = {
-    title: rawData.title.slice(0, ARTICLE_CONFIG.maxTitleLength),
+  // Build the frontmatter object immutably
+  return {
+    title: rawData.title || 'Untitled',
     date: rawData.date || new Date().toISOString(),
+    description: rawData.description || rawData.subtitle || undefined,
+    category: rawData.category && 
+      ARTICLE_CONFIG.allowedCategories.includes(rawData.category as ArticleCategory) ? 
+      rawData.category as ArticleCategory : 
+      undefined,
+    tags: rawData.tags && Array.isArray(rawData.tags) ? 
+      Array.from(new Set(
+        rawData.tags
+          .filter((tag): tag is string => typeof tag === 'string')
+          .map(tag => tag.toLowerCase())
+          .filter((tag): tag is ArticleTag => 
+            ARTICLE_CONFIG.allowedTags.map(t => t.toLowerCase()).includes(tag)
+          )
+      )) : 
+      undefined,
+    image: transformImage(rawData.image, rawData.title || 'Article image'),
     featured: rawData.featured || false,
     draft: rawData.draft || false,
   };
-
-  // Handle description
-  if (rawData.description || rawData.subtitle) {
-    const description = (rawData.description || rawData.subtitle || '').slice(0, ARTICLE_CONFIG.maxDescriptionLength);
-    if (description) frontmatter.description = description;
-  }
-
-  // Validate category
-  if (rawData.category) {
-    const lowercaseCategory = rawData.category.toLowerCase();
-    if (isValidCategory(lowercaseCategory)) {
-      frontmatter.category = lowercaseCategory;
-    }
-  }
-
-  // Validate tags
-  if (Array.isArray(rawData.tags)) {
-    const validTags = rawData.tags
-      .map(tag => tag.toLowerCase())
-      .filter(isValidTag);
-    if (validTags.length > 0) {
-      frontmatter.tags = validTags;
-    }
-  }
-
-  // Transform image
-  const transformedImage = transformImage(rawData.image, rawData.title);
-  if (transformedImage) {
-    frontmatter.image = transformedImage;
-  }
-
-  return frontmatter;
 }
 
 export function createArticle(
@@ -125,7 +92,7 @@ export function createArticle(
   };
 }
 
-export async function getArticles(forceRefresh = false): Promise<Article[]> {
+export async function getArticles(forceRefresh = false): Promise<readonly Article[]> {
   // Check cache first
   const now = Date.now();
   if (
@@ -179,7 +146,7 @@ export async function getArticles(forceRefresh = false): Promise<Article[]> {
   }
 }
 
-export async function getFeaturedArticles(): Promise<Article[]> {
+export async function getFeaturedArticles(): Promise<readonly Article[]> {
   const articles = await getArticles();
   return articles
     .filter(article => article.frontmatter.featured)

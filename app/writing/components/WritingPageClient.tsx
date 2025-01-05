@@ -60,7 +60,7 @@ const itemVariants = {
 };
 
 interface WritingPageClientProps {
-  initialArticles: Article[];
+  initialArticles: readonly Article[];
   config: typeof import('../types').ARTICLE_CONFIG;
 }
 

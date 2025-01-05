@@ -1,7 +1,14 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { Article, ArticleFrontmatter, RawFrontmatter, ARTICLE_CONFIG, ArticleTag } from './types';
+import { 
+  Article, 
+  ArticleFrontmatter, 
+  RawFrontmatter, 
+  ARTICLE_CONFIG, 
+  ArticleTag,
+  ArticleCategory 
+} from './types';
 
 const articlesDirectory = path.join(process.cwd(), ARTICLE_CONFIG.directory);
 
@@ -11,83 +18,34 @@ export function validateFrontmatter(data: unknown): ArticleFrontmatter {
 
   const rawData = data as RawFrontmatter;
 
-  const transformImage = (
-    image: string | { src: string; alt?: string } | undefined,
-    defaultAlt: string
-  ): { src: string; alt: string } | undefined => {
-    if (!image) return undefined;
-    if (typeof image === 'string') {
-      return {
-        src: image,
-        alt: `Featured image for article: ${defaultAlt}`,
-      };
-    }
-    return {
-      src: image.src,
-      alt: image.alt || `Featured image for article: ${defaultAlt}`,
-    };
-  };
-
-  const frontmatter: ArticleFrontmatter = {
+  // Build the frontmatter object immutably
+  return {
     title: rawData.title || 'Untitled',
     date: rawData.date || new Date().toISOString(),
+    description: rawData.description || rawData.subtitle || undefined,
+    category: rawData.category && 
+      ARTICLE_CONFIG.allowedCategories.includes(rawData.category as ArticleCategory) ? 
+      rawData.category as ArticleCategory : 
+      undefined,
+    tags: rawData.tags && Array.isArray(rawData.tags) ? 
+      Array.from(new Set(
+        rawData.tags
+          .filter((tag): tag is string => typeof tag === 'string')
+          .map(tag => tag.toLowerCase())
+          .filter((tag): tag is ArticleTag => 
+            ARTICLE_CONFIG.allowedTags.map(t => t.toLowerCase()).includes(tag)
+          )
+      )) : 
+      undefined,
+    image: rawData.image ? {
+      src: typeof rawData.image === 'string' ? rawData.image : rawData.image.src,
+      alt: typeof rawData.image === 'string' ? 
+        `Featured image for article: ${rawData.title || 'Untitled'}` : 
+        rawData.image.alt || `Featured image for article: ${rawData.title || 'Untitled'}`
+    } : undefined,
     featured: rawData.featured || false,
     draft: rawData.draft || false,
   };
-
-  if (rawData.description || rawData.subtitle) {
-    frontmatter.description = rawData.description || rawData.subtitle || '';
-  }
-
-  if (rawData.category) {
-    const category = rawData.category as string;
-    if (ARTICLE_CONFIG.allowedCategories.includes(category as typeof ARTICLE_CONFIG.allowedCategories[number])) {
-      frontmatter.category = category as typeof ARTICLE_CONFIG.allowedCategories[number];
-    } else {
-      console.warn(`Invalid category: ${category}`);
-    }
-  }
-
-  if (rawData.tags && Array.isArray(rawData.tags)) {
-    // First validate and convert to lowercase
-    const normalizedTags = rawData.tags
-      .filter((tag): tag is string => typeof tag === 'string')
-      .map(tag => tag.toLowerCase());
-
-    // Then validate against allowed tags (which should be lowercase)
-    const validTags = normalizedTags.filter((tag): tag is ArticleTag => 
-      ARTICLE_CONFIG.allowedTags.map(t => t.toLowerCase()).includes(tag)
-    );
-    
-    if (validTags.length > 0) {
-      // Remove duplicates while maintaining the ArticleTag type
-      frontmatter.tags = Array.from(new Set(validTags));
-    } else {
-      console.warn(`No valid tags found in: ${rawData.tags.join(', ')}`);
-    }
-  }
-
-  const transformedImage = transformImage(rawData.image, rawData.title || 'Article image');
-  if (transformedImage) {
-    frontmatter.image = transformedImage;
-  }
-
-  // Validate title length
-  if (frontmatter.title.length > ARTICLE_CONFIG.maxTitleLength) {
-    console.warn(`Title exceeds maximum length: ${frontmatter.title}`);
-    frontmatter.title = frontmatter.title.slice(0, ARTICLE_CONFIG.maxTitleLength);
-  }
-
-  // Validate description length if present
-  if (
-    frontmatter.description &&
-    frontmatter.description.length > ARTICLE_CONFIG.maxDescriptionLength
-  ) {
-    console.warn(`Description exceeds maximum length: ${frontmatter.description}`);
-    frontmatter.description = frontmatter.description.slice(0, ARTICLE_CONFIG.maxDescriptionLength);
-  }
-
-  return frontmatter;
 }
 
 export function createArticleFromFrontmatter(
@@ -95,46 +53,36 @@ export function createArticleFromFrontmatter(
   content: string,
   slug: string
 ): Article {
-  // Validate title length
   if (frontmatter.title.length > 100) {
     throw new Error('Title is too long (max 100 characters)');
   }
 
-  const article: Article = {
+  const base = {
     id: slug,
     slug,
     title: frontmatter.title,
     content,
-    date: frontmatter.date,
     link: `/writing/${slug}`,
     frontmatter,
   };
 
-  if (frontmatter.description) {
-    article.description = frontmatter.description;
-  }
+  const optionals = {
+    ...(frontmatter.date && { date: frontmatter.date }),
+    ...(frontmatter.description && { description: frontmatter.description }),
+    ...(frontmatter.category && { category: frontmatter.category }),
+    ...(frontmatter.tags && { tags: frontmatter.tags }),
+    ...(frontmatter.image && { image: frontmatter.image })
+  };
 
-  if (frontmatter.category) {
-    article.category = frontmatter.category;
-  }
-
-  if (frontmatter.tags) {
-    article.tags = frontmatter.tags;
-  }
-
-  if (frontmatter.image) {
-    article.image = frontmatter.image;
-  }
-
-  return article;
+  return { ...base, ...optionals } as Article;
 }
 
 // Add memoization for getArticles
-let cachedArticles: Article[] | null = null;
+let cachedArticles: readonly Article[] | null = null;
 let lastFetchTime = 0;
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
-export async function getArticles(): Promise<Article[]> {
+export async function getArticles(): Promise<readonly Article[]> {
   const now = Date.now();
   if (cachedArticles && now - lastFetchTime < CACHE_DURATION) {
     return cachedArticles;
@@ -178,7 +126,7 @@ export async function getArticles(): Promise<Article[]> {
   }
 }
 
-export async function getFeaturedArticles(): Promise<Article[]> {
+export async function getFeaturedArticles(): Promise<readonly Article[]> {
   const articles = await getArticles();
   return articles.filter((article) => article.frontmatter.featured).slice(0, 3);
 }
