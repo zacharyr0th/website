@@ -65,6 +65,7 @@ node_modules/
 **/*.{sublime-*,code-workspace}
 **/.{settings,project,classpath}
 **/*.{swp,swo}
+.cursorrules
 
 ###############################################
 # Build and Compilation

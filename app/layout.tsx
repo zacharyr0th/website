@@ -45,7 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           `}
         </Script>
       </head>
-      <body className="min-h-screen bg-background font-sans antialiased overflow-x-hidden">
+      <body className="min-h-screen bg-background antialiased overflow-x-hidden">
         <Navigation showHomeButton />
         <main className="relative flex min-h-screen flex-col max-w-[100vw] overflow-x-hidden">
           {children}
