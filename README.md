@@ -1,12 +1,12 @@
 # Modern Personal Website & Blog Platform
 
-A high-performance, SEO-optimized personal website built with Next.js 13+, featuring a blog, project showcase, bio, and audio player. Designed for developers who want to showcase their work and share their thoughts.
+A modern, high-performance personal website and blog platform built with Next.js 13+. Features server-side rendering, TypeScript strict mode, and a component-driven architecture powering a project showcase, blog system, interactive bio page, and global audio player with API integrations.
 
 ## Technical Architecture
 
 | Category | Features |
 |----------|----------|
-| **Core Technologies** | **N** Framework: Next.js 13+ with App Router<br>**TS** Language: TypeScript (Strict Mode)<br>🎨 Styling: Tailwind CSS with Custom Design System<br>📄 Content: MDX with Remark/Rehype<br>⚛️ State Management: React Hooks + Context<br>🔄 Data Fetching: SWR with REST APIs |
+| **Core Technologies** | **N** Framework: Next.js 13+ with App Router<br>**TS** Language: TypeScript (Strict Mode)<br>Styling: Tailwind CSS with Custom Design System<br>Content: MDX with Remark/Rehype<br>State Management: React Hooks + Context<br>Data Fetching: SWR with REST APIs |
 | **Performance Features** | Server Components (RSC)<br>Edge Runtime Support<br>Streaming SSR<br>Image Optimization<br>Dynamic Imports |
 | **Developer Experience** | ESLint + Prettier Configuration<br>TypeScript Path Aliases<br>Hot Module Replacement<br>Fast Refresh |
 | **SEO Optimization** | Dynamic meta tags<br>Structured data (JSON-LD)<br>Automatic sitemap generation<br>OpenGraph images<br>robots.txt configuration |
