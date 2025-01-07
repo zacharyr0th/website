@@ -16,11 +16,12 @@ const ProjectNav = memo(({ selectedCategory, onCategoryChange }: ProjectNavProps
   );
 
   return (
-    <div className="bg-surface/80 backdrop-blur-sm rounded-3xl px-4 py-2.5 flex items-center space-x-4 overflow-x-auto scrollbar-hide">
+    <div className="bg-surface/80 backdrop-blur-sm rounded-3xl px-4 py-2.5 inline-flex items-center space-x-4 overflow-x-auto scrollbar-hide">
       <NavButton
         active={selectedCategory === 'all'}
         onClick={handleCategoryChange('all')}
-        size="xs"
+        size="sm"
+        className="text-base"
       >
         All
       </NavButton>
@@ -29,7 +30,8 @@ const ProjectNav = memo(({ selectedCategory, onCategoryChange }: ProjectNavProps
           key={key}
           active={selectedCategory === key}
           onClick={handleCategoryChange(key)}
-          size="xs"
+          size="sm"
+          className="text-base"
         >
           {value}
         </NavButton>

@@ -40,7 +40,7 @@ const WritingCard = memo(({ article }: WritingCardProps) => (
         <p className="flex font-mono text-white/60 text-sm leading-relaxed line-clamp-3 text-left w-full">{article.description}</p>
       </article>
 
-      <div className="ml-4 flex items-center text-accent/80 group-hover:text-accent text-sm font-mono transition-colors">
+      <div className="flex items-center text-accent/80 group-hover:text-accent text-sm font-mono transition-colors">
         Read Article
         <svg className="ml-1 w-4 h-4 group-hover:translate-x-0.5 transition-transform" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M6.66667 12.6667L12 7.33333L6.66667 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -100,7 +100,7 @@ const ProjectGrid = memo(({ projects }: { projects: typeof PROJECTS }) => {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <ProjectCard project={project} />
+          <ProjectCard project={project} isFocused={false} />
         </motion.div>
       ))}
     </div>

@@ -1,6 +1,8 @@
 import './styles/globals.css';
 import Navigation from './components/navigation/Navigation';
 import ConditionalFooter from './components/ConditionalFooter';
+import KeyboardShortcuts from './components/KeyboardShortcuts';
+import GlobalConnectModal from './components/misc/GlobalConnectModal';
 import { metadata } from './lib/metadata'
 import Script from 'next/script'
 
@@ -46,6 +48,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Script>
       </head>
       <body className="min-h-screen bg-background antialiased overflow-x-hidden">
+        <KeyboardShortcuts />
+        <GlobalConnectModal />
         <Navigation showHomeButton />
         <main className="relative flex min-h-screen flex-col max-w-[100vw] overflow-x-hidden">
           {children}

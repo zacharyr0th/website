@@ -12,7 +12,6 @@ const openSocialLink = (url: string) => window.open(url, '_blank', 'noopener,nor
 
 const ConnectModal = memo(({ isOpen, onClose }: ConnectModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
-  const linkedInButtonRef = useRef<HTMLButtonElement>(null);
 
   const handleEscape = useCallback((e: KeyboardEvent) => {
     if (e.key === 'Escape') onClose();
@@ -27,7 +26,6 @@ const ConnectModal = memo(({ isOpen, onClose }: ConnectModalProps) => {
 
     document.addEventListener('keydown', handleEscape);
     document.addEventListener('mousedown', handleClickOutside);
-    linkedInButtonRef.current?.focus();
 
     return () => {
       document.removeEventListener('keydown', handleEscape);
@@ -51,10 +49,9 @@ const ConnectModal = memo(({ isOpen, onClose }: ConnectModalProps) => {
         <div className="flex justify-center items-center gap-8">
           {Object.values(SOCIAL_LINKS)
             .filter(link => link.platform !== 'GitHub')
-            .map((link, index) => (
+            .map((link) => (
               <IconButton
                 key={link.label}
-                ref={index === 0 ? linkedInButtonRef : undefined}
                 variant="default"
                 onClick={() => openSocialLink(link.url)}
                 className="hover:text-accent transition-colors"

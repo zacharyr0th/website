@@ -25,9 +25,9 @@ const NavLink = memo(({ label, href, active }: NavItem & { active: boolean }) =>
 NavLink.displayName = 'NavLink';
 
 const NavContent = memo(({ pathname, themeButton, showHomeButton }: { pathname: string; themeButton?: React.ReactNode; showHomeButton?: boolean }) => (
-  <div className="flex w-full justify-between max-sm:justify-center">
+  <div className="flex w-full justify-end max-sm:justify-center">
     {showHomeButton && pathname !== '/' && (
-      <div className="max-sm:hidden">
+      <div className="max-sm:hidden mr-auto">
         <BlurBackground>
           <Link href="/" style={{ textDecoration: 'none' }}>
             <NavButton active={pathname === '/'}>
@@ -37,7 +37,7 @@ const NavContent = memo(({ pathname, themeButton, showHomeButton }: { pathname: 
         </BlurBackground>
       </div>
     )}
-    {(!showHomeButton || pathname === '/') && <div className="max-sm:hidden" />}
+    {(!showHomeButton || pathname === '/') && <div className="max-sm:hidden mr-auto" />}
     <BlurBackground>
       <ul className="flex items-center space-x-4 max-sm:space-x-2 px-2">
         {showHomeButton && pathname !== '/' && (
@@ -78,7 +78,7 @@ function Navigation({ showHomeButton = false, themeButton }: NavigationProps) {
   }
 
   return (
-    <nav className="fixed top-0 right-0 left-0 mx-8 mt-8 mb-32 z-50 flex items-center justify-between max-sm:justify-center max-sm:mx-4 max-sm:mt-4 max-sm:mb-24">
+    <nav className="fixed top-0 right-0 left-0 mx-auto mt-8 mb-32 z-50 max-w-[var(--max-content-width)] flex items-center justify-center max-sm:mx-4 max-sm:mt-4 max-sm:mb-24">
       <NavContent pathname={pathname} themeButton={themeButton} showHomeButton={showHomeButton} />
     </nav>
   );

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { Article } from '../types';
 import { ArchiveSection } from './ArchiveSection';
 import WritingNav from './WritingNav';
@@ -34,42 +34,23 @@ const EmptyState = () => (
   </div>
 );
 
-const containerVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.22, 1, 0.36, 1],
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-};
-
 interface WritingPageClientProps {
   initialArticles: readonly Article[];
-  config: typeof import('../types').ARTICLE_CONFIG;
+  containerVariants: Variants;
 }
 
-export default function WritingPageClient({ initialArticles, config }: WritingPageClientProps) {
+export default function WritingPageClient({ 
+  initialArticles, 
+  containerVariants
+}: WritingPageClientProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
   const filteredArticles = useMemo(() => {
-    if (selectedCategory === 'all') return initialArticles;
-    return initialArticles.filter((article) => article.category === selectedCategory);
+    return selectedCategory === 'all'
+      ? initialArticles
+      : initialArticles.filter(article => 
+          article.frontmatter.category === selectedCategory
+        );
   }, [initialArticles, selectedCategory]);
 
   const handleCategoryChange = (category: string) => {
@@ -82,27 +63,17 @@ export default function WritingPageClient({ initialArticles, config }: WritingPa
 
   return (
     <motion.div
-      className="space-y-6"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
+      className="space-y-12"
     >
-      <motion.header className="space-y-3" variants={itemVariants}>
-        <h1 className="text-4xl md:text-5xl font-bold">Writing</h1>
-      </motion.header>
-
-      <motion.div variants={itemVariants}>
-        <WritingNav
-          selectedCategory={selectedCategory}
-          onCategoryChange={handleCategoryChange}
-        />
-      </motion.div>
-
-      <motion.div variants={containerVariants}>
-        <ArchiveSection 
-          articles={filteredArticles.slice(0, config.pagination.defaultPageSize)} 
-        />
-      </motion.div>
+      <WritingNav 
+        selectedCategory={selectedCategory}
+        onCategoryChange={handleCategoryChange}
+      />
+      
+      <ArchiveSection articles={filteredArticles} />
     </motion.div>
   );
 } 

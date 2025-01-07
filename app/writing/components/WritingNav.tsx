@@ -18,11 +18,12 @@ const WritingNav = memo(({ selectedCategory, onCategoryChange }: WritingNavProps
   );
 
   return (
-    <div className="bg-surface/80 backdrop-blur-sm rounded-3xl px-4 py-2.5 flex items-center space-x-4 overflow-x-auto scrollbar-hide">
+    <div className="bg-surface/80 backdrop-blur-sm rounded-3xl px-4 py-2.5 inline-flex items-center space-x-4 overflow-x-auto scrollbar-hide">
       <NavButton
         active={selectedCategory === 'all'}
         onClick={handleCategoryChange('all')}
-        size="xs"
+        size="sm"
+        className="text-base"
       >
         All
       </NavButton>
@@ -31,7 +32,8 @@ const WritingNav = memo(({ selectedCategory, onCategoryChange }: WritingNavProps
           key={category}
           active={selectedCategory === category}
           onClick={handleCategoryChange(category)}
-          size="xs"
+          size="sm"
+          className="text-base"
         >
           {category.charAt(0).toUpperCase() + category.slice(1)}
         </NavButton>

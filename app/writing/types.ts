@@ -46,6 +46,7 @@ export type ArticleFrontmatter = {
   readonly image?: ArticleImage | undefined;
   readonly featured: boolean;
   readonly draft: boolean;
+  readonly takeaways?: readonly string[] | undefined;
 };
 
 /** Complete article data structure */
@@ -74,6 +75,7 @@ export type RawFrontmatter = Readonly<{
   image?: string | ArticleImage;
   featured?: boolean;
   draft?: boolean;
+  takeaways?: readonly string[];
 }>;
 
 /** Props for article content component */

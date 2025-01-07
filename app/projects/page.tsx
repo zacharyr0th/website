@@ -14,9 +14,9 @@ const containerVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
+      duration: 0.4,
       ease: [0.22, 1, 0.36, 1],
-      staggerChildren: 0.1,
+      staggerChildren: 0.05,
     },
   },
 };
@@ -27,7 +27,7 @@ const itemVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.5,
+      duration: 0.3,
       ease: [0.22, 1, 0.36, 1],
     },
   },
@@ -35,10 +35,7 @@ const itemVariants = {
 
 export default function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState<Category>('all');
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  const [focusedIndex, setFocusedIndex] = useState(0);
 
   const filteredProjects = useMemo(() => {
     if (selectedCategory === 'all') return PROJECTS;
@@ -46,6 +43,47 @@ export default function ProjectsPage() {
       project.categories.includes(selectedCategory as ProjectCategory)
     );
   }, [selectedCategory]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    setFocusedIndex(0); // Reset focus to first item when category changes
+  }, [selectedCategory]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        e.preventDefault();
+        
+        const numProjects = filteredProjects.length;
+        const cols = window.innerWidth >= 768 ? 2 : 1; // md breakpoint
+
+        let newIndex = focusedIndex;
+
+        switch (e.key) {
+          case 'ArrowUp':
+            newIndex = focusedIndex - cols;
+            break;
+          case 'ArrowDown':
+            newIndex = focusedIndex + cols;
+            break;
+          case 'ArrowLeft':
+            newIndex = focusedIndex - 1;
+            break;
+          case 'ArrowRight':
+            newIndex = focusedIndex + 1;
+            break;
+        }
+
+        // Ensure new index is within bounds
+        if (newIndex >= 0 && newIndex < numProjects) {
+          setFocusedIndex(newIndex);
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [focusedIndex, filteredProjects.length]);
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category as Category);
@@ -61,7 +99,7 @@ export default function ProjectsPage() {
       <main className="container mx-auto px-6 sm:px-8 pt-24 sm:pt-36 pb-24">
         <div style={{ maxWidth: 'var(--article-width)' }} className="mx-auto space-y-8">
           <motion.header className="space-y-4" variants={itemVariants}>
-            <h1 className="text-4xl md:text-5xl font-bold">Projects</h1>
+            <h1 className="text-5xl lg:text-6xl font-bold tracking-tight">Projects</h1>
           </motion.header>
 
           <motion.div variants={itemVariants}>
@@ -75,9 +113,12 @@ export default function ProjectsPage() {
             className="grid gap-8 md:grid-cols-2"
             variants={containerVariants}
           >
-            {filteredProjects.map((project) => (
+            {filteredProjects.map((project, index) => (
               <motion.div key={project.id} variants={itemVariants}>
-                <ProjectCard project={project} />
+                <ProjectCard 
+                  project={project} 
+                  isFocused={index === focusedIndex}
+                />
               </motion.div>
             ))}
           </motion.div>

@@ -1,13 +1,15 @@
 'use client';
 
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { FaGithub, FaNewspaper, FaPlay } from 'react-icons/fa6';
 import { IconButton } from '../components/buttons';
 import { BaseProject } from './projects';
+import Link from 'next/link';
 
 const ProjectTag = memo(({ tag }: { tag: string }) => (
   <span
-    className="inline-flex items-center px-2.5 py-1 text-xs font-medium bg-white/5 text-secondary/90 rounded-md"
+    className="inline-flex items-center px-2.5 py-1 text-xs font-medium bg-white/5 text-zinc-400 rounded-md"
   >
     {tag}
   </span>
@@ -22,7 +24,7 @@ const ProjectLinks = memo(({ project }: { project: BaseProject }) => (
         icon={<FaGithub className="h-5 w-5" />}
         onClick={() => window.open(project.githubLink, '_blank', 'noopener,noreferrer')}
         ariaLabel="View project on GitHub"
-        className="text-secondary/60 hover:text-accent transition-colors"
+        className="text-zinc-400/60 hover:text-[#3b82f6] transition-colors"
       />
     )}
     {project.articleLink && (
@@ -30,7 +32,7 @@ const ProjectLinks = memo(({ project }: { project: BaseProject }) => (
         icon={<FaNewspaper className="h-4 w-4" />}
         onClick={() => window.open(project.articleLink, '_blank', 'noopener,noreferrer')}
         ariaLabel="Read project article"
-        className="text-secondary/60 hover:text-accent transition-colors"
+        className="text-zinc-400/60 hover:text-[#3b82f6] transition-colors"
       />
     )}
     {project.demoLink && (
@@ -38,7 +40,7 @@ const ProjectLinks = memo(({ project }: { project: BaseProject }) => (
         icon={<FaPlay className="h-4 w-4" />}
         onClick={() => window.open(project.demoLink, '_blank', 'noopener,noreferrer')}
         ariaLabel="View live demo"
-        className="text-secondary/60 hover:text-accent transition-colors"
+        className="text-zinc-400/60 hover:text-[#3b82f6] transition-colors"
       />
     )}
   </div>
@@ -46,29 +48,63 @@ const ProjectLinks = memo(({ project }: { project: BaseProject }) => (
 
 ProjectLinks.displayName = 'ProjectLinks';
 
-function ProjectCardComponent({ project }: { project: BaseProject }) {
-  return (
-    <div 
-      className="flex flex-col justify-between p-6 group space-y-4 bg-surface/50 rounded-xl hover:bg-surface hover:scale-[1.02] hover:shadow-lg transition-all duration-300 ease-in-out will-change-transform"
-    >
-      <div className="space-y-4">
-        <div>
-          <h3 className="text-xl font-semibold text-white group-hover:text-accent transition-colors">
-            {project.title}
-          </h3>
-        </div>
-        <p className="text-secondary/90 text-sm leading-relaxed">{project.description}</p>
-      </div>
+interface ProjectCardProps {
+  project: BaseProject;
+  isFocused: boolean;
+}
 
-      <div>
-        <div className="flex flex-wrap items-center gap-2">
-          {project.tags.map((tag: string) => (
-            <ProjectTag key={tag} tag={tag} />
-          ))}
-          <ProjectLinks project={project} />
-        </div>
-      </div>
-    </div>
+function ProjectCardComponent({ project, isFocused }: ProjectCardProps) {
+  const ref = React.useRef(null);
+  const linkRef = React.useRef<HTMLAnchorElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  useEffect(() => {
+    if (isFocused && linkRef.current) {
+      linkRef.current.focus();
+    }
+  }, [isFocused]);
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{
+        transform: isInView ? "none" : "translateY(50px)",
+        opacity: isInView ? 1 : 0,
+        transition: "all 0.5s cubic-bezier(0.17, 0.55, 0.55, 1) 0.2s"
+      }}
+    >
+      <Link
+        ref={linkRef}
+        href={project.link || project.githubLink || project.demoLink || '#'}
+        className={`block transition-all duration-200 ease-in-out will-change-transform outline-none focus:outline-none ${
+          isFocused ? 'scale-[1.02]' : 'hover:scale-[1.02]'
+        }`}
+      >
+        <article className={`flex flex-col justify-between p-6 group space-y-4 rounded-xl transition-all duration-200 ${
+          isFocused ? 'bg-zinc-800/50' : 'hover:bg-zinc-800/50 bg-inherit'
+        }`}>
+          <div className="space-y-4">
+            <div>
+              <h3 className={`text-2xl font-semibold transition-colors ${
+                isFocused ? 'text-accent' : 'text-zinc-100 group-hover:text-accent'
+              }`}>
+                {project.title}
+              </h3>
+            </div>
+            <p className="text-base text-zinc-400 leading-relaxed">{project.description}</p>
+          </div>
+
+          <div>
+            <div className="flex flex-wrap items-center gap-2">
+              {project.tags.map((tag: string) => (
+                <ProjectTag key={tag} tag={tag} />
+              ))}
+              <ProjectLinks project={project} />
+            </div>
+          </div>
+        </article>
+      </Link>
+    </motion.div>
   );
 }
 

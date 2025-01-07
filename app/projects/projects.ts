@@ -1,4 +1,4 @@
-export type ProjectCategory = 'crypto' | 'ai' | 'devtools' | 'webdev' | 'misc';
+export type ProjectCategory = 'crypto' | 'ai' | 'devtools' | 'webdev';
 
 export interface BaseProject {
   id: string;
@@ -19,7 +19,6 @@ export const PROJECT_CATEGORIES: Readonly<Record<ProjectCategory, string>> = {
   ai: 'AI',
   devtools: 'DevTools',
   webdev: 'WebDev',
-  misc: 'Misc',
 };
 
 export const PROJECTS: readonly BaseProject[] = [
@@ -42,7 +41,7 @@ export const PROJECTS: readonly BaseProject[] = [
     demoLink: '',
     articleLink: '/writing/simple-os',
     status: 'Functional',
-    categories: ['misc'],
+    categories: ['devtools'],
   },
   {
     id: 'toml-tools',

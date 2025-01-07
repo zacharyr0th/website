@@ -69,6 +69,9 @@ export function validateFrontmatter(data: unknown): ArticleFrontmatter {
     image: transformImage(rawData.image, rawData.title || 'Article image'),
     featured: rawData.featured || false,
     draft: rawData.draft || false,
+    takeaways: rawData.takeaways && Array.isArray(rawData.takeaways) ?
+      rawData.takeaways.filter((takeaway): takeaway is string => typeof takeaway === 'string') :
+      undefined,
   };
 }
 

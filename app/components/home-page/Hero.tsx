@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import BackgroundSVG from './backgrounds/HeroBackground';
-import ConnectModal from '../misc/ConnectModal';
 import { ActionButton } from '../buttons';
 import { heroContent } from './constants';
 import { pageTransition, sectionTransition } from '../../lib/animations';
@@ -87,15 +86,15 @@ const ContentSection = memo<ContentSectionProps>(({ title, content, children }) 
 ContentSection.displayName = 'ContentSection';
 
 const StickyHeader = memo(() => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const handleOpenModal = useCallback(() => setIsModalOpen(true), []);
-  const handleCloseModal = useCallback(() => setIsModalOpen(false), []);
+  const handleOpenModal = useCallback(() => {
+    window.dispatchEvent(new CustomEvent('openConnectModal'));
+  }, []);
 
   if (!mounted) {
     return (
@@ -143,7 +142,6 @@ const StickyHeader = memo(() => {
           </ActionButton>
         </Link>
       </motion.div>
-      <ConnectModal isOpen={isModalOpen} onClose={handleCloseModal} />
     </motion.div>
   );
 });
