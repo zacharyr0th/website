@@ -7,6 +7,12 @@ image:
 description: 'Understanding the Building Blocks'
 category: 'crypto'
 tags: ['crypto', 'guide']
+takeaways:
+  - "Blockchains are distributed ledgers that enable trustless transactions through consensus methods, eliminating the need for centralized intermediaries."
+  - "Digital wallets provide access to blockchain accounts, allowing 24/7 participation in various applications from finance to gaming."
+  - "While most blockchains offer transparent transaction records, some focus on privacy features, demonstrating the technology's versatility."
+  - "Bitcoin's evolution from a peer-to-peer payment system to a 'digital gold' store of value highlights how blockchain narratives can shift over time."
+  - "Censorship resistance varies among blockchains, with ongoing debates about which consensus methods and infrastructures best serve this goal."
 ---
 
 <style jsx>{`

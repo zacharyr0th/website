@@ -7,6 +7,12 @@ image:
 description: 'Market Structure & Price Discovery'
 category: 'finance'
 tags: ['crypto', 'analysis']
+takeaways:
+  - "Market structure, including dealer positioning and gamma squeezes, significantly influences price movements in traditional equity markets."
+  - "The 1987 market crash led to regulatory changes requiring market makers to provide liquidity, fundamentally altering market dynamics."
+  - "Real asset values differ significantly from notional values due to monetary policy, as demonstrated by comparing the S&P 500 to the Fed's balance sheet."
+  - "The global derivatives market is estimated at one quadrillion dollars, with $11 in derivatives for every $1 in stocks, creating complex market reflexivity."
+  - "Crypto markets differ from traditional markets due to unique whale behavior, multiple exchanges, and less mature derivatives markets, leading to higher volatility."
 ---
 
 <style jsx>{`

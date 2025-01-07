@@ -8,10 +8,11 @@ description: 'Why blockchains make sense'
 category: 'blockchain'
 tags: ['crypto', 'defi', 'technology', 'research']
 takeaways:
-  - 'Traditional financial systems face ongoing challenges with transparency and accessibility'
-  - 'DeFi offers practical solutions for both developed and emerging markets'
-  - 'The future of global finance likely involves a hybrid approach combining traditional finance and DeFi'
-  - 'Regulatory frameworks are evolving globally at different rates, creating both opportunities and challenges'
+  - "Traditional financial systems face significant challenges with regulatory violations, opaque practices, and inherent conflicts of interest."
+  - "The Federal Reserve's dual mandate of maximum employment and price stability has led to complex monetary policies, with interest rates showing a centuries-long declining trend."
+  - "Defi offers three key advantages: stable coins for unstable currencies, censorship resistance against centralized control, and democratized yield generation through transparent systems."
+  - "The future of finance likely involves a hybrid approach, combining traditional banking's stability with Defi's innovation and accessibility."
+  - "Regulatory development varies globally, with some jurisdictions embracing innovation while others maintain caution, highlighting the need for balanced oversight."
 ---
 
 The global financial system relies on intermediaries that process trillions in daily transactions, creating critical yet - until recently - necessary bottlenecks in worldwide capital movement. Technology has evolved, and the need for these institutions is diminishing, but they are still deeply ingrained in our society at an operational, regulatory, and influential level. 

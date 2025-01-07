@@ -7,6 +7,12 @@ image:
 description: 'The Reflexivity of Value'
 category: 'finance'
 tags: ['crypto', 'analysis']
+takeaways:
+  - "Cryptocurrency's explosive growth has created unprecedented wealth, with Bitcoin's 6,965,454,545% increase leading to a new class of crypto millionaires and billionaires."
+  - "Self-custody through blockchain technology has revolutionized asset control, enabling 24/7 global trading without traditional financial intermediaries."
+  - "Veblen goods, items that become more desirable as they get more expensive, play a significant role in crypto markets, particularly with NFTs."
+  - "Mimetic desire drives market behavior, where people's wants are influenced by observing others' desires, creating self-reinforcing price cycles."
+  - "Even blockchain transaction fees, like Ethereum's gas, can function as Veblen goods, where high costs become a status symbol rather than a deterrent."
 ---
 
 <style jsx>{`

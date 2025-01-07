@@ -9,15 +9,11 @@ import remarkParse from 'remark-parse';
 import { notFound } from 'next/navigation';
 import { validateFrontmatter, createArticleFromFrontmatter } from '../articles';
 import ArticleContent from './ArticleContent';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { cache } from 'react';
 import { ARTICLE_CONFIG } from '../types';
 
 const articlesDirectory = path.join(process.cwd(), ARTICLE_CONFIG.directory);
-
-interface PageParams {
-  slug: string;
-}
 
 // Enhanced markdown processor with better configuration
 const processMarkdown = cache(async (content: string) => {
@@ -83,8 +79,10 @@ const getAllArticles = cache(async () => {
   }
 });
 
-export async function generateMetadata({ params }: { params: PageParams }): Promise<Metadata> {
-  const slug = String(params.slug);
+export async function generateMetadata(props: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const slug = String(props.params.slug);
   const article = await loadArticle(slug);
   
   if (!article) {
@@ -102,8 +100,10 @@ export async function generateMetadata({ params }: { params: PageParams }): Prom
   };
 }
 
-export default async function Page({ params }: { params: PageParams }) {
-  const slug = String(params.slug);
+export default async function Page(props: {
+  params: { slug: string };
+}) {
+  const slug = String(props.params.slug);
 
   try {
     const article = await loadArticle(slug);
@@ -128,8 +128,8 @@ export default async function Page({ params }: { params: PageParams }) {
             <ArticleContent 
               article={processedArticle} 
               contentHtml={processedContent}
-              nextArticle={nextArticle || undefined}
-              prevArticle={prevArticle || undefined}
+              nextArticle={nextArticle ?? undefined}
+              prevArticle={prevArticle ?? undefined}
             />
           </div>
         </main>
@@ -141,7 +141,7 @@ export default async function Page({ params }: { params: PageParams }) {
   }
 }
 
-export async function generateStaticParams(): Promise<PageParams[]> {
+export async function generateStaticParams() {
   try {
     const fileNames = await fs.readdir(articlesDirectory);
     return fileNames

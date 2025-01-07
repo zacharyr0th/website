@@ -62,6 +62,7 @@ export type Article = {
   readonly category: ArticleCategory | undefined;
   readonly tags: readonly ArticleTag[] | undefined;
   readonly image: ArticleImage | undefined;
+  readonly takeaways: readonly string[] | undefined;
 };
 
 /** Raw frontmatter before processing */
@@ -82,8 +83,8 @@ export type RawFrontmatter = Readonly<{
 export interface ArticleContentProps {
   article: Article;
   contentHtml: string;
-  nextArticle?: Article;
-  prevArticle?: Article;
+  nextArticle?: Article | undefined;
+  prevArticle?: Article | undefined;
 }
 
 /** Props for archive section component */

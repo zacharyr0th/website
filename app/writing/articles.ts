@@ -45,6 +45,9 @@ export function validateFrontmatter(data: unknown): ArticleFrontmatter {
     } : undefined,
     featured: rawData.featured || false,
     draft: rawData.draft || false,
+    takeaways: rawData.takeaways && Array.isArray(rawData.takeaways) ?
+      rawData.takeaways.filter((takeaway): takeaway is string => typeof takeaway === 'string') :
+      undefined
   };
 }
 
@@ -71,7 +74,8 @@ export function createArticleFromFrontmatter(
     ...(frontmatter.description && { description: frontmatter.description }),
     ...(frontmatter.category && { category: frontmatter.category }),
     ...(frontmatter.tags && { tags: frontmatter.tags }),
-    ...(frontmatter.image && { image: frontmatter.image })
+    ...(frontmatter.image && { image: frontmatter.image }),
+    ...(frontmatter.takeaways && { takeaways: frontmatter.takeaways })
   };
 
   return { ...base, ...optionals } as Article;

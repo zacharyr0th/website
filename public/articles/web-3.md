@@ -7,6 +7,12 @@ image:
 description: 'User-owned Networks'
 category: 'technology'
 tags: ['crypto', 'technology']
+takeaways:
+  - "Web 3 (2017-Present) represents a shift towards user-owned networks, challenging the centralized control of Web 2 platforms and empowering users with greater ownership and autonomy."
+  - "The generational conflict between Heroes (Web 2 leaders) and Artists (Web 3 innovators) reflects a fundamental tension between centralized control and decentralized disruption."
+  - "Unprecedented asset valuations and low interest rates have created an economic environment ripe for new financial innovations through cryptocurrency and blockchain technology."
+  - "Smart contracts and token standards (ERC20, ERC721) have enabled new models of user engagement and value creation that weren't possible in the Web 2 era."
+  - "Web 3's focus on decentralization and interoperability aims to fulfill the original utopian vision of the internet with free information and borderless connectivity."
 ---
 
 <style jsx>{`

@@ -92,6 +92,7 @@ export function createArticle(
     tags: frontmatter.tags,
     image: frontmatter.image,
     frontmatter,
+    takeaways: frontmatter.takeaways,
   };
 }
 

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { memo } from 'react';
+import React, { memo, useCallback, useMemo, useRef } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useSwipeable } from 'react-swipeable';
@@ -71,41 +71,6 @@ const ChatBot = memo<{ title: string; description: string | undefined }>(({ titl
 });
 
 ChatBot.displayName = 'ChatBot';
-
-const KeyTakeaways = memo<{ takeaways: readonly string[]; onHeaderClick?: () => void; isExpanded?: boolean }>(
-  ({ takeaways, onHeaderClick, isExpanded = true }) => (
-  <div className={styles.keyTakeaways}>
-    {isExpanded ? (
-      <div className="flex items-center gap-4 mb-8">
-        <button
-          onClick={onHeaderClick}
-          className="text-[13px] w-[180px] text-left font-medium uppercase tracking-wider text-text-secondary hover:text-text-primary transition-colors whitespace-nowrap"
-        >
-          Executive Summary
-        </button>
-        <div className="h-px flex-1 bg-surface/50" />
-      </div>
-    ) : (
-      <button
-        onClick={onHeaderClick}
-        className="text-[13px] w-[180px] text-left font-medium uppercase tracking-wider text-text-secondary hover:text-text-primary transition-colors whitespace-nowrap"
-      >
-        Executive Summary
-      </button>
-    )}
-    {isExpanded && (
-      <ul className="space-y-4">
-        {takeaways.map((point, index) => (
-          <li key={index} className="text-[15px] leading-relaxed text-text-secondary">
-            {point}
-          </li>
-        ))}
-      </ul>
-    )}
-  </div>
-));
-
-KeyTakeaways.displayName = 'KeyTakeaways';
 
 const TableOfContents = memo<{ content: string; onHeaderClick?: () => void; isExpanded?: boolean }>(
   ({ content, onHeaderClick, isExpanded = true }) => {
@@ -179,57 +144,122 @@ const ArticleImage = memo<{ image: ArticleImageType; title: string }>(({ image, 
 
 ArticleImage.displayName = 'ArticleImage';
 
+const KeyTakeaways = memo<{ points: readonly string[]; onHeaderClick?: () => void; isExpanded?: boolean }>(
+  ({ points, onHeaderClick, isExpanded = true }) => (
+  <div className={styles.keyTakeaways}>
+    {isExpanded ? (
+      <div className="flex items-center gap-4 mb-8">
+        <button
+          onClick={onHeaderClick}
+          className="text-[13px] w-[180px] text-left font-medium uppercase tracking-wider text-text-secondary hover:text-text-primary transition-colors whitespace-nowrap"
+        >
+          KEY TAKEAWAYS
+        </button>
+        <div className="h-px flex-1 bg-surface/50" />
+      </div>
+    ) : (
+      <button
+        onClick={onHeaderClick}
+        className="text-[13px] w-[180px] text-left font-medium uppercase tracking-wider text-text-secondary hover:text-text-primary transition-colors whitespace-nowrap"
+      >
+        KEY TAKEAWAYS
+      </button>
+    )}
+    {isExpanded && (
+      <ul className="space-y-4">
+        {points.map((point, index) => (
+          <li key={index} className="text-[15px] leading-relaxed text-text-secondary">
+            {point}
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+));
+
+KeyTakeaways.displayName = 'KeyTakeaways';
+
 const ArticleContent = memo<ArticleContentProps>(({ article, contentHtml, nextArticle, prevArticle }) => {
   const { title, description, frontmatter } = article;
   const [showToc, setShowToc] = React.useState(true);
-  const [showSummary, setShowSummary] = React.useState(true);
+  const [showTakeaways, setShowTakeaways] = React.useState(true);
   const [copyFeedback, setCopyFeedback] = React.useState<string | null>(null);
   const router = useRouter();
+  const contentRef = useRef<HTMLDivElement>(null);
+  
+  const handleToggleToc = useCallback(() => setShowToc(prev => !prev), []);
+  const handleToggleTakeaways = useCallback(() => setShowTakeaways(prev => !prev), []);
   
   const handlers = useSwipeable({
-    onSwipedLeft: () => {
+    onSwipedLeft: useCallback(() => {
       if (nextArticle) {
         router.push(`/writing/${nextArticle.slug}`);
       }
-    },
-    onSwipedRight: () => {
+    }, [nextArticle, router]),
+    onSwipedRight: useCallback(() => {
       if (prevArticle) {
         router.push(`/writing/${prevArticle.slug}`);
       }
-    },
+    }, [prevArticle, router]),
     trackMouse: false,
     preventScrollOnSwipe: true,
     delta: 10,
     swipeDuration: 500,
   });
   
-  const handleHeaderClick = (id: string) => {
+  const handleHeaderClick = useCallback((id: string) => {
     const url = `${window.location.origin}${window.location.pathname}#${id}`;
     navigator.clipboard.writeText(url).then(() => {
       setCopyFeedback(id);
       setTimeout(() => setCopyFeedback(null), 2000);
     });
-  };
+  }, []);
   
-  const processedContent = contentHtml.replace(
-    /<h([1-3])(.*?)>(.*?)<\/h[1-3]>/g,
-    (_match, level, attrs, text) => {
-      const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-      return `<h${level}${attrs} id="${id}" class="group cursor-pointer" onclick="window.handleHeaderClick('${id}')" ontouchend="window.handleHeaderClick('${id}')">
-        ${text}
-        <span class="opacity-0 group-hover:opacity-100 md:group-hover:opacity-100 transition-opacity ml-3 text-accent text-sm">
-          ${copyFeedback === id ? '✓ Copied!' : '🔗'}
-        </span>
-      </h${level}>`;
-    }
-  );
+  const processedContent = useMemo(() => {
+    return contentHtml.replace(
+      /<h([1-3])(.*?)>(.*?)<\/h[1-3]>/g,
+      (_match, level, attrs, text) => {
+        const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        return `<h${level}${attrs} id="${id}" class="group cursor-pointer" onclick="window.handleHeaderClick('${id}')" ontouchend="window.handleHeaderClick('${id}')">
+          ${text}
+          <span class="opacity-0 group-hover:opacity-100 md:group-hover:opacity-100 transition-opacity ml-3 text-accent text-sm">
+            ${copyFeedback === id ? '✓ Copied!' : '🔗'}
+          </span>
+        </h${level}>`;
+      }
+    );
+  }, [contentHtml, copyFeedback]);
 
   React.useEffect(() => {
     window.handleHeaderClick = handleHeaderClick;
     return () => {
       window.handleHeaderClick = (() => {}) as (id: string) => void;
     };
-  }, []);
+  }, [handleHeaderClick]);
+
+  const renderTakeaways = useMemo(() => {
+    if (!frontmatter.takeaways?.length) return null;
+    
+    return (
+      <div className="bg-zinc-800/30 backdrop-blur-sm rounded-xl border border-surface p-8">
+        <KeyTakeaways 
+          points={frontmatter.takeaways} 
+          onHeaderClick={handleToggleTakeaways}
+          isExpanded={showTakeaways}
+        />
+      </div>
+    );
+  }, [frontmatter.takeaways, handleToggleTakeaways, showTakeaways]);
+
+  const renderTableOfContents = useMemo(() => (
+    <div className="bg-zinc-800/30 backdrop-blur-sm rounded-xl border border-surface p-8">
+      <TableOfContents 
+        content={contentHtml} 
+        onHeaderClick={handleToggleToc}
+        isExpanded={showToc}
+      />
+    </div>
+  ), [contentHtml, handleToggleToc, showToc]);
 
   return (
     <div className="content-page font-mono bg-gradient-to-b from-background to-surface/30">
@@ -245,49 +275,27 @@ const ArticleContent = memo<ArticleContentProps>(({ article, contentHtml, nextAr
               <div className="sticky top-8 bg-zinc-800/30 backdrop-blur-sm rounded-xl border border-surface pl-8 pr-6 py-8">
                 <TableOfContents 
                   content={contentHtml} 
-                  onHeaderClick={() => setShowToc(prev => !prev)}
+                  onHeaderClick={handleToggleToc}
                   isExpanded={showToc}
                 />
               </div>
             </div>
           </div>
           
-          {/* Mobile Executive Summary and ToC */}
+          {/* Mobile Key Takeaways and ToC */}
           <div className="lg:hidden mb-16 space-y-8">
-            {frontmatter.takeaways && frontmatter.takeaways.length > 0 && (
-              <div className="bg-zinc-800/30 backdrop-blur-sm rounded-xl border border-surface p-8">
-                <KeyTakeaways 
-                  takeaways={frontmatter.takeaways} 
-                  onHeaderClick={() => setShowSummary(prev => !prev)}
-                  isExpanded={showSummary}
-                />
-              </div>
-            )}
-            
-            <div className="bg-zinc-800/30 backdrop-blur-sm rounded-xl border border-surface p-8">
-              <TableOfContents 
-                content={contentHtml} 
-                onHeaderClick={() => setShowToc(prev => !prev)}
-                isExpanded={showToc}
-              />
-            </div>
+            {renderTakeaways}
+            {renderTableOfContents}
           </div>
 
-          {/* Desktop Executive Summary */}
-          {frontmatter.takeaways && frontmatter.takeaways.length > 0 && (
-            <div className="hidden lg:block mb-16">
-              <div className="bg-zinc-800/30 backdrop-blur-sm rounded-xl border border-surface p-8">
-                <KeyTakeaways 
-                  takeaways={frontmatter.takeaways} 
-                  onHeaderClick={() => setShowSummary(prev => !prev)}
-                  isExpanded={showSummary}
-                />
-              </div>
-            </div>
-          )}
+          {/* Desktop Key Takeaways */}
+          <div className="hidden lg:block mb-16">
+            {renderTakeaways}
+          </div>
 
           {/* Main content */}
           <div 
+            ref={contentRef}
             className={styles.content}
             dangerouslySetInnerHTML={{ __html: processedContent }} 
           />

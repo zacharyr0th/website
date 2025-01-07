@@ -7,6 +7,12 @@ image:
 description: 'Crypto fixes this'
 category: 'finance'
 tags: ['crypto', 'finance', 'defi']
+takeaways:
+  - "Traditional banking systems leave millions unbanked globally, with rates varying from 0% to over 70% across different countries."
+  - "Being unbanked restricts access to essential financial services like interest-earning, online payments, and credit, while incurring high fees for basic transactions."
+  - "Banks' fractional reserve lending and systemic risks expose fundamental flaws in the traditional banking system."
+  - "Non-custodial wallets enable self-custody of assets without intermediaries, offering a path from unbanked to bankless."
+  - "Emerging markets, particularly in Africa and Southeast Asia, are leading adoption of bankless solutions due to high unbanked populations."
 ---
 
 <style jsx>{`

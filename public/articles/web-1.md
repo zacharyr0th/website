@@ -7,17 +7,12 @@ image:
 description: 'Content Delivery Networks'
 category: 'technology'
 tags: ['crypto', 'technology']
----
-
----
-title: 'Self Custody: Part 2'
-date: '2023-12-31'
-image:
-  src: '/misc/placeholder.webp'
-  alt: 'Self Custody: Part 2'
-description: 'Opportunities and Consequences'
-category: 'crypto'
-tags: ['crypto']
+takeaways:
+  - "Web 1 (1990-2004) was characterized by content delivery networks, coinciding with the Strauss-Howe theory's 'Unraveling' period of weak institutions and strong individualism."
+  - "The generational dynamics between Nomads and Heroes shaped Web 1's development, with Nomads leading during the Unraveling and Heroes (Millennials) emerging to challenge existing structures."
+  - "The transition from the post-WWII 'High' through the 'Awakening' to the 'Unraveling' period reflects a pattern of institutional strength, social awakening, and digital innovation."
+  - "Web 1's era coincided with unprecedented stock market growth and globalization of supply chains, leading to new economic opportunities and wealth distribution."
+  - "The period's ethos of democratic and free society was challenged by the emergence of dominant digital companies, setting the stage for Web 2's centralized platforms."
 ---
 
 <style jsx>{`

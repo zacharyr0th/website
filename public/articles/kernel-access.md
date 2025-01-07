@@ -9,23 +9,6 @@ category: 'technology'
 tags: ['programming', 'guide']
 ---
 
-<style jsx>{`
- .prose a {
-    text-decoration: underline;
-    color: var(--color-accent);
- }
- .prose ol {
-    list-style-type: decimal;
-    margin-left: 2em; /* Adjust as needed for indentation */
-    padding-left: 0.5em; /* Add padding if needed */
- }
- .prose ol li {
-    margin-bottom: 0.5em;
-    color: var(--color-text-primary);
-    line-height: 1.5; /* Adjust line height for better readability */
- }
-`}</style>
-
 <div class="tldr-section">
 
 Kernel access is a powerful capability that allows software to interact directly with an operating system's core. While this can provide performance benefits and enable advanced functionality, it also has massive security risks.
