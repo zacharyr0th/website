@@ -1,4 +1,4 @@
-export type ProjectCategory = 'crypto' | 'ai' | 'devtools' | 'webdev';
+export type ProjectCategory = 'crypto' | 'ai' | 'tools' | 'web';
 
 export interface BaseProject {
   id: string;
@@ -17,8 +17,8 @@ export interface BaseProject {
 export const PROJECT_CATEGORIES: Readonly<Record<ProjectCategory, string>> = {
   crypto: 'Crypto',
   ai: 'AI',
-  devtools: 'DevTools',
-  webdev: 'WebDev',
+  tools: 'Tools',
+  web: 'Web',
 };
 
 export const PROJECTS: readonly BaseProject[] = [
@@ -30,7 +30,7 @@ export const PROJECTS: readonly BaseProject[] = [
     tags: ['Next.js', 'TypeScript', 'Tailwind'],
     githubLink: 'https://github.com/zacharyr0th/website',
     status: 'Functional',
-    categories: ['webdev'],
+    categories: ['web'],
   },
   {
     id: 'simple-os',
@@ -41,7 +41,7 @@ export const PROJECTS: readonly BaseProject[] = [
     demoLink: '',
     articleLink: '/writing/simple-os',
     status: 'Functional',
-    categories: ['devtools'],
+    categories: ['tools'],
   },
   {
     id: 'toml-tools',
@@ -52,7 +52,7 @@ export const PROJECTS: readonly BaseProject[] = [
     githubLink: 'https://github.com/zacharyr0th/toml-tools',
     demoLink: '',
     status: 'Functional',
-    categories: ['crypto', 'devtools'],
+    categories: ['crypto', 'tools'],
   },
   {
     id: 'music-ide',
@@ -64,7 +64,7 @@ export const PROJECTS: readonly BaseProject[] = [
     demoLink: '',
     articleLink: '/writing/musicide',
     status: 'WiP',
-    categories: ['ai', 'devtools'],
+    categories: ['ai', 'tools'],
   },
   {
     id: 'privvy',

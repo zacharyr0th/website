@@ -80,8 +80,10 @@ export type RawFrontmatter = Readonly<{
 
 /** Props for article content component */
 export interface ArticleContentProps {
-  readonly article: Article;
-  readonly contentHtml: string;
+  article: Article;
+  contentHtml: string;
+  nextArticle?: Article;
+  prevArticle?: Article;
 }
 
 /** Props for archive section component */

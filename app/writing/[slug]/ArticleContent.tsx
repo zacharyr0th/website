@@ -2,6 +2,8 @@
 
 import React, { memo } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useSwipeable } from 'react-swipeable';
 import type { ArticleImage as ArticleImageType, ArticleContentProps } from '../types';
 import styles from './article.module.css';
 import clsx from 'clsx';
@@ -177,11 +179,29 @@ const ArticleImage = memo<{ image: ArticleImageType; title: string }>(({ image, 
 
 ArticleImage.displayName = 'ArticleImage';
 
-const ArticleContent = memo<ArticleContentProps>(({ article, contentHtml }) => {
+const ArticleContent = memo<ArticleContentProps>(({ article, contentHtml, nextArticle, prevArticle }) => {
   const { title, description, frontmatter } = article;
   const [showToc, setShowToc] = React.useState(true);
   const [showSummary, setShowSummary] = React.useState(true);
   const [copyFeedback, setCopyFeedback] = React.useState<string | null>(null);
+  const router = useRouter();
+  
+  const handlers = useSwipeable({
+    onSwipedLeft: () => {
+      if (nextArticle) {
+        router.push(`/writing/${nextArticle.slug}`);
+      }
+    },
+    onSwipedRight: () => {
+      if (prevArticle) {
+        router.push(`/writing/${prevArticle.slug}`);
+      }
+    },
+    trackMouse: false,
+    preventScrollOnSwipe: true,
+    delta: 10,
+    swipeDuration: 500,
+  });
   
   const handleHeaderClick = (id: string) => {
     const url = `${window.location.origin}${window.location.pathname}#${id}`;
@@ -210,10 +230,10 @@ const ArticleContent = memo<ArticleContentProps>(({ article, contentHtml }) => {
       window.handleHeaderClick = (() => {}) as (id: string) => void;
     };
   }, []);
-  
+
   return (
     <div className="content-page font-mono bg-gradient-to-b from-background to-surface/30">
-      <main className="max-w-[var(--max-content-width)] mx-auto relative">
+      <main className="max-w-[var(--max-content-width)] mx-auto relative" {...handlers}>
         <article className={styles.article} aria-labelledby="article-title">
           <ArticleHeader title={title} description={description} />
           
@@ -271,6 +291,16 @@ const ArticleContent = memo<ArticleContentProps>(({ article, contentHtml }) => {
             className={styles.content}
             dangerouslySetInnerHTML={{ __html: processedContent }} 
           />
+
+          {/* Mobile Navigation Hints */}
+          <div className="lg:hidden mt-8 flex justify-between text-sm text-zinc-400">
+            {prevArticle && (
+              <div>← Swipe right for previous</div>
+            )}
+            {nextArticle && (
+              <div>Swipe left for next →</div>
+            )}
+          </div>
         </article>
       </main>
     </div>

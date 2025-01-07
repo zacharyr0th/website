@@ -29,6 +29,7 @@
     "react-dom": "18.2.0",
     "react-error-boundary": "^5.0.0",
     "react-icons": "^4.11.0",
+    "react-swipeable": "^7.0.2",
     "remark": "^15.0.1",
     "remark-gfm": "^4.0.0",
     "remark-html": "^16.0.1",

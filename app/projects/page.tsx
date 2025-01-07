@@ -97,10 +97,10 @@ export default function ProjectsPage() {
       animate="visible"
       variants={containerVariants}
     >
-      <main className="container mx-auto px-6 sm:px-8 pt-24 sm:pt-36 pb-24">
+      <main className="container mx-auto px-6 sm:px-8 pt-16 sm:pt-36 pb-24">
         <div style={{ maxWidth: 'var(--article-width)' }} className="mx-auto space-y-6">
           <motion.header variants={itemVariants}>
-            <h1 className="text-5xl lg:text-6xl font-bold tracking-tight">Projects</h1>
+            <h1 className="text-5xl lg:text-6xl font-bold tracking-tight text-center sm:text-left">Projects</h1>
           </motion.header>
 
           <motion.div variants={itemVariants}>

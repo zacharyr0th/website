@@ -54,6 +54,35 @@ const loadArticle = cache(async (slug: string) => {
   }
 });
 
+// Get all articles sorted by date
+const getAllArticles = cache(async () => {
+  try {
+    const fileNames = await fs.readdir(articlesDirectory);
+    const articles = await Promise.all(
+      fileNames
+        .filter(fileName => fileName.endsWith('.md'))
+        .map(async fileName => {
+          const slug = fileName.replace(/\.md$/, '');
+          const article = await loadArticle(slug);
+          if (!article) return null;
+          return createArticleFromFrontmatter(article.frontmatter, article.content, slug);
+        })
+    );
+
+    return articles
+      .filter(article => article !== null)
+      .sort((a, b) => {
+        if (!a || !b) return 0;
+        const dateA = a.date ? new Date(a.date).getTime() : 0;
+        const dateB = b.date ? new Date(b.date).getTime() : 0;
+        return dateB - dateA;
+      });
+  } catch (error) {
+    console.error('Error getting all articles:', error);
+    return [];
+  }
+});
+
 export async function generateMetadata({ params }: { params: PageParams }): Promise<Metadata> {
   const slug = String(params.slug);
   const article = await loadArticle(slug);
@@ -86,11 +115,22 @@ export default async function Page({ params }: { params: PageParams }) {
     const processedArticle = createArticleFromFrontmatter(frontmatter, content, slug);
     const processedContent = await processMarkdown(content);
 
+    // Get adjacent articles
+    const allArticles = await getAllArticles();
+    const currentIndex = allArticles.findIndex(a => a?.slug === slug);
+    const nextArticle = currentIndex > 0 ? allArticles[currentIndex - 1] : undefined;
+    const prevArticle = currentIndex < allArticles.length - 1 ? allArticles[currentIndex + 1] : undefined;
+
     return (
       <div className="content-page font-mono bg-gradient-to-b from-background to-surface/30">
-        <main className="container mx-auto px-3 sm:px-6 md:px-8 pt-12 sm:pt-20 md:pt-28 pb-12 sm:pb-20 md:pb-28 max-w-[98vw] md:max-w-[90vw]">
+        <main className="container mx-auto px-3 sm:px-6 md:px-8 pt-16 sm:pt-20 md:pt-28 pb-12 sm:pb-20 md:pb-28 max-w-[98vw] md:max-w-[90vw]">
           <div className="mx-auto max-w-[var(--article-width)]">
-            <ArticleContent article={processedArticle} contentHtml={processedContent} />
+            <ArticleContent 
+              article={processedArticle} 
+              contentHtml={processedContent}
+              nextArticle={nextArticle || undefined}
+              prevArticle={prevArticle || undefined}
+            />
           </div>
         </main>
       </div>
