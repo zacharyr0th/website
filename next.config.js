@@ -3,6 +3,11 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   transpilePackages: ['react-icons'],
+  output: 'standalone',
+  experimental: {
+    serverMinification: true,
+    serverSourceMaps: false,
+  },
   webpack: (config) => {
     config.resolve.fallback = {
       ...config.resolve.fallback,

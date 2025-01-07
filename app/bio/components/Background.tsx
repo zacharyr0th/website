@@ -3,11 +3,11 @@
 import React, { memo, useMemo } from 'react';
 import { motion } from 'framer-motion';
 
-const GRADIENT_COLORS = ['primary', 'secondary', 'accent'] as const;
+const GRADIENT_COLORS = ['primary', 'secondary'] as const;
 
 const GRADIENT_STOPS = [
-  { offset: '0%', opacity: 0.05 },
-  { offset: '100%', opacity: 0.02 },
+  { offset: '0%', opacity: 0.08 },
+  { offset: '100%', opacity: 0.03 },
 ] as const;
 
 const SVG_ATTRS = {
@@ -49,8 +49,8 @@ Gradients.displayName = 'Gradients';
 
 const NoiseFilter = memo(() => (
   <filter id="bioNoise">
-    <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch" />
-    <feColorMatrix type="saturate" values="0.05" />
+    <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="3" stitchTiles="stitch" />
+    <feColorMatrix type="saturate" values="0.1" />
   </filter>
 ));
 
@@ -67,65 +67,22 @@ const Background = memo(() => (
       <NoiseFilter />
       <Gradients />
     </defs>
-    <motion.rect 
+    <rect 
       width="100%" 
       height="100%" 
       fill="url(#bioGradient1)"
-      animate={{
-        scale: [1, 1.05, 1],
-        opacity: [0.8, 1, 0.8],
-      }}
-      transition={{
-        duration: 8,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }}
     />
-    <motion.rect 
+    <rect 
       width="100%" 
       height="100%" 
       fill="url(#bioGradient2)" 
-      transform="rotate(60)"
-      animate={{
-        scale: [1, 1.1, 1],
-        opacity: [0.8, 1, 0.8],
-      }}
-      transition={{
-        duration: 10,
-        repeat: Infinity,
-        ease: "easeInOut",
-        delay: 1
-      }}
+      transform="rotate(45)"
     />
-    <motion.rect 
-      width="100%" 
-      height="100%" 
-      fill="url(#bioGradient3)" 
-      transform="rotate(-60)"
-      animate={{
-        scale: [1, 1.15, 1],
-        opacity: [0.8, 1, 0.8],
-      }}
-      transition={{
-        duration: 12,
-        repeat: Infinity,
-        ease: "easeInOut",
-        delay: 2
-      }}
-    />
-    <motion.rect 
+    <rect 
       width="100%" 
       height="100%" 
       filter="url(#bioNoise)" 
-      opacity="0.4"
-      animate={{
-        opacity: [0.3, 0.4, 0.3]
-      }}
-      transition={{
-        duration: 4,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }}
+      opacity="0.2"
     />
   </motion.svg>
 ));

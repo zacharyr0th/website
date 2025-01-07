@@ -642,6 +642,21 @@
   text-decoration: underline;
 }
 
+/* Images */
+.content :global(img) {
+  border-radius: 0.75rem;
+  width: 100%;
+  height: auto;
+  margin: 1.5rem 0;
+}
+
+@media (min-width: 768px) {
+  .content :global(img) {
+    border-radius: 1rem;
+    margin: 2rem 0;
+  }
+}
+
 /* Horizontal Rule */
 .content :global(hr) {
   border: 0;
