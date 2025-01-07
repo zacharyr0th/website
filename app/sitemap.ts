@@ -1,6 +1,9 @@
 import type { MetadataRoute } from 'next'
 import { getArticles } from './writing/articles'
 
+export const dynamic = 'force-static'
+export const revalidate = 86400 // Revalidate daily
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.zacharyr0th.com'
 

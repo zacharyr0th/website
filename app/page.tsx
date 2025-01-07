@@ -6,9 +6,8 @@ export const metadata: Metadata = {
   description: 'Personal website and blog of Zachary Tyler Roth',
 };
 
-export const runtime = 'edge';
-export const preferredRegion = 'auto';
 export const dynamic = 'force-static';
+export const revalidate = 86400; // Revalidate daily
 
 export default function HomePage() {
   return (

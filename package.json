@@ -15,7 +15,9 @@
     "clean": "npx rimraf .next node_modules dist out package-lock.json",
     "reset": "npm run clean && npm cache clean --force && npm install && npm run build",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "analyze": "ANALYZE=true next build",
+    "build:prod": "npm prune --production && next build"
   },
   "dependencies": {
     "@vercel/analytics": "^1.4.1",
@@ -38,6 +40,7 @@
     "swr": "^2.2.4"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^14.0.4",
     "@tailwindcss/typography": "^0.5.15",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -50,6 +53,7 @@
     "@typescript-eslint/eslint-plugin": "^6.8.0",
     "@typescript-eslint/parser": "^6.8.0",
     "autoprefixer": "^10.4.16",
+    "critters": "^0.0.23",
     "eslint": "^8.52.0",
     "eslint-config-next": "13.5.6",
     "eslint-config-prettier": "^9.1.0",
