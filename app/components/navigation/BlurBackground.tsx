@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
-import { CSSProperties } from 'react';
+import type { CSSProperties } from 'react';
 
 interface BlurBackgroundProps {
   children: React.ReactNode;

@@ -13,16 +13,16 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { 
+import type { 
   Article, 
   ArticleFrontmatter, 
-  RawFrontmatter, 
-  ARTICLE_CONFIG,
+  RawFrontmatter,
   ArticleCache,
   ArticleImage,
   ArticleCategory,
   ArticleTag
 } from '../writing/types';
+import { ARTICLE_CONFIG } from '../writing/types';
 
 // In-memory cache
 let articleCache: ArticleCache | null = null;

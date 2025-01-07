@@ -1,5 +1,6 @@
 import React from 'react';
-import { BaseButtonProps, getButtonClassName } from './constants';
+import type { BaseButtonProps } from './constants';
+import { getButtonClassName } from './constants';
 import { LoadingSpinner } from '../../lib/Loading';
 
 export const BaseButton = React.memo(

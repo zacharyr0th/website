@@ -6,99 +6,58 @@ image:
   alt: 'Blockchain Foundations'
 description: 'Understanding the Building Blocks'
 category: 'crypto'
-tags: ['crypto', 'guide']
+tags: ['crypto']
 takeaways:
   - "Blockchains are distributed ledgers that enable trustless transactions through consensus methods, eliminating the need for centralized intermediaries."
-  - "Digital wallets provide access to blockchain accounts, allowing 24/7 participation in various applications from finance to gaming."
-  - "While most blockchains offer transparent transaction records, some focus on privacy features, demonstrating the technology's versatility."
-  - "Bitcoin's evolution from a peer-to-peer payment system to a 'digital gold' store of value highlights how blockchain narratives can shift over time."
-  - "Censorship resistance varies among blockchains, with ongoing debates about which consensus methods and infrastructures best serve this goal."
+  - "Digital wallets provide easy access to blockchain accounts, allowing 24/7 participation in various applications from finance to gaming."
+  - "Over the last 15 years, Bitcoin evololved from a peer-to-peer payment system to a 'digital gold' store of value."
+  - "Censorship resistance and consensus methods varies among blockchains, with ongoing debates about which consensus methods and infrastructures best serve this goal."
 ---
 
-<style jsx>{`
- .prose a {
-    text-decoration: underline;
-    color: var(--color-accent);
- }
- .prose ol {
-    list-style-type: decimal;
-    margin-left: 2em; /* Adjust as needed for indentation */
-    padding-left: 0.5em; /* Add padding if needed */
- }
- .prose ol li {
-    margin-bottom: 0.5em;
-    color: var(--color-text-primary);
-    line-height: 1.5; /* Adjust line height for better readability */
- }
-`}</style>
+Blockchains are ever-expanding ledgers of transactions with distinct features and functionalities that differentiate them from traditional centralized networks. 
 
-<div class="tldr-section">
+As a result, they open doors to new ways of doing things.
+# Core Concepts
+## How Blockchains Work in 30 Seconds
 
-Blockchains are ever-expanding ledgers of transactions that have distinct features and functionalities which differentiate them from traditional computing networks. As a result, they open doors to new ways of doing things and this article explores the foundational knowledge required to understand them from the ground up.
+Users submit transactions, and then a computer groups them into a list that other computers look at. Once the other computers agree that this list is correct, that list of transactions is added to a previously agreed-upon list. The list, or ever-expanding ledger, is, by design, immutable—or unchangeable. A good way to think about blockchains is that they're read-and-write-only databases; there's no delete button. 
 
-</div>
+The computers involved with the transactions can earn money by participating in the verification process. Anyone can set up one of these computers to generate a return—and from the blockchain's perspective, the more computers involved, the better. The complexity behind the scenes has begun to be abstracted away in recent years, but it's important to understand the fundamentals until these problems are solved.
 
-The impl of a blockchain is for transactions to be Transactions are grouped into blocks and verified by a distributed network of computers that earn money for participating in the verification process. Distributed means that these computers are not governed by any central entity but rather by a widespread collection of individual entities. This network collectively creates a public ledger that can be indexed and searched with extreme detail. Anything that happens on a public blockchain is immediately and immutably a part of the public record.
+## Consensus Methods and Trust
 
-## Accounts & Wallets
+To interact with a blockchain, you need an account, which acts as a digital container for your assets. An account can hold any value, from $0.00 to infinity, and both users and developers can use the assets within an account to engage with compatible applications. Accounts are permissionless, meaning anyone can create one at any time. When best practices for security and operations are followed, only the creator(s) has control over the account.
 
-Each account is accessed with a digital wallet. Accounts hold an individual or entity's tokens, which can be freely transferred between wallets and interact with applications that are compatible with the wallet. These applications can be financial or used for gaming, messaging, and virtually anything else.
+Accounts can connect to various applications, such as wallets, for viewing and managing assets, and platforms for finance, gaming, gambling, social media, and more. Regardless of the use case, accounts must pay a fee to execute transactions. These fees vary based on the blockchain being used and are required to prevent network overloads and ensure consistent performance.
 
-Unlike traditional markets, blockchains operate all day, so on-chain markets run 24/7, and anyone with a wallet can participate.
-
-## Reducing Counterparty Risk
-
-Consensus methods are the backbone of any blockchain. In the next chapter, we'll explain their work in more detail. They are meant to give disparate network participants the ability to verify the truth without trusting anyone or relying on any centralized entity to act accurately or ethically.
-
-Not wanting to trust a counterparty may sound counterintuitive, but if there is no counterparty, then there is no counterparty risk. If there are no ethics, there is no misbehavior. It's a technical philosophy embodied in the code behind decentralized systems, and it's all possible because of consensus methods.
-
-Consensus methods are algorithms that an incentivized computer network uses to participate in collective transaction verification. The process of how this works varies from method to method.
+Unlike traditional markets with limited operating hours, holidays, censorship, and barriers to entry that many cannot reach, blockchains function globally and continuously, enabling on-chain markets to operate 24/7. Anyone with an internet connection can participate anytime, providing global accessibility and uninterrupted engagement.
 
 ## Digital Transparency
 
-Specific blockchains (ZEC, MXR, SCRT) are oriented towards privacy, but most are transparent by default. A blockchain scanner can openly search and index every detail of every transaction, as shown below.
+Specific blockchains are oriented towards privacy, but most are transparent by default. A proper blockchain scanner can openly search and index every detail of every transaction, as shown below.
 
 You can see that 0.00203928 SOL was transferred from one wallet to another on March 18, 03:21:07 AM +UTC, and the transaction fee was 0.000005 SOL (a fraction of $0.01).
 
-On other blockchains, transaction fees can quickly go into the dozens and hundreds of dollars, depending on network congestion. Using Solana, you can make 1,000,000 trades and only pay ~$10 in transaction fees.
-
-## The Store of Value Narrative
-
-Bitcoin was initially intended to be a peer-to-peer medium of exchange, although its narrative has switched mainly to that of a global store of value. Countries that use their proprietary currency other than the big six (USD—United States Dollar, CAD—Canadian Dollar, EUR—Euro, AUS—Australian Dollar, JPY—Japanese Yen, and GBP—British Pound) are subject to grave risks imposed by the arbiters of the big six.
-
-Rather than hold onto, for example ��� the Turkish Lira or South African Rand and have their spending power decline over time, many have fled to BTC or other cryptocurrencies that enable pseudonymous, secure transfers of value and opportunities for capital appreciation. Bitcoin, for example, increased in value by 6,965,454,545.45% between 2010 and 2021.
-
-Its low was $0.00099, and the all-time high was $$68,958.
-
-## Uncertainty
-
-Financial markets serve many critical economic functions, although they do not always reflect what's happening in the real world. They often aren't. The stock market, for example, is constantly attempting to base prices and valuations on future expectations. To predict future outcomes, you want the least amount of uncertainty involved.
-
-Markets are always searching for certainty.
-
-When outcomes are uncertain – such as when a supply chain crisis, a war, or a pandemic occurs- prices will reflect that. Speculative assets like revenueless tech stocks or purposeless altcoins will reflect uncertainty by having their price spike downwards because there is no more perceived value. Re-pricings will occur, even if it's not immediate. It's easy to forget that asset prices can go down another 99% after dropping by 99%.
-
-## Mimetic Desire
-
-Physical gold bars have historically outperformed most assets during periods of economic strife. As a result, gold has become a haven asset in the eyes of asset managers. It's important to understand that money flows from speculative investments to safe-haven assets doesn't happen automatically. It's a result of trader psychology being influenced by mimetic desire, and it happens slowly, then all at once.
-
-Other than its use in jewelry and select manufacturing, gold is perceived to exist outside of the traditional financial system, although banks are the largest owners of it. Derivatives are constantly used to manipulate its price, so that is a relatively naïve assumption. Below is one of the many headlines detailing big bank baboonery. In this instance, JPM Chase had to pay a $920 million fine.
-
-Source
-Even though gold has performed well in the past during times of distress, this rise in value is not based on any fundamental, intrinsic characteristic. Gold is not easy to transport or store, especially at scale. Try moving $1 billion in gold across an ocean. Due to the large number of industry players, gold is a very centralized commodity, and the price will only be appreciated because of a fluctuating extrinsic value. Someone will see that someone else has gold, and they'll want it.
-
-What if everyone thought silver was a better store of value, or tungsten, or rhodium, or zinc… or Bitcoin?
-
-## Bitcoin as Digital Gold
-
-Narratives drive markets as much as fear and uncertainty do. Although gold hasn't been a practical currency in hundreds, if not thousands, of years in most places, big banks, and asset managers still recommend it as a haven asset worthy of 1-5% of a traditional financial nest egg in the off-chance that calamity happens.
-
-The narrative that it stores its value in times of distress is just that – a narrative. It will work until it doesn't. If rarity or scarcity is the argument, there are more scarce assets on this planet that could replace gold if the narrative shifted—Bitcoin is one of them.
-
-As proposed in the white paper, Bitcoin was initially conceived as a peer-to-peer method of exchange. It has since become part of the larger store of value narrative to which gold can attribute its declining relevance, except this time—it's digital. Bitcoin has been referred to as Digital Gold by many investors and mainstream media pundits, partially because that's the most digestible explanation they can come up with for its sucess, and partially because it's true.
-
 ## Censorship Resistance
 
-Some blockchains, particularly the privacy ones listed above, are intended to resist censorship. The goal is for anyone to build and use them. There are no credit checks; the only requirement to open a digital wallet is an internet connection.
+Some blockchains are intended to resist censorship. The goal is for anyone to build and use them, regardless of circumstance. There are no credit checks; an internet connection is the only requirement to open a digital wallet. The reality is that censorship resistance in crypto is a spectrum. Some blockchains do a better job than others, and the measure of this resistance is called the Nakamoto Coefficient. It's based on the number of computers hosting the network, where they're located, and how easy it would be to take the network down. 
 
-The reality of censorship resistance in crypto is that some blockchains do a better job than others. The blockchain industry is barely a teenager, and there are many schools of thought regarding how it should operate. Maximalism, tribalism, game theory, and investor bias contribute to a never-ending conversation on which consensus methods and blockchain infrastructure are the most secure and censorship-resistant.
+The blockchain industry is barely a teenager, and there are many evolving schools of thought regarding how it should operate. Maximalism, tribalism, game theory, and investor bias contribute to a never-ending conversation on which consensus methods and blockchain infrastructure are the most secure and censorship-resistant, so DYOR.
+
+# Bitcoin: The First Blockchain
+
+Bitcoin was the first blockchain and was initially intended to be a peer-to-peer medium of exchange, although its narrative has switched mainly to that of a global store of value. Rather than hold onto, for example, the Turkish Lira or South African Rand and have their spending power decline over time, many have fled to BTC or other cryptocurrencies that enable pseudonymous, secure transfers of value and opportunities for capital appreciation. Bitcoin's low was $0.00099 when someone spent 10,000 on a $40 pizza, and the all-time high was recently $108,958.
+
+## Digital Gold
+
+Physical Gold bars have historically outperformed most assets during periods of economic strife. As a result, Gold has become a haven asset in the eyes of asset managers. It's important to understand that money flows from speculative investments to safe-haven assets doesn't happen automatically. It's a result of trader psychology being influenced by mimetic desire, and it often happens slowly, then all at once.
+
+Besides its use in jewelry and select manufacturing, Gold is perceived to exist outside of the traditional financial system. However, banks are the largest owners of it, and derivatives are frequently used to manipulate its price. In this instance, JPM Chase had to pay a $920 million fine for manipulating Gold and Silver markets.
+
+JPM fine image
+
+Even though Gold has performed well in the past during times of distress, this rise in value is not based on any fundamental, intrinsic characteristic. Gold is not easy to transport or store, especially at scale. Try moving $1 billion in Gold across an ocean. Due to the large number of industry players, Gold is a very centralized commodity, and the price will only be appreciated because of a fluctuating extrinsic value. Someone will see that someone else has Gold, and they'll want it.
+
+# Looking Ahead
+
+Blockchains are changing industries and has continued to find more sophisticated applications. From Bitcoin's rise to Solana's dominance and the high performing blockchains being launched every year, the direction of the industry is clear. Its up.

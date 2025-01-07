@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     // Language and Environment
-    "target": "es5",
+    "target": "es2022",
     "lib": ["dom", "dom.iterable", "esnext"],
     "jsx": "preserve",
     // Modules
@@ -9,13 +9,15 @@
     "moduleResolution": "bundler",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
-      "@components/*": ["./components/*"],
-      "@styles/*": ["./styles/*"],
-      "@lib/*": ["./lib/*"],
-      "@utils/*": ["./utils/*"],
-      "@types/*": ["./types/*"],
-      "@projects/*": ["./app/projects/*"]
+      "@/*": ["./app/*"],
+      "@components/*": ["./app/components/*"],
+      "@styles/*": ["./app/styles/*"],
+      "@lib/*": ["./app/lib/*"],
+      "@utils/*": ["./app/utils/*"],
+      "@types/*": ["./app/types/*"],
+      "@projects/*": ["./app/projects/*"],
+      "@hooks/*": ["./app/hooks/*"],
+      "@constants/*": ["./app/constants/*"]
     },
     // JavaScript Support
     "allowJs": true,
@@ -42,14 +44,17 @@
     "noImplicitOverride": true,
     "allowUnusedLabels": false,
     "allowUnreachableCode": false,
+    // Module Resolution
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
-    // Completeness
+    "verbatimModuleSyntax": true,
+    // Optimization and Performance
     "skipLibCheck": true,
-    "esModuleInterop": true,
     // Type Declarations
-    "typeRoots": ["./node_modules/@types", "./lib"],
-    "types": ["node", "react", "react-dom"],
+    "typeRoots": ["./node_modules/@types", "./app/types"],
+    "types": ["node", "react", "react-dom", "jest"],
     // Plugins
     "plugins": [
       {
@@ -62,9 +67,19 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "lib/updateSheetMusicCatalog.mts",
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    "lib/**/*.ts",
+    "lib/**/*.tsx",
     "global.d.ts",
     "tailwind.config.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    ".next",
+    "out",
+    "coverage",
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ]
 }

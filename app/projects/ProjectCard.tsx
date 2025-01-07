@@ -4,7 +4,7 @@ import React, { memo, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { FaGithub, FaNewspaper, FaPlay } from 'react-icons/fa6';
 import { IconButton } from '../components/buttons';
-import { BaseProject } from './projects';
+import type { BaseProject } from './projects';
 import Link from 'next/link';
 
 const ProjectTag = memo(({ tag }: { tag: string }) => (
@@ -19,11 +19,11 @@ ProjectTag.displayName = 'ProjectTag';
 
 const ProjectLinks = memo(({ project }: { project: BaseProject }) => (
   <div className="flex ml-auto">
-    {project.githubLink && (
+    {project.demoLink && (
       <IconButton
-        icon={<FaGithub className="h-5 w-5" />}
-        onClick={() => window.open(project.githubLink, '_blank', 'noopener,noreferrer')}
-        ariaLabel="View project on GitHub"
+        icon={<FaPlay className="h-4 w-4" />}
+        onClick={() => window.open(project.demoLink, '_blank', 'noopener,noreferrer')}
+        ariaLabel="View live demo"
         className="text-zinc-400/60 hover:text-[#3b82f6] transition-colors"
       />
     )}
@@ -35,11 +35,11 @@ const ProjectLinks = memo(({ project }: { project: BaseProject }) => (
         className="text-zinc-400/60 hover:text-[#3b82f6] transition-colors"
       />
     )}
-    {project.demoLink && (
+    {project.githubLink && (
       <IconButton
-        icon={<FaPlay className="h-4 w-4" />}
-        onClick={() => window.open(project.demoLink, '_blank', 'noopener,noreferrer')}
-        ariaLabel="View live demo"
+        icon={<FaGithub className="h-5 w-5" />}
+        onClick={() => window.open(project.githubLink, '_blank', 'noopener,noreferrer')}
+        ariaLabel="View project on GitHub"
         className="text-zinc-400/60 hover:text-[#3b82f6] transition-colors"
       />
     )}
@@ -76,29 +76,33 @@ function ProjectCardComponent({ project, isFocused }: ProjectCardProps) {
       <Link
         ref={linkRef}
         href={project.link || project.githubLink || project.demoLink || '#'}
-        className={`block transition-all duration-200 ease-in-out will-change-transform outline-none focus:outline-none ${
+        className={`block transition-all duration-200 ease-in-out will-change-transform outline-none ${
           isFocused ? 'scale-[1.02]' : 'hover:scale-[1.02]'
         }`}
+        role="listitem"
+        tabIndex={0}
       >
-        <article className={`flex flex-col justify-between p-6 group space-y-4 rounded-xl transition-all duration-200 ${
+        <article className={`flex flex-col justify-between h-[11.25rem] p-6 group rounded-xl transition-all duration-200 ${
           isFocused ? 'bg-zinc-800/50' : 'hover:bg-zinc-800/50 bg-inherit'
         }`}>
-          <div className="space-y-4">
+          <div className="space-y-3">
             <div>
-              <h3 className={`text-2xl font-semibold transition-colors ${
+              <h3 className={`text-xl font-semibold transition-colors line-clamp-1 ${
                 isFocused ? 'text-accent' : 'text-zinc-100 group-hover:text-accent'
               }`}>
                 {project.title}
               </h3>
             </div>
-            <p className="text-base text-zinc-400 leading-relaxed">{project.description}</p>
+            <p className="text-base text-zinc-400 leading-relaxed line-clamp-2">{project.description}</p>
           </div>
 
           <div>
             <div className="flex flex-wrap items-center gap-2">
-              {project.tags.map((tag: string) => (
-                <ProjectTag key={tag} tag={tag} />
-              ))}
+              <div className="flex-1 flex flex-wrap gap-2">
+                {project.tags.map((tag: string) => (
+                  <ProjectTag key={tag} tag={tag} />
+                ))}
+              </div>
               <ProjectLinks project={project} />
             </div>
           </div>

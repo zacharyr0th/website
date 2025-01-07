@@ -1,14 +1,14 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { 
+import type { 
   Article, 
   ArticleFrontmatter, 
   RawFrontmatter, 
-  ARTICLE_CONFIG, 
   ArticleTag,
   ArticleCategory 
 } from './types';
+import { ARTICLE_CONFIG } from './types';
 
 const articlesDirectory = path.join(process.cwd(), ARTICLE_CONFIG.directory);
 
@@ -18,30 +18,41 @@ export function validateFrontmatter(data: unknown): ArticleFrontmatter {
 
   const rawData = data as RawFrontmatter;
 
+  // Required fields
+  if (!rawData.title) {
+    throw new Error('Title is required');
+  }
+
+  if (!rawData.date) {
+    throw new Error('Date is required');
+  }
+
+  if (!rawData.description && !rawData.subtitle) {
+    throw new Error('Description is required');
+  }
+
   // Build the frontmatter object immutably
   return {
-    title: rawData.title || 'Untitled',
-    date: rawData.date || new Date().toISOString(),
-    description: rawData.description || rawData.subtitle || undefined,
+    title: rawData.title,
+    date: rawData.date,
+    description: rawData.description || rawData.subtitle,
     category: rawData.category && 
       ARTICLE_CONFIG.allowedCategories.includes(rawData.category as ArticleCategory) ? 
       rawData.category as ArticleCategory : 
       undefined,
     tags: rawData.tags && Array.isArray(rawData.tags) ? 
-      Array.from(new Set(
-        rawData.tags
-          .filter((tag): tag is string => typeof tag === 'string')
-          .map(tag => tag.toLowerCase())
-          .filter((tag): tag is ArticleTag => 
-            ARTICLE_CONFIG.allowedTags.map(t => t.toLowerCase()).includes(tag)
-          )
-      )) : 
-      undefined,
+      rawData.tags
+        .filter((tag): tag is string => typeof tag === 'string')
+        .map(tag => tag.toLowerCase())
+        .filter((tag): tag is ArticleTag => 
+          ARTICLE_CONFIG.allowedTags.includes(tag as ArticleTag)
+        ) : 
+      [],
     image: rawData.image ? {
       src: typeof rawData.image === 'string' ? rawData.image : rawData.image.src,
       alt: typeof rawData.image === 'string' ? 
-        `Featured image for article: ${rawData.title || 'Untitled'}` : 
-        rawData.image.alt || `Featured image for article: ${rawData.title || 'Untitled'}`
+        `Featured image for article: ${rawData.title}` : 
+        rawData.image.alt || `Featured image for article: ${rawData.title}`
     } : undefined,
     featured: rawData.featured || false,
     draft: rawData.draft || false,

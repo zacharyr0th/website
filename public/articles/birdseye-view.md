@@ -4,15 +4,15 @@ date: '2023-12-31'
 image:
   src: '/misc/placeholder.webp'
   alt: "A Bird's Eye View"
-description: 'Why blockchains make sense'
-category: 'blockchain'
-tags: ['crypto', 'defi', 'technology', 'research']
+description: 'Why use a blockchain?'
+category: 'technology'
+tags: ['crypto', 'defi']
 takeaways:
-  - "Traditional financial systems face significant challenges with regulatory violations, opaque practices, and inherent conflicts of interest."
-  - "The Federal Reserve's dual mandate of maximum employment and price stability has led to complex monetary policies, with interest rates showing a centuries-long declining trend."
-  - "Defi offers three key advantages: stable coins for unstable currencies, censorship resistance against centralized control, and democratized yield generation through transparent systems."
-  - "The future of finance likely involves a hybrid approach, combining traditional banking's stability with Defi's innovation and accessibility."
-  - "Regulatory development varies globally, with some jurisdictions embracing innovation while others maintain caution, highlighting the need for balanced oversight."
+  - "Traditional banking systems suffer from regulatory violations and conflicts of interest"
+  - "Federal Reserve policies have extended a centuries-long decline in interest rates"
+  - "DeFi provides stable coins, censorship resistance, and democratized access to financial services"
+  - "The future of finance will likely blend traditional banking with DeFi innovations"
+  - "Global regulatory approaches vary widely"
 ---
 
 The global financial system relies on intermediaries that process trillions in daily transactions, creating critical yet - until recently - necessary bottlenecks in worldwide capital movement. Technology has evolved, and the need for these institutions is diminishing, but they are still deeply ingrained in our society at an operational, regulatory, and influential level. 

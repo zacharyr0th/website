@@ -2,7 +2,7 @@
 
 import React, { memo } from 'react';
 import Link from 'next/link';
-import { Article } from '../types';
+import type { Article } from '../types';
 
 interface ArticleCardProps {
   article: Article;
@@ -13,6 +13,18 @@ export const ArticleCard = memo<ArticleCardProps>(({ article, isFocused }) => {
   const linkRef = React.useRef<HTMLAnchorElement>(null);
   const isFeatured = article.frontmatter.featured;
   
+  const sortTags = (tags: readonly string[]) => {
+    const tagOrder = ['crypto', 'defi', 'trading', 'ai', 'systems'];
+    const lowerTags = tags.map(t => t.toLowerCase());
+    
+    // Return tags in reverse order so crypto appears rightmost
+    return tagOrder
+      .filter(tag => lowerTags.includes(tag))
+      .map(tag => tags.find(t => t.toLowerCase() === tag)!)
+      .concat(tags.filter(tag => !tagOrder.includes(tag.toLowerCase())))
+      .reverse();
+  };
+
   React.useEffect(() => {
     if (isFocused && linkRef.current) {
       linkRef.current.focus();
@@ -23,10 +35,12 @@ export const ArticleCard = memo<ArticleCardProps>(({ article, isFocused }) => {
     <Link
       ref={linkRef}
       href={article.link || '#'}
-      className={`block transition-all duration-200 ease-in-out will-change-transform outline-none focus:outline-none ${
+      className={`block transition-all duration-200 ease-in-out will-change-transform outline-none ${
         isFocused ? 'scale-[1.02]' : 'hover:scale-[1.02]'
       } ${isFeatured ? 'bg-amber-500/[0.02]' : ''}`}
       aria-label={`Read article: ${article.title || 'Untitled Article'}`}
+      role="listitem"
+      tabIndex={0}
     >
       <article className={`flex flex-col justify-between p-6 group rounded-xl transition-all duration-200 ${
         isFocused ? 'bg-zinc-800/50' : 'hover:bg-zinc-800/50 bg-inherit'
@@ -61,19 +75,11 @@ export const ArticleCard = memo<ArticleCardProps>(({ article, isFocused }) => {
                   })}
                 </time>
               )}
-              {article.category && (
-                <>
-                  <span className="w-1 h-1 rounded-full bg-zinc-700" />
-                  <span className="inline-flex items-center px-2.5 py-1 text-sm font-medium bg-inherit rounded-md">
-                    {article.category}
-                  </span>
-                </>
-              )}
             </div>
 
             {article.tags && article.tags.length > 0 && (
               <div className="flex flex-wrap items-center gap-2">
-                {article.tags.map((tag) => (
+                {sortTags(article.tags).map((tag) => (
                   <span
                     key={tag}
                     className="inline-flex items-center px-2.5 py-1 text-xs font-medium bg-white/5 text-zinc-400 rounded-md"

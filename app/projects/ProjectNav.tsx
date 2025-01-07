@@ -1,15 +1,15 @@
 import React, { memo, useCallback } from 'react';
 import { NavButton } from '../components/buttons';
-import { PROJECT_CATEGORIES } from './projects';
+import { PROJECT_CATEGORIES, type ProjectCategory } from './projects';
 
 interface ProjectNavProps {
-  selectedCategory: string;
-  onCategoryChange: (category: string) => void;
+  selectedCategory: 'all' | ProjectCategory;
+  onCategoryChange: (category: 'all' | ProjectCategory) => void;
 }
 
 const ProjectNav = memo(({ selectedCategory, onCategoryChange }: ProjectNavProps) => {
   const handleCategoryChange = useCallback(
-    (category: string) => () => {
+    (category: 'all' | ProjectCategory) => () => {
       onCategoryChange(category);
     },
     [onCategoryChange]
@@ -29,7 +29,7 @@ const ProjectNav = memo(({ selectedCategory, onCategoryChange }: ProjectNavProps
         <NavButton
           key={key}
           active={selectedCategory === key}
-          onClick={handleCategoryChange(key)}
+          onClick={handleCategoryChange(key as ProjectCategory)}
           size="sm"
           className="text-base"
         >

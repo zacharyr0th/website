@@ -1,4 +1,4 @@
-import { Base, WritingCategory } from './types';
+import type { Base, WritingCategory } from './types';
 
 export const WRITING_CATEGORIES: Readonly<Record<WritingCategory, string>> = {
   technical: 'Technical',

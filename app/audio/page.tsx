@@ -3,7 +3,8 @@
 import React, { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
-import { pageTransition, sectionTransition } from '../lib/animations';
+import { sectionTransition } from '../lib/animations';
+import PageHeader from '../components/PageHeader';
 
 const LoadingCard = () => (
   <div className="animate-pulse space-y-4">
@@ -26,15 +27,10 @@ const AudioPageClient = dynamic(() => import('./AudioPageClient'), {
 
 export default function AudioPage() {
   return (
-    <motion.div 
-      className="content-page font-mono bg-gradient-to-b from-background to-surface/30"
-      {...pageTransition}
-    >
+    <div className="content-page font-mono bg-gradient-to-b from-background to-surface/30">
       <main className="container mx-auto px-6 sm:px-8 pt-16 sm:pt-36">
         <div style={{ maxWidth: 'var(--article-width)' }} className="mx-auto space-y-12">
-          <motion.header className="mb-8" {...sectionTransition}>
-            <h1 className="text-5xl lg:text-6xl font-bold tracking-tight text-center sm:text-left">Audio</h1>
-          </motion.header>
+          <PageHeader title="Audio" />
 
           <Suspense fallback={<LoadingCard />}>
             <motion.div {...sectionTransition}>
@@ -43,6 +39,6 @@ export default function AudioPage() {
           </Suspense>
         </div>
       </main>
-    </motion.div>
+    </div>
   );
 }

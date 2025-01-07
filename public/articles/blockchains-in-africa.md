@@ -5,7 +5,7 @@ image:
   src: '/images/ba-0.webp'
   alt: 'Blockchains in Africa'
 description: 'Notes on Adoption Efforts'
-category: 'crypto'
+category: 'finance'
 tags: ['crypto']
 takeaways:
   - "Africa's growing blockchain adoption offers solutions to economic challenges, with Nigeria and Seychelles leading in venture capital investments despite significant wealth inequality."

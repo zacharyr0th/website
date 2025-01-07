@@ -1,5 +1,7 @@
-import React, { useState, MouseEvent } from 'react';
-import { motion, AnimatePresence, TargetAndTransition } from 'framer-motion';
+import React, { useState } from 'react';
+import type { MouseEvent } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import type { TargetAndTransition } from 'framer-motion';
 import Image from 'next/image';
 
 interface ProfileImageProps {

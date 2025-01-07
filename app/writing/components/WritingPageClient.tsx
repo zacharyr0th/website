@@ -1,42 +1,15 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { motion, Variants } from 'framer-motion';
-import { Article } from '../types';
+import { motion } from 'framer-motion';
+import type { Article } from '../types';
 import { ArchiveSection } from './ArchiveSection';
 import WritingNav from './WritingNav';
-
-// Error State
-export const ErrorState = () => (
-  <div 
-    className="max-w-2xl mx-auto space-y-4" 
-    role="alert"
-    aria-live="polite"
-  >
-    <h2 className="text-xl font-medium text-text-primary">Error Loading Articles</h2>
-    <p className="text-text-secondary">
-      There was a problem loading the articles. Please try again later.
-    </p>
-  </div>
-);
-
-// Empty State
-const EmptyState = () => (
-  <div 
-    className="max-w-2xl mx-auto space-y-4"
-    role="status"
-    aria-live="polite"
-  >
-    <h2 className="text-xl font-medium text-text-primary">No Articles Found</h2>
-    <p className="text-text-secondary">
-      Articles are currently being prepared. Check back soon for updates.
-    </p>
-  </div>
-);
+import { itemVariants } from '../../lib/animations';
 
 interface WritingPageClientProps {
   initialArticles: readonly Article[];
-  containerVariants: Variants;
+  containerVariants: typeof itemVariants;
 }
 
 export default function WritingPageClient({ 
@@ -49,16 +22,23 @@ export default function WritingPageClient({
     return selectedCategory === 'all'
       ? initialArticles
       : initialArticles.filter(article => 
-          article.frontmatter.category === selectedCategory
+          article.category === selectedCategory
         );
-  }, [initialArticles, selectedCategory]);
-
-  const handleCategoryChange = (category: string) => {
-    setSelectedCategory(category);
-  };
+  }, [selectedCategory, initialArticles]);
 
   if (!initialArticles || initialArticles.length === 0) {
-    return <EmptyState />;
+    return (
+      <div 
+        className="max-w-2xl mx-auto space-y-4"
+        role="status"
+        aria-live="polite"
+      >
+        <h2 className="text-xl font-medium text-text-primary">No Articles Found</h2>
+        <p className="text-text-secondary">
+          Articles are currently being prepared. Check back soon for updates.
+        </p>
+      </div>
+    );
   }
 
   return (
@@ -68,12 +48,16 @@ export default function WritingPageClient({
       variants={containerVariants}
       className="space-y-6"
     >
-      <WritingNav 
-        selectedCategory={selectedCategory}
-        onCategoryChange={handleCategoryChange}
-      />
-      
-      <ArchiveSection articles={filteredArticles} />
+      <motion.div variants={itemVariants}>
+        <WritingNav
+          selectedCategory={selectedCategory}
+          onCategoryChange={setSelectedCategory}
+        />
+      </motion.div>
+
+      <div className="grid grid-cols-1">
+        <ArchiveSection articles={filteredArticles} />
+      </div>
     </motion.div>
   );
 } 

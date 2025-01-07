@@ -1,27 +1,43 @@
+import type { ReactNode } from 'react';
 import './styles/globals.css';
+import { Inter, JetBrains_Mono } from 'next/font/google';
 import Navigation from './components/navigation/Navigation';
 import ConditionalFooter from './components/ConditionalFooter';
 import KeyboardShortcuts from './components/KeyboardShortcuts';
 import GlobalConnectModal from './components/misc/GlobalConnectModal';
-import { metadata } from './lib/metadata'
-import Script from 'next/script'
+import { metadata } from './lib/metadata';
+import Script from 'next/script';
 
-export { metadata }
+export { metadata };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-sans',
+  preload: true,
+  fallback: ['system-ui', 'arial'],
+});
+
+const mono = JetBrains_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-mono',
+  preload: true,
+  fallback: ['monospace'],
+});
+
+interface RootLayoutProps {
+  children: ReactNode;
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html 
+      lang="en" 
+      suppressHydrationWarning 
+      className={`${inter.variable} ${mono.variable} scroll-smooth`}
+    >
       <head>
-        <link 
-          rel="preconnect" 
-          href="https://fonts.googleapis.com" 
-          crossOrigin="anonymous"
-        />
-        <link 
-          rel="preconnect" 
-          href="https://fonts.gstatic.com" 
-          crossOrigin="anonymous"
-        />
         <meta 
           name="viewport" 
           content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover"
@@ -31,23 +47,38 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        
+        {/* Performance optimizations */}
+        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+        <meta httpEquiv="x-dns-prefetch-control" content="on" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        
+        {/* Analytics with improved loading */}
         <Script
-          strategy="afterInteractive"
+          id="gtag-base"
+          strategy="lazyOnload"
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+          nonce="analytics"
         />
         <Script
-          id="google-analytics"
-          strategy="afterInteractive"
+          id="gtag-config"
+          strategy="lazyOnload"
+          nonce="analytics"
         >
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
+            gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
+              page_path: window.location.pathname,
+              transport_type: 'beacon',
+              anonymize_ip: true,
+              cookie_flags: 'SameSite=Strict;Secure'
+            });
           `}
         </Script>
       </head>
-      <body className="min-h-screen bg-background antialiased overflow-x-hidden">
+      <body className="min-h-screen bg-background antialiased overflow-x-hidden selection:bg-accent/10">
         <KeyboardShortcuts />
         <GlobalConnectModal />
         <Navigation showHomeButton />

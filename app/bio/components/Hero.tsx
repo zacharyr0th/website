@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import ProfileImage from '../../components/misc/ProfileImage';
-import { SOCIAL_LINKS, SocialLink } from '../../lib/social';
+import type { SocialLink } from '../../lib/social';
+import { SOCIAL_LINKS } from '../../lib/social';
 import { BIO } from '../constants';
 
 const springTransition = {
