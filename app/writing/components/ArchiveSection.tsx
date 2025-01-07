@@ -4,6 +4,7 @@ import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 import { ArchiveSectionProps } from '../types';
 import { ArticleCard } from './ArticleCard';
+import clsx from 'clsx';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -89,7 +90,6 @@ export const ArchiveSection = memo<ArchiveSectionProps>(({ articles }) => {
       variants={containerVariants}
     >
       <div 
-        className="divide-y divide-zinc-800"
         role="list"
         aria-label="Articles list"
       >
@@ -98,6 +98,7 @@ export const ArchiveSection = memo<ArchiveSectionProps>(({ articles }) => {
             key={article.slug} 
             role="listitem"
             variants={itemVariants}
+            className={clsx(index !== 0 && "border-t border-zinc-800/50")}
             ref={(el) => {
               articleRefs.current[index] = el;
               return undefined;

@@ -66,7 +66,7 @@ export default function WritingPageClient({
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="space-y-12"
+      className="space-y-6"
     >
       <WritingNav 
         selectedCategory={selectedCategory}

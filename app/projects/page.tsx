@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { PROJECTS, ProjectCategory } from './projects';
 import ProjectCard from './ProjectCard';
 import ProjectNav from './ProjectNav';
+import clsx from 'clsx';
 
 type Category = 'all' | ProjectCategory;
 
@@ -97,8 +98,8 @@ export default function ProjectsPage() {
       variants={containerVariants}
     >
       <main className="container mx-auto px-6 sm:px-8 pt-24 sm:pt-36 pb-24">
-        <div style={{ maxWidth: 'var(--article-width)' }} className="mx-auto space-y-8">
-          <motion.header className="space-y-4" variants={itemVariants}>
+        <div style={{ maxWidth: 'var(--article-width)' }} className="mx-auto space-y-6">
+          <motion.header variants={itemVariants}>
             <h1 className="text-5xl lg:text-6xl font-bold tracking-tight">Projects</h1>
           </motion.header>
 
@@ -109,19 +110,20 @@ export default function ProjectsPage() {
             />
           </motion.div>
 
-          <motion.div
-            className="grid gap-8 md:grid-cols-2"
-            variants={containerVariants}
-          >
+          <div className="grid md:grid-cols-1">
             {filteredProjects.map((project, index) => (
-              <motion.div key={project.id} variants={itemVariants}>
+              <motion.div 
+                key={project.id} 
+                variants={itemVariants}
+                className={clsx(index !== 0 && "border-t border-zinc-800/50")}
+              >
                 <ProjectCard 
                   project={project} 
                   isFocused={index === focusedIndex}
                 />
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </main>
     </motion.div>
