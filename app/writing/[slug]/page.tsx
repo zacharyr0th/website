@@ -79,10 +79,13 @@ const getAllArticles = cache(async () => {
   }
 });
 
-export async function generateMetadata(props: {
-  params: { slug: string };
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const slug = String(props.params.slug);
+  const resolvedParams = await params;
+  const slug = String(resolvedParams.slug);
   const article = await loadArticle(slug);
   
   if (!article) {
@@ -91,19 +94,26 @@ export async function generateMetadata(props: {
     };
   }
 
+  const ogImage = typeof article.frontmatter.image === 'string'
+    ? { url: article.frontmatter.image }
+    : article.frontmatter.image?.src
+      ? { url: article.frontmatter.image.src, alt: article.frontmatter.image.alt }
+      : undefined;
+
   return {
     title: `${article.frontmatter.title} | Writing | Zachary Roth`,
-    description: article.frontmatter.description || null,
-    openGraph: article.frontmatter.image ? {
-      images: [{ url: article.frontmatter.image.src, alt: article.frontmatter.image.alt }],
-    } : null,
+    description: article.frontmatter.description,
+    openGraph: ogImage ? { images: [ogImage] } : undefined,
   };
 }
 
-export default async function Page(props: {
-  params: { slug: string };
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
 }) {
-  const slug = String(props.params.slug);
+  const resolvedParams = await params;
+  const slug = String(resolvedParams.slug);
 
   try {
     const article = await loadArticle(slug);

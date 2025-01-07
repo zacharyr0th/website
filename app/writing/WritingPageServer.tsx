@@ -16,8 +16,9 @@ async function getArticles(options: FetchArticlesOptions = {}): Promise<Article[
   const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
   
   try {
-    const headersList = headers();
-    const response = await fetch(`${getBaseUrl(headersList)}/api/articles`, {
+    const headersList = await headers();
+    const baseUrl = getBaseUrl(headersList);
+    const response = await fetch(`${baseUrl}/api/articles`, {
       next: { revalidate: CACHE_REVALIDATE_SECONDS, tags: ['articles'] },
       signal: options.signal || controller.signal,
       cache: options.cache || 'default',
