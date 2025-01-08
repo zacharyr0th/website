@@ -17,63 +17,8 @@ const ArticleHeader = memo<{ title: string; description: string | undefined }>((
 
 ArticleHeader.displayName = 'ArticleHeader';
 
-const ChatBot = memo<{ title: string; description: string | undefined }>(({ title, description }) => {
-  return (
-    <div className="flex flex-col h-full">
-      <h2 className="text-xl font-semibold mb-6">Article Assistant</h2>
-      <div className="space-y-6 overflow-y-auto flex-grow">
-        <div className="flex gap-4">
-          <div className="w-8 h-8 rounded-full bg-accent/20 flex-shrink-0 flex items-center justify-center">
-            🤖
-          </div>
-          <div className="flex-1">
-            <p className="text-sm text-text-secondary">
-              Hi! I&apos;m here to help you understand this article better. Feel free to ask questions as you read.
-            </p>
-          </div>
-        </div>
-        <div className="flex gap-4">
-          <div className="w-8 h-8 rounded-full bg-surface flex-shrink-0 flex items-center justify-center">
-            👤
-          </div>
-          <div className="flex-1">
-            <p className="text-sm text-text-secondary">
-              What&apos;s the main topic of this article?
-            </p>
-          </div>
-        </div>
-        <div className="flex gap-4">
-          <div className="w-8 h-8 rounded-full bg-accent/20 flex-shrink-0 flex items-center justify-center">
-            🤖
-          </div>
-          <div className="flex-1">
-            <p className="text-sm text-text-secondary">
-              This article discusses {title}. The key focus is on {description || 'the topic at hand'}.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="mt-6 pt-6 border-t border-surface">
-        <div className="flex gap-3">
-          <input
-            type="text"
-            placeholder="Ask a question..."
-            className="flex-1 bg-surface/50 rounded-lg px-4 py-2.5 text-sm border border-surface focus:outline-none focus:border-accent/50 transition-colors"
-          />
-          <button className="px-4 py-2.5 bg-accent/20 hover:bg-accent/30 rounded-lg transition-colors">
-            <span className="sr-only">Send message</span>
-            ↑
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-});
-
-ChatBot.displayName = 'ChatBot';
-
 const TableOfContents = memo<{ content: string; onHeaderClick?: () => void; isExpanded?: boolean }>(
-  ({ content, onHeaderClick, isExpanded = true }) => {
+  ({ content, onHeaderClick, isExpanded = false }) => {
   const headings = content.match(/<h[1-3][^>]*>(.*?)<\/h[1-3]>/g)?.map(heading => {
     const level = heading.charAt(2);
     const text = heading.replace(/<[^>]+>/g, '');
@@ -84,10 +29,10 @@ const TableOfContents = memo<{ content: string; onHeaderClick?: () => void; isEx
   return (
     <nav className={styles.tableOfContents} aria-label="Table of contents">
       {isExpanded ? (
-        <div className="flex items-center gap-4 mb-8">
+        <div className="flex items-center gap-3 mb-4">
           <button
             onClick={onHeaderClick}
-            className="text-[13px] w-[140px] text-left font-medium uppercase tracking-wider text-text-secondary hover:text-text-primary transition-colors"
+            className="text-[12px] w-[120px] text-left font-medium uppercase tracking-wider text-text-secondary hover:text-text-primary transition-colors"
           >
             Contents
           </button>
@@ -96,25 +41,25 @@ const TableOfContents = memo<{ content: string; onHeaderClick?: () => void; isEx
       ) : (
         <button
           onClick={onHeaderClick}
-          className="text-[13px] w-[140px] text-left font-medium uppercase tracking-wider text-text-secondary hover:text-text-primary transition-colors"
+          className="text-[12px] w-[120px] text-left font-medium uppercase tracking-wider text-text-secondary hover:text-text-primary transition-colors"
         >
           Contents
         </button>
       )}
       {isExpanded && (
-        <ul className="space-y-4">
+        <ul>
           {headings.map((heading, index) => (
             <li 
               key={index}
               className={clsx(
-                heading.level === '1' && 'text-[15px] font-semibold',
-                heading.level === '2' && 'text-[14px] font-medium',
-                heading.level === '3' && 'ml-6 text-[13px] h3-item'
+                heading.level === '1' && 'h1-item',
+                heading.level === '2' && 'h2-item',
+                heading.level === '3' && 'h3-item'
               )}
             >
               <a 
                 href={`#${heading.id}`}
-                className="block py-2 text-[var(--color-text-secondary)] hover:text-[var(--color-accent)]"
+                className="block text-[var(--color-text-secondary)] hover:text-[var(--color-accent)]"
               >
                 {heading.text}
               </a>
@@ -148,10 +93,10 @@ const KeyTakeaways = memo<{ points: readonly string[]; onHeaderClick?: () => voi
   ({ points, onHeaderClick, isExpanded = true }) => (
   <div className={styles.keyTakeaways}>
     {isExpanded ? (
-      <div className="flex items-center gap-4 mb-8">
+      <div className="flex items-center gap-3 mb-4">
         <button
           onClick={onHeaderClick}
-          className="text-[13px] w-[180px] text-left font-medium uppercase tracking-wider text-text-secondary hover:text-text-primary transition-colors whitespace-nowrap"
+          className="text-[12px] w-[140px] text-left font-medium uppercase tracking-wider text-text-secondary hover:text-text-primary transition-colors whitespace-nowrap"
         >
           KEY TAKEAWAYS
         </button>
@@ -160,15 +105,15 @@ const KeyTakeaways = memo<{ points: readonly string[]; onHeaderClick?: () => voi
     ) : (
       <button
         onClick={onHeaderClick}
-        className="text-[13px] w-[180px] text-left font-medium uppercase tracking-wider text-text-secondary hover:text-text-primary transition-colors whitespace-nowrap"
+        className="text-[12px] w-[140px] text-left font-medium uppercase tracking-wider text-text-secondary hover:text-text-primary transition-colors whitespace-nowrap"
       >
         KEY TAKEAWAYS
       </button>
     )}
     {isExpanded && (
-      <ul className="space-y-4">
+      <ul className="space-y-2">
         {points.map((point, index) => (
-          <li key={index} className="text-[15px] leading-relaxed text-text-secondary">
+          <li key={index} className="text-[13px] leading-relaxed text-text-secondary">
             {point}
           </li>
         ))}
@@ -181,7 +126,7 @@ KeyTakeaways.displayName = 'KeyTakeaways';
 
 const ArticleContent = memo<ArticleContentProps>(({ article, contentHtml, nextArticle, prevArticle }) => {
   const { title, description, frontmatter } = article;
-  const [showToc, setShowToc] = React.useState(true);
+  const [showToc, setShowToc] = React.useState(false);
   const [showTakeaways, setShowTakeaways] = React.useState(true);
   const [copyFeedback, setCopyFeedback] = React.useState<string | null>(null);
   const router = useRouter();
@@ -208,6 +153,7 @@ const ArticleContent = memo<ArticleContentProps>(({ article, contentHtml, nextAr
   });
   
   const handleHeaderClick = useCallback((id: string) => {
+    if (typeof window === 'undefined') return;
     const url = `${window.location.origin}${window.location.pathname}#${id}`;
     navigator.clipboard.writeText(url).then(() => {
       setCopyFeedback(id);
@@ -220,9 +166,9 @@ const ArticleContent = memo<ArticleContentProps>(({ article, contentHtml, nextAr
       /<h([1-3])(.*?)>(.*?)<\/h[1-3]>/g,
       (_match, level, attrs, text) => {
         const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-        return `<h${level}${attrs} id="${id}" class="group cursor-pointer" onclick="window.handleHeaderClick('${id}')" ontouchend="window.handleHeaderClick('${id}')">
+        return `<h${level}${attrs} id="${id}" class="group cursor-pointer" onclick="if(window.handleHeaderClick)window.handleHeaderClick('${id}')" ontouchend="if(window.handleHeaderClick)window.handleHeaderClick('${id}')">
           ${text}
-          <span class="opacity-0 group-hover:opacity-100 md:group-hover:opacity-100 transition-opacity ml-3 text-accent text-sm">
+          <span class="link-icon">
             ${copyFeedback === id ? '✓ Copied!' : '🔗'}
           </span>
         </h${level}>`;
@@ -231,9 +177,12 @@ const ArticleContent = memo<ArticleContentProps>(({ article, contentHtml, nextAr
   }, [contentHtml, copyFeedback]);
 
   React.useEffect(() => {
+    if (typeof window === 'undefined') return;
     window.handleHeaderClick = handleHeaderClick;
     return () => {
-      window.handleHeaderClick = (() => {}) as (id: string) => void;
+      if (typeof window !== 'undefined') {
+        delete window.handleHeaderClick;
+      }
     };
   }, [handleHeaderClick]);
 
@@ -241,7 +190,7 @@ const ArticleContent = memo<ArticleContentProps>(({ article, contentHtml, nextAr
     if (!frontmatter.takeaways?.length) return null;
     
     return (
-      <div className="bg-zinc-800/30 backdrop-blur-sm rounded-xl border border-surface p-8">
+      <div className={styles.mobileContainer}>
         <KeyTakeaways 
           points={frontmatter.takeaways} 
           onHeaderClick={handleToggleTakeaways}
@@ -252,7 +201,7 @@ const ArticleContent = memo<ArticleContentProps>(({ article, contentHtml, nextAr
   }, [frontmatter.takeaways, handleToggleTakeaways, showTakeaways]);
 
   const renderTableOfContents = useMemo(() => (
-    <div className="bg-zinc-800/30 backdrop-blur-sm rounded-xl border border-surface p-8">
+    <div className={styles.mobileContainer}>
       <TableOfContents 
         content={contentHtml} 
         onHeaderClick={handleToggleToc}
@@ -263,34 +212,24 @@ const ArticleContent = memo<ArticleContentProps>(({ article, contentHtml, nextAr
 
   return (
     <div className="content-page font-mono bg-gradient-to-b from-background to-surface/30">
-      <main className="max-w-[var(--max-content-width)] mx-auto relative" {...handlers}>
+      <main className="max-w-[var(--max-content-width)] mx-auto relative px-3 sm:px-4" {...handlers}>
         <article className={styles.article} aria-labelledby="article-title">
           <ArticleHeader title={title} description={description} />
           
           <div className="relative">
             {frontmatter.image && <ArticleImage image={frontmatter.image} title={title} />}
-            
-            {/* Desktop ToC */}
-            <div className="hidden lg:block absolute right-0 top-0 w-[260px] translate-x-[calc(100%+2rem)]">
-              <div className="sticky top-8 bg-zinc-800/30 backdrop-blur-sm rounded-xl border border-surface pl-8 pr-6 py-8">
-                <TableOfContents 
-                  content={contentHtml} 
-                  onHeaderClick={handleToggleToc}
-                  isExpanded={showToc}
-                />
-              </div>
-            </div>
           </div>
           
           {/* Mobile Key Takeaways and ToC */}
-          <div className="lg:hidden mb-16 space-y-8">
+          <div className="lg:hidden space-y-3 my-4">
             {renderTakeaways}
             {renderTableOfContents}
           </div>
 
-          {/* Desktop Key Takeaways */}
-          <div className="hidden lg:block mb-16">
+          {/* Desktop Key Takeaways and ToC */}
+          <div className="hidden lg:block mb-6">
             {renderTakeaways}
+            {renderTableOfContents}
           </div>
 
           {/* Main content */}
@@ -299,16 +238,6 @@ const ArticleContent = memo<ArticleContentProps>(({ article, contentHtml, nextAr
             className={styles.content}
             dangerouslySetInnerHTML={{ __html: processedContent }} 
           />
-
-          {/* Mobile Navigation Hints */}
-          <div className="lg:hidden mt-8 flex justify-between text-sm text-zinc-400">
-            {prevArticle && (
-              <div>← Swipe right for previous</div>
-            )}
-            {nextArticle && (
-              <div>Swipe left for next →</div>
-            )}
-          </div>
         </article>
       </main>
     </div>
@@ -319,7 +248,7 @@ ArticleContent.displayName = 'ArticleContent';
 
 declare global {
   interface Window {
-    handleHeaderClick: (id: string) => void;
+    handleHeaderClick?: (id: string) => void;
   }
 }
 

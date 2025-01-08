@@ -1,9 +1,11 @@
 import React, { Suspense } from 'react';
-import { getArticles } from '../lib/articles';
+import { getArticles } from './[slug]/articles';
 import { LoadingState } from '../lib/Loading';
 import WritingPageClient from './components/WritingPageClient';
 import { containerVariants } from '../lib/animations';
 import PageHeader from '../components/PageHeader';
+
+export const revalidate = 60; // Revalidate every minute
 
 export default async function WritingPage() {
   const articles = await getArticles();

@@ -1,95 +1,88 @@
+/** Core article types and configurations */
+
 /** Image metadata for articles */
 export interface ArticleImage {
   readonly src: string;
   readonly alt: string;
 }
 
+/** Allowed categories and tags */
+export const CATEGORIES = ['technology', 'finance', 'music'] as const;
+export const TAGS = [
+  'crypto',
+  'aptos',
+  'solana',
+  'sui',
+  'bitcoin',
+  'ethereum',
+  'technology',
+  'finance',
+  'defi',
+  'kernels',
+  'theory'
+] as const;
+
 /** Core configuration for article management */
 export const ARTICLE_CONFIG = {
   directory: 'public/articles',
-  maxTitleLength: 100,
-  maxDescriptionLength: 200,
-  allowedCategories: ['technology', 'finance', 'music'] as const,
-  allowedTags: [
-    'crypto',
-    'aptos',
-    'solana',
-    'sui',
-    'bitcoin',
-    'ethereum',
-    'technology',
-    'finance',
-    'defi',
-    'kernels',
-    'theory'
-  ] as const,
-  cacheConfig: {
-    revalidateInterval: 5 * 60 * 1000, // 5 minutes
+  limits: {
+    title: 100,
+    description: 200,
+  },
+  cache: {
+    revalidate: 5 * 60 * 1000, // 5 minutes
     staleWhileRevalidate: 24 * 60 * 60 * 1000, // 24 hours
   },
   pagination: {
-    defaultPageSize: 100,
+    pageSize: 100,
     featuredCount: 3,
   },
 } as const;
 
-export type ArticleCategory = (typeof ARTICLE_CONFIG.allowedCategories)[number];
-export type ArticleTag = (typeof ARTICLE_CONFIG.allowedTags)[number];
+export type ArticleCategory = (typeof CATEGORIES)[number];
+export type ArticleTag = (typeof TAGS)[number];
 
 /** Frontmatter metadata for articles */
-export type ArticleFrontmatter = {
+export interface ArticleFrontmatter {
   readonly title: string;
   readonly date: string;
-  readonly description?: string | undefined;
-  readonly category?: ArticleCategory | undefined;
-  readonly tags?: readonly ArticleTag[] | undefined;
-  readonly image?: ArticleImage | undefined;
+  readonly description: string;
+  readonly category: ArticleCategory | null;
+  readonly tags: readonly ArticleTag[];
+  readonly image: ArticleImage | null;
   readonly featured: boolean;
   readonly draft: boolean;
-  readonly takeaways?: readonly string[] | undefined;
-};
+  readonly takeaways: readonly string[] | null;
+}
 
 /** Complete article data structure */
-export type Article = {
+export interface Article {
   readonly id: string;
   readonly slug: string;
   readonly title: string;
   readonly content: string;
   readonly link: string;
   readonly frontmatter: ArticleFrontmatter;
-  readonly description: string | undefined;
-  readonly date: string | undefined;
-  readonly category: ArticleCategory | undefined;
-  readonly tags: readonly ArticleTag[] | undefined;
-  readonly image: ArticleImage | undefined;
-  readonly takeaways: readonly string[] | undefined;
-};
-
-/** Raw frontmatter before processing */
-export type RawFrontmatter = Readonly<{
-  title: string;
-  date?: string;
-  description?: string;
-  subtitle?: string;
-  category?: string;
-  tags?: readonly string[];
-  image?: string | ArticleImage;
-  featured?: boolean;
-  draft?: boolean;
-  takeaways?: readonly string[];
-}>;
-
-/** Props for article content component */
-export interface ArticleContentProps {
-  article: Article;
-  contentHtml: string;
-  nextArticle: Article | undefined;
-  prevArticle: Article | undefined;
+  readonly description: string;
+  readonly date: string;
+  readonly category: ArticleCategory | null;
+  readonly tags: readonly ArticleTag[];
+  readonly image: ArticleImage | null;
+  readonly takeaways: readonly string[] | null;
 }
 
-/** Props for archive section component */
-export interface ArchiveSectionProps {
-  readonly articles: readonly Article[];
+/** Raw frontmatter before processing */
+export interface RawFrontmatter {
+  readonly title: string;
+  readonly date?: string;
+  readonly description?: string;
+  readonly subtitle?: string;
+  readonly category?: string;
+  readonly tags?: readonly string[];
+  readonly image?: string | ArticleImage;
+  readonly featured?: boolean;
+  readonly draft?: boolean;
+  readonly takeaways?: readonly string[];
 }
 
 /** Cache structure for articles */
@@ -100,6 +93,24 @@ export interface ArticleCache {
 
 /** Options for fetching articles */
 export interface FetchArticlesOptions {
+  readonly featured?: boolean;
+  readonly category?: ArticleCategory;
+  readonly tag?: ArticleTag;
+  readonly limit?: number;
+  readonly excludeDrafts?: boolean;
   readonly signal?: AbortSignal;
   readonly cache?: RequestCache;
+}
+
+/** Props for article content component */
+export interface ArticleContentProps {
+  article: Article;
+  contentHtml: string;
+  nextArticle: Article | null;
+  prevArticle: Article | null;
+}
+
+/** Props for archive section component */
+export interface ArchiveSectionProps {
+  articles: Article[];
 }

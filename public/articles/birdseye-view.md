@@ -50,13 +50,13 @@ The Fed seeks to achieve these goals through various monetary policy tools, prim
 
 Although there are spikes, interest rates have been trending down for centuries.
 
-![Historical interest rates trend over 400 years showing a declining pattern](/images/400y-interest.webp)
+![Historical interest rates trend over 400 years showing a declining pattern](/public/images/400y-interest.webp)
 
 ## Changing Value Perceptions
 
 One way to evaluate the Federal Reserve's economic impact on value perception is through two key metrics: its balance sheet correlation with the S&P 500 and the US dollar's purchasing power trajectory. While correlation doesn't imply causation, monetarists who believe the printing of money directly affects the dollar's value have extensively studied these relationships. This has become particularly interesting following the Fed's interventions during the 2008 crisis and the COVID-19 pandemic.
 
-![Federal Reserve balance sheet correlation with S&P 500](/images/fed-sp.webp)
+![Federal Reserve balance sheet correlation with S&P 500](/public/images/fed-sp.webp)
 
 Wall Street optimists argue that because of the US's dominance, it doesn't matter how much money is printed, and centralized intermediaries are a battle-tested system worth more than the trouble of occasionally bailing out a few bad actors.
 
@@ -78,7 +78,7 @@ In 2022, China's banking crisis revealed more risks of centralized banking contr
 
 Then, tanks were deployed against the protesters.
 
-![Chinese tanks deployed during bank protests](/images/tank-webp.png)
+![Chinese tanks deployed during bank protests](/public/images/tank-webp.png)
 
 While China's response represents an extreme case of centralization and censorship, these issues exist on a spectrum worldwide—as does the need for Defi.
 
@@ -90,7 +90,7 @@ As opposed to centralized platforms like Celsius, Automated Market Makers (AMMs)
 
 Below are the top DEXes by 7-day average fees across various blockchains:
 
-![Uniswap and other DEX statistics](/images/uniswap.webp)
+![Uniswap and other DEX statistics](/public/images/uniswap.webp)
 
 This democratization of market-making represents a significant shift from traditional financial structures. The blockchain infrastructure underlying these systems also brings unprecedented transparency, as trading activities and settlements are recorded on public ledgers, simplifying what was historically an opaque process.
 

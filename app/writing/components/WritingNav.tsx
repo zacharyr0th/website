@@ -2,32 +2,33 @@
 
 import React, { memo, useCallback } from 'react';
 import { NavButton } from '../../components/buttons';
-import { ARTICLE_CONFIG } from '../types';
+import { CATEGORIES } from '../types';
+import type { ArticleCategory } from '../types';
 
 interface WritingNavProps {
-  selectedCategory: string;
-  onCategoryChange: (category: string) => void;
+  selectedCategory: ArticleCategory | null;
+  onCategorySelect: (category: ArticleCategory | null) => void;
 }
 
-const WritingNav = memo(({ selectedCategory, onCategoryChange }: WritingNavProps) => {
+export const WritingNav = memo<WritingNavProps>(({ selectedCategory, onCategorySelect }) => {
   const handleCategoryChange = useCallback(
-    (category: string) => () => {
-      onCategoryChange(category);
+    (category: ArticleCategory | null) => () => {
+      onCategorySelect(category);
     },
-    [onCategoryChange]
+    [onCategorySelect]
   );
 
   return (
     <div className="bg-surface/80 backdrop-blur-sm rounded-3xl px-4 py-2.5 inline-flex items-center space-x-4 overflow-x-auto scrollbar-hide">
       <NavButton
-        active={selectedCategory === 'all'}
-        onClick={handleCategoryChange('all')}
+        active={selectedCategory === null}
+        onClick={handleCategoryChange(null)}
         size="sm"
         className="text-base"
       >
         All
       </NavButton>
-      {ARTICLE_CONFIG.allowedCategories.map((category) => (
+      {CATEGORIES.map((category) => (
         <NavButton
           key={category}
           active={selectedCategory === category}
@@ -42,6 +43,4 @@ const WritingNav = memo(({ selectedCategory, onCategoryChange }: WritingNavProps
   );
 });
 
-WritingNav.displayName = 'WritingNav';
-
-export default WritingNav; 
+WritingNav.displayName = 'WritingNav'; 

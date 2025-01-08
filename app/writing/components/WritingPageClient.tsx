@@ -1,30 +1,65 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import type { Article } from '../types';
-import { ArchiveSection } from './ArchiveSection';
-import WritingNav from './WritingNav';
-import { itemVariants } from '../../lib/animations';
+import type { Article, ArticleCategory } from '../types';
+import { ArticleCard } from './ArticleCard';
+import { WritingNav } from './WritingNav';
+import { itemVariants, containerVariants } from '../../lib/animations';
 
 interface WritingPageClientProps {
   initialArticles: readonly Article[];
-  containerVariants: typeof itemVariants;
+  containerVariants: typeof containerVariants;
 }
 
 export default function WritingPageClient({ 
   initialArticles, 
   containerVariants
 }: WritingPageClientProps) {
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedCategory, setSelectedCategory] = useState<ArticleCategory | null>(null);
+  const [focusedIndex, setFocusedIndex] = useState(0);
 
   const filteredArticles = useMemo(() => {
-    return selectedCategory === 'all'
-      ? initialArticles
-      : initialArticles.filter(article => 
-          article.category === selectedCategory
-        );
+    const articles = !selectedCategory 
+      ? [...initialArticles]
+      : [...initialArticles].filter(article => article.category === selectedCategory);
+
+    return articles.sort((a: Article, b: Article) => 
+      new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
   }, [selectedCategory, initialArticles]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    setFocusedIndex(0);
+  }, [selectedCategory]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        
+        const numArticles = filteredArticles.length;
+        let newIndex = focusedIndex;
+
+        switch (e.key) {
+          case 'ArrowUp':
+            newIndex = focusedIndex - 1;
+            break;
+          case 'ArrowDown':
+            newIndex = focusedIndex + 1;
+            break;
+        }
+
+        if (newIndex >= 0 && newIndex < numArticles) {
+          setFocusedIndex(newIndex);
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [focusedIndex, filteredArticles.length]);
 
   if (!initialArticles || initialArticles.length === 0) {
     return (
@@ -46,18 +81,31 @@ export default function WritingPageClient({
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="space-y-6"
+      className="space-y-4"
     >
       <motion.div variants={itemVariants}>
         <WritingNav
           selectedCategory={selectedCategory}
-          onCategoryChange={setSelectedCategory}
+          onCategorySelect={setSelectedCategory}
         />
       </motion.div>
 
-      <div className="grid grid-cols-1">
-        <ArchiveSection articles={filteredArticles} />
-      </div>
+      <motion.div 
+        variants={containerVariants}
+        className="space-y-3"
+      >
+        {filteredArticles.map((article: Article, index: number) => (
+          <motion.div 
+            key={article.id} 
+            variants={itemVariants}
+          >
+            <ArticleCard
+              article={article}
+              isFocused={index === focusedIndex}
+            />
+          </motion.div>
+        ))}
+      </motion.div>
     </motion.div>
   );
 } 

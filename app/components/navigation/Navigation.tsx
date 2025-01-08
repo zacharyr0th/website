@@ -24,7 +24,7 @@ const NavLink = memo(({ label, href, active }: NavItem & { active: boolean }) =>
 ));
 NavLink.displayName = 'NavLink';
 
-const NavContent = memo(({ pathname, themeButton, showHomeButton }: { pathname: string; themeButton?: React.ReactNode; showHomeButton?: boolean }) => (
+const NavContent = memo(({ pathname, themeButton, showHomeButton }: { pathname: string | null; themeButton?: React.ReactNode; showHomeButton?: boolean }) => (
   <div className="flex w-screen px-8 max-sm:px-4 items-center justify-between max-sm:justify-center">
     <div className="max-sm:hidden">
       {showHomeButton && pathname !== '/' && (
