@@ -13,4 +13,4 @@ export const PROJECT_CATEGORIES = {
   web: 'Web',
   mobile: 'Mobile',
   other: 'Other',
-} as const; 
+} as const;

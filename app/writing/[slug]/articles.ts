@@ -13,14 +13,14 @@ import remarkImages from 'remark-images';
 import remarkParse from 'remark-parse';
 import swr from 'swr';
 import { useMemo, useCallback } from 'react';
-import type { 
-  Article, 
-  ArticleFrontmatter, 
+import type {
+  Article,
+  ArticleFrontmatter,
   RawFrontmatter,
   ArticleCache,
   ArticleImage,
   ArticleCategory,
-  ArticleTag
+  ArticleTag,
 } from '../types';
 import { ARTICLE_CONFIG, CATEGORIES, TAGS } from '../types';
 
@@ -57,27 +57,31 @@ export const validateFrontmatter = (data: unknown): ArticleFrontmatter => {
 
   const description = rawData.description || rawData.subtitle;
   if (description && description.length > ARTICLE_CONFIG.limits.description) {
-    throw new Error(`Description is too long (max ${ARTICLE_CONFIG.limits.description} characters)`);
+    throw new Error(
+      `Description is too long (max ${ARTICLE_CONFIG.limits.description} characters)`
+    );
   }
 
-  const category = rawData.category && 
-    CATEGORIES.includes(rawData.category as ArticleCategory) ? 
-    rawData.category as ArticleCategory : 
-    null;
+  const category =
+    rawData.category && CATEGORIES.includes(rawData.category as ArticleCategory)
+      ? (rawData.category as ArticleCategory)
+      : null;
 
-  const tags = rawData.tags && Array.isArray(rawData.tags) ? 
-    Array.from(new Set(
-      rawData.tags
-        .filter((tag): tag is string => typeof tag === 'string')
-        .map(tag => tag.toLowerCase())
-        .filter((tag): tag is ArticleTag => 
-          TAGS.includes(tag as ArticleTag)
+  const tags =
+    rawData.tags && Array.isArray(rawData.tags)
+      ? Array.from(
+          new Set(
+            rawData.tags
+              .filter((tag): tag is string => typeof tag === 'string')
+              .map((tag) => tag.toLowerCase())
+              .filter((tag): tag is ArticleTag => TAGS.includes(tag as ArticleTag))
+          )
         )
-    )) : 
-    [];
+      : [];
 
-  const takeaways = rawData.takeaways?.filter((takeaway): takeaway is string => 
-    typeof takeaway === 'string') || null;
+  const takeaways =
+    rawData.takeaways?.filter((takeaway): takeaway is string => typeof takeaway === 'string') ||
+    null;
 
   return {
     title: rawData.title,
@@ -120,12 +124,15 @@ const processMarkdown = async (content: string): Promise<string> => {
     .use(html)
     .process(content);
 
-  return result.toString()
+  return result
+    .toString()
     .replace(/<img/g, '<img class="responsive-image" loading="lazy"')
     .replace(/<figure/g, '<figure class="image-figure"')
     .replace(/<figcaption/g, '<figcaption class="image-caption"')
-    .replace(/<pre><code class="language-(\w+)">/g, (_, lang) => 
-      `<pre><code class="language-${lang} syntax-highlighted">`);
+    .replace(
+      /<pre><code class="language-(\w+)">/g,
+      (_, lang) => `<pre><code class="language-${lang} syntax-highlighted">`
+    );
 };
 
 // Article Retrieval Functions
@@ -146,8 +153,8 @@ export const getArticle = async (slug: string) => {
 export const getArticles = async (forceRefresh = false): Promise<readonly Article[]> => {
   const now = Date.now();
   if (
-    !forceRefresh && 
-    articleCache && 
+    !forceRefresh &&
+    articleCache &&
     now - articleCache.timestamp < ARTICLE_CONFIG.cache.revalidate
   ) {
     return articleCache.articles;
@@ -157,8 +164,8 @@ export const getArticles = async (forceRefresh = false): Promise<readonly Articl
     const fileNames = await fs.readdir(articlesDirectory);
     const articles = await Promise.all(
       fileNames
-        .filter(fileName => fileName.endsWith('.md'))
-        .map(async fileName => {
+        .filter((fileName) => fileName.endsWith('.md'))
+        .map(async (fileName) => {
           try {
             const slug = fileName.replace(/\.md$/, '');
             const article = await getArticle(slug);
@@ -175,7 +182,7 @@ export const getArticles = async (forceRefresh = false): Promise<readonly Articl
 
     const validArticles = articles
       .filter((article): article is Article => article !== null)
-      .sort((a, b) => (new Date(b.date || 0).getTime() - new Date(a.date || 0).getTime()));
+      .sort((a, b) => new Date(b.date || 0).getTime() - new Date(a.date || 0).getTime());
 
     articleCache = { articles: validArticles, timestamp: now };
     return validArticles;
@@ -188,7 +195,7 @@ export const getArticles = async (forceRefresh = false): Promise<readonly Articl
 export const getFeaturedArticles = async (): Promise<readonly Article[]> => {
   const articles = await getArticles();
   return articles
-    .filter(article => article.frontmatter.featured)
+    .filter((article) => article.frontmatter.featured)
     .slice(0, ARTICLE_CONFIG.pagination.featuredCount);
 };
 
@@ -228,7 +235,7 @@ export const useArticles = () => {
   };
 };
 
-const seededShuffle = <T,>(array: T[], seed: number): T[] => {
+const seededShuffle = <T>(array: T[], seed: number): T[] => {
   const shuffled = [...array];
   let currentIndex = shuffled.length;
   const seededRandom = () => {
@@ -249,10 +256,9 @@ const seededShuffle = <T,>(array: T[], seed: number): T[] => {
 };
 
 const filterArticles = (articles: Article[], primaryArticleId: string): Article[] =>
-  articles.filter(article => 
-    !article.frontmatter.featured &&
-    article.id !== primaryArticleId &&
-    !article.frontmatter.draft
+  articles.filter(
+    (article) =>
+      !article.frontmatter.featured && article.id !== primaryArticleId && !article.frontmatter.draft
   );
 
 export const useRandomArticles = (articles: Article[], primaryArticleId: string) => {
@@ -268,8 +274,10 @@ export const useRandomArticles = (articles: Article[], primaryArticleId: string)
         return [];
       }
 
-      return seededShuffle(availableArticles, seed)
-        .slice(0, Math.min(ARTICLE_CONFIG.pagination.featuredCount, availableArticles.length));
+      return seededShuffle(availableArticles, seed).slice(
+        0,
+        Math.min(ARTICLE_CONFIG.pagination.featuredCount, availableArticles.length)
+      );
     },
     [availableArticles]
   );
@@ -280,4 +288,3 @@ export const useRandomArticles = (articles: Article[], primaryArticleId: string)
     isLoading: false,
   };
 };
-

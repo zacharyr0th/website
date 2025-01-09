@@ -43,4 +43,4 @@ export const WritingNav = memo<WritingNavProps>(({ selectedCategory, onCategoryS
   );
 });
 
-WritingNav.displayName = 'WritingNav'; 
+WritingNav.displayName = 'WritingNav';

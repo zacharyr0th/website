@@ -50,4 +50,4 @@ export default function KeyboardShortcuts() {
   }, [router, pathname]);
 
   return null;
-} 
+}

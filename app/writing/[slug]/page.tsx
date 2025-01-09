@@ -35,7 +35,7 @@ export default async function ArticlePage({ params }: PageProps) {
 
   const article = createArticle(rawArticle.frontmatter, rawArticle.content, slug);
   const articles = await getArticles();
-  const currentIndex = articles.findIndex(a => a.slug === slug);
+  const currentIndex = articles.findIndex((a) => a.slug === slug);
   const nextArticle = currentIndex < articles.length - 1 ? articles[currentIndex + 1] : null;
   const prevArticle = currentIndex > 0 ? articles[currentIndex - 1] : null;
 
@@ -43,13 +43,13 @@ export default async function ArticlePage({ params }: PageProps) {
     <div className="min-h-screen bg-gradient-to-b from-background to-surface/30">
       <main className="container mx-auto px-6 sm:px-8 pt-16 sm:pt-36 pb-24">
         <div style={{ maxWidth: 'var(--article-width)' }} className="mx-auto">
-          <Suspense 
+          <Suspense
             fallback={
-              <LoadingState 
-                label="Loading article" 
+              <LoadingState
+                label="Loading article"
                 height="h-[600px]"
                 barCount={4}
-                className="max-w-3xl mx-auto" 
+                className="max-w-3xl mx-auto"
               />
             }
           >

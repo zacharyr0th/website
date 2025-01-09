@@ -42,4 +42,4 @@ export const heroContent = {
     },
   ],
   chainLogos: ['bitcoin', 'ethereum', 'solana', 'aptos'],
-} as const; 
+} as const;

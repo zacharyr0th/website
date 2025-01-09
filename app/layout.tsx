@@ -32,14 +32,14 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html 
-      lang="en" 
-      suppressHydrationWarning 
+    <html
+      lang="en"
+      suppressHydrationWarning
       className={`${inter.variable} ${mono.variable} scroll-smooth`}
     >
       <head>
-        <meta 
-          name="viewport" 
+        <meta
+          name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover"
         />
         <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
@@ -47,12 +47,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        
+
         {/* Performance optimizations */}
         <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        
+
         {/* Analytics with improved loading */}
         <Script
           id="gtag-base"
@@ -60,11 +60,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
           nonce="analytics"
         />
-        <Script
-          id="gtag-config"
-          strategy="lazyOnload"
-          nonce="analytics"
-        >
+        <Script id="gtag-config" strategy="lazyOnload" nonce="analytics">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}

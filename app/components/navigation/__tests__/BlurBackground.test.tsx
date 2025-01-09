@@ -55,15 +55,17 @@ describe('BlurBackground', () => {
       render(<BlurBackground>Test content</BlurBackground>);
       const container = screen.getByTestId('blur-background');
       const classes = container.className.split(' ');
-      expect(classes).toEqual(expect.arrayContaining([
-        'rounded-3xl',
-        'px-4',
-        'pt-4',
-        'flex',
-        'items-center',
-        'justify-center',
-        'text-center'
-      ]));
+      expect(classes).toEqual(
+        expect.arrayContaining([
+          'rounded-3xl',
+          'px-4',
+          'pt-4',
+          'flex',
+          'items-center',
+          'justify-center',
+          'text-center',
+        ])
+      );
     });
   });
 
@@ -96,4 +98,4 @@ describe('BlurBackground', () => {
       });
     });
   });
-}); 
+});

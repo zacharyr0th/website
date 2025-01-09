@@ -27,7 +27,7 @@ describe('KeyboardShortcuts', () => {
 
   it('navigates to writing page on Cmd+Ctrl+W', () => {
     render(<KeyboardShortcuts />);
-    
+
     const event = new KeyboardEvent('keydown', {
       key: 'w',
       metaKey: true,
@@ -41,7 +41,7 @@ describe('KeyboardShortcuts', () => {
 
   it('navigates to projects page on Cmd+Shift+P', () => {
     render(<KeyboardShortcuts />);
-    
+
     const event = new KeyboardEvent('keydown', {
       key: 'p',
       metaKey: true,
@@ -55,7 +55,7 @@ describe('KeyboardShortcuts', () => {
 
   it('opens connect modal on Cmd+Shift+C', () => {
     render(<KeyboardShortcuts />);
-    
+
     const event = new KeyboardEvent('keydown', {
       key: 'c',
       metaKey: true,
@@ -73,7 +73,7 @@ describe('KeyboardShortcuts', () => {
   it('navigates to home page on Cmd+Shift+Z when not on home page', () => {
     (usePathname as jest.Mock).mockReturnValue('/other');
     render(<KeyboardShortcuts />);
-    
+
     const event = new KeyboardEvent('keydown', {
       key: 'z',
       metaKey: true,
@@ -88,7 +88,7 @@ describe('KeyboardShortcuts', () => {
   it('does not navigate on Cmd+Shift+Z when already on home page', () => {
     (usePathname as jest.Mock).mockReturnValue('/');
     render(<KeyboardShortcuts />);
-    
+
     const event = new KeyboardEvent('keydown', {
       key: 'z',
       metaKey: true,
@@ -99,4 +99,4 @@ describe('KeyboardShortcuts', () => {
 
     expect(mockPush).not.toHaveBeenCalled();
   });
-}); 
+});

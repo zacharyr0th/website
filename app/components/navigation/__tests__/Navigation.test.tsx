@@ -21,11 +21,15 @@ jest.mock('framer-motion', () => ({
 
 describe('Navigation', () => {
   const mockPathname = '/';
-  
+
   beforeEach(() => {
     (usePathname as jest.Mock).mockReturnValue(mockPathname);
     // Reset window dimensions
-    Object.defineProperty(window, 'innerWidth', { writable: true, configurable: true, value: 1024 });
+    Object.defineProperty(window, 'innerWidth', {
+      writable: true,
+      configurable: true,
+      value: 1024,
+    });
     window.dispatchEvent(new Event('resize'));
   });
 
@@ -43,8 +47,8 @@ describe('Navigation', () => {
     it('renders all navigation items', () => {
       render(<Navigation />);
       const nav = screen.getByRole('navigation');
-      
-      navItems.forEach(item => {
+
+      navItems.forEach((item) => {
         const link = within(nav).getByRole('link', { name: item.label });
         expect(link).toHaveAttribute('href', item.href);
       });
@@ -60,7 +64,7 @@ describe('Navigation', () => {
     it('shows home button when showHomeButton is true and not on home page', () => {
       (usePathname as jest.Mock).mockReturnValue('/projects');
       render(<Navigation showHomeButton />);
-      
+
       const homeLinks = screen.getAllByText('z');
       expect(homeLinks.length).toBeGreaterThan(0);
       expect(homeLinks[0].closest('a')).toHaveAttribute('href', '/');
@@ -69,7 +73,7 @@ describe('Navigation', () => {
     it('hides home button when on home page', () => {
       (usePathname as jest.Mock).mockReturnValue('/');
       render(<Navigation showHomeButton />);
-      
+
       const homeLinks = screen.queryAllByText('z');
       expect(homeLinks.length).toBe(0);
     });
@@ -77,7 +81,7 @@ describe('Navigation', () => {
     it('applies correct styles to home button', () => {
       (usePathname as jest.Mock).mockReturnValue('/projects');
       render(<Navigation showHomeButton />);
-      
+
       const homeButton = screen.getAllByText('z')[0];
       expect(homeButton).toHaveClass('uppercase', 'text-2xl');
     });
@@ -102,7 +106,7 @@ describe('Navigation', () => {
     it('applies active state to current route', () => {
       (usePathname as jest.Mock).mockReturnValue('/projects');
       render(<Navigation />);
-      
+
       const activeLink = screen.getByRole('link', { name: 'Projects' });
       const activeButton = within(activeLink).getByRole('button');
       expect(activeButton).toHaveAttribute('aria-current', 'page');
@@ -111,7 +115,7 @@ describe('Navigation', () => {
     it('does not apply active state to non-current routes', () => {
       (usePathname as jest.Mock).mockReturnValue('/projects');
       render(<Navigation />);
-      
+
       const inactiveLink = screen.getByRole('link', { name: 'Writing' });
       const inactiveButton = within(inactiveLink).getByRole('button');
       expect(inactiveButton).not.toHaveAttribute('aria-current');
@@ -123,7 +127,7 @@ describe('Navigation', () => {
       // Mock small screen
       Object.defineProperty(window, 'innerWidth', { value: 500 });
       window.dispatchEvent(new Event('resize'));
-      
+
       render(<Navigation showHomeButton />);
       const nav = screen.getByRole('navigation');
       expect(nav).toHaveClass('max-sm:mt-4');
@@ -133,7 +137,7 @@ describe('Navigation', () => {
       // Mock large screen
       Object.defineProperty(window, 'innerWidth', { value: 1024 });
       window.dispatchEvent(new Event('resize'));
-      
+
       render(<Navigation showHomeButton />);
       const nav = screen.getByRole('navigation');
       expect(nav).toHaveClass('mt-8');
@@ -143,10 +147,10 @@ describe('Navigation', () => {
       // Mock small screen
       Object.defineProperty(window, 'innerWidth', { value: 500 });
       window.dispatchEvent(new Event('resize'));
-      
+
       (usePathname as jest.Mock).mockReturnValue('/projects');
       render(<Navigation showHomeButton />);
-      
+
       const mobileHomeButton = screen.getAllByText('z')[0].closest('li');
       expect(mobileHomeButton).toHaveClass('sm:hidden');
     });
@@ -163,10 +167,10 @@ describe('Navigation', () => {
     it('supports keyboard navigation', async () => {
       render(<Navigation />);
       const firstLink = screen.getAllByRole('link')[0];
-      
+
       firstLink.focus();
       expect(document.activeElement).toBe(firstLink);
-      
+
       await userEvent.tab();
       expect(document.activeElement).not.toBe(firstLink);
     });
@@ -179,4 +183,4 @@ describe('Navigation', () => {
       expect(blurBackground).toHaveClass('backdrop-blur-sm');
     });
   });
-}); 
+});

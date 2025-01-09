@@ -20,7 +20,12 @@ const sizes = {
 const hoverScale: TargetAndTransition = { scale: 1.05 };
 const tapScale: TargetAndTransition = { scale: 0.95 };
 
-const ProfileImage = ({ size = 'md', editable = false, clickable = true, onImageChange }: ProfileImageProps) => {
+const ProfileImage = ({
+  size = 'md',
+  editable = false,
+  clickable = true,
+  onImageChange,
+}: ProfileImageProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleClick = () => clickable && setIsModalOpen(true);

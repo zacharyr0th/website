@@ -13,10 +13,13 @@ interface CategoryCardProps {
 }
 
 const CategoryCard = memo(({ category, index }: CategoryCardProps) => {
-  const variants = useMemo(() => ({
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  }), []);
+  const variants = useMemo(
+    () => ({
+      hidden: { opacity: 0, y: 20 },
+      visible: { opacity: 1, y: 0 },
+    }),
+    []
+  );
 
   return (
     <motion.div
@@ -36,7 +39,7 @@ const CategoryCard = memo(({ category, index }: CategoryCardProps) => {
             boxShadow: 'var(--shadow-sm)',
           }}
           whileHover={{ scale: 1.01 }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
         >
           <div className="p-4 sm:p-6 flex flex-col h-full">
             <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-3">
@@ -45,7 +48,7 @@ const CategoryCard = memo(({ category, index }: CategoryCardProps) => {
               </h2>
               <AnimatePresence>
                 {category.status === 'coming-soon' && (
-                  <motion.span 
+                  <motion.span
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     className="text-xs sm:text-sm text-[var(--color-text-secondary)]"
@@ -76,9 +79,9 @@ const CategoryCard = memo(({ category, index }: CategoryCardProps) => {
               </svg>
             </div>
           </div>
-          <div 
-            className="absolute inset-x-0 bottom-0 h-1.5 sm:h-2.5 bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300 rounded-b-lg" 
-            style={{ 
+          <div
+            className="absolute inset-x-0 bottom-0 h-1.5 sm:h-2.5 bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300 rounded-b-lg"
+            style={{
               marginTop: '-1px',
               borderBottomLeftRadius: '8px',
               borderBottomRightRadius: '8px',

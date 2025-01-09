@@ -5,9 +5,21 @@ import { motion } from 'framer-motion';
 import { SOCIAL_LINKS } from '../../lib/social';
 
 const socialLinks = [
-  { href: SOCIAL_LINKS.linkedin.url, Icon: SOCIAL_LINKS.linkedin.icon, label: SOCIAL_LINKS.linkedin.label },
-  { href: SOCIAL_LINKS.twitter.url, Icon: SOCIAL_LINKS.twitter.icon, label: SOCIAL_LINKS.twitter.label },
-  { href: SOCIAL_LINKS.github.url, Icon: SOCIAL_LINKS.github.icon, label: SOCIAL_LINKS.github.label },
+  {
+    href: SOCIAL_LINKS.linkedin.url,
+    Icon: SOCIAL_LINKS.linkedin.icon,
+    label: SOCIAL_LINKS.linkedin.label,
+  },
+  {
+    href: SOCIAL_LINKS.twitter.url,
+    Icon: SOCIAL_LINKS.twitter.icon,
+    label: SOCIAL_LINKS.twitter.label,
+  },
+  {
+    href: SOCIAL_LINKS.github.url,
+    Icon: SOCIAL_LINKS.github.icon,
+    label: SOCIAL_LINKS.github.label,
+  },
 ] as const;
 
 export const BioFooter = React.memo(() => {
@@ -43,4 +55,4 @@ export const BioFooter = React.memo(() => {
   );
 });
 
-BioFooter.displayName = 'BioFooter'; 
+BioFooter.displayName = 'BioFooter';

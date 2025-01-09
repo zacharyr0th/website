@@ -13,13 +13,19 @@ const openSocialLink = (url: string) => window.open(url, '_blank', 'noopener,nor
 const ConnectModal = memo(({ isOpen, onClose }: ConnectModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const handleEscape = useCallback((e: KeyboardEvent) => {
-    if (e.key === 'Escape') onClose();
-  }, [onClose]);
+  const handleEscape = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    },
+    [onClose]
+  );
 
-  const handleClickOutside = useCallback((event: MouseEvent) => {
-    if (modalRef.current && !modalRef.current.contains(event.target as Node)) onClose();
-  }, [onClose]);
+  const handleClickOutside = useCallback(
+    (event: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) onClose();
+    },
+    [onClose]
+  );
 
   useEffect(() => {
     if (!isOpen) return;
@@ -48,7 +54,7 @@ const ConnectModal = memo(({ isOpen, onClose }: ConnectModalProps) => {
 
         <div className="flex justify-center items-center gap-8">
           {Object.values(SOCIAL_LINKS)
-            .filter(link => link.platform !== 'GitHub')
+            .filter((link) => link.platform !== 'GitHub')
             .map((link) => (
               <IconButton
                 key={link.label}

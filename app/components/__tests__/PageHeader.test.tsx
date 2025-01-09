@@ -6,7 +6,7 @@ describe('PageHeader', () => {
   describe('rendering', () => {
     it('renders the title correctly', () => {
       render(<PageHeader title="Test Title" />);
-      
+
       const heading = screen.getByRole('heading', { level: 1 });
       expect(heading).toHaveTextContent('Test Title');
     });
@@ -74,7 +74,8 @@ describe('PageHeader', () => {
     });
 
     it('supports long titles without breaking layout', () => {
-      const longTitle = 'This is a very long title that should still maintain proper styling and not break the layout of the page header component';
+      const longTitle =
+        'This is a very long title that should still maintain proper styling and not break the layout of the page header component';
       render(<PageHeader title={longTitle} />);
       const heading = screen.getByRole('heading', { level: 1 });
       expect(heading).toHaveTextContent(longTitle);
@@ -110,10 +111,11 @@ describe('PageHeader', () => {
     });
 
     it('maintains proper text wrapping', () => {
-      const longTitle = 'This is a very long title that should wrap properly without breaking the layout';
+      const longTitle =
+        'This is a very long title that should wrap properly without breaking the layout';
       render(<PageHeader title={longTitle} />);
       const heading = screen.getByRole('heading', { level: 1 });
       expect(heading).toHaveClass('tracking-tight');
     });
   });
-}); 
+});

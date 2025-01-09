@@ -14,7 +14,7 @@ const getBaseUrl = (headers: Headers): string => {
 async function getArticles(options: FetchArticlesOptions = {}): Promise<Article[]> {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
-  
+
   try {
     const headersList = await headers();
     const baseUrl = getBaseUrl(headersList);
@@ -30,7 +30,7 @@ async function getArticles(options: FetchArticlesOptions = {}): Promise<Article[
     }
 
     const data = await response.json();
-    
+
     if (!Array.isArray(data)) {
       throw new TypeError('API response is not an array');
     }
@@ -44,9 +44,10 @@ async function getArticles(options: FetchArticlesOptions = {}): Promise<Article[
     });
   } catch (error) {
     if (error instanceof Error) {
-      const message = error.name === 'AbortError'
-        ? `Failed to load articles: Request timed out after ${FETCH_TIMEOUT_MS}ms`
-        : `Failed to load articles: ${error.message}`;
+      const message =
+        error.name === 'AbortError'
+          ? `Failed to load articles: Request timed out after ${FETCH_TIMEOUT_MS}ms`
+          : `Failed to load articles: ${error.message}`;
       console.error(message);
       throw new Error(message);
     }

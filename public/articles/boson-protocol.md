@@ -8,11 +8,11 @@ description: 'Tackling dEcommerce'
 category: 'crypto'
 tags: ['crypto']
 takeaways:
-  - "Boson Protocol aims to revolutionize e-commerce by creating a decentralized ecosystem for trustless transactions of physical goods using blockchain technology."
-  - "The protocol utilizes Commitment Tokens (NFTVs) and Thing Tokens to facilitate secure transactions, with game theory mechanics ensuring fair behavior from both buyers and sellers."
-  - "BOSON tokens serve as incentives for ecosystem participants, while Gluons act as quality indicators to encourage high-quality transactions."
-  - "The platform enables various applications beyond e-commerce, including machine-to-machine commerce, loyalty programs, and gaming rewards."
-  - "With significant funding and infrastructure investments, Boson Protocol aims to scale on Ethereum and create Portal, a virtual commerce playground in Decentraland."
+  - 'Boson Protocol aims to revolutionize e-commerce by creating a decentralized ecosystem for trustless transactions of physical goods using blockchain technology.'
+  - 'The protocol utilizes Commitment Tokens (NFTVs) and Thing Tokens to facilitate secure transactions, with game theory mechanics ensuring fair behavior from both buyers and sellers.'
+  - 'BOSON tokens serve as incentives for ecosystem participants, while Gluons act as quality indicators to encourage high-quality transactions.'
+  - 'The platform enables various applications beyond e-commerce, including machine-to-machine commerce, loyalty programs, and gaming rewards.'
+  - 'With significant funding and infrastructure investments, Boson Protocol aims to scale on Ethereum and create Portal, a virtual commerce playground in Decentraland.'
 ---
 
 <style jsx>{`

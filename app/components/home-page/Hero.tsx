@@ -26,10 +26,7 @@ const ChainLogo = memo<{ logo: string }>(({ logo }) => (
 ChainLogo.displayName = 'ChainLogo';
 
 const ChainLogos = memo(() => (
-  <motion.div 
-    className="flex items-center gap-6"
-    {...pageTransition}
-  >
+  <motion.div className="flex items-center gap-6" {...pageTransition}>
     {heroContent.chainLogos.map((logo) => (
       <ChainLogo key={logo} logo={logo} />
     ))}
@@ -45,17 +42,17 @@ type ContentSectionProps = {
 
 const ContentSection = memo<ContentSectionProps>(({ title, content, children }) => {
   const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <motion.div 
+    <motion.div
       ref={ref}
       className="mb-12"
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
-      <motion.h2 
+      <motion.h2
         className="text-2xl font-bold mb-4 text-text-primary tracking-tight"
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : { opacity: 0 }}
@@ -63,7 +60,7 @@ const ContentSection = memo<ContentSectionProps>(({ title, content, children }) 
       >
         {title}
       </motion.h2>
-      <motion.p 
+      <motion.p
         className="text-base max-w-xl leading-relaxed mb-6 text-text-secondary"
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : { opacity: 0 }}
@@ -105,17 +102,17 @@ const StickyHeader = memo(() => {
   }
 
   return (
-    <motion.div 
+    <motion.div
       className="h-screen px-6 sm:px-12 ml-4 sm:ml-8 lg:ml-16 flex flex-col justify-center sticky top-0 z-30"
       {...pageTransition}
     >
-      <motion.h1 
+      <motion.h1
         className="text-4xl sm:text-6xl font-normal leading-tight tracking-tight text-text-primary mb-4"
         {...sectionTransition}
       >
         {heroContent.name}
       </motion.h1>
-      <motion.p 
+      <motion.p
         className="text-base sm:text-lg mb-6 max-w-xl tracking-tight text-text-secondary font-normal"
         {...sectionTransition}
       >
@@ -129,7 +126,7 @@ const StickyHeader = memo(() => {
           Aptos Labs
         </a>
       </motion.p>
-      <motion.div 
+      <motion.div
         className="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0 sm:space-x-4"
         {...sectionTransition}
       >
@@ -158,7 +155,7 @@ const MainContent = memo(() => {
   const y = useTransform(scrollYProgress, [0, 0.2], [50, 0]);
 
   return (
-    <motion.div 
+    <motion.div
       className="h-screen lg:bg-transparent bg-background flex flex-col justify-center"
       style={{ opacity, y }}
     >
@@ -187,15 +184,9 @@ const HeroContent = memo(() => (
 HeroContent.displayName = 'HeroContent';
 
 const Hero = memo(() => (
-  <motion.section 
-    className="relative min-h-[200vh]"
-    {...pageTransition}
-  >
+  <motion.section className="relative min-h-[200vh]" {...pageTransition}>
     <div className="hidden lg:block absolute inset-y-0 left-0 w-1/2 z-10 bg-background" />
-    <motion.div 
-      className="w-full lg:w-1/2 flex flex-col relative z-20"
-      {...sectionTransition}
-    >
+    <motion.div className="w-full lg:w-1/2 flex flex-col relative z-20" {...sectionTransition}>
       <HeroContent />
     </motion.div>
     <div className="absolute top-0 right-0 w-full lg:w-1/2 h-[200vh] opacity-50">

@@ -35,15 +35,19 @@ describe('ActionButton', () => {
     it('handles click events', async () => {
       const handleClick = jest.fn();
       render(<ActionButton onClick={handleClick}>Click me</ActionButton>);
-      
+
       await userEvent.click(screen.getByRole('button'));
       expect(handleClick).toHaveBeenCalled();
     });
 
     it('prevents click when disabled', async () => {
       const handleClick = jest.fn();
-      render(<ActionButton onClick={handleClick} disabled>Click me</ActionButton>);
-      
+      render(
+        <ActionButton onClick={handleClick} disabled>
+          Click me
+        </ActionButton>
+      );
+
       await userEvent.click(screen.getByRole('button'));
       expect(handleClick).not.toHaveBeenCalled();
     });
@@ -61,7 +65,7 @@ describe('ActionButton', () => {
       render(<ActionButton leftIcon={<MockIcon />}>Click me</ActionButton>);
       const contentWrapper = screen.getByText('Click me').closest('span');
       const icon = screen.getByTestId('mock-icon');
-      
+
       expect(contentWrapper?.firstElementChild).toBe(icon);
       expect(contentWrapper?.lastChild?.textContent).toBe('Click me');
     });
@@ -70,28 +74,28 @@ describe('ActionButton', () => {
       render(<ActionButton rightIcon={<MockIcon />}>Click me</ActionButton>);
       const contentWrapper = screen.getByText('Click me').closest('span');
       const icon = screen.getByTestId('mock-icon');
-      
+
       expect(contentWrapper?.firstChild?.textContent).toBe('Click me');
       expect(contentWrapper?.lastElementChild).toBe(icon);
     });
 
     it('maintains correct order with both icons', () => {
       render(
-        <ActionButton 
+        <ActionButton
           leftIcon={<MockIcon data-testid="left-icon" />}
           rightIcon={<MockIcon data-testid="right-icon" />}
         >
           Click me
         </ActionButton>
       );
-      
+
       const contentWrapper = screen.getByText('Click me').closest('span');
       const leftIcon = screen.getByTestId('left-icon');
       const rightIcon = screen.getByTestId('right-icon');
-      
+
       expect(contentWrapper?.firstElementChild).toBe(leftIcon);
       expect(contentWrapper?.children[1].textContent).toBe('Click me');
       expect(contentWrapper?.lastElementChild).toBe(rightIcon);
     });
   });
-}); 
+});

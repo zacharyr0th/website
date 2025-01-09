@@ -12,4 +12,4 @@ export default function PageHeader({ title }: PageHeaderProps) {
       </h1>
     </header>
   );
-} 
+}

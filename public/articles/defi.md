@@ -9,10 +9,10 @@ category: 'defi'
 tags: ['defi', 'crypto']
 takeaways:
   - "DeFi represents a fundamental shift from traditional finance's trust-based intermediaries to permissionless, decentralized systems built on smart contracts."
-  - "The ecosystem is built on distinct digital assets: native blockchain coins for transaction fees and programmable tokens for specific functionalities."
-  - "Stablecoins come in three main varieties (asset-backed, over-collateralized, and algorithmic) with varying risk levels and use cases."
-  - "The 2020 DeFi Summer marked a pivotal moment in adoption, establishing core services like DEXs, lending protocols, and liquidity pools as essential infrastructure."
-  - "Compared to traditional exchanges, DeFi platforms offer advantages in accessibility, speed, and control, though they face challenges in security and user experience."
+  - 'The ecosystem is built on distinct digital assets: native blockchain coins for transaction fees and programmable tokens for specific functionalities.'
+  - 'Stablecoins come in three main varieties (asset-backed, over-collateralized, and algorithmic) with varying risk levels and use cases.'
+  - 'The 2020 DeFi Summer marked a pivotal moment in adoption, establishing core services like DEXs, lending protocols, and liquidity pools as essential infrastructure.'
+  - 'Compared to traditional exchanges, DeFi platforms offer advantages in accessibility, speed, and control, though they face challenges in security and user experience.'
 ---
 
 <style jsx>{`

@@ -14,7 +14,8 @@ export const BUTTON_CLASSES = {
   } as const,
   variant: {
     primary: 'bg-primary text-text-primary hover:opacity-90',
-    secondary: 'bg-surface text-text-secondary border border-secondary hover:border-accent hover:text-accent',
+    secondary:
+      'bg-surface text-text-secondary border border-secondary hover:border-accent hover:text-accent',
     default: 'bg-transparent hover:bg-surface/10',
     surface: 'bg-surface hover:bg-surface/90',
   } as const,
@@ -43,8 +44,8 @@ export const getButtonClassName = ({
     BUTTON_CLASSES.variant[variant],
     disabled && BUTTON_CLASSES.state.disabled,
     isLoading && BUTTON_CLASSES.state.loading,
-    className
+    className,
   ];
 
   return classes.filter(Boolean).join(' ');
-}; 
+};

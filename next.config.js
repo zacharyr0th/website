@@ -6,12 +6,6 @@ const nextConfig = {
   experimental: {
     serverMinification: true,
     serverSourceMaps: false,
-    optimizeCss: {
-      cssModules: true,
-      inlineFonts: true,
-      pruneUnusedSelectors: true,
-      minify: true,
-    },
     optimizeServerReact: true,
   },
   webpack: (config, { isServer }) => {
@@ -51,19 +45,6 @@ const nextConfig = {
 
     return config;
   },
-  // Security-focused redirects
-  redirects: async () => [
-    {
-      source: '/:path*/index.html',
-      destination: '/:path*',
-      permanent: true,
-    },
-    {
-      source: '/:path*.html',
-      destination: '/:path*',
-      permanent: true,
-    },
-  ],
   // Force all pages to be static by default
   output: 'export',
   images: {

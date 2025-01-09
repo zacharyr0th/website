@@ -34,4 +34,4 @@ export const LoadingState = ({
 );
 
 LoadingState.displayName = 'LoadingState';
-LoadingSpinner.displayName = 'LoadingSpinner'; 
+LoadingSpinner.displayName = 'LoadingSpinner';

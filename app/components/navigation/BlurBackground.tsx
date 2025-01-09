@@ -24,10 +24,10 @@ const BlurBackground: React.FC<BlurBackgroundProps> = ({ children, className = '
           rect.x + rect.width / 2,
           rect.y + rect.height / 2
         );
-        
+
         // Filter out our own element and its children
-        const relevantElements = elementsUnderneath.filter(el => 
-          !elementRef.current?.contains(el) && el !== elementRef.current
+        const relevantElements = elementsUnderneath.filter(
+          (el) => !elementRef.current?.contains(el) && el !== elementRef.current
         );
 
         setHasBackground(relevantElements.length > 1);
@@ -40,10 +40,10 @@ const BlurBackground: React.FC<BlurBackgroundProps> = ({ children, className = '
     const resizeObserver = new ResizeObserver(checkBackground);
 
     if (elementRef.current) {
-      observer.observe(document.body, { 
-        childList: true, 
+      observer.observe(document.body, {
+        childList: true,
         subtree: true,
-        characterData: true 
+        characterData: true,
       });
       resizeObserver.observe(elementRef.current);
     }
@@ -59,11 +59,7 @@ const BlurBackground: React.FC<BlurBackgroundProps> = ({ children, className = '
   const sharedClassName = `rounded-3xl px-4 pt-4 flex items-center justify-center text-center ${className}`;
 
   if (!mounted) {
-    return (
-      <div className={sharedClassName}>
-        {children}
-      </div>
-    );
+    return <div className={sharedClassName}>{children}</div>;
   }
 
   const backgroundStyle: CSSProperties = {
@@ -76,11 +72,7 @@ const BlurBackground: React.FC<BlurBackgroundProps> = ({ children, className = '
   };
 
   return (
-    <div
-      ref={elementRef}
-      className={sharedClassName}
-      style={backgroundStyle}
-    >
+    <div ref={elementRef} className={sharedClassName} style={backgroundStyle}>
       {children}
     </div>
   );

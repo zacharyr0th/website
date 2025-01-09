@@ -19,7 +19,7 @@ export const TAGS = [
   'finance',
   'defi',
   'kernels',
-  'theory'
+  'theory',
 ] as const;
 
 /** Core configuration for article management */

@@ -7,10 +7,10 @@ import { THESIS_CONTENT, THESIS_STYLES } from './constants';
 
 const ThesisContent = memo(() => {
   const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <motion.div 
+    <motion.div
       ref={ref}
       className={THESIS_STYLES.content}
       initial={{ opacity: 0, y: 30 }}
@@ -18,7 +18,7 @@ const ThesisContent = memo(() => {
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className={THESIS_STYLES.textContainer}>
-        <motion.h2 
+        <motion.h2
           className={THESIS_STYLES.label}
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
@@ -26,7 +26,7 @@ const ThesisContent = memo(() => {
         >
           {THESIS_CONTENT.label}
         </motion.h2>
-        <motion.h1 
+        <motion.h1
           className={THESIS_STYLES.title}
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -34,7 +34,7 @@ const ThesisContent = memo(() => {
         >
           {THESIS_CONTENT.title}
         </motion.h1>
-        <motion.p 
+        <motion.p
           className={THESIS_STYLES.subtitle}
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -51,11 +51,11 @@ ThesisContent.displayName = 'ThesisContent';
 
 const Thesis = memo(() => {
   const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
     <section className={THESIS_STYLES.section}>
-      <motion.div 
+      <motion.div
         ref={ref}
         className={THESIS_STYLES.contentWrapper}
         initial={{ opacity: 0, scale: 0.95 }}
@@ -73,4 +73,4 @@ const Thesis = memo(() => {
 
 Thesis.displayName = 'Thesis';
 
-export { Thesis }; 
+export { Thesis };

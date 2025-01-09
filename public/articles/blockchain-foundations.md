@@ -8,19 +8,19 @@ description: 'Understanding the Building Blocks'
 category: 'crypto'
 tags: ['crypto', 'bitcoin']
 takeaways:
-  - "Blockchains are distributed ledgers that enable trustless transactions through, eliminating the need for centralized intermediaries."
-  - "Digital wallets provide secure, permissionless access to blockchain networks, enabling 24/7 participation."
+  - 'Blockchains are distributed ledgers that enable trustless transactions through, eliminating the need for centralized intermediaries.'
+  - 'Digital wallets provide secure, permissionless access to blockchain networks, enabling 24/7 participation.'
   - "Bitcoin evolved from a peer-to-peer payment system to a 'digital gold' store of value."
-  - "Blockchain networks vary in their censorship resistance and consensus mechanisms."
+  - 'Blockchain networks vary in their censorship resistance and consensus mechanisms.'
 ---
 
-Blockchains are ever-expanding ledgers of transactions with distinct features and functionalities that differentiate them from traditional centralized networks. 
+Blockchains are ever-expanding ledgers of transactions with distinct features and functionalities that differentiate them from traditional centralized networks.
 
 As a result, they open doors to new ways of doing things.
 
 # How Blockchains Work
 
-Blockchains operate through a network of computers that validate and record transactions. 
+Blockchains operate through a network of computers that validate and record transactions.
 
 1. Users submit transactions to the network
 2. Validators (computers) group these transactions into lists called blocks
@@ -46,9 +46,10 @@ Unlike traditional markets with limited operating hours, holidays, censorship, a
 
 ## Digital Transparency and Traceability
 
-Most public blockchains offer complete transaction transparency by design, though some prioritize privacy features. 
+Most public blockchains offer complete transaction transparency by design, though some prioritize privacy features.
 
 Using blockchain explorers, anyone can:
+
 - Track transactions in real-time
 - View wallet balances and history
 - Monitor network activity and health
@@ -58,17 +59,14 @@ Using blockchain explorers, anyone can:
 
 Bitcoin is the first blockchain, and it's the only one that doesn't support smart contracts. Ethereum, Solana, and other blockchains support smart contracts, which are self-executing and the terms of the agreement are directly written into code.
 
-Smart contracts are the building blocks of decentralized applications, and they enable the creation of complex, automated systems that can execute transactions without the need for intermediaries. 
+Smart contracts are the building blocks of decentralized applications, and they enable the creation of complex, automated systems that can execute transactions without the need for intermediaries.
 
 ## Censorship Resistance
 
-Some, not all, blockchains are intended to resist censorship. The goal is for anyone to build and use them, regardless of circumstance. There are no credit checks and an internet connection is the only requirement to open a digital wallet which grants access to financial services that are unavailable to many. 
+Some, not all, blockchains are intended to resist censorship. The goal is for anyone to build and use them, regardless of circumstance. There are no credit checks and an internet connection is the only requirement to open a digital wallet which grants access to financial services that are unavailable to many.
 
 The reality is that censorship resistance across chains and applications operates on a spectrum. Blockchains themselves become more censorship resistant as more globally distributed validators join the network, and the measure of this resistance is called the Nakamoto Coefficient. Even with a perfect Nakamoto Coefficient, there are still many ways for censorship to take place, e.g. through a centralized RPC provider sharing or blocking a user's IP address if the user is operating from a sanctioned location.
 
 # DoYourOwnResearch
 
 The oldest blockchains are barely a teenagers, and there are many evolving schools of thought regarding how they should operate. Maximalism, tribalism, game theory, and investor bias contribute to a never-ending conversation on which consensus methods, blockchain infrastructure, and policies are the most secure and censorship-resistant, so DYOR.
-
-
-

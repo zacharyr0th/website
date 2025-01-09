@@ -50,16 +50,12 @@ export default function AudioPageClient() {
   return (
     <>
       <motion.section className="mb-12" {...sectionTransition}>
-        <motion.div 
+        <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
           {...pageTransition}
         >
           {BANDCAMP_TRACKS.map((track) => (
-            <motion.div
-              key={track.id}
-              {...sectionTransition}
-              className="w-full"
-            >
+            <motion.div key={track.id} {...sectionTransition} className="w-full">
               <iframe
                 style={{
                   border: 0,
@@ -78,21 +74,18 @@ export default function AudioPageClient() {
       </motion.section>
 
       <motion.section className="py-4 sm:py-8" {...sectionTransition}>
-        <motion.h2 
+        <motion.h2
           className="text-2xl md:text-3xl font-bold mb-8 text-[var(--color-text-primary)]"
           {...sectionTransition}
         >
           Explore
         </motion.h2>
-        <motion.div 
+        <motion.div
           className="grid gap-6 sm:gap-8 lg:gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr"
           {...pageTransition}
         >
           {AUDIO_CATEGORIES.map((category, index) => (
-            <motion.div 
-              key={category.slug} 
-              {...sectionTransition}
-            >
+            <motion.div key={category.slug} {...sectionTransition}>
               <CategoryCard category={category} index={index} />
             </motion.div>
           ))}

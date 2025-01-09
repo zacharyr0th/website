@@ -74,12 +74,5 @@
     "global.d.ts",
     "tailwind.config.ts"
   ],
-  "exclude": [
-    "node_modules",
-    ".next",
-    "out",
-    "coverage",
-    "**/*.test.ts",
-    "**/*.test.tsx"
-  ]
+  "exclude": ["node_modules", ".next", "out", "coverage", "**/*.test.ts", "**/*.test.tsx"]
 }

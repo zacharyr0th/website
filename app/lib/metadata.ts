@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata } from 'next';
 
 // Constants configuration
 const CONFIG = {
@@ -18,7 +18,7 @@ const CONFIG = {
       type: 'image/webp',
     },
   },
-} as const
+} as const;
 
 // Section metadata with type safety
 export const SECTION_METADATA = {
@@ -26,20 +26,20 @@ export const SECTION_METADATA = {
     title: 'Writing',
     description: 'Articles and thoughts on technology, development, and blockchain.',
   },
-} as const
+} as const;
 
 // Helper function to create consistent title templates
 const createTitleTemplate = (title: string) => ({
   default: CONFIG.site.name,
   template: `${title} | ${CONFIG.site.name}`,
-})
+});
 
 // Metadata configuration
 export const metadata: Metadata = {
   title: createTitleTemplate('%s'),
   description: CONFIG.site.description,
   metadataBase: new URL(CONFIG.site.url),
-  
+
   openGraph: {
     type: 'website',
     locale: CONFIG.site.locale,
@@ -75,4 +75,4 @@ export const metadata: Metadata = {
     shortcut: '/favicon-16x16.png',
     apple: '/apple-touch-icon.png',
   },
-} 
+};

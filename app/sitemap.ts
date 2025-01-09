@@ -1,20 +1,20 @@
-import type { MetadataRoute } from 'next'
-import { getArticles } from './writing/[slug]/articles'
+import type { MetadataRoute } from 'next';
+import { getArticles } from './writing/[slug]/articles';
 
-export const dynamic = 'force-static'
-export const revalidate = 86400 // Revalidate daily
+export const dynamic = 'force-static';
+export const revalidate = 86400; // Revalidate daily
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://www.zacharyr0th.com'
+  const baseUrl = 'https://www.zacharyr0th.com';
 
   // Get all articles
-  const articles = await getArticles()
+  const articles = await getArticles();
   const articleUrls = articles.map((article) => ({
     url: `${baseUrl}/writing/${article.slug}`,
     lastModified: article.date ? new Date(article.date) : new Date(),
     changeFrequency: 'monthly' as const,
     priority: 0.7,
-  }))
+  }));
 
   // Define static routes with varied priorities and change frequencies
   const routes = [
@@ -48,7 +48,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly' as const,
       priority: 0.6,
     },
-  ]
+  ];
 
-  return [...routes, ...articleUrls]
-} 
+  return [...routes, ...articleUrls];
+}

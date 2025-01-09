@@ -4,20 +4,21 @@ A modern, high-performance personal website and blog platform built with Next.js
 
 ## Technical Architecture
 
-| Category | Features |
-|----------|----------|
-| **Core Technologies** | **N** Framework: Next.js 13+ with App Router<br>**TS** Language: TypeScript (Strict Mode)<br>Styling: Tailwind CSS with Custom Design System<br>Content: MDX with Remark/Rehype<br>State Management: React Hooks + Context<br>Data Fetching: SWR with REST APIs |
-| **Performance Features** | Server Components (RSC)<br>Edge Runtime Support<br>Streaming SSR<br>Image Optimization<br>Dynamic Imports |
-| **Developer Experience** | ESLint + Prettier Configuration<br>TypeScript Path Aliases<br>Hot Module Replacement<br>Fast Refresh |
-| **SEO Optimization** | Dynamic meta tags<br>Structured data (JSON-LD)<br>Automatic sitemap generation<br>OpenGraph images<br>robots.txt configuration |
+| Category                 | Features                                                                                                                                                                                                                                                        |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Core Technologies**    | **N** Framework: Next.js 13+ with App Router<br>**TS** Language: TypeScript (Strict Mode)<br>Styling: Tailwind CSS with Custom Design System<br>Content: MDX with Remark/Rehype<br>State Management: React Hooks + Context<br>Data Fetching: SWR with REST APIs |
+| **Performance Features** | Server Components (RSC)<br>Edge Runtime Support<br>Streaming SSR<br>Image Optimization<br>Dynamic Imports                                                                                                                                                       |
+| **Developer Experience** | ESLint + Prettier Configuration<br>TypeScript Path Aliases<br>Hot Module Replacement<br>Fast Refresh                                                                                                                                                            |
+| **SEO Optimization**     | Dynamic meta tags<br>Structured data (JSON-LD)<br>Automatic sitemap generation<br>OpenGraph images<br>robots.txt configuration                                                                                                                                  |
 
 ### Performance Metrics
 
 ![Lighthouse Audit Scores](/public/images/readme-lighthouse-scores.webp)
 
-*Test taken on 2025-01-05 - [link to live lighthouse report](https://lighthouse-metrics.com/lighthouse/checks/4d5733a8-bdcd-4c32-a88c-611f97f86f61)*
+_Test taken on 2025-01-05 - [link to live lighthouse report](https://lighthouse-metrics.com/lighthouse/checks/4d5733a8-bdcd-4c32-a88c-611f97f86f61)_
 
 ### Accessibility
+
 - WCAG 2.1 Compliant
 - Keyboard Navigation
 - Screen Reader Support
@@ -67,6 +68,7 @@ A modern, high-performance personal website and blog platform built with Next.js
 [Screenshot: Bio Page]
 
 ### Audio Player Feature (Coming Soon)
+
 - Global audio player with persistent state across navigation
 - Custom playlist management with drag-and-drop support
 - Audio visualization with WebAudio API
@@ -94,6 +96,7 @@ A modern, high-performance personal website and blog platform built with Next.js
 ```
 
 ### Available Scripts
+
 - `npm run dev` - Development (port 3000)
 - `npm run build` - Production build
 - `npm run start` - Production server

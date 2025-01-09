@@ -8,9 +8,7 @@ import type { BaseProject } from './projects';
 import Link from 'next/link';
 
 const ProjectTag = memo(({ tag }: { tag: string }) => (
-  <span
-    className="inline-flex items-center px-2.5 py-1 text-xs font-medium bg-white/5 text-zinc-400 rounded-md"
-  >
+  <span className="inline-flex items-center px-2.5 py-1 text-xs font-medium bg-white/5 text-zinc-400 rounded-md">
     {tag}
   </span>
 ));
@@ -56,7 +54,7 @@ interface ProjectCardProps {
 function ProjectCardComponent({ project, isFocused }: ProjectCardProps) {
   const ref = React.useRef(null);
   const linkRef = React.useRef<HTMLAnchorElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   useEffect(() => {
     if (isFocused && linkRef.current) {
@@ -68,9 +66,9 @@ function ProjectCardComponent({ project, isFocused }: ProjectCardProps) {
     <motion.div
       ref={ref}
       style={{
-        transform: isInView ? "none" : "translateY(50px)",
+        transform: isInView ? 'none' : 'translateY(50px)',
         opacity: isInView ? 1 : 0,
-        transition: "all 0.5s cubic-bezier(0.17, 0.55, 0.55, 1) 0.2s"
+        transition: 'all 0.5s cubic-bezier(0.17, 0.55, 0.55, 1) 0.2s',
       }}
     >
       <Link
@@ -82,18 +80,24 @@ function ProjectCardComponent({ project, isFocused }: ProjectCardProps) {
         role="listitem"
         tabIndex={0}
       >
-        <article className={`flex flex-col justify-between h-[11.25rem] p-6 group rounded-xl transition-all duration-200 ${
-          isFocused ? 'bg-zinc-800/50' : 'hover:bg-zinc-800/50 bg-inherit'
-        }`}>
+        <article
+          className={`flex flex-col justify-between h-[11.25rem] p-6 group rounded-xl transition-all duration-200 ${
+            isFocused ? 'bg-zinc-800/50' : 'hover:bg-zinc-800/50 bg-inherit'
+          }`}
+        >
           <div className="space-y-3">
             <div>
-              <h3 className={`text-xl font-semibold transition-colors line-clamp-1 ${
-                isFocused ? 'text-accent' : 'text-zinc-100 group-hover:text-accent'
-              }`}>
+              <h3
+                className={`text-xl font-semibold transition-colors line-clamp-1 ${
+                  isFocused ? 'text-accent' : 'text-zinc-100 group-hover:text-accent'
+                }`}
+              >
                 {project.title}
               </h3>
             </div>
-            <p className="text-base text-zinc-400 leading-relaxed line-clamp-2">{project.description}</p>
+            <p className="text-base text-zinc-400 leading-relaxed line-clamp-2">
+              {project.description}
+            </p>
           </div>
 
           <div>

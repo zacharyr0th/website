@@ -1,9 +1,21 @@
 import { SOCIAL_LINKS } from '../lib/social';
 
 export const BIO_SOCIAL_LINKS = [
-  { icon: SOCIAL_LINKS.github.icon, href: SOCIAL_LINKS.github.url, label: SOCIAL_LINKS.github.label },
-  { icon: SOCIAL_LINKS.linkedin.icon, href: SOCIAL_LINKS.linkedin.url, label: SOCIAL_LINKS.linkedin.label },
-  { icon: SOCIAL_LINKS.twitter.icon, href: SOCIAL_LINKS.twitter.url, label: SOCIAL_LINKS.twitter.label },
+  {
+    icon: SOCIAL_LINKS.github.icon,
+    href: SOCIAL_LINKS.github.url,
+    label: SOCIAL_LINKS.github.label,
+  },
+  {
+    icon: SOCIAL_LINKS.linkedin.icon,
+    href: SOCIAL_LINKS.linkedin.url,
+    label: SOCIAL_LINKS.linkedin.label,
+  },
+  {
+    icon: SOCIAL_LINKS.twitter.icon,
+    href: SOCIAL_LINKS.twitter.url,
+    label: SOCIAL_LINKS.twitter.label,
+  },
 ] as const;
 
 export const BIO = {
@@ -11,7 +23,7 @@ export const BIO = {
   title: 'Analyst, Strategist, Writer',
   location: 'San Francisco Bay Area',
   intro: `Since 2019, I've been involved with projects across multiple hyper-growth blockchain ecosystems including Bitcoin, Ethereum, Solana, and Aptos. My work involves identifying market opportunities and guiding DeFi and AI teams on leveraging on-chain solutions to enhance their products and services on Aptos, the world's highest performing blockchain.`,
-  
+
   featuredProjects: [
     {
       title: 'DeFi Integration Framework',
@@ -19,7 +31,7 @@ export const BIO = {
       technologies: ['Move', 'TypeScript', 'Python'],
       impact: 'Reduced integration time by 60% for new protocols',
       link: 'https://github.com/zacharyr0th/defi-framework',
-      image: '/projects/defi-framework.png'
+      image: '/projects/defi-framework.png',
     },
     {
       title: 'Blockchain Analytics Suite',
@@ -27,7 +39,7 @@ export const BIO = {
       technologies: ['Python', 'SQL', 'React'],
       impact: 'Processed over 1M daily transactions',
       link: 'https://github.com/zacharyr0th/blockchain-analytics',
-      image: '/projects/analytics-suite.png'
+      image: '/projects/analytics-suite.png',
     },
     {
       title: 'Smart Contract Security Scanner',
@@ -35,8 +47,8 @@ export const BIO = {
       technologies: ['Rust', 'Move', 'Python'],
       impact: 'Identified vulnerabilities in 50+ protocols',
       link: 'https://github.com/zacharyr0th/security-scanner',
-      image: '/projects/security-scanner.png'
-    }
+      image: '/projects/security-scanner.png',
+    },
   ],
 
   achievements: [
@@ -44,20 +56,20 @@ export const BIO = {
       title: 'Top DeFi Contributor',
       organization: 'Aptos Foundation',
       year: '2023',
-      description: 'Recognized for significant contributions to the Aptos DeFi ecosystem'
+      description: 'Recognized for significant contributions to the Aptos DeFi ecosystem',
     },
     {
       title: 'Technical Excellence Award',
       organization: 'Solrise Finance',
       year: '2022',
-      description: 'Awarded for innovative solutions in DeFi product development'
+      description: 'Awarded for innovative solutions in DeFi product development',
     },
     {
       title: 'Blockchain Security Champion',
       organization: 'Web3 Security Alliance',
       year: '2023',
-      description: 'Recognition for contributions to blockchain security research'
-    }
+      description: 'Recognition for contributions to blockchain security research',
+    },
   ],
 
   experience: [
@@ -74,8 +86,8 @@ export const BIO = {
       highlights: [
         'Led 20+ successful protocol integrations',
         'Developed core DeFi standards',
-        'Grew ecosystem TVL by 300%'
-      ]
+        'Grew ecosystem TVL by 300%',
+      ],
     },
     {
       date: '2021 - 2023',
@@ -89,8 +101,8 @@ export const BIO = {
       highlights: [
         'Launched 3 successful DeFi products',
         'Grew user base to 50k+',
-        'Implemented key security features'
-      ]
+        'Implemented key security features',
+      ],
     },
     {
       date: '2020 - 2023',
@@ -104,8 +116,8 @@ export const BIO = {
       highlights: [
         'Led 15+ successful fundraising rounds',
         'Developed crypto market analysis framework',
-        'Advisory for major DeFi protocols'
-      ]
+        'Advisory for major DeFi protocols',
+      ],
     },
   ],
 
@@ -115,8 +127,8 @@ export const BIO = {
       institution: 'Stanford University',
       year: '2019',
       highlights: ['Focus on Distributed Systems', 'Blockchain Technology Research'],
-      awards: ['Outstanding Research Award', 'Dean\'s List 2017-2019']
-    }
+      awards: ['Outstanding Research Award', "Dean's List 2017-2019"],
+    },
   ],
 
   certifications: [
@@ -124,20 +136,20 @@ export const BIO = {
       name: 'Move Programming Language Expert',
       issuer: 'Aptos Foundation',
       year: '2023',
-      link: 'https://certification.aptos.dev/move-expert'
+      link: 'https://certification.aptos.dev/move-expert',
     },
     {
       name: 'Advanced Smart Contract Security',
       issuer: 'Web3 Security Alliance',
       year: '2022',
-      link: 'https://web3security.alliance/cert/asc'
+      link: 'https://web3security.alliance/cert/asc',
     },
     {
       name: 'DeFi Architecture Specialist',
       issuer: 'DeFi Alliance',
       year: '2022',
-      link: 'https://defi.alliance/cert/das'
-    }
+      link: 'https://defi.alliance/cert/das',
+    },
   ],
 
   speakingEngagements: [
@@ -145,47 +157,60 @@ export const BIO = {
       title: 'The Future of DeFi Infrastructure',
       event: 'ETH San Francisco',
       date: 'October 2023',
-      link: 'https://ethsf.com/talks/defi-infrastructure'
+      link: 'https://ethsf.com/talks/defi-infrastructure',
     },
     {
       title: 'Securing the Future of Web3',
       event: 'Aptos Summit',
       date: 'September 2023',
-      link: 'https://aptossummit.com/talks/web3-security'
+      link: 'https://aptossummit.com/talks/web3-security',
     },
     {
       title: 'Building Scalable DeFi Protocols',
       event: 'DeFi Summit London',
       date: 'July 2023',
-      link: 'https://defisummit.london/talks/scalable-protocols'
-    }
+      link: 'https://defisummit.london/talks/scalable-protocols',
+    },
   ],
 
   skills: [
     {
       category: 'Programming & Development',
       skills: [
-        'Python', 'TypeScript', 'C', 'Next.js', 'React', 'Tailwind CSS', 
-        'SCAMP', 'Git', 'GraphQL', 'REST APIs'
+        'Python',
+        'TypeScript',
+        'C',
+        'Next.js',
+        'React',
+        'Tailwind CSS',
+        'SCAMP',
+        'Git',
+        'GraphQL',
+        'REST APIs',
       ],
       proficiencyLevels: {
         expert: ['Python', 'TypeScript', 'React'],
         advanced: ['Next.js', 'Tailwind CSS', 'Git'],
         intermediate: ['C', 'SCAMP'],
-      }
+      },
     },
     {
       category: 'Blockchain & DeFi',
       skills: [
-        'Move', 'Solidity', 'Rust', 'DeFi Architecture', 'Analytics',
-        'Smart Contract Development', 'Protocol Design',
+        'Move',
+        'Solidity',
+        'Rust',
+        'DeFi Architecture',
+        'Analytics',
+        'Smart Contract Development',
+        'Protocol Design',
         'Tokenomics',
       ],
       proficiencyLevels: {
         expert: ['Move', 'DeFi Architecture', 'Protocol Design'],
         advanced: ['Solidity', 'Smart Contract Development', 'Tokenomics'],
         intermediate: ['Rust'],
-      }
+      },
     },
     {
       category: 'Business & Communication',
@@ -197,14 +222,14 @@ export const BIO = {
         'Developer Relations',
         'Technical Documentation',
         'Public Speaking',
-        'Team Leadership'
+        'Team Leadership',
       ],
       proficiencyLevels: {
         expert: ['Technical Writing', 'Strategic Planning', 'Developer Relations'],
         advanced: ['Partnership Development', 'Product Management'],
         intermediate: ['Public Speaking', 'Team Leadership'],
-      }
-    }
+      },
+    },
   ],
 
   featuredContent: [
@@ -214,7 +239,7 @@ export const BIO = {
       publisher: 'Medium',
       date: '2023',
       url: 'https://medium.com/@zacharyr0th/future-of-defi',
-      highlights: ['Featured on Medium homepage', '50k+ views', 'Widely cited in industry']
+      highlights: ['Featured on Medium homepage', '50k+ views', 'Widely cited in industry'],
     },
     {
       type: 'Technical Guide',
@@ -222,7 +247,7 @@ export const BIO = {
       publisher: 'Aptos Dev Portal',
       date: '2023',
       url: 'https://aptos.dev/guides/defi-security',
-      highlights: ['Official documentation', 'Used by 100+ protocols']
+      highlights: ['Official documentation', 'Used by 100+ protocols'],
     },
     {
       type: 'Research Paper',
@@ -230,15 +255,15 @@ export const BIO = {
       publisher: 'ArXiv',
       date: '2023',
       url: 'https://arxiv.org/papers/defi-optimization',
-      highlights: ['Peer-reviewed', 'Novel optimization techniques']
-    }
+      highlights: ['Peer-reviewed', 'Novel optimization techniques'],
+    },
   ],
 
   languages: [
     { name: 'English', level: 'Native' },
     { name: 'Python', level: 'Expert' },
     { name: 'TypeScript', level: 'Expert' },
-    { name: 'Move', level: 'Expert' }
+    { name: 'Move', level: 'Expert' },
   ],
 
   interests: [
@@ -249,6 +274,6 @@ export const BIO = {
     'Financial Innovation',
     'Distributed Systems',
     'Cryptography',
-    'System Design'
-  ]
+    'System Design',
+  ],
 } as const;

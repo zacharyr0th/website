@@ -14,7 +14,10 @@ interface ProjectsPageClientProps {
   containerVariants: typeof containerVariants;
 }
 
-export function ProjectsPageClient({ initialProjects, containerVariants }: ProjectsPageClientProps) {
+export function ProjectsPageClient({
+  initialProjects,
+  containerVariants,
+}: ProjectsPageClientProps) {
   const [selectedCategory, setSelectedCategory] = useState<Category>('all');
   const [focusedIndex, setFocusedIndex] = useState(0);
 
@@ -32,9 +35,14 @@ export function ProjectsPageClient({ initialProjects, containerVariants }: Proje
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      if (
+        e.key === 'ArrowUp' ||
+        e.key === 'ArrowDown' ||
+        e.key === 'ArrowLeft' ||
+        e.key === 'ArrowRight'
+      ) {
         e.preventDefault();
-        
+
         const numProjects = filteredProjects.length;
         const cols = window.innerWidth >= 768 ? 2 : 1;
 
@@ -79,22 +87,13 @@ export function ProjectsPageClient({ initialProjects, containerVariants }: Proje
         />
       </motion.div>
 
-      <motion.div 
-        variants={containerVariants}
-        className="grid grid-cols-1 md:grid-cols-2 gap-6"
-      >
+      <motion.div variants={containerVariants} className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {filteredProjects.map((project, index) => (
-          <motion.div 
-            key={project.id} 
-            variants={itemVariants}
-          >
-            <ProjectCard 
-              project={project} 
-              isFocused={index === focusedIndex}
-            />
+          <motion.div key={project.id} variants={itemVariants}>
+            <ProjectCard project={project} isFocused={index === focusedIndex} />
           </motion.div>
         ))}
       </motion.div>
     </motion.div>
   );
-} 
+}

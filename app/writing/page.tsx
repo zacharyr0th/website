@@ -16,20 +16,17 @@ export default async function WritingPage() {
         <div style={{ maxWidth: 'var(--article-width)' }} className="mx-auto space-y-6">
           <PageHeader title="Writing" />
 
-          <Suspense 
+          <Suspense
             fallback={
-              <LoadingState 
-                label="Loading articles" 
+              <LoadingState
+                label="Loading articles"
                 height="h-[600px]"
                 barCount={4}
-                className="max-w-3xl mx-auto" 
+                className="max-w-3xl mx-auto"
               />
             }
           >
-            <WritingPageClient 
-              initialArticles={articles} 
-              containerVariants={containerVariants}
-            />
+            <WritingPageClient initialArticles={articles} containerVariants={containerVariants} />
           </Suspense>
         </div>
       </main>

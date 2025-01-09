@@ -12,20 +12,17 @@ export default function ProjectsPage() {
         <div style={{ maxWidth: 'var(--article-width)' }} className="mx-auto space-y-6">
           <PageHeader title="Projects" />
 
-          <Suspense 
+          <Suspense
             fallback={
-              <LoadingState 
-                label="Loading projects" 
+              <LoadingState
+                label="Loading projects"
                 height="h-[600px]"
                 barCount={4}
-                className="max-w-3xl mx-auto" 
+                className="max-w-3xl mx-auto"
               />
             }
           >
-            <ProjectsPageClient 
-              initialProjects={PROJECTS} 
-              containerVariants={containerVariants}
-            />
+            <ProjectsPageClient initialProjects={PROJECTS} containerVariants={containerVariants} />
           </Suspense>
         </div>
       </main>

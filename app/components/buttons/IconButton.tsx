@@ -9,24 +9,16 @@ export interface IconButtonProps extends BaseButtonProps {
 }
 
 export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ 
-    icon, 
-    className = '', 
-    ariaLabel,
-    noPadding = false,
-    ...props 
-  }, ref) => (
+  ({ icon, className = '', ariaLabel, noPadding = false, ...props }, ref) => (
     <BaseButton
       ref={ref}
       className={`interactive-button ${noPadding ? '' : 'p-2'} ${className}`}
       aria-label={ariaLabel}
       {...props}
     >
-      <span className="flex items-center justify-center">
-        {icon}
-      </span>
+      <span className="flex items-center justify-center">{icon}</span>
     </BaseButton>
   )
 );
 
-IconButton.displayName = 'IconButton'; 
+IconButton.displayName = 'IconButton';

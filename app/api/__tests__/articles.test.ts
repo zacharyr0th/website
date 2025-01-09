@@ -44,10 +44,10 @@ draft: true
   beforeEach(() => {
     // Reset all mocks
     jest.clearAllMocks();
-    
+
     // Reset environment
     process.env.NODE_ENV = 'production';
-    
+
     // Default mock implementations
     (fs.access as jest.Mock).mockResolvedValue(undefined);
     (fs.readdir as jest.Mock).mockResolvedValue(['test.md', 'draft.md']);
@@ -68,7 +68,7 @@ draft: true
 
     expect(data).toBeInstanceOf(Array);
     expect(data.length).toBe(1); // Only non-draft article in production
-    
+
     const article = data[0];
     expect(article).toMatchObject({
       title: 'Test Article',
@@ -167,4 +167,4 @@ invalid_field: test
 
     expect(data).toEqual([]); // Should filter out invalid articles
   });
-}); 
+});

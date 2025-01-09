@@ -6,12 +6,10 @@ import { NavButton } from '../components/buttons';
 
 const Hero = () => {
   const [selectedCategory, setSelectedCategory] = useState<'all' | ProjectCategory>('all');
-  
+
   const filteredProjects = useMemo(() => {
     if (selectedCategory === 'all') return PROJECTS;
-    return PROJECTS.filter(project => 
-      project.categories.includes(selectedCategory)
-    );
+    return PROJECTS.filter((project) => project.categories.includes(selectedCategory));
   }, [selectedCategory]);
 
   return (
@@ -120,11 +118,15 @@ const Hero = () => {
                   {project.publishDate && (
                     <span>Published: {new Date(project.publishDate).toLocaleDateString()}</span>
                   )}
-                  <span className={`px-2 py-1 rounded-full ${
-                    project.status === 'completed' ? 'bg-green-500/10 text-green-500' :
-                    project.status === 'in-progress' ? 'bg-yellow-500/10 text-yellow-500' :
-                    'bg-blue-500/10 text-blue-500'
-                  }`}>
+                  <span
+                    className={`px-2 py-1 rounded-full ${
+                      project.status === 'completed'
+                        ? 'bg-green-500/10 text-green-500'
+                        : project.status === 'in-progress'
+                          ? 'bg-yellow-500/10 text-yellow-500'
+                          : 'bg-blue-500/10 text-blue-500'
+                    }`}
+                  >
                     {project.status}
                   </span>
                 </div>

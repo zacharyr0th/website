@@ -32,23 +32,23 @@ SocialButton.displayName = 'SocialButton';
 export default function ConditionalFooter() {
   const pathname = usePathname();
   const showFooter = pathname !== '/bio';
-  
+
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
   const year = new Date().getFullYear().toString();
-  
+
   if (!showFooter) return null;
 
   return (
     <footer className="bg-background text-sm pb-12 mt-auto">
-      <motion.div 
+      <motion.div
         ref={ref}
         className="container mx-auto flex flex-col items-center space-y-6"
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
-        <motion.div 
+        <motion.div
           className="flex items-center justify-center space-x-4"
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
@@ -65,7 +65,7 @@ export default function ConditionalFooter() {
             </motion.div>
           ))}
         </motion.div>
-        <motion.p 
+        <motion.p
           className="text-text-secondary"
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
@@ -76,4 +76,4 @@ export default function ConditionalFooter() {
       </motion.div>
     </footer>
   );
-} 
+}

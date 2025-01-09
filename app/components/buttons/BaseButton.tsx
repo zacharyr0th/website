@@ -5,15 +5,18 @@ import { LoadingSpinner } from '../../lib/Loading';
 
 export const BaseButton = React.memo(
   React.forwardRef<HTMLButtonElement, BaseButtonProps>(
-    ({ 
-      children,
-      className = '',
-      disabled = false,
-      isLoading = false,
-      size = 'md',
-      variant = 'default',
-      ...props 
-    }, ref) => {
+    (
+      {
+        children,
+        className = '',
+        disabled = false,
+        isLoading = false,
+        size = 'md',
+        variant = 'default',
+        ...props
+      },
+      ref
+    ) => {
       const buttonClassName = getButtonClassName({
         size,
         variant,
@@ -23,24 +26,17 @@ export const BaseButton = React.memo(
       } as const);
 
       return (
-        <button
-          ref={ref}
-          className={buttonClassName}
-          disabled={disabled || isLoading}
-          {...props}
-        >
+        <button ref={ref} className={buttonClassName} disabled={disabled || isLoading} {...props}>
           {isLoading && (
             <div className="absolute inset-0 flex items-center justify-center">
               <LoadingSpinner />
             </div>
           )}
-          <span className={isLoading ? 'invisible' : 'visible'}>
-            {children}
-          </span>
+          <span className={isLoading ? 'invisible' : 'visible'}>{children}</span>
         </button>
       );
     }
   )
 );
 
-BaseButton.displayName = 'BaseButton'; 
+BaseButton.displayName = 'BaseButton';

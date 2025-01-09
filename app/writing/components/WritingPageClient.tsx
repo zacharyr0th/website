@@ -12,20 +12,20 @@ interface WritingPageClientProps {
   containerVariants: typeof containerVariants;
 }
 
-export default function WritingPageClient({ 
-  initialArticles, 
-  containerVariants
+export default function WritingPageClient({
+  initialArticles,
+  containerVariants,
 }: WritingPageClientProps) {
   const [selectedCategory, setSelectedCategory] = useState<ArticleCategory | null>(null);
   const [focusedIndex, setFocusedIndex] = useState(0);
 
   const filteredArticles = useMemo(() => {
-    const articles = !selectedCategory 
+    const articles = !selectedCategory
       ? [...initialArticles]
-      : [...initialArticles].filter(article => article.category === selectedCategory);
+      : [...initialArticles].filter((article) => article.category === selectedCategory);
 
-    return articles.sort((a: Article, b: Article) => 
-      new Date(b.date).getTime() - new Date(a.date).getTime()
+    return articles.sort(
+      (a: Article, b: Article) => new Date(b.date).getTime() - new Date(a.date).getTime()
     );
   }, [selectedCategory, initialArticles]);
 
@@ -38,7 +38,7 @@ export default function WritingPageClient({
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
         e.preventDefault();
-        
+
         const numArticles = filteredArticles.length;
         let newIndex = focusedIndex;
 
@@ -63,11 +63,7 @@ export default function WritingPageClient({
 
   if (!initialArticles || initialArticles.length === 0) {
     return (
-      <div 
-        className="max-w-2xl mx-auto space-y-4"
-        role="status"
-        aria-live="polite"
-      >
+      <div className="max-w-2xl mx-auto space-y-4" role="status" aria-live="polite">
         <h2 className="text-xl font-medium text-text-primary">No Articles Found</h2>
         <p className="text-text-secondary">
           Articles are currently being prepared. Check back soon for updates.
@@ -84,28 +80,16 @@ export default function WritingPageClient({
       className="space-y-4"
     >
       <motion.div variants={itemVariants}>
-        <WritingNav
-          selectedCategory={selectedCategory}
-          onCategorySelect={setSelectedCategory}
-        />
+        <WritingNav selectedCategory={selectedCategory} onCategorySelect={setSelectedCategory} />
       </motion.div>
 
-      <motion.div 
-        variants={containerVariants}
-        className="space-y-3"
-      >
+      <motion.div variants={containerVariants} className="space-y-3">
         {filteredArticles.map((article: Article, index: number) => (
-          <motion.div 
-            key={article.id} 
-            variants={itemVariants}
-          >
-            <ArticleCard
-              article={article}
-              isFocused={index === focusedIndex}
-            />
+          <motion.div key={article.id} variants={itemVariants}>
+            <ArticleCard article={article} isFocused={index === focusedIndex} />
           </motion.div>
         ))}
       </motion.div>
     </motion.div>
   );
-} 
+}

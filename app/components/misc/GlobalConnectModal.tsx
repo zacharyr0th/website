@@ -16,4 +16,4 @@ export default function GlobalConnectModal() {
   }, []);
 
   return <ConnectModal isOpen={isOpen} onClose={handleClose} />;
-} 
+}

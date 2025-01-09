@@ -24,11 +24,11 @@ export const itemVariants = {
 };
 
 export const pageTransition = {
-  initial: "hidden",
-  animate: "visible",
+  initial: 'hidden',
+  animate: 'visible',
   variants: containerVariants,
 };
 
 export const sectionTransition = {
   variants: itemVariants,
-}; 
+};

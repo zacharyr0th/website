@@ -23,13 +23,13 @@ describe('ArticleCard', () => {
   describe('rendering', () => {
     it('renders article information correctly', () => {
       render(<ArticleCard article={mockArticle} isFocused={false} />);
-      
+
       expect(screen.getByText('Test Article')).toBeInTheDocument();
       expect(screen.getByText('A test article description')).toBeInTheDocument();
       const formattedDate = new Date(mockArticle.date).toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'short',
-        day: 'numeric'
+        day: 'numeric',
       });
       expect(screen.getByText(formattedDate)).toBeInTheDocument();
     });
@@ -37,19 +37,19 @@ describe('ArticleCard', () => {
     it('renders without description when not provided', () => {
       const articleWithoutDesc = { ...mockArticle, description: undefined };
       render(<ArticleCard article={articleWithoutDesc} isFocused={false} />);
-      
+
       expect(screen.getByText('Test Article')).toBeInTheDocument();
       expect(screen.queryByText('A test article description')).not.toBeInTheDocument();
     });
 
     it('renders "Untitled Article" when title is missing', () => {
-      const articleWithoutTitle = { 
-        ...mockArticle, 
+      const articleWithoutTitle = {
+        ...mockArticle,
         title: undefined,
-        frontmatter: { ...mockArticle.frontmatter, title: undefined }
+        frontmatter: { ...mockArticle.frontmatter, title: undefined },
       };
       render(<ArticleCard article={articleWithoutTitle} isFocused={false} />);
-      
+
       expect(screen.getByText('Untitled Article')).toBeInTheDocument();
     });
   });
@@ -57,27 +57,33 @@ describe('ArticleCard', () => {
   describe('tag handling', () => {
     it('renders tags in correct order', () => {
       render(<ArticleCard article={mockArticle} isFocused={false} />);
-      
+
       const tags = screen.getAllByText(/crypto|defi|ai|systems|trading/);
-      expect(tags.map(tag => tag.textContent)).toEqual(['systems', 'ai', 'trading', 'defi', 'crypto']);
+      expect(tags.map((tag) => tag.textContent)).toEqual([
+        'systems',
+        'ai',
+        'trading',
+        'defi',
+        'crypto',
+      ]);
     });
 
     it('renders no tags when not provided', () => {
-      const articleWithoutTags = { 
-        ...mockArticle, 
+      const articleWithoutTags = {
+        ...mockArticle,
         tags: undefined,
-        frontmatter: { ...mockArticle.frontmatter, tags: undefined }
+        frontmatter: { ...mockArticle.frontmatter, tags: undefined },
       };
       render(<ArticleCard article={articleWithoutTags} isFocused={false} />);
-      
+
       expect(screen.queryByText(/crypto|defi|ai|systems|trading/)).not.toBeInTheDocument();
     });
 
     it('applies correct tag styles', () => {
       render(<ArticleCard article={mockArticle} isFocused={false} />);
-      
+
       const tags = screen.getAllByText(/crypto|defi|ai|systems|trading/);
-      tags.forEach(tag => {
+      tags.forEach((tag) => {
         expect(tag).toHaveClass(
           'inline-flex',
           'items-center',
@@ -96,7 +102,7 @@ describe('ArticleCard', () => {
   describe('focus behavior', () => {
     it('applies focus styles when isFocused is true', () => {
       render(<ArticleCard article={mockArticle} isFocused={true} />);
-      
+
       const link = screen.getByRole('listitem');
       const article = link.querySelector('article');
       expect(link).toHaveClass('scale-[1.02]');
@@ -105,7 +111,7 @@ describe('ArticleCard', () => {
 
     it('applies hover styles when not focused', () => {
       render(<ArticleCard article={mockArticle} isFocused={false} />);
-      
+
       const link = screen.getByRole('listitem');
       const article = link.querySelector('article');
       expect(link).toHaveClass('hover:scale-[1.02]');
@@ -126,17 +132,17 @@ describe('ArticleCard', () => {
     it('applies featured styles when article is featured', () => {
       const featuredArticle = {
         ...mockArticle,
-        frontmatter: { ...mockArticle.frontmatter, featured: true }
+        frontmatter: { ...mockArticle.frontmatter, featured: true },
       };
       render(<ArticleCard article={featuredArticle} isFocused={false} />);
-      
+
       const link = screen.getByRole('listitem');
       expect(link).toHaveClass('bg-amber-500/[0.02]');
     });
 
     it('does not apply featured styles when article is not featured', () => {
       render(<ArticleCard article={mockArticle} isFocused={false} />);
-      
+
       const link = screen.getByRole('listitem');
       expect(link).not.toHaveClass('bg-amber-500/[0.02]');
     });
@@ -148,19 +154,19 @@ describe('ArticleCard', () => {
       const formattedDate = new Date(mockArticle.date).toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'short',
-        day: 'numeric'
+        day: 'numeric',
       });
       expect(screen.getByText(formattedDate)).toBeInTheDocument();
     });
 
     it('handles missing date', () => {
-      const articleWithoutDate = { 
-        ...mockArticle, 
+      const articleWithoutDate = {
+        ...mockArticle,
         date: undefined,
-        frontmatter: { ...mockArticle.frontmatter, date: undefined }
+        frontmatter: { ...mockArticle.frontmatter, date: undefined },
       };
       render(<ArticleCard article={articleWithoutDate} isFocused={false} />);
-      
+
       const dateElement = screen.queryByRole('time');
       expect(dateElement).not.toBeInTheDocument();
     });
@@ -182,7 +188,7 @@ describe('ArticleCard', () => {
     it('supports keyboard navigation', () => {
       render(<ArticleCard article={mockArticle} isFocused={false} />);
       const link = screen.getByRole('listitem');
-      
+
       link.focus();
       expect(document.activeElement).toBe(link);
     });
@@ -192,7 +198,7 @@ describe('ArticleCard', () => {
       const formattedDate = new Date(mockArticle.date).toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'short',
-        day: 'numeric'
+        day: 'numeric',
       });
       const timeElement = screen.getByText(formattedDate).closest('time');
       expect(timeElement).toHaveAttribute('dateTime', '2024-01-07');
@@ -211,4 +217,4 @@ describe('ArticleCard', () => {
       expect(screen.getByRole('listitem')).toHaveAttribute('href', '#');
     });
   });
-}); 
+});

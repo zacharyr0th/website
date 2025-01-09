@@ -13,18 +13,14 @@ export interface NavButtonProps extends BaseButtonProps {
 
 export const NavButton = React.memo(
   React.forwardRef<HTMLButtonElement, NavButtonProps>(
-    ({ 
-      active,
-      children,
-      leftIcon,
-      rightIcon,
-      className = '',
-      ...props 
-    }, ref) => {
-      const style = useMemo(() => ({
-        backgroundColor: active ? 'var(--color-surface)' : 'transparent',
-        color: active ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
-      }), [active]);
+    ({ active, children, leftIcon, rightIcon, className = '', ...props }, ref) => {
+      const style = useMemo(
+        () => ({
+          backgroundColor: active ? 'var(--color-surface)' : 'transparent',
+          color: active ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
+        }),
+        [active]
+      );
 
       return (
         <BaseButton
@@ -44,4 +40,4 @@ export const NavButton = React.memo(
   )
 );
 
-NavButton.displayName = 'NavButton'; 
+NavButton.displayName = 'NavButton';

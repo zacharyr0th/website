@@ -47,15 +47,19 @@ describe('NavButton', () => {
     it('handles click events', async () => {
       const handleClick = jest.fn();
       render(<NavButton onClick={handleClick}>Home</NavButton>);
-      
+
       await userEvent.click(screen.getByRole('button'));
       expect(handleClick).toHaveBeenCalled();
     });
 
     it('prevents click when disabled', async () => {
       const handleClick = jest.fn();
-      render(<NavButton onClick={handleClick} disabled>Home</NavButton>);
-      
+      render(
+        <NavButton onClick={handleClick} disabled>
+          Home
+        </NavButton>
+      );
+
       await userEvent.click(screen.getByRole('button'));
       expect(handleClick).not.toHaveBeenCalled();
     });
@@ -74,7 +78,7 @@ describe('NavButton', () => {
       render(<NavButton leftIcon={<MockIcon />}>Home</NavButton>);
       const contentWrapper = screen.getByText('Home').closest('span');
       const icon = screen.getByTestId('mock-icon');
-      
+
       expect(contentWrapper?.firstElementChild).toBe(icon);
       expect(contentWrapper?.lastChild?.textContent).toBe('Home');
     });
@@ -83,28 +87,28 @@ describe('NavButton', () => {
       render(<NavButton rightIcon={<MockIcon />}>Home</NavButton>);
       const contentWrapper = screen.getByText('Home').closest('span');
       const icon = screen.getByTestId('mock-icon');
-      
+
       expect(contentWrapper?.firstChild?.textContent).toBe('Home');
       expect(contentWrapper?.lastElementChild).toBe(icon);
     });
 
     it('maintains correct order with both icons', () => {
       render(
-        <NavButton 
+        <NavButton
           leftIcon={<MockIcon data-testid="left-icon" />}
           rightIcon={<MockIcon data-testid="right-icon" />}
         >
           Home
         </NavButton>
       );
-      
+
       const contentWrapper = screen.getByText('Home').closest('span');
       const leftIcon = screen.getByTestId('left-icon');
       const rightIcon = screen.getByTestId('right-icon');
-      
+
       expect(contentWrapper?.firstElementChild).toBe(leftIcon);
       expect(contentWrapper?.children[1].textContent).toBe('Home');
       expect(contentWrapper?.lastElementChild).toBe(rightIcon);
     });
   });
-}); 
+});

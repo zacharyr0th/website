@@ -8,26 +8,26 @@ description: 'Why use a blockchain?'
 category: 'technology'
 tags: ['crypto', 'defi']
 takeaways:
-  - "Traditional banking systems suffer from regulatory violations and conflicts of interest"
-  - "Federal Reserve policies have extended a centuries-long decline in interest rates"
-  - "DeFi provides stable coins, censorship resistance, and democratized access to financial services"
-  - "The future of finance will likely blend traditional banking with DeFi innovations"
-  - "Global regulatory approaches vary widely"
+  - 'Traditional banking systems suffer from regulatory violations and conflicts of interest'
+  - 'Federal Reserve policies have extended a centuries-long decline in interest rates'
+  - 'DeFi provides stable coins, censorship resistance, and democratized access to financial services'
+  - 'The future of finance will likely blend traditional banking with DeFi innovations'
+  - 'Global regulatory approaches vary widely'
 ---
 
-The global financial system relies on intermediaries that process trillions in daily transactions, creating critical yet - until recently - necessary bottlenecks in worldwide capital movement. Technology has evolved, and the need for these institutions is diminishing, but they are still deeply ingrained in our society at an operational, regulatory, and influential level. 
+The global financial system relies on intermediaries that process trillions in daily transactions, creating critical yet - until recently - necessary bottlenecks in worldwide capital movement. Technology has evolved, and the need for these institutions is diminishing, but they are still deeply ingrained in our society at an operational, regulatory, and influential level.
 
 Some institutions have been deemed too big to fail, while others are allowed to collapse. Although these institutions are often reputable, they face ongoing scrutiny for opaque practices and frequent regulatory violations.
 
-| Institution | Regulatory Fines | Violations |
-|------------|----------------------|------------|
-| Bank of America | $82.7B | 214 |
-| JPMorgan Chase | $35.7B | 158 |
-| Citigroup | $25.4B | 122 |
-| Wells Fargo | $21.3B | 181 |
-| Deutsche Bank | $18.1B | 59 |
-| UBS | $16.7B | 83 |
-| Goldman Sachs | $16.3B | 44 |
+| Institution     | Regulatory Fines | Violations |
+| --------------- | ---------------- | ---------- |
+| Bank of America | $82.7B           | 214        |
+| JPMorgan Chase  | $35.7B           | 158        |
+| Citigroup       | $25.4B           | 122        |
+| Wells Fargo     | $21.3B           | 181        |
+| Deutsche Bank   | $18.1B           | 59         |
+| UBS             | $16.7B           | 83         |
+| Goldman Sachs   | $16.3B           | 44         |
 
 These regulatory violations demonstrate systemic issues in traditional banking that have driven interest in alternative financial systems. Institutional failures and oversight account for some violations, but many result from individual misconduct and inherent conflicts of interest.
 
@@ -46,7 +46,7 @@ The two primary objectives are:
 1. Maximum employment, which is not a specific unemployment rate.
 2. Price stability, which the Fed has interpreted as targeting 2% inflation over time.
 
-The Fed seeks to achieve these goals through various monetary policy tools, primarily by adjusting interest rates and managing the money supply. The 2% inflation target wasn't officially adopted until 2012 when the Federal Open Market Committee (FOMC) explicitly stated this goal. 
+The Fed seeks to achieve these goals through various monetary policy tools, primarily by adjusting interest rates and managing the money supply. The 2% inflation target wasn't officially adopted until 2012 when the Federal Open Market Committee (FOMC) explicitly stated this goal.
 
 Although there are spikes, interest rates have been trending down for centuries.
 
@@ -105,12 +105,15 @@ The future of finance likely lies in thoughtful integration of traditional and D
 # Relevant Perspectives
 
 Dr. Fabian Schär, Professor of DLT at the University of Basel:
+
 > "Defi protocols represent a paradigm shift in financial infrastructure, offering programmable and transparent alternatives to traditional financial services."
 
 Gary Gensler, Former SEC Chairman:
+
 > "While Defi platforms may offer promising technological innovations, they still need to operate within a framework that protects investors and maintains market integrity."
 
 Vitalik Buterin, Ethereum Co-founder:
+
 > "The goal of Defi isn't to oppose traditional finance, but to create an open, accessible financial system that complements existing infrastructure."
 
 ## Advantages of Defi
@@ -123,4 +126,4 @@ Smart contracts automate complex financial operations without intermediaries, re
 
 Regulatory frameworks are developing at different speeds globally. While the UAE and Singapore foster innovation, others remain cautious. Europe's MiCA framework and US securities law developments will likely set important precedents.
 
-The integration between traditional systems and Defi protocols is accelerating through stablecoins, CBDCs, and hybrid financial products. Success lies in leveraging both systems' strengths to build a more inclusive, efficient, and resilient financial infrastructure. 
+The integration between traditional systems and Defi protocols is accelerating through stablecoins, CBDCs, and hybrid financial products. Success lies in leveraging both systems' strengths to build a more inclusive, efficient, and resilient financial infrastructure.

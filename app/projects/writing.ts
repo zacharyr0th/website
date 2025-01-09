@@ -46,4 +46,4 @@ export const WRITING_PROJECTS: readonly WritingProject[] = [
     category: 'technical',
     lastUpdated: '2023-10-30',
   },
-] as const; 
+] as const;

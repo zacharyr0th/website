@@ -26,15 +26,15 @@ const SkillCategory = React.memo<SkillCategoryProps>(({ category, skills, index 
           key={skill}
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          whileHover={{ 
+          whileHover={{
             scale: 1.05,
             backgroundColor: 'var(--color-accent)',
-            color: 'var(--color-text-primary)'
+            color: 'var(--color-text-primary)',
           }}
           viewport={{ once: true }}
-          transition={{ 
+          transition={{
             delay: index * 0.1 + skillIndex * 0.05,
-            duration: 0.2
+            duration: 0.2,
           }}
           className="px-4 py-2 text-sm rounded-full bg-surface/50 text-text-secondary border border-white/5
                      backdrop-blur-sm transition-all shadow-sm hover:shadow-lg cursor-default"

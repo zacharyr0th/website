@@ -25,7 +25,7 @@ describe('ProjectCard', () => {
   describe('rendering', () => {
     it('renders project information correctly', () => {
       render(<ProjectCard project={mockProject} isFocused={false} />);
-      
+
       expect(screen.getByText('Test Project')).toBeInTheDocument();
       expect(screen.getByText('A test project description')).toBeInTheDocument();
       expect(screen.getByText('React')).toBeInTheDocument();
@@ -34,7 +34,7 @@ describe('ProjectCard', () => {
 
     it('renders project links correctly', () => {
       render(<ProjectCard project={mockProject} isFocused={false} />);
-      
+
       expect(screen.getByLabelText('View live demo')).toBeInTheDocument();
       expect(screen.getByLabelText('View project on GitHub')).toBeInTheDocument();
     });
@@ -43,7 +43,7 @@ describe('ProjectCard', () => {
   describe('focus behavior', () => {
     it('applies focus styles when isFocused is true', () => {
       render(<ProjectCard project={mockProject} isFocused={true} />);
-      
+
       const article = screen.getByRole('listitem').querySelector('article');
       expect(article).toHaveClass('bg-zinc-800/50');
     });
@@ -71,11 +71,11 @@ describe('ProjectCard', () => {
     });
 
     it('uses # as fallback when no links are available', () => {
-      const projectWithNoLinks = { 
-        ...mockProject, 
-        link: undefined, 
-        githubLink: undefined, 
-        demoLink: undefined 
+      const projectWithNoLinks = {
+        ...mockProject,
+        link: undefined,
+        githubLink: undefined,
+        demoLink: undefined,
       };
       render(<ProjectCard project={projectWithNoLinks} isFocused={false} />);
       const link = screen.getByRole('listitem');
@@ -93,9 +93,9 @@ describe('ProjectCard', () => {
     it('supports keyboard navigation', async () => {
       render(<ProjectCard project={mockProject} isFocused={false} />);
       const link = screen.getByRole('listitem');
-      
+
       link.focus();
       expect(document.activeElement).toBe(link);
     });
   });
-}); 
+});

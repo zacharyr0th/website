@@ -8,11 +8,11 @@ description: 'Automated Market Making'
 category: 'defi'
 tags: ['defi', 'crypto']
 takeaways:
-  - "Liquidity pools automate market making through smart contracts, eliminating the need for traditional order books."
-  - "The constant product formula (x * y = k) ensures continuous liquidity and price stability."
-  - "Impermanent loss poses a risk to liquidity providers when asset prices diverge significantly."
-  - "Pool fees incentivize liquidity provision while maintaining market efficiency."
-  - "Advanced features like concentrated liquidity and multi-token pools optimize capital efficiency."
+  - 'Liquidity pools automate market making through smart contracts, eliminating the need for traditional order books.'
+  - 'The constant product formula (x * y = k) ensures continuous liquidity and price stability.'
+  - 'Impermanent loss poses a risk to liquidity providers when asset prices diverge significantly.'
+  - 'Pool fees incentivize liquidity provision while maintaining market efficiency.'
+  - 'Advanced features like concentrated liquidity and multi-token pools optimize capital efficiency.'
 ---
 
 # Understanding Liquidity Pools and Automated Market Making
@@ -25,15 +25,15 @@ Traditional exchanges rely on market makers to provide liquidity. In DeFi, liqui
 
 ### The Constant Product Formula
 
-> x * y = k defines the fundamental relationship between token quantities in a pool.
+> x \* y = k defines the fundamental relationship between token quantities in a pool.
 
 This elegant formula ensures:
 
-* Continuous liquidity availability
-* Automatic price adjustments
-* Predictable slippage
-* Market stability
-* Efficient price discovery
+- Continuous liquidity availability
+- Automatic price adjustments
+- Predictable slippage
+- Market stability
+- Efficient price discovery
 
 ## How Liquidity Pools Work
 
@@ -47,12 +47,12 @@ When users provide liquidity, they must deposit both tokens in the correct ratio
 
 ### Key Components
 
-| Component | Function | Impact |
-|-----------|----------|---------|
-| Token Pairs | Trading Assets | Market Creation |
-| LP Tokens | Ownership Proof | Provider Rights |
-| Trading Fees | Incentives | Pool Sustainability |
-| Smart Contract | Pool Logic | Automated Trading |
+| Component      | Function        | Impact              |
+| -------------- | --------------- | ------------------- |
+| Token Pairs    | Trading Assets  | Market Creation     |
+| LP Tokens      | Ownership Proof | Provider Rights     |
+| Trading Fees   | Incentives      | Pool Sustainability |
+| Smart Contract | Pool Logic      | Automated Trading   |
 
 ## Advanced Concepts
 
@@ -60,11 +60,11 @@ When users provide liquidity, they must deposit both tokens in the correct ratio
 
 Impermanent loss occurs when:
 
-* Token prices diverge significantly
-* One asset appreciates more than the other
-* Pool ratio must be maintained
-* Value differs from holding
-* Loss becomes permanent upon withdrawal
+- Token prices diverge significantly
+- One asset appreciates more than the other
+- Pool ratio must be maintained
+- Value differs from holding
+- Loss becomes permanent upon withdrawal
 
 > Impermanent loss can significantly impact returns, especially in volatile markets.
 
@@ -82,11 +82,11 @@ Modern pools introduce concentrated liquidity:
 
 Important considerations for liquidity providers:
 
-* Price volatility exposure
-* Smart contract risks
-* Gas costs for transactions
-* Competition from other pools
-* Protocol-specific risks
+- Price volatility exposure
+- Smart contract risks
+- Gas costs for transactions
+- Competition from other pools
+- Protocol-specific risks
 
 ### Mitigation Strategies
 
@@ -102,11 +102,11 @@ To manage risks effectively:
 
 The space continues to evolve with:
 
-* Multi-token pools
-* Dynamic fee structures
-* Cross-chain liquidity
-* Yield optimization
-* Risk management tools
+- Multi-token pools
+- Dynamic fee structures
+- Cross-chain liquidity
+- Yield optimization
+- Risk management tools
 
 ### Emerging Trends
 

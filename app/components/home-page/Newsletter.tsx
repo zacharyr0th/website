@@ -6,18 +6,18 @@ import { ActionButton } from '../buttons';
 
 export const Newsletter = memo(() => {
   const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
     <section className="bg-[var(--color-background)] py-8 sm:py-16">
-      <motion.div 
+      <motion.div
         ref={ref}
         className="container mx-auto px-4 sm:px-6 flex flex-col items-center"
         initial={{ opacity: 0, y: 30 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
-        <motion.h2 
+        <motion.h2
           className="text-2xl sm:text-3xl font-bold text-center mb-6 sm:mb-8 text-[var(--color-text-primary)]"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -25,7 +25,7 @@ export const Newsletter = memo(() => {
         >
           Subscribe for Updates
         </motion.h2>
-        <motion.form 
+        <motion.form
           className="w-full max-w-md"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -42,12 +42,7 @@ export const Newsletter = memo(() => {
                 data-np-autofill-field-type="email"
               />
               <div className="flex justify-center sm:flex-shrink-0">
-                <ActionButton
-                  variant="primary"
-                  disabled
-                  type="submit"
-                  size="sm"
-                >
+                <ActionButton variant="primary" disabled type="submit" size="sm">
                   Coming Soon
                 </ActionButton>
               </div>

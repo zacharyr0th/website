@@ -67,26 +67,12 @@ const Background = memo(() => (
       <NoiseFilter />
       <Gradients />
     </defs>
-    <rect 
-      width="100%" 
-      height="100%" 
-      fill="url(#bioGradient1)"
-    />
-    <rect 
-      width="100%" 
-      height="100%" 
-      fill="url(#bioGradient2)" 
-      transform="rotate(45)"
-    />
-    <rect 
-      width="100%" 
-      height="100%" 
-      filter="url(#bioNoise)" 
-      opacity="0.2"
-    />
+    <rect width="100%" height="100%" fill="url(#bioGradient1)" />
+    <rect width="100%" height="100%" fill="url(#bioGradient2)" transform="rotate(45)" />
+    <rect width="100%" height="100%" filter="url(#bioNoise)" opacity="0.2" />
   </motion.svg>
 ));
 
 Background.displayName = 'Background';
 
-export default Background; 
+export default Background;

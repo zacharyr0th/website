@@ -39,8 +39,12 @@ describe('BaseButton', () => {
 
     it('prevents click events when disabled', async () => {
       const handleClick = jest.fn();
-      render(<BaseButton disabled onClick={handleClick}>Click me</BaseButton>);
-      
+      render(
+        <BaseButton disabled onClick={handleClick}>
+          Click me
+        </BaseButton>
+      );
+
       await userEvent.click(screen.getByRole('button'));
       expect(handleClick).not.toHaveBeenCalled();
     });
@@ -50,7 +54,7 @@ describe('BaseButton', () => {
     it('shows loading spinner and hides content', () => {
       render(<BaseButton isLoading>Click me</BaseButton>);
       const button = screen.getByRole('button');
-      
+
       expect(button).toBeDisabled();
       expect(button).toHaveClass(BUTTON_CLASSES.state.loading);
       expect(screen.getByText('Click me')).toHaveClass('invisible');
@@ -59,8 +63,12 @@ describe('BaseButton', () => {
 
     it('prevents click events when loading', async () => {
       const handleClick = jest.fn();
-      render(<BaseButton isLoading onClick={handleClick}>Click me</BaseButton>);
-      
+      render(
+        <BaseButton isLoading onClick={handleClick}>
+          Click me
+        </BaseButton>
+      );
+
       await userEvent.click(screen.getByRole('button'));
       expect(handleClick).not.toHaveBeenCalled();
     });
@@ -87,7 +95,7 @@ describe('BaseButton', () => {
     it('handles click events', async () => {
       const handleClick = jest.fn();
       render(<BaseButton onClick={handleClick}>Click me</BaseButton>);
-      
+
       await userEvent.click(screen.getByRole('button'));
       expect(handleClick).toHaveBeenCalledTimes(1);
     });
@@ -95,7 +103,7 @@ describe('BaseButton', () => {
     it('forwards ref correctly', () => {
       const ref = React.createRef<HTMLButtonElement>();
       render(<BaseButton ref={ref}>Click me</BaseButton>);
-      
+
       expect(ref.current).toBeInstanceOf(HTMLButtonElement);
       expect(ref.current).toBe(screen.getByRole('button'));
     });
@@ -126,17 +134,11 @@ describe('BaseButton', () => {
   describe('style composition', () => {
     it('combines multiple classes correctly', () => {
       render(
-        <BaseButton
-          className="custom-class"
-          variant="primary"
-          size="lg"
-          disabled
-          isLoading
-        >
+        <BaseButton className="custom-class" variant="primary" size="lg" disabled isLoading>
           Click me
         </BaseButton>
       );
-      
+
       const button = screen.getByRole('button');
       expect(button).toHaveClass(
         BUTTON_CLASSES.base,
@@ -148,4 +150,4 @@ describe('BaseButton', () => {
       );
     });
   });
-}); 
+});

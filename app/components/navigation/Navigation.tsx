@@ -16,48 +16,56 @@ interface NavigationProps {
 const NavLink = memo(({ label, href, active }: NavItem & { active: boolean }) => (
   <li className={active ? 'max-sm:hidden' : ''}>
     <Link href={href}>
-      <NavButton active={active}>
-        {label}
-      </NavButton>
+      <NavButton active={active}>{label}</NavButton>
     </Link>
   </li>
 ));
 NavLink.displayName = 'NavLink';
 
-const NavContent = memo(({ pathname, themeButton, showHomeButton }: { pathname: string | null; themeButton?: React.ReactNode; showHomeButton?: boolean }) => (
-  <div className="flex w-screen px-8 max-sm:px-4 items-center justify-between max-sm:justify-center">
-    <div className="max-sm:hidden">
-      {showHomeButton && pathname !== '/' && (
-        <BlurBackground>
-          <Link href="/" style={{ textDecoration: 'none' }}>
-            <NavButton active={pathname === '/'}>
-              <span className="uppercase text-2xl">z</span>
-            </NavButton>
-          </Link>
-        </BlurBackground>
-      )}
-    </div>
-    <BlurBackground>
-      <ul className="flex items-center space-x-4 max-sm:space-x-2 px-2">
+const NavContent = memo(
+  ({
+    pathname,
+    themeButton,
+    showHomeButton,
+  }: {
+    pathname: string | null;
+    themeButton?: React.ReactNode;
+    showHomeButton?: boolean;
+  }) => (
+    <div className="flex w-screen px-8 max-sm:px-4 items-center justify-between max-sm:justify-center">
+      <div className="max-sm:hidden">
         {showHomeButton && pathname !== '/' && (
-          <li className="sm:hidden">
+          <BlurBackground>
             <Link href="/" style={{ textDecoration: 'none' }}>
               <NavButton active={pathname === '/'}>
                 <span className="uppercase text-2xl">z</span>
               </NavButton>
             </Link>
-          </li>
+          </BlurBackground>
         )}
-        {navItems.map((item) => (
-          <NavLink key={item.label} {...item} active={pathname === item.href} />
-        ))}
-        <li className="flex items-center">
-          <div className="px-2 max-sm:px-1">{themeButton}</div>
-        </li>
-      </ul>
-    </BlurBackground>
-  </div>
-));
+      </div>
+      <BlurBackground>
+        <ul className="flex items-center space-x-4 max-sm:space-x-2 px-2">
+          {showHomeButton && pathname !== '/' && (
+            <li className="sm:hidden">
+              <Link href="/" style={{ textDecoration: 'none' }}>
+                <NavButton active={pathname === '/'}>
+                  <span className="uppercase text-2xl">z</span>
+                </NavButton>
+              </Link>
+            </li>
+          )}
+          {navItems.map((item) => (
+            <NavLink key={item.label} {...item} active={pathname === item.href} />
+          ))}
+          <li className="flex items-center">
+            <div className="px-2 max-sm:px-1">{themeButton}</div>
+          </li>
+        </ul>
+      </BlurBackground>
+    </div>
+  )
+);
 NavContent.displayName = 'NavContent';
 
 function Navigation({ showHomeButton = false, themeButton }: NavigationProps) {

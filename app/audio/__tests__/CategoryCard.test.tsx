@@ -17,8 +17,16 @@ interface MotionProps {
 
 jest.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, className, ...props }: MotionProps) => <div className={className} {...props}>{children}</div>,
-    span: ({ children, className, ...props }: MotionProps) => <span className={className} {...props}>{children}</span>,
+    div: ({ children, className, ...props }: MotionProps) => (
+      <div className={className} {...props}>
+        {children}
+      </div>
+    ),
+    span: ({ children, className, ...props }: MotionProps) => (
+      <span className={className} {...props}>
+        {children}
+      </span>
+    ),
   },
   AnimatePresence: ({ children }: { children: React.ReactNode }) => children,
 }));
@@ -27,7 +35,7 @@ describe('CategoryCard', () => {
   describe('rendering', () => {
     it('renders category information correctly', () => {
       render(<CategoryCard category={mockCategory} index={0} />);
-      
+
       expect(screen.getByText('Test Category')).toBeInTheDocument();
       expect(screen.getByText('A test category description')).toBeInTheDocument();
       expect(screen.getByText('(Coming Soon)')).toBeInTheDocument();
@@ -60,4 +68,4 @@ describe('CategoryCard', () => {
       expect(arrow).toHaveAttribute('aria-hidden', 'true');
     });
   });
-}); 
+});

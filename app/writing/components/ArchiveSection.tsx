@@ -30,7 +30,7 @@ export const ArchiveSection = memo<ArchiveSectionProps>(({ articles }) => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
         e.preventDefault();
-        
+
         const numArticles = sortedArticles.length;
         let newIndex = focusedIndex;
 
@@ -58,18 +58,15 @@ export const ArchiveSection = memo<ArchiveSectionProps>(({ articles }) => {
   return (
     <>
       {sortedArticles.map((article, index) => (
-        <motion.div 
-          key={article.slug} 
+        <motion.div
+          key={article.slug}
           variants={itemVariants}
-          className={clsx(index !== 0 && "border-t border-zinc-800/50")}
+          className={clsx(index !== 0 && 'border-t border-zinc-800/50')}
           ref={(el) => {
             articleRefs.current[index] = el;
           }}
         >
-          <ArticleCard 
-            article={article} 
-            isFocused={index === focusedIndex}
-          />
+          <ArticleCard article={article} isFocused={index === focusedIndex} />
         </motion.div>
       ))}
     </>
