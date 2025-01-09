@@ -35,7 +35,7 @@ The Turkish Lira has lost 99.9% of its value since 2018.
 The South African Rand has experienced extreme volatility over the past decade.
 ![usd-zar](/images/usd-zar.webp)
 
-Bitcoin holders have outperformed everyone over the past decade other than maybe [Jensen Huang](https://www.instagram.com/commuter.ny/p/C71tPJgpmgw/). Bitcoin's low was $0.0041 when someone spent 10,000 BTC on a [$41 pizza](https://economictimes.indiatimes.com/markets/cryptocurrency/bitcoin-pizza-day-and-the-rise-of-crypto-commerce/articleshow/110321112.cms?from=mdr#:~:text=Laszlo%20Hanyecz%2C%20a%20programmer%20and,most%20expensive%20pizza%20purchase%20ever.) on May 22, 2010, and the all-time high was recently $108,077.
+Bitcoin holders have outperformed everyone over the past decade other than maybe [Jensen Huang](https://www.instagram.com/commuter.ny/p/C71tPJgpmgw/). Bitcoin's low was $0.0041 when someone spent 10,000 BTC on two pizzas totalling [$41](https://economictimes.indiatimes.com/markets/cryptocurrency/bitcoin-pizza-day-and-the-rise-of-crypto-commerce/articleshow/110321112.cms?from=mdr#:~:text=Laszlo%20Hanyecz%2C%20a%20programmer%20and,most%20expensive%20pizza%20purchase%20ever.) on May 22, 2010, and the all-time high was recently $108,077.
 ![btc-to-usd](/images/btc-usd.webp)
 
 USD holders in shambles.
@@ -43,7 +43,7 @@ USD holders in shambles.
 
 # Gold
 
-Physical Gold bars have historically outperformed most assets during periods of economic strife. As a result, Gold has become a haven asset in the eyes of asset managers. It's important to understand that money flows from speculative investments to safe-haven assets doesn't happen automatically. It's a result of trader psychology being influenced by mimetic desire, and it often happens slowly, then all at once - a phenomenon known as a ["mimetic contagion"](https://mimetictheory.com/mimetic-contagion/).
+Physical Gold bars have historically outperformed most assets during periods of economic strife. As a result, Gold has become a haven asset in the eyes of asset managers. It's important to understand that money flows from speculative investments to safe-haven assets doesn't happen automatically. It's a result of trader psychology being influenced by mimetic desire, and it often happens slowly, then all at once - a phenomenon known as a "[mimetic contagion](https://mimetictheory.com/mimetic-contagion/)".
 
 Besides its use in jewelry and select manufacturing, Gold is perceived to exist outside of the traditional financial system. However, banks are the largest owners of it, and derivatives are frequently used to manipulate its price.
 
@@ -55,7 +55,6 @@ Few are arguing for Bitcoin to serve as money, meaning there is little need for 
 
 Many investors and mainstream media pundits have referred to Bitcoin as digital Gold, partially because that's the most digestible explanation they can come up with for its success and partially because it's true.
 
-Key comparisons with traditional Gold include:
 
 | Feature       | Physical Gold    | Bitcoin              |
 | ------------- | ---------------- | -------------------- |
