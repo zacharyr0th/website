@@ -1,17 +1,16 @@
 ---
 title: 'Digital Gold'
-date: '2023-12-31'
+date: '2025-01-06T12:00:00.000Z'
 image:
   src: '/images/btc-whitepaper-abstract.webp'
   alt: 'Digital Gold'
 description: 'Bitcoins Transformation'
-category: 'crypto'
+category: 'finance'
 tags: ['crypto', 'bitcoin']
 takeaways:
-  - 'Bitcoin has evolved from a peer-to-peer payment system to a global store of value.'
+  - 'Bitcoin has evolved from a peer-to-peer payment system to a global store of value and offers advantages over physical gold in terms of portability, divisibility, and verifiability.'
   - 'Traditional currencies have lost significant value over time due to inflation.'
   - "Gold's value is primarily extrinsic, based on collective belief rather than intrinsic utility."
-  - 'Bitcoin offers advantages over physical gold in terms of portability, divisibility, and verifiability.'
 ---
 
 Bitcoin was initially intended to be a peer-to-peer medium of exchange, although its narrative has switched mainly to that of a global store of value. Below is an exploration of why we need a store of value and why Bitcoin is better than Gold at being one.
@@ -28,14 +27,14 @@ Money serves three purposes - unit of account, store of value, and medium of exc
 
 Rather than hold onto, for example, the Turkish Lira or South African Rand and have their spending power decline non-trivially, many have fled to BTC, USDT, or other cryptocurrencies that enable pseudonymous, secure transfers of value and opportunities for capital appreciation. Cash is king, and USD is cash; everything else is priced against and dependent upon it. When compared to USD, you don't want your national currency to rise in value because it takes more of your currency to buy the same amount of USD.
 
-The Turkish Lira has lost 99.9% of its value since 2018.
+The Turkish Lira has lost most of its value since 2018.
 
 ![usd-try](/images/usd-try.webp)
 
 The South African Rand has experienced extreme volatility over the past decade.
 ![usd-zar](/images/usd-zar.webp)
 
-Bitcoin holders have outperformed everyone over the past decade other than maybe [Jensen Huang](https://www.instagram.com/commuter.ny/p/C71tPJgpmgw/). Bitcoin's low was $0.0041 when someone spent 10,000 BTC on two pizzas totalling [$41](https://economictimes.indiatimes.com/markets/cryptocurrency/bitcoin-pizza-day-and-the-rise-of-crypto-commerce/articleshow/110321112.cms?from=mdr#:~:text=Laszlo%20Hanyecz%2C%20a%20programmer%20and,most%20expensive%20pizza%20purchase%20ever.) on May 22, 2010, and the all-time high was recently $108,077.
+Bitcoin holders have outperformed everyone over the past decade with a low of $0.0041, when someone spent 10,000 BTC on two pizzas totalling [$41](https://economictimes.indiatimes.com/markets/cryptocurrency/bitcoin-pizza-day-and-the-rise-of-crypto-commerce/articleshow/110321112.cms?from=mdr#:~:text=Laszlo%20Hanyecz%2C%20a%20programmer%20and,most%20expensive%20pizza%20purchase%20ever.) on May 22, 2010, and an all-time high of $108,077.
 ![btc-to-usd](/images/btc-usd.webp)
 
 USD holders in shambles.
@@ -53,7 +52,7 @@ Few are arguing for Bitcoin to serve as money, meaning there is little need for 
 
 ## Digital Gold
 
-Many investors and mainstream media pundits have referred to Bitcoin as digital Gold, partially because that's the most digestible explanation they can come up with for its success and partially because it's true.
+Investors and mainstream media pundits have referred to Bitcoin as digital Gold, partially because that's the most digestible explanation they can come up with for its success and partially because it's true.
 
 
 | Feature       | Physical Gold    | Bitcoin              |
@@ -67,7 +66,7 @@ Many investors and mainstream media pundits have referred to Bitcoin as digital 
 
 ## Extrinsic Value and Mimetic Desire
 
-Even though Gold has performed well in the past during times of distress, this rise in value is not based on any fundamental, intrinsic characteristic. Gold is not easy to transport or store, especially at scale. Due to the large number of industry players, Gold is a very centralized commodity, and the price generally appreciates because of a fluctuating extrinsic value. Someone will see that someone else has Gold and want it because they want to be like them or share in the upside of their idea.
+Even though Gold has performed well in the past during times of distress, this rise in value is not based on any fundamental, intrinsic characteristic. Gold is not easy to transport or store, especially at scale. Due to the large number of industry players, Gold is a very centralized commodity, and the price generally moves because of a fluctuating extrinsic value. Someone will see that someone else has Gold and want it because they want to be like them or share in the upside of their idea.
 
 ![Gold Price](/images/gold-chart.webp)
 
@@ -75,16 +74,16 @@ Quite the [cup and handle](https://www.strike.money/technical-analysis/cup-and-h
 
 ## Counterarguments to Bitcoin's Scarcity
 
-Bitcoin should not be cash because it should not be used for payments.
+In its current state,Bitcoin should not be cash because it should not be used for payments because of its volatility. Theres validity in the argument to have a decentralized central global currency (DCGC), but the practical solution for the time being is to remain on the USD standard. Michael Saylor is projecting a devaluation in the USD and a state of hyperinflation in the coming years, while also centralizing the ownership of the world's digital gold reserves into his own, and wall-street's hands.
 
-Instead, it could serve as a store of value instead of Gold because of its multiple advantages listed in the table above. Scarcity is a key component of both Gold and Bitcoin's value, and while Gold's scarcity deals with factors like mining, metal streaming, and institutional concentration, Bitcoins's scarcity deals with a few lines of code.
+Instead of serving as a payment mechanism, Bitcoin could serve as a store of value because of its multiple advantages over Gold, listed in the table above. Scarcity is a key component of both Gold and Bitcoin's value, and while Gold's scarcity deals with factors like mining, metal streaming, and institutional concentration, Bitcoins's scarcity deals with a few lines of code.
 
 ![Bitcoin Code](/images/btc-21m.webp)
 
 A handful of developers can change the code's underlying rules. Any change requires consensus among this group, and currently, there is a rule defining that there will only ever be 21 million BTC. Most of those BTC already exist and the last will be made public around 2130. If everyone in that group of developers agreed to change the rule and create more BTC, there would still be a need in the majority of computers on the network to update and validate the new supply. BTC's verification process - mining- is an expensive undertaking, and the costs involved have resulted in a few mining pools controlling most of the network's validation.
 
-That being said, it's not in the interest of the miners to accept this change because it would dilute the value of their returns and introduce risk to their business. So, while it could be changed, it's not in the interest of the developers, miners, or the network for there to be more than 21 million BTC, and it will likely not happen without a catastrophic event. However, I believe the most primal hacking method, the "[$5 wrench attack](https://www.financemagnates.com/terms/5/5-wrench-attack/)" poses a non-trivial risk to the Bitcoin core group of developers.
+While it could be changed, it's not in the interest of the developers, miners, or the network for there to be more than 21 million BTC, and it will likely not happen without a catastrophic event. However, I believe the most primal hacking method, the "[$5 wrench attack](https://www.financemagnates.com/terms/5/5-wrench-attack/)" poses a non-trivial risk to the Bitcoin core group of developers and capital-heavy mining operators around the world.
 
 # Food for Thought
 
-Although Gold hasn't been a practical currency for hundreds or more years, big banks and asset managers continue to recommend it as a haven asset worthy of 1-5% of a traditional financial nest egg in the event of a calamity. Gold will store value until it doesn't. If rarity or scarcity is the argument, there are more scarce assets on this planet that could quickly replace Gold if the narrative shifted—Bitcoin is one of them.
+Although Gold hasn't been a practical currency for hundreds or more years, big banks and asset managers continue to recommend it as a haven asset worthy of 1-5% of a traditional financial nest egg. Gold will store value until it doesn't. If rarity or scarcity is the argument, there are more scarce assets on this planet that could quickly replace Gold if the narrative shifted—Bitcoin is one of them.

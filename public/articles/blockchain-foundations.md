@@ -1,17 +1,15 @@
 ---
 title: 'Blockchain Foundations'
-date: '2025-1-9'
+date: '2022-1-9'
 image:
   src: '/misc/placeholder.webp'
   alt: 'Blockchain Foundations'
 description: 'Understanding the Building Blocks'
-category: 'crypto'
-tags: ['crypto', 'bitcoin']
+category: 'technology'
+tags: ['crypto']
 takeaways:
-  - 'Blockchains are distributed ledgers that enable trustless transactions through, eliminating the need for centralized intermediaries.'
-  - 'Digital wallets provide secure, permissionless access to blockchain networks, enabling 24/7 participation.'
-  - "Bitcoin evolved from a peer-to-peer payment system to a 'digital gold' store of value."
-  - 'Blockchain networks vary in their censorship resistance and consensus mechanisms.'
+  - 'Blockchains are distributed ledgers that enable trustless transactions, eliminating the need for centralized intermediaries.'
+  - 'Digital wallets provide secure, permissionless access to blockchain networks and the economies built on top of them at all hours of the day.'
 ---
 
 Blockchains are ever-expanding ledgers of transactions with distinct features and functionalities that differentiate them from traditional centralized networks.

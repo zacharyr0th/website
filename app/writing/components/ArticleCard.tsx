@@ -14,7 +14,7 @@ export const ArticleCard = memo<ArticleCardProps>(({ article, isFocused }) => {
   const isFeatured = article.frontmatter.featured;
 
   const sortTags = (tags: readonly string[]) => {
-    const tagOrder = ['crypto', 'defi', 'trading', 'ai', 'systems'];
+    const tagOrder = ['crypto', 'defi', 'bitcoin', 'ethereum', 'solana'];
     const lowerTags = tags.map((t) => t.toLowerCase());
 
     // Return tags in reverse order so crypto appears rightmost
@@ -30,6 +30,22 @@ export const ArticleCard = memo<ArticleCardProps>(({ article, isFocused }) => {
       linkRef.current.focus();
     }
   }, [isFocused]);
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    // Force UTC interpretation
+    const utcDate = new Date(Date.UTC(
+      date.getUTCFullYear(),
+      date.getUTCMonth(),
+      date.getUTCDate()
+    ));
+    return utcDate.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      timeZone: 'UTC'
+    });
+  };
 
   return (
     <Link
@@ -67,11 +83,7 @@ export const ArticleCard = memo<ArticleCardProps>(({ article, isFocused }) => {
             <div className="flex items-center gap-2">
               {article.date && (
                 <time className="tabular-nums" dateTime={article.date}>
-                  {new Date(article.date).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric',
-                  })}
+                  {formatDate(article.date)}
                 </time>
               )}
             </div>

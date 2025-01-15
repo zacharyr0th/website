@@ -34,7 +34,6 @@ export const ARTICLE_CONFIG = {
     staleWhileRevalidate: 24 * 60 * 60 * 1000, // 24 hours
   },
   pagination: {
-    pageSize: 100,
     featuredCount: 3,
   },
 } as const;

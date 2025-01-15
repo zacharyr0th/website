@@ -11,7 +11,7 @@ import html from 'remark-html';
 import remarkGfm from 'remark-gfm';
 import remarkImages from 'remark-images';
 import remarkParse from 'remark-parse';
-import swr from 'swr';
+import useSWR from 'swr';
 import { useMemo, useCallback } from 'react';
 import type {
   Article,
@@ -55,6 +55,16 @@ export const validateFrontmatter = (data: unknown): ArticleFrontmatter => {
     throw new Error(`Title is too long (max ${ARTICLE_CONFIG.limits.title} characters)`);
   }
 
+  // Ensure date is in UTC format
+  const date = new Date(rawData.date);
+  const utcDate = new Date(Date.UTC(
+    date.getUTCFullYear(),
+    date.getUTCMonth(),
+    date.getUTCDate(),
+    12 // Set to noon UTC to avoid timezone issues
+  ));
+  const formattedDate = utcDate.toISOString();
+
   const description = rawData.description || rawData.subtitle;
   if (description && description.length > ARTICLE_CONFIG.limits.description) {
     throw new Error(
@@ -85,7 +95,7 @@ export const validateFrontmatter = (data: unknown): ArticleFrontmatter => {
 
   return {
     title: rawData.title,
-    date: rawData.date,
+    date: formattedDate,
     description: description || '',
     category,
     tags,
@@ -220,7 +230,7 @@ const fetchArticles = async (): Promise<Article[]> => {
 };
 
 export const useArticles = () => {
-  const { data, error, isLoading, mutate } = swr<Article[], Error>(
+  const { data, error, isLoading, mutate } = useSWR<Article[], Error>(
     '/api/articles',
     fetchArticles,
     CACHE_CONFIG

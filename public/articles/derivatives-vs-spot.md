@@ -6,37 +6,14 @@ image:
   alt: 'Derivatives vs Spot'
 description: 'Market Structure & Price Discovery'
 category: 'finance'
-tags: ['crypto', 'analysis']
+tags: ['derivatives', 'trading']
 takeaways:
-  - 'Market structure, including dealer positioning and gamma squeezes, significantly influences price movements in traditional equity markets.'
+  - 'Market structure significantly influences price movements in traditional equity markets.'
   - 'The 1987 market crash led to regulatory changes requiring market makers to provide liquidity, fundamentally altering market dynamics.'
-  - "Real asset values differ significantly from notional values due to monetary policy, as demonstrated by comparing the S&P 500 to the Fed's balance sheet."
-  - 'The global derivatives market is estimated at one quadrillion dollars, with $11 in derivatives for every $1 in stocks, creating complex market reflexivity.'
   - 'Crypto markets differ from traditional markets due to unique whale behavior, multiple exchanges, and less mature derivatives markets, leading to higher volatility.'
 ---
 
-<style jsx>{`
-  .prose a {
-    text-decoration: underline;
-    color: var(--color-accent);
-  }
-  .prose ol {
-    list-style-type: decimal;
-    margin-left: 2em; /* Adjust as needed for indentation */
-    padding-left: 0.5em; /* Add padding if needed */
-  }
-  .prose ol li {
-    margin-bottom: 0.5em;
-    color: var(--color-text-primary);
-    line-height: 1.5; /* Adjust line height for better readability */
-  }
-`}</style>
-
-<div class="tldr-section">
-
 Derivative markets significantly influence equity prices through market-maker actions. Real asset values differ from notional values due to monetary policy and market mechanics. While crypto markets are less affected by derivatives, they face unique challenges from well capitalized traders, resulting in illiquidity and volatility.
-
-</div>
 
 The recent S&P 500 futures (/ES) movement presents an interesting case study:
 
