@@ -57,12 +57,14 @@ export const validateFrontmatter = (data: unknown): ArticleFrontmatter => {
 
   // Ensure date is in UTC format
   const date = new Date(rawData.date);
-  const utcDate = new Date(Date.UTC(
-    date.getUTCFullYear(),
-    date.getUTCMonth(),
-    date.getUTCDate(),
-    12 // Set to noon UTC to avoid timezone issues
-  ));
+  const utcDate = new Date(
+    Date.UTC(
+      date.getUTCFullYear(),
+      date.getUTCMonth(),
+      date.getUTCDate(),
+      12 // Set to noon UTC to avoid timezone issues
+    )
+  );
   const formattedDate = utcDate.toISOString();
 
   const description = rawData.description || rawData.subtitle;

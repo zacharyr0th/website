@@ -5,7 +5,7 @@ image:
   src: /images/nouns-0.webp
   alt: 'Nouns'
 description: 'There is a New One Every Day'
-category: 'crypto'
+category: 'technology'
 tags: ['crypto']
 ---
 

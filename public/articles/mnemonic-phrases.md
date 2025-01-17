@@ -5,7 +5,7 @@ image:
   src: '/misc/placeholder.webp'
   alt: 'Mnemonic Phrases'
 description: 'AKA Seed Phrases'
-category: 'crypto'
+category: 'technology'
 tags: ['crypto']
 ---
 

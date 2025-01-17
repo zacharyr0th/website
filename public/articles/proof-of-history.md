@@ -5,8 +5,8 @@ image:
   src: '/misc/placeholder.webp'
   alt: 'Proof of History'
 description: 'How Solana Tells Time'
-category: 'crypto'
-tags: ['crypto', 'technology']
+category: 'technology'
+tags: ['crypto']
 ---
 
 <style jsx>{`

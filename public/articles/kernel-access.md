@@ -6,27 +6,26 @@ image:
   alt: 'Kernel Access'
 description: 'Everything You Need to Worry About'
 category: 'technology'
-tags: ['programming', 'guide']
+tags: ['computing']
+takeaways:
+  - 'Kernel access is a powerful capability that allows software to interact directly with an operating systems core.'
+  - 'It can provide performance benefits and enable advanced functionality, but also has massive security risks.'
 ---
-
-<div class="tldr-section">
 
 Kernel access is a powerful capability that allows software to interact directly with an operating system's core. While this can provide performance benefits and enable advanced functionality, it also has massive security risks.
 
-This article highlights a few types of software that may be requesting this access without you even realizing.
-
-</div>
+This article is a PSA/FYI for the few types of software that may be requesting this access without your knowledge.
 
 A recent [incident](/writing/a-simple-operating-system) involving the BSOD demonstrated the risks of kernel access for necessary software. It made me wonder which applications need kernel access and which ones could get by with only user-mode access.
 
-### Hidden in plain sight
+# Hidden in Plain Sight
 
 The following is a list of applications that may require kernel access. A good rule of thumb is to limit kernel access to only the most necessary applications.
 
 | Application                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Anti-Cheat Software             | Anti-cheat software utilizes kernel-level access to monitor real-time game processes, system memory, and hardware interactions. This allows for detecting and preventing cheating methods that operate at a low level, such as memory manipulation or driver exploits.                                                                                                                                                                                           |
-| Security Software               | Security software may require kernel-level access to protect the system against malware, viruses, and other threats. This access allows it to monitor system calls and intercept potentially malicious activities.                                                                                                                                                                                                                                               |
+| Security Software               | Security software may require kernel-level access to protect the system against malware, viruses, and other threats. This allows it to monitor system calls and intercept potentially malicious activities.                                                                                                                                                                                                                                                      |
 | Virtualization Software         | Virtualization software may require kernel-level access to manage virtual machines efficiently and provide near-native performance. This allows for direct hardware resource allocation, memory management, and CPU scheduling for virtual machines.                                                                                                                                                                                                             |
 | Performance Monitoring Tools    | Performance monitoring tools may require kernel-level access to interact directly with hardware components and low-level system functions. This allows for accurate monitoring of CPU frequencies, temperatures, voltages, and other hardware metrics. For overclocking tools, kernel-mode operation enables manipulation of hardware settings beyond what's possible in user mode.                                                                              |
 | Remote Access Software          | Some remote access solutions use kernel-level components to enhance functionality, security, and performance. Kernel access can enable features like remote desktop integration, screen capture and transmission, and secure encrypted connections.                                                                                                                                                                                                              |
@@ -35,8 +34,8 @@ The following is a list of applications that may require kernel access. A good r
 | VPN Clients                     | Some VPN implementations use kernel-level drivers to enhance performance, security, and integration with the operating system's networking stack. Kernel-mode VPN components can bypass user-mode processing to provide better throughput and lower latency. They can also offer stronger security by intercepting network traffic at a lower level, though this deep integration also increases the potential security risk if the VPN software is compromised. |
 | Development and Debugging Tools | Development and debugging tools may utilize kernel-level access to provide essential low-level system access and debugging capabilities for system-level programming, driver development, and operating system internals analysis. These tools can inspect and modify kernel memory, set hardware breakpoints, and analyze system crashes.                                                                                                                       |
 
-## Be Aware
+# That's All
 
-While kernel access provides powerful capabilities, it's important to recognize the risks involved. The path of least resistance is not always the most straightforward or most secure, and a handful of incumbent kernel architectures will dominate the market in the foreseeable future.
+Be vigilant about which software you allow this level of access to—reserve it for what's truly necessary and trust only reputable developers unless you know what you're doing.
 
-In the meantime, there is plenty of room for innovation in the kernel design space. I'm most interested in multi-layered kernel designs that can provide the performance of a monolithic kernel with the security and modularity of a microkernel. There may also be a demand for kernels specifically designed for a real-time data processing use case, such as high-frequency trading or blockchain validation.
+A little caution goes a long way in keeping your systems secure.

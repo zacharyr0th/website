@@ -8,8 +8,8 @@ description: 'Notes on Adoption Efforts'
 category: 'technology'
 tags: ['crypto']
 takeaways:
-  - "Africa's growing blockchain adoption offers solutions to longstandingeconomic challenges, with Nigeria and Seychelles leading in venture capital investments."
-  - 'Blockchains provides alternatives to unstable local currencies and expensive remittance systems, potentially saving billions in transaction fees.'
+  - "Africa's growing blockchain adoption offers solutions to longstanding economic challenges, with Nigeria and Seychelles leading in venture capital investments."
+  - 'Blockchains provide alternatives to unstable local currencies and expensive remittance systems, potentially saving billions in transaction fees.'
   - 'Early crypto adoption attempts in El Salvador and the Central African Republic reveal challenges in implementation and infrastructure readiness.'
 ---
 
@@ -53,7 +53,7 @@ Time plays a critical role in China's geopolitical strategies, and over the past
 
 El Salvador adopted BTC as a domestic currency in June of 2021, and the results have been mixed. Crypto Critics' Corner recorded four podcasts about this situation, and according to them, it seems all is not going well. They are biased no-coiners, so take it with a significantly sized grain of salt, but to be fair, the IMF recently downgraded El Salvador's credit rating, and the rollout of Bitcoin's Lightning network has been met with significant resistance from vendors and individuals within the country.
 
-It's also worth considering that Nayib allegedly "deployed the armed forces and civil police around and inside the Legislative Assembly" to "coerce the legislative branch to act on his crime bill." 
+It's also worth considering that Nayib allegedly "deployed the armed forces and civil police around and inside the Legislative Assembly" to "coerce the legislative branch to act on his crime bill."
 
 ![El Salvador Scene](/images/ba-4.webp)
 

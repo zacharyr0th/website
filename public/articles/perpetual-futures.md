@@ -5,8 +5,8 @@ image:
   src: '/misc/placeholder.webp'
   alt: 'Perpetual Futures'
 description: 'A New Financial Primitive'
-category: 'finance'
-tags: ['crypto', 'finance', 'defi']
+category: 'technology'
+tags: ['crypto']
 ---
 
 <style jsx>{`

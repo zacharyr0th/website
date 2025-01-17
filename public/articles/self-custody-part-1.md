@@ -5,7 +5,7 @@ image:
   src: '/misc/placeholder.webp'
   alt: 'Self Custody: Part 1'
 description: 'More Power, More Responsibility'
-category: 'crypto'
+category: 'technology'
 tags: ['crypto']
 ---
 

@@ -6,7 +6,7 @@ image:
   alt: 'Web 2'
 description: 'Content Creation Networks'
 category: 'technology'
-tags: ['crypto', 'technology']
+tags: ['crypto']
 takeaways:
   - 'Web 2 (2004-Present) transformed the internet into a user-generated content platform, leading to the rise of powerful intermediaries controlling digital distribution channels.'
   - 'The Crisis phase (post-9/11) brought significant changes including the rise of big tech, political polarization, and a shift in how people consume information online.'

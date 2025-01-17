@@ -6,7 +6,7 @@ image:
   alt: 'Search Engine Turbulence'
 description: 'LLMs and the Future of Search Engines'
 category: 'technology'
-tags: ['technology', 'analysis']
+tags: ['ai']
 ---
 
 <style jsx>{`

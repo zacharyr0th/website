@@ -5,8 +5,8 @@ image:
   src: '/misc/placeholder.webp'
   alt: 'Unbanked to Bankless'
 description: 'Crypto fixes this'
-category: 'finance'
-tags: ['crypto', 'finance', 'defi']
+category: 'technology'
+tags: ['crypto']
 takeaways:
   - 'Traditional banking systems leave millions unbanked globally, with rates varying from 0% to over 70% across different countries.'
   - 'Being unbanked restricts access to essential financial services like interest-earning, online payments, and credit, while incurring high fees for basic transactions.'

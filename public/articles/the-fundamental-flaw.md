@@ -5,7 +5,7 @@ image:
   src: /images/flaw-0.webp
   alt: 'The Fundamental Flaw'
 description: 'Onboarding and Offboarding'
-category: 'crypto'
+category: 'technology'
 tags: ['crypto']
 ---
 

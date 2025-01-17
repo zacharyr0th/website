@@ -34,16 +34,14 @@ export const ArticleCard = memo<ArticleCardProps>(({ article, isFocused }) => {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     // Force UTC interpretation
-    const utcDate = new Date(Date.UTC(
-      date.getUTCFullYear(),
-      date.getUTCMonth(),
-      date.getUTCDate()
-    ));
+    const utcDate = new Date(
+      Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate())
+    );
     return utcDate.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
-      timeZone: 'UTC'
+      timeZone: 'UTC',
     });
   };
 

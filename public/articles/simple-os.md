@@ -6,7 +6,7 @@ image:
   alt: 'SimpleOS'
 description: 'BSOD and the Need for a Multi-Layered Kernel'
 category: 'technology'
-tags: ['technology', 'development']
+tags: ['computing']
 ---
 
 <style jsx>{`

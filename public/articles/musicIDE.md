@@ -5,8 +5,8 @@ image:
   src: '/misc/placeholder.webp'
   alt: 'MusicIDE'
 description: 'Cursor + Musescore for Research + Composition'
-category: 'development'
-tags: ['technology', 'development']
+category: 'music'
+tags: ['tech']
 ---
 
 <style jsx>{`

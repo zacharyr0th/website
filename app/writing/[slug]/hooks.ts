@@ -40,7 +40,7 @@ export const useArticles = () => {
   };
 };
 
-const seededShuffle = <T,>(array: T[], seed: number): T[] => {
+const seededShuffle = <T>(array: T[], seed: number): T[] => {
   const shuffled = [...array];
   let currentIndex = shuffled.length;
   const seededRandom = () => {
@@ -61,10 +61,9 @@ const seededShuffle = <T,>(array: T[], seed: number): T[] => {
 };
 
 const filterArticles = (articles: Article[], primaryArticleId: string): Article[] =>
-  articles.filter(article => 
-    !article.frontmatter.featured &&
-    article.id !== primaryArticleId &&
-    !article.frontmatter.draft
+  articles.filter(
+    (article) =>
+      !article.frontmatter.featured && article.id !== primaryArticleId && !article.frontmatter.draft
   );
 
 export const useRandomArticles = (articles: Article[], primaryArticleId: string) => {
@@ -80,8 +79,10 @@ export const useRandomArticles = (articles: Article[], primaryArticleId: string)
         return [];
       }
 
-      return seededShuffle(availableArticles, seed)
-        .slice(0, Math.min(ARTICLE_CONFIG.pagination.featuredCount, availableArticles.length));
+      return seededShuffle(availableArticles, seed).slice(
+        0,
+        Math.min(ARTICLE_CONFIG.pagination.featuredCount, availableArticles.length)
+      );
     },
     [availableArticles]
   );
@@ -91,4 +92,4 @@ export const useRandomArticles = (articles: Article[], primaryArticleId: string)
     refreshRandomArticles: () => getRandomArticles(Date.now()),
     isLoading: false,
   };
-}; 
+};

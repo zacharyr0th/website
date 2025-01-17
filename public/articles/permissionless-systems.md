@@ -5,8 +5,8 @@ image:
   src: '/misc/placeholder.webp'
   alt: 'Permissionless Systems'
 description: 'Understanding DeFi, NFTs, and DAOs'
-category: 'defi'
-tags: ['defi', 'crypto']
+category: 'technology'
+tags: ['crypto']
 ---
 
 <style jsx>{`

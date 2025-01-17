@@ -5,7 +5,7 @@ image:
   src: '/misc/placeholder.webp'
   alt: 'Self Custody: Part 2'
 description: 'Opportunities and Consequences'
-category: 'crypto'
+category: 'technology'
 tags: ['crypto']
 ---
 

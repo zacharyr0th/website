@@ -6,7 +6,7 @@ image:
   alt: 'Web 1'
 description: 'Content Delivery Networks'
 category: 'technology'
-tags: ['crypto', 'technology']
+tags: ['crypto']
 takeaways:
   - "Web 1 (1990-2004) was characterized by content delivery networks, coinciding with the Strauss-Howe theory's 'Unraveling' period of weak institutions and strong individualism."
   - "The generational dynamics between Nomads and Heroes shaped Web 1's development, with Nomads leading during the Unraveling and Heroes (Millennials) emerging to challenge existing structures."

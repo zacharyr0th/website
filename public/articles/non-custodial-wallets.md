@@ -5,7 +5,7 @@ image:
   src: '/misc/placeholder.webp'
   alt: 'Non-Custodial Wallets'
 description: 'A Primer on Self Custody'
-category: 'crypto'
+category: 'technology'
 tags: ['crypto']
 ---
 

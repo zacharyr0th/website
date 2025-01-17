@@ -6,7 +6,7 @@ image:
   alt: "A Bird's Eye View"
 description: 'Why use a blockchain?'
 category: 'technology'
-tags: ['crypto', 'defi']
+tags: ['crypto']
 takeaways:
   - 'Traditional banking systems suffer from regulatory violations and conflicts of interest'
   - 'DeFi provides stable coins, censorship resistance, and democratized access to financial services'
@@ -44,7 +44,7 @@ The two primary objectives are:
 1. Maximum employment, which is not a specific unemployment rate.
 2. Price stability, which the Fed has interpreted as targeting 2% inflation over time.
 
-The Fed seeks to achieve these goals through various monetary policy tools, primarily by adjusting interest rates and managing the money supply. The 2% inflation target wasn't officially adopted until 2012 when the Federal Open Market Committee (FOMC) explicitly stated this goal.
+The Fed seeks to achieve these goals through various monetary policy tools, primarily by adjusting interest rates and managing the money supply. The 2% inflation target wasn't officially adopted until 2012, when the Federal Open Market Committee (FOMC) explicitly stated this goal.
 
 Although there are spikes, interest rates have been trending down for centuries.
 
@@ -84,7 +84,7 @@ While China's response represents an extreme case of centralization and censorsh
 
 Crypto builders have developed various approaches to generating yields with varying degrees of legitimacy and sustainability. Some mechanisms represent genuine financial innovation, but others - particularly centralized platforms like the now-defunct Celsius - have proved to be poorly regulated and over-leveraged systems that misrepresented risks. I met Alex Mashinsky, Celsius' CEO, a few months before the collapse, and he was dead-eyed. On the other hand, liquidity pools are an example of legitimate yield generation that democratizes access to trading profits.
 
-As opposed to centralized platforms like Celsius, Automated Market Makers (AMMs) are smart contracts deployed on blockchains that enable asset trading through algorithmically managed liquidity pools—which is effectively what a DEX is. These systems compensate liquidity providers in two primary ways: through a share of trading fees or through incentive token distributions.
+Unlike centralized platforms like Celsius, Automated Market Makers (AMMs) are smart contracts deployed on blockchains that enable asset trading through algorithmically managed liquidity pools—which is effectively what a DEX is. These systems compensate liquidity providers in two primary ways: through a share of trading fees or incentive token distributions.
 
 Below are the top DEXes by 7-day average fees across various blockchains:
 
@@ -98,7 +98,7 @@ Ryan Selkis, the CEO of Messari, recently published a [thread](https://twitter.c
 
 The emergence of Defi represents more than just a technological evolution in financial services—it marks a fundamental shift in how we think about and interact with money. Traditional financial systems have been the backbone of global commerce for centuries, but their limitations have become increasingly apparent in the digital age. Defi's promise lies in providing solutions addressing core limitations: accessibility, transparency, and censorship resistance.
 
-The future of finance likely lies in thoughtful integration of traditional and Defi systems, each serving its optimal purpose. Defi offers battle-tested, practical solutions today for those seeking alternatives—whether due to economic instability, political censorship, or a desire for financial autonomy.
+The future of finance likely lies in the thoughtful integration of traditional and Defi systems, each serving its optimal purpose. Defi offers battle-tested, practical solutions today for those seeking alternatives—whether due to economic instability, political censorship, or a desire for financial autonomy.
 
 # Relevant Perspectives
 
