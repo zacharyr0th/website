@@ -1,6 +1,6 @@
 ---
 title: 'Blockchains in Africa'
-date: '2024-10-25'
+date: '2022-05-22'
 image:
   src: '/images/ba-0.webp'
   alt: 'Blockchains in Africa'

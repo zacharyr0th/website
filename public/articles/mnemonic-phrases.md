@@ -4,7 +4,7 @@ date: '2022-11-05'
 image:
   src: '/misc/placeholder.webp'
   alt: 'Mnemonic Phrases'
-description: 'Entropy is the foundation of it all'
+description: 'Derived from entropy'
 category: 'technology'
 tags: ['crypto']
 takeaways:
