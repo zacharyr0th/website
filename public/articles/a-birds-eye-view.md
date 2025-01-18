@@ -1,6 +1,6 @@
 ---
 title: "A Bird's Eye View"
-date: '2023-12-31'
+date: '2022-10-19'
 image:
   src: '/misc/placeholder.webp'
   alt: "A Bird's Eye View"

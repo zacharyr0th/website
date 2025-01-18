@@ -1,6 +1,6 @@
 ---
 title: 'SimpleOS'
-date: '2023-12-31'
+date: '2024-07-10'
 image:
   src: /images/simpleos-0.webp
   alt: 'SimpleOS'

@@ -1,6 +1,6 @@
 ---
 title: 'Search Engine Turbulence'
-date: '2023-12-31'
+date: '2023-03-10'
 image:
   src: /images/bing-0.webp
   alt: 'Search Engine Turbulence'
@@ -9,31 +9,10 @@ category: 'technology'
 tags: ['ai']
 ---
 
-<style jsx>{`
- .prose a {
-    text-decoration: underline;
-    color: var(--color-accent);
- }
- .prose ol {
-    list-style-type: decimal;
-    margin-left: 2em; /* Adjust as needed for indentation */
-    padding-left: 0.5em; /* Add padding if needed */
- }
- .prose ol li {
-    margin-bottom: 0.5em;
-    color: var(--color-text-primary);
-    line-height: 1.5; /* Adjust line height for better readability */
- }
-`}</style>
-
-<div class="tldr-section">
-
 LLMs introduce a new form of search. They can answer questions, provide summaries, and
 generate content based on learned data. They're the first real challenge to Google's
 long-standing dominance and are sure to cause turmoil in the search engine market in the
 coming years.
-
-</div>
 
 ## The AI Gold Rush
 

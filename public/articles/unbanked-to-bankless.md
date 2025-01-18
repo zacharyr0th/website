@@ -1,6 +1,6 @@
 ---
 title: 'Unbanked to Bankless'
-date: '2023-12-31'
+date: '2022-10-28'
 image:
   src: '/misc/placeholder.webp'
   alt: 'Unbanked to Bankless'

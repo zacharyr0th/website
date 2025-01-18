@@ -1,6 +1,6 @@
 ---
 title: 'Kernel Access'
-date: '2023-12-31'
+date: '2024-08-04'
 image:
   src: '/misc/placeholder.webp'
   alt: 'Kernel Access'

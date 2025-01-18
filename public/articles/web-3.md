@@ -1,6 +1,6 @@
 ---
 title: 'Web 3'
-date: '2023-12-31'
+date: '2022-09-14'
 image:
   src: '/misc/placeholder.webp'
   alt: 'Web 3'

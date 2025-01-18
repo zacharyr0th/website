@@ -1,6 +1,6 @@
 ---
 title: 'Self Custody: Part 1'
-date: '2023-12-31'
+date: '2022-03-10'
 image:
   src: '/misc/placeholder.webp'
   alt: 'Self Custody: Part 1'

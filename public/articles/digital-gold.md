@@ -9,7 +9,6 @@ category: 'finance'
 tags: ['crypto']
 takeaways:
   - 'Bitcoin has evolved from a peer-to-peer payment system to a global store of value and offers advantages over physical gold in portability, divisibility, and verifiability.'
-  - 'Traditional currencies have lost significant value over time due to inflation.'
   - "Gold's value is primarily extrinsic, based on collective belief rather than intrinsic utility."
 ---
 
@@ -19,7 +18,7 @@ Bitcoin was initially intended to be a peer-to-peer medium of exchange, although
 
 Inflation is the rate at which the general price level of goods and services rises. Financial regulators play games with how they measure it, and it's a tool in their arsenal to manipulate the value of their debt over time. It allows them to pay back their debt with less value than they borrowed and keep the difference as profit. Over time, this leads to a loss of purchasing power and increased asset prices, benefiting asset owners (wealthy people) and mainly impacting the working class at the cash register.
 
-Traditional financial systems have been plagued by inflation for centuries. The US Dollar, the world's most dominant currency, has lost 99.9% of its value since 1913. To help the public fend off inflation, the government allows people in the know to purchase bonds that pay a fixed rate of return. This return is typically 2-4%, and banks capitalize on the spread between the rate they pay users in savings accounts and the rate they receive from the government. At one point, interest rates were over 2%, and the savings rate on my JP Morgan Chase savings account was 0.01%. [This tweet](https://x.com/zacharyr0th/status/1829654300450009530) details other tactics banks use to ruse the unknowing.
+Traditional financial systems have been plagued by inflation for centuries. The US Dollar, the world's most dominant currency, has lost 97% of its value since 1913. To help the public fend off inflation, the government allows people in the know to purchase bonds that pay a fixed rate of return. This return is typically 2-4%, and banks capitalize on the spread between the rate they pay users in savings accounts and the rate they receive from the government. At one point, interest rates were over 2%, and the savings rate on my JP Morgan Chase savings account was 0.01%. [This tweet](https://x.com/zacharyr0th/status/1829654300450009530) details other tactics banks use to ruse the unknowing.
 
 ## Stores of Value
 

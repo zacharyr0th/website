@@ -1,6 +1,6 @@
 ---
 title: 'Proof of History'
-date: '2023-12-31'
+date: '2021-11-15'
 image:
   src: '/misc/placeholder.webp'
   alt: 'Proof of History'

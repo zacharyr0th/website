@@ -1,6 +1,6 @@
 ---
 title: 'Liquidity Pools'
-date: '2025-01-18'
+date: '2022-01-14'
 image:
   src: '/misc/placeholder.webp'
   alt: 'Liquidity Pools'

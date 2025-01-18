@@ -1,6 +1,6 @@
 ---
 title: 'The Fundamental Flaw'
-date: '2023-12-31'
+date: '2023-01-08'
 image:
   src: /images/flaw-0.webp
   alt: 'The Fundamental Flaw'

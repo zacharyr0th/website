@@ -1,6 +1,6 @@
 ---
 title: 'Boson Protocol'
-date: '2024-10-25'
+date: '2021-08-21'
 image:
   src: '/images/boson.webp'
   alt: 'Boson Protocol'

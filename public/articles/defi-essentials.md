@@ -1,6 +1,6 @@
 ---
 title: 'DeFi Essentials'
-date: '2024-10-25'
+date: '2021-10-2'
 image:
   src: '/misc/placeholder.webp'
   alt: 'DeFi Essentials'

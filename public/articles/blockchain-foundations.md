@@ -1,6 +1,6 @@
 ---
 title: 'Blockchain Foundations'
-date: '2022-1-9'
+date: '2022-01-09'
 image:
   src: '/misc/placeholder.webp'
   alt: 'Blockchain Foundations'

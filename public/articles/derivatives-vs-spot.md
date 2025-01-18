@@ -1,6 +1,6 @@
 ---
 title: 'Derivatives vs Spot'
-date: '2023-12-31'
+date: '2022-03-02'
 image:
   src: /images/derivatives-0.webp
   alt: 'Derivatives vs Spot'
@@ -10,7 +10,6 @@ tags: ['trading']
 takeaways:
   - 'Market structure significantly influences asset prices.'
   - 'The 1987 market crash led to regulatory changes requiring market makers to provide liquidity, fundamentally altering market dynamics.'
-  - 'Crypto markets differ from traditional markets due to unique whale behavior, multiple exchanges, and less mature derivatives markets, leading to higher volatility.'
 ---
 
 Both traditional and decentralized markets face unique challenges from well-capitalized traders who, through their opinions, can influence illiquidity and volatility.
