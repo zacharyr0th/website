@@ -7,6 +7,9 @@ image:
 description: 'LLMs and the Future of Search Engines'
 category: 'technology'
 tags: ['ai']
+takeaways:
+  - 'LLMs are the first real challenge to Google''s long-standing dominance and are sure to cause turmoil in the search engine market in the coming years.'
+  - 'With ChatGPT, Bing, and other LLMs on the rise, the future of how we use the web is uncertain.'
 ---
 
 LLMs introduce a new form of search. They can answer questions, provide summaries, and

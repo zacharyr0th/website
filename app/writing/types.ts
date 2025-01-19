@@ -10,16 +10,10 @@ export interface ArticleImage {
 export const CATEGORIES = ['technology', 'finance', 'music'] as const;
 export const TAGS = [
   'crypto',
-  'aptos',
-  'solana',
-  'sui',
-  'bitcoin',
-  'ethereum',
-  'technology',
-  'finance',
-  'defi',
-  'kernels',
+  'trading',
+  'computing',
   'theory',
+  'ai',
 ] as const;
 
 /** Core configuration for article management */

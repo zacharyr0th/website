@@ -46,64 +46,125 @@ const transformImage = (
   };
 };
 
+// Add new utility function for string sanitization
+const sanitizeString = (str: string): string => {
+  return str
+    .trim()
+    // Normalize quotes and apostrophes
+    .replace(/['']/g, "'")
+    .replace(/[""]/g, '"')
+    // Convert HTML entities to their actual characters
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
+};
+
 export const validateFrontmatter = (data: unknown): ArticleFrontmatter => {
   const rawData = data as RawFrontmatter;
-  if (!rawData.title) throw new Error('Title is required');
-  if (!rawData.date) throw new Error('Date is required');
-  if (!rawData.description && !rawData.subtitle) throw new Error('Description is required');
-  if (rawData.title.length > ARTICLE_CONFIG.limits.title) {
-    throw new Error(`Title is too long (max ${ARTICLE_CONFIG.limits.title} characters)`);
+  
+  // Required field validation with descriptive errors
+  if (!rawData.title) throw new Error('Title is required in frontmatter');
+  if (!rawData.date) throw new Error('Date is required in frontmatter');
+  if (!rawData.description && !rawData.subtitle) throw new Error('Description or subtitle is required in frontmatter');
+  
+  // Title length validation with sanitized string
+  const sanitizedTitle = sanitizeString(rawData.title);
+  if (sanitizedTitle.length > ARTICLE_CONFIG.limits.title) {
+    throw new Error(`Title is too long: ${sanitizedTitle.length} chars (max ${ARTICLE_CONFIG.limits.title})`);
   }
 
   // Ensure date is in UTC format
-  const date = new Date(rawData.date);
-  const utcDate = new Date(
-    Date.UTC(
-      date.getUTCFullYear(),
-      date.getUTCMonth(),
-      date.getUTCDate(),
-      12 // Set to noon UTC to avoid timezone issues
-    )
-  );
+  let utcDate: Date;
+  try {
+    const date = new Date(rawData.date);
+    utcDate = new Date(
+      Date.UTC(
+        date.getUTCFullYear(),
+        date.getUTCMonth(),
+        date.getUTCDate(),
+        12 // Set to noon UTC to avoid timezone issues
+      )
+    );
+    if (isNaN(utcDate.getTime())) {
+      throw new Error('Invalid date');
+    }
+  } catch (error) {
+    throw new Error(`Invalid date format in frontmatter: ${rawData.date}`);
+  }
   const formattedDate = utcDate.toISOString();
 
-  const description = rawData.description || rawData.subtitle;
+  // Description validation with sanitized string
+  const description = sanitizeString(rawData.description || rawData.subtitle || '');
   if (description && description.length > ARTICLE_CONFIG.limits.description) {
     throw new Error(
-      `Description is too long (max ${ARTICLE_CONFIG.limits.description} characters)`
+      `Description is too long: ${description.length} chars (max ${ARTICLE_CONFIG.limits.description})`
     );
   }
 
-  const category =
-    rawData.category && CATEGORIES.includes(rawData.category as ArticleCategory)
-      ? (rawData.category as ArticleCategory)
-      : null;
+  // Category validation with helpful error message
+  let category: ArticleCategory | null = null;
+  if (rawData.category) {
+    const sanitizedCategory = sanitizeString(rawData.category);
+    if (!CATEGORIES.includes(sanitizedCategory as ArticleCategory)) {
+      throw new Error(
+        `Invalid category "${sanitizedCategory}". Must be one of: ${CATEGORIES.join(', ')}`
+      );
+    }
+    category = sanitizedCategory as ArticleCategory;
+  }
 
-  const tags =
-    rawData.tags && Array.isArray(rawData.tags)
-      ? Array.from(
-          new Set(
-            rawData.tags
-              .filter((tag): tag is string => typeof tag === 'string')
-              .map((tag) => tag.toLowerCase())
-              .filter((tag): tag is ArticleTag => TAGS.includes(tag as ArticleTag))
-          )
-        )
-      : [];
+  // Tags validation and normalization with sanitization
+  const tags = new Set<ArticleTag>();
+  if (rawData.tags && Array.isArray(rawData.tags)) {
+    for (const tag of rawData.tags) {
+      if (typeof tag !== 'string') {
+        throw new Error(`Invalid tag type: ${typeof tag}. Tags must be strings`);
+      }
+      const sanitizedTag = sanitizeString(tag).toLowerCase();
+      if (!TAGS.includes(sanitizedTag as ArticleTag)) {
+        throw new Error(
+          `Invalid tag "${sanitizedTag}". Must be one of: ${TAGS.join(', ')}`
+        );
+      }
+      tags.add(sanitizedTag as ArticleTag);
+    }
+  }
 
-  const takeaways =
-    rawData.takeaways?.filter((takeaway): takeaway is string => typeof takeaway === 'string') ||
-    null;
+  // Takeaways validation with sanitization
+  const takeaways = rawData.takeaways 
+    ? rawData.takeaways
+        .map(takeaway => {
+          if (typeof takeaway !== 'string') {
+            console.warn(`Invalid takeaway type: ${typeof takeaway}. Takeaways must be strings`);
+            return null;
+          }
+          return sanitizeString(takeaway);
+        })
+        .filter((t): t is string => t !== null)
+    : null;
+
+  // Image validation and sanitization
+  const image = rawData.image ? transformImage(
+    typeof rawData.image === 'string' 
+      ? sanitizeString(rawData.image)
+      : {
+          src: sanitizeString(rawData.image.src),
+          alt: rawData.image.alt ? sanitizeString(rawData.image.alt) : ''
+        },
+    sanitizedTitle
+  ) : null;
 
   return {
-    title: rawData.title,
+    title: sanitizedTitle,
     date: formattedDate,
-    description: description || '',
+    description: description,
     category,
-    tags,
-    image: transformImage(rawData.image, rawData.title),
-    featured: rawData.featured || false,
-    draft: rawData.draft || false,
+    tags: Array.from(tags),
+    image,
+    featured: Boolean(rawData.featured),
+    draft: Boolean(rawData.draft),
     takeaways,
   };
 };

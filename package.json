@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@vercel/analytics": "^1.4.1",
-    "caniuse-lite": "^1.0.30001692",
+    "caniuse-lite": "^1.0.30001695",
     "clsx": "^2.1.1",
     "framer-motion": "^10.18.0",
     "gray-matter": "^4.0.3",

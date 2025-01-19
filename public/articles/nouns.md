@@ -4,7 +4,7 @@ date: '2021-08-01'
 image:
   src: /images/nouns-0.webp
   alt: 'Nouns'
-description: 'There is a New One Every Day'
+description: 'There is a new one every day'
 category: 'technology'
 tags: ['crypto']
 takeaways:
