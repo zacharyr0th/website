@@ -108,8 +108,9 @@ const ArticleContent = memo<ArticleContentProps>(
       }, [prevArticle, router]),
       trackMouse: false,
       preventScrollOnSwipe: true,
-      delta: 10,
+      delta: 50,
       swipeDuration: 500,
+      touchEventOptions: { passive: false }
     });
 
     const handleHeaderClick = useCallback((id: string) => {
@@ -148,8 +149,8 @@ const ArticleContent = memo<ArticleContentProps>(
 
     return (
       <div className="min-h-screen bg-gradient-to-b from-background to-surface/30">
-        <main className="container mx-auto px-6 sm:px-8 pt-16 sm:pt-36 pb-16">
-          <div style={{ maxWidth: 'var(--article-width)' }} className="mx-auto space-y-4">
+        <main className="container mx-auto px-4 sm:px-6 pt-8 sm:pt-16 pb-16">
+          <div style={{ maxWidth: 'var(--article-width)' }} className="mx-auto">
             <article className={styles.article} aria-labelledby="article-title">
               <ArticleHeader title={title} description={description} />
 

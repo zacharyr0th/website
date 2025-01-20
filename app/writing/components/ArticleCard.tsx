@@ -32,30 +32,32 @@ export const ArticleCard = memo<ArticleCardProps>(({ article, isFocused }) => {
       tabIndex={0}
     >
       <article
-        className={`flex flex-col justify-between p-6 group rounded-xl transition-all duration-200 ${
+        className={`flex flex-col justify-between p-4 sm:p-6 group rounded-xl transition-all duration-200 ${
           isFocused ? 'bg-zinc-800/50' : 'hover:bg-zinc-800/50 bg-inherit'
         }`}
       >
-        <div className="space-y-4">
+        <div className="space-y-3">
           <div>
             <h2
-              className={`text-2xl font-semibold transition-colors ${
+              className={`text-xl sm:text-2xl font-semibold transition-colors ${
                 isFocused ? 'text-accent' : 'text-zinc-100 group-hover:text-accent'
               }`}
             >
               {article.title || 'Untitled Article'}
             </h2>
             {article.description && (
-              <p className="text-base text-zinc-400 leading-relaxed mt-2">{article.description}</p>
+              <p className="text-sm sm:text-base text-zinc-400 leading-relaxed mt-2 line-clamp-2">
+                {article.description}
+              </p>
             )}
           </div>
         </div>
 
-        <div>
-          <div className="flex items-center justify-between text-sm text-zinc-400">
+        <div className="mt-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-sm text-zinc-400">
             <div className="flex items-center gap-2">
               {article.date && (
-                <time className="tabular-nums" dateTime={article.date}>
+                <time className="tabular-nums text-sm" dateTime={article.date}>
                   {formatDate(article.date)}
                 </time>
               )}
@@ -66,7 +68,7 @@ export const ArticleCard = memo<ArticleCardProps>(({ article, isFocused }) => {
                 {article.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="inline-flex items-center px-2.5 py-1 text-xs font-medium bg-white/5 text-zinc-400 rounded-md"
+                    className="inline-flex items-center px-2 py-0.5 text-xs font-medium bg-white/5 text-zinc-400 rounded-md"
                   >
                     {tag}
                   </span>
