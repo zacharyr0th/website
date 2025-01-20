@@ -49,55 +49,46 @@ export const viewport: Viewport = {
 
 // Metadata configuration
 export const metadata: Metadata = {
-  title: createTitleTemplate('%s'),
-  description: CONFIG.site.description,
-  metadataBase: new URL(CONFIG.site.url),
-  manifest: '/manifest.json',
-  
-  icons: {
-    icon: [
-      { url: '/misc/favicon.ico', sizes: '48x48' },
-      { url: '/misc/favicon.ico', sizes: '32x32' },
-      { url: '/misc/favicon.ico', sizes: '16x16' },
-    ],
-    apple: [
-      { url: '/icons/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
-    ],
+  title: {
+    template: '%s | Zachary Roth',
+    default: 'Zachary Roth',
   },
-
+  description: 'Software Engineer',
+  applicationName: 'zacharyr0th.com',
+  authors: [{ name: 'Zachary Roth', url: 'https://zacharyr0th.com' }],
+  generator: 'Next.js',
+  keywords: ['Zachary Roth', 'Software Engineer', 'Developer', 'Engineer', 'Portfolio'],
+  referrer: 'origin-when-cross-origin',
+  robots: 'index, follow',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#000000' },
+  ],
+  manifest: '/manifest.json',
+  formatDetection: {
+    telephone: false,
+    date: false,
+    address: false,
+    email: false,
+    url: false,
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: CONFIG.site.name,
+    title: 'Zachary Roth',
   },
-
-  openGraph: {
-    type: 'website',
-    locale: CONFIG.site.locale,
-    url: CONFIG.site.url,
-    siteName: CONFIG.site.name,
-    title: createTitleTemplate('%s'),
-    description: CONFIG.site.description,
-    images: [CONFIG.images.profile],
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+    viewportFit: 'cover',
   },
-
-  twitter: {
-    card: 'summary',
-    title: createTitleTemplate('%s'),
-    description: CONFIG.site.description,
-    creator: CONFIG.site.creator,
-    images: [CONFIG.images.profile],
-  },
-
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+  verification: {
+    google: 'google',
+    other: {
+      me: ['https://github.com/zacharyr0th'],
     },
   },
+  category: 'technology',
 };

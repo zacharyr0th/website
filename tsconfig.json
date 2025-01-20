@@ -1,78 +1,27 @@
 {
   "compilerOptions": {
-    // Language and Environment
     "target": "es2022",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "jsx": "preserve",
-    // Modules
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "bundler",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./app/*"],
-      "@components/*": ["./app/components/*"],
-      "@styles/*": ["./app/styles/*"],
-      "@lib/*": ["./app/lib/*"],
-      "@utils/*": ["./app/utils/*"],
-      "@types/*": ["./app/types/*"],
-      "@projects/*": ["./app/projects/*"],
-      "@hooks/*": ["./app/hooks/*"],
-      "@constants/*": ["./app/constants/*"]
-    },
-    // JavaScript Support
-    "allowJs": true,
     "resolveJsonModule": true,
-    // Emit
-    "noEmit": true,
-    "incremental": true,
-    // Type Checking
-    "strict": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "strictBindCallApply": true,
-    "strictPropertyInitialization": true,
-    "noImplicitThis": true,
-    "useUnknownInCatchVariables": true,
-    "alwaysStrict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "exactOptionalPropertyTypes": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true,
-    "allowUnusedLabels": false,
-    "allowUnreachableCode": false,
-    // Module Resolution
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
-    "verbatimModuleSyntax": true,
-    // Optimization and Performance
-    "skipLibCheck": true,
-    // Type Declarations
-    "typeRoots": ["./node_modules/@types", "./app/types"],
-    "types": ["node", "react", "react-dom", "jest"],
-    // Plugins
+    "jsx": "preserve",
+    "incremental": true,
     "plugins": [
       {
         "name": "next"
       }
-    ]
+    ],
+    "paths": {
+      "@/*": ["./app/*"]
+    }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "app/**/*.ts",
-    "app/**/*.tsx",
-    "lib/**/*.ts",
-    "lib/**/*.tsx",
-    "global.d.ts",
-    "tailwind.config.ts"
-  ],
-  "exclude": ["node_modules", ".next", "out", "coverage", "**/*.test.ts", "**/*.test.tsx"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }

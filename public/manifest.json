@@ -1,39 +1,10 @@
 {
   "name": "Zachary Roth",
-  "short_name": "ZR",
-  "description": "Personal website and blog of Zachary Roth",
+  "short_name": "zacharyr0th",
+  "description": "Software Engineer",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#000000",
+  "background_color": "#ffffff",
   "theme_color": "#000000",
-  "icons": [
-    {
-      "src": "/misc/favicon.ico",
-      "sizes": "48x48",
-      "type": "image/x-icon",
-      "purpose": "any"
-    },
-    {
-      "src": "/misc/favicon.ico",
-      "sizes": "16x16",
-      "type": "image/x-icon",
-      "purpose": "any"
-    },
-    {
-      "src": "/misc/favicon.ico",
-      "sizes": "32x32",
-      "type": "image/x-icon",
-      "purpose": "any"
-    },
-    {
-      "src": "/icons/apple-touch-icon.png",
-      "sizes": "180x180",
-      "type": "image/png",
-      "purpose": "any"
-    }
-  ],
-  "prefer_related_applications": false,
-  "categories": ["productivity", "utilities"],
-  "screenshots": [],
-  "shortcuts": []
+  "orientation": "portrait-primary"
 }
