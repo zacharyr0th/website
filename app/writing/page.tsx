@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { getArticles } from './[slug]/articles';
+import { getArticles } from './lib/articles';
 import { LoadingState } from '../lib/Loading';
 import WritingPageClient from './components/WritingPageClient';
 import { containerVariants } from '../lib/animations';

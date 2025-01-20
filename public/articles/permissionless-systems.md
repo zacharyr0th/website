@@ -8,15 +8,15 @@ description: 'Understanding DeFi, NFTs, and DAOs'
 category: 'technology'
 tags: ['crypto']
 takeaways:
- - 'Permissionless systems are decentralized networks open to everyone at any time.'
- - 'The capabilities of permissionless systems are limited by the infrastructure and limit of developer creativity.'
+  - 'Permissionless systems are decentralized networks open to everyone at any time.'
+  - 'The capabilities of permissionless systems are limited by the infrastructure and limit of developer creativity.'
 ---
 
 Blockchains are permissionless systems. They enable app builders to create decentralized applications open to everyone anytime. These apps are built directly on a blockchain and utilize its settlement layer to perform their functions, usually in centralized databases and cloud services. They can be anything from a messaging service to a trading platform.
 
 # New Economies
 
-There are thousands of apps built across hundreds of blockchains, and most of their utility and function can be categorized into the DeFi, NFT, or DAO industries. Some apps allow users to earn yields of billions of dollars, while others are built purely to serve as infrastructure, such as bridges between blockchains. 
+There are thousands of apps built across hundreds of blockchains, and most of their utility and function can be categorized into the DeFi, NFT, or DAO industries. Some apps allow users to earn yields of billions of dollars, while others are built purely to serve as infrastructure, such as bridges between blockchains.
 
 New apps like Lens, an on-chain social network, and Rabbit Hole, an on-chain credentialing service, are gaining popularity, and it will be interesting to see how burgeoning sub-industries like digital fashion and decentralized science movements evolve. These apps are similar to regular websites but use blockchains, a framework different from the regular internet, so their capabilities differ.
 
@@ -53,7 +53,7 @@ This regulatory framework hurts US investors, as they are left with a small sele
 
 The global monetary system is inconsistent. Evidence suggests that new international reserve currencies emerge every few centuries. Billionaire investor and Bitcoin advocate Ray Dahlio, among others, theorizes that the USD's current reserve status is declining and that other currencies will rise in global prominence.
 
-While compelling, this theory conflicts with other geopolitical commentators, such as Peter Zeihan, who argues that falling populations and supply chain issues will halt the advancements of many emerging markets over the next century. Peter argues that the global macroeconomic environment has moved into unprecedented territory and that the previous framework won't accommodate what will happen. 
+While compelling, this theory conflicts with other geopolitical commentators, such as Peter Zeihan, who argues that falling populations and supply chain issues will halt the advancements of many emerging markets over the next century. Peter argues that the global macroeconomic environment has moved into unprecedented territory and that the previous framework won't accommodate what will happen.
 
 Also compelling.
 

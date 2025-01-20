@@ -99,10 +99,77 @@ _Test taken on 2025-01-05 - [link to live lighthouse report](https://lighthouse-
 
 - `npm run dev` - Development (port 3000)
 - `npm run build` - Production build
-- `npm run start` - Production server
-- `npm run check` - Type/lint checks
-- `npm run clean` - Clean build files
+- `npm run reset` - Resets Everything
 
 ## License
 
 MIT License - See [LICENSE](./LICENSE) file for details.
+
+# Article System Documentation
+
+A modern, responsive article system built with Next.js, TypeScript, and CSS Modules. The system supports rich article content with features like table of contents, key takeaways, and responsive images.
+
+## Directory Structure
+
+```
+app/
+├── writing/
+│   ├── components/
+│   │   ├── ArticleCard.tsx         # Card component for article previews
+│   │   ├── ArticleContent.tsx      # Main article content component
+│   │   ├── ArticleClientContent.tsx # Client-side wrapper for article content
+│   │   └── article.module.css      # Styles for article components
+│   ├── lib/
+│   │   ├── articles.ts            # Core article management functionality
+│   │   ├── hooks.ts              # Custom hooks for article data
+│   │   └── utils.ts              # Utility functions
+│   ├── types.ts                  # TypeScript types for articles
+│   ├── page.tsx                  # Writing section main page
+│   └── [slug]/
+│       └── page.tsx              # Individual article pages
+└── public/
+    └── articles/                 # Markdown files for articles
+```
+
+## Features
+
+- **Responsive Design**: Adapts seamlessly to different screen sizes
+- **Article Components**:
+  - Table of Contents with collapsible sections
+  - Key Takeaways section
+  - Featured image support
+  - Rich typography with responsive sizing
+  - Code syntax highlighting
+  - Blockquotes and tables
+- **Navigation**:
+  - Next/Previous article navigation
+  - Swipe gestures on mobile
+  - Anchor links for headings
+- **Performance**:
+  - Client-side caching
+  - Optimized image loading
+  - CSS module composition
+  - Memoized components
+
+## Article Format
+
+Articles are written in Markdown with frontmatter:
+
+```yaml
+---
+title: Article Title
+date: YYYY-MM-DD
+description: Brief description
+category: technology | finance | music
+tags: [crypto, trading, computing, theory, ai]
+image:
+  src: /path/to/image.jpg
+  alt: Image description
+featured: true | false
+draft: true | false
+takeaways:
+  - Key point 1
+  - Key point 2
+---
+Article content in Markdown...
+```

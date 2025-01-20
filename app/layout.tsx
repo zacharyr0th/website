@@ -16,6 +16,7 @@ const inter = Inter({
   variable: '--font-sans',
   preload: true,
   fallback: ['system-ui', 'arial'],
+  adjustFontFallback: true,
 });
 
 const mono = JetBrains_Mono({
@@ -24,6 +25,7 @@ const mono = JetBrains_Mono({
   variable: '--font-mono',
   preload: true,
   fallback: ['monospace'],
+  adjustFontFallback: true,
 });
 
 interface RootLayoutProps {
@@ -31,6 +33,21 @@ interface RootLayoutProps {
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
+  const cspContent = `
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com;
+    style-src 'self' 'unsafe-inline';
+    img-src 'self' data: https:;
+    font-src 'self' data: https://fonts.gstatic.com;
+    connect-src 'self' https://www.google-analytics.com;
+    frame-ancestors 'none';
+    form-action 'self';
+    base-uri 'self';
+    upgrade-insecure-requests;
+  `
+    .replace(/\s+/g, ' ')
+    .trim();
+
   return (
     <html
       lang="en"
@@ -48,10 +65,18 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 
+        {/* Security headers */}
+        <meta httpEquiv="Content-Security-Policy" content={cspContent} />
+        <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
+        <meta httpEquiv="X-Frame-Options" content="DENY" />
+        <meta httpEquiv="X-XSS-Protection" content="1; mode=block" />
+        <meta httpEquiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+        <meta httpEquiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
+
         {/* Performance optimizations */}
-        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
         {/* Analytics with improved loading */}
         <Script

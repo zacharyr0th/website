@@ -1,13 +1,3 @@
-/**
- * Global Styles
- * 
- * Structure:
- * 1. Tailwind Directives
- * 2. Theme Variables
- * 3. Base Styles (@layer base)
- * 4. Utility Classes (@layer utilities)
- */
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -30,7 +20,7 @@
 
   /* Typography */
   --font-size-base: clamp(0.875rem, 1vw, 0.9rem);
-  --line-height-base: 1.6;
+  --line-height-base: 1.5;
 
   /* Spacing */
   --spacing-unit: 0.25rem;
@@ -60,9 +50,10 @@
   /* Layout */
   --header-height: max(56px, 4vh);
   --footer-height: max(56px, 4vh);
-  --max-content-width: min(1200px, 95vw);
-  --max-reading-width: min(70ch, 98%);
-  --article-width: min(720px, 98%);
+  --max-content-width: min(720px, 100%);
+  --max-content-width-wide: min(1200px, 100%);
+  --max-reading-width: min(65ch, 100%);
+  --article-width: min(720px, 100%);
   --sidebar-width: 280px;
   --min-touch-target: 44px;
 
@@ -89,22 +80,23 @@
 
 @layer base {
   html {
-    font-size: 90%;
+    font-size: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
   }
 
   body {
     @apply bg-background text-text-primary min-h-screen;
     font-family: var(--font-mono);
     line-height: var(--line-height-base);
+    font-size: var(--font-size-base);
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
   }
 
   /* Typography */
-  a {
-    @apply text-accent transition-colors hover:text-[var(--color-accent-hover)];
-  }
-
   h1,
   h2,
   h3,
@@ -112,41 +104,19 @@
   h5,
   h6 {
     @apply font-mono font-bold text-text-primary;
-  }
-
-  /* Responsive heading sizes */
-  h1 {
-    @apply text-4xl md:text-5xl mt-12 mb-8;
-  }
-  h2 {
-    @apply text-3xl md:text-4xl mt-10 mb-6;
-  }
-  h3 {
-    @apply text-2xl md:text-3xl mt-8 mb-4;
-  }
-  h4 {
-    @apply text-xl md:text-2xl mt-6 mb-3;
-  }
-  h5 {
-    @apply text-lg md:text-xl mt-4 mb-2;
-  }
-  h6 {
-    @apply text-base md:text-lg mt-4 mb-2;
-  }
-
-  /* Remove top margin from first headings */
-  :where(section, article, div) > :where(h1, h2, h3, h4, h5, h6):first-child {
-    @apply mt-0;
+    line-height: 1.2;
   }
 
   /* Content Elements */
   button {
     @apply font-mono;
   }
+
   ul,
   ol {
-    @apply list-inside mb-6;
+    @apply list-inside;
   }
+
   pre,
   code {
     @apply font-mono bg-surface px-1 py-0.5 rounded-lg bg-opacity-50;
@@ -157,45 +127,15 @@
   Image {
     @apply w-full h-auto;
   }
+
   figure,
   .image-container {
     @apply overflow-hidden;
   }
 
-  /* Article Images */
-  article figure.featured {
-    @apply mb-12 relative aspect-video overflow-hidden;
-    img,
-    Image {
-      @apply w-full h-full object-cover;
-    }
-  }
-
-  /* Prose Images */
-  .prose {
-    img {
-      @apply my-8 w-full;
-    }
-    figure {
-      @apply my-8;
-    }
-    figure img {
-      @apply my-0;
-    }
-    td img {
-      @apply my-0;
-    }
-  }
-
-  /* Profile Images */
-  .profile-image img,
-  .profile-image Image {
-    @apply rounded-full;
-  }
-
   @media (max-width: 640px) {
     article {
-      @apply px-4;
+      @apply w-full max-w-full mx-0;
     }
   }
 }
@@ -254,6 +194,11 @@
   .content-container {
     @apply mx-auto px-4;
     max-width: var(--max-content-width);
+  }
+
+  .content-container-wide {
+    @apply mx-auto px-4;
+    max-width: var(--max-content-width-wide);
   }
 
   .reading-container {

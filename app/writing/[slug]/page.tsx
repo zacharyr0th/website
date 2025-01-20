@@ -1,5 +1,5 @@
-import { getArticle, getArticles, createArticle } from './articles';
-import ArticleContent from './ArticleContent';
+import { getArticle, getArticles, createArticle } from '../lib/articles';
+import ArticleContent from '../components/ArticleContent';
 import { Suspense } from 'react';
 import { LoadingState } from '../../lib/Loading';
 
@@ -23,7 +23,7 @@ export default async function ArticlePage({ params }: PageProps) {
   if (!rawArticle) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-background to-surface/30">
-        <main className="container mx-auto px-6 sm:px-8 pt-16 sm:pt-36 pb-24">
+        <main className="container mx-auto px-6 sm:px-8 sm:pt-36 pb-24">
           <div className="text-center">
             <h1 className="text-4xl font-bold mb-4">404</h1>
             <p className="text-lg text-text-secondary">Article not found</p>
@@ -41,8 +41,8 @@ export default async function ArticlePage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-surface/30">
-      <main className="container mx-auto px-6 sm:px-8 pt-16 sm:pt-36 pb-24">
-        <div style={{ maxWidth: 'var(--article-width)' }} className="mx-auto">
+      <main className="container mx-auto px-6 sm:px-8 sm:pt-18 pb-24">
+        <div style={{ maxWidth: 'var(--article-width)' }} className="mx-auto space-y-6">
           <Suspense
             fallback={
               <LoadingState

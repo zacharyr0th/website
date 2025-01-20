@@ -20,7 +20,7 @@ A recent [incident](/writing/a-simple-operating-system) involving the BSOD demon
 
 # Hidden in Plain Sight
 
-The following is a list of applications that may require kernel access. A good rule of thumb is to limit kernel access to only the most necessary applications.
+The following is a list of applications that may require kernel access. A good rule of thumb is to limit kernel access to only the most necessary applications. Be vigilant about which software you allow this level of access to—reserve it for what's necessary and trust only reputable developers unless you know what you're doing.
 
 | Application                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -33,9 +33,3 @@ The following is a list of applications that may require kernel access. A good r
 | Disk Management Tools           | Disk management tools may require kernel-level access to perform low-level disk operations efficiently. This allows for direct manipulation of partition tables, file systems, and disk structures.                                                                                                                                                                                                                                                              |
 | VPN Clients                     | Some VPN implementations use kernel-level drivers to enhance performance, security, and integration with the operating system's networking stack. Kernel-mode VPN components can bypass user-mode processing to provide better throughput and lower latency. They can also offer stronger security by intercepting network traffic at a lower level, though this deep integration also increases the potential security risk if the VPN software is compromised. |
 | Development and Debugging Tools | Development and debugging tools may utilize kernel-level access to provide essential low-level system access and debugging capabilities for system-level programming, driver development, and operating system internals analysis. These tools can inspect and modify kernel memory, set hardware breakpoints, and analyze system crashes.                                                                                                                       |
-
-# That's All
-
-Be vigilant about which software you allow this level of access to—reserve it for what's truly necessary and trust only reputable developers unless you know what you're doing.
-
-A little caution goes a long way in keeping your systems secure.

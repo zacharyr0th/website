@@ -8,11 +8,11 @@ description: 'A Primer on Self Custody'
 category: 'technology'
 tags: ['crypto']
 takeaways:
- - 'Non-custodial wallets give you complete control over your assets through recovery phrases and private keys that only you can access when handled correctly.'
- - 'Unlike exchange wallets, they cant be frozen and give you abilities on-chain that are only possible with self-custody.'
+  - 'Non-custodial wallets give you complete control over your assets through recovery phrases and private keys that only you can access when handled correctly.'
+  - 'Unlike exchange wallets, they cant be frozen and give you abilities on-chain that are only possible with self-custody.'
 ---
 
-Crypto wallets come in all shapes and sizes, and non-custodial wallets give you, and only you, control over your assets. 
+Crypto wallets come in all shapes and sizes, and non-custodial wallets give you, and only you, control over your assets.
 
 It does so through a recovery phrase, which you can only access when generated. From this recovery phrase, a private key is generated. A private key is a secret code that your wallet uses to log in and verify cryptocurrency transactions you send from your wallet. These keys are governed by mathematical functions that prove the funds are yours and that no one else has access to or can recover them. From your private key, a public key is generated. A public key is a label used to identify your wallet on the blockchain and is what you use to send and receive funds.
 

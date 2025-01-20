@@ -3,6 +3,7 @@
 import React, { memo } from 'react';
 import Link from 'next/link';
 import type { Article } from '../types';
+import { formatDate } from '../lib/utils';
 
 interface ArticleCardProps {
   article: Article;
@@ -13,37 +14,11 @@ export const ArticleCard = memo<ArticleCardProps>(({ article, isFocused }) => {
   const linkRef = React.useRef<HTMLAnchorElement>(null);
   const isFeatured = article.frontmatter.featured;
 
-  const sortTags = (tags: readonly string[]) => {
-    const tagOrder = ['crypto', 'defi', 'bitcoin', 'ethereum', 'solana'];
-    const lowerTags = tags.map((t) => t.toLowerCase());
-
-    // Return tags in reverse order so crypto appears rightmost
-    return tagOrder
-      .filter((tag) => lowerTags.includes(tag))
-      .map((tag) => tags.find((t) => t.toLowerCase() === tag)!)
-      .concat(tags.filter((tag) => !tagOrder.includes(tag.toLowerCase())))
-      .reverse();
-  };
-
   React.useEffect(() => {
     if (isFocused && linkRef.current) {
       linkRef.current.focus();
     }
   }, [isFocused]);
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    // Force UTC interpretation
-    const utcDate = new Date(
-      Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate())
-    );
-    return utcDate.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      timeZone: 'UTC',
-    });
-  };
 
   return (
     <Link
@@ -88,7 +63,7 @@ export const ArticleCard = memo<ArticleCardProps>(({ article, isFocused }) => {
 
             {article.tags && article.tags.length > 0 && (
               <div className="flex flex-wrap items-center gap-2">
-                {sortTags(article.tags).map((tag) => (
+                {article.tags.map((tag) => (
                   <span
                     key={tag}
                     className="inline-flex items-center px-2.5 py-1 text-xs font-medium bg-white/5 text-zinc-400 rounded-md"

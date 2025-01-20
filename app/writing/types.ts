@@ -8,13 +8,7 @@ export interface ArticleImage {
 
 /** Allowed categories and tags */
 export const CATEGORIES = ['technology', 'finance', 'music'] as const;
-export const TAGS = [
-  'crypto',
-  'trading',
-  'computing',
-  'theory',
-  'ai',
-] as const;
+export const TAGS = ['crypto', 'trading', 'computing', 'theory', 'ai'] as const;
 
 /** Core configuration for article management */
 export const ARTICLE_CONFIG = {

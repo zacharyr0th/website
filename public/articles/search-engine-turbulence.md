@@ -8,73 +8,31 @@ description: 'LLMs and the Future of Search Engines'
 category: 'technology'
 tags: ['ai']
 takeaways:
-  - 'LLMs are the first real challenge to Google''s long-standing dominance and are sure to cause turmoil in the search engine market in the coming years.'
+  - "LLMs are the first real challenge to Google's long-standing dominance and will cause turmoil in the search engine market in the coming years."
   - 'With ChatGPT, Bing, and other LLMs on the rise, the future of how we use the web is uncertain.'
 ---
 
-LLMs introduce a new form of search. They can answer questions, provide summaries, and
-generate content based on learned data. They're the first real challenge to Google's
-long-standing dominance and are sure to cause turmoil in the search engine market in the
-coming years.
+LLMs introduce a new form of search. They can answer questions, provide summaries, and generate content based on learned data. They're the first real challenge to Google's dominance and are sure to cause turmoil in the search engine market in the coming years.
 
-## The AI Gold Rush
+# LLMs in Search
 
-If you have an AI idea that you want to get funded, now is your time to try. VCs have been
-pouring billions into AI startups at an accelerating rate for years, and since ChatGPT went
-mainstream in December, the acceleration has been reaching a fever pitch. ChatGPT was the
-[fastest](https://www.reuters.com/technology/chatgpt-sets-record-fastest-growing-user-base-analyst-note-2023-02-01/)
-consumer product to hit 1 million users, and interest in it from the public has only increased.
+LLMs, or large language models, fundamentally change how search engines operate. Unlike traditional search algorithms that match keywords and rank web pages, LLMs can understand context, generate human-like responses, and perform tasks based on natural language inputs.
 
-There's a meme now that all you have to do to raise money from VCs is build a UI wrapper
-around a ChatGPT function—like an app that gives you customized recipes or helps you code.
-Even [Snapchat](https://www.theverge.com/2023/2/27/23614959/snapchat-my-ai-chatbot-chatgpt-openai-plus-subscription)
-is releasing a new chatbot with ChatGPT on the backend. It will soon be refrigerators and
-washing machines.
-
-![Bing-1](/images/bing-1.webp)
-
-But as Balaji put it:
-
-> "Not your API keys, not your AI."
->
-> — Balaji Srinivasan (@balajis) _February 24, 2023_
-
-Tech companies are feeling the competition. Google's co-founder, Sergey Brin, came out of
-the shadows to submit his first
-[request for code access](https://www.forbes.com/sites/richardnieva/2023/01/31/sergey-brin-code-request-lamda/?sh=751f6a857ce6)
-in years to none other than LaMDa - Google's natural language chatbot.
-
-This was a natural reaction to the moves Microsoft has been making with Bing. Microsoft's
-CEO Satya Nadella made [his](https://www.youtube.com/watch?v=UcLw-CNySiA)
-The position is clear: "I want people to know that we made them dance."
-
-### Let's talk about Bing
-
-For those of you unfamiliar with Bing's background,
-[Trung Phan](https://www.readtrung.com/) laid out its
-[history](https://www.readtrung.com/p/bing-a-history-in-7-stories) in his
-newsletter. Bing now incorporates LLMs into its search engine to answer questions and
-provide a new, arguably revolutionized, browsing experience. Of course, there are variations
-of this already in the wild, but the fact that the biggest companies in the world are
-adopting this is a big signal. As you can see, with Notion's AI, GitHub's co-pilot, Replit's
-AI, Meta AI, and SnapChat's new chatbot - to name a few- will be significant
-competition in the coming years.
-
-So why is OpenAI valued at
-[$29 billion](https://bdtechtalks.com/2023/01/09/openai-tender-offer/)?
-
-Well, they have the best model for now.
+Bing's AI Integration
+Microsoft's Bing now incorporates an LLM into its search engine to answer questions and provide a new browsing experience. Examples of companies following suit are Notion's AI, GitHub's Copilot, Replit's AI, Meta AI, and Snapchat's new chatbot. OpenAI, the company behind ChatGPT, is valued at $29 billion, mainly due to its lead in model quality and reach. However, the LLM race is far from over, with tech giants like Google and Meta heavily investing in their models, and they have the distribution.
 
 ## Public Perception
 
-The public's reaction is mixed. Some see Sam Altman's vision of the AI-enabled future, and
-others feel Eliezer Yudkowsky's fears of the unknown. In the past few decades, there have
-been stories of individuals who began fearing imminent human extinction due to rapid AI
-progress. They typically liquidate all their assets and indulge recklessly, only to realize
+The public's reaction to these advancements is mixed. While some see the potential for an AI-enabled future, others harbor concerns:
+Bias: These models add a layer of interpretation over data that may be wrong.
+Misinformation: The potential for LLMs to generate convincing but false information raises concerns about the spread of misinformation.
+Privacy: The data to train these models has sparked debates about privacy, consent, and copyright.
+
+Some see Sam Altman's vision of the AI-enabled future, and
+others feel Eliezer Yudkowsky's fears of the unknown. In the past few decades, there have been stories of individuals who began fearing imminent human extinction due to rapid AI
+progress. They've liquidated all their assets and indulged recklessly, only to realize
 they've acted prematurely a few years later. Others fear it will take their jobs, but it
-remains to be seen which industries will be massively interrupted first. Some AI experts,
-such as Lann Yucun, say these models are insufficient at their core, and we need new architecture to
-reach the coveted "artificial general intelligence" level of machine reasoning.
+remains to be seen which industries will be massively interrupted first.
 
 ![Bing-2](/images/bing-2.webp)
 
@@ -83,58 +41,34 @@ of expertise acquisition. ChatGPT, while impressive, still has a known hallucina
 10-20%, making it unreliable for serious consideration in search or medicine. Given the
 nature of S-curves, some speculate that the progress AI has made recently will be the most
 it experiences until the next leap forward in the sweet spot region of the
-above graph - maybe quantum computing gets us there. This makes sense, given that these
-models have been trained on nearly all the public data available. If stagnation occurs,
-we'll see history repeat itself, as that happened during the AI winters of 1974-1980 and
-1987-1993 after massive leaps forward in the industry took place.
+above graph, and maybe quantum computing will get us there. Given that these
+models have been trained on nearly all the public data available, we'll see. If stagnation does
+occur, history is repeating itself as that happened during the AI winters of 1974-1980 and
+1987-1993, after massive leaps forward in the industry took place.
 
-### Unintended Consequences
+## Unintended Consequences
 
 The unintended consequences are hard to quantify, but a few are clear. Ted Goya goes into
 detail on some examples
 [here](https://www.honest-broker.com/p/over-the-course-72-hours-microsofts utm_source=substack&utm_campaign=post_embed&utm_medium=web).
-Anecdotally, Bing has returned strange things to me, including "I would rather us not have
-this conversation anymore 😔" instead of giving me a wrong answer - as ChatGPT, You.com, or
-Poe would. Note the word return - I am not going to anthropomorphize these chatbots. It's
-not responding to me or talking to me. Prompts are the same as binary code to these things,
-and their entire existence is a compilation of code with emergent properties that stem from pattern recognition.
 
-On the other hand, observing Bing's use of emojis is uncomfortable 😳.
+Anecdotally, Bing has returned strange things to me, including "I would rather us not have
+this conversation anymore 😔." It's not only Bing's use of emojis that is alarming 😳.
 
 ![Bing-4](/images/bing-4.webp)
 
-### The Future of AI and Search
+## Inspiration for Media
 
-In the above interview, Satya clarified that improving Google's search model has been
-daunting. They are monolithic and, until recently, have had no competition. He sees ChatGPT
-and Bing as the first real competitors of Google's prowess. Combine this with the fact that
-Nvidia's CEO went on the
-[record](https://www.pcgamer.com/nvidia-predicts-ai-models-one-million-times-more-powerful-than-chatgpt-within-10-years/)
-saying their chips will enable models to be 1 million times the power of current AI models in the next
-decade. ChatGPT was trained on an estimated 10,000 Nvidia GPUs.
-
-With Edge and Bing only amounting to a fraction of Google's market share, what do Satya
-and Microsoft have to lose? Every underdog story has a Goliath. This time, it's Google.
-
-It's easy to forget that all of the recent progress in AI wouldn't have happened without
-Google. Transformers are considered game changers in the application of AI models, and all
-of these chatbots were trained on networks that incorporate transformers. Google may speed
-up its historically slow software development cycle and blow everybody out of the water. Or
-maybe Apple will, or Tesla, or Anthropic, or
-[Buzzfeed](https://hackernoon.com/how-buzzfeed-plans-to-use-ai-to-generate-listicles-and-more-content)
-will.
-
-### Inspiration
+Like the space race of the 20th century, the LLM revolution has the power to inspire new generations, push boundaries, and redefine entire industries.
 
 In
 [1962 speech](https://www.npr.org/2022/09/12/1122375097/space-exploration-jfk-we-choose-the-moon-speech#:~:text=His%20%22We%20Choose%20the%20Moon%22%20speech%20became%20a%20pivotal%20moment,at%20Rice%20University%20in%20Houston.),
 John F. Kennedy talked about landing on the moon within a decade. Unfortunately, he didn't
-see it, but the US landed on the moon in 1969. Soon after, sci-fi became an exciting topic
-in mainstream culture for the first time, space blockbusters dominated the entertainment
+see it, but the US landed on the moon in 1969. Soon after, sci-fi became a topic of widespread
+interest in mainstream culture for the first time; space blockbusters dominated the entertainment
 industry. E.g., Star Wars (1977), Star Trek (1966), Alien (1979), and Stanley Kubrick's 2001
-Space Odyssey (1968). There's a correlation there.
+Space Odyssey (1968). There's probably a correlation there.
 
-At first, AI's most significant societal changes will be on each edge of the barbell,
-inspiration, and fear - similar to Sergey Brin's and Eliezer Yudkowsky's reactions. Then,
-unintended consequences that no one can predict will start happening, and that's where it
-can get out of hand. I hope humans don't begin marrying chatbots.
+# What's Next?
+
+The LLM revolution is still in its infancy, and the future is uncertain. We can expect to see more of these models integrated into apps we use, and the media will play a big role in shaping public perception. Expect markets to rise as the LLM race heats up, and unintended consequences that no one can predict will start happening, which is where it can get out of hand.
