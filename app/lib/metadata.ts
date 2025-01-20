@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 
 // Constants configuration
 const CONFIG = {
@@ -11,7 +11,7 @@ const CONFIG = {
   },
   images: {
     profile: {
-      url: '/profile-picture.webp',
+      url: '/misc/profile-picture.webp',
       width: 256,
       height: 256,
       alt: 'Zachary Roth',
@@ -34,11 +34,46 @@ const createTitleTemplate = (title: string) => ({
   template: `${title} | ${CONFIG.site.name}`,
 });
 
+// Viewport configuration
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  viewportFit: 'cover',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#000000' },
+  ],
+};
+
 // Metadata configuration
 export const metadata: Metadata = {
   title: createTitleTemplate('%s'),
   description: CONFIG.site.description,
   metadataBase: new URL(CONFIG.site.url),
+  manifest: '/manifest.json',
+  
+  icons: {
+    icon: [
+      { url: '/misc/favicon.ico', sizes: '48x48' },
+      { url: '/icons/icon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/icons/icon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/icons/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    other: [
+      { url: '/icons/icon-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icons/icon-512x512.png', sizes: '512x512', type: 'image/png' },
+    ],
+  },
+
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: CONFIG.site.name,
+  },
 
   openGraph: {
     type: 'website',
@@ -55,6 +90,7 @@ export const metadata: Metadata = {
     title: createTitleTemplate('%s'),
     description: CONFIG.site.description,
     creator: CONFIG.site.creator,
+    images: [CONFIG.images.profile],
   },
 
   robots: {
@@ -67,12 +103,5 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
-  },
-
-  manifest: '/site.webmanifest',
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png',
   },
 };

@@ -5,10 +5,10 @@ import Navigation from './components/navigation/Navigation';
 import ConditionalFooter from './components/ConditionalFooter';
 import KeyboardShortcuts from './components/KeyboardShortcuts';
 import GlobalConnectModal from './components/misc/GlobalConnectModal';
-import { metadata } from './lib/metadata';
+import { metadata, viewport } from './lib/metadata';
 import Script from 'next/script';
 
-export { metadata };
+export { metadata, viewport };
 
 const inter = Inter({
   subsets: ['latin'],
@@ -80,14 +80,20 @@ export default function RootLayout({ children }: RootLayoutProps) {
           `}
         </Script>
       </head>
-      <body className="min-h-screen bg-background antialiased overflow-x-hidden selection:bg-accent/10">
+      <body className="bg-background text-text-primary antialiased">
+        <Navigation />
+        <div className="flex min-h-screen flex-col">
+          <main className="flex-1">{children}</main>
+          <ConditionalFooter />
+        </div>
         <KeyboardShortcuts />
         <GlobalConnectModal />
-        <Navigation showHomeButton />
-        <main className="relative flex min-h-screen flex-col max-w-[100vw] overflow-x-hidden">
-          {children}
-        </main>
-        <ConditionalFooter />
+        <Script
+          defer
+          data-domain="zacharyr0th.com"
+          src="https://plausible.io/js/script.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

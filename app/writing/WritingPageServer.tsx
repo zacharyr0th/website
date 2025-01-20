@@ -2,7 +2,6 @@ import { getArticles } from './lib/articles';
 
 export default async function WritingPageServer() {
   try {
-    // Get articles directly instead of through API
     const allArticles = await getArticles();
     return {
       allArticles,
