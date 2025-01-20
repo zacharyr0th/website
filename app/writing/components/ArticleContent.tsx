@@ -138,13 +138,25 @@ const ArticleContent = memo<ArticleContentProps>(({ article, contentHtml }) => {
     if (typeof window === 'undefined') return;
 
     try {
-      const url = `${window.location.origin}${window.location.pathname}#${id}`;
-      await navigator.clipboard.writeText(url);
-      setCopyFeedback(id);
-      setTimeout(() => setCopyFeedback(null), 2000);
-    } catch (error) {
-      // Fallback for browsers that don't support clipboard API
-      try {
+      // Check if running on mobile
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      
+      if (isMobile) {
+        // On mobile, just update the URL hash
+        window.location.hash = id;
+        setCopyFeedback(id);
+        setTimeout(() => setCopyFeedback(null), 2000);
+        return;
+      }
+
+      // On desktop, try to copy the URL
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+        const url = `${window.location.origin}${window.location.pathname}#${id}`;
+        await navigator.clipboard.writeText(url);
+        setCopyFeedback(id);
+        setTimeout(() => setCopyFeedback(null), 2000);
+      } else {
+        // Fallback for browsers without clipboard API
         const tempInput = document.createElement('input');
         tempInput.value = `${window.location.origin}${window.location.pathname}#${id}`;
         document.body.appendChild(tempInput);
@@ -153,24 +165,29 @@ const ArticleContent = memo<ArticleContentProps>(({ article, contentHtml }) => {
         document.body.removeChild(tempInput);
         setCopyFeedback(id);
         setTimeout(() => setCopyFeedback(null), 2000);
-      } catch (fallbackError) {
-        console.warn('Copy fallback failed:', fallbackError);
       }
+    } catch (error) {
+      console.warn('Copy operation failed:', error);
+      // Still update the URL hash even if copy fails
+      window.location.hash = id;
     }
   }, []);
 
   const processedContent = useMemo(() => {
+    if (!contentHtml) return '';
+    
     try {
       return contentHtml.replace(
         /<h([1-3])(.*?)>(.*?)<\/h[1-3]>/g,
         (_match, level, attrs, text) => {
           const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-          return `<h${level}${attrs} id="${id}" class="group cursor-pointer" onclick="if(window.handleHeaderClick)window.handleHeaderClick('${id}')">
-          ${text}
-          <span class="link-icon">
-            ${copyFeedback === id ? '✓' : '🔗'}
-          </span>
-        </h${level}>`;
+          // Use data attributes instead of onclick for better mobile compatibility
+          return `<h${level}${attrs} id="${id}" class="group cursor-pointer" data-heading-id="${id}">
+            ${text}
+            <span class="link-icon" aria-hidden="true">
+              ${copyFeedback === id ? '✓' : '🔗'}
+            </span>
+          </h${level}>`;
         }
       );
     } catch (error) {
@@ -182,17 +199,22 @@ const ArticleContent = memo<ArticleContentProps>(({ article, contentHtml }) => {
   React.useEffect(() => {
     if (typeof window === 'undefined') return undefined;
 
-    try {
-      window.handleHeaderClick = handleHeaderClick;
-      return () => {
-        if (typeof window !== 'undefined') {
-          delete window.handleHeaderClick;
-        }
-      };
-    } catch (error) {
-      console.warn('Header click handler setup error:', error);
-      return undefined;
+    const handleClick = (event: Event) => {
+      const target = event.target as HTMLElement;
+      const heading = target.closest('[data-heading-id]');
+      if (heading) {
+        const id = heading.getAttribute('data-heading-id');
+        if (id) handleHeaderClick(id);
+      }
+    };
+
+    const contentElement = contentRef.current;
+    if (contentElement) {
+      contentElement.addEventListener('click', handleClick);
+      return () => contentElement.removeEventListener('click', handleClick);
     }
+
+    return undefined;
   }, [handleHeaderClick]);
 
   return (
