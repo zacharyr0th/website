@@ -6,7 +6,6 @@ import ConditionalFooter from './components/ConditionalFooter';
 import KeyboardShortcuts from './components/KeyboardShortcuts';
 import GlobalConnectModal from './components/misc/GlobalConnectModal';
 import { metadata, viewport } from './lib/metadata';
-import Script from 'next/script';
 
 export { metadata, viewport };
 
@@ -50,12 +49,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
         </div>
         <KeyboardShortcuts />
         <GlobalConnectModal />
-        <Script
-          defer
-          data-domain="zacharyr0th.com"
-          src="https://plausible.io/js/script.js"
-          strategy="lazyOnload"
-        />
       </body>
     </html>
   );
