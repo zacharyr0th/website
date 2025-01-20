@@ -5,6 +5,37 @@ import Image from 'next/image';
 import type { ArticleImage as ArticleImageType, ArticleContentProps } from '../types';
 import styles from './article.module.css';
 
+// Error Boundary Component
+class ErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { hasError: boolean; error: Error | null }
+> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
+  }
+
+  override componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.warn('ArticleContent error:', error, errorInfo);
+  }
+
+  override render() {
+    if (this.state.hasError) {
+      return (
+        <div className="p-4 text-center">
+          <h2 className="text-xl font-semibold mb-2">Something went wrong</h2>
+          <p className="text-text-secondary">Please try refreshing the page</p>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 const ArticleHeader = memo<{ title: string; description: string | undefined }>(
   ({ title, description }) => (
     <header className={styles.header}>
@@ -18,13 +49,19 @@ ArticleHeader.displayName = 'ArticleHeader';
 
 const ArticleMetadata = memo<{ content: string; takeaways: readonly string[] | null }>(
   ({ content, takeaways }) => {
-    const headings =
-      content.match(/<h[1-3][^>]*>(.*?)<\/h[1-3]>/g)?.map((heading) => {
-        const level = heading.charAt(2);
-        const text = heading.replace(/<[^>]+>/g, '');
-        const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-        return { level, text, id };
-      }) || [];
+    const headings = useMemo(() => {
+      try {
+        return content.match(/<h[1-3][^>]*>(.*?)<\/h[1-3]>/g)?.map((heading) => {
+          const level = heading.charAt(2);
+          const text = heading.replace(/<[^>]+>/g, '');
+          const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+          return { level, text, id };
+        }) || [];
+      } catch (error) {
+        console.warn('Error parsing headings:', error);
+        return [];
+      }
+    }, [content]);
 
     if (!takeaways?.length && !headings.length) return null;
 
@@ -90,15 +127,15 @@ const ArticleImage = memo<{ image: ArticleImageType; title: string }>(({ image, 
 
 ArticleImage.displayName = 'ArticleImage';
 
-const ArticleContent = memo<ArticleContentProps>(
-  ({ article, contentHtml }) => {
-    const { title, description, frontmatter } = article;
-    const [copyFeedback, setCopyFeedback] = React.useState<string | null>(null);
-    const contentRef = useRef<HTMLDivElement>(null);
+const ArticleContent = memo<ArticleContentProps>(({ article, contentHtml }) => {
+  const { title, description, frontmatter } = article;
+  const [copyFeedback, setCopyFeedback] = React.useState<string | null>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
-    const handleHeaderClick = useCallback(async (id: string) => {
+  const handleHeaderClick = useCallback(
+    async (id: string) => {
       if (typeof window === 'undefined') return;
-      
+
       try {
         const url = `${window.location.origin}${window.location.pathname}#${id}`;
         await navigator.clipboard.writeText(url);
@@ -106,43 +143,58 @@ const ArticleContent = memo<ArticleContentProps>(
         setTimeout(() => setCopyFeedback(null), 2000);
       } catch (error) {
         // Fallback for browsers that don't support clipboard API
-        const tempInput = document.createElement('input');
-        tempInput.value = `${window.location.origin}${window.location.pathname}#${id}`;
-        document.body.appendChild(tempInput);
-        tempInput.select();
-        document.execCommand('copy');
-        document.body.removeChild(tempInput);
-        setCopyFeedback(id);
-        setTimeout(() => setCopyFeedback(null), 2000);
+        try {
+          const tempInput = document.createElement('input');
+          tempInput.value = `${window.location.origin}${window.location.pathname}#${id}`;
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          document.execCommand('copy');
+          document.body.removeChild(tempInput);
+          setCopyFeedback(id);
+          setTimeout(() => setCopyFeedback(null), 2000);
+        } catch (fallbackError) {
+          console.warn('Copy fallback failed:', fallbackError);
+        }
       }
-    }, []);
+    },
+    []
+  );
 
-    const processedContent = useMemo(() => {
-      return contentHtml.replace(
-        /<h([1-3])(.*?)>(.*?)<\/h[1-3]>/g,
-        (_match, level, attrs, text) => {
-          const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-          return `<h${level}${attrs} id="${id}" class="group cursor-pointer" onclick="if(window.handleHeaderClick)window.handleHeaderClick('${id}')">
+  const processedContent = useMemo(() => {
+    try {
+      return contentHtml.replace(/<h([1-3])(.*?)>(.*?)<\/h[1-3]>/g, (_match, level, attrs, text) => {
+        const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        return `<h${level}${attrs} id="${id}" class="group cursor-pointer" onclick="if(window.handleHeaderClick)window.handleHeaderClick('${id}')">
           ${text}
           <span class="link-icon">
             ${copyFeedback === id ? '✓' : '🔗'}
           </span>
         </h${level}>`;
-        }
-      );
-    }, [contentHtml, copyFeedback]);
+      });
+    } catch (error) {
+      console.warn('Content processing error:', error);
+      return contentHtml;
+    }
+  }, [contentHtml, copyFeedback]);
 
-    React.useEffect(() => {
-      if (typeof window === 'undefined') return;
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return undefined;
+
+    try {
       window.handleHeaderClick = handleHeaderClick;
       return () => {
         if (typeof window !== 'undefined') {
           delete window.handleHeaderClick;
         }
       };
-    }, [handleHeaderClick]);
+    } catch (error) {
+      console.warn('Header click handler setup error:', error);
+      return undefined;
+    }
+  }, [handleHeaderClick]);
 
-    return (
+  return (
+    <ErrorBoundary>
       <div className="min-h-screen bg-gradient-to-b from-background to-surface/30">
         <main className="container mx-auto px-4 sm:px-6 pt-8 sm:pt-16 pb-16">
           <div style={{ maxWidth: 'var(--article-width)' }} className="mx-auto">
@@ -164,9 +216,9 @@ const ArticleContent = memo<ArticleContentProps>(
           </div>
         </main>
       </div>
-    );
-  }
-);
+    </ErrorBoundary>
+  );
+});
 
 ArticleContent.displayName = 'ArticleContent';
 
