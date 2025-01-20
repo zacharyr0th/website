@@ -2,8 +2,6 @@
 
 import React, { memo, useCallback, useMemo, useRef } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { useSwipeable } from 'react-swipeable';
 import type { ArticleImage as ArticleImageType, ArticleContentProps } from '../types';
 import styles from './article.module.css';
 
@@ -93,33 +91,30 @@ const ArticleImage = memo<{ image: ArticleImageType; title: string }>(({ image, 
 ArticleImage.displayName = 'ArticleImage';
 
 const ArticleContent = memo<ArticleContentProps>(
-  ({ article, contentHtml, nextArticle, prevArticle }) => {
+  ({ article, contentHtml }) => {
     const { title, description, frontmatter } = article;
     const [copyFeedback, setCopyFeedback] = React.useState<string | null>(null);
-    const router = useRouter();
     const contentRef = useRef<HTMLDivElement>(null);
 
-    useSwipeable({
-      onSwipedLeft: useCallback(() => {
-        if (nextArticle) router.push(`/writing/${nextArticle.slug}`);
-      }, [nextArticle, router]),
-      onSwipedRight: useCallback(() => {
-        if (prevArticle) router.push(`/writing/${prevArticle.slug}`);
-      }, [prevArticle, router]),
-      trackMouse: false,
-      preventScrollOnSwipe: true,
-      delta: 50,
-      swipeDuration: 500,
-      touchEventOptions: { passive: false }
-    });
-
-    const handleHeaderClick = useCallback((id: string) => {
+    const handleHeaderClick = useCallback(async (id: string) => {
       if (typeof window === 'undefined') return;
-      const url = `${window.location.origin}${window.location.pathname}#${id}`;
-      navigator.clipboard.writeText(url).then(() => {
+      
+      try {
+        const url = `${window.location.origin}${window.location.pathname}#${id}`;
+        await navigator.clipboard.writeText(url);
         setCopyFeedback(id);
         setTimeout(() => setCopyFeedback(null), 2000);
-      });
+      } catch (error) {
+        // Fallback for browsers that don't support clipboard API
+        const tempInput = document.createElement('input');
+        tempInput.value = `${window.location.origin}${window.location.pathname}#${id}`;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+        setCopyFeedback(id);
+        setTimeout(() => setCopyFeedback(null), 2000);
+      }
     }, []);
 
     const processedContent = useMemo(() => {
@@ -127,7 +122,7 @@ const ArticleContent = memo<ArticleContentProps>(
         /<h([1-3])(.*?)>(.*?)<\/h[1-3]>/g,
         (_match, level, attrs, text) => {
           const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-          return `<h${level}${attrs} id="${id}" class="group cursor-pointer" onclick="if(window.handleHeaderClick)window.handleHeaderClick('${id}')" ontouchend="if(window.handleHeaderClick)window.handleHeaderClick('${id}')">
+          return `<h${level}${attrs} id="${id}" class="group cursor-pointer" onclick="if(window.handleHeaderClick)window.handleHeaderClick('${id}')">
           ${text}
           <span class="link-icon">
             ${copyFeedback === id ? '✓' : '🔗'}
