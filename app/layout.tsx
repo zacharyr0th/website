@@ -40,29 +40,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       className={`${inter.variable} ${mono.variable} scroll-smooth`}
     >
       <head>
-        {/* Performance optimizations */}
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-
-        {/* Analytics with improved loading */}
-        <Script
-          id="gtag-base"
-          strategy="lazyOnload"
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-        />
-        <Script id="gtag-config" strategy="lazyOnload">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
-              page_path: window.location.pathname,
-              transport_type: 'beacon',
-              anonymize_ip: true,
-              cookie_flags: 'SameSite=Strict;Secure'
-            });
-          `}
-        </Script>
       </head>
       <body className="bg-background text-text-primary antialiased">
         <Navigation />
@@ -76,7 +54,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           defer
           data-domain="zacharyr0th.com"
           src="https://plausible.io/js/script.js"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
       </body>
     </html>
