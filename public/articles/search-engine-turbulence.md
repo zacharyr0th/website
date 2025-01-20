@@ -23,20 +23,19 @@ Microsoft's Bing now incorporates an LLM into its search engine to answer questi
 
 ## Public Perception
 
-The public's reaction to these advancements is mixed. While some see the potential for an AI-enabled future, others harbor concerns:
-Bias: These models add a layer of interpretation over data that may be wrong.
-Misinformation: The potential for LLMs to generate convincing but false information raises concerns about the spread of misinformation.
-Privacy: The data to train these models has sparked debates about privacy, consent, and copyright.
+The public's reaction to these advancements is mixed. Some see the potential for an AI-enabled future, others have concerns:
+- Bias: These models add a layer of interpretation over data that may be wrong.
+- Misinformation: The potential for LLMs to generate convincing but false information raises concerns about the spread of misinformation.
+- Privacy: The data to train these models has sparked debates about privacy, consent, and copyright.
 
-Some see Sam Altman's vision of the AI-enabled future, and
-others feel Eliezer Yudkowsky's fears of the unknown. In the past few decades, there have been stories of individuals who began fearing imminent human extinction due to rapid AI
+Some see Sam Altman's vision of the AI-enabled future, and others moreso agree with Eliezer Yudkowsky's fears of the unknown. In the past few decades, there have been stories of individuals who began fearing imminent human extinction due to rapid AI
 progress. They've liquidated all their assets and indulged recklessly, only to realize
 they've acted prematurely a few years later. Others fear it will take their jobs, but it
-remains to be seen which industries will be massively interrupted first.
+remains to be seen which industries will be interrupted first.
 
 ![Bing-2](/images/bing-2.webp)
 
-However, AI advancement may slow down as it historically has, following the typical S-curve
+AI advancement may slow down as it historically has, following the typical S-curve
 of expertise acquisition. ChatGPT, while impressive, still has a known hallucination rate of
 10-20%, making it unreliable for serious consideration in search or medicine. Given the
 nature of S-curves, some speculate that the progress AI has made recently will be the most
@@ -44,16 +43,14 @@ it experiences until the next leap forward in the sweet spot region of the
 above graph, and maybe quantum computing will get us there. Given that these
 models have been trained on nearly all the public data available, we'll see. If stagnation does
 occur, history is repeating itself as that happened during the AI winters of 1974-1980 and
-1987-1993, after massive leaps forward in the industry took place.
+1987-1993 after massive technological leaps forward took place.
 
 ## Unintended Consequences
 
-The unintended consequences are hard to quantify, but a few are clear. Ted Goya goes into
-detail on some examples
-[here](https://www.honest-broker.com/p/over-the-course-72-hours-microsofts utm_source=substack&utm_campaign=post_embed&utm_medium=web).
+The unintended consequences of these models proliferating througuhout society are hard to quantify, but a few are clear. Ted Goya goes into detail on some examples [here](https://www.honest-broker.com/p/over-the-course-72-hours-microsofts utm_source=substack&utm_campaign=post_embed&utm_medium=web).
 
 Anecdotally, Bing has returned strange things to me, including "I would rather us not have
-this conversation anymore 😔." It's not only Bing's use of emojis that is alarming 😳.
+this conversation anymore 😔.", and it's not only Bing's use of emojis that is alarming 😳.
 
 ![Bing-4](/images/bing-4.webp)
 

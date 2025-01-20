@@ -7,20 +7,21 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   theme: {
     extend: {
+      screens: {
+        xs: '475px',
+      },
       colors: {
-        primary: 'var(--color-primary)',
-        secondary: 'var(--color-secondary)',
+        background: 'var(--color-background)',
+        foreground: 'var(--color-foreground)',
+        surface: 'var(--color-surface)',
         accent: 'var(--color-accent)',
         'text-primary': 'var(--color-text-primary)',
         'text-secondary': 'var(--color-text-secondary)',
-        background: 'var(--color-background)',
-        surface: 'var(--color-surface)',
-        error: 'var(--color-error)',
-        success: 'var(--color-success)',
-        warning: 'var(--color-warning)',
-        info: 'var(--color-info)',
       },
       typography: ({ theme }: PluginUtils) => ({
         DEFAULT: {
@@ -84,7 +85,10 @@ const config: Config = {
       },
     },
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
+  ],
 };
 
 export default config;

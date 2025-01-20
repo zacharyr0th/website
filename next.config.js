@@ -9,15 +9,17 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://static.cloudflareinsights.com",
               "style-src 'self' 'unsafe-inline'",
-              "img-src 'self' data: https:",
+              "img-src 'self' data: https: blob:",
               "font-src 'self' data: https://fonts.gstatic.com",
-              "connect-src 'self' https://www.google-analytics.com",
+              "connect-src 'self' https://www.google-analytics.com https://cloudflareinsights.com",
               "frame-ancestors 'none'",
               "form-action 'self'",
               "base-uri 'self'",
-              'upgrade-insecure-requests',
+              "upgrade-insecure-requests",
+              "worker-src 'self' blob:",
+              "manifest-src 'self'"
             ].join('; '),
           },
           {
@@ -46,16 +48,22 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
   reactStrictMode: true,
   poweredByHeader: false,
   transpilePackages: ['react-icons'],
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
   experimental: {
+    optimizeCss: true,
     serverMinification: true,
     serverSourceMaps: false,
     optimizeServerReact: true,
   },
-  webpack: (config, { isServer }) => {
+  webpack: (config, { dev, isServer }) => {
     // Optimize bundle size
     config.resolve.fallback = {
       ...config.resolve.fallback,
@@ -79,14 +87,16 @@ const nextConfig = {
       };
     }
 
-    // Handle browser APIs in server context
-    if (!isServer) {
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        fs: false,
-        net: false,
-        tls: false,
-        child_process: false,
+    if (!isServer && !dev) {
+      // Client-side production optimizations
+      config.optimization = {
+        ...config.optimization,
+        runtimeChunk: 'single',
+        splitChunks: {
+          chunks: 'all',
+          maxInitialRequests: 25,
+          minSize: 20000,
+        },
       };
     }
 
