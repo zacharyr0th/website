@@ -51,12 +51,14 @@ const ArticleMetadata = memo<{ content: string; takeaways: readonly string[] | n
   ({ content, takeaways }) => {
     const headings = useMemo(() => {
       try {
-        return content.match(/<h[1-3][^>]*>(.*?)<\/h[1-3]>/g)?.map((heading) => {
-          const level = heading.charAt(2);
-          const text = heading.replace(/<[^>]+>/g, '');
-          const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-          return { level, text, id };
-        }) || [];
+        return (
+          content.match(/<h[1-3][^>]*>(.*?)<\/h[1-3]>/g)?.map((heading) => {
+            const level = heading.charAt(2);
+            const text = heading.replace(/<[^>]+>/g, '');
+            const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+            return { level, text, id };
+          }) || []
+        );
       } catch (error) {
         console.warn('Error parsing headings:', error);
         return [];
@@ -132,45 +134,45 @@ const ArticleContent = memo<ArticleContentProps>(({ article, contentHtml }) => {
   const [copyFeedback, setCopyFeedback] = React.useState<string | null>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const handleHeaderClick = useCallback(
-    async (id: string) => {
-      if (typeof window === 'undefined') return;
+  const handleHeaderClick = useCallback(async (id: string) => {
+    if (typeof window === 'undefined') return;
 
+    try {
+      const url = `${window.location.origin}${window.location.pathname}#${id}`;
+      await navigator.clipboard.writeText(url);
+      setCopyFeedback(id);
+      setTimeout(() => setCopyFeedback(null), 2000);
+    } catch (error) {
+      // Fallback for browsers that don't support clipboard API
       try {
-        const url = `${window.location.origin}${window.location.pathname}#${id}`;
-        await navigator.clipboard.writeText(url);
+        const tempInput = document.createElement('input');
+        tempInput.value = `${window.location.origin}${window.location.pathname}#${id}`;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
         setCopyFeedback(id);
         setTimeout(() => setCopyFeedback(null), 2000);
-      } catch (error) {
-        // Fallback for browsers that don't support clipboard API
-        try {
-          const tempInput = document.createElement('input');
-          tempInput.value = `${window.location.origin}${window.location.pathname}#${id}`;
-          document.body.appendChild(tempInput);
-          tempInput.select();
-          document.execCommand('copy');
-          document.body.removeChild(tempInput);
-          setCopyFeedback(id);
-          setTimeout(() => setCopyFeedback(null), 2000);
-        } catch (fallbackError) {
-          console.warn('Copy fallback failed:', fallbackError);
-        }
+      } catch (fallbackError) {
+        console.warn('Copy fallback failed:', fallbackError);
       }
-    },
-    []
-  );
+    }
+  }, []);
 
   const processedContent = useMemo(() => {
     try {
-      return contentHtml.replace(/<h([1-3])(.*?)>(.*?)<\/h[1-3]>/g, (_match, level, attrs, text) => {
-        const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-        return `<h${level}${attrs} id="${id}" class="group cursor-pointer" onclick="if(window.handleHeaderClick)window.handleHeaderClick('${id}')">
+      return contentHtml.replace(
+        /<h([1-3])(.*?)>(.*?)<\/h[1-3]>/g,
+        (_match, level, attrs, text) => {
+          const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+          return `<h${level}${attrs} id="${id}" class="group cursor-pointer" onclick="if(window.handleHeaderClick)window.handleHeaderClick('${id}')">
           ${text}
           <span class="link-icon">
             ${copyFeedback === id ? '✓' : '🔗'}
           </span>
         </h${level}>`;
-      });
+        }
+      );
     } catch (error) {
       console.warn('Content processing error:', error);
       return contentHtml;
