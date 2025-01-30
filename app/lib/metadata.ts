@@ -1,26 +1,21 @@
 import type { Metadata } from 'next';
 
-// Constants configuration
-const CONFIG = {
-  site: {
-    name: 'Zachary Roth',
-    url: 'https://zacharyr0th.com',
-    description: 'Personal website of Zachary Roth',
-    locale: 'en_US',
-    creator: '@zacharyr0th',
-  },
-  images: {
-    profile: {
-      url: '/profile-picture.webp',
-      width: 256,
-      height: 256,
-      alt: 'Zachary Roth',
-      type: 'image/webp',
-    },
-  },
+// Site configuration
+const SITE_NAME = 'Zachary Roth';
+const SITE_URL = 'https://zacharyr0th.com';
+const SITE_DESCRIPTION = 'Personal website of Zachary Roth';
+const TWITTER_HANDLE = '@zacharyr0th';
+
+// Profile image configuration
+const PROFILE_IMAGE = {
+  url: '/profile-picture.webp',
+  width: 256,
+  height: 256,
+  alt: 'Zachary Roth',
+  type: 'image/webp',
 } as const;
 
-// Section metadata with type safety
+// Section metadata
 export const SECTION_METADATA = {
   writing: {
     title: 'Writing',
@@ -28,33 +23,28 @@ export const SECTION_METADATA = {
   },
 } as const;
 
-// Helper function to create consistent title templates
-const createTitleTemplate = (title: string) => ({
-  default: CONFIG.site.name,
-  template: `${title} | ${CONFIG.site.name}`,
-});
-
-// Metadata configuration
+// Base metadata configuration
 export const metadata: Metadata = {
-  title: createTitleTemplate('%s'),
-  description: CONFIG.site.description,
-  metadataBase: new URL(CONFIG.site.url),
-
+  title: {
+    default: SITE_NAME,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  metadataBase: new URL(SITE_URL),
+  
   openGraph: {
     type: 'website',
-    locale: CONFIG.site.locale,
-    url: CONFIG.site.url,
-    siteName: CONFIG.site.name,
-    title: createTitleTemplate('%s'),
-    description: CONFIG.site.description,
-    images: [CONFIG.images.profile],
+    locale: 'en_US',
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    images: [PROFILE_IMAGE],
   },
 
   twitter: {
     card: 'summary',
-    title: createTitleTemplate('%s'),
-    description: CONFIG.site.description,
-    creator: CONFIG.site.creator,
+    creator: TWITTER_HANDLE,
   },
 
   robots: {

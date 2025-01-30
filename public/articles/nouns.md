@@ -8,8 +8,8 @@ description: 'There is a New One Every Day'
 category: 'technology'
 tags: ['crypto']
 takeaways:
- - 'NounsDAO is an NFT project built on Ethereum that harnesses time as a method of distribution and decentralization.'
- - 'Theyre expensive.'
+  - 'NounsDAO is an NFT project built on Ethereum that harnesses time as a method of distribution and decentralization.'
+  - 'Theyre expensive.'
 ---
 
 What do NounsDAO & John Cage have in common?
@@ -17,7 +17,8 @@ What do NounsDAO & John Cage have in common?
 In 1985, contemporary composer John Cage wrote a solo piano piece called ASLSP (As Slow as Possible) that can last anywhere from 20 to 70 minutes. In 1987, Cage adapted it for organ, and in 2001 - 9 years after Cage's passing, a small German church constructed a customized organ to perform this piece over the next 639 years. The organizers chose this duration as that was the age of the church in question. The most recent notes, G# & E, were on September 5, 2020, and the next note, G#, will occur on February 5, 2022. The final note will take place on September 5, 2640. There will also be a new Noun auctioned off that day.
 
 # Nouns
-NounsDAO is an NFT project built on Ethereum that harnesses time as a method of distribution and decentralization. Each Noun is a generative 32x32 pixel NFT comprising people, places, and things. 
+
+NounsDAO is an NFT project built on Ethereum that harnesses time as a method of distribution and decentralization. Each Noun is a generative 32x32 pixel NFT comprising people, places, and things.
 
 Their features are chosen randomly and controlled by a smart contract that transfers the Noun to the winning bidder's wallet while simultaneously creating a new Noun for auction 24 hours later. 100% of the auction proceeds are deposited into the NounsDAO Treasury and governed by the collective of Noun NFT holders. At the time of writing, 24 Nouns control 3260.6022 Ethereum ($11,003,847.70 at a current ETH price of $3,374.79).
 
