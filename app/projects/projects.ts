@@ -1,27 +1,27 @@
 export type ProjectCategory = 'crypto' | 'ai' | 'tools' | 'web';
 
 export interface BaseProject {
-  id: string;
-  title: string;
-  description: string;
-  tags: string[];
-  status: 'completed' | 'in-progress' | 'planned' | 'Functional' | 'WiP';
-  link?: string;
-  publishDate?: string;
-  githubLink?: string;
-  articleLink?: string;
-  demoLink?: string;
-  categories: ProjectCategory[];
+  readonly id: string;
+  readonly title: string;
+  readonly description: string;
+  readonly tags: ReadonlyArray<string>;
+  readonly status: 'completed' | 'in-progress' | 'planned' | 'Functional' | 'WiP';
+  readonly link?: string;
+  readonly publishDate?: string;
+  readonly githubLink?: string;
+  readonly articleLink?: string;
+  readonly demoLink?: string;
+  readonly categories: ReadonlyArray<ProjectCategory>;
 }
 
-export const PROJECT_CATEGORIES: Readonly<Record<ProjectCategory, string>> = {
+export const PROJECT_CATEGORIES: Readonly<Record<ProjectCategory, string>> = Object.freeze({
   crypto: 'Crypto',
   ai: 'AI',
   tools: 'Tools',
   web: 'Web',
-};
+});
 
-export const PROJECTS: readonly BaseProject[] = [
+export const PROJECTS: ReadonlyArray<BaseProject> = Object.freeze([
   {
     id: 'zacharyr0th-com',
     title: 'zacharyr0th.com',
@@ -88,4 +88,4 @@ export const PROJECTS: readonly BaseProject[] = [
     status: 'WiP',
     categories: ['crypto'],
   },
-] as const;
+]);

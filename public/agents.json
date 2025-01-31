@@ -1,0 +1,476 @@
+{
+  "apiVersion": "1.1",
+  "schemaUrl": "https://www.zacharyr0th.com/schemas/agents.json",
+  "baseUrl": "https://www.zacharyr0th.com",
+  "agentCapabilities": {
+    "supportedActions": [
+      "read",
+      "navigate",
+      "interact",
+      "search",
+      "keyboard-shortcuts",
+      "modal-interactions",
+      "animations",
+      "semantic-understanding",
+      "content-analysis",
+      "dynamic-navigation"
+    ],
+    "authenticationRequired": false,
+    "rateLimit": {
+      "requestsPerMinute": 120,
+      "burstLimit": 20,
+      "cooldownPeriod": 60,
+      "retryAfter": 5
+    },
+    "preferredLanguageModel": "gpt-4",
+    "minimumCapabilities": ["text-understanding", "navigation"],
+    "performance": {
+      "maxResponseTime": 2000,
+      "cacheControl": {
+        "maxAge": 3600,
+        "staleWhileRevalidate": 86400
+      },
+      "compression": ["gzip", "brotli"],
+      "prefetch": ["navigation", "images"]
+    }
+  },
+  "globalInteractions": {
+    "keyboardShortcuts": {
+      "description": "Global keyboard shortcuts for quick navigation",
+      "shortcuts": {
+        "writing": {
+          "key": "w",
+          "modifiers": ["meta", "ctrl"],
+          "action": "navigate",
+          "target": "/writing",
+          "description": "Navigate to writing section"
+        },
+        "projects": {
+          "key": "p",
+          "modifiers": ["meta", "shift"],
+          "action": "navigate",
+          "target": "/projects",
+          "description": "Navigate to projects section"
+        },
+        "audio": {
+          "key": "a",
+          "modifiers": ["meta", "shift"],
+          "action": "navigate",
+          "target": "/audio",
+          "description": "Navigate to audio section"
+        },
+        "bio": {
+          "key": "b",
+          "modifiers": ["meta", "shift"],
+          "action": "navigate",
+          "target": "/bio",
+          "description": "Navigate to bio section"
+        },
+        "connect": {
+          "key": "c",
+          "modifiers": ["meta", "shift"],
+          "action": "trigger",
+          "target": "openConnectModal",
+          "description": "Open connect modal"
+        },
+        "home": {
+          "key": "z",
+          "modifiers": ["meta", "shift"],
+          "action": "navigate",
+          "target": "/",
+          "description": "Navigate to home page"
+        }
+      }
+    },
+    "navigation": {
+      "selector": "nav",
+      "description": "Main navigation menu",
+      "actionPatterns": {
+        "click": {
+          "method": "click",
+          "waitForNavigation": true,
+          "successIndicator": "url-change"
+        },
+        "hover": {
+          "method": "hover",
+          "expectedBehavior": "show-submenu"
+        }
+      },
+      "components": {
+        "homeButton": {
+          "selector": ".w-10.h-10",
+          "description": "Home navigation button",
+          "ariaLabel": "Go to home page"
+        },
+        "navLinks": {
+          "selector": "nav li a",
+          "description": "Navigation menu links",
+          "ariaAttributes": {
+            "current": "page"
+          }
+        }
+      }
+    },
+    "modals": {
+      "connect": {
+        "selector": "[role='dialog']",
+        "description": "Connect modal for social links",
+        "trigger": {
+          "event": "openConnectModal",
+          "shortcut": {
+            "key": "c",
+            "modifiers": ["meta", "shift"]
+          }
+        },
+        "closeActions": ["escape", "clickOutside", "closeButton"],
+        "components": {
+          "socialButtons": {
+            "selector": "button[aria-label^='Connect on']",
+            "description": "Social media connection buttons"
+          },
+          "closeButton": {
+            "selector": "button[aria-label='Close modal']",
+            "description": "Modal close button"
+          }
+        }
+      },
+      "profileImage": {
+        "selector": ".profile-image",
+        "description": "Profile image modal",
+        "trigger": {
+          "action": "click",
+          "target": ".profile-image img"
+        },
+        "closeActions": ["escape", "clickOutside", "closeButton"]
+      }
+    },
+    "footer": {
+      "selector": "footer",
+      "description": "Global footer component",
+      "components": {
+        "socialLinks": {
+          "selector": ".flex.items-center.justify-center.space-x-4",
+          "description": "Social media links",
+          "items": [
+            {
+              "platform": "Twitter",
+              "selector": "[aria-label='Connect on Twitter']"
+            },
+            {
+              "platform": "LinkedIn",
+              "selector": "[aria-label='Connect on LinkedIn']"
+            },
+            {
+              "platform": "GitHub",
+              "selector": "[aria-label='Connect on GitHub']"
+            }
+          ]
+        },
+        "copyright": {
+          "selector": "footer p",
+          "description": "Copyright information"
+        }
+      }
+    },
+    "errorHandling": {
+      "globalErrorBoundary": {
+        "selector": "[role='alert']",
+        "description": "Global error boundary component",
+        "actions": {
+          "retry": {
+            "selector": "button",
+            "description": "Retry failed operation"
+          },
+          "goHome": {
+            "selector": "button:last-child",
+            "description": "Return to home page"
+          }
+        }
+      }
+    }
+  },
+  "pages": {
+    "/": {
+      "uiInteractions": {
+        "hero": {
+          "selector": "section.relative.min-h-[200vh]",
+          "description": "Hero section with sticky header",
+          "components": {
+            "header": {
+              "selector": ".sticky.top-0",
+              "description": "Sticky header with main content"
+            },
+            "chainLogos": {
+              "selector": ".chain-logo",
+              "description": "Blockchain platform logos"
+            },
+            "actionButtons": {
+              "selector": ".flex.flex-col.sm\\:flex-row button",
+              "description": "Primary action buttons"
+            }
+          }
+        },
+        "mainNavigation": {
+          "selector": "nav",
+          "description": "Main navigation menu",
+          "agent_instructions": "Use this menu to navigate between main sections of the site.",
+          "semanticStructure": {
+            "type": "navigation",
+            "items": ["writing", "projects", "bio", "audio"],
+            "relationships": {
+              "writing": ["articles", "blog"],
+              "projects": ["portfolio", "code"],
+              "bio": ["about", "experience", "skills"],
+              "audio": ["podcasts", "music"]
+            }
+          }
+        },
+        "featuredContent": {
+          "selector": ".featured",
+          "description": "Featured content section",
+          "agent_instructions": "Browse highlighted content and recent updates.",
+          "dataAttributes": ["title", "date", "category"]
+        },
+        "newsletter": {
+          "selector": "section.bg-\\[var\\(--color-background\\)]",
+          "description": "Newsletter subscription section",
+          "components": {
+            "form": {
+              "selector": "form",
+              "inputs": {
+                "email": {
+                  "selector": "input[type='email']",
+                  "placeholder": "Enter your email"
+                }
+              },
+              "submitButton": {
+                "selector": "button[type='submit']",
+                "text": "Coming Soon"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/writing": {
+      "uiInteractions": {
+        "articleList": {
+          "selector": "article",
+          "description": "List of written articles",
+          "agent_instructions": "Browse through articles. Each article has a title, date, and preview.",
+          "dataStructure": {
+            "title": ".article-title",
+            "date": ".article-date",
+            "preview": ".article-preview",
+            "tags": ".article-tags"
+          },
+          "pagination": {
+            "selector": ".pagination",
+            "nextButton": ".pagination-next",
+            "previousButton": ".pagination-prev",
+            "itemsPerPage": 10
+          }
+        },
+        "articleLink": {
+          "selector": "article a",
+          "description": "Link to full article",
+          "agent_instructions": "Click to read the full article content."
+        }
+      },
+      "filters": {
+        "categories": {
+          "selector": ".category-filter",
+          "options": ["tech", "personal", "projects"]
+        },
+        "dateRange": {
+          "selector": ".date-filter",
+          "format": "YYYY-MM-DD"
+        }
+      }
+    },
+    "/writing/[slug]": {
+      "uiInteractions": {
+        "articleContent": {
+          "selector": "article",
+          "description": "Full article content",
+          "agent_instructions": "Read the complete article content here."
+        }
+      }
+    },
+    "/projects": {
+      "uiInteractions": {
+        "projectList": {
+          "selector": ".project-grid",
+          "description": "Grid of projects",
+          "agent_instructions": "Browse through projects. Each project has a title, description, and links.",
+          "components": {
+            "projectCard": {
+              "selector": ".project-card",
+              "structure": {
+                "title": "h3",
+                "description": "p",
+                "tags": ".project-tag",
+                "links": {
+                  "demo": "button[aria-label='View live demo']",
+                  "article": "button[aria-label='Read project article']",
+                  "github": "button[aria-label='View project on GitHub']"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bio": {
+      "uiInteractions": {
+        "about": {
+          "selector": "#about",
+          "description": "About section",
+          "agent_instructions": "Read about Zachary Roth's background and experience.",
+          "contentStructure": {
+            "biography": ".bio-text",
+            "contact": ".contact-info",
+            "socialLinks": ".social-links"
+          }
+        },
+        "experience": {
+          "selector": "#experience",
+          "description": "Professional experience",
+          "dataStructure": {
+            "role": ".job-title",
+            "company": ".company-name",
+            "duration": ".job-duration",
+            "description": ".job-description"
+          }
+        },
+        "skills": {
+          "selector": "#skills",
+          "description": "Skills section",
+          "agent_instructions": "Browse technical skills and expertise."
+        },
+        "achievements": {
+          "selector": "#achievements",
+          "description": "Achievements section",
+          "agent_instructions": "View notable achievements and accomplishments."
+        }
+      }
+    },
+    "/audio": {
+      "uiInteractions": {
+        "audioPlayer": {
+          "selector": ".audio-player",
+          "description": "Audio content player",
+          "agent_instructions": "Access and play audio content."
+        }
+      }
+    }
+  },
+  "metadata": {
+    "author": "Zachary Roth",
+    "description": "Personal website featuring writing, projects, bio, and audio content",
+    "contentTypes": ["articles", "projects", "biography", "audio"],
+    "primaryLanguage": "en",
+    "lastUpdated": "auto",
+    "analytics": {
+      "trackAgentInteractions": true,
+      "collectMetrics": [
+        "navigation-patterns",
+        "content-access",
+        "performance-metrics",
+        "error-rates",
+        "interaction-flows"
+      ],
+      "samplingRate": 1.0,
+      "retention": {
+        "duration": "30d",
+        "aggregation": "hourly"
+      }
+    },
+    "accessibility": {
+      "aria": true,
+      "keyboardNavigation": true,
+      "semanticHTML": true,
+      "colorContrast": true,
+      "reducedMotion": true,
+      "screenReader": {
+        "announcements": true,
+        "landmarks": true
+      }
+    },
+    "animations": {
+      "pageTransitions": {
+        "enabled": true,
+        "duration": 300,
+        "timing": "ease-in-out"
+      },
+      "scrollAnimations": {
+        "enabled": true,
+        "threshold": 0.1
+      },
+      "modalAnimations": {
+        "enabled": true,
+        "duration": 200
+      },
+      "loadingStates": {
+        "spinner": {
+          "selector": ".loading-spinner",
+          "description": "Loading state indicator",
+          "fallback": "text"
+        },
+        "skeleton": {
+          "enabled": true,
+          "duration": 1000
+        }
+      },
+      "preferences": {
+        "respectReducedMotion": true,
+        "adaptiveAnimations": true
+      }
+    }
+  },
+  "security": {
+    "rateLimiting": true,
+    "allowedOrigins": ["*"],
+    "requiredHeaders": {
+      "User-Agent": "required",
+      "Agent-ID": "optional",
+      "Accept": "required",
+      "Accept-Encoding": "optional"
+    },
+    "cors": {
+      "enabled": true,
+      "methods": ["GET", "HEAD", "OPTIONS"],
+      "maxAge": 86400
+    },
+    "contentSecurity": {
+      "enabled": true,
+      "reportOnly": false,
+      "policies": {
+        "defaultSrc": ["'self'"],
+        "scriptSrc": ["'self'", "'unsafe-inline'"],
+        "styleSrc": ["'self'", "'unsafe-inline'"],
+        "imgSrc": ["'self'", "data:", "https:"],
+        "connectSrc": ["'self'", "https:"]
+      }
+    }
+  },
+  "errorHandling": {
+    "retryStrategy": {
+      "maxAttempts": 3,
+      "backoff": {
+        "initial": 1000,
+        "multiplier": 2,
+        "maxDelay": 10000
+      }
+    },
+    "fallbacks": {
+      "navigation": "/",
+      "content": "static",
+      "images": "placeholder"
+    },
+    "logging": {
+      "level": "error",
+      "sampling": 1.0
+    }
+  }
+} 

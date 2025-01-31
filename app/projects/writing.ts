@@ -1,18 +1,18 @@
 import type { Base, WritingCategory } from './types';
 
-export const WRITING_CATEGORIES: Readonly<Record<WritingCategory, string>> = {
+export const WRITING_CATEGORIES: Readonly<Record<WritingCategory, string>> = Object.freeze({
   technical: 'Technical',
   research: 'Research',
-} as const;
+});
 
 export interface WritingProject extends Omit<Base, 'category'> {
-  publishDate: string;
-  readTime: number;
-  category: WritingCategory;
-  link: string;
+  readonly publishDate: string;
+  readonly readTime: number;
+  readonly category: WritingCategory;
+  readonly link: string;
 }
 
-export const WRITING_PROJECTS: readonly WritingProject[] = [
+export const WRITING_PROJECTS: ReadonlyArray<WritingProject> = Object.freeze([
   {
     id: 'birdseye-view',
     title: 'A Birdseye View',
@@ -46,4 +46,4 @@ export const WRITING_PROJECTS: readonly WritingProject[] = [
     category: 'technical',
     lastUpdated: '2023-10-30',
   },
-] as const;
+]);

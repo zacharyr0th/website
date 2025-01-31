@@ -3,7 +3,7 @@
  * Combines article processing, caching, and hooks for efficient article management
  */
 
-import fs from 'fs/promises';
+import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { remark } from 'remark';
@@ -11,6 +11,7 @@ import html from 'remark-html';
 import remarkGfm from 'remark-gfm';
 import remarkImages from 'remark-images';
 import remarkParse from 'remark-parse';
+import { promisify } from 'util';
 import type {
   Article,
   ArticleFrontmatter,
@@ -25,6 +26,10 @@ import { ARTICLE_CONFIG, CATEGORIES, TAGS } from '../types';
 // Constants and Types
 const articlesDirectory = path.join(process.cwd(), ARTICLE_CONFIG.directory);
 let articleCache: ArticleCache | null = null;
+
+// Promisify fs functions we need
+const readFile = promisify(fs.readFile);
+const readdir = promisify(fs.readdir);
 
 // Utility Functions
 const transformImage = (
@@ -149,7 +154,7 @@ const processMarkdown = async (content: string): Promise<string> => {
 export const getArticle = async (slug: string) => {
   try {
     const filePath = path.join(articlesDirectory, `${slug}.md`);
-    const fileContents = await fs.readFile(filePath, 'utf8');
+    const fileContents = await readFile(filePath, 'utf8');
     const { data, content } = matter(fileContents);
     const validatedFrontmatter = validateFrontmatter(data);
     const processedContent = await processMarkdown(content);
@@ -171,7 +176,7 @@ export const getArticles = async (forceRefresh = false): Promise<readonly Articl
   }
 
   try {
-    const fileNames = await fs.readdir(articlesDirectory);
+    const fileNames = await readdir(articlesDirectory);
     const articles = await Promise.all(
       fileNames
         .filter((fileName) => fileName.endsWith('.md'))

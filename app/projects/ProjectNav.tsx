@@ -7,7 +7,7 @@ interface ProjectNavProps {
   onCategoryChange: (category: 'all' | ProjectCategory) => void;
 }
 
-const ProjectNav = memo(({ selectedCategory, onCategoryChange }: ProjectNavProps) => {
+const ProjectNav = memo<ProjectNavProps>(({ selectedCategory, onCategoryChange }) => {
   const handleCategoryChange = useCallback(
     (category: 'all' | ProjectCategory) => () => {
       onCategoryChange(category);
@@ -16,7 +16,11 @@ const ProjectNav = memo(({ selectedCategory, onCategoryChange }: ProjectNavProps
   );
 
   return (
-    <div className="bg-surface/80 backdrop-blur-sm rounded-3xl px-4 py-2.5 inline-flex items-center space-x-4 overflow-x-auto scrollbar-hide">
+    <nav
+      className="bg-surface/80 backdrop-blur-sm rounded-3xl px-4 py-2.5 inline-flex items-center space-x-4 overflow-x-auto scrollbar-hide"
+      role="navigation"
+      aria-label="Project categories"
+    >
       <NavButton
         active={selectedCategory === 'all'}
         onClick={handleCategoryChange('all')}
@@ -36,7 +40,7 @@ const ProjectNav = memo(({ selectedCategory, onCategoryChange }: ProjectNavProps
           {value}
         </NavButton>
       ))}
-    </div>
+    </nav>
   );
 });
 

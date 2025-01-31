@@ -3,14 +3,7 @@
 import { useCallback, useMemo } from 'react';
 import useSWRImmutable from 'swr/immutable';
 import type { Article } from '../types';
-
-const CACHE_CONFIG = {
-  revalidateOnFocus: false,
-  revalidateOnReconnect: false,
-  dedupingInterval: 3600000, // 1 hour
-  errorRetryCount: 3,
-  errorRetryInterval: 5000, // 5 seconds
-} as const;
+import { ARTICLE_CACHE_CONFIG } from '@/lib/swr-config';
 
 async function fetchArticles(): Promise<Article[]> {
   const response = await fetch('/api/articles', {
@@ -43,7 +36,7 @@ export function useArticles() {
     error,
     isLoading,
     mutate,
-  } = useSWRImmutable<Article[], Error>('/api/articles', fetchArticles, CACHE_CONFIG);
+  } = useSWRImmutable<Article[], Error>('/api/articles', fetchArticles, ARTICLE_CACHE_CONFIG);
 
   const sortedArticles = useMemo(() => {
     if (!articles) return [];

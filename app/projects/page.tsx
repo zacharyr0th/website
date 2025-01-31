@@ -8,8 +8,8 @@ import PageHeader from '../components/PageHeader';
 export default function ProjectsPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-surface/30">
-      <main className="container mx-auto px-6 sm:px-8 pt-16 sm:pt-36 pb-24">
-        <div style={{ maxWidth: 'var(--article-width)' }} className="mx-auto space-y-6">
+      <main className="container-responsive py-16 sm:py-36">
+        <div className="mx-auto space-y-6" style={{ maxWidth: 'var(--article-width)' }}>
           <PageHeader title="Projects" />
 
           <Suspense

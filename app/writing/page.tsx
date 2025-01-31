@@ -5,6 +5,9 @@ import WritingPageClient from './components/WritingPageClient';
 import { containerVariants } from '../lib/animations';
 import PageHeader from '../components/PageHeader';
 
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+export const fetchCache = 'force-cache';
 export const revalidate = 60; // Revalidate every minute
 
 export default async function WritingPage() {

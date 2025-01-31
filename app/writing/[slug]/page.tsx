@@ -1,7 +1,9 @@
 import { getArticle, getArticles, createArticle } from './articles';
+import type { Article } from '../types';
 import ArticleContent from './ArticleContent';
 import { Suspense } from 'react';
 import { LoadingState } from '../../lib/Loading';
+import { notFound } from 'next/navigation';
 
 interface PageProps {
   params: {
@@ -17,39 +19,27 @@ export async function generateStaticParams() {
 }
 
 export default async function ArticlePage({ params }: PageProps) {
-  if (!params?.slug) {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-background to-surface/30">
-        <main className="container mx-auto px-6 sm:px-8 pt-16 sm:pt-36 pb-24">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold mb-4">404</h1>
-            <p className="text-lg text-text-secondary">Invalid article slug</p>
-          </div>
-        </main>
-      </div>
-    );
+  const slug = params?.slug;
+  if (!slug) {
+    notFound();
   }
 
-  const rawArticle = await getArticle(params.slug);
+  const rawArticle = await getArticle(slug);
 
   if (!rawArticle) {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-background to-surface/30">
-        <main className="container mx-auto px-6 sm:px-8 pt-16 sm:pt-36 pb-24">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold mb-4">404</h1>
-            <p className="text-lg text-text-secondary">Article not found</p>
-          </div>
-        </main>
-      </div>
-    );
+    notFound();
   }
 
-  const article = createArticle(rawArticle.frontmatter, rawArticle.content, params.slug);
+  const article = createArticle(rawArticle.frontmatter, rawArticle.content, slug);
   const articles = await getArticles();
-  const currentIndex = articles.findIndex((a) => a.slug === params.slug);
-  const nextArticle = currentIndex < articles.length - 1 ? articles[currentIndex + 1] : null;
-  const prevArticle = currentIndex > 0 ? articles[currentIndex - 1] : null;
+  const currentIndex = articles.findIndex((a) => a.slug === slug);
+  
+  // Get next and previous articles with proper type assertions
+  const hasNextArticle = currentIndex >= 0 && currentIndex < articles.length - 1;
+  const hasPrevArticle = currentIndex > 0;
+  
+  const nextArticle: Article | null = hasNextArticle ? (articles[currentIndex + 1] as Article) : null;
+  const prevArticle: Article | null = hasPrevArticle ? (articles[currentIndex - 1] as Article) : null;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-surface/30">
@@ -68,8 +58,8 @@ export default async function ArticlePage({ params }: PageProps) {
             <ArticleContent
               article={article}
               contentHtml={rawArticle.processedContent}
-              nextArticle={nextArticle ?? null}
-              prevArticle={prevArticle ?? null}
+              nextArticle={nextArticle}
+              prevArticle={prevArticle}
             />
           </Suspense>
         </div>

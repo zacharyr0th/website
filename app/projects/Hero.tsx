@@ -1,16 +1,25 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import Link from 'next/link';
+import type { IconType } from 'react-icons';
 import { PROJECTS, PROJECT_CATEGORIES, type ProjectCategory } from './projects';
 import { Icons } from './constants';
 import { NavButton } from '../components/buttons';
 
-const Hero = () => {
+const ProjectIcon: React.FC<{ icon: IconType }> = ({ icon: Icon }) => (
+  <Icon className="w-5 h-5" />
+);
+
+const Hero: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<'all' | ProjectCategory>('all');
 
   const filteredProjects = useMemo(() => {
     if (selectedCategory === 'all') return PROJECTS;
     return PROJECTS.filter((project) => project.categories.includes(selectedCategory));
   }, [selectedCategory]);
+
+  const handleCategoryChange = useCallback((category: 'all' | ProjectCategory) => {
+    setSelectedCategory(category);
+  }, []);
 
   return (
     <div className="max-w-6xl mx-auto space-y-8">
@@ -24,7 +33,7 @@ const Hero = () => {
         <NavButton
           variant="secondary"
           active={selectedCategory === 'all'}
-          onClick={() => setSelectedCategory('all')}
+          onClick={() => handleCategoryChange('all')}
           size="sm"
         >
           All
@@ -34,7 +43,7 @@ const Hero = () => {
             key={key}
             variant="secondary"
             active={selectedCategory === key}
-            onClick={() => setSelectedCategory(key as ProjectCategory)}
+            onClick={() => handleCategoryChange(key as ProjectCategory)}
             size="sm"
           >
             {value}
@@ -54,7 +63,7 @@ const Hero = () => {
                   {project.title}
                 </h2>
                 <div className="flex gap-3">
-                  {project.githubLink && (
+                  {project.githubLink && Icons.GitHub && (
                     <Link
                       href={project.githubLink}
                       className="text-muted hover:text-accent transition-colors"
@@ -62,10 +71,10 @@ const Hero = () => {
                       rel="noopener noreferrer"
                       aria-label="View on GitHub"
                     >
-                      <Icons.GitHub className="w-5 h-5" />
+                      <ProjectIcon icon={Icons.GitHub} />
                     </Link>
                   )}
-                  {project.articleLink && (
+                  {project.articleLink && Icons.Article && (
                     <Link
                       href={project.articleLink}
                       className="text-muted hover:text-accent transition-colors"
@@ -73,10 +82,10 @@ const Hero = () => {
                       rel="noopener noreferrer"
                       aria-label="Read article"
                     >
-                      <Icons.Article className="w-5 h-5" />
+                      <ProjectIcon icon={Icons.Article} />
                     </Link>
                   )}
-                  {project.demoLink && (
+                  {project.demoLink && Icons.Demo && (
                     <Link
                       href={project.demoLink}
                       className="text-muted hover:text-accent transition-colors"
@@ -84,10 +93,10 @@ const Hero = () => {
                       rel="noopener noreferrer"
                       aria-label="View demo"
                     >
-                      <Icons.Demo className="w-5 h-5" />
+                      <ProjectIcon icon={Icons.Demo} />
                     </Link>
                   )}
-                  {project.link && (
+                  {project.link && Icons.Link && (
                     <Link
                       href={project.link}
                       className="text-muted hover:text-accent transition-colors"
@@ -95,7 +104,7 @@ const Hero = () => {
                       rel="noopener noreferrer"
                       aria-label="Visit project"
                     >
-                      <Icons.Link className="w-5 h-5" />
+                      <ProjectIcon icon={Icons.Link} />
                     </Link>
                   )}
                 </div>
@@ -123,8 +132,8 @@ const Hero = () => {
                       project.status === 'completed'
                         ? 'bg-green-500/10 text-green-500'
                         : project.status === 'in-progress'
-                          ? 'bg-yellow-500/10 text-yellow-500'
-                          : 'bg-blue-500/10 text-blue-500'
+                        ? 'bg-yellow-500/10 text-yellow-500'
+                        : 'bg-blue-500/10 text-blue-500'
                     }`}
                   >
                     {project.status}
@@ -139,4 +148,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default React.memo(Hero);

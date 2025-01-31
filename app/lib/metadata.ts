@@ -59,10 +59,13 @@ export const metadata: Metadata = {
     },
   },
 
-  manifest: '/site.webmanifest',
+  manifest: '/manifest.json',
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/assets/icons/icon-192.webp', sizes: '192x192' }
+    ],
+    shortcut: '/assets/icons/icon-192.webp',
+    apple: '/assets/icons/apple-touch-icon.png',
   },
 };

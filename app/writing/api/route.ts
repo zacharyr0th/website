@@ -1,8 +1,10 @@
 import { NextResponse } from 'next/server';
 import { getArticles } from '../lib/articles';
+import { ARTICLE_CACHE_CONFIG } from '@/lib/swr-config';
 
-export const dynamic = 'force-static';
-export const revalidate = 3600; // 1 hour
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+export const revalidate = 60; // 1 minute revalidation
 
 export async function GET() {
   try {
@@ -12,18 +14,29 @@ export async function GET() {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
-        'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+        'Cache-Control': `public, s-maxage=${revalidate}, stale-while-revalidate=${ARTICLE_CACHE_CONFIG.staleWhileRevalidate / 1000}`,
         'X-Content-Type-Options': 'nosniff',
         'X-Frame-Options': 'DENY',
         'X-XSS-Protection': '1; mode=block',
         'Referrer-Policy': 'strict-origin-when-cross-origin',
         'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+        'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
+        'Access-Control-Allow-Origin': process.env.NEXT_PUBLIC_SITE_URL || '*',
+        'Vary': 'Accept',
       },
     });
 
     return response;
   } catch (error) {
     console.error('Error in articles API route:', error);
-    return NextResponse.json({ error: 'Failed to fetch articles' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Failed to fetch articles' },
+      { 
+        status: 500,
+        headers: {
+          'Cache-Control': 'no-store',
+        }
+      }
+    );
   }
 }

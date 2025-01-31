@@ -10,13 +10,16 @@ import { heroContent } from './constants';
 import { pageTransition, sectionTransition } from '../../lib/animations';
 
 const ChainLogo = memo<{ logo: string }>(({ logo }) => (
-  <motion.div className="chain-logo w-12 h-12" {...sectionTransition}>
+  <motion.div 
+    className="chain-logo w-12 h-12 rounded-full bg-black/40 border border-white/10 p-0.5 backdrop-blur-sm hover:bg-black/60 transition-all duration-300 hover:scale-105 shadow-lg" 
+    {...sectionTransition}
+  >
     <Image
       src={`/logos/${logo}-logo.webp`}
       alt={`${logo.charAt(0).toUpperCase() + logo.slice(1)} Logo`}
       width={48}
       height={48}
-      className="object-contain"
+      className="object-cover w-full h-full rounded-full"
       loading="eager"
       priority
       sizes="48px"

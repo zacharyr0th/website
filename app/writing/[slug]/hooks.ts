@@ -3,19 +3,13 @@
 import useSWRImmutable from 'swr/immutable';
 import { useMemo, useCallback } from 'react';
 import type { Article } from '../types';
+import { ARTICLE_CACHE_CONFIG } from '@/lib/swr-config';
 import { ARTICLE_CONFIG } from '../types';
-
-const CACHE_CONFIG = {
-  revalidateOnFocus: false,
-  revalidateOnReconnect: false,
-  refreshInterval: ARTICLE_CONFIG.cache.revalidate,
-  dedupingInterval: ARTICLE_CONFIG.cache.staleWhileRevalidate,
-} as const;
 
 const fetchArticles = async (): Promise<Article[]> => {
   const response = await fetch('/api/articles', {
     headers: { Accept: 'application/json' },
-    next: { revalidate: ARTICLE_CONFIG.cache.revalidate / 1000 },
+    next: { revalidate: ARTICLE_CACHE_CONFIG.dedupingInterval / 1000 },
   });
 
   if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -28,7 +22,7 @@ export const useArticles = () => {
   const { data, error, isLoading, mutate } = useSWRImmutable<Article[], Error>(
     typeof window !== 'undefined' ? '/api/articles' : null,
     fetchArticles,
-    CACHE_CONFIG
+    ARTICLE_CACHE_CONFIG
   );
 
   return {

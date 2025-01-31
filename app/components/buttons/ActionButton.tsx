@@ -8,12 +8,14 @@ export interface ActionButtonProps extends BaseButtonProps {
 }
 
 export const ActionButton = React.forwardRef<HTMLButtonElement, ActionButtonProps>(
-  ({ children, leftIcon, rightIcon, className = '', variant = 'primary', ...props }, ref) => (
-    <BaseButton ref={ref} className={`px-6 py-2 ${className}`} variant={variant} {...props}>
-      <span className="flex items-center gap-2">
-        {leftIcon}
-        {children}
-        {rightIcon}
+  ({ children, leftIcon, rightIcon, className = '', variant = 'primary', isLoading = false, ...props }, ref) => (
+    <BaseButton ref={ref} className={`px-6 py-2 ${className}`} variant={variant} isLoading={isLoading} {...props}>
+      <span className={isLoading ? 'invisible' : 'visible'}>
+        <span className="flex items-center gap-2">
+          {leftIcon}
+          {children}
+          {rightIcon}
+        </span>
       </span>
     </BaseButton>
   )

@@ -13,7 +13,7 @@ export interface NavButtonProps extends BaseButtonProps {
 
 export const NavButton = React.memo(
   React.forwardRef<HTMLButtonElement, NavButtonProps>(
-    ({ active, children, leftIcon, rightIcon, className = '', ...props }, ref) => {
+    ({ active, children, leftIcon, rightIcon, className = '', isLoading = false, ...props }, ref) => {
       const style = useMemo(
         () => ({
           backgroundColor: active ? 'var(--color-surface)' : 'transparent',
@@ -25,14 +25,17 @@ export const NavButton = React.memo(
       return (
         <BaseButton
           ref={ref}
-          className={`interactive-button ${!className?.includes('p-0') ? 'px-3' : ''} text-lg${active ? ' shadow-sm' : ''} ${className}`}
+          className={`interactive-button h-8 flex items-center justify-center ${!className?.includes('p-0') ? 'px-3' : ''} text-lg${active ? ' shadow-sm' : ''} ${className}`}
           style={style}
+          isLoading={isLoading}
           {...props}
         >
-          <span className="flex items-center gap-2">
-            {leftIcon}
-            {children}
-            {rightIcon}
+          <span className={isLoading ? 'invisible' : 'visible'}>
+            <span className="flex items-center gap-2">
+              {leftIcon}
+              {children}
+              {rightIcon}
+            </span>
           </span>
         </BaseButton>
       );

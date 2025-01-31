@@ -4,8 +4,9 @@ import type { ReactNode } from 'react';
 import { useEffect } from 'react';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
+import { Analytics } from '@vercel/analytics/react';
 import Navigation from './navigation/Navigation';
-import ConditionalFooter from './ConditionalFooter';
+import ConditionalFooter from './Footer';
 import KeyboardShortcuts from './KeyboardShortcuts';
 import GlobalConnectModal from './misc/GlobalConnectModal';
 import ErrorBoundary from './ErrorBoundary';
@@ -37,49 +38,28 @@ export default function RootLayoutClient({ children }: RootLayoutClientProps) {
   }, []);
 
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${inter.variable} ${mono.variable} scroll-smooth`}
-    >
-      <head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover"
-        />
-        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-        <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-
-        {/* Performance optimizations */}
-        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
-        <meta httpEquiv="x-dns-prefetch-control" content="on" />
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-
-        {/* Analytics with improved loading */}
-        <Script
-          id="gtag-base"
-          strategy="lazyOnload"
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-          nonce="analytics"
-        />
-        <Script id="gtag-config" strategy="lazyOnload" nonce="analytics">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
-              page_path: window.location.pathname,
-              transport_type: 'beacon',
-              anonymize_ip: true,
-              cookie_flags: 'SameSite=Strict;Secure'
-            });
-          `}
-        </Script>
-      </head>
-      <body className="min-h-screen bg-background antialiased overflow-x-hidden selection:bg-accent/10">
+    <div className={`${inter.variable} ${mono.variable}`}>
+      <Analytics />
+      <Script
+        id="gtag-base"
+        strategy="lazyOnload"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+        nonce="analytics"
+      />
+      <Script id="gtag-config" strategy="lazyOnload" nonce="analytics">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
+            page_path: window.location.pathname,
+            transport_type: 'beacon',
+            anonymize_ip: true,
+            cookie_flags: 'SameSite=Strict;Secure'
+          });
+        `}
+      </Script>
+      <div className="min-h-screen bg-background antialiased overflow-x-hidden selection:bg-accent/10">
         <ErrorBoundary>
           <KeyboardShortcuts />
           <GlobalConnectModal />
@@ -89,7 +69,7 @@ export default function RootLayoutClient({ children }: RootLayoutClientProps) {
           </main>
           <ConditionalFooter />
         </ErrorBoundary>
-      </body>
-    </html>
+      </div>
+    </div>
   );
 } 

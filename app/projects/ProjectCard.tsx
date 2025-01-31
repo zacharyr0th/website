@@ -1,13 +1,17 @@
 'use client';
 
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { FaGithub, FaNewspaper, FaPlay } from 'react-icons/fa6';
 import { IconButton } from '../components/buttons';
 import type { BaseProject } from './projects';
 import Link from 'next/link';
 
-const ProjectTag = memo(({ tag }: { tag: string }) => (
+interface ProjectTagProps {
+  tag: string;
+}
+
+const ProjectTag = memo<ProjectTagProps>(({ tag }) => (
   <span className="inline-flex items-center px-2.5 py-1 text-xs font-medium bg-white/5 text-zinc-400 rounded-md">
     {tag}
   </span>
@@ -15,14 +19,18 @@ const ProjectTag = memo(({ tag }: { tag: string }) => (
 
 ProjectTag.displayName = 'ProjectTag';
 
-const ProjectLinks = memo(({ project }: { project: BaseProject }) => (
+interface ProjectLinksProps {
+  project: BaseProject;
+}
+
+const ProjectLinks = memo<ProjectLinksProps>(({ project }) => (
   <div className="flex ml-auto">
     {project.demoLink && (
       <IconButton
         icon={<FaPlay className="h-4 w-4" />}
         onClick={() => window.open(project.demoLink, '_blank', 'noopener,noreferrer')}
         ariaLabel="View live demo"
-        className="text-zinc-400/60 hover:text-[#3b82f6] transition-colors"
+        className="text-zinc-400/60 hover:text-accent transition-colors"
       />
     )}
     {project.articleLink && (
@@ -30,7 +38,7 @@ const ProjectLinks = memo(({ project }: { project: BaseProject }) => (
         icon={<FaNewspaper className="h-4 w-4" />}
         onClick={() => window.open(project.articleLink, '_blank', 'noopener,noreferrer')}
         ariaLabel="Read project article"
-        className="text-zinc-400/60 hover:text-[#3b82f6] transition-colors"
+        className="text-zinc-400/60 hover:text-accent transition-colors"
       />
     )}
     {project.githubLink && (
@@ -38,7 +46,7 @@ const ProjectLinks = memo(({ project }: { project: BaseProject }) => (
         icon={<FaGithub className="h-5 w-5" />}
         onClick={() => window.open(project.githubLink, '_blank', 'noopener,noreferrer')}
         ariaLabel="View project on GitHub"
-        className="text-zinc-400/60 hover:text-[#3b82f6] transition-colors"
+        className="text-zinc-400/60 hover:text-accent transition-colors"
       />
     )}
   </div>
@@ -51,9 +59,9 @@ interface ProjectCardProps {
   isFocused: boolean;
 }
 
-function ProjectCardComponent({ project, isFocused }: ProjectCardProps) {
-  const ref = React.useRef(null);
-  const linkRef = React.useRef<HTMLAnchorElement>(null);
+const ProjectCard = memo<ProjectCardProps>(({ project, isFocused }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const linkRef = useRef<HTMLAnchorElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   useEffect(() => {
@@ -114,8 +122,8 @@ function ProjectCardComponent({ project, isFocused }: ProjectCardProps) {
       </Link>
     </motion.div>
   );
-}
+});
 
-ProjectCardComponent.displayName = 'ProjectCard';
+ProjectCard.displayName = 'ProjectCard';
 
-export default memo(ProjectCardComponent);
+export default ProjectCard;
