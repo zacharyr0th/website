@@ -3,12 +3,12 @@
 import { useEffect, useState, useRef } from 'react';
 import type { CSSProperties } from 'react';
 
-interface BlurBackgroundProps {
+interface BlurBackgroundProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
 }
 
-const BlurBackground: React.FC<BlurBackgroundProps> = ({ children, className = '' }) => {
+const BlurBackground: React.FC<BlurBackgroundProps> = ({ children, className = '', ...props }) => {
   const [hasBackground, setHasBackground] = useState(false);
   const [blurIntensity, setBlurIntensity] = useState(0);
   const [mounted, setMounted] = useState(false);
@@ -59,7 +59,7 @@ const BlurBackground: React.FC<BlurBackgroundProps> = ({ children, className = '
   const sharedClassName = `rounded-3xl flex items-center justify-center text-center ${className}`;
 
   if (!mounted) {
-    return <div className={sharedClassName}>{children}</div>;
+    return <div className={sharedClassName} {...props}>{children}</div>;
   }
 
   const backgroundStyle: CSSProperties = {
@@ -73,7 +73,7 @@ const BlurBackground: React.FC<BlurBackgroundProps> = ({ children, className = '
   };
 
   return (
-    <div ref={elementRef} className={sharedClassName} style={backgroundStyle}>
+    <div ref={elementRef} className={sharedClassName} style={backgroundStyle} {...props}>
       {children}
     </div>
   );
