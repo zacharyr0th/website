@@ -10,31 +10,10 @@ tags: ['crypto']
 takeaways:
   - "Web 1 (1990-2004) was characterized by content delivery networks, coinciding with the Strauss-Howe theory's 'Unraveling' period of weak institutions and strong individualism."
   - "The generational dynamics between Nomads and Heroes shaped Web 1's development, with Nomads leading during the Unraveling and Heroes (Millennials) emerging to challenge existing structures."
-  - "The transition from the post-WWII 'High' through the 'Awakening' to the 'Unraveling' period reflects a pattern of institutional strength, social awakening, and digital innovation."
-  - "Web 1's era coincided with unprecedented stock market growth and globalization of supply chains, leading to new economic opportunities and wealth distribution."
   - "The period's ethos of democratic and free society was challenged by the emergence of dominant digital companies, setting the stage for Web 2's centralized platforms."
 ---
 
-<style jsx>{`
- .prose a {
-    text-decoration: underline;
-    color: var(--color-accent);
- }
- .prose ol {
-    list-style-type: decimal;
-    margin-left: 2em; /* Adjust as needed for indentation */
-    padding-left: 0.5em; /* Add padding if needed */
- }
- .prose ol li {
-    margin-bottom: 0.5em;
-    color: var(--color-text-primary);
-    line-height: 1.5; /* Adjust line height for better readability */
- }
-`}</style>
-
-<div class="tldr-section">
-This article is the first in a series of deep dives into Web 1, Web 2, and Web 3. It will examine the history, function, and legacy of Web 1 through the lens of the Strauss-Howe Generational Theory. 
-</div>
+This article is the first in a series of deep dives into Web 1, Web 2, and Web 3. It will examine the history, function, and legacy of Web 1 through the lens of the Strauss-Howe Generational Theory.
 
 The period from 1990-2005 is widely referred to as Web 1 and was defined by the Internet's primary function of content distribution. It preceded Web 2, which occurred between 2005 and 2020 and was characterized by user-generated content. Web 2 still dominates the Internet's format today, but the crypto industry has helped kickstart what is called Web 3, which is defined by user-owned networks. Web 1, 2, and 3's periods blend into one another as scalable innovation takes time.
 

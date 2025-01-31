@@ -9,34 +9,10 @@ category: 'technology'
 tags: ['crypto']
 takeaways:
   - 'Traditional banking systems leave millions unbanked globally, with rates varying from 0% to over 70% across different countries.'
-  - 'Being unbanked restricts access to essential financial services like interest-earning, online payments, and credit, while incurring high fees for basic transactions.'
-  - "Banks' fractional reserve lending and systemic risks expose fundamental flaws in the traditional banking system."
   - 'Non-custodial wallets enable self-custody of assets without intermediaries, offering a path from unbanked to bankless.'
   - 'Emerging markets, particularly in Africa and Southeast Asia, are leading adoption of bankless solutions due to high unbanked populations.'
 ---
 
-<style jsx>{`
-  .prose a {
-    text-decoration: underline;
-    color: var(--color-accent);
-  }
-  .prose ol {
-    list-style-type: decimal;
-    margin-left: 2em; /* Adjust as needed for indentation */
-    padding-left: 0.5em; /* Add padding if needed */
-  }
-  .prose ol li {
-    margin-bottom: 0.5em;
-    color: var(--color-text-primary);
-    line-height: 1.5; /* Adjust line height for better readability */
-  }
-`}</style>
-
-<div class="tldr-section">
-
-Testing
-
-</div>
 Most people worldwide have at least one bank account, but millions don't. Being unbanked or underbanked can be very destabilizing because you have to safeguard or carry your assets with you at all times and pay for everything in cash.
 
 As blockchain technology has developed, anyone can generate a [non-custodial wallet](/writing/non-custodial-wallets), which can serve as a decentralized bank, and an investment account. This eliminates the need for you to trust an intermediary to safeguard and give you access to your funds. In its current form, it's not for everyone, but for many - it's becoming a necessity.

@@ -10,35 +10,12 @@ tags: ['crypto']
 takeaways:
   - 'Web 3 (2017-Present) represents a shift towards user-owned networks, challenging the centralized control of Web 2 platforms and empowering users with greater ownership and autonomy.'
   - 'The generational conflict between Heroes (Web 2 leaders) and Artists (Web 3 innovators) reflects a fundamental tension between centralized control and decentralized disruption.'
-  - 'Unprecedented asset valuations and low interest rates have created an economic environment ripe for new financial innovations through cryptocurrency and blockchain technology.'
   - "Smart contracts and token standards (ERC20, ERC721) have enabled new models of user engagement and value creation that weren't possible in the Web 2 era."
-  - "Web 3's focus on decentralization and interoperability aims to fulfill the original utopian vision of the internet with free information and borderless connectivity."
 ---
-
-<style jsx>{`
- .prose a {
-    text-decoration: underline;
-    color: var(--color-accent);
- }
- .prose ol {
-    list-style-type: decimal;
-    margin-left: 2em; /* Adjust as needed for indentation */
-    padding-left: 0.5em; /* Add padding if needed */
- }
- .prose ol li {
-    margin-bottom: 0.5em;
-    color: var(--color-text-primary);
-    line-height: 1.5; /* Adjust line height for better readability */
- }
-`}</style>
-
-<div class="tldr-section">
 
 Web 3 is a technical philosophy that has disrupted previous internet models by empowering users to take more ownership of the products they're using.
 
 Some say it's a fugazi, and others may define it differently than how you understand it, but there's no denying that users' relationship with the Internet is changing.
-
-</div>
 
 ## The Evolution of the Web
 

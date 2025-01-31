@@ -25,7 +25,7 @@ export const NavButton = React.memo(
       return (
         <BaseButton
           ref={ref}
-          className={`interactive-button px-3 text-lg${active ? ' shadow-sm' : ''} ${className}`}
+          className={`interactive-button ${!className?.includes('p-0') ? 'px-3' : ''} text-lg${active ? ' shadow-sm' : ''} ${className}`}
           style={style}
           {...props}
         >

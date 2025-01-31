@@ -35,9 +35,9 @@ const NavContent = memo(
     <div className="flex w-screen px-8 max-sm:px-4 items-center justify-between max-sm:justify-center">
       <div className="max-sm:hidden">
         {showHomeButton && pathname !== '/' && (
-          <BlurBackground>
+          <BlurBackground className="w-10 h-10 p-0">
             <Link href="/" style={{ textDecoration: 'none' }}>
-              <NavButton active={pathname === '/'}>
+              <NavButton active={pathname === '/'} className="w-full h-full flex items-center justify-center p-0">
                 <span className="uppercase text-2xl">z</span>
               </NavButton>
             </Link>
@@ -48,11 +48,13 @@ const NavContent = memo(
         <ul className="flex items-center space-x-4 max-sm:space-x-2 px-2">
           {showHomeButton && pathname !== '/' && (
             <li className="sm:hidden">
-              <Link href="/" style={{ textDecoration: 'none' }}>
-                <NavButton active={pathname === '/'}>
-                  <span className="uppercase text-2xl">z</span>
-                </NavButton>
-              </Link>
+              <BlurBackground className="w-10 h-10 p-0">
+                <Link href="/" style={{ textDecoration: 'none' }}>
+                  <NavButton active={pathname === '/'} className="w-full h-full flex items-center justify-center p-0">
+                    <span className="uppercase text-2xl">z</span>
+                  </NavButton>
+                </Link>
+              </BlurBackground>
             </li>
           )}
           {navItems.map((item) => (

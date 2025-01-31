@@ -8,19 +8,7 @@ export interface ArticleImage {
 
 /** Allowed categories and tags */
 export const CATEGORIES = ['technology', 'finance', 'music'] as const;
-export const TAGS = [
-  'crypto',
-  'aptos',
-  'solana',
-  'sui',
-  'bitcoin',
-  'ethereum',
-  'technology',
-  'finance',
-  'defi',
-  'kernels',
-  'theory',
-] as const;
+export const TAGS = ['crypto', 'computing', 'theory', 'ai', 'trading'] as const;
 
 /** Core configuration for article management */
 export const ARTICLE_CONFIG = {

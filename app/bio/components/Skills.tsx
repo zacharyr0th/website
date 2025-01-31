@@ -1,63 +1,48 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Section } from './Section';
-import { BIO } from '../constants';
+import clsx from 'clsx';
+import type { SkillCategoryProps } from '../types';
+import { GROUPED_SKILLS } from '../constants';
 
-interface SkillCategoryProps {
-  category: string;
-  skills: readonly string[];
-  index: number;
-}
-
-const SkillCategory = React.memo<SkillCategoryProps>(({ category, skills, index }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ delay: index * 0.2 }}
-    className="flex flex-col gap-6"
-  >
-    <h3 className="text-xl font-semibold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent">
+const SkillCategory = React.memo<SkillCategoryProps>(({ category, skillGroups }) => (
+  <div>
+    {/* Category Header */}
+    <h3 className="text-2xl font-mono mb-6 text-text-primary">
       {category}
     </h3>
-    <div className="flex flex-wrap gap-3">
-      {skills.map((skill, skillIndex) => (
-        <motion.span
-          key={skill}
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          whileHover={{
-            scale: 1.05,
-            backgroundColor: 'var(--color-accent)',
-            color: 'var(--color-text-primary)',
-          }}
-          viewport={{ once: true }}
-          transition={{
-            delay: index * 0.1 + skillIndex * 0.05,
-            duration: 0.2,
-          }}
-          className="px-4 py-2 text-sm rounded-full bg-surface/50 text-text-secondary border border-white/5
-                     backdrop-blur-sm transition-all shadow-sm hover:shadow-lg cursor-default"
-        >
-          {skill}
-        </motion.span>
+
+    {/* Skills List */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-6">
+      {skillGroups.map((group) => (
+        <div key={group.title}>
+          <h4 className="font-mono text-base text-accent mb-3">
+            {group.title}
+          </h4>
+          <div className="space-y-2">
+            {group.skills.map((skill) => (
+              <div key={skill} className="font-mono text-lg text-text-secondary hover:text-text-primary transition-colors">
+                {skill}
+              </div>
+            ))}
+          </div>
+        </div>
       ))}
     </div>
-  </motion.div>
+  </div>
 ));
 
 SkillCategory.displayName = 'SkillCategory';
 
 export const Skills = React.memo(() => (
-  <Section title="Competencies" delay={0.4}>
+  <Section title="">
     <div className="space-y-10">
-      {BIO.skills.map((category, index) => (
-        <SkillCategory
-          key={category.category}
-          category={category.category}
-          skills={category.skills}
-          index={index}
-        />
+      {Object.entries(GROUPED_SKILLS).map(([category, skillGroups], index, array) => (
+        <div key={category} className={clsx(index === array.length - 1 && 'mb-0')}>
+          <SkillCategory
+            category={category}
+            skillGroups={skillGroups}
+          />
+        </div>
       ))}
     </div>
   </Section>

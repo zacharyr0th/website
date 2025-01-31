@@ -1,54 +1,56 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Section } from './Section';
 import { BIO } from '../constants';
+import clsx from 'clsx';
+import type { TimelineItemProps } from '../types';
 
-interface TimelineItemProps {
-  date: string;
-  title: string;
-  company?: string;
-  description: readonly string[];
-  index: number;
-}
+const TimelineItem = React.memo<TimelineItemProps>(({ date, title, company, description, highlights, index }) => (
+  <div className={clsx('flex flex-col gap-4 relative pl-6', index > 0 && 'mt-8')}>
+    <div className="absolute left-0 top-[0.6rem] w-1.5 h-1.5 bg-accent rounded-full" />
+    
+    <div>
+      <h3 className="text-2xl font-semibold text-text-primary">{title}</h3>
+      {company && <div className="text-accent font-medium mt-1 text-xl">{company}</div>}
+      <div className="flex items-center gap-4 mt-2">
+        <time className="font-medium text-text-tertiary text-base">{date}</time>
+        <div className="h-px flex-1 bg-accent/10" />
+      </div>
+    </div>
 
-const TimelineItem = React.memo<TimelineItemProps>(
-  ({ date, title, company, description, index }) => (
-    <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.2 }}
-      className={`flex flex-col gap-2 ${index > 0 ? 'mt-8' : ''} relative pl-6`}
-    >
-      <div className="absolute left-0 top-2 w-3 h-3 bg-accent rounded-full" />
-      <div className="text-sm text-muted">{date}</div>
-      <h3 className="text-lg font-semibold">{title}</h3>
-      {company && <div className="text-accent">{company}</div>}
-      <ul className="list-none space-y-2">
+    <div className="space-y-4">
+      <ul className="space-y-2 text-text-secondary text-lg">
         {description.map((point, i) => (
-          <motion.li
-            key={i}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.2 + i * 0.1 }}
-            className="text-muted before:content-['•'] before:mr-2 before:text-accent"
-          >
-            {point}
-          </motion.li>
+          <li key={i} className="flex gap-2 items-baseline">
+            <span className="text-accent/60">•</span>
+            <span>{point}</span>
+          </li>
         ))}
       </ul>
-    </motion.div>
-  )
-);
+      
+      {highlights && highlights.length > 0 && (
+        <div className="mt-4 pt-4 border-t border-accent/10">
+          <h4 className="text-base font-medium text-text-tertiary mb-3">Key Achievements</h4>
+          <ul className="space-y-2">
+            {highlights.map((highlight, i) => (
+              <li key={i} className="flex gap-2 items-baseline text-lg text-text-secondary">
+                <span className="text-accent/60">→</span>
+                <span>{highlight}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  </div>
+));
 
 TimelineItem.displayName = 'TimelineItem';
 
 export const Experience = React.memo(() => (
-  <Section title="Experience" delay={0.3}>
-    <div className="relative space-y-8">
+  <Section title="" className="py-8">
+    <div className="relative">
       <div
-        className="absolute left-[5px] top-2 h-full w-0.5 bg-gradient-to-b from-accent to-accent/20"
+        className="absolute left-[2px] top-3 h-[calc(100%-2rem)] w-px bg-accent/10"
         aria-hidden="true"
       />
       {BIO.experience.map((item, index) => (

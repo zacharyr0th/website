@@ -6,7 +6,7 @@ image:
   alt: 'MusicIDE'
 description: 'Cursor + Musescore for Research + Composition'
 category: 'music'
-tags: ['tech']
+tags: ['theory']
 takeaways:
   - 'MusicIDE is a tool that combines the power of LLMs and AI with the capabilities of Musescore and more to create a comprehensive music research and composition tool.'
   - 'The tool will provide users with a seamless way to generate and edit music and access a wide range of resources and historical examples. The release data for public access is not soon.'

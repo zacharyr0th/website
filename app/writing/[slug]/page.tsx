@@ -17,8 +17,20 @@ export async function generateStaticParams() {
 }
 
 export default async function ArticlePage({ params }: PageProps) {
-  const { slug } = params;
-  const rawArticle = await getArticle(slug);
+  if (!params?.slug) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-background to-surface/30">
+        <main className="container mx-auto px-6 sm:px-8 pt-16 sm:pt-36 pb-24">
+          <div className="text-center">
+            <h1 className="text-4xl font-bold mb-4">404</h1>
+            <p className="text-lg text-text-secondary">Invalid article slug</p>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  const rawArticle = await getArticle(params.slug);
 
   if (!rawArticle) {
     return (
@@ -33,9 +45,9 @@ export default async function ArticlePage({ params }: PageProps) {
     );
   }
 
-  const article = createArticle(rawArticle.frontmatter, rawArticle.content, slug);
+  const article = createArticle(rawArticle.frontmatter, rawArticle.content, params.slug);
   const articles = await getArticles();
-  const currentIndex = articles.findIndex((a) => a.slug === slug);
+  const currentIndex = articles.findIndex((a) => a.slug === params.slug);
   const nextArticle = currentIndex < articles.length - 1 ? articles[currentIndex + 1] : null;
   const prevArticle = currentIndex > 0 ? articles[currentIndex - 1] : null;
 

@@ -1,7 +1,22 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Section } from './Section';
-import { BIO } from '../constants';
+import type { Achievement } from '../types';
+
+const achievements: Achievement[] = [
+  {
+    title: 'DeFi Growth Leadership',
+    organization: 'Aptos Labs',
+    year: '2023',
+    description: 'Led ecosystem growth from $200M to $1.2B TVL',
+  },
+  {
+    title: 'Technical Documentation',
+    organization: 'Solrise Finance',
+    year: '2022',
+    description: 'Built comprehensive DeFi knowledge base and documentation',
+  },
+];
 
 const AchievementCard = React.memo(
   ({
@@ -10,13 +25,7 @@ const AchievementCard = React.memo(
     year,
     description,
     index,
-  }: {
-    title: string;
-    organization: string;
-    year: string;
-    description: string;
-    index: number;
-  }) => (
+  }: Achievement & { index: number }) => (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -37,14 +46,14 @@ const AchievementCard = React.memo(
 
 AchievementCard.displayName = 'AchievementCard';
 
-export const Achievements = React.memo(() => (
-  <Section title="Achievements" delay={0.5}>
+export const Achievements = () => (
+  <Section title="Achievements">
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {BIO.achievements.map((achievement, index) => (
+      {achievements.map((achievement, index) => (
         <AchievementCard key={achievement.title} {...achievement} index={index} />
       ))}
     </div>
   </Section>
-));
+);
 
-Achievements.displayName = 'Achievements';
+Achievements.displayName = 'Achievements'; 

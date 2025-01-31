@@ -1,4 +1,5 @@
 import { SOCIAL_LINKS } from '../lib/social';
+import type { SkillGroup } from './types';
 
 export const BIO_SOCIAL_LINKS = [
   {
@@ -18,59 +19,56 @@ export const BIO_SOCIAL_LINKS = [
   },
 ] as const;
 
+export const GROUPED_SKILLS: Record<string, readonly SkillGroup[]> = {
+  'Programming & Development': [
+    {
+      title: 'LANGUAGES',
+      skills: ['Python', 'TypeScript', 'C'],
+    },
+    {
+      title: 'FRONTEND',
+      skills: ['Next.js', 'React', 'Tailwind CSS'],
+    },
+    {
+      title: 'BACKEND & TOOLS',
+      skills: ['SCAMP', 'Git', 'GraphQL', 'REST APIs'],
+    },
+  ],
+  'Blockchain & DeFi': [
+    {
+      title: 'SMART CONTRACTS',
+      skills: ['Move', 'Solidity', 'Rust'],
+    },
+    {
+      title: 'ARCHITECTURE',
+      skills: ['DeFi Architecture', 'Protocol Design', 'Smart Contract Development'],
+    },
+    {
+      title: 'ANALYSIS',
+      skills: ['Analytics', 'Tokenomics'],
+    },
+  ],
+  'Business & Communication': [
+    {
+      title: 'TECHNICAL',
+      skills: ['Technical Writing', 'Technical Documentation', 'Developer Relations'],
+    },
+    {
+      title: 'STRATEGY',
+      skills: ['Strategic Planning', 'Partnership Development', 'Product Management'],
+    },
+    {
+      title: 'LEADERSHIP',
+      skills: ['Public Speaking', 'Team Leadership'],
+    },
+  ],
+} as const;
+
 export const BIO = {
   name: 'Zachary Roth',
   title: 'Analyst, Strategist, Writer',
   location: 'San Francisco Bay Area',
   intro: `Since 2019, I've been involved with projects across multiple hyper-growth blockchain ecosystems including Bitcoin, Ethereum, Solana, and Aptos. My work involves identifying market opportunities and guiding DeFi and AI teams on leveraging on-chain solutions to enhance their products and services on Aptos, the world's highest performing blockchain.`,
-
-  featuredProjects: [
-    {
-      title: 'DeFi Integration Framework',
-      description: 'Developed a standardized framework for DeFi protocols integrating with Aptos',
-      technologies: ['Move', 'TypeScript', 'Python'],
-      impact: 'Reduced integration time by 60% for new protocols',
-      link: 'https://github.com/zacharyr0th/defi-framework',
-      image: '/projects/defi-framework.png',
-    },
-    {
-      title: 'Blockchain Analytics Suite',
-      description: 'Built data analytics tools for on-chain market analysis',
-      technologies: ['Python', 'SQL', 'React'],
-      impact: 'Processed over 1M daily transactions',
-      link: 'https://github.com/zacharyr0th/blockchain-analytics',
-      image: '/projects/analytics-suite.png',
-    },
-    {
-      title: 'Smart Contract Security Scanner',
-      description: 'Developed automated security analysis tools for Move smart contracts',
-      technologies: ['Rust', 'Move', 'Python'],
-      impact: 'Identified vulnerabilities in 50+ protocols',
-      link: 'https://github.com/zacharyr0th/security-scanner',
-      image: '/projects/security-scanner.png',
-    },
-  ],
-
-  achievements: [
-    {
-      title: 'Top DeFi Contributor',
-      organization: 'Aptos Foundation',
-      year: '2023',
-      description: 'Recognized for significant contributions to the Aptos DeFi ecosystem',
-    },
-    {
-      title: 'Technical Excellence Award',
-      organization: 'Solrise Finance',
-      year: '2022',
-      description: 'Awarded for innovative solutions in DeFi product development',
-    },
-    {
-      title: 'Blockchain Security Champion',
-      organization: 'Web3 Security Alliance',
-      year: '2023',
-      description: 'Recognition for contributions to blockchain security research',
-    },
-  ],
 
   experience: [
     {
@@ -80,28 +78,25 @@ export const BIO = {
       description: [
         'Leading strategic initiatives to expand DeFi and AI capabilities within the Aptos ecosystem',
         'Developing technical specifications and integration frameworks for partner protocols',
-        'Managing relationships with key DeFi protocols and infrastructure providers',
-        'Contributing to core protocol development and ecosystem growth strategies',
+        'Managed relationships with key DeFi protocols and infrastructure providers',
       ],
       highlights: [
-        'Led 20+ successful protocol integrations',
-        'Developed core DeFi standards',
-        'Grew ecosystem TVL by 300%',
+        'Led 25+ successful protocol integrations',
+        'Helped grow ecosystem TVL by 600% in one year - $200m to $1.2B',
       ],
     },
     {
       date: '2021 - 2023',
-      title: 'Product @ Solrise Finance',
+      title: 'Product Manager',
       company: 'Solrise Finance',
       description: [
         'Created educational content to make DeFi more accessible',
-        'Led comprehensive user interviews',
-        'Managed product roadmaps and technical documentation',
+        'Led user interviews and product roadmaps',
+        'Managed technical documentation',
       ],
       highlights: [
-        'Launched 3 successful DeFi products',
-        'Grew user base to 50k+',
-        'Implemented key security features',
+        'Launched numerous successful DeFi products',
+        'Built a comprehensive knowledge base',
       ],
     },
     {
@@ -111,65 +106,12 @@ export const BIO = {
       description: [
         'Helped companies navigate the intersection of traditional finance and crypto, from capital formation to regulatory compliance',
         'Analyzed market opportunities across both digital assets and physical commodities',
-        'Supporting over $2B in fundraising initiatives',
+        'Supported over $2B in fundraising initiatives',
       ],
       highlights: [
-        'Led 15+ successful fundraising rounds',
-        'Developed crypto market analysis framework',
-        'Advisory for major DeFi protocols',
+        'Ghostwrote for multiple publications and served as investor relations consultant',
+        'Wrote 2 Private Placement Memorandums that helped raise a collective $2b',
       ],
-    },
-  ],
-
-  education: [
-    {
-      degree: 'B.S. Computer Science',
-      institution: 'Stanford University',
-      year: '2019',
-      highlights: ['Focus on Distributed Systems', 'Blockchain Technology Research'],
-      awards: ['Outstanding Research Award', "Dean's List 2017-2019"],
-    },
-  ],
-
-  certifications: [
-    {
-      name: 'Move Programming Language Expert',
-      issuer: 'Aptos Foundation',
-      year: '2023',
-      link: 'https://certification.aptos.dev/move-expert',
-    },
-    {
-      name: 'Advanced Smart Contract Security',
-      issuer: 'Web3 Security Alliance',
-      year: '2022',
-      link: 'https://web3security.alliance/cert/asc',
-    },
-    {
-      name: 'DeFi Architecture Specialist',
-      issuer: 'DeFi Alliance',
-      year: '2022',
-      link: 'https://defi.alliance/cert/das',
-    },
-  ],
-
-  speakingEngagements: [
-    {
-      title: 'The Future of DeFi Infrastructure',
-      event: 'ETH San Francisco',
-      date: 'October 2023',
-      link: 'https://ethsf.com/talks/defi-infrastructure',
-    },
-    {
-      title: 'Securing the Future of Web3',
-      event: 'Aptos Summit',
-      date: 'September 2023',
-      link: 'https://aptossummit.com/talks/web3-security',
-    },
-    {
-      title: 'Building Scalable DeFi Protocols',
-      event: 'DeFi Summit London',
-      date: 'July 2023',
-      link: 'https://defisummit.london/talks/scalable-protocols',
     },
   ],
 
@@ -230,50 +172,5 @@ export const BIO = {
         intermediate: ['Public Speaking', 'Team Leadership'],
       },
     },
-  ],
-
-  featuredContent: [
-    {
-      type: 'Article',
-      title: 'The Future of DeFi on High-Performance Blockchains',
-      publisher: 'Medium',
-      date: '2023',
-      url: 'https://medium.com/@zacharyr0th/future-of-defi',
-      highlights: ['Featured on Medium homepage', '50k+ views', 'Widely cited in industry'],
-    },
-    {
-      type: 'Technical Guide',
-      title: 'Building Secure DeFi Protocols on Aptos',
-      publisher: 'Aptos Dev Portal',
-      date: '2023',
-      url: 'https://aptos.dev/guides/defi-security',
-      highlights: ['Official documentation', 'Used by 100+ protocols'],
-    },
-    {
-      type: 'Research Paper',
-      title: 'Optimizing DeFi Protocol Performance',
-      publisher: 'ArXiv',
-      date: '2023',
-      url: 'https://arxiv.org/papers/defi-optimization',
-      highlights: ['Peer-reviewed', 'Novel optimization techniques'],
-    },
-  ],
-
-  languages: [
-    { name: 'English', level: 'Native' },
-    { name: 'Python', level: 'Expert' },
-    { name: 'TypeScript', level: 'Expert' },
-    { name: 'Move', level: 'Expert' },
-  ],
-
-  interests: [
-    'Blockchain Technology',
-    'Artificial Intelligence',
-    'Music Production',
-    'Open Source Development',
-    'Financial Innovation',
-    'Distributed Systems',
-    'Cryptography',
-    'System Design',
   ],
 } as const;

@@ -10,34 +10,12 @@ tags: ['crypto']
 takeaways:
   - 'Web 2 (2004-Present) transformed the internet into a user-generated content platform, leading to the rise of powerful intermediaries controlling digital distribution channels.'
   - 'The Crisis phase (post-9/11) brought significant changes including the rise of big tech, political polarization, and a shift in how people consume information online.'
-  - 'The generational contrast between Heroes (like Mark Zuckerberg) and Artists shapes the evolution from Web 2 to Web 3, with Artists pushing for decentralization and equality.'
   - 'Technology bubbles, while often criticized, play a crucial role in technological adoption by demonstrating potential to the masses, as seen with e-commerce and crypto.'
-  - "The exponential nature of technological progress, demonstrated by Moore's Law and Metcalfe's Law, challenges traditional linear thinking about innovation and adoption."
 ---
 
-<style jsx>{`
- .prose a {
-    text-decoration: underline;
-    color: var(--color-accent);
- }
- .prose ol {
-    list-style-type: decimal;
-    margin-left: 2em; /* Adjust as needed for indentation */
-    padding-left: 0.5em; /* Add padding if needed */
- }
- .prose ol li {
-    margin-bottom: 0.5em;
-    color: var(--color-text-primary);
-    line-height: 1.5; /* Adjust line height for better readability */
- }
-`}</style>
-
-<div class="tldr-section">
 In Web 1, we broke down the cultural and generational context of how the infrastructure for the modern Internet came to be and how it set in motion the innovations that led to Web 2 and 3.
 
 This article will examine how these periods have been influenced by the generations involved, the issues of the incumbents, and the desires of the new entrants.
-
-</div>
 
 Since the onset of Web 2, internet usage has been primarily oriented around user-generated content (social media and e-commerce). This has enabled monopolistic, rent-seeking intermediaries to take a stranglehold on physical and digital content distribution channels. Many companies have acquired undue influence over what billions of people see and buy.
 

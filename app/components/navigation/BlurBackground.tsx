@@ -56,7 +56,7 @@ const BlurBackground: React.FC<BlurBackgroundProps> = ({ children, className = '
     };
   }, []);
 
-  const sharedClassName = `rounded-3xl px-4 pt-4 flex items-center justify-center text-center ${className}`;
+  const sharedClassName = `rounded-3xl flex items-center justify-center text-center ${className}`;
 
   if (!mounted) {
     return <div className={sharedClassName}>{children}</div>;
@@ -69,6 +69,7 @@ const BlurBackground: React.FC<BlurBackgroundProps> = ({ children, className = '
     position: 'relative',
     zIndex: 1,
     color: hasBackground ? 'var(--color-text-primary)' : 'inherit',
+    aspectRatio: className?.includes('w-10 h-10') ? '1 / 1' : 'auto',
   };
 
   return (

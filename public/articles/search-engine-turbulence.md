@@ -7,12 +7,14 @@ image:
 description: 'LLMs and the Future of Search Engines'
 category: 'technology'
 tags: ['ai']
+draft: false
+takeaways:
+  - >-
+    LLMs introduce a new form of search. They can answer questions, provide summaries,
+    and generate content based on learned data. They are the first real challenge to
+    Google's long-standing dominance and are sure to cause turmoil in the search
+    engine market in the coming years.
 ---
-
-LLMs introduce a new form of search. They can answer questions, provide summaries, and
-generate content based on learned data. They're the first real challenge to Google's
-long-standing dominance and are sure to cause turmoil in the search engine market in the
-coming years.
 
 ## The AI Gold Rush
 

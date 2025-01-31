@@ -9,29 +9,8 @@ category: 'technology'
 tags: ['computing']
 ---
 
-<style jsx>{`
-  .prose a {
-    text-decoration: underline;
-    color: var(--color-accent);
-  }
-  .prose ol {
-    list-style-type: decimal;
-    margin-left: 2em; /* Adjust as needed for indentation */
-    padding-left: 0.5em; /* Add padding if needed */
-  }
-  .prose ol li {
-    margin-bottom: 0.5em;
-    color: var(--color-text-primary);
-    line-height: 1.5; /* Adjust line height for better readability */
-  }
-`}</style>
-
-<div class="tldr-section">
-
 A software update crashed millions of computers on July 19, 2024, causing widespread flight cancellations.
 I was fortunate enough to have booked my flight on this day, and while waiting in the terminal, I started to think about kernels.
-
-</div>
 
 My flight was luckily only delayed by two hours, but I felt for those whose journeys were more severely disrupted.
 That sympathy disapated when Delta notified me four hours before my return flight a few days later that they had canceled it.

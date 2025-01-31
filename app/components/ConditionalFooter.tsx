@@ -1,7 +1,6 @@
 'use client';
 
 import React, { memo } from 'react';
-import { usePathname } from 'next/navigation';
 import { motion, useInView } from 'framer-motion';
 import { FaLinkedin, FaXTwitter, FaGithub } from 'react-icons/fa6';
 import { SOCIAL_LINKS } from '../lib/social';
@@ -30,8 +29,7 @@ const SocialButton = memo<{
 SocialButton.displayName = 'SocialButton';
 
 export default function ConditionalFooter() {
-  const pathname = usePathname();
-  const showFooter = pathname !== '/bio';
+  const showFooter = true; // Show footer on all pages
 
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });

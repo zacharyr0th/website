@@ -7,32 +7,13 @@ image:
 description: 'Onboarding and Offboarding'
 category: 'technology'
 tags: ['crypto']
+takeaways:
+  - 'The fundamental flaw in blockchain adoption lies in the challenges of on and off-boarding users. The current financial and political infrastructure makes it difficult for people to enter and exit crypto ecosystems easily.'
 ---
-
-<style jsx>{`
- .prose a {
-    text-decoration: underline;
-    color: var(--color-accent);
- }
- .prose ol {
-    list-style-type: decimal;
-    margin-left: 2em; /* Adjust as needed for indentation */
-    padding-left: 0.5em; /* Add padding if needed */
- }
- .prose ol li {
-    margin-bottom: 0.5em;
-    color: var(--color-text-primary);
-    line-height: 1.5; /* Adjust line height for better readability */
- }
-`}</style>
-
-<div class="tldr-section">
 
 The fundamental flaw in blockchain adoption lies in the challenges of on and off-boarding users. The current financial and political infrastructure makes it difficult for people to enter and exit crypto ecosystems easily.
 
 This limitation, coupled with regulatory hurdles and public skepticism, presents a significant barrier to widespread adoption.
-
-</div>
 
 Onboarding to and offboarding from a blockchain is challenging for first-time users.
 

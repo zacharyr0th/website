@@ -140,7 +140,7 @@ const ArticleContent = memo<ArticleContentProps>(({ article, contentHtml }) => {
     try {
       // Check if running on mobile
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-      
+
       if (isMobile) {
         // On mobile, just update the URL hash
         window.location.hash = id;
@@ -175,7 +175,7 @@ const ArticleContent = memo<ArticleContentProps>(({ article, contentHtml }) => {
 
   const processedContent = useMemo(() => {
     if (!contentHtml) return '';
-    
+
     try {
       return contentHtml.replace(
         /<h([1-3])(.*?)>(.*?)<\/h[1-3]>/g,

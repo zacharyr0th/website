@@ -7,28 +7,9 @@ image:
 description: 'Opportunities and Consequences'
 category: 'technology'
 tags: ['crypto']
+takeaways:
+  - 'Self-custody is a fundamental feature of crypto, giving people more control over their finances and sovereignty than ever before. However, it also requires more responsibility than traditional banking, with some unintended consequences.'
 ---
-
-<style jsx>{`
- .prose a {
-    text-decoration: underline;
-    color: var(--color-accent);
- }
- .prose ol {
-    list-style-type: decimal;
-    margin-left: 2em; /* Adjust as needed for indentation */
-    padding-left: 0.5em; /* Add padding if needed */
- }
- .prose ol li {
-    margin-bottom: 0.5em;
-    color: var(--color-text-primary);
-    line-height: 1.5; /* Adjust line height for better readability */
- }
-`}</style>
-
-<div class="tldr-section">
-
-</div>
 
 # Self-Custody
 
