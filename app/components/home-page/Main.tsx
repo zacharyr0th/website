@@ -1,11 +1,10 @@
 'use client';
 
-import React, { memo, useState, useMemo, useCallback } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
-import { PROJECTS, PROJECT_CATEGORIES, type ProjectCategory } from '@/projects/projects';
+import { PROJECTS } from '@/projects/projects';
 import ProjectCard from '@/projects/ProjectCard';
-import { NavButton } from '../buttons';
 
 const WRITING_PROJECTS = [
   {
