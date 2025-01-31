@@ -41,7 +41,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         {/* Preload critical images */}
         <link
           rel="preload"
-          href="/profile-picture.webp"
+          href="/misc/profile-picture.webp"
           as="image"
           type="image/webp"
         />

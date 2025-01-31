@@ -7,14 +7,20 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { SECTION_METADATA } from '../../lib/metadata';
 
-interface PageProps {
-  params: {
-    slug: string;
-  };
+type Props = {
+  params: Promise<{ slug: string }> | { slug: string };
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const article = await getArticle(params.slug);
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const { params } = props;
+  const resolvedParams = await params;
+  const slug = resolvedParams.slug;
+
+  if (!slug) {
+    return {};
+  }
+
+  const article = await getArticle(slug);
   
   if (!article) {
     return {};
@@ -48,7 +54,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       images: ogImage ? [ogImage.url] : undefined,
     },
     alternates: {
-      canonical: `/writing/${params.slug}`,
+      canonical: `/writing/${slug}`,
     },
   };
 }
@@ -60,8 +66,11 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function ArticlePage({ params }: PageProps) {
-  const slug = params?.slug;
+export default async function ArticlePage(props: Props) {
+  const { params } = props;
+  const resolvedParams = await params;
+  const slug = resolvedParams.slug;
+
   if (!slug) {
     notFound();
   }

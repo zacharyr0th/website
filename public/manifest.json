@@ -52,7 +52,7 @@
   ],
   "screenshots": [
     {
-      "src": "/assets/screenshots/desktop.webp",
+      "src": "/assets/screenshots/desktop_optimized.webp",
       "sizes": "1920x1080",
       "type": "image/webp",
       "platform": "wide",
@@ -60,15 +60,7 @@
       "form_factor": "wide"
     },
     {
-      "src": "/assets/screenshots/mobile.webp",
-      "sizes": "1080x1920",
-      "type": "image/webp",
-      "platform": "narrow",
-      "label": "Zachary Roth's Website - Mobile View",
-      "form_factor": "narrow"
-    },
-    {
-      "src": "/assets/screenshots/writing.webp",
+      "src": "/assets/screenshots/writing_optimized.webp",
       "sizes": "1920x1080",
       "type": "image/webp",
       "platform": "wide",
@@ -76,7 +68,7 @@
       "form_factor": "wide"
     },
     {
-      "src": "/assets/screenshots/projects.webp",
+      "src": "/assets/screenshots/projects_optimized.webp",
       "sizes": "1920x1080",
       "type": "image/webp",
       "platform": "wide",

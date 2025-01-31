@@ -8,7 +8,7 @@ const TWITTER_HANDLE = '@zacharyr0th';
 
 // Profile image configuration
 const PROFILE_IMAGE = {
-  url: '/profile-picture.webp',
+  url: '/misc/profile-picture.webp',
   width: 256,
   height: 256,
   alt: 'Zachary Roth',
