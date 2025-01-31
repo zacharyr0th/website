@@ -1,5 +1,3 @@
-export type ContentType = 'article' | 'review' | 'project'; // Content type categories
-
 export interface WritingProject { // Structure for writing projects
   id: string;        // Unique identifier for the writing
   title: string;     // Writing title

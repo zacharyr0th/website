@@ -142,6 +142,30 @@ const ArticleContent = memo<ArticleContentProps>(
     const router = useRouter();
     const contentRef = useRef<HTMLDivElement>(null);
 
+    // Generate article structured data
+    const articleStructuredData = {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: frontmatter.title,
+      description: frontmatter.description,
+      image: frontmatter.image?.src,
+      datePublished: frontmatter.date,
+      author: {
+        '@type': 'Person',
+        name: 'Zachary Roth',
+        url: 'https://zacharyr0th.com',
+      },
+      publisher: {
+        '@type': 'Person',
+        name: 'Zachary Roth',
+        url: 'https://zacharyr0th.com',
+      },
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': `https://zacharyr0th.com/writing/${article.slug}`,
+      },
+    };
+
     const handleToggleToc = useCallback(() => setShowToc((prev) => !prev), []);
     const handleToggleTakeaways = useCallback(() => setShowTakeaways((prev) => !prev), []);
 
@@ -224,39 +248,45 @@ const ArticleContent = memo<ArticleContentProps>(
     );
 
     return (
-      <div className="content-page font-mono bg-gradient-to-b from-background to-surface/30">
-        <main
-          className="max-w-[var(--max-content-width)] mx-auto relative px-3 sm:px-4"
-          {...handlers}
-        >
-          <article className={styles.article} aria-labelledby="article-title">
-            <ArticleHeader title={title} description={description} />
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleStructuredData) }}
+        />
+        <div className="content-page font-mono bg-gradient-to-b from-background to-surface/30">
+          <main
+            className="max-w-[var(--max-content-width)] mx-auto relative px-3 sm:px-4"
+            {...handlers}
+          >
+            <article className={styles.article} aria-labelledby="article-title">
+              <ArticleHeader title={title} description={description} />
 
-            <div className="relative">
-              {frontmatter.image && <ArticleImage image={frontmatter.image} title={title} />}
-            </div>
+              <div className="relative">
+                {frontmatter.image && <ArticleImage image={frontmatter.image} title={title} />}
+              </div>
 
-            {/* Mobile Key Takeaways and ToC */}
-            <div className="lg:hidden space-y-3 my-4">
-              {renderTakeaways}
-              {renderTableOfContents}
-            </div>
+              {/* Mobile Key Takeaways and ToC */}
+              <div className="lg:hidden space-y-3 my-4">
+                {renderTakeaways}
+                {renderTableOfContents}
+              </div>
 
-            {/* Desktop Key Takeaways and ToC */}
-            <div className="hidden lg:block mb-6">
-              {renderTakeaways}
-              {renderTableOfContents}
-            </div>
+              {/* Desktop Key Takeaways and ToC */}
+              <div className="hidden lg:block mb-6">
+                {renderTakeaways}
+                {renderTableOfContents}
+              </div>
 
-            {/* Main content */}
-            <div
-              ref={contentRef}
-              className={styles.content}
-              dangerouslySetInnerHTML={{ __html: processedContent }}
-            />
-          </article>
-        </main>
-      </div>
+              {/* Main content */}
+              <div
+                ref={contentRef}
+                className={styles.content}
+                dangerouslySetInnerHTML={{ __html: processedContent }}
+              />
+            </article>
+          </main>
+        </div>
+      </>
     );
   }
 );

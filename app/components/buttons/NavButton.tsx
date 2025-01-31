@@ -30,12 +30,10 @@ export const NavButton = React.memo(
           isLoading={isLoading}
           {...props}
         >
-          <span className={isLoading ? 'invisible' : 'visible'}>
-            <span className="flex items-center gap-2">
-              {leftIcon}
-              {children}
-              {rightIcon}
-            </span>
+          <span className="flex items-center gap-2">
+            {leftIcon}
+            {children}
+            {rightIcon}
           </span>
         </BaseButton>
       );

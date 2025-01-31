@@ -4,10 +4,52 @@ import ArticleContent from './ArticleContent';
 import { Suspense } from 'react';
 import { LoadingState } from '../../lib/Loading';
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
+import { SECTION_METADATA } from '../../lib/metadata';
 
 interface PageProps {
   params: {
     slug: string;
+  };
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const article = await getArticle(params.slug);
+  
+  if (!article) {
+    return {};
+  }
+
+  const { frontmatter } = article;
+  const ogImage = frontmatter.image ? {
+    url: frontmatter.image.src,
+    width: 1200,
+    height: 630,
+    alt: frontmatter.image.alt,
+  } : undefined;
+
+  const title = `${frontmatter.title} | ${SECTION_METADATA.writing.title}`;
+
+  return {
+    title,
+    description: frontmatter.description,
+    openGraph: {
+      title: frontmatter.title,
+      description: frontmatter.description,
+      type: 'article',
+      publishedTime: frontmatter.date,
+      authors: [SECTION_METADATA.writing.title],
+      images: ogImage ? [ogImage] : undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: frontmatter.title,
+      description: frontmatter.description,
+      images: ogImage ? [ogImage.url] : undefined,
+    },
+    alternates: {
+      canonical: `/writing/${params.slug}`,
+    },
   };
 }
 

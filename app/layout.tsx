@@ -1,8 +1,11 @@
 import type { ReactNode } from 'react';
+import { Suspense, lazy } from 'react';
 import './styles/globals.css';
 import { metadata } from './lib/metadata';
-import RootLayoutClient from './components/RootLayoutClient';
 import { Analytics } from '@vercel/analytics/react';
+import { jetbrainsMono } from './lib/fonts';
+
+const RootLayoutClient = lazy(() => import('./components/RootLayoutClient'));
 
 export { metadata };
 
@@ -12,7 +15,7 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning className="scroll-smooth">
+    <html lang="en" suppressHydrationWarning className={`scroll-smooth ${jetbrainsMono.variable}`}>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
@@ -33,18 +36,29 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
         
         {/* Preload critical resources */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        
-        {/* Resource hints for performance */}
-        <link rel="preload" href="/fonts/your-main-font.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        
-        {/* Modern image format support */}
-        <link rel="preload" as="image" href="/assets/icons/apple-touch-icon.png" type="image/png" />
+
+        {/* Preload critical images */}
+        <link
+          rel="preload"
+          href="/profile-picture.webp"
+          as="image"
+          type="image/webp"
+        />
+
+        {/* HTTP Headers for caching and performance */}
+        <meta httpEquiv="Cache-Control" content="public, max-age=31536000, immutable" />
+        <meta httpEquiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains" />
+        <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
+        <meta httpEquiv="X-Frame-Options" content="SAMEORIGIN" />
+        <meta httpEquiv="X-XSS-Protection" content="1; mode=block" />
+        <meta httpEquiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+        <meta httpEquiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
       </head>
       <body className="antialiased">
-        <RootLayoutClient>{children}</RootLayoutClient>
+        <Suspense fallback={<div className="min-h-screen bg-background" />}>
+          <RootLayoutClient>{children}</RootLayoutClient>
+        </Suspense>
         <Analytics />
       </body>
     </html>

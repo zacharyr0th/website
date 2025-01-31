@@ -6,12 +6,12 @@
 **/.env*
 !**/.env.example
 **/.credentials/
-**/*secret*
-**/*private*
-**/*.{token,jwt}
-**/*password*
-**/*pass*
-**/*pwd*
+**/*{secret,private,password,pass,pwd}*
+**/*.{token,jwt,pem,key,crt,cer,der,p12,pfx,p7b,p7c,keystore,jks,asc,enc,sig,sign,signature,gpg}
+**/id_{rsa,dsa,ed25519,ecdsa}*
+**/.{ssh,gnupg,gpg}/
+**/*htpasswd
+**/*htaccess
 
 # Certificates, Keys and Authentication
 **/*.{pem,key,crt,cer,der,p12,pfx,p7b,p7c,keystore,jks,asc,enc,sig,sign,signature,gpg}
@@ -23,6 +23,9 @@
 # Service Account Credentials
 **/*{-service-account,-adminsdk,cloud-credentials,api-keys,oauth-tokens,client_secret}*.json
 **/{gcloud,firebase,aws,azure}*.json
+**/.{auth,cert,vault,secrets}*/
+**/*.{key,pem}.encrypted
+**/security-reports/
 
 ###############################################
 # Backups and Logs
@@ -53,56 +56,85 @@
 
 # Dependencies
 node_modules/
-.yarn/*
+.yarn/
 !.yarn/{patches,plugins,releases,sdks,versions}
 .pnp.*
 .pnpm-store/
-{package,pnpm,yarn}-lock.{json,yaml}
-**/*.{pnpm-debug.log,yarn-integrity,npm-debug.log}*
+bower_components/
+**/package-lock.json
+**/yarn.lock
+**/pnpm-lock.yaml
+**/.npmrc
+!**/.npmrc.example
+**/.yarnrc
+**/.npm/
 
 # IDE and Editors
-**/.{vscode,vscode-server,idea,vim,nvim,atom,history}/
+**/.{vscode,idea,vim,nvim,atom,webstorm,fleet,vs,nova}*/
 **/*.{sublime-*,code-workspace}
 **/.{settings,project,classpath}
 **/*.{swp,swo}
 .cursorrules
+.history/
+.husky/
+.lint-staged/
+.eslintcache
+.stylelintcache
+.dccache
 
 ###############################################
 # Build and Compilation
 ###############################################
 
 # Build Output
-.next/
+.next*/
 out/
 dist*/
 build/
 .output/
-**/*.{bundle,chunk,min}.{js,ts}
+**/*.{bundle,chunk,min,opt}.{js,css,html}
 **/generated/
 **/__generated__/
 **/*-manifest.json
 **/stats*.json
+**/*.map
+**/*.{gzip,br}
+storybook-static/
+.storybook-out/
 
 # Framework Specific
-**/.{angular,svelte-kit,nuxt,remix,astro,docz,gatsby,gridsome,meteor,quasar,redwood,nx,vuepress}/
+**/.{angular,svelte-kit,nuxt,remix,astro,docz,gatsby,gridsome,meteor,quasar,redwood,nx,vuepress,blitz,docusaurus,eleventy,nextra}*/
 
 # Cache and Temporary
-**/.{cache,turbo,swc,webpack,parcel-cache}/
+**/.{cache,turbo,swc,webpack,parcel-cache,next-cache}*/
 **/.*cache
-**/{tmp,temp}/
-**/*.{tmp,temp}
+**/{tmp,temp,run}*/
+**/*.{tmp,temp,pid,sock}
+**/*~
+**/*#
+**/.#*
+.contentlayer/
+.mdx-data/
+.rss-data/
 
 ###############################################
 # Deployment and Infrastructure
 ###############################################
 
 # Cloud Services
-**/.{vercel,netlify,serverless,amplify,docker}/
+**/.{vercel,netlify,serverless,amplify,docker,kubernetes,k8s,aws,azure,gcloud,terraform}*/
 **/kubernetes/
 **/k8s/
-**/.{aws,azure,gcloud,terraform}/
-**/*.tfstate
+**/*.tfstate*
 **/*.tfvars
+**/.serverless/
+**/.chalice/
+**/.claudia/
+**/.apex/
+**/.pulumi/
+**/.cdk*/
+**/.sam*/
+**/cdk.out/
 
 # Mobile Development
 **/.expo/
@@ -121,9 +153,8 @@ build/
 # Testing
 **/coverage/
 **/test-results/
-**/{playwright,cypress}-report/
+**/{playwright,cypress,jest}-*/
 **/.nyc_output/
-**/jest*/
 **/__snapshots__/
 **/*.snap
 **/.{vitest,hypothesis,pytest_cache}/
@@ -194,14 +225,11 @@ build/
 **/tsconfig.tsbuildinfo
 
 # Next.js Specific
-**/.next-cache/
 **/next-env.d.ts
 **/.vercel/
 .vercelignore
 
 # Development Tools
-**/.husky/
-**/.lint-staged/
 **/.commitlintrc
 **/.czrc
 **/.release-it.json
@@ -214,12 +242,9 @@ build/
 **/.env.production.local
 
 # Turborepo
-**/.turbo/
 **/turbo.json
 
 # Misc
-**/.history/
-**/.temp/
 **/*.bak
 **/*.orig
 **/*.rej
@@ -260,15 +285,15 @@ build/
 **/flamegraph.{html,svg}
 
 # Package Manager Specific
-**/.npm/
-**/.yarn/
 **/.yalc/
 **/bower_components/
-**/.package-lock.json
-**/.yarn-metadata.json
-**/.yarnrc
+**/package-lock.json
+**/yarn.lock
+**/pnpm-lock.yaml
 **/.npmrc
 !**/.npmrc.example
+**/.yarnrc
+**/.npm/
 
 # Documentation and Examples
 **/docs/_build/
@@ -334,7 +359,6 @@ build/
 **/.next/**/*.hot-update.*
 
 # Additional React/Frontend
-**/.storybook-static/
 **/.style-dictionary/
 **/.css-modules.json
 **/.sass-cache/
@@ -420,13 +444,7 @@ build/
 **/.svgo/
 **/.fontello/
 **/sprites/
-**/.assets-cache/
-**/.image-cache/
-**/.font-cache/
-**/.video-cache/
-**/.audio-cache/
-**/*.{min.svg,min.png,min.jpg,min.jpeg}
-**/*.{webp,avif}
+**/.{assets,image,font,video,audio}-cache/
 
 # Framework Extensions
 **/.nuxt/

@@ -5,19 +5,8 @@ export interface NavItem {
   readonly description?: string;
 }
 
-export type NavSection = 'main' | 'social' | 'footer';
-
 export interface NavConfig {
   readonly main: ReadonlyArray<NavItem>;
-  readonly breakpoints: {
-    readonly mobile: number;
-    readonly tablet: number;
-    readonly desktop: number;
-  };
-  readonly animation: {
-    readonly duration: number;
-    readonly easing: string;
-  };
 }
 
 export const navConfig: NavConfig = {
@@ -38,15 +27,6 @@ export const navConfig: NavConfig = {
       description: 'Listen to my audio content'
     },
   ],
-  breakpoints: {
-    mobile: 640,
-    tablet: 768,
-    desktop: 1024,
-  },
-  animation: {
-    duration: 300,
-    easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
-  },
 } as const;
 
 export const navItems = navConfig.main;

@@ -20,7 +20,8 @@ const ROBOTS_CONFIG = {
         '/*.json',
         '/images/*.{jpg,jpeg,png,gif,webp,avif}',
         '/fonts/*.{woff,woff2}',
-        '/api/public/*'
+        '/api/public/*',
+        '/manifest.json',
       ],
       disallow: [
         '/api/private/',
@@ -31,9 +32,34 @@ const ROBOTS_CONFIG = {
         '/node_modules/',
         '/.git/',
         '/tmp/',
-        '/*.log'
+        '/*.log',
+        '/_next/static/chunks/*',
+        '/_next/static/css/*',
+        '/_next/static/media/*',
+        '/api/auth/*',
+        '/api/analytics/*',
+        '/api/internal/*',
       ],
-      crawlDelay: 0.1
+      crawlDelay: 1,
+    },
+    {
+      // Special rules for Google
+      userAgent: 'Googlebot',
+      allow: [
+        '/',
+        '/writing/',
+        '/projects/',
+        '/bio/',
+        '/audio/',
+        '/sitemap.xml',
+        '/manifest.json',
+      ],
+      disallow: [
+        '/api/*',
+        '/_next/*',
+        '/scripts/*',
+      ],
+      crawlDelay: 0.5,
     },
     {
       // Special rules for AI agents
@@ -45,14 +71,15 @@ const ROBOTS_CONFIG = {
         '/bio/',
         '/audio/',
         '/agents.json',
-        '/api/public/*'
+        '/api/public/*',
       ],
       disallow: [
         '/api/private/',
         '/api/draft/*',
-        '/_next/*'
+        '/_next/*',
+        '/scripts/*',
       ],
-      crawlDelay: 0.5
+      crawlDelay: 2,
     },
     {
       // Bing/Microsoft AI bot
@@ -63,20 +90,44 @@ const ROBOTS_CONFIG = {
         '/projects/',
         '/bio/',
         '/audio/',
-        '/agents.json'
+        '/agents.json',
       ],
       disallow: [
         '/api/*',
-        '/_next/*'
+        '/_next/*',
+        '/scripts/*',
       ],
-      crawlDelay: 0.5
-    }
+      crawlDelay: 1,
+    },
+    {
+      // Rules for other search engines
+      userAgent: ['Yandexbot', 'Baiduspider', 'DuckDuckBot'],
+      allow: [
+        '/',
+        '/writing/',
+        '/projects/',
+        '/bio/',
+        '/audio/',
+      ],
+      disallow: [
+        '/api/*',
+        '/_next/*',
+        '/scripts/*',
+        '/agents.json',
+      ],
+      crawlDelay: 2,
+    },
   ],
   sitemapUrl: 'sitemap.xml',
   headers: {
     'Cache-Control': 'public, max-age=3600',
-    'X-Robots-Tag': 'all'
-  }
+    'X-Robots-Tag': 'all',
+    'X-Content-Type-Options': 'nosniff',
+    'X-Frame-Options': 'DENY',
+    'X-XSS-Protection': '1; mode=block',
+    'Referrer-Policy': 'strict-origin-when-cross-origin',
+    'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+  },
 };
 
 export const dynamic = 'force-static';
@@ -90,6 +141,7 @@ export const revalidate = 3600; // Revalidate hourly
  * - Clear allow/disallow patterns
  * - Cache control headers
  * - Regular revalidation
+ * - Security headers
  * 
  * @returns {MetadataRoute.Robots} The optimized robots.txt configuration
  */

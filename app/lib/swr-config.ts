@@ -19,19 +19,4 @@ export const ARTICLE_CACHE_CONFIG = {
   ...SWR_CONFIG,
   dedupingInterval: 3600000, // 1 hour
   staleWhileRevalidate: 86400000, // 24 hours
-} as const;
-
-// Initialize SWR configuration globally
-export function initializeSWR(): void {
-  if (typeof window === 'undefined') return;
-  
-  if ('SWRConfig' in window) {
-    const SWRConfig = (window as Window & { 
-      SWRConfig: { 
-        default: (config: typeof SWR_CONFIG) => void 
-      } 
-    }).SWRConfig;
-    
-    SWRConfig.default(SWR_CONFIG);
-  }
-} 
+} as const; 

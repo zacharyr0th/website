@@ -1,16 +1,14 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { useEffect } from 'react';
+import { Suspense, lazy } from 'react';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/react';
-import Navigation from './navigation/Navigation';
 import ConditionalFooter from './Footer';
 import KeyboardShortcuts from './KeyboardShortcuts';
 import GlobalConnectModal from './misc/GlobalConnectModal';
 import ErrorBoundary from './ErrorBoundary';
-import { initializeApp } from '../lib/init';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -28,15 +26,13 @@ const mono = JetBrains_Mono({
   fallback: ['monospace'],
 });
 
+const Navigation = lazy(() => import('./navigation/Navigation'));
+
 interface RootLayoutClientProps {
   children: ReactNode;
 }
 
 export default function RootLayoutClient({ children }: RootLayoutClientProps) {
-  useEffect(() => {
-    initializeApp();
-  }, []);
-
   return (
     <div className={`${inter.variable} ${mono.variable}`}>
       <Analytics />
@@ -63,7 +59,9 @@ export default function RootLayoutClient({ children }: RootLayoutClientProps) {
         <ErrorBoundary>
           <KeyboardShortcuts />
           <GlobalConnectModal />
-          <Navigation showHomeButton />
+          <Suspense fallback={<div className="h-16" />}>
+            <Navigation showHomeButton />
+          </Suspense>
           <main className="relative flex min-h-screen flex-col max-w-[100vw] overflow-x-hidden">
             {children}
           </main>
