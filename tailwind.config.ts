@@ -89,8 +89,11 @@ const config: Config = {
 
 // Add scrollbar hiding utilities
 const plugin = require('tailwindcss/plugin');
+if (!config.plugins) {
+  config.plugins = [];
+}
 config.plugins.push(
-  plugin(({ addUtilities }) => {
+  plugin(({ addUtilities }: { addUtilities: (utilities: Record<string, any>) => void }) => {
     addUtilities({
       '.scrollbar-hide': {
         /* IE and Edge */

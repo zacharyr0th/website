@@ -32,7 +32,7 @@ const formatArtistName = (name: string | undefined): string => {
   const names = name.split(' ');
   // If name is longer than 15 characters and has multiple parts, use last name
   if (name.length > 15 && names.length > 1) {
-    return names[names.length - 1];
+    return names[names.length - 1] || '';
   }
   return name;
 };

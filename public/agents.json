@@ -359,8 +359,156 @@
       "uiInteractions": {
         "audioPlayer": {
           "selector": ".audio-player",
-          "description": "Audio content player",
-          "agent_instructions": "Access and play audio content."
+          "description": "Interactive audio content player with playlist management",
+          "agent_instructions": "Control and manage audio playback with comprehensive player features.",
+          "components": {
+            "playlistContainer": {
+              "selector": ".playlist-container",
+              "description": "List of available audio tracks",
+              "components": {
+                "playlistItem": {
+                  "selector": ".playlist-item",
+                  "description": "Individual track in playlist",
+                  "structure": {
+                    "title": "h5.font-medium",
+                    "artist": "span.text-[var(--color-text-secondary)]",
+                    "composer": "span.opacity-75",
+                    "duration": "span.whitespace-nowrap",
+                    "metadata": {
+                      "instrument": "span.capitalize",
+                      "genre": "span.rounded-full"
+                    }
+                  },
+                  "states": {
+                    "active": "bg-[var(--color-primary)] bg-opacity-10",
+                    "inactive": "hover:bg-[var(--color-border)]"
+                  },
+                  "animations": {
+                    "initial": { "opacity": 0, "y": 10 },
+                    "animate": { "opacity": 1, "y": 0 },
+                    "exit": { "opacity": 0, "y": -10 },
+                    "transition": { "duration": 0.2 }
+                  }
+                }
+              }
+            },
+            "controls": {
+              "selector": ".audio-controls",
+              "description": "Playback control buttons",
+              "components": {
+                "playPause": {
+                  "selector": "button[aria-label='Play/Pause']",
+                  "description": "Toggle playback state",
+                  "states": ["playing", "paused"]
+                },
+                "previous": {
+                  "selector": "button[aria-label='Previous Track']",
+                  "description": "Play previous track"
+                },
+                "next": {
+                  "selector": "button[aria-label='Next Track']",
+                  "description": "Play next track"
+                },
+                "shuffle": {
+                  "selector": "button[aria-label='Shuffle']",
+                  "description": "Toggle shuffle mode",
+                  "states": ["active", "inactive"]
+                },
+                "repeat": {
+                  "selector": "button[aria-label='Repeat']",
+                  "description": "Cycle repeat modes",
+                  "states": ["off", "all", "one"]
+                },
+                "volume": {
+                  "selector": ".volume-control",
+                  "description": "Volume control slider",
+                  "components": {
+                    "slider": "input[type='range']",
+                    "muteButton": "button[aria-label='Mute']"
+                  }
+                }
+              }
+            },
+            "progressBar": {
+              "selector": ".progress-bar",
+              "description": "Track progress indicator",
+              "components": {
+                "slider": {
+                  "selector": "input[type='range']",
+                  "description": "Seek through track"
+                },
+                "currentTime": {
+                  "selector": ".current-time",
+                  "description": "Current playback position"
+                },
+                "duration": {
+                  "selector": ".duration",
+                  "description": "Total track duration"
+                },
+                "waveform": {
+                  "selector": ".waveform",
+                  "description": "Visual waveform representation"
+                }
+              }
+            }
+          }
+        },
+        "categoryFilters": {
+          "selector": ".category-filters",
+          "description": "Filter tracks by category",
+          "options": ["All", "Piano", "Guitar", "Classical", "Jazz"],
+          "components": {
+            "filterButton": {
+              "selector": ".category-button",
+              "states": {
+                "selected": "bg-[var(--color-primary)]",
+                "unselected": "bg-[var(--color-border)]"
+              }
+            }
+          }
+        }
+      },
+      "trackMetadata": {
+        "instruments": ["piano", "guitar"],
+        "genres": ["Classical", "Jazz"],
+        "attributes": {
+          "title": "string",
+          "artist": "string",
+          "composer": "string?",
+          "duration": "string",
+          "isOriginal": "boolean",
+          "coverArt": "string",
+          "waveform": "number[]"
+        }
+      },
+      "audioFeatures": {
+        "preloading": {
+          "enabled": true,
+          "strategy": "next-track",
+          "cacheSize": 5
+        },
+        "waveformGeneration": {
+          "enabled": true,
+          "sampleSize": 100,
+          "useWebWorker": true
+        },
+        "playbackModes": {
+          "shuffle": true,
+          "repeat": ["off", "all", "one"],
+          "autoplay": false
+        },
+        "accessibility": {
+          "keyboardControls": {
+            "space": "togglePlayPause",
+            "arrowLeft": "previousTrack",
+            "arrowRight": "nextTrack",
+            "m": "toggleMute"
+          },
+          "screenReaderAnnouncements": {
+            "trackChange": true,
+            "playbackState": true,
+            "volumeChange": true
+          }
         }
       }
     }
