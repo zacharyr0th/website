@@ -87,4 +87,23 @@ const config: Config = {
   plugins: [require('@tailwindcss/typography')],
 };
 
+// Add scrollbar hiding utilities
+const plugin = require('tailwindcss/plugin');
+config.plugins.push(
+  plugin(({ addUtilities }) => {
+    addUtilities({
+      '.scrollbar-hide': {
+        /* IE and Edge */
+        '-ms-overflow-style': 'none',
+        /* Firefox */
+        'scrollbar-width': 'none',
+        /* Safari and Chrome */
+        '&::-webkit-scrollbar': {
+          display: 'none'
+        }
+      }
+    });
+  })
+);
+
 export default config;
