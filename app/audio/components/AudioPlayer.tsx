@@ -43,30 +43,51 @@ const useAudioPlayer = (initialTrack: Track) => {
     // Add error handling for debugging
     audio.onerror = (event: Event | string) => {
       const mediaError = audio.error;
-      const errorDetails = {
-        message: mediaError?.message || 'Unknown error',
-        code: mediaError?.code,
+      let errorDetails: Record<string, any> = {
+        timestamp: new Date().toISOString(),
+        message: 'Unknown error',
+        code: null,
         src: audio.src,
         readyState: audio.readyState,
         networkState: audio.networkState,
-        errorType: event instanceof Event ? event.type : 'string_error',
-        errorCodes: mediaError ? {
-          MEDIA_ERR_ABORTED: mediaError.code === MediaError.MEDIA_ERR_ABORTED,
-          MEDIA_ERR_NETWORK: mediaError.code === MediaError.MEDIA_ERR_NETWORK,
-          MEDIA_ERR_DECODE: mediaError.code === MediaError.MEDIA_ERR_DECODE,
-          MEDIA_ERR_SRC_NOT_SUPPORTED: mediaError.code === MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED
-        } : null
       };
 
-      console.error('Audio playback error:', errorDetails);
+      if (mediaError) {
+        errorDetails = {
+          ...errorDetails,
+          message: mediaError.message || 'Media Error',
+          code: mediaError.code,
+          errorType: {
+            MEDIA_ERR_ABORTED: mediaError.code === MediaError.MEDIA_ERR_ABORTED,
+            MEDIA_ERR_NETWORK: mediaError.code === MediaError.MEDIA_ERR_NETWORK,
+            MEDIA_ERR_DECODE: mediaError.code === MediaError.MEDIA_ERR_DECODE,
+            MEDIA_ERR_SRC_NOT_SUPPORTED: mediaError.code === MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED
+          }
+        };
+      }
+
+      if (event instanceof Event) {
+        errorDetails.eventType = event.type;
+      }
+
+      console.error('Audio playback error:', JSON.stringify(errorDetails, null, 2));
+
+      // Set error state and attempt recovery
+      setIsLoading(false);
+      setIsBuffering(false);
+      setIsPlaying(false);
 
       // Attempt recovery based on error type
       if (mediaError?.code === MediaError.MEDIA_ERR_NETWORK) {
-        // Network error - could try reloading
         console.warn('Network error detected, attempting to reload audio...');
-        audio.load();
+        setTimeout(() => {
+          audio.load();
+        }, 1000);
       } else if (mediaError?.code === MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED) {
         console.error('Audio format not supported');
+      } else if (mediaError?.code === MediaError.MEDIA_ERR_DECODE) {
+        console.error('Audio decode error, attempting to recreate audio element...');
+        createNewAudio(audio.src);
       }
     };
 
@@ -261,7 +282,7 @@ const formatArtistName = (name: string | undefined): string => {
   if (!name) return '';
   const names = name.split(' ');
   if (name.length > 15 && names.length > 1) {
-    return names[names.length - 1];
+    return names[names.length - 1] || '';
   }
   return name;
 };
