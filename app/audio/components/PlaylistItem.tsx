@@ -132,7 +132,7 @@ const PlaylistItem = memo<PlaylistItemProps>(({ track, currentTrack, onPlay }) =
   const isActive = currentTrack.id === track.id;
   
   const className = useMemo(() => 
-    `flex items-center p-4 rounded-xl cursor-pointer transition-all duration-200 ease-in-out ${
+    `flex items-center p-3 sm:p-4 rounded-xl cursor-pointer transition-all duration-200 ease-in-out touch-manipulation active:scale-[0.99] ${
       isActive ? styles.active : styles.inactive
     }`,
     [isActive]
@@ -150,6 +150,7 @@ const PlaylistItem = memo<PlaylistItemProps>(({ track, currentTrack, onPlay }) =
       onClick={handleClick}
       layout
       style={styles.container}
+      whileTap={{ scale: 0.98 }}
       {...ANIMATION_CONFIG}
     >
       <TrackInfo track={track} />
