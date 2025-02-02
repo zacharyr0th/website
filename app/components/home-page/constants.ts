@@ -43,3 +43,21 @@ export const heroContent = {
   ],
   chainLogos: ['bitcoin', 'ethereum', 'solana', 'aptos'],
 } as const;
+
+export const WRITING_PROJECTS = [
+  {
+    title: "A Bird's Eye View",
+    description: 'Seeing the forest through the trees when it comes to blockchain adoption.',
+    link: '/writing/birdseye-view',
+  },
+  {
+    title: 'Web 1',
+    description: 'A cross generational perspective on the internet.',
+    link: '/writing/web-1',
+  },
+  {
+    title: 'MusicIDE',
+    description: 'Exploring the intersection of artificial intelligence and music composition.',
+    link: '/writing/musicide',
+  },
+];
