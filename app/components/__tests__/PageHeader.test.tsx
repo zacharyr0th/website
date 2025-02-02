@@ -3,23 +3,40 @@ import { render, screen } from '@testing-library/react';
 import PageHeader from '../PageHeader';
 
 describe('PageHeader', () => {
-  describe('rendering', () => {
-    it('renders the title correctly', () => {
-      render(<PageHeader title="Test Title" />);
+  it('renders the title correctly', () => {
+    const testTitle = 'Test Page Title';
+    render(<PageHeader title={testTitle} />);
+    
+    const heading = screen.getByRole('heading', { level: 1 });
+    expect(heading).toHaveTextContent(testTitle);
+  });
 
-      const heading = screen.getByRole('heading', { level: 1 });
-      expect(heading).toHaveTextContent('Test Title');
-    });
+  it('applies correct CSS classes', () => {
+    render(<PageHeader title="Test" />);
+    
+    const header = screen.getByRole('banner');
+    expect(header).toHaveClass('mb-8');
 
-    it('renders as a header element', () => {
-      render(<PageHeader title="Test Title" />);
-      expect(screen.getByRole('banner')).toBeInTheDocument();
-    });
+    const heading = screen.getByRole('heading', { level: 1 });
+    expect(heading).toHaveClass(
+      'text-5xl',
+      'lg:text-6xl',
+      'font-bold',
+      'tracking-tight',
+      'text-center',
+      'sm:text-left'
+    );
+  });
 
-    it('renders title with correct heading level', () => {
-      render(<PageHeader title="Test Title" />);
-      expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument();
-    });
+  it('renders within a header element', () => {
+    render(<PageHeader title="Test" />);
+    expect(screen.getByRole('banner')).toBeInTheDocument();
+  });
+
+  it('maintains accessibility hierarchy', () => {
+    render(<PageHeader title="Test" />);
+    const heading = screen.getByRole('heading', { level: 1 });
+    expect(heading.tagName).toBe('H1');
   });
 
   describe('styling', () => {
