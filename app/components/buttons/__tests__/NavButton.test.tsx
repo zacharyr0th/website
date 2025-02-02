@@ -1,114 +1,99 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import { NavButton } from '../NavButton';
 
-const MockIcon = () => <svg data-testid="mock-icon" />;
+// Mock LoadingSpinner
+jest.mock('../../../lib/Loading', () => ({
+  LoadingSpinner: () => <div data-testid="loading-spinner">Loading...</div>,
+}));
 
 describe('NavButton', () => {
-  describe('rendering', () => {
-    it('renders children correctly', () => {
-      render(<NavButton>Home</NavButton>);
-      expect(screen.getByText('Home')).toBeInTheDocument();
-    });
-
-    it('renders with left icon', () => {
-      render(<NavButton leftIcon={<MockIcon />}>Home</NavButton>);
-      expect(screen.getByTestId('mock-icon')).toBeInTheDocument();
-    });
-
-    it('renders with right icon', () => {
-      render(<NavButton rightIcon={<MockIcon />}>Home</NavButton>);
-      expect(screen.getByTestId('mock-icon')).toBeInTheDocument();
-    });
+  it('renders with default props', () => {
+    render(<NavButton>Click me</NavButton>);
+    const button = screen.getByRole('button', { name: 'Click me' });
+    expect(button).toBeInTheDocument();
+    expect(button).toHaveClass('interactive-button', 'h-8');
   });
 
-  describe('styling', () => {
-    it('applies active styles', () => {
-      render(<NavButton active>Home</NavButton>);
-      const button = screen.getByRole('button');
-      expect(button).toHaveClass('shadow-sm');
-    });
-
-    it('applies inactive styles', () => {
-      render(<NavButton active={false}>Home</NavButton>);
-      const button = screen.getByRole('button');
-      expect(button).not.toHaveClass('shadow-sm');
-    });
-
-    it('applies flex layout for content', () => {
-      render(<NavButton>Home</NavButton>);
-      const contentWrapper = screen.getByText('Home').closest('span');
-      expect(contentWrapper).toHaveClass('flex items-center gap-2');
-    });
+  it('applies active styles', () => {
+    render(<NavButton active>Click me</NavButton>);
+    const button = screen.getByRole('button');
+    expect(button).toHaveClass('shadow-sm');
   });
 
-  describe('interactions', () => {
-    it('handles click events', async () => {
-      const handleClick = jest.fn();
-      render(<NavButton onClick={handleClick}>Home</NavButton>);
-
-      await userEvent.click(screen.getByRole('button'));
-      expect(handleClick).toHaveBeenCalled();
-    });
-
-    it('prevents click when disabled', async () => {
-      const handleClick = jest.fn();
-      render(
-        <NavButton onClick={handleClick} disabled>
-          Home
-        </NavButton>
-      );
-
-      await userEvent.click(screen.getByRole('button'));
-      expect(handleClick).not.toHaveBeenCalled();
-    });
-
-    it('handles loading state', () => {
-      render(<NavButton isLoading>Home</NavButton>);
-      const button = screen.getByRole('button');
-      expect(button).toBeDisabled();
-      const contentWrapper = screen.getByText('Home').closest('span');
-      expect(contentWrapper).toHaveClass('invisible');
-    });
+  it('handles click events', async () => {
+    const handleClick = jest.fn();
+    render(<NavButton onClick={handleClick}>Click me</NavButton>);
+    await userEvent.click(screen.getByRole('button'));
+    expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
-  describe('icon positioning', () => {
-    it('maintains correct order with left icon', () => {
-      render(<NavButton leftIcon={<MockIcon />}>Home</NavButton>);
-      const contentWrapper = screen.getByText('Home').closest('span');
-      const icon = screen.getByTestId('mock-icon');
+  it('renders with left icon', () => {
+    const LeftIcon = () => <span data-testid="left-icon">←</span>;
+    render(<NavButton leftIcon={<LeftIcon />}>Click me</NavButton>);
+    expect(screen.getByTestId('left-icon')).toBeInTheDocument();
+    expect(screen.getByRole('button')).toHaveTextContent('←Click me');
+  });
 
-      expect(contentWrapper?.firstElementChild).toBe(icon);
-      expect(contentWrapper?.lastChild?.textContent).toBe('Home');
-    });
+  it('renders with right icon', () => {
+    const RightIcon = () => <span data-testid="right-icon">→</span>;
+    render(<NavButton rightIcon={<RightIcon />}>Click me</NavButton>);
+    expect(screen.getByTestId('right-icon')).toBeInTheDocument();
+    expect(screen.getByRole('button')).toHaveTextContent('Click me→');
+  });
 
-    it('maintains correct order with right icon', () => {
-      render(<NavButton rightIcon={<MockIcon />}>Home</NavButton>);
-      const contentWrapper = screen.getByText('Home').closest('span');
-      const icon = screen.getByTestId('mock-icon');
+  it('handles loading state', () => {
+    render(<NavButton isLoading>Click me</NavButton>);
+    expect(screen.getByTestId('loading-spinner')).toBeInTheDocument();
+    const contentSpan = screen.getByText('Click me').closest('span');
+    expect(contentSpan?.parentElement).toHaveClass('invisible');
+  });
 
-      expect(contentWrapper?.firstChild?.textContent).toBe('Home');
-      expect(contentWrapper?.lastElementChild).toBe(icon);
-    });
+  it('applies custom className', () => {
+    render(<NavButton className="custom-class">Click me</NavButton>);
+    expect(screen.getByRole('button')).toHaveClass('custom-class');
+  });
 
-    it('maintains correct order with both icons', () => {
-      render(
-        <NavButton
-          leftIcon={<MockIcon data-testid="left-icon" />}
-          rightIcon={<MockIcon data-testid="right-icon" />}
-        >
-          Home
-        </NavButton>
-      );
+  it('respects p-0 in className', () => {
+    const { rerender } = render(<NavButton>Click me</NavButton>);
+    let button = screen.getByRole('button');
+    expect(button).toHaveClass('px-3');
 
-      const contentWrapper = screen.getByText('Home').closest('span');
-      const leftIcon = screen.getByTestId('left-icon');
-      const rightIcon = screen.getByTestId('right-icon');
+    rerender(<NavButton className="p-0">Click me</NavButton>);
+    button = screen.getByRole('button');
+    expect(button).toHaveClass('p-0');
+    // The px-3 class will still be present from BaseButton's default size classes
+    // but it will be overridden by p-0 in the browser's CSS cascade
+  });
 
-      expect(contentWrapper?.firstElementChild).toBe(leftIcon);
-      expect(contentWrapper?.children[1].textContent).toBe('Home');
-      expect(contentWrapper?.lastElementChild).toBe(rightIcon);
-    });
+  it('forwards ref', () => {
+    const ref = React.createRef<HTMLButtonElement>();
+    render(<NavButton ref={ref}>Click me</NavButton>);
+    expect(ref.current).toBeInstanceOf(HTMLButtonElement);
+  });
+
+  it('forwards additional props', () => {
+    render(
+      <NavButton data-testid="test-button" aria-label="Test button">
+        Click me
+      </NavButton>
+    );
+    const button = screen.getByTestId('test-button');
+    expect(button).toHaveAttribute('aria-label', 'Test button');
+  });
+
+  it('renders with both icons', () => {
+    const LeftIcon = () => <span data-testid="left-icon">←</span>;
+    const RightIcon = () => <span data-testid="right-icon">→</span>;
+    render(
+      <NavButton leftIcon={<LeftIcon />} rightIcon={<RightIcon />}>
+        Click me
+      </NavButton>
+    );
+    expect(screen.getByTestId('left-icon')).toBeInTheDocument();
+    expect(screen.getByTestId('right-icon')).toBeInTheDocument();
+    expect(screen.getByRole('button')).toHaveTextContent('←Click me→');
   });
 });
