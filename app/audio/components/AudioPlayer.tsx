@@ -529,7 +529,7 @@ export default memo(function AudioPlayer() {
 
   return (
     <motion.div 
-      className="w-full max-w-4xl mx-auto p-4 sm:p-8 rounded-3xl bg-gradient-to-br from-[#1A1A1A] to-[#2A2A2A] shadow-2xl backdrop-blur-lg border border-white/10"
+      className="w-full max-w-4xl mx-auto p-4 sm:p-8 rounded-3xl bg-gradient-to-br from-[#1A1A1A] to-[#2A2A2A] shadow-2xl backdrop-blur-lg border border-white/10 overflow-hidden"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -545,7 +545,7 @@ export default memo(function AudioPlayer() {
           controls={controls}
         />
         
-        <div className="mt-2">
+        <div className="mt-2 touch-none">
           <Suspense fallback={<div className="h-2 bg-surface/50 rounded-full animate-pulse" />}>
             <ProgressBar
               progressRef={progressRef}
@@ -560,12 +560,15 @@ export default memo(function AudioPlayer() {
 
       {filteredTracks.length > 0 && (
         <div className="mt-6 sm:mt-8">
-          <div className="space-y-2 max-h-[200px] sm:max-h-[280px] overflow-y-auto 
+          <div className="space-y-2 max-h-[180px] sm:max-h-[280px] overflow-y-auto 
             scrollbar-thin scrollbar-track-[#1A1A1A] scrollbar-thumb-[#3A3A3A] 
             hover:scrollbar-thumb-[#4A4A4A] 
             [&::-webkit-scrollbar]:w-2 
             [&::-webkit-scrollbar-thumb]:rounded-full 
-            [&::-webkit-scrollbar-track]:rounded-full">
+            [&::-webkit-scrollbar-track]:rounded-full
+            overscroll-behavior-y-contain
+            -mx-4 sm:mx-0 px-4 sm:px-0"
+          >
             <Suspense fallback={<div className="h-16 bg-surface/50 rounded-lg animate-pulse" />}>
               {filteredTracks.map((track) => (
                 <PlaylistItem

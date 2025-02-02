@@ -67,15 +67,15 @@ const AudioPageClient = dynamic(() => import('./AudioPageClient'), {
 
 // Extract container component with performance optimizations
 const PageContainer = memo<{ children: React.ReactNode }>(({ children }) => (
-  <div className="content-page font-mono bg-gradient-to-b from-background to-surface/30">
-    <main className="container mx-auto px-6 sm:px-8 pt-16 sm:pt-36">
+  <div className="content-page font-mono bg-gradient-to-b from-background to-surface/30 min-h-[100dvh]">
+    <main className="container mx-auto px-4 sm:px-8 pt-16 pb-safe sm:pt-24 sm:pb-16">
       <div 
         style={{ 
           maxWidth: 'var(--article-width)',
           willChange: 'transform',
           contain: 'layout style paint',
         }} 
-        className="mx-auto space-y-12"
+        className="mx-auto space-y-8 sm:space-y-12"
       >
         {children}
       </div>
