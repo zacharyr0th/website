@@ -155,10 +155,31 @@ export const getArticle = async (slug: string) => {
   try {
     const filePath = path.join(articlesDirectory, `${slug}.md`);
     const fileContents = await readFile(filePath, 'utf8');
-    const { data, content } = matter(fileContents);
-    const validatedFrontmatter = validateFrontmatter(data);
-    const processedContent = await processMarkdown(content);
-    return { frontmatter: validatedFrontmatter, content, processedContent };
+    
+    let data, content;
+    try {
+      const parsed = matter(fileContents);
+      data = parsed.data;
+      content = parsed.content;
+    } catch (error) {
+      console.error(`Invalid frontmatter format in article ${slug}:`, error);
+      return null;
+    }
+
+    // Check for invalid content
+    if (!content || content.trim().length === 0) {
+      console.error(`Invalid content in article ${slug}: Content is empty`);
+      return null;
+    }
+
+    try {
+      const validatedFrontmatter = validateFrontmatter(data);
+      const processedContent = await processMarkdown(content);
+      return { frontmatter: validatedFrontmatter, content, processedContent };
+    } catch (error) {
+      console.error(`Error validating article ${slug}:`, error);
+      return null;
+    }
   } catch (error) {
     console.error(`Error loading article ${slug}:`, error);
     return null;
@@ -183,11 +204,35 @@ export const getArticles = async (forceRefresh = false): Promise<readonly Articl
         .map(async (fileName) => {
           try {
             const slug = fileName.replace(/\.md$/, '');
-            const article = await getArticle(slug);
-            if (!article || (process.env.NODE_ENV === 'production' && article.frontmatter.draft)) {
+            const filePath = path.join(articlesDirectory, fileName);
+            const fileContents = await readFile(filePath, 'utf8');
+            
+            let data, content;
+            try {
+              const parsed = matter(fileContents);
+              data = parsed.data;
+              content = parsed.content;
+            } catch (error) {
+              console.error(`Invalid frontmatter format in article ${fileName}:`, error);
               return null;
             }
-            return createArticle(article.frontmatter, article.content, slug);
+            
+            // Check for invalid content
+            if (!content || content.trim().length === 0) {
+              console.error(`Invalid content in article ${fileName}: Content is empty`);
+              return null;
+            }
+            
+            try {
+              const validatedFrontmatter = validateFrontmatter(data);
+              if (process.env.NODE_ENV === 'production' && validatedFrontmatter.draft) {
+                return null;
+              }
+              return createArticle(validatedFrontmatter, content, slug);
+            } catch (error) {
+              console.error(`Invalid frontmatter in article ${fileName}:`, error);
+              return null;
+            }
           } catch (error) {
             console.error(`Error processing article ${fileName}:`, error);
             return null;

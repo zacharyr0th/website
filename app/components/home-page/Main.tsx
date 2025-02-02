@@ -5,24 +5,7 @@ import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import { PROJECTS } from '@/projects/projects';
 import ProjectCard from '@/projects/ProjectCard';
-
-const WRITING_PROJECTS = [
-  {
-    title: "A Bird's Eye View",
-    description: 'Seeing the forest through the trees when it comes to blockchain adoption.',
-    link: '/writing/birdseye-view',
-  },
-  {
-    title: 'Web 1',
-    description: 'A cross generational perspective on the internet.',
-    link: '/writing/web-1',
-  },
-  {
-    title: 'MusicIDE',
-    description: 'Exploring the intersection of artificial intelligence and music composition.',
-    link: '/writing/musicide',
-  },
-];
+import { WRITING_PROJECTS } from './constants';
 
 interface WritingCardProps {
   article: {
@@ -36,9 +19,9 @@ const WritingCard = memo(({ article }: WritingCardProps) => (
   <Link href={article.link}>
     <div className="group relative flex flex-col justify-between px-8 py-6 space-y-4 bg-black/40 rounded-2xl border border-white/5 h-full">
       <article className="space-y-3 w-full">
-        <h2 className="text-xl font-mono text-white/90 group-hover:text-accent transition-colors text-left w-full">
+        <h3 className="text-xl font-mono text-white/90 group-hover:text-accent transition-colors text-left w-full">
           {article.title}
-        </h2>
+        </h3>
         <p className="flex font-mono text-white/60 text-sm leading-relaxed line-clamp-3 text-left w-full">
           {article.description}
         </p>
