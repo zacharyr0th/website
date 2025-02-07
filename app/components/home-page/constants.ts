@@ -47,8 +47,8 @@ export const heroContent = {
 export const WRITING_PROJECTS = [
   {
     title: "A Bird's Eye View",
-    description: 'Seeing the forest through the trees when it comes to blockchain adoption.',
-    link: '/writing/birdseye-view',
+    description: 'Seeing the forest through the trees.',
+    link: '/writing/a-birds-eye-view',
   },
   {
     title: 'Web 1',
@@ -56,8 +56,8 @@ export const WRITING_PROJECTS = [
     link: '/writing/web-1',
   },
   {
-    title: 'MusicIDE',
-    description: 'Exploring the intersection of artificial intelligence and music composition.',
-    link: '/writing/musicide',
+    title: 'Easy Money and Veblen Goods',
+    description: 'The Reflexivity of Value',
+    link: '/writing/easy-money-and-veblen-goods',
   },
 ];

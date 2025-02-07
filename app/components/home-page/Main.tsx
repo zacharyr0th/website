@@ -3,7 +3,7 @@
 import React, { memo } from 'react';
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
-import { PROJECTS } from '@/projects/projects';
+import { getFeaturedProjects } from '@/projects/projects';
 import ProjectCard from '@/projects/ProjectCard';
 import { WRITING_PROJECTS } from './constants';
 
@@ -102,7 +102,7 @@ Section.displayName = 'Section';
 
 const ProjectGrid = memo(() => (
   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-    {PROJECTS.map((project) => (
+    {getFeaturedProjects().map((project) => (
       <ProjectCard key={project.id} project={project} isFocused={false} />
     ))}
   </div>
@@ -114,7 +114,7 @@ const WritingGrid = memo(({ articles }: { articles: typeof WRITING_PROJECTS }) =
   const parentRef = React.useRef<HTMLDivElement>(null);
   
   return (
-    <div ref={parentRef} className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <div ref={parentRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {articles.map((article) => (
         <WritingCard key={article.link} article={article} />
       ))}

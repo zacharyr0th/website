@@ -3,7 +3,7 @@
 import React, { memo, useState, useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import BackgroundSVG from './backgrounds/HeroBackground';
 import { ActionButton } from '../buttons';
 import { heroContent } from './constants';
@@ -90,6 +90,11 @@ const StickyHeader = memo(() => {
 
   useEffect(() => {
     setMounted(true);
+    // Enable scrolling
+    document.body.style.overflow = 'visible';
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, []);
 
   const handleOpenModal = useCallback(() => {
@@ -98,7 +103,7 @@ const StickyHeader = memo(() => {
 
   if (!mounted) {
     return (
-      <div className="h-screen px-6 sm:px-12 ml-4 sm:ml-8 lg:ml-16 flex flex-col justify-center sticky top-0 z-30">
+      <div className="min-h-screen px-6 sm:px-12 ml-4 sm:ml-8 lg:ml-16 flex flex-col justify-center">
         <div className="opacity-0">Loading...</div>
       </div>
     );
@@ -106,7 +111,7 @@ const StickyHeader = memo(() => {
 
   return (
     <motion.div
-      className="h-screen px-6 sm:px-12 ml-4 sm:ml-8 lg:ml-16 flex flex-col justify-center sticky top-0 z-30"
+      className="min-h-screen px-6 sm:px-12 ml-4 sm:ml-8 lg:ml-16 flex flex-col justify-center"
       {...pageTransition}
     >
       <motion.h1
@@ -153,19 +158,13 @@ const MainContent = memo(() => {
     []
   );
 
-  const { scrollYProgress } = useScroll();
-  const opacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
-  const y = useTransform(scrollYProgress, [0, 0.2], [50, 0]);
-
   return (
     <motion.div
-      className="h-screen lg:bg-transparent bg-background flex flex-col justify-center"
-      style={{ opacity, y }}
+      className="min-h-screen lg:bg-transparent bg-background flex flex-col justify-center"
     >
       <div className="px-6 sm:px-12 ml-4 sm:ml-8 lg:ml-16 max-w-screen-2xl mx-auto">
         {heroContent.sections?.map((section) => {
           const showChainLogos = isFirstSection(section.title);
-
           return (
             <ContentSection key={section.title} title={section.title} content={section.content}>
               {showChainLogos && <ChainLogos />}
@@ -187,12 +186,15 @@ const HeroContent = memo(() => (
 HeroContent.displayName = 'HeroContent';
 
 const Hero = memo(() => (
-  <motion.section className="relative min-h-[200vh]" {...pageTransition}>
+  <motion.section 
+    className="relative min-h-screen overflow-visible" 
+    {...pageTransition}
+  >
     <div className="hidden lg:block absolute inset-y-0 left-0 w-1/2 z-10 bg-background" />
     <motion.div className="w-full lg:w-1/2 flex flex-col relative z-20" {...sectionTransition}>
       <HeroContent />
     </motion.div>
-    <div className="absolute top-0 right-0 w-full lg:w-1/2 h-[200vh] opacity-50">
+    <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full opacity-50">
       <BackgroundSVG />
     </div>
   </motion.section>

@@ -175,6 +175,17 @@ export const getArticle = async (slug: string) => {
     try {
       const validatedFrontmatter = validateFrontmatter(data);
       const processedContent = await processMarkdown(content);
+      
+      // Cache the result
+      if (articleCache) {
+        articleCache[slug] = {
+          frontmatter: validatedFrontmatter,
+          content,
+          processedContent,
+          timestamp: Date.now()
+        };
+      }
+      
       return { frontmatter: validatedFrontmatter, content, processedContent };
     } catch (error) {
       console.error(`Error validating article ${slug}:`, error);
@@ -186,68 +197,50 @@ export const getArticle = async (slug: string) => {
   }
 };
 
-export const getArticles = async (forceRefresh = false): Promise<readonly Article[]> => {
-  const now = Date.now();
-  if (
-    !forceRefresh &&
-    articleCache &&
-    now - articleCache.timestamp < ARTICLE_CONFIG.cache.revalidate
-  ) {
-    return articleCache.articles;
-  }
-
+export const getArticles = async (): Promise<readonly Article[]> => {
   try {
+    // Initialize cache if needed
+    if (!articleCache) {
+      articleCache = {};
+    }
+
+    // Get all markdown files
     const fileNames = await readdir(articlesDirectory);
+    const mdFiles = fileNames.filter((fileName) => fileName.endsWith('.md'));
+
+    // Process all articles in parallel
     const articles = await Promise.all(
-      fileNames
-        .filter((fileName) => fileName.endsWith('.md'))
-        .map(async (fileName) => {
-          try {
-            const slug = fileName.replace(/\.md$/, '');
-            const filePath = path.join(articlesDirectory, fileName);
-            const fileContents = await readFile(filePath, 'utf8');
-            
-            let data, content;
-            try {
-              const parsed = matter(fileContents);
-              data = parsed.data;
-              content = parsed.content;
-            } catch (error) {
-              console.error(`Invalid frontmatter format in article ${fileName}:`, error);
-              return null;
-            }
-            
-            // Check for invalid content
-            if (!content || content.trim().length === 0) {
-              console.error(`Invalid content in article ${fileName}: Content is empty`);
-              return null;
-            }
-            
-            try {
-              const validatedFrontmatter = validateFrontmatter(data);
-              if (process.env.NODE_ENV === 'production' && validatedFrontmatter.draft) {
-                return null;
-              }
-              return createArticle(validatedFrontmatter, content, slug);
-            } catch (error) {
-              console.error(`Invalid frontmatter in article ${fileName}:`, error);
-              return null;
-            }
-          } catch (error) {
-            console.error(`Error processing article ${fileName}:`, error);
-            return null;
-          }
-        })
+      mdFiles.map(async (fileName) => {
+        const slug = fileName.replace(/\.md$/, '');
+        
+        // Check cache first
+        const cached = articleCache[slug];
+        if (cached && Date.now() - cached.timestamp < 3600000) { // 1 hour cache
+          return createArticle(cached.frontmatter, cached.content, slug);
+        }
+
+        const filePath = path.join(articlesDirectory, fileName);
+        const fileContents = await readFile(filePath, 'utf8');
+        const { data, content } = matter(fileContents);
+        const validatedFrontmatter = validateFrontmatter(data);
+        
+        // Cache the result
+        articleCache[slug] = {
+          frontmatter: validatedFrontmatter,
+          content,
+          timestamp: Date.now()
+        };
+
+        return createArticle(validatedFrontmatter, content, slug);
+      })
     );
 
-    const validArticles = articles
-      .filter((article): article is Article => article !== null)
-      .sort((a, b) => new Date(b.date || 0).getTime() - new Date(a.date || 0).getTime());
-
-    articleCache = { articles: validArticles, timestamp: now };
-    return validArticles;
+    // Sort articles by date
+    return articles
+      .filter((article): article is Article => article !== null && !article.frontmatter.draft)
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   } catch (error) {
-    console.error('Error reading articles:', error);
+    console.error('Error loading articles:', error);
     return [];
   }
 };

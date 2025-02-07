@@ -42,7 +42,7 @@ Think about the white cotton T-shirt from TJMaxx that sells for $5 and compare i
 
 This type of social engineering is a large part of what drives the prices of luxury items skyward, and NFTs are similar. A long list of reasons drives people to NFTs, but usually, it is either for the idea of buying something for X and selling it to someone for X+Y, the concept of being and owning a part of a community, or both.
 
-So, how can you value an NFT or a set of NFTs? If you ask many of the most successful crypto traders, they would tell you to follow the cult. Notice they aren't recommending you join the cult. Instead, you observe which communities are the most cultish in their behavior and position investments accordingly. This can be carried across cryptocurrencies and NFTs, especially in NFTs. NFTs are valued at whatever someone else will pay. People notice the price going up and want to get in on it. This increases the price even more until there is a capitulation event, the average buyer is priced out, and the price starts trending down. Why do people flock to gold when financial times get rough and when more rare earth metals are out there? In short, because other people are doing it.
+So, how can you value an NFT or a set of NFTs? If you ask many of the most successful crypto traders, they would tell you to follow the cult. Notice they aren't recommending you join the cult. Instead, you observe which communities are the most cultish in their behavior and position investments accordingly. This can be carried across cryptocurrencies and NFTs, especially in NFTs and memecoins. These assets are valued at whatever someone else will pay. People notice the price going up and want to get in on it. This increases the price even more until there is a capitulation event, the average buyer is priced out, and the price starts trending down and 99% go to zero.Why do people flock to gold when financial times get rough and when more rare earth metals are out there? In short, because other people are doing it and they want to be part of the group.
 
 ### Ethereum's Gas
 
@@ -52,10 +52,10 @@ In these cases, Ethereum's transaction fees can be viewed as Veblen goods. Its a
 
 ![ethereum-gas](/images/veblen-1.webp)
 
-# It's All Psychology
+# Psychology
 
-To continue oversimplifying things, when economies bust, discretionary spending goes down. When economies boom, some normal goods transform into Veblen goods. As prices go higher, people notice. As people notice, more people buy higher.
+To continue oversimplifying things, when economies bust, discretionary spending goes down. When economies boom, some normal goods transform into Veblen goods. As prices go higher, people notice. As people notice, more people buy higher, until they can't.
 
-If BTC is up 5%, some people will buy, but many will feel like they'll have a chance to buy at a similar price later, so they don't have to buy now. If BTC is up 20%, these same people may feel like they won't be able to pay less than the current price, so they buy now.
+If BTC is up 5%, some people will buy, but many will feel like they'll have a chance to buy at a similar price later, so they don't have to buy now. If BTC is up 20%, these same people may feel like they won't be able to pay less than the current price, so they buy now. We all know this [this guy](https://www.reddit.com/r/Bitcoin/comments/1eku2y1/we_all_know_some_people_like_this/).
 
 The same goes for selling.

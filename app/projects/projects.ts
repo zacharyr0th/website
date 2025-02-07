@@ -55,16 +55,35 @@ export const PROJECTS: ReadonlyArray<BaseProject> = Object.freeze([
     categories: ['crypto', 'tools'],
   },
   {
-    id: 'music-ide',
-    title: 'MusicIDE',
-    description:
-      'AI-powered music development environment combining intelligent suggestions with interactive visualization and theory analysis.',
-    tags: ['Next.js', 'TypeScript', 'Music Theory'],
+    id: 'portfolio',
+    title: 'Portfolio',
+    description: 'A dashboard that integrates banks, brokers, CEXes, and chains into a unified platform.',
+    tags: ['Next.js', 'TypeScript', 'Tailwind'],
+    githubLink: 'https://github.com/zacharyr0th/portfolio',
+    demoLink: '',
+    status: 'WiP',
+    categories: ['crypto', 'web'],
+  },
+  {
+    id: 'crypto-repos',
+    title: 'Crypto Repos',
+    description: 'A directory of over 125,000 crypto projects and resources.',
+    tags: ['Next.js', 'TypeScript', 'Tailwind'],
     githubLink: '',
     demoLink: '',
-    articleLink: '/writing/musicide',
     status: 'WiP',
-    categories: ['ai', 'tools'],
+    categories: ['crypto', 'web'],
+  },
+  {
+    id: 'casino-time',
+    title: 'CasinoTime',
+    description:
+      'Trustless gambling platform on Aptos combining verifiable randomness with zero-knowledge proofs for transparent, fair gaming.',
+    tags: ['Aptos', 'Gaming'],
+    githubLink: '',
+    demoLink: '',
+    status: 'WiP',
+    categories: ['crypto'],
   },
   {
     id: 'privvy',
@@ -78,14 +97,39 @@ export const PROJECTS: ReadonlyArray<BaseProject> = Object.freeze([
     categories: ['crypto'],
   },
   {
-    id: 'casino-time',
-    title: 'CasinoTime',
+    id: 'music-ide',
+    title: 'MusicIDE',
     description:
-      'Trustless gambling platform on Aptos combining verifiable randomness with zero-knowledge proofs for transparent, fair gaming.',
-    tags: ['Aptos', 'Gaming'],
+      'AI-powered music development environment combining intelligent suggestions with interactive visualization and theory analysis.',
+    tags: ['Next.js', 'TypeScript', 'Music Theory'],
     githubLink: '',
     demoLink: '',
+    articleLink: '/writing/musicide',
     status: 'WiP',
-    categories: ['crypto'],
+    categories: ['ai', 'tools'],
   },
 ]);
+
+// Get the featured projects for the home page (limited to 6)
+export const getFeaturedProjects = (): ReadonlyArray<BaseProject> => {
+  // First get completed and functional projects
+  const completedProjects = PROJECTS.filter(
+    project => project.status === 'completed' || project.status === 'Functional'
+  );
+
+  // If we have 6 or more completed projects, return first 6
+  if (completedProjects.length >= 6) {
+    return completedProjects.slice(0, 6);
+  }
+
+  // Otherwise, get additional WiP projects to fill the remaining slots
+  const wipProjects = PROJECTS.filter(
+    project => project.status === 'WiP' || project.status === 'in-progress'
+  );
+
+  // Combine completed and WiP projects, taking only enough WiP projects to reach 6 total
+  return [
+    ...completedProjects,
+    ...wipProjects.slice(0, 6 - completedProjects.length)
+  ];
+};

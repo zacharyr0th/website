@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Hero, Main, Thesis, Newsletter } from './components/home-page';
+import { Hero, Main, Thesis } from './components/home-page';
 
 export const metadata: Metadata = {
   title: 'Home | Zachary Tyler Roth',
@@ -15,7 +15,7 @@ export default function HomePage() {
       <Hero />
       <Main />
       <Thesis />
-      <Newsletter />
+      <div className="mt-20" /> {/* Spacer above footer */}
     </main>
   );
 }

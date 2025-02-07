@@ -56,8 +56,8 @@ const NavContent = memo(({ pathname, showHomeButton }: NavContentProps) => {
   const isHome = pathname === '/';
 
   return (
-    <div className="flex w-screen px-8 max-sm:px-4 items-center justify-between max-sm:justify-center">
-      <div className="max-sm:hidden">
+    <div className="flex w-screen px-8 max-sm:px-4 items-center sm:justify-between max-sm:justify-center">
+      <div className="hidden sm:block">
         {showHomeButton && !isHome && <HomeButton active={false} />}
       </div>
       <nav
@@ -79,6 +79,11 @@ const NavContent = memo(({ pathname, showHomeButton }: NavContentProps) => {
             className="flex items-center space-x-4 max-sm:space-x-2 px-2"
             role="menubar"
           >
+            {showHomeButton && !isHome && (
+              <li className="sm:hidden transition-transform duration-300 ease-out hover:scale-105" role="none">
+                <HomeButton active={false} />
+              </li>
+            )}
             {navItems.map((item) => (
               <NavLink
                 key={item.href}
