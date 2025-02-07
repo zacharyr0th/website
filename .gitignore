@@ -209,6 +209,10 @@ storybook-static/
 **/*.swp
 **/*.swo
 
+# Audio Files
+/public/audio/*.{m4a,mp3,wav,aac,ogg,flac}
+/public/audio/**/*.{m4a,mp3,wav,aac,ogg,flac}
+
 # Allowed Config Files (Exceptions)
 !tailwind.config.{js,ts}
 !postcss.config.js
@@ -492,4 +496,225 @@ storybook-static/
 **/*.po
 **/locale-backup/
 **/translations-backup/
+.vercel
+
+###############################################
+# Machine Learning and AI
+###############################################
+
+# Model Files and Weights
+**/models/
+**/*.onnx
+**/*.h5
+**/*.tflite
+**/*.pt
+**/*.pth
+**/*.mlmodel
+**/*.weights
+**/checkpoints/
+**/runs/
+
+# ML Tools and Platforms
+**/wandb/
+**/.neptune/
+**/.tensorboard/
+**/.mlflow/
+**/.dvc/
+**/.aim/
+
+###############################################
+# GraphQL and API Development
+###############################################
+
+# GraphQL
+**/schema.graphql
+**/.graphqlconfig
+**/graphql.schema.json
+**/graphql.config.*
+**/__generated__/
+**/generated/
+
+# API Documentation
+**/swagger/
+**/openapi/
+**/*.postman_collection.json
+**/*.insomnia.json
+**/api-docs/
+**/api-spec/
+**/.stoplight/
+
+###############################################
+# Web Development Assets
+###############################################
+
+# Asset Processing
+**/dist/assets/
+**/.sass-cache/
+**/.css-cache/
+**/.style-dictionary/
+**/sprites/
+**/.imagemin/
+**/.svgo-cache/
+**/.fontello/
+**/.optimized-assets/
+**/.processed-assets/
+
+# Generated Assets
+**/generated-assets/
+**/compressed-images/
+**/optimized-images/
+**/webp-converted/
+**/sprite-sheets/
+
+###############################################
+# Performance and Monitoring
+###############################################
+
+# Performance Testing
+**/.lighthouse/
+**/.pagespeed/
+**/.webpagetest/
+**/speedcurve/
+**/.sitespeed-result/
+**/.performance-budgets/
+**/.bundle-stats/
+**/.size-snapshot/
+**/.perf-cache/
+
+# Monitoring
+**/.newrelic/
+**/.datadog/
+**/.sentry/
+**/.elastic/
+**/.grafana/
+**/.prometheus/
+
+###############################################
+# Development Tools
+###############################################
+
+# Code Analysis
+**/.depcruise/
+**/.depcheck/
+**/.madge/
+**/.bundlesize/
+**/.complexity/
+**/.maintainability/
+**/.codemetrics/
+**/.analyze/
+
+# Testing Tools
+**/.stryker/
+**/.karma/
+**/.jasmine/
+**/.ava/
+**/.tape/
+**/.mocha/
+**/.jest-cache/
+**/.test-results/
+
+###############################################
+# Build and Optimization
+###############################################
+
+# Build Tools
+**/.esbuild/
+**/.swc/
+**/.babel-cache/
+**/.terser-cache/
+**/.optimize-cache/
+**/.minify-cache/
+**/.compile-cache/
+**/.transpile-cache/
+
+# Module Federation
+**/federation-manifest.json
+**/federation-stats.json
+**/federation-expose.json
+**/federation-remotes.json
+
+###############################################
+# Security and Compliance
+###############################################
+
+# Security Tools
+**/.snyk
+**/.dependency-check/
+**/.owasp/
+**/.security-scan/
+**/.pen-test/
+**/.audit-results/
+**/.compliance/
+**/.security-baseline/
+
+# Vulnerability Reports
+**/security-reports/
+**/vulnerability-scan/
+**/penetration-test/
+**/security-audit/
+**/.secret-scan/
+
+###############################################
+# Internationalization and Localization
+###############################################
+
+# i18n Tools and Cache
+**/.lingui/
+**/.i18next-parser/
+**/.translations-cache/
+**/.locale-cache/
+**/.message-cache/
+
+# Translation Files
+**/*.pot
+**/*.mo
+**/*.po
+**/locale-backup/
+**/translations-backup/
+**/locale-archive/
+**/.translations-memory/
+
+###############################################
+# Progressive Web App
+###############################################
+
+# Service Workers
+**/sw.js.map
+**/workbox-*.js.map
+**/service-worker.js
+**/sw-toolbox.js
+**/offline.html
+**/.workbox-*/
+
+# PWA Assets
+**/manifest.*.json
+**/.pwa/
+**/pwa-assets/
+**/offline-cache/
+**/app-shell/
+
+###############################################
+# Development State
+###############################################
+
+# History and Backups
+**/.history/
+**/.local-history/
+**/.changesets/
+**/.version-backup/
+**/.git-rewrite/
+**/.patch/
+**/.stash/
+**/.archive/
+
+# Editor Recovery
+**/.recovery/
+**/.backup/
+**/*.autosave
+**/*.backup
+**/*~[0-9]*
+**/.saves/
+**/.auto-backup/
+**/.temp-recovery/
+
 .vercel
