@@ -36,15 +36,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
         
         {/* Preload critical resources */}
+        <link rel="preload" href="/_next/static/css/app/layout.css" as="style" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-
-        {/* Preload critical images */}
-        <link
-          rel="preload"
-          href="/misc/profile-picture.webp"
-          as="image"
-          type="image/webp"
-        />
 
         {/* HTTP Headers for caching and performance */}
         <meta httpEquiv="Cache-Control" content="public, max-age=31536000, immutable" />

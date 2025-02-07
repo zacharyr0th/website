@@ -19,7 +19,7 @@ export const WritingNav = memo<WritingNavProps>(({ selectedCategory, onCategoryS
   );
 
   return (
-    <div className="bg-surface/80 backdrop-blur-sm rounded-3xl px-4 py-2.5 inline-flex items-center space-x-4 overflow-x-auto scrollbar-hide">
+    <div className="flex justify-center md:justify-start md:inline-flex bg-surface/80 backdrop-blur-sm rounded-3xl px-4 py-2.5 items-center space-x-1 md:space-x-4 overflow-x-auto scrollbar-hide">
       <NavButton
         active={selectedCategory === null}
         onClick={handleCategoryChange(null)}

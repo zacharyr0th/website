@@ -1,12 +1,12 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Main } from '../Main';
-import { PROJECTS } from '@/projects/projects';
+import { PROJECTS } from '../../../projects/projects';
 import { WRITING_PROJECTS } from '../constants';
 
 // Mock next/link
 jest.mock('next/link', () => {
-  return function MockLink({ children, href }: any) {
+  return function MockLink({ children, href }: React.PropsWithChildren<{ href: string }>) {
     return <a href={href}>{children}</a>;
   };
 });
@@ -14,18 +14,18 @@ jest.mock('next/link', () => {
 // Mock framer-motion
 jest.mock('framer-motion', () => ({
   motion: {
-    section: ({ children, className, 'aria-labelledby': ariaLabelledBy }: any) => (
+    section: ({ children, className, 'aria-labelledby': ariaLabelledBy }: React.HTMLAttributes<HTMLElement>) => (
       <section className={className} aria-labelledby={ariaLabelledBy}>{children}</section>
     ),
-    div: ({ children, className }: any) => <div className={className}>{children}</div>,
-    h2: ({ children, className, id }: any) => <h2 id={id} className={className}>{children}</h2>,
+    div: ({ children, className }: React.HTMLAttributes<HTMLDivElement>) => <div className={className}>{children}</div>,
+    h2: ({ children, className, id }: React.HTMLAttributes<HTMLHeadingElement>) => <h2 id={id} className={className}>{children}</h2>,
   },
   useInView: () => true,
 }));
 
 // Mock ProjectCard component
 jest.mock('@/projects/ProjectCard', () => {
-  return function MockProjectCard({ project }: any) {
+  return function MockProjectCard({ project }: { project: { title: string; description: string } }) {
     return (
       <div data-testid="project-card">
         <h3>{project.title}</h3>

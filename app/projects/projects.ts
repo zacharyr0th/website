@@ -57,8 +57,8 @@ export const PROJECTS: ReadonlyArray<BaseProject> = Object.freeze([
   {
     id: 'portfolio',
     title: 'Portfolio',
-    description: 'A dashboard that integrates banks, brokers, CEXes, and chains into a unified platform.',
-    tags: ['Next.js', 'TypeScript', 'Tailwind'],
+    description: 'A dashboard integrating banks, brokers, CEXes, and blockchains.',
+    tags: ['Next.js', 'Blockchains', 'Plaid'],
     githubLink: 'https://github.com/zacharyr0th/portfolio',
     demoLink: '',
     status: 'WiP',
@@ -78,7 +78,7 @@ export const PROJECTS: ReadonlyArray<BaseProject> = Object.freeze([
     id: 'casino-time',
     title: 'CasinoTime',
     description:
-      'Trustless gambling platform on Aptos combining verifiable randomness with zero-knowledge proofs for transparent, fair gaming.',
+      'Trustless gambling on Aptos, combining randomness with zero-knowledge proofs.',
     tags: ['Aptos', 'Gaming'],
     githubLink: '',
     demoLink: '',
@@ -89,7 +89,7 @@ export const PROJECTS: ReadonlyArray<BaseProject> = Object.freeze([
     id: 'privvy',
     title: 'Privvy',
     description:
-      'Privacy-first DEX built on Aleo leveraging zero-knowledge proofs to enable confidential trading while maintaining decentralization.',
+      'Privacy-first DEX built on the zk-forward Aleo blockchain.',
     tags: ['Aleo', 'Zero-knowledge', 'DeFi'],
     githubLink: '',
     demoLink: '',
@@ -100,8 +100,8 @@ export const PROJECTS: ReadonlyArray<BaseProject> = Object.freeze([
     id: 'music-ide',
     title: 'MusicIDE',
     description:
-      'AI-powered music development environment combining intelligent suggestions with interactive visualization and theory analysis.',
-    tags: ['Next.js', 'TypeScript', 'Music Theory'],
+      'AI-powered music development and research environment.',
+    tags: ['Next.js', 'TypeScript', 'Theory'],
     githubLink: '',
     demoLink: '',
     articleLink: '/writing/musicide',

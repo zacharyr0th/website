@@ -74,8 +74,12 @@ export interface RawFrontmatter {
 
 /** Cache structure for articles */
 export interface ArticleCache {
-  readonly articles: readonly Article[];
-  readonly timestamp: number;
+  [slug: string]: {
+    frontmatter: ArticleFrontmatter;
+    content: string;
+    processedContent?: string;
+    timestamp: number;
+  };
 }
 
 /** Options for fetching articles */

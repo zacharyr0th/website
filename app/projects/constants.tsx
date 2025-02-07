@@ -7,13 +7,3 @@ export const Icons: Readonly<Record<string, IconType>> = {
   Demo: FaPlay,
   Link: FaArrowUpRightFromSquare,
 } as const;
-
-export type ProjectCategory = keyof typeof PROJECT_CATEGORIES;
-
-export const PROJECT_CATEGORIES = {
-  web3: 'Web3',
-  ai: 'AI',
-  web: 'Web',
-  mobile: 'Mobile',
-  other: 'Other',
-} as const;

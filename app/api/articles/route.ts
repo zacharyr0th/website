@@ -9,21 +9,21 @@
  */
 
 import { NextResponse } from 'next/server';
-import { getArticles } from '../../writing/[slug]/articles';
-import { ARTICLE_CACHE_CONFIG } from '@/lib/swr-config';
+import { getArticles } from '@/writing/lib/articles';
+import { ARTICLE_CONFIG } from '@/writing/types';
 
 export const dynamic = 'force-static';
 export const revalidate = 3600; // 1 hour
 
 export async function GET() {
   try {
-    const articles = await getArticles(true); // Force refresh on API calls
+    const articles = await getArticles(); // Removed the true parameter
     
     const response = NextResponse.json(articles, {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
-        'Cache-Control': `public, s-maxage=${revalidate}, stale-while-revalidate=${ARTICLE_CACHE_CONFIG.staleWhileRevalidate / 1000}`,
+        'Cache-Control': `public, s-maxage=${revalidate}, stale-while-revalidate=${ARTICLE_CONFIG.cache.staleWhileRevalidate / 1000}`,
         'X-Content-Type-Options': 'nosniff',
         'X-Frame-Options': 'DENY',
         'X-XSS-Protection': '1; mode=block',

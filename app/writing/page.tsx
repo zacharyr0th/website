@@ -1,14 +1,19 @@
 import React, { Suspense } from 'react';
-import { getArticles } from './[slug]/articles';
+import { getArticles } from '@/writing/lib/articles';
 import { LoadingState } from '../lib/Loading';
 import WritingPageClient from './components/WritingPageClient';
 import { containerVariants } from '../lib/animations';
 import PageHeader from '../components/PageHeader';
+import type { Metadata } from 'next';
+import { SECTION_METADATA } from '@/lib/metadata';
 
-export const dynamic = 'force-dynamic';
-export const runtime = 'nodejs';
-export const fetchCache = 'force-cache';
-export const revalidate = 60; // Revalidate every minute
+export const metadata: Metadata = {
+  title: SECTION_METADATA.writing.title,
+  description: SECTION_METADATA.writing.description,
+};
+
+export const dynamic = 'force-static';
+export const revalidate = 3600; // Revalidate every hour
 
 export default async function WritingPage() {
   const articles = await getArticles();

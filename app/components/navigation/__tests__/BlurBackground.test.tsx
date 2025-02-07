@@ -18,14 +18,15 @@ class ResizeObserverMock {
 }
 
 // Mock MutationObserver
-class MutationObserverMock {
+class MutationObserverMock implements MutationObserver {
   observe() {}
   disconnect() {}
+  takeRecords(): MutationRecord[] { return []; }
 }
 
 beforeAll(() => {
   window.ResizeObserver = ResizeObserverMock;
-  window.MutationObserver = MutationObserverMock as any;
+  window.MutationObserver = MutationObserverMock;
   window.elementsFromPoint = jest.fn().mockReturnValue([]);
 });
 

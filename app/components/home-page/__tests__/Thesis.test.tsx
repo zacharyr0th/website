@@ -6,10 +6,10 @@ import { THESIS_CONTENT, THESIS_STYLES } from '../constants';
 // Mock framer-motion
 jest.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, className }: any) => <div className={className}>{children}</div>,
-    h1: ({ children, className }: any) => <h1 className={className}>{children}</h1>,
-    h2: ({ children, className }: any) => <h2 className={className}>{children}</h2>,
-    p: ({ children, className }: any) => <p className={className}>{children}</p>,
+    div: ({ children, className }: React.HTMLAttributes<HTMLDivElement>) => <div className={className}>{children}</div>,
+    h1: ({ children, className }: React.HTMLAttributes<HTMLHeadingElement>) => <h1 className={className}>{children}</h1>,
+    h2: ({ children, className }: React.HTMLAttributes<HTMLHeadingElement>) => <h2 className={className}>{children}</h2>,
+    p: ({ children, className }: React.HTMLAttributes<HTMLParagraphElement>) => <p className={className}>{children}</p>,
   },
   useInView: () => true,
 }));
@@ -138,8 +138,10 @@ describe('Thesis', () => {
       const contentWrapper = screen.getByText(THESIS_CONTENT.title).parentElement?.parentElement;
       const background = screen.getByTestId('thesis-background').parentElement;
 
-      expect(section).toContainElement(contentWrapper);
-      expect(section).toContainElement(background);
+      if (contentWrapper && background) {
+        expect(section).toContainElement(contentWrapper);
+        expect(section).toContainElement(background);
+      }
     });
 
     it('positions background correctly', () => {

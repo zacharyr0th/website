@@ -43,7 +43,23 @@ const useAudioPlayer = (initialTrack: Track) => {
     // Add error handling for debugging
     audio.onerror = (event: Event | string) => {
       const mediaError = audio.error;
-      let errorDetails: Record<string, any> = {
+      interface AudioErrorDetails {
+        timestamp: string;
+        message: string;
+        code: number | null;
+        src: string;
+        readyState: number;
+        networkState: number;
+        eventType?: string;
+        errorType?: {
+          MEDIA_ERR_ABORTED: boolean;
+          MEDIA_ERR_NETWORK: boolean;
+          MEDIA_ERR_DECODE: boolean;
+          MEDIA_ERR_SRC_NOT_SUPPORTED: boolean;
+        };
+      }
+      
+      let errorDetails: AudioErrorDetails = {
         timestamp: new Date().toISOString(),
         message: 'Unknown error',
         code: null,

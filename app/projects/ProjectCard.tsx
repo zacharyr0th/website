@@ -1,7 +1,7 @@
 'use client';
 
 import React, { memo, useEffect, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { FaGithub, FaNewspaper, FaPlay } from 'react-icons/fa6';
 import { IconButton } from '../components/buttons';
 import type { BaseProject } from './projects';
@@ -60,9 +60,7 @@ interface ProjectCardProps {
 }
 
 const ProjectCard = memo<ProjectCardProps>(({ project, isFocused }) => {
-  const ref = useRef<HTMLDivElement>(null);
   const linkRef = useRef<HTMLAnchorElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   useEffect(() => {
     if (isFocused && linkRef.current) {
@@ -72,12 +70,9 @@ const ProjectCard = memo<ProjectCardProps>(({ project, isFocused }) => {
 
   return (
     <motion.div
-      ref={ref}
-      style={{
-        transform: isInView ? 'none' : 'translateY(50px)',
-        opacity: isInView ? 1 : 0,
-        transition: 'all 0.5s cubic-bezier(0.17, 0.55, 0.55, 1) 0.2s',
-      }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
     >
       <Link
         ref={linkRef}

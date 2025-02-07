@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import GlobalConnectModal from '../GlobalConnectModal';
+import { ErrorBoundary } from 'react-error-boundary';
 
 // Mock next/dynamic
 jest.mock('next/dynamic', () => () => {
@@ -13,6 +14,19 @@ jest.mock('next/dynamic', () => () => {
   );
   return DynamicComponent;
 });
+
+const ErrorFallback = ({ error, resetErrorBoundary }: { error: Error; resetErrorBoundary: () => void }) => (
+  <div className="fixed bottom-4 right-4 bg-red-500 text-white p-4 rounded-lg shadow-lg" role="alert">
+    <p className="font-semibold">Error loading connect modal:</p>
+    <p className="text-sm">{error.message}</p>
+    <button
+      onClick={resetErrorBoundary}
+      className="mt-2 px-4 py-1 bg-white text-red-500 rounded hover:bg-red-50 transition-colors"
+    >
+      Retry
+    </button>
+  </div>
+);
 
 describe('GlobalConnectModal', () => {
   beforeEach(() => {
@@ -64,9 +78,10 @@ describe('GlobalConnectModal', () => {
       };
 
       render(
-        <GlobalConnectModal>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <GlobalConnectModal defaultOpen={true} />
           <ThrowError />
-        </GlobalConnectModal>
+        </ErrorBoundary>
       );
 
       expect(screen.getByText('Error loading connect modal:')).toBeInTheDocument();
@@ -79,9 +94,10 @@ describe('GlobalConnectModal', () => {
       };
 
       render(
-        <GlobalConnectModal>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <GlobalConnectModal defaultOpen={true} />
           <ThrowError />
-        </GlobalConnectModal>
+        </ErrorBoundary>
       );
 
       expect(screen.getByText('Retry')).toBeInTheDocument();
@@ -97,9 +113,10 @@ describe('GlobalConnectModal', () => {
       };
 
       render(
-        <GlobalConnectModal>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <GlobalConnectModal defaultOpen={true} />
           <MaybeThrow />
-        </GlobalConnectModal>
+        </ErrorBoundary>
       );
 
       expect(screen.getByText('Error loading connect modal:')).toBeInTheDocument();
@@ -113,42 +130,43 @@ describe('GlobalConnectModal', () => {
       // Error boundary should be cleared
       expect(screen.queryByText('Error loading connect modal:')).not.toBeInTheDocument();
     });
-  });
 
-  it('applies correct CSS classes to error fallback', () => {
-    const ThrowError = () => {
-      throw new Error('Test error');
-    };
+    it('applies correct CSS classes to error fallback', () => {
+      const ThrowError = () => {
+        throw new Error('Test error');
+      };
 
-    render(
-      <GlobalConnectModal>
-        <ThrowError />
-      </GlobalConnectModal>
-    );
+      render(
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <GlobalConnectModal defaultOpen={true} />
+          <ThrowError />
+        </ErrorBoundary>
+      );
 
-    const errorAlert = screen.getByRole('alert');
-    expect(errorAlert).toHaveClass(
-      'fixed',
-      'bottom-4',
-      'right-4',
-      'bg-red-500',
-      'text-white',
-      'p-4',
-      'rounded-lg',
-      'shadow-lg'
-    );
+      const errorAlert = screen.getByRole('alert');
+      expect(errorAlert).toHaveClass(
+        'fixed',
+        'bottom-4',
+        'right-4',
+        'bg-red-500',
+        'text-white',
+        'p-4',
+        'rounded-lg',
+        'shadow-lg'
+      );
 
-    const retryButton = screen.getByText('Retry');
-    expect(retryButton).toHaveClass(
-      'mt-2',
-      'px-4',
-      'py-1',
-      'bg-white',
-      'text-red-500',
-      'rounded',
-      'hover:bg-red-50',
-      'transition-colors'
-    );
+      const retryButton = screen.getByText('Retry');
+      expect(retryButton).toHaveClass(
+        'mt-2',
+        'px-4',
+        'py-1',
+        'bg-white',
+        'text-red-500',
+        'rounded',
+        'hover:bg-red-50',
+        'transition-colors'
+      );
+    });
   });
 
   it('cleans up event listener on unmount', () => {

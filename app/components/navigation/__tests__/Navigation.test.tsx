@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event';
 import Navigation from '../Navigation';
 import { navItems } from '../constants';
 import { usePathname } from 'next/navigation';

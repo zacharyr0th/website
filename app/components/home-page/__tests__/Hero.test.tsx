@@ -5,14 +5,21 @@ import { heroContent } from '../constants';
 
 // Mock next/image
 jest.mock('next/image', () => {
-  return function MockImage({ src, alt, className }: any) {
-    return <img src={src} alt={alt} className={className} />;
+  return function MockImage({ src, alt, className, width = 100, height = 100 }: {
+    src: string;
+    alt: string;
+    className?: string;
+    width?: number;
+    height?: number;
+  }) {
+    // eslint-disable-next-line @next/next/no-img-element
+    return <img src={src} alt={alt} className={className} width={width} height={height} />;
   };
 });
 
 // Mock next/link
 jest.mock('next/link', () => {
-  return function MockLink({ children, href }: any) {
+  return function MockLink({ children, href }: React.PropsWithChildren<{ href: string }>) {
     return <a href={href}>{children}</a>;
   };
 });
@@ -20,18 +27,18 @@ jest.mock('next/link', () => {
 // Mock framer-motion
 jest.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, className, style }: any) => (
+    div: ({ children, className, style }: React.HTMLAttributes<HTMLDivElement>) => (
       <div className={className} style={style}>{children}</div>
     ),
-    h1: ({ children, className }: any) => <h1 className={className}>{children}</h1>,
-    h2: ({ children, className }: any) => <h2 className={className}>{children}</h2>,
-    p: ({ children, className }: any) => <p className={className}>{children}</p>,
-    section: ({ children, className }: any) => <section className={className}>{children}</section>,
+    h1: ({ children, className }: React.HTMLAttributes<HTMLHeadingElement>) => <h1 className={className}>{children}</h1>,
+    h2: ({ children, className }: React.HTMLAttributes<HTMLHeadingElement>) => <h2 className={className}>{children}</h2>,
+    p: ({ children, className }: React.HTMLAttributes<HTMLParagraphElement>) => <p className={className}>{children}</p>,
+    section: ({ children, className }: React.HTMLAttributes<HTMLElement>) => <section className={className}>{children}</section>,
   },
   useScroll: () => ({ scrollYProgress: { get: () => 0 } }),
   useTransform: () => 0,
   useInView: () => true,
-  AnimatePresence: ({ children }: any) => children,
+  AnimatePresence: ({ children }: React.PropsWithChildren) => children,
 }));
 
 // Mock background SVG

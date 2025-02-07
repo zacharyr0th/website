@@ -1,4 +1,4 @@
-import { getArticle, getArticles, createArticle } from './articles';
+import { getArticle, getArticles } from '@/writing/lib/articles';
 import type { Article } from '../types';
 import ArticleContent from './ArticleContent';
 import { Suspense } from 'react';
@@ -6,6 +6,9 @@ import { LoadingState } from '../../lib/Loading';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { SECTION_METADATA } from '../../lib/metadata';
+
+export const dynamic = 'force-static';
+export const revalidate = 3600; // Revalidate every hour
 
 type Props = {
   params: Promise<{ slug: string }> | { slug: string };
@@ -81,7 +84,21 @@ export default async function ArticlePage(props: Props) {
     notFound();
   }
 
-  const article = createArticle(rawArticle.frontmatter, rawArticle.content, slug);
+  const article: Article = {
+    id: slug,
+    slug,
+    title: rawArticle.frontmatter.title,
+    content: rawArticle.content,
+    date: rawArticle.frontmatter.date,
+    link: `/writing/${slug}`,
+    description: rawArticle.frontmatter.description,
+    category: rawArticle.frontmatter.category,
+    tags: rawArticle.frontmatter.tags,
+    image: rawArticle.frontmatter.image,
+    frontmatter: rawArticle.frontmatter,
+    takeaways: rawArticle.frontmatter.takeaways,
+  };
+
   const articles = await getArticles();
   const currentIndex = articles.findIndex((a) => a.slug === slug);
   

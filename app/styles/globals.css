@@ -252,8 +252,14 @@
 
   /* Containers */
   .content-container {
-    @apply mx-auto px-4;
-    max-width: var(--max-content-width);
+    @apply mx-auto;
+    padding: 0;
+    max-width: 100%;
+    
+    @screen sm {
+      @apply px-4;
+      max-width: var(--max-content-width);
+    }
   }
 
   .reading-container {

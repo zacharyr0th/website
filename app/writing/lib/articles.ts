@@ -24,7 +24,7 @@ import { ARTICLE_CONFIG } from '../types';
 
 // Constants and Types
 const articlesDirectory = join(process.cwd(), ARTICLE_CONFIG.directory);
-let articleCache: ArticleCache | null = null;
+const articleCache: ArticleCache = {};
 
 // Utility Functions
 const transformImage = (
@@ -128,14 +128,7 @@ export const getArticle = async (slug: string) => {
 
 export const getArticles = async (forceRefresh = false): Promise<readonly Article[]> => {
   const now = Date.now();
-  if (
-    !forceRefresh &&
-    articleCache &&
-    now - articleCache.timestamp < ARTICLE_CONFIG.cache.revalidate
-  ) {
-    return articleCache.articles;
-  }
-
+  
   try {
     const fileNames = await readdir(articlesDirectory);
     const articles = await Promise.all(
@@ -144,10 +137,30 @@ export const getArticles = async (forceRefresh = false): Promise<readonly Articl
         .map(async (fileName) => {
           try {
             const slug = fileName.replace(/\.md$/, '');
+            
+            // Check cache first if not forcing refresh
+            if (!forceRefresh && articleCache) {
+              const cached = articleCache[slug];
+              if (cached && now - cached.timestamp < ARTICLE_CONFIG.cache.revalidate) {
+                return createArticle(cached.frontmatter, cached.content, slug);
+              }
+            }
+            
             const article = await getArticle(slug);
             if (!article || (process.env.NODE_ENV === 'production' && article.frontmatter.draft)) {
               return null;
             }
+            
+            // Cache the result
+            if (articleCache) {
+              articleCache[slug] = {
+                frontmatter: article.frontmatter,
+                content: article.content,
+                processedContent: article.processedContent,
+                timestamp: now
+              };
+            }
+            
             return createArticle(article.frontmatter, article.content, slug);
           } catch (error) {
             console.error(`Error processing article ${fileName}:`, error);
@@ -160,7 +173,6 @@ export const getArticles = async (forceRefresh = false): Promise<readonly Articl
       .filter((article): article is Article => article !== null)
       .sort((a, b) => new Date(b.date || 0).getTime() - new Date(a.date || 0).getTime());
 
-    articleCache = { articles: validArticles, timestamp: now };
     return validArticles;
   } catch (error) {
     console.error('Error reading articles:', error);

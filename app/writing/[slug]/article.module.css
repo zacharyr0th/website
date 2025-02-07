@@ -1,17 +1,17 @@
 /* Base Variables */
 .variables {
-  --article-padding-mobile: 1rem;
+  --article-padding-mobile: 0;
   --article-padding-desktop: 2rem;
   --card-padding-mobile: 1rem;
   --card-padding-desktop: 1.25rem;
-  --mobile-radius: 0.75rem;
+  --mobile-radius: 0;
   --desktop-radius: 1rem;
 }
 
 /* Article Layout */
 .article {
   composes: variables;
-  max-width: var(--max-content-width);
+  max-width: 100%;
   margin: 0 auto;
   padding: var(--article-padding-mobile);
   background: var(--color-background);
@@ -203,6 +203,7 @@
 
 @media (min-width: 768px) {
   .article {
+    max-width: var(--max-content-width);
     padding: var(--article-padding-desktop);
     border-radius: var(--desktop-radius);
   }
