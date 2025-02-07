@@ -1,4 +1,13 @@
 ###############################################
+# Audio Files (High Priority)
+###############################################
+
+public/audio/
+public/audio/**/*
+public/audio/*.m4a
+public/audio/**/*.m4a
+
+###############################################
 # Security and Credentials (Highest Priority)
 ###############################################
 
