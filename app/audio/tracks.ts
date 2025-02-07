@@ -223,6 +223,21 @@ const getAudioUrl = (filename: string): string => {
 
 export const TRACKS: readonly Track[] = [
   {
+    id: '12',
+    title: 'Midnight, the Stars and You',
+    artist: 'Zachary Roth',
+    composer: 'Harry Woods',
+    isOriginal: false,
+    duration: '3:15',
+    genre: 'Jazz',
+    type: 'audio/x-m4a',
+    coverArt: '/audio/covers/midnight-the-stars-and-you.jpg',
+    audioUrl: getAudioUrl('piano_midnight-the-stars-and-you.m4a'),
+    waveform: generateWaveform('12'),
+    instrument: 'piano',
+    priority: true,
+  },
+  {
     id: '8',
     title: 'Christmas Time Is Here',
     artist: 'Zachary Roth',
