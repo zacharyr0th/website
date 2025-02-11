@@ -1,4 +1,190 @@
- /* Custom Scrollbar */
+/**
+ * Global Styles
+ * 
+ * Structure:
+ * 1. Tailwind Directives
+ * 2. Theme Variables
+ * 3. Base Styles (@layer base)
+ * 4. Utility Classes (@layer utilities)
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme Variables */
+:root {
+  /* Colors */
+  --color-primary: #2c3e50;
+  --color-secondary: #34495e;
+  --color-accent: #2d7fc1;
+  --color-accent-hover: #1d6ca8;
+  --color-text-primary: #ecf0f1;
+  --color-text-secondary: #bdc3c7;
+  --color-background: #1a1a1a;
+  --color-surface: #2c2c2c;
+  --color-error: #e74c3c;
+  --color-success: #2ecc71;
+  --color-warning: #f39c12;
+  --color-info: #3498db;
+
+  /* Typography */
+  --font-size-base: clamp(0.875rem, 1vw, 0.9rem);
+  --line-height-base: 1.6;
+
+  /* Spacing */
+  --spacing-unit: 0.25rem;
+  --spacing-2xs: calc(var(--spacing-unit) * 0.5);
+  --spacing-xs: var(--spacing-unit);
+  --spacing-sm: calc(var(--spacing-unit) * 2);
+  --spacing-md: calc(var(--spacing-unit) * 4);
+  --spacing-lg: calc(var(--spacing-unit) * 6);
+  --spacing-xl: calc(var(--spacing-unit) * 8);
+  --spacing-2xl: calc(var(--spacing-unit) * 12);
+  --spacing-3xl: calc(var(--spacing-unit) * 16);
+
+  /* Effects */
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --shadow-sm: 0 1px 2px var(--shadow-color);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4);
+  --transition-speed: 0.3s;
+
+  /* Border Radii */
+  --radius-unit: 0.25rem;
+  --radius-sm: var(--radius-unit);
+  --radius-md: calc(var(--radius-unit) * 2);
+  --radius-lg: calc(var(--radius-unit) * 4);
+  --radius-full: 9999px;
+
+  /* Layout */
+  --header-height: max(56px, 4vh);
+  --footer-height: max(56px, 4vh);
+  --max-content-width: min(1200px, 95vw);
+  --max-reading-width: min(70ch, 98%);
+  --article-width: min(720px, 98%);
+  --sidebar-width: 280px;
+  --min-touch-target: 44px;
+}
+
+@layer base {
+  html {
+    font-size: 90%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-text-primary min-h-screen;
+    font-family: var(--font-mono);
+    line-height: var(--line-height-base);
+  }
+
+  /* Typography */
+  a {
+    @apply text-accent transition-colors hover:text-[var(--color-accent-hover)];
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-mono font-bold text-text-primary;
+  }
+
+  /* Responsive heading sizes */
+  h1 { @apply text-4xl md:text-5xl mt-12 mb-8; }
+  h2 { @apply text-3xl md:text-4xl mt-10 mb-6; }
+  h3 { @apply text-2xl md:text-3xl mt-8 mb-4; }
+  h4 { @apply text-xl md:text-2xl mt-6 mb-3; }
+  h5 { @apply text-lg md:text-xl mt-4 mb-2; }
+  h6 { @apply text-base md:text-lg mt-4 mb-2; }
+
+  /* Remove top margin from first headings */
+  :where(section, article, div) > :where(h1, h2, h3, h4, h5, h6):first-child {
+    @apply mt-0;
+  }
+
+  /* Content Elements */
+  button {
+    @apply font-mono;
+  }
+
+  ul, ol {
+    @apply list-inside mb-6;
+  }
+
+  pre, code {
+    @apply font-mono bg-surface px-1 py-0.5 rounded-lg bg-opacity-50;
+  }
+
+  /* Images */
+  img {
+    @apply w-full h-auto;
+  }
+
+  figure {
+    @apply overflow-hidden;
+  }
+}
+
+@layer utilities {
+  /* Transitions */
+  .transition-base {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  /* Hover Effects */
+  .hover-fade {
+    @apply transition-opacity hover:opacity-80;
+  }
+
+  .hover-scale {
+    @apply transition-transform hover:scale-105;
+  }
+
+  .hover-bounce {
+    @apply transition-all duration-300 ease-in-out hover:scale-[1.02] hover:shadow-lg active:-translate-y-1 hover:cursor-pointer will-change-transform;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Typography */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .truncate-lines {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .truncate-2 {
+    @apply truncate-lines;
+    -webkit-line-clamp: 2;
+  }
+
+  .truncate-3 {
+    @apply truncate-lines;
+    -webkit-line-clamp: 3;
+  }
+
+  /* Flexbox */
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+
+  .flex-between {
+    @apply flex justify-between items-center;
+  }
+
+  .flex-start {
+    @apply flex justify-start items-center;
+  }
+
+  .flex-end {
+    @apply flex justify-end items-center;
+  }
+}
+
+/* Custom Scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
   width: 8px;
 }

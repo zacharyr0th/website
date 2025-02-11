@@ -1,13 +1,18 @@
 import React from 'react';
-import { Section } from './Section';
-import { BIO } from '../constants';
+import type { BioData } from '../types';
 
-export const About = React.memo(() => (
-  <Section title="">
-    <p className="text-xl text-text-secondary leading-relaxed max-w-3xl">
-      {BIO.intro}
-    </p>
-  </Section>
-));
+interface AboutProps {
+  data: BioData['basics'];
+}
 
-About.displayName = 'About';
+export function About({ data }: AboutProps) {
+  const paragraphs = data.intro.split('\n\n').map(p => p.trim());
+  
+  return (
+    <div className="text-lg text-text-secondary leading-relaxed -mt-1 space-y-4">
+      {paragraphs.map((paragraph, index) => (
+        <p key={index}>{paragraph}</p>
+      ))}
+    </div>
+  );
+}

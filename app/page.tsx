@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import { Hero, Main, Thesis } from './components/home-page';
 
 export const metadata: Metadata = {
-  title: 'Home | Zachary Tyler Roth',
-  description: 'Personal website and blog of Zachary Tyler Roth',
+  title: 'Home | Zachary Roth',
+  description: 'Personal website and blog of Zachary Roth',
 };
 
 export const dynamic = 'force-static';

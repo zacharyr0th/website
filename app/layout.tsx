@@ -1,11 +1,10 @@
 import type { ReactNode } from 'react';
-import { Suspense, lazy } from 'react';
-import './styles/globals.css';
+import { Suspense } from 'react';
+import './globals.css';
 import { metadata } from './lib/metadata';
 import { Analytics } from '@vercel/analytics/react';
 import { jetbrainsMono } from './lib/fonts';
-
-const RootLayoutClient = lazy(() => import('./components/RootLayoutClient'));
+import RootLayoutClient from './components/RootLayoutClient';
 
 export { metadata };
 
@@ -35,18 +34,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
         
-        {/* Preload critical resources */}
-        <link rel="preload" href="/_next/static/css/app/layout.css" as="style" />
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-
-        {/* HTTP Headers for caching and performance */}
+        {/* Cache Control */}
         <meta httpEquiv="Cache-Control" content="public, max-age=31536000, immutable" />
-        <meta httpEquiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains" />
-        <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
-        <meta httpEquiv="X-Frame-Options" content="SAMEORIGIN" />
-        <meta httpEquiv="X-XSS-Protection" content="1; mode=block" />
-        <meta httpEquiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
-        <meta httpEquiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
       </head>
       <body className="antialiased">
         <Suspense fallback={<div className="min-h-screen bg-background" />}>
