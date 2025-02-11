@@ -6,7 +6,7 @@ export const bioData: BioData = {
     name: 'Zachary Roth',
     title: 'Analyst, Strategist, Writer',
     location: 'San Francisco Bay Area',
-    intro: `Since 2019, I've been involved with projects across multiple hyper-growth blockchain ecosystems including Bitcoin, Ethereum, Solana, and Aptos. 
+    intro: `Since 2019, I've been involved with projects across multiple blockchain ecosystems including Bitcoin, Ethereum, Solana, and Aptos. 
     I'm a strategic thinker and builder with a diverse background and have dedicated my career to advancing the adoption of decentralized technologies.
 
     I lead growth initiatives for DeFi and AI verticals on Aptos, the world's highest performing blockchain, and beyond my professional work, I regularly build
