@@ -1,6 +1,5 @@
-###############################################
+
 # Audio Files (High Priority)
-###############################################
 
 public/audio/
 public/audio/**/*
@@ -167,6 +166,9 @@ storybook-static/
 **/__snapshots__/
 **/*.snap
 **/.{vitest,hypothesis,pytest_cache}/
+
+# Docs
+docs/
 
 ###############################################
 # System Files
@@ -727,3 +729,4 @@ storybook-static/
 **/.temp-recovery/
 
 .vercel
+**/scripts/**

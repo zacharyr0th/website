@@ -1,624 +1,364 @@
 {
   "apiVersion": "1.1",
-  "schemaUrl": "https://www.zacharyr0th.com/schemas/agents.json",
-  "baseUrl": "https://www.zacharyr0th.com",
+  "baseUrl": "https://${DOMAIN_NAME}",
   "agentCapabilities": {
     "supportedActions": [
       "read",
       "navigate",
       "interact",
       "search",
-      "keyboard-shortcuts",
-      "modal-interactions",
-      "animations",
-      "semantic-understanding",
-      "content-analysis",
-      "dynamic-navigation"
+      "prefetch",
+      "report",
+      "analyze",
+      "automate",
+      "delegate"
     ],
-    "authenticationRequired": false,
     "rateLimit": {
       "requestsPerMinute": 120,
-      "burstLimit": 20,
       "cooldownPeriod": 60,
-      "retryAfter": 5
-    },
-    "preferredLanguageModel": "gpt-4",
-    "minimumCapabilities": ["text-understanding", "navigation"],
-    "performance": {
-      "maxResponseTime": 2000,
-      "cacheControl": {
-        "maxAge": 3600,
-        "staleWhileRevalidate": 86400
+      "burstLimit": 30,
+      "perEndpoint": {
+        "auth": {
+          "requestsPerMinute": 20,
+          "cooldownPeriod": 300
+        },
+        "search": {
+          "requestsPerMinute": 60,
+          "cooldownPeriod": 120
+        },
+        "api": {
+          "requestsPerMinute": 100,
+          "cooldownPeriod": 60
+        },
+        "agent": {
+          "requestsPerMinute": 200,
+          "cooldownPeriod": 30,
+          "burstLimit": 50
+        }
       },
-      "compression": ["gzip", "brotli"],
-      "prefetch": ["navigation", "images"]
+      "ipBasedRateLimit": true,
+      "userBasedRateLimit": true,
+      "agentBasedRateLimit": true
+    },
+    "errorHandling": {
+      "retryStrategy": {
+        "maxRetries": 3,
+        "backoffMultiplier": 1.5,
+        "initialDelayMs": 1000
+      },
+      "fallbackBehavior": {
+        "cacheTimeout": 3600,
+        "gracefulDegradation": true
+      }
+    },
+    "monitoring": {
+      "performanceMetrics": true,
+      "errorReporting": true,
+      "usageAnalytics": true,
+      "healthChecks": {
+        "enabled": true,
+        "intervalSeconds": 300
+      }
+    },
+    "agentFramework": {
+      "enabled": true,
+      "protocols": ["MCP", "OpenAPI", "JSON-RPC"],
+      "capabilities": {
+        "autonomous": true,
+        "cooperative": true,
+        "learning": true,
+        "stateful": true
+      },
+      "communication": {
+        "interAgentProtocol": "MCP",
+        "messageFormats": ["JSON", "Protocol Buffers"],
+        "eventTypes": [
+          "task.created",
+          "task.updated",
+          "task.completed",
+          "agent.registered",
+          "agent.deregistered"
+        ]
+      },
+      "security": {
+        "authentication": {
+          "type": "JWT",
+          "scope": "agent",
+          "expiration": 3600
+        },
+        "authorization": {
+          "type": "RBAC",
+          "defaultRole": "agent",
+          "permissions": ["read", "execute", "delegate"]
+        }
+      },
+      "resourceManagement": {
+        "maxConcurrentTasks": 10,
+        "maxMemoryUsage": "256MB",
+        "timeoutMs": 30000
+      }
     }
   },
   "globalInteractions": {
     "keyboardShortcuts": {
-      "description": "Global keyboard shortcuts for quick navigation",
       "shortcuts": {
         "writing": {
           "key": "w",
           "modifiers": ["meta", "ctrl"],
-          "action": "navigate",
           "target": "/writing",
-          "description": "Navigate to writing section"
+          "description": "Navigate to writing section",
+          "ariaLabel": "Go to writing section",
+          "automatable": true
         },
         "projects": {
           "key": "p",
           "modifiers": ["meta", "shift"],
-          "action": "navigate",
           "target": "/projects",
-          "description": "Navigate to projects section"
+          "description": "Navigate to projects section",
+          "ariaLabel": "Go to projects section",
+          "automatable": true
         },
         "audio": {
           "key": "a",
           "modifiers": ["meta", "shift"],
-          "action": "navigate",
           "target": "/audio",
-          "description": "Navigate to audio section"
+          "description": "Navigate to audio section",
+          "ariaLabel": "Go to audio section",
+          "automatable": true
         },
         "bio": {
           "key": "b",
           "modifiers": ["meta", "shift"],
-          "action": "navigate",
           "target": "/bio",
-          "description": "Navigate to bio section"
-        },
-        "connect": {
-          "key": "c",
-          "modifiers": ["meta", "shift"],
-          "action": "trigger",
-          "target": "openConnectModal",
-          "description": "Open connect modal"
+          "description": "Navigate to bio section",
+          "ariaLabel": "Go to bio section",
+          "automatable": true
         },
         "home": {
           "key": "z",
           "modifiers": ["meta", "shift"],
-          "action": "navigate",
           "target": "/",
-          "description": "Navigate to home page"
+          "description": "Navigate to home page",
+          "ariaLabel": "Go to home page",
+          "automatable": true
+        },
+        "search": {
+          "key": "k",
+          "modifiers": ["meta"],
+          "target": "/search",
+          "description": "Open search",
+          "ariaLabel": "Open search dialog",
+          "automatable": true
         }
+      },
+      "validation": {
+        "preventConflicts": true,
+        "enforceModifiers": true
       }
     },
     "navigation": {
-      "selector": "nav",
-      "description": "Main navigation menu",
-      "actionPatterns": {
-        "click": {
-          "method": "click",
-          "waitForNavigation": true,
-          "successIndicator": "url-change"
-        },
-        "hover": {
-          "method": "hover",
-          "expectedBehavior": "show-submenu"
-        }
-      },
       "components": {
         "homeButton": {
           "selector": ".w-10.h-10",
-          "description": "Home navigation button",
-          "ariaLabel": "Go to home page"
+          "ariaLabel": "Go to home page",
+          "role": "link",
+          "testId": "home-button",
+          "automatable": true
         },
         "navLinks": {
           "selector": "nav li a",
-          "description": "Navigation menu links",
-          "ariaAttributes": {
-            "current": "page"
-          }
-        }
-      }
-    },
-    "modals": {
-      "connect": {
-        "selector": "[role='dialog']",
-        "description": "Connect modal for social links",
-        "trigger": {
-          "event": "openConnectModal",
-          "shortcut": {
-            "key": "c",
-            "modifiers": ["meta", "shift"]
-          }
-        },
-        "closeActions": ["escape", "clickOutside", "closeButton"],
-        "components": {
-          "socialButtons": {
-            "selector": "button[aria-label^='Connect on']",
-            "description": "Social media connection buttons"
-          },
-          "closeButton": {
-            "selector": "button[aria-label='Close modal']",
-            "description": "Modal close button"
-          }
+          "role": "menuitem",
+          "testId": "nav-link",
+          "automatable": true
         }
       },
-      "profileImage": {
-        "selector": ".profile-image",
-        "description": "Profile image modal",
-        "trigger": {
-          "action": "click",
-          "target": ".profile-image img"
-        },
-        "closeActions": ["escape", "clickOutside", "closeButton"]
-      }
-    },
-    "footer": {
-      "selector": "footer",
-      "description": "Global footer component",
-      "components": {
-        "socialLinks": {
-          "selector": ".flex.items-center.justify-center.space-x-4",
-          "description": "Social media links",
-          "items": [
-            {
-              "platform": "Twitter",
-              "selector": "[aria-label='Connect on Twitter']"
-            },
-            {
-              "platform": "LinkedIn",
-              "selector": "[aria-label='Connect on LinkedIn']"
-            },
-            {
-              "platform": "GitHub",
-              "selector": "[aria-label='Connect on GitHub']"
-            }
-          ]
-        },
-        "copyright": {
-          "selector": "footer p",
-          "description": "Copyright information"
+      "accessibility": {
+        "skipLinks": true,
+        "keyboardNav": true,
+        "ariaLabels": true,
+        "focusManagement": true
+      },
+      "automation": {
+        "enabled": true,
+        "selectors": {
+          "navigation": "[data-testid^='nav-']",
+          "content": "[data-testid^='content-']",
+          "interactive": "[data-testid^='interactive-']"
         }
       }
     },
-    "errorHandling": {
-      "globalErrorBoundary": {
-        "selector": "[role='alert']",
-        "description": "Global error boundary component",
-        "actions": {
-          "retry": {
-            "selector": "button",
-            "description": "Retry failed operation"
-          },
-          "goHome": {
-            "selector": "button:last-child",
-            "description": "Return to home page"
-          }
-        }
+    "errorBoundary": {
+      "enabled": true,
+      "fallbackUI": true,
+      "logging": true,
+      "recovery": {
+        "autoRetry": true,
+        "maxAttempts": 3
       }
     }
   },
   "pages": {
     "/": {
-      "uiInteractions": {
-        "hero": {
-          "selector": "section.relative.min-h-[200vh]",
-          "description": "Hero section with sticky header",
-          "components": {
-            "header": {
-              "selector": ".sticky.top-0",
-              "description": "Sticky header with main content"
-            },
-            "chainLogos": {
-              "selector": ".chain-logo",
-              "description": "Blockchain platform logos"
-            },
-            "actionButtons": {
-              "selector": ".flex.flex-col.sm\\:flex-row button",
-              "description": "Primary action buttons"
-            }
-          }
-        },
-        "mainNavigation": {
-          "selector": "nav",
-          "description": "Main navigation menu",
-          "agent_instructions": "Use this menu to navigate between main sections of the site.",
-          "semanticStructure": {
-            "type": "navigation",
-            "items": ["writing", "projects", "bio", "audio"],
-            "relationships": {
-              "writing": ["articles", "blog"],
-              "projects": ["portfolio", "code"],
-              "bio": ["about", "experience", "skills"],
-              "audio": ["podcasts", "music"]
-            }
-          }
-        },
-        "featuredContent": {
-          "selector": ".featured",
-          "description": "Featured content section",
-          "agent_instructions": "Browse highlighted content and recent updates.",
-          "dataAttributes": ["title", "date", "category"]
-        },
-        "newsletter": {
-          "selector": "section.bg-\\[var\\(--color-background\\)]",
-          "description": "Newsletter subscription section",
-          "components": {
-            "form": {
-              "selector": "form",
-              "inputs": {
-                "email": {
-                  "selector": "input[type='email']",
-                  "placeholder": "Enter your email"
-                }
-              },
-              "submitButton": {
-                "selector": "button[type='submit']",
-                "text": "Coming Soon"
-              }
-            }
-          }
-        }
+      "sections": ["hero", "mainNavigation", "featuredContent", "newsletter"],
+      "caching": {
+        "strategy": "stale-while-revalidate",
+        "maxAge": 3600
+      },
+      "automation": {
+        "allowed": true,
+        "actions": ["read", "navigate", "interact"]
       }
     },
     "/writing": {
-      "uiInteractions": {
-        "articleList": {
-          "selector": "article",
-          "description": "List of written articles",
-          "agent_instructions": "Browse through articles. Each article has a title, date, and preview.",
-          "dataStructure": {
-            "title": ".article-title",
-            "date": ".article-date",
-            "preview": ".article-preview",
-            "tags": ".article-tags"
-          },
-          "pagination": {
-            "selector": ".pagination",
-            "nextButton": ".pagination-next",
-            "previousButton": ".pagination-prev",
-            "itemsPerPage": 10
-          }
-        },
-        "articleLink": {
-          "selector": "article a",
-          "description": "Link to full article",
-          "agent_instructions": "Click to read the full article content."
-        }
+      "sections": ["articleList", "filters"],
+      "itemsPerPage": 10,
+      "caching": {
+        "strategy": "network-first",
+        "maxAge": 1800
       },
-      "filters": {
-        "categories": {
-          "selector": ".category-filter",
-          "options": ["tech", "personal", "projects"]
-        },
-        "dateRange": {
-          "selector": ".date-filter",
-          "format": "YYYY-MM-DD"
-        }
-      }
-    },
-    "/writing/[slug]": {
-      "uiInteractions": {
-        "articleContent": {
-          "selector": "article",
-          "description": "Full article content",
-          "agent_instructions": "Read the complete article content here."
-        }
+      "automation": {
+        "allowed": true,
+        "actions": ["read", "search", "filter"]
       }
     },
     "/projects": {
-      "uiInteractions": {
-        "projectList": {
-          "selector": ".project-grid",
-          "description": "Grid of projects",
-          "agent_instructions": "Browse through projects. Each project has a title, description, and links.",
-          "components": {
-            "projectCard": {
-              "selector": ".project-card",
-              "structure": {
-                "title": "h3",
-                "description": "p",
-                "tags": ".project-tag",
-                "links": {
-                  "demo": "button[aria-label='View live demo']",
-                  "article": "button[aria-label='Read project article']",
-                  "github": "button[aria-label='View project on GitHub']"
-                }
-              }
-            }
-          }
-        }
+      "sections": ["projectGrid"],
+      "caching": {
+        "strategy": "cache-first",
+        "maxAge": 7200
+      },
+      "automation": {
+        "allowed": true,
+        "actions": ["read", "navigate"]
       }
     },
     "/bio": {
-      "uiInteractions": {
-        "about": {
-          "selector": "#about",
-          "description": "About section",
-          "agent_instructions": "Read about Zachary Roth's background and experience.",
-          "contentStructure": {
-            "biography": ".bio-text",
-            "contact": ".contact-info",
-            "socialLinks": ".social-links"
-          }
-        },
-        "experience": {
-          "selector": "#experience",
-          "description": "Professional experience",
-          "dataStructure": {
-            "role": ".job-title",
-            "company": ".company-name",
-            "duration": ".job-duration",
-            "description": ".job-description"
-          }
-        },
-        "skills": {
-          "selector": "#skills",
-          "description": "Skills section",
-          "agent_instructions": "Browse technical skills and expertise."
-        },
-        "achievements": {
-          "selector": "#achievements",
-          "description": "Achievements section",
-          "agent_instructions": "View notable achievements and accomplishments."
-        }
+      "sections": ["about", "experience", "skills"],
+      "caching": {
+        "strategy": "cache-first",
+        "maxAge": 86400
+      },
+      "automation": {
+        "allowed": true,
+        "actions": ["read"]
       }
     },
     "/audio": {
-      "uiInteractions": {
-        "audioPlayer": {
-          "selector": ".audio-player",
-          "description": "Interactive audio content player with playlist management",
-          "agent_instructions": "Control and manage audio playback with comprehensive player features.",
-          "components": {
-            "playlistContainer": {
-              "selector": ".playlist-container",
-              "description": "List of available audio tracks",
-              "components": {
-                "playlistItem": {
-                  "selector": ".playlist-item",
-                  "description": "Individual track in playlist",
-                  "structure": {
-                    "title": "h5.font-medium",
-                    "artist": "span.text-[var(--color-text-secondary)]",
-                    "composer": "span.opacity-75",
-                    "duration": "span.whitespace-nowrap",
-                    "metadata": {
-                      "instrument": "span.capitalize",
-                      "genre": "span.rounded-full"
-                    }
-                  },
-                  "states": {
-                    "active": "bg-[var(--color-primary)] bg-opacity-10",
-                    "inactive": "hover:bg-[var(--color-border)]"
-                  },
-                  "animations": {
-                    "initial": { "opacity": 0, "y": 10 },
-                    "animate": { "opacity": 1, "y": 0 },
-                    "exit": { "opacity": 0, "y": -10 },
-                    "transition": { "duration": 0.2 }
-                  }
-                }
-              }
-            },
-            "controls": {
-              "selector": ".audio-controls",
-              "description": "Playback control buttons",
-              "components": {
-                "playPause": {
-                  "selector": "button[aria-label='Play/Pause']",
-                  "description": "Toggle playback state",
-                  "states": ["playing", "paused"]
-                },
-                "previous": {
-                  "selector": "button[aria-label='Previous Track']",
-                  "description": "Play previous track"
-                },
-                "next": {
-                  "selector": "button[aria-label='Next Track']",
-                  "description": "Play next track"
-                },
-                "shuffle": {
-                  "selector": "button[aria-label='Shuffle']",
-                  "description": "Toggle shuffle mode",
-                  "states": ["active", "inactive"]
-                },
-                "repeat": {
-                  "selector": "button[aria-label='Repeat']",
-                  "description": "Cycle repeat modes",
-                  "states": ["off", "all", "one"]
-                },
-                "volume": {
-                  "selector": ".volume-control",
-                  "description": "Volume control slider",
-                  "components": {
-                    "slider": "input[type='range']",
-                    "muteButton": "button[aria-label='Mute']"
-                  }
-                }
-              }
-            },
-            "progressBar": {
-              "selector": ".progress-bar",
-              "description": "Track progress indicator",
-              "components": {
-                "slider": {
-                  "selector": "input[type='range']",
-                  "description": "Seek through track"
-                },
-                "currentTime": {
-                  "selector": ".current-time",
-                  "description": "Current playback position"
-                },
-                "duration": {
-                  "selector": ".duration",
-                  "description": "Total track duration"
-                },
-                "waveform": {
-                  "selector": ".waveform",
-                  "description": "Visual waveform representation"
-                }
-              }
-            }
-          }
-        },
-        "categoryFilters": {
-          "selector": ".category-filters",
-          "description": "Filter tracks by category",
-          "options": ["All", "Piano", "Guitar", "Classical", "Jazz"],
-          "components": {
-            "filterButton": {
-              "selector": ".category-button",
-              "states": {
-                "selected": "bg-[var(--color-primary)]",
-                "unselected": "bg-[var(--color-border)]"
-              }
-            }
-          }
-        }
+      "sections": ["audioPlayer", "playlist"],
+      "features": {
+        "shuffle": true,
+        "repeat": true,
+        "autoplay": false,
+        "preload": "metadata"
       },
-      "trackMetadata": {
-        "instruments": ["piano", "guitar"],
-        "genres": ["Classical", "Jazz"],
-        "attributes": {
-          "title": "string",
-          "artist": "string",
-          "composer": "string?",
-          "duration": "string",
-          "isOriginal": "boolean",
-          "coverArt": "string",
-          "waveform": "number[]"
-        }
+      "caching": {
+        "strategy": "network-first",
+        "maxAge": 3600
       },
-      "audioFeatures": {
-        "preloading": {
-          "enabled": true,
-          "strategy": "next-track",
-          "cacheSize": 5
-        },
-        "waveformGeneration": {
-          "enabled": true,
-          "sampleSize": 100,
-          "useWebWorker": true
-        },
-        "playbackModes": {
-          "shuffle": true,
-          "repeat": ["off", "all", "one"],
-          "autoplay": false
-        },
-        "accessibility": {
-          "keyboardControls": {
-            "space": "togglePlayPause",
-            "arrowLeft": "previousTrack",
-            "arrowRight": "nextTrack",
-            "m": "toggleMute"
-          },
-          "screenReaderAnnouncements": {
-            "trackChange": true,
-            "playbackState": true,
-            "volumeChange": true
-          }
-        }
+      "automation": {
+        "allowed": true,
+        "actions": ["play", "pause", "next", "previous"]
       }
     }
   },
   "metadata": {
-    "author": "Zachary Roth",
+    "author": "${AUTHOR_NAME}",
     "description": "Personal website featuring writing, projects, bio, and audio content",
-    "contentTypes": ["articles", "projects", "biography", "audio"],
     "primaryLanguage": "en",
     "lastUpdated": "auto",
+    "version": "1.1.0",
+    "repository": {
+      "type": "git",
+      "url": "${REPO_URL}"
+    },
     "analytics": {
-      "trackAgentInteractions": true,
-      "collectMetrics": [
-        "navigation-patterns",
-        "content-access",
-        "performance-metrics",
-        "error-rates",
-        "interaction-flows"
-      ],
-      "samplingRate": 1.0,
-      "retention": {
-        "duration": "30d",
-        "aggregation": "hourly"
-      }
+      "enabled": true,
+      "anonymize": true,
+      "respectDNT": true
     },
-    "accessibility": {
-      "aria": true,
-      "keyboardNavigation": true,
-      "semanticHTML": true,
-      "colorContrast": true,
-      "reducedMotion": true,
-      "screenReader": {
-        "announcements": true,
-        "landmarks": true
-      }
-    },
-    "animations": {
-      "pageTransitions": {
-        "enabled": true,
-        "duration": 300,
-        "timing": "ease-in-out"
-      },
-      "scrollAnimations": {
-        "enabled": true,
-        "threshold": 0.1
-      },
-      "modalAnimations": {
-        "enabled": true,
-        "duration": 200
-      },
-      "loadingStates": {
-        "spinner": {
-          "selector": ".loading-spinner",
-          "description": "Loading state indicator",
-          "fallback": "text"
-        },
-        "skeleton": {
-          "enabled": true,
-          "duration": 1000
-        }
-      },
-      "preferences": {
-        "respectReducedMotion": true,
-        "adaptiveAnimations": true
+    "automation": {
+      "framework": "MCP",
+      "version": "1.0",
+      "documentation": "/docs/automation",
+      "endpoints": {
+        "register": "/api/agents/register",
+        "tasks": "/api/agents/tasks",
+        "events": "/api/agents/events"
       }
     }
   },
   "security": {
     "rateLimiting": true,
-    "allowedOrigins": ["*"],
-    "requiredHeaders": {
-      "User-Agent": "required",
-      "Agent-ID": "optional",
-      "Accept": "required",
-      "Accept-Encoding": "optional"
-    },
     "cors": {
       "enabled": true,
-      "methods": ["GET", "HEAD", "OPTIONS"],
+      "methods": ["GET", "HEAD", "OPTIONS", "POST"],
+      "origins": ["${ALLOWED_ORIGINS}"],
+      "credentials": false,
       "maxAge": 86400
     },
     "contentSecurity": {
       "enabled": true,
-      "reportOnly": false,
       "policies": {
         "defaultSrc": ["'self'"],
-        "scriptSrc": ["'self'", "'unsafe-inline'"],
+        "scriptSrc": ["'self'", "'strict-dynamic'"],
         "styleSrc": ["'self'", "'unsafe-inline'"],
         "imgSrc": ["'self'", "data:", "https:"],
-        "connectSrc": ["'self'", "https:"]
-      }
-    }
-  },
-  "errorHandling": {
-    "retryStrategy": {
-      "maxAttempts": 3,
-      "backoff": {
-        "initial": 1000,
-        "multiplier": 2,
-        "maxDelay": 10000
+        "connectSrc": ["'self'", "https:"],
+        "fontSrc": ["'self'", "data:", "https:"],
+        "objectSrc": ["'none'"],
+        "mediaSrc": ["'self'"],
+        "frameSrc": ["'none'"],
+        "manifestSrc": ["'self'"],
+        "workerSrc": ["'self'", "blob:"],
+        "childSrc": ["'none'"],
+        "formAction": ["'self'"],
+        "frameAncestors": ["'none'"],
+        "baseUri": ["'self'"],
+        "upgradeInsecureRequests": true,
+        "blockAllMixedContent": true
+      },
+      "reportUri": "/api/security/csp-report",
+      "reportOnly": false
+    },
+    "headers": {
+      "strictTransportSecurity": {
+        "enabled": true,
+        "maxAge": 31536000,
+        "includeSubDomains": true,
+        "preload": true
+      },
+      "frameOptions": "DENY",
+      "contentTypeOptions": "nosniff",
+      "referrerPolicy": "strict-origin-when-cross-origin",
+      "permissionsPolicy": {
+        "camera": [],
+        "microphone": [],
+        "geolocation": [],
+        "interest-cohort": []
       }
     },
-    "fallbacks": {
-      "navigation": "/",
-      "content": "static",
-      "images": "placeholder"
+    "sanitization": {
+      "enabled": true,
+      "sanitizeHtml": true,
+      "sanitizeUrls": true
     },
-    "logging": {
-      "level": "error",
-      "sampling": 1.0
+    "automation": {
+      "enabled": true,
+      "authentication": {
+        "type": "JWT",
+        "scope": "automation",
+        "expiration": 3600
+      },
+      "authorization": {
+        "type": "RBAC",
+        "roles": ["agent", "supervisor", "admin"],
+        "defaultRole": "agent"
+      },
+      "rateLimit": {
+        "enabled": true,
+        "requestsPerMinute": 200,
+        "burstLimit": 50
+      }
     }
   }
-} 
+}

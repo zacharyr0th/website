@@ -13,13 +13,18 @@ interface NavigationProps {
 }
 
 const HomeButton = memo(({ active }: { active: boolean }) => (
-  <div 
-    className="w-10 h-10 p-0 transition-transform duration-300 ease-out hover:scale-105" 
+  <div
+    className="w-10 h-10 p-0 transition-transform duration-300 ease-out hover:scale-105"
     role="none"
   >
     <Link href="/" style={{ textDecoration: 'none' }} aria-label="Go to home page">
       <NavButton active={active} className="w-full h-full flex items-center justify-center p-0">
-        <span className="uppercase text-2xl transform-gpu transition-opacity duration-300" aria-hidden="true">z</span>
+        <span
+          className="uppercase text-2xl transform-gpu transition-opacity duration-300"
+          aria-hidden="true"
+        >
+          z
+        </span>
       </NavButton>
     </Link>
   </div>
@@ -27,12 +32,12 @@ const HomeButton = memo(({ active }: { active: boolean }) => (
 HomeButton.displayName = 'HomeButton';
 
 const NavLink = memo(({ label, href, active, description }: NavItem & { active: boolean }) => (
-  <li 
-    className={`${active ? 'max-sm:hidden' : ''} transition-transform duration-300 ease-out hover:scale-105`} 
+  <li
+    className={`${active ? 'max-sm:hidden' : ''} transition-transform duration-300 ease-out hover:scale-105`}
     role="none"
   >
-    <Link 
-      href={href} 
+    <Link
+      href={href}
       aria-current={active ? 'page' : undefined}
       className="focus:outline-none focus:ring-2 focus:ring-primary group"
       aria-label={description}
@@ -80,16 +85,15 @@ const NavContent = memo(({ pathname, showHomeButton }: NavContentProps) => {
             role="menubar"
           >
             {showHomeButton && !isHome && (
-              <li className="sm:hidden transition-transform duration-300 ease-out hover:scale-105" role="none">
+              <li
+                className="sm:hidden transition-transform duration-300 ease-out hover:scale-105"
+                role="none"
+              >
                 <HomeButton active={false} />
               </li>
             )}
             {navItems.map((item) => (
-              <NavLink
-                key={item.href}
-                {...item}
-                active={pathname === item.href}
-              />
+              <NavLink key={item.href} {...item} active={pathname === item.href} />
             ))}
           </ul>
         </BlurBackground>
@@ -108,7 +112,7 @@ const Navigation = memo(({ showHomeButton = false }: NavigationProps) => {
   const handleScroll = useCallback(() => {
     const currentScrollY = window.scrollY;
     const isScrollingUpNow = currentScrollY <= lastScrollY;
-    
+
     setIsVisible(isScrollingUpNow || currentScrollY < 50);
     setIsScrollingUp(isScrollingUpNow);
     setLastScrollY(currentScrollY);

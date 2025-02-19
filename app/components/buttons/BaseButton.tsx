@@ -1,7 +1,7 @@
 import React from 'react';
 import type { BaseButtonProps } from './constants';
 import { getButtonClassName } from './constants';
-import { LoadingSpinner } from '../../lib/Loading';
+import { LoadingSpinner } from '@/components/misc/Loading';
 
 export const BaseButton = React.memo(
   React.forwardRef<HTMLButtonElement, BaseButtonProps>(

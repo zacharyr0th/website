@@ -1,5 +1,7 @@
 import type { Config } from 'tailwindcss';
 import type { PluginUtils } from 'tailwindcss/types/config';
+import typography from '@tailwindcss/typography';
+import plugin from 'tailwindcss/plugin';
 
 const config: Config = {
   content: [
@@ -22,9 +24,14 @@ const config: Config = {
         warning: 'var(--color-warning)',
         info: 'var(--color-info)',
       },
+      backgroundImage: {
+        'gradient-to-b': 'linear-gradient(to bottom, var(--tw-gradient-stops))',
+      },
       typography: ({ theme }: PluginUtils) => ({
         DEFAULT: {
           css: {
+            fontFamily: 'var(--font-mono)',
+            fontOpticalSizing: 'auto',
             '--tw-prose-body': 'var(--color-text-primary)',
             '--tw-prose-headings': 'var(--color-text-primary)',
             '--tw-prose-links': 'var(--color-accent)',
@@ -33,7 +40,64 @@ const config: Config = {
             '--tw-prose-code': 'var(--color-text-primary)',
             '--tw-prose-pre-code': 'var(--color-text-primary)',
             '--tw-prose-pre-bg': 'var(--color-surface)',
+            fontSize: 'var(--font-size-base)',
+            lineHeight: '1.4',
+            letterSpacing: '-0.01em',
+            wordSpacing: '-0.025em',
             maxWidth: '100%',
+            textAlign: 'justify',
+            hyphens: 'auto',
+            p: {
+              marginTop: theme('spacing.3'),
+              marginBottom: theme('spacing.3'),
+              lineHeight: '1.4',
+              letterSpacing: '-0.01em',
+              wordSpacing: '-0.025em',
+              textRendering: 'optimizeLegibility',
+            },
+            'p + p': {
+              marginTop: theme('spacing.4'),
+            },
+            'p:first-of-type': {
+              marginTop: '0',
+            },
+            h1: {
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--font-size-h1)',
+              lineHeight: '1.1',
+              letterSpacing: '-0.03em',
+              marginTop: '1.5rem',
+              marginBottom: '1rem',
+              fontWeight: '800',
+              textAlign: 'left',
+            },
+            h2: {
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--font-size-h2)',
+              lineHeight: '1.2',
+              letterSpacing: '-0.02em',
+              marginTop: '1.4rem',
+              marginBottom: '0.8rem',
+              fontWeight: '700',
+              textAlign: 'left',
+            },
+            h3: {
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--font-size-h3)',
+              lineHeight: '1.3',
+              letterSpacing: '-0.01em',
+              marginTop: '1.2rem',
+              marginBottom: '0.6rem',
+              fontWeight: '600',
+              textAlign: 'left',
+            },
+            abbr: {
+              fontVariantCaps: 'small-caps',
+              letterSpacing: '0.5px',
+              opacity: '0.8',
+              textDecoration: 'none',
+              fontFeatureSettings: '"smcp"',
+            },
             a: {
               '&:hover': {
                 color: 'var(--color-accent-hover)',
@@ -84,11 +148,10 @@ const config: Config = {
       },
     },
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [typography],
 };
 
 // Add scrollbar hiding utilities
-const plugin = require('tailwindcss/plugin');
 if (!config.plugins) {
   config.plugins = [];
 }
@@ -102,9 +165,9 @@ config.plugins.push(
         'scrollbar-width': 'none',
         /* Safari and Chrome */
         '&::-webkit-scrollbar': {
-          display: 'none'
-        }
-      }
+          display: 'none',
+        },
+      },
     });
   })
 );

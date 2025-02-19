@@ -49,7 +49,7 @@ Public keys are intimidating if you're new to them, but you can copy and paste t
 
 Each character of the wallet address, aka public key, is connected to your private key, and if you send digital assets to the wrong wallet address, you will likely be unable to recover them. Wallet designers are continually addressing this issue. If these long alphanumerics are overly intimidating, there's always the option to utilize a custodial wallet at a centralized crypto exchange (like FTX or Coinbase) rather than a non-custodial one (like Solflare or Metamask).
 
-Many wallets have built-in address books, so you won't need to copy and paste a public key every time. Most mainstream crypto exchanges also support this feature. The primary risk of utilizing a non-custodial wallet is either losing your private key or mnemonic/recovery phrase or stealing it. It is crucial to keep a copy of each of those written down and stored safely. Some people etch it into fireproof, "bullet-proof" steel.
+Many wallets have built-in address books, so you won't need to copy and paste a public key every time. Most mainstream crypto exchanges also support this feature. The primary risk of utilizing a non-custodial wallet is either losing your private key or mnemonic/recovery phrase or stealing it. It is important to keep a copy of each of those written down and stored safely. Some people etch it into fireproof, "bullet-proof" steel.
 
 Don't take a video for social media and accidentally leave your phrase visible in the background. Don't click on any suspicious-looking links—they could be phishing attempts that drain your wallet. This happened to Seth Green, who played Dr. Evil's son in the Austin Powers movie trilogy.
 
@@ -74,7 +74,7 @@ Mnemonics serve two primary purposes:
 They offer a more human-readable format than a private key, making importing a wallet account into a wallet application easier.
 You can derive multiple private keys from a single mnemonic phrase, allowing you to create various wallet accounts for different use cases.
 
-In short, your mnemonic gives you access to your private key, which gives you access to your funds. From the user's perspective, Mnemonics / Recovery Phrases / Seed Phrases are the most essential aspects of a wallet. They are the human-readable sequences of words that give you access to your private keys and, thus, your capital. The words are generally in English, although there are many languages wallet providers can choose to implement.
+In short, Mnemonics / Recovery Phrases / Seed Phrases are the main aspects of a wallet. They are the human-readable sequences of words that give you access to your private keys and, thus, your capital. The words are generally in English, although there are many languages wallet providers can choose to implement.
 
 A public key can easily be calculated from a private key; however, computing the private key from a public key is impossible. Most people are blissfully unaware of their private key(s), which is fine … as long as they are painfully aware of their mnemonic.
 

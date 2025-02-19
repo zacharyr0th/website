@@ -97,7 +97,7 @@ Each of these tokens has its use case, tokenomics, and distribution schedule tha
 
 ### Fund Raising
 
-Another vital component of Web 3 thus far has been the innovations in the fundraising industry. Traditionally, startup companies have either gone through a series of venture capital funding rounds or have been bootstrapped. This was until Mastercoin implemented the world's first Initial Coin Offering (ICO) in 2013, an innovation that spurred the imagination of many investors later on during the 2017 ICO bubble.
+Another significant component of Web 3 thus far has been the innovations in the fundraising industry. Traditionally, startup companies have either gone through a series of venture capital funding rounds or have been bootstrapped. This was until Mastercoin implemented the world's first Initial Coin Offering (ICO) in 2013, an innovation that spurred the imagination of many investors later on during the 2017 ICO bubble.
 
 This bubble, which was relatively similar to the Tech Bubble but at a much smaller scale, displayed the excitement people had about how projects and companies could now raise money. Some were raising a lot of money, which attracted a few nefarious actors and influencers like John McAfee and Floyd Mayweather, who promoted low-quality projects that essentially went to zero. The ICO industry has since evolved into multiple variations of ICOs that each serve different purposes. These will impact Web 3's fundraising and development going forward.
 
@@ -135,7 +135,7 @@ Electronic music producer 3LAU decided to list his previously released album fro
 
 If you follow crypto-related content on LinkedIn and casually scroll through your newsfeed, you'll be hard-pressed not to find articles related to new blockchain investment funds. Blockchains and DeFi projects are constantly doling out grants meant to help improve their surrounding ecosystem.
 
-Grants are great. They've historically been able to fund essential projects within academia and elsewhere, but they've recently taken their funding game to the next level due to crypto-related innovations like DAOs.
+Grants are great. They've historically been able to fund important projects within academia and elsewhere, but they've recently taken their funding game to the next level due to crypto-related innovations like DAOs.
 
 ### Gitcoin
 

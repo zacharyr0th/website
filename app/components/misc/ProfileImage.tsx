@@ -11,12 +11,6 @@ interface ProfileImageProps {
   onImageChange?: (file: File) => void;
 }
 
-const sizes = {
-  sm: 'w-24',
-  md: 'w-48',
-  lg: 'w-96',
-};
-
 const hoverScale: TargetAndTransition = { scale: 1.05 };
 const tapScale: TargetAndTransition = { scale: 0.95 };
 
@@ -27,6 +21,18 @@ const ProfileImage = ({
   onImageChange,
 }: ProfileImageProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const sizeClass = ((s: typeof size) => {
+    switch (s) {
+      case 'sm':
+        return 'w-24';
+      case 'md':
+        return 'w-48';
+      case 'lg':
+        return 'w-96';
+      default:
+        return 'w-48';
+    }
+  })(size);
 
   const handleClick = () => clickable && setIsModalOpen(true);
   const handleClose = () => setIsModalOpen(false);
@@ -41,7 +47,7 @@ const ProfileImage = ({
   return (
     <>
       <motion.div
-        className={`profile-image relative aspect-square ${sizes[size]}`}
+        className={`profile-image relative aspect-square ${sizeClass}`}
         whileHover={clickable ? hoverScale : {}}
         whileTap={clickable ? tapScale : {}}
         onClick={handleClick}

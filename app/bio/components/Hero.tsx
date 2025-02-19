@@ -10,14 +10,14 @@ interface HeroProps {
 
 export function Hero({ data }: HeroProps) {
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="space-y-8 pt-6"
+      className="space-y-8 pt-24 md:pt-16"
     >
       <div className="flex flex-col md:flex-row gap-4 items-center">
-        <motion.div 
+        <motion.div
           className="relative w-24 md:w-28 aspect-square rounded-full overflow-hidden ring-2 ring-zinc-800/50"
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.2 }}
@@ -33,7 +33,7 @@ export function Hero({ data }: HeroProps) {
         </motion.div>
 
         <div className="flex-1 text-center md:text-left space-y-1">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
@@ -41,8 +41,8 @@ export function Hero({ data }: HeroProps) {
           >
             {data.name}
           </motion.h1>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
@@ -51,7 +51,7 @@ export function Hero({ data }: HeroProps) {
             {data.title}
           </motion.p>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
@@ -75,7 +75,7 @@ export function Hero({ data }: HeroProps) {
         </div>
       </div>
 
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.6 }}

@@ -14,34 +14,60 @@
 
 /* Theme Variables */
 :root {
-  /* Colors */
+  /* Semantic Colors */
   --color-primary: #2c3e50;
   --color-secondary: #34495e;
   --color-accent: #2d7fc1;
   --color-accent-hover: #1d6ca8;
-  --color-text-primary: #ecf0f1;
-  --color-text-secondary: #bdc3c7;
-  --color-background: #1a1a1a;
-  --color-surface: #2c2c2c;
-  --color-error: #e74c3c;
-  --color-success: #2ecc71;
-  --color-warning: #f39c12;
-  --color-info: #3498db;
 
-  /* Typography */
+  /* Text Colors */
+  --text-primary: var(--color-text-primary, #ecf0f1);
+  --text-secondary: var(--color-text-secondary, #bdc3c7);
+  --text-muted: rgba(var(--text-primary), 0.7);
+
+  /* Background Colors */
+  --bg-primary: var(--color-background, #1a1a1a);
+  --bg-surface: var(--color-surface, #2c2c2c);
+  --bg-surface-rgb: var(--color-surface-rgb, 44, 44, 44);
+
+  /* Status Colors */
+  --status-error: var(--color-error, #e74c3c);
+  --status-success: var(--color-success, #2ecc71);
+  --status-warning: var(--color-warning, #f39c12);
+  --status-info: var(--color-info, #3498db);
+
+  /* Typography Scale - Using Modern Fluid Typography */
   --font-size-base: clamp(0.875rem, 1vw, 0.9rem);
-  --line-height-base: 1.6;
+  --font-size-sm: clamp(0.75rem, 0.875vw, 0.8rem);
+  --font-size-lg: clamp(1rem, 1.125vw, 1.125rem);
+  --font-size-xl: clamp(1.25rem, 1.5vw, 1.5rem);
+  --font-size-2xl: clamp(1.5rem, 2vw, 2rem);
+  --font-size-3xl: clamp(2rem, 3vw, 3rem);
 
-  /* Spacing */
-  --spacing-unit: 0.25rem;
-  --spacing-2xs: calc(var(--spacing-unit) * 0.5); /* 2px */
-  --spacing-xs: var(--spacing-unit); /* 4px */
-  --spacing-sm: calc(var(--spacing-unit) * 2); /* 8px */
-  --spacing-md: calc(var(--spacing-unit) * 4); /* 16px */
-  --spacing-lg: calc(var(--spacing-unit) * 6); /* 24px */
-  --spacing-xl: calc(var(--spacing-unit) * 8); /* 32px */
-  --spacing-2xl: calc(var(--spacing-unit) * 12); /* 48px */
-  --spacing-3xl: calc(var(--spacing-unit) * 16); /* 64px */
+  /* Font Stacks */
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+    monospace;
+  --font-prose:
+    system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+
+  /* Line Heights */
+  --line-height-tight: 1.2;
+  --line-height-base: 1.6;
+  --line-height-relaxed: 1.7;
+  --line-height-loose: 2;
+
+  /* Fluid Spacing Scale */
+  --space-unit: clamp(0.25rem, 0.5vw, 0.5rem);
+  --space-2xs: calc(var(--space-unit) * 0.5);
+  --space-xs: var(--space-unit);
+  --space-sm: calc(var(--space-unit) * 2);
+  --space-md: calc(var(--space-unit) * 4);
+  --space-lg: calc(var(--space-unit) * 6);
+  --space-xl: calc(var(--space-unit) * 8);
+  --space-2xl: calc(var(--space-unit) * 12);
+  --space-3xl: calc(var(--space-unit) * 16);
 
   /* Effects */
   --shadow-color: rgba(0, 0, 0, 0.1);
@@ -49,6 +75,7 @@
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4);
   --transition-speed: 0.3s;
+  --transition-base: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
 
   /* Border Radii */
   --radius-unit: 0.25rem;
@@ -57,7 +84,7 @@
   --radius-lg: calc(var(--radius-unit) * 4);
   --radius-full: 9999px;
 
-  /* Layout */
+  /* Layout Constants */
   --header-height: max(56px, 4vh);
   --footer-height: max(56px, 4vh);
   --max-content-width: min(1200px, 95vw);
@@ -66,25 +93,15 @@
   --sidebar-width: 280px;
   --min-touch-target: 44px;
 
-  /* Breakpoints */
-  --breakpoint-sm: 640px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 1024px;
-  --breakpoint-xl: 1280px;
-  --breakpoint-2xl: 1536px;
-
-  /* Container Widths */
-  --container-padding: {
-    sm: 2rem;
-    md: 3rem;
-    lg: 4rem;
-    xl: 5rem;
-    2xl: 6rem;
-  };
-
-  /* Fonts */
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
-    'Courier New', monospace;
+  /* Z-Index Scale */
+  --z-negative: -1;
+  --z-elevate: 1;
+  --z-sticky: 100;
+  --z-header: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-popover: 500;
+  --z-tooltip: 600;
 }
 
 @layer base {
@@ -255,7 +272,7 @@
     @apply mx-auto;
     padding: 0;
     max-width: 100%;
-    
+
     @screen sm {
       @apply px-4;
       max-width: var(--max-content-width);

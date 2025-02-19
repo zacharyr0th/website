@@ -1,43 +1,45 @@
-import React, { Suspense } from 'react';
-import { getArticles } from '@/writing/lib/articles';
-import { LoadingState } from '../lib/Loading';
+import React from 'react';
 import WritingPageClient from './components/WritingPageClient';
-import { containerVariants } from '../lib/animations';
-import PageHeader from '../components/PageHeader';
+import { containerVariants } from '@/lib/ui/animations';
+import PageContainer from '@/components/layout/PageContainer';
+import PageHeader from '@/components/layout/PageHeader';
+import PageLayout from '@/components/layout/PageLayout';
 import type { Metadata } from 'next';
-import { SECTION_METADATA } from '@/lib/metadata';
+import { SECTION_METADATA } from '@/lib/config/metadata';
+import { readArticlesFromFilesystem } from './lib/server';
 
 export const metadata: Metadata = {
   title: SECTION_METADATA.writing.title,
   description: SECTION_METADATA.writing.description,
 };
 
+export const revalidate = 3600; // 1 hour
 export const dynamic = 'force-static';
-export const revalidate = 3600; // Revalidate every hour
+export const preferredRegion = 'auto';
+
+const INITIAL_ARTICLES_LIMIT = 50;
 
 export default async function WritingPage() {
-  const articles = await getArticles();
+  // Only fetch featured articles and a limited number of regular articles initially
+  const regularArticles = await readArticlesFromFilesystem({
+    excludeDrafts: true,
+    featured: false,
+    limit: INITIAL_ARTICLES_LIMIT,
+  });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-surface/30">
-      <main className="container mx-auto px-6 sm:px-8 pt-16 sm:pt-36 pb-24">
-        <div style={{ maxWidth: 'var(--article-width)' }} className="mx-auto space-y-6">
-          <PageHeader title="Writing" />
+    <PageLayout>
+      <PageContainer>
+        <PageHeader title="Writing" />
 
-          <Suspense
-            fallback={
-              <LoadingState
-                label="Loading articles"
-                height="h-[600px]"
-                barCount={4}
-                className="max-w-3xl mx-auto"
-              />
-            }
-          >
-            <WritingPageClient initialArticles={articles} containerVariants={containerVariants} />
-          </Suspense>
-        </div>
-      </main>
-    </div>
+        <section>
+          <WritingPageClient
+            initialArticles={regularArticles}
+            containerVariants={containerVariants}
+            enableLoadMore
+          />
+        </section>
+      </PageContainer>
+    </PageLayout>
   );
 }

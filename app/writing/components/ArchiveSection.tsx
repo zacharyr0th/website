@@ -2,14 +2,30 @@
 
 import React, { memo } from 'react';
 import { motion } from 'framer-motion';
-import type { ArchiveSectionProps } from '../types';
-import { ArticleCard } from './ArticleCard';
+import type { ArchiveSectionProps } from './articles/types';
+import ArticleCard from './articles/ArticleCard';
 import clsx from 'clsx';
-import { itemVariants } from '../../lib/animations';
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.48, 0.15, 0.25, 0.96] },
+  },
+};
 
 export const ArchiveSection = memo<ArchiveSectionProps>(({ articles }) => {
   const [focusedIndex, setFocusedIndex] = React.useState(0);
-  const articleRefs = React.useRef<(HTMLDivElement | null)[]>([]);
+  const articleRefs = React.useRef<Map<string, HTMLDivElement>>(new Map());
+
+  const setArticleRef = React.useCallback((element: HTMLDivElement | null, slug: string) => {
+    if (element) {
+      articleRefs.current.set(slug, element);
+    } else {
+      articleRefs.current.delete(slug);
+    }
+  }, []);
 
   // Sort articles by date
   const sortedArticles = React.useMemo(() => {
@@ -62,9 +78,7 @@ export const ArchiveSection = memo<ArchiveSectionProps>(({ articles }) => {
           key={article.slug}
           variants={itemVariants}
           className={clsx(index !== 0 && 'border-t border-zinc-800/50')}
-          ref={(el) => {
-            articleRefs.current[index] = el;
-          }}
+          ref={(el) => setArticleRef(el, article.slug)}
         >
           <ArticleCard article={article} isFocused={index === focusedIndex} />
         </motion.div>

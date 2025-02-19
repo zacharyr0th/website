@@ -99,6 +99,7 @@ export interface ArticleContentProps {
   contentHtml: string;
   nextArticle: Article | null;
   prevArticle: Article | null;
+  containerVariants: typeof import('@/lib/ui/animations').containerVariants;
 }
 
 /** Props for archive section component */

@@ -1,4 +1,4 @@
-import type { Article, FetchArticlesOptions } from './types';
+import type { Article, FetchArticlesOptions } from './components/articles/types';
 import { headers } from 'next/headers';
 
 const FETCH_TIMEOUT_MS = 5000; // 5 seconds timeout
@@ -6,7 +6,9 @@ const CACHE_REVALIDATE_SECONDS = 3600; // 1 hour cache
 
 // Add memoization for the base URL construction
 const getBaseUrl = (headers: Headers): string => {
-  const host = headers.get('host') || 'localhost:3000';
+  const host =
+    headers.get('host') ||
+    `${process.env.DEVELOPMENT_HOST || 'localhost'}:${process.env.DEVELOPMENT_PORT || '3000'}`;
   const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
   return `${protocol}://${host}`;
 };
@@ -36,7 +38,7 @@ async function getArticles(options: FetchArticlesOptions = {}): Promise<Article[
     }
 
     return data.filter((article): article is Article => {
-      const isValid = article.id && article.title;
+      const isValid = article.slug && article.title;
       if (!isValid) {
         console.warn('Article missing required fields:', article);
       }

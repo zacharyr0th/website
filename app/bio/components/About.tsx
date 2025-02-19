@@ -6,8 +6,8 @@ interface AboutProps {
 }
 
 export function About({ data }: AboutProps) {
-  const paragraphs = data.intro.split('\n\n').map(p => p.trim());
-  
+  const paragraphs = data.intro.split('\n\n').map((p) => p.trim());
+
   return (
     <div className="text-lg text-text-secondary leading-relaxed -mt-1 space-y-4">
       {paragraphs.map((paragraph, index) => (

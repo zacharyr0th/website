@@ -1,137 +1,92 @@
-import { getArticle, getArticles } from '@/writing/lib/articles';
-import type { Article } from '../types';
-import ArticleContent from './ArticleContent';
-import { Suspense } from 'react';
-import { LoadingState } from '../../lib/Loading';
 import { notFound } from 'next/navigation';
+import ArticleContent from '@/writing/components/articles/ArticleContent';
 import type { Metadata } from 'next';
-import { SECTION_METADATA } from '../../lib/metadata';
+import { SECTION_METADATA } from '@/lib/config/metadata';
+import PageLayout from '@/components/layout/PageLayout';
+import { readArticleFromFilesystem, getAdjacentArticlesFromFilesystem } from '@/writing/lib/server';
 
 export const dynamic = 'force-static';
-export const revalidate = 3600; // Revalidate every hour
+export const revalidate = 3600; // 1 hour
 
-type Props = {
-  params: Promise<{ slug: string }> | { slug: string };
+interface Props {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 }
 
-export async function generateMetadata(props: Props): Promise<Metadata> {
-  const { params } = props;
-  const resolvedParams = await params;
-  const slug = resolvedParams.slug;
+const defaultMetadata: Metadata = {
+  title: `Article Not Found | ${SECTION_METADATA.writing.title}`,
+  description: 'The requested article could not be found.',
+};
 
-  if (!slug) {
-    return {};
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await Promise.resolve(params);
+  try {
+    const article = await readArticleFromFilesystem(slug);
+    if (!article) return defaultMetadata;
+
+    const metadata: Metadata = {
+      title: `${article.title} | ${SECTION_METADATA.writing.title}`,
+      description: article.description,
+      openGraph: {
+        title: article.title,
+        description: article.description,
+        type: 'article',
+        publishedTime: article.date,
+        images: article.image
+          ? [
+              {
+                url: article.image.src,
+                width: 1200,
+                height: 675,
+                alt: article.image.alt || article.title,
+              },
+            ]
+          : undefined,
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: article.title,
+        description: article.description,
+        images: article.image ? [article.image.src] : undefined,
+      },
+    };
+
+    if (article.tags?.length) {
+      metadata.keywords = [...article.tags];
+    }
+
+    return metadata;
+  } catch (error) {
+    console.error('Error generating metadata:', error);
+    return defaultMetadata;
   }
-
-  const article = await getArticle(slug);
-  
-  if (!article) {
-    return {};
-  }
-
-  const { frontmatter } = article;
-  const ogImage = frontmatter.image ? {
-    url: frontmatter.image.src,
-    width: 1200,
-    height: 630,
-    alt: frontmatter.image.alt,
-  } : undefined;
-
-  const title = `${frontmatter.title} | ${SECTION_METADATA.writing.title}`;
-
-  return {
-    title,
-    description: frontmatter.description,
-    openGraph: {
-      title: frontmatter.title,
-      description: frontmatter.description,
-      type: 'article',
-      publishedTime: frontmatter.date,
-      authors: [SECTION_METADATA.writing.title],
-      images: ogImage ? [ogImage] : undefined,
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: frontmatter.title,
-      description: frontmatter.description,
-      images: ogImage ? [ogImage.url] : undefined,
-    },
-    alternates: {
-      canonical: `/writing/${slug}`,
-    },
-  };
 }
 
-export async function generateStaticParams() {
-  const articles = await getArticles();
-  return articles.map((article) => ({
-    slug: article.slug,
-  }));
-}
+export default async function ArticlePage({ params }: Props) {
+  const { slug } = await Promise.resolve(params);
 
-export default async function ArticlePage(props: Props) {
-  const { params } = props;
-  const resolvedParams = await params;
-  const slug = resolvedParams.slug;
+  try {
+    const [article, { next, prev }] = await Promise.all([
+      readArticleFromFilesystem(slug),
+      getAdjacentArticlesFromFilesystem(slug),
+    ]);
 
-  if (!slug) {
+    if (!article) {
+      notFound();
+    }
+
+    return (
+      <PageLayout>
+        <ArticleContent
+          article={article}
+          contentHtml={article.content}
+          nextArticle={next}
+          prevArticle={prev}
+        />
+      </PageLayout>
+    );
+  } catch (error) {
+    console.error('Error loading article:', error);
     notFound();
   }
-
-  const rawArticle = await getArticle(slug);
-
-  if (!rawArticle) {
-    notFound();
-  }
-
-  const article: Article = {
-    id: slug,
-    slug,
-    title: rawArticle.frontmatter.title,
-    content: rawArticle.content,
-    date: rawArticle.frontmatter.date,
-    link: `/writing/${slug}`,
-    description: rawArticle.frontmatter.description,
-    category: rawArticle.frontmatter.category,
-    tags: rawArticle.frontmatter.tags,
-    image: rawArticle.frontmatter.image,
-    frontmatter: rawArticle.frontmatter,
-    takeaways: rawArticle.frontmatter.takeaways,
-  };
-
-  const articles = await getArticles();
-  const currentIndex = articles.findIndex((a) => a.slug === slug);
-  
-  // Get next and previous articles with proper type assertions
-  const hasNextArticle = currentIndex >= 0 && currentIndex < articles.length - 1;
-  const hasPrevArticle = currentIndex > 0;
-  
-  const nextArticle: Article | null = hasNextArticle ? (articles[currentIndex + 1] as Article) : null;
-  const prevArticle: Article | null = hasPrevArticle ? (articles[currentIndex - 1] as Article) : null;
-
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-surface/30">
-      <main className="container mx-auto px-6 sm:px-8 pt-16 sm:pt-36 pb-24">
-        <div style={{ maxWidth: 'var(--article-width)' }} className="mx-auto">
-          <Suspense
-            fallback={
-              <LoadingState
-                label="Loading article"
-                height="h-[600px]"
-                barCount={4}
-                className="max-w-3xl mx-auto"
-              />
-            }
-          >
-            <ArticleContent
-              article={article}
-              contentHtml={rawArticle.processedContent}
-              nextArticle={nextArticle}
-              prevArticle={prevArticle}
-            />
-          </Suspense>
-        </div>
-      </main>
-    </div>
-  );
 }

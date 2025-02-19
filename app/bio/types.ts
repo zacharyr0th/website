@@ -41,4 +41,4 @@ export interface SectionProps {
 
 export interface TimelineItemProps extends Experience {
   index: number;
-} 
+}

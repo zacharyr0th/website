@@ -3,8 +3,9 @@
 import React, { memo } from 'react';
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
-import { getFeaturedProjects } from '@/projects/projects';
-import ProjectCard from '@/projects/ProjectCard';
+import { getFeaturedProjects } from '@/projects/data/projects';
+import ProjectCard from '@/projects/components/ProjectCard';
+import { type BaseProject } from '@/projects/types/types';
 import { WRITING_PROJECTS } from './constants';
 
 interface WritingCardProps {
@@ -17,7 +18,7 @@ interface WritingCardProps {
 
 const WritingCard = memo(({ article }: WritingCardProps) => (
   <Link href={article.link}>
-    <div className="group relative flex flex-col justify-between px-8 py-6 space-y-4 bg-black/40 rounded-2xl border border-white/5 h-full">
+    <div className="group relative flex flex-col justify-between px-8 py-6 space-y-4 bg-black/40 backdrop-blur-sm rounded-2xl border border-white/5 h-full shadow-md hover:bg-black/60 transition-all duration-200">
       <article className="space-y-3 w-full">
         <h3 className="text-xl font-mono text-white/90 group-hover:text-accent transition-colors text-left w-full">
           {article.title}
@@ -100,25 +101,49 @@ const Section = memo(
 
 Section.displayName = 'Section';
 
-const ProjectGrid = memo(() => (
-  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-    {getFeaturedProjects().map((project) => (
-      <ProjectCard key={project.id} project={project} isFocused={false} />
-    ))}
-  </div>
-));
+const ProjectGrid = memo(() => {
+  const featuredProjects = getFeaturedProjects();
+
+  return (
+    <>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {featuredProjects.map((project: BaseProject) => (
+          <ProjectCard key={project.id} project={project} isFocused={false} />
+        ))}
+      </div>
+      <div className="mt-8 text-center">
+        <Link
+          href="/projects"
+          className="inline-flex items-center justify-center px-6 py-2 text-sm font-medium text-accent hover:text-accent/80 transition-colors duration-200"
+        >
+          View all projects →
+        </Link>
+      </div>
+    </>
+  );
+});
 
 ProjectGrid.displayName = 'ProjectGrid';
 
 const WritingGrid = memo(({ articles }: { articles: typeof WRITING_PROJECTS }) => {
   const parentRef = React.useRef<HTMLDivElement>(null);
-  
+
   return (
-    <div ref={parentRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {articles.map((article) => (
-        <WritingCard key={article.link} article={article} />
-      ))}
-    </div>
+    <>
+      <div ref={parentRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {articles.map((article) => (
+          <WritingCard key={article.link} article={article} />
+        ))}
+      </div>
+      <div className="mt-8 text-center">
+        <Link
+          href="/writing"
+          className="inline-flex items-center justify-center px-6 py-2 text-sm font-medium text-accent hover:text-accent/80 transition-colors duration-200"
+        >
+          View all articles →
+        </Link>
+      </div>
+    </>
   );
 });
 

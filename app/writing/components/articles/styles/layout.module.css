@@ -1,0 +1,33 @@
+/* Base Variables */
+.variables {
+  /* Core Spacing */
+  --article-padding: 2rem;
+  --card-padding: 2rem;
+  --border-radius: 1rem;
+  --content-max-width: min(1200px, 100%);
+  --content-side-padding: 2rem;
+}
+
+@media (min-width: 640px) {
+  .variables {
+    --article-padding: 3rem;
+    --card-padding: 3rem;
+    --content-side-padding: 3rem;
+  }
+}
+
+/* Core Article Layout */
+.article {
+  composes: variables;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: var(--article-padding);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 640px) {
+  .article {
+    padding: 1rem;
+  }
+}

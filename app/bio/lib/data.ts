@@ -1,4 +1,4 @@
-import { SOCIAL_LINKS } from '@/lib/social';
+import { SOCIAL_LINKS } from '@/lib/config/social';
 import type { BioData } from '../types';
 
 export const bioData: BioData = {
@@ -15,14 +15,15 @@ export const bioData: BioData = {
       { ...SOCIAL_LINKS.github },
       { ...SOCIAL_LINKS.linkedin },
       { ...SOCIAL_LINKS.twitter },
-      { ...SOCIAL_LINKS.email }
+      { ...SOCIAL_LINKS.email },
     ],
   },
   experience: [
     {
       date: '2023 - Present',
       title: 'Head of Growth, Defi & AI',
-      company: '<a href="https://aptoslabs.com/" class="text-accent hover:text-accent/80 transition-colors" target="_blank" rel="noopener noreferrer">Aptos Labs</a>',
+      company:
+        '<a href="https://aptoslabs.com/" class="text-accent hover:text-accent/80 transition-colors" target="_blank" rel="noopener noreferrer">Aptos Labs</a>',
       description: [
         'Leading strategic initiatives to expand DeFi and AI capabilities within the Aptos ecosystem',
         'Developing technical specifications and integration frameworks for partner protocols',
@@ -31,13 +32,14 @@ export const bioData: BioData = {
       '2024 Highlights': [
         'Led 25+ successful protocol integrations in 2024',
         'Helped grow ecosystem TVL by 600% in one year - $200m to $1.2B',
-        'Owned Aptos\' presence in Electric Capital\'s report - 2nd fastest growing ecosystem of 2024',
+        "Owned Aptos' presence in Electric Capital's report - 2nd fastest growing ecosystem of 2024",
       ],
     },
     {
       date: '2021 - 2023',
       title: 'Product Manager',
-      company: '<a href="https://solflare.com/" class="text-accent hover:text-accent/80 transition-colors" target="_blank" rel="noopener noreferrer">Solrise Finance</a>',
+      company:
+        '<a href="https://solflare.com/" class="text-accent hover:text-accent/80 transition-colors" target="_blank" rel="noopener noreferrer">Solrise Finance</a>',
       description: [
         'Led product strategy and development for DeFi structured products',
         'Coordinated with engineering teams to optimize protocol performance and security',
@@ -51,7 +53,8 @@ export const bioData: BioData = {
     {
       date: '2020 - 2023',
       title: 'Senior Analyst',
-      company: '<a href="https://n2comms.com/" class="text-accent hover:text-accent/80 transition-colors" target="_blank" rel="noopener noreferrer">N2 Communications</a>',
+      company:
+        '<a href="https://n2comms.com/" class="text-accent hover:text-accent/80 transition-colors" target="_blank" rel="noopener noreferrer">N2 Communications</a>',
       description: [
         'Assisted in investor relations and communication strategies for high-profile private equity funds',
         'Provided strategic advisory services to traditional funds interested in investing in blockchain ventures',
@@ -65,16 +68,27 @@ export const bioData: BioData = {
   ],
   skills: [
     // Programming & Development
+    { name: 'APIs', level: 'expert', category: 'Programming & Development' },
+    { name: 'Bolt', level: 'expert', category: 'Programming & Development' },
+    { name: 'Cloudflare', level: 'expert', category: 'Programming & Development' },
+    { name: 'Cursor', level: 'expert', category: 'Programming & Development' },
+    { name: 'Eliza', level: 'expert', category: 'Programming & Development' },
+    { name: 'Open Source', level: 'expert', category: 'Programming & Development' },
     { name: 'Python', level: 'expert', category: 'Programming & Development' },
-    { name: 'TypeScript', level: 'expert', category: 'Programming & Development' },
     { name: 'React', level: 'expert', category: 'Programming & Development' },
+    { name: 'TypeScript', level: 'expert', category: 'Programming & Development' },
+    { name: 'Vercel', level: 'expert', category: 'Programming & Development' },
     { name: 'Next.js', level: 'advanced', category: 'Programming & Development' },
     { name: 'Tailwind CSS', level: 'advanced', category: 'Programming & Development' },
     { name: 'Git', level: 'advanced', category: 'Programming & Development' },
     { name: 'C', level: 'intermediate', category: 'Programming & Development' },
     { name: 'SCAMP', level: 'intermediate', category: 'Programming & Development' },
-    
+
     // Blockchain & DeFi
+    { name: 'Bitcoin', level: 'expert', category: 'Blockchain & DeFi' },
+    { name: 'Ethereum', level: 'expert', category: 'Blockchain & DeFi' },
+    { name: 'Solana', level: 'expert', category: 'Blockchain & DeFi' },
+    { name: 'Aptos', level: 'expert', category: 'Blockchain & DeFi' },
     { name: 'Move', level: 'expert', category: 'Blockchain & DeFi' },
     { name: 'DeFi Architecture', level: 'expert', category: 'Blockchain & DeFi' },
     { name: 'Protocol Design', level: 'expert', category: 'Blockchain & DeFi' },
@@ -82,7 +96,7 @@ export const bioData: BioData = {
     { name: 'Smart Contract Development', level: 'advanced', category: 'Blockchain & DeFi' },
     { name: 'Tokenomics', level: 'advanced', category: 'Blockchain & DeFi' },
     { name: 'Rust', level: 'intermediate', category: 'Blockchain & DeFi' },
-    
+
     // Business & Communication
     { name: 'Technical Writing', level: 'expert', category: 'Business & Communication' },
     { name: 'Strategic Planning', level: 'expert', category: 'Business & Communication' },
@@ -92,4 +106,8 @@ export const bioData: BioData = {
     { name: 'Public Speaking', level: 'intermediate', category: 'Business & Communication' },
     { name: 'Team Leadership', level: 'intermediate', category: 'Business & Communication' },
   ],
-}; 
+};
+
+export const getBio = async (): Promise<BioData> => {
+  return bioData;
+};

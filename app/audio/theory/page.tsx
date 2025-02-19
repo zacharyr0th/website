@@ -1,5 +1,5 @@
-import { type Metadata } from 'next';
-import PageHeader from '@/components/PageHeader';
+import type { Metadata } from 'next';
+import PageHeader from '@/components/layout/PageHeader';
 import AudioPageLayout from '@/audio/components/AudioPageLayout';
 
 export const metadata: Metadata = {
@@ -19,4 +19,4 @@ export default function MusicTheoryPage() {
       </section>
     </AudioPageLayout>
   );
-} 
+}

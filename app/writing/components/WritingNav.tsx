@@ -2,8 +2,9 @@
 
 import React, { memo, useCallback } from 'react';
 import { NavButton } from '../../components/buttons';
-import { CATEGORIES } from '../types';
-import type { ArticleCategory } from '../types';
+import { CATEGORIES } from './articles/types';
+import type { ArticleCategory } from './articles/types';
+import { cn } from '@/lib';
 
 interface WritingNavProps {
   selectedCategory: ArticleCategory | null;
@@ -24,7 +25,13 @@ export const WritingNav = memo<WritingNavProps>(({ selectedCategory, onCategoryS
         active={selectedCategory === null}
         onClick={handleCategoryChange(null)}
         size="sm"
-        className="text-base"
+        className={cn(
+          'text-base font-medium',
+          'transition-all duration-200',
+          selectedCategory === null
+            ? 'text-accent bg-accent/10 shadow-[inset_0_1px_2px_rgba(0,0,0,0.15)]'
+            : 'text-zinc-400 hover:text-white'
+        )}
       >
         All
       </NavButton>
@@ -34,7 +41,13 @@ export const WritingNav = memo<WritingNavProps>(({ selectedCategory, onCategoryS
           active={selectedCategory === category}
           onClick={handleCategoryChange(category)}
           size="sm"
-          className="text-base"
+          className={cn(
+            'text-base font-medium',
+            'transition-all duration-200',
+            selectedCategory === category
+              ? 'text-accent bg-accent/10 shadow-[inset_0_1px_2px_rgba(0,0,0,0.15)]'
+              : 'text-zinc-400 hover:text-white'
+          )}
         >
           {category.charAt(0).toUpperCase() + category.slice(1)}
         </NavButton>

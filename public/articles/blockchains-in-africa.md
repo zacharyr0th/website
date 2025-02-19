@@ -47,7 +47,7 @@ China recently banned the holding and transacting of crypto in preparation for i
 
 ![Graph showing China's debt to African countries](/images/ba-3.webp)
 
-Time plays a critical role in China's geopolitical strategies, and over the past few decades, Chinese firms have invested in infrastructure projects across Africa. Resource-rich but economically developing nations struggle to repay these debts, but these countries don't have the resources or financial infrastructure to operate independently. Blockchains offer a compelling alternative by enabling businesses to operate globally without requiring permission and allowing individuals to securely manage their assets, reducing reliance on domestic currencies and untested local banking systems.
+Time plays an important role in China's geopolitical strategies, and over the past few decades, Chinese firms have invested in infrastructure projects across Africa. Resource-rich but economically developing nations struggle to repay these debts, but these countries don't have the resources or financial infrastructure to operate independently. Blockchains offer a compelling alternative by enabling businesses to operate globally without requiring permission and allowing individuals to securely manage their assets, reducing reliance on domestic currencies and untested local banking systems.
 
 # Adoption Issues
 

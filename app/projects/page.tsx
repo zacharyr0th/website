@@ -1,31 +1,39 @@
 import React, { Suspense } from 'react';
-import { PROJECTS } from './projects';
-import { LoadingState } from '../lib/Loading';
-import { ProjectsPageClient } from './ProjectsPageClient';
-import { containerVariants } from '../lib/animations';
-import PageHeader from '../components/PageHeader';
+import { PROJECTS } from './data/projects';
+import { LoadingState } from '@/components/misc/Loading';
+import ProjectsPageClient from './ProjectsPageClient';
+import { containerVariants } from '@/lib/ui/animations';
+import PageContainer from '@/components/layout/PageContainer';
+import PageHeader from '@/components/layout/PageHeader';
+import type { Metadata } from 'next';
+import { SECTION_METADATA } from '@/lib/config/metadata';
+
+export const metadata: Metadata = {
+  title: SECTION_METADATA.projects.title,
+  description: SECTION_METADATA.projects.description,
+};
+
+export const dynamic = 'force-static';
+export const revalidate = 3600; // Revalidate every hour
 
 export default function ProjectsPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-surface/30">
-      <main className="container-responsive py-16 sm:py-36">
-        <div className="mx-auto space-y-6" style={{ maxWidth: 'var(--article-width)' }}>
-          <PageHeader title="Projects" />
-
-          <Suspense
-            fallback={
-              <LoadingState
-                label="Loading projects"
-                height="h-[600px]"
-                barCount={4}
-                className="max-w-3xl mx-auto"
-              />
-            }
-          >
-            <ProjectsPageClient initialProjects={PROJECTS} containerVariants={containerVariants} />
-          </Suspense>
-        </div>
-      </main>
-    </div>
+    <PageContainer className="space-y-8 sm:space-y-12">
+      <Suspense fallback={<LoadingState label="Loading title" height="h-12" barCount={1} />}>
+        <PageHeader title="Projects" />
+      </Suspense>
+      <Suspense
+        fallback={
+          <LoadingState
+            label="Loading projects"
+            height="h-[600px]"
+            barCount={4}
+            className="max-w-3xl mx-auto"
+          />
+        }
+      >
+        <ProjectsPageClient initialProjects={PROJECTS} containerVariants={containerVariants} />
+      </Suspense>
+    </PageContainer>
   );
 }

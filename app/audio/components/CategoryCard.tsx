@@ -48,14 +48,17 @@ StatusBadge.displayName = 'StatusBadge';
 
 // Extract CategoryTitle component with optimized animations
 const CategoryTitle = memo<{ title: string }>(({ title }) => {
-  const titleAnimation = useMemo(() => ({
-    initial: { opacity: 0, y: 10 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.3 },
-  }), []);
+  const titleAnimation = useMemo(
+    () => ({
+      initial: { opacity: 0, y: 10 },
+      animate: { opacity: 1, y: 0 },
+      transition: { duration: 0.3 },
+    }),
+    []
+  );
 
   return (
-    <motion.h2 
+    <motion.h2
       {...titleAnimation}
       className="text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[var(--color-text-primary)] to-[var(--color-text-primary)] group-hover:from-[var(--color-primary)] group-hover:to-accent transition-all duration-300"
     >
@@ -68,14 +71,17 @@ CategoryTitle.displayName = 'CategoryTitle';
 
 // Extract CategoryDescription component with optimized animations
 const CategoryDescription = memo<{ description: string }>(({ description }) => {
-  const descriptionAnimation = useMemo(() => ({
-    initial: { opacity: 0, y: 5 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.3, delay: 0.1 },
-  }), []);
+  const descriptionAnimation = useMemo(
+    () => ({
+      initial: { opacity: 0, y: 5 },
+      animate: { opacity: 1, y: 0 },
+      transition: { duration: 0.3, delay: 0.1 },
+    }),
+    []
+  );
 
   return (
-    <motion.p 
+    <motion.p
       {...descriptionAnimation}
       className="text-sm text-[var(--color-text-secondary)] mb-4 flex-grow"
     >
@@ -88,14 +94,17 @@ CategoryDescription.displayName = 'CategoryDescription';
 
 // Extract ExploreLink component with optimized animations
 const ExploreLink = memo(() => {
-  const linkAnimation = useMemo(() => ({
-    initial: { opacity: 0, x: -10 },
-    animate: { opacity: 1, x: 0 },
-    transition: { duration: 0.3, delay: 0.2 },
-  }), []);
+  const linkAnimation = useMemo(
+    () => ({
+      initial: { opacity: 0, x: -10 },
+      animate: { opacity: 1, x: 0 },
+      transition: { duration: 0.3, delay: 0.2 },
+    }),
+    []
+  );
 
   return (
-    <motion.div 
+    <motion.div
       {...linkAnimation}
       className="flex items-center text-sm text-[var(--color-text-secondary)] group-hover:text-accent transition-colors duration-300"
     >
@@ -177,11 +186,7 @@ const CategoryContent = memo<{ category: Category; index: number }>(({ category,
           aria-hidden="true"
           style={{ willChange: 'transform' }}
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M9 5l7 7-7 7"
-          />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
         </motion.svg>
       </motion.div>
     </div>
@@ -211,4 +216,4 @@ const CategoryCard = memo<CategoryCardProps>(({ category, index }) => {
 
 CategoryCard.displayName = 'CategoryCard';
 
-export default CategoryCard; 
+export default CategoryCard;

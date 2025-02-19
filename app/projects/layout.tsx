@@ -1,11 +1,5 @@
-import React from 'react';
+import { type PropsWithChildren } from 'react';
 
-interface ProjectsLayoutProps {
-  children: React.ReactNode;
-}
-
-export default function ProjectsLayout({ children }: ProjectsLayoutProps) {
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-surface/30">{children}</div>
-  );
+export default function ProjectsLayout({ children }: PropsWithChildren) {
+  return <section className="w-full max-w-5xl mx-auto px-4 py-8">{children}</section>;
 }

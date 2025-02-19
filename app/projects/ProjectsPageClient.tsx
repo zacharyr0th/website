@@ -1,26 +1,32 @@
 'use client';
 
-import React, { useState, useMemo, useEffect, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import type { ProjectCategory, BaseProject } from './projects';
-import ProjectCard from './ProjectCard';
-import ProjectNav from './ProjectNav';
-import { itemVariants, containerVariants } from '../lib/animations';
+import type { ProjectCategory, BaseProject } from './types/types';
+import ProjectCard from './components/ProjectCard';
+import ProjectNav from './components/ProjectNav';
 
 type Category = 'all' | ProjectCategory;
-
 interface ProjectsPageClientProps {
   readonly initialProjects: ReadonlyArray<BaseProject>;
-  readonly containerVariants: typeof containerVariants;
+  readonly containerVariants: typeof import('@/lib/ui/animations').containerVariants;
 }
 
-const useKeyboardNavigation = (
-  focusedIndex: number,
-  setFocusedIndex: (index: number) => void,
-  projectsLength: number
-) => {
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
+export default function ProjectsPageClient({
+  initialProjects,
+  containerVariants,
+}: ProjectsPageClientProps) {
+  const [category, setCategory] = useState<Category>('all');
+  const [focusedIndex, setFocusedIndex] = useState(-1);
+
+  const filteredProjects = useMemo(() => {
+    return category === 'all'
+      ? initialProjects
+      : initialProjects.filter((project) => project.categories.includes(category));
+  }, [category, initialProjects]);
+
+  const handleKeyboardNavigation = useCallback(
+    (e: KeyboardEvent) => {
       if (
         e.key === 'ArrowUp' ||
         e.key === 'ArrowDown' ||
@@ -34,67 +40,56 @@ const useKeyboardNavigation = (
 
         switch (e.key) {
           case 'ArrowUp':
-            newIndex = focusedIndex - cols;
+            newIndex = Math.max(focusedIndex - cols, 0);
             break;
           case 'ArrowDown':
-            newIndex = focusedIndex + cols;
+            newIndex = Math.min(focusedIndex + cols, filteredProjects.length - 1);
             break;
           case 'ArrowLeft':
-            newIndex = focusedIndex - 1;
+            newIndex = Math.max(focusedIndex - 1, 0);
             break;
           case 'ArrowRight':
-            newIndex = focusedIndex + 1;
+            newIndex = Math.min(focusedIndex + 1, filteredProjects.length - 1);
             break;
         }
 
-        if (newIndex >= 0 && newIndex < projectsLength) {
-          setFocusedIndex(newIndex);
-        }
+        setFocusedIndex(newIndex);
       }
-    };
+    },
+    [focusedIndex, filteredProjects.length]
+  );
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [focusedIndex, projectsLength, setFocusedIndex]);
-};
-
-export function ProjectsPageClient({ initialProjects, containerVariants }: ProjectsPageClientProps) {
-  const [selectedCategory, setSelectedCategory] = useState<Category>('all');
-  const [focusedIndex, setFocusedIndex] = useState(0);
-
-  const filteredProjects = useMemo(() => {
-    if (selectedCategory === 'all') return initialProjects;
-    return initialProjects.filter((project) =>
-      project.categories.includes(selectedCategory as ProjectCategory)
-    );
-  }, [selectedCategory, initialProjects]);
-
-  const handleCategoryChange = useCallback((category: Category) => {
-    window.scrollTo(0, 0);
-    setFocusedIndex(0);
-    setSelectedCategory(category);
-  }, []);
-
-  useKeyboardNavigation(focusedIndex, setFocusedIndex, filteredProjects.length);
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyboardNavigation);
+    return () => window.removeEventListener('keydown', handleKeyboardNavigation);
+  }, [handleKeyboardNavigation]);
 
   return (
-    <motion.div
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants}
-      className="space-y-6"
-    >
-      <motion.div variants={itemVariants}>
-        <ProjectNav selectedCategory={selectedCategory} onCategoryChange={handleCategoryChange} />
-      </motion.div>
-
-      <motion.div variants={containerVariants} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="space-y-8">
+      <ProjectNav
+        selectedCategory={category}
+        onCategoryChange={setCategory}
+        className="sticky top-4 z-10"
+      />
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
+      >
         {filteredProjects.map((project, index) => (
-          <motion.div key={project.id} variants={itemVariants}>
-            <ProjectCard project={project} isFocused={index === focusedIndex} />
-          </motion.div>
+          <ProjectCard key={project.id} project={project} isFocused={index === focusedIndex} />
         ))}
+        {filteredProjects.length === 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="col-span-full text-center py-12"
+          >
+            <p className="text-zinc-400 text-lg">No projects found in this category.</p>
+          </motion.div>
+        )}
       </motion.div>
-    </motion.div>
+    </div>
   );
 }

@@ -12,7 +12,7 @@ export function Section({ title, children, className }: SectionProps) {
       className={`${title ? 'py-6' : 'py-2'} ${className || ''}`}
     >
       {title && (
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: '-100px' }}

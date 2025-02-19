@@ -7,11 +7,11 @@ import { motion, useInView } from 'framer-motion';
 import BackgroundSVG from './backgrounds/HeroBackground';
 import { ActionButton } from '../buttons';
 import { heroContent } from './constants';
-import { pageTransition, sectionTransition } from '../../lib/animations';
+import { pageTransition, sectionTransition } from '@/lib/ui/animations';
 
 const ChainLogo = memo<{ logo: string }>(({ logo }) => (
-  <motion.div 
-    className="chain-logo w-12 h-12 rounded-full bg-black/40 border border-white/10 p-0.5 backdrop-blur-sm hover:bg-black/60 transition-all duration-300 hover:scale-105 shadow-lg" 
+  <motion.div
+    className="chain-logo w-12 h-12 rounded-full bg-black/40 border border-white/10 p-0.5 backdrop-blur-sm hover:bg-black/60 transition-all duration-300 hover:scale-105 shadow-lg"
     {...sectionTransition}
   >
     <Image
@@ -97,8 +97,11 @@ const StickyHeader = memo(() => {
     };
   }, []);
 
-  const handleOpenModal = useCallback(() => {
-    window.dispatchEvent(new CustomEvent('openConnectModal'));
+  const handleOpenModal = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const event = new CustomEvent('openConnectModal', { bubbles: true, cancelable: true });
+    window.dispatchEvent(event);
   }, []);
 
   if (!mounted) {
@@ -159,9 +162,7 @@ const MainContent = memo(() => {
   );
 
   return (
-    <motion.div
-      className="min-h-screen lg:bg-transparent bg-background flex flex-col justify-center"
-    >
+    <motion.div className="min-h-screen lg:bg-transparent bg-background flex flex-col justify-center">
       <div className="px-6 sm:px-12 ml-4 sm:ml-8 lg:ml-16 max-w-screen-2xl mx-auto">
         {heroContent.sections?.map((section) => {
           const showChainLogos = isFirstSection(section.title);
@@ -186,10 +187,7 @@ const HeroContent = memo(() => (
 HeroContent.displayName = 'HeroContent';
 
 const Hero = memo(() => (
-  <motion.section 
-    className="relative min-h-screen overflow-visible" 
-    {...pageTransition}
-  >
+  <motion.section className="relative min-h-screen overflow-visible" {...pageTransition}>
     <div className="hidden lg:block absolute inset-y-0 left-0 w-1/2 z-10 bg-background" />
     <motion.div className="w-full lg:w-1/2 flex flex-col relative z-20" {...sectionTransition}>
       <HeroContent />

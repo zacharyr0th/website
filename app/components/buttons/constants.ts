@@ -40,8 +40,10 @@ export const getButtonClassName = ({
 }: BaseButtonProps): string => {
   const classes = [
     BUTTON_CLASSES.base,
-    BUTTON_CLASSES.size[size],
-    BUTTON_CLASSES.variant[variant],
+    size in BUTTON_CLASSES.size ? BUTTON_CLASSES.size[size as ButtonSize] : BUTTON_CLASSES.size.md,
+    variant in BUTTON_CLASSES.variant
+      ? BUTTON_CLASSES.variant[variant as ButtonVariant]
+      : BUTTON_CLASSES.variant.default,
     disabled && BUTTON_CLASSES.state.disabled,
     isLoading && BUTTON_CLASSES.state.loading,
     className,

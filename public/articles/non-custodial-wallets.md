@@ -37,7 +37,7 @@ The primary risk to self-custody is losing your login information, making your d
 
 IMAGE - WALLET RECOVERY MILLIONS LOST
 
-This is why storing your wallet passwords and mnemonic phrases in secure, recoverable locations is imperative. The best practices are to physically write them down or keep them in encrypted documents on your device—not a cloud-based storage system that can be hacked.
+This is why storing your wallet passwords and mnemonic phrases in secure, recoverable locations is necessary. The best practices are to physically write them down or keep them in encrypted documents on your device—not a cloud-based storage system that can be hacked.
 
 There are estimated to be well over 3 million unrecoverable Bitcoins—about 20% of the current supply, equating to over $200 billion at current prices. This number may be inflated as it could represent long-term holders, but many suspect most of these dormant funds will be lost forever. Only time will tell exactly how many Bitcoins have been lost or forgotten.
 

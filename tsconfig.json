@@ -16,7 +16,7 @@
       "@utils/*": ["./app/utils/*"],
       "@types/*": ["./app/types/*"],
       "@projects/*": ["./app/projects/*"],
-      "@hooks/*": ["./app/hooks/*"],
+      "@hooks/*": ["app/lib/hooks/*"],
       "@constants/*": ["./app/constants/*"]
     },
     // JavaScript Support
@@ -54,7 +54,7 @@
     "skipLibCheck": true,
     // Type Declarations
     "typeRoots": ["./node_modules/@types", "./app/types"],
-    "types": ["node", "react", "react-dom", "jest"],
+    "types": ["node", "react", "react-dom"],
     // Plugins
     "plugins": [
       {

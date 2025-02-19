@@ -3,7 +3,7 @@ import { Hero, Main, Thesis } from './components/home-page';
 
 export const metadata: Metadata = {
   title: 'Home | Zachary Roth',
-  description: 'Personal website and blog of Zachary Roth',
+  description: 'Personal website of Zachary Roth',
 };
 
 export const dynamic = 'force-static';
@@ -15,7 +15,7 @@ export default function HomePage() {
       <Hero />
       <Main />
       <Thesis />
-      <div className="mt-20" /> {/* Spacer above footer */}
+      <div className="mt-20" />
     </main>
   );
 }

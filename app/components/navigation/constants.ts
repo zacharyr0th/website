@@ -11,20 +11,20 @@ export interface NavConfig {
 
 export const navConfig: NavConfig = {
   main: [
-    { 
-      label: 'Projects', 
+    {
+      label: 'Projects',
       href: '/projects',
-      description: 'View my projects and work'
+      description: 'View my projects and work',
     },
-    { 
-      label: 'Writing', 
+    {
+      label: 'Writing',
       href: '/writing',
-      description: 'Read my articles and thoughts'
+      description: 'Read my articles and thoughts',
     },
-    { 
-      label: 'Audio', 
+    {
+      label: 'Audio',
       href: '/audio',
-      description: 'Listen to my audio content'
+      description: 'Listen to my audio content',
     },
   ],
 } as const;

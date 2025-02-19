@@ -82,14 +82,18 @@
       "short_name": "Write",
       "description": "View my latest articles and insights",
       "url": "/writing?source=shortcut",
-      "icons": [{ "src": "/assets/icons/writing-icon.webp", "sizes": "96x96", "type": "image/webp" }]
+      "icons": [
+        { "src": "/assets/icons/writing-icon.webp", "sizes": "96x96", "type": "image/webp" }
+      ]
     },
     {
       "name": "Projects",
       "short_name": "Projects",
       "description": "Explore my software projects",
       "url": "/projects?source=shortcut",
-      "icons": [{ "src": "/assets/icons/projects-icon.webp", "sizes": "96x96", "type": "image/webp" }]
+      "icons": [
+        { "src": "/assets/icons/projects-icon.webp", "sizes": "96x96", "type": "image/webp" }
+      ]
     },
     {
       "name": "Bio",
@@ -103,7 +107,9 @@
       "short_name": "Connect",
       "description": "Get in touch with me",
       "url": "/connect?source=shortcut",
-      "icons": [{ "src": "/assets/icons/connect-icon.webp", "sizes": "96x96", "type": "image/webp" }]
+      "icons": [
+        { "src": "/assets/icons/connect-icon.webp", "sizes": "96x96", "type": "image/webp" }
+      ]
     }
   ],
   "share_target": {

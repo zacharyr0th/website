@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import PageHeader from '@/components/PageHeader';
+import PageHeader from '@/components/layout/PageHeader';
 
 export const metadata: Metadata = {
   title: 'Audio Archive | Zachary Roth',
@@ -18,4 +18,4 @@ export default function AudioArchivePage() {
       </div>
     </div>
   );
-} 
+}

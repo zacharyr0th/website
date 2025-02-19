@@ -13,7 +13,10 @@ export interface NavButtonProps extends BaseButtonProps {
 
 export const NavButton = React.memo(
   React.forwardRef<HTMLButtonElement, NavButtonProps>(
-    ({ active, children, leftIcon, rightIcon, className = '', isLoading = false, ...props }, ref) => {
+    (
+      { active, children, leftIcon, rightIcon, className = '', isLoading = false, ...props },
+      ref
+    ) => {
       const style = useMemo(
         () => ({
           backgroundColor: active ? 'var(--color-surface)' : 'transparent',

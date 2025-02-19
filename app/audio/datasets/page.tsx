@@ -1,9 +1,9 @@
-import type { Metadata } from 'next';
-import PageHeader from '@/components/PageHeader';
+import { type Metadata } from 'next';
+import PageHeader from '@/components/layout/PageHeader';
 
 export const metadata: Metadata = {
   title: 'Audio Datasets | Zachary Roth',
-  description: 'Collection of audio datasets and samples.',
+  description: 'Audio datasets for machine learning and research.',
 };
 
 export default function AudioDatasetsPage() {
@@ -14,10 +14,12 @@ export default function AudioDatasetsPage() {
         <section className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <div className="p-6 rounded-lg bg-surface/50 backdrop-blur">
             <h2 className="text-xl font-semibold mb-4">Coming Soon</h2>
-            <p className="text-muted">Audio datasets and sample collections will be available here.</p>
+            <p className="text-muted">
+              Audio datasets and sample collections will be available here.
+            </p>
           </div>
         </section>
       </div>
     </div>
   );
-} 
+}

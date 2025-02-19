@@ -78,7 +78,7 @@ So, a single private key can unlock infinite public keys.
 
 # Final Thoughts
 
-Before BIP-32 and 44, burdensome tasks and financially insecure practices regarding digital wallets and derivation paths prevented many people who needed to be computer-savvy from participating. Once BIP-32, 39, and 44 were widely implemented, users could access nearly a limitless number of digital assets (tokens and NFTs) from one user-friendly mnemonic device. 
+Before BIP-32 and 44, burdensome tasks and financially insecure practices regarding digital wallets and derivation paths prevented many people who needed to be computer-savvy from participating. Once BIP-32, 39, and 44 were widely implemented, users could access nearly a limitless number of digital assets (tokens and NFTs) from one user-friendly mnemonic device.
 
 Thank you BIP-32, 39, and 44.
 
@@ -86,4 +86,4 @@ Thank you BIP-32, 39, and 44.
 
 [BIP-32 ](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki), [BIP-39 ](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki#Generating_the_mnemonic), [BIP-39 Lists ](https://github.com/bitcoin/bips/blob/master/bip-0039/bip-0039-wordlists.md), [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki)
 
-Cover Image Source: [Link](https://entropy-global.com/) 
+Cover Image Source: [Link](https://entropy-global.com/)

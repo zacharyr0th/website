@@ -13,7 +13,7 @@ takeaways:
   - 'The future of finance will likely blend traditional banking with DeFi innovations'
 ---
 
-The global financial system relies on intermediaries that process trillions in daily transactions, creating critical yet - until recently - necessary bottlenecks in worldwide capital movement. Technology has evolved, and the need for these institutions is diminishing, but they are still deeply ingrained in our society at an operational, regulatory, and influential level.
+The global financial system relies on intermediaries that process trillions in daily transactions, creating significant bottlenecks in worldwide capital movement. Technology has evolved, and the need for these institutions is diminishing, but they are still deeply ingrained in our society at an operational, regulatory, and influential level.
 
 Some institutions have been deemed too big to fail, while others are allowed to collapse. Although these institutions are often reputable, they face ongoing scrutiny for opaque practices and frequent regulatory violations.
 

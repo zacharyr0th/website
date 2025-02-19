@@ -58,4 +58,4 @@ export default function RootLayoutClient({ children }: RootLayoutClientProps) {
       </div>
     </div>
   );
-} 
+}

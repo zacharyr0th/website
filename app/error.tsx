@@ -35,7 +35,7 @@ export default function Error({
               Try again
             </button>
             <button
-              onClick={() => window.location.href = '/'}
+              onClick={() => (window.location.href = '/')}
               className="px-6 py-3 bg-surface hover:bg-surface/80 text-text-primary rounded-lg transition-colors"
             >
               Go home
@@ -45,4 +45,4 @@ export default function Error({
       </main>
     </div>
   );
-} 
+}
