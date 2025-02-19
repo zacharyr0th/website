@@ -9,7 +9,7 @@ export function Section({ title, children, className }: SectionProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-100px' }}
       transition={{ duration: 0.6 }}
-      className={`${title ? 'py-6' : 'py-2'} ${className || ''}`}
+      className={`${title ? 'py-4 sm:py-6' : ''} ${className || ''}`}
     >
       {title && (
         <motion.h2
@@ -17,12 +17,12 @@ export function Section({ title, children, className }: SectionProps) {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-2xl font-bold text-text-primary mb-4"
+          className="text-xl sm:text-2xl font-bold text-text-primary mb-4 sm:mb-8"
         >
           {title}
         </motion.h2>
       )}
-      <div className="space-y-3">{children}</div>
+      <div className="space-y-4 sm:space-y-6">{children}</div>
     </motion.section>
   );
 }

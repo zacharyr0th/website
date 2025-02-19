@@ -9,7 +9,7 @@ export function About({ data }: AboutProps) {
   const paragraphs = data.intro.split('\n\n').map((p) => p.trim());
 
   return (
-    <div className="text-lg text-text-secondary leading-relaxed -mt-1 space-y-4">
+    <div className="prose prose-invert prose-xl max-w-none text-text-secondary leading-relaxed space-y-4">
       {paragraphs.map((paragraph, index) => (
         <p key={index}>{paragraph}</p>
       ))}

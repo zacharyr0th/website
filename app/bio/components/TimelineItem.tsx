@@ -23,22 +23,20 @@ export function TimelineItem({
     : '';
 
   return (
-    <div className={`flex flex-col gap-3 relative pl-6 ${index > 0 ? 'mt-3' : ''}`}>
-      <div className="absolute left-0 top-[0.6rem] w-1.5 h-1.5 bg-accent rounded-full" />
-
+    <div className={`flex flex-col gap-1.5 ${index > 0 ? 'mt-1 sm:mt-2' : ''}`}>
       <div>
-        <h3 className="text-2xl font-semibold text-text-primary">{title}</h3>
+        <h3 className="text-xl sm:text-2xl font-semibold text-text-primary">{title}</h3>
         {company && (
-          <div className="text-xl" dangerouslySetInnerHTML={{ __html: sanitizedCompanyHtml }} />
+          <div className="text-lg sm:text-xl" dangerouslySetInnerHTML={{ __html: sanitizedCompanyHtml }} />
         )}
-        <div className="flex items-center gap-4 mt-2">
-          <time className="font-medium text-text-tertiary text-base">{date}</time>
+        <div className="flex items-center gap-2 mt-0.5 sm:mt-1">
+          <time className="font-medium text-text-tertiary text-sm sm:text-base">{date}</time>
           <div className="h-px flex-1 bg-accent/10" />
         </div>
       </div>
 
-      <div className="space-y-3">
-        <ul className="space-y-2 text-text-secondary text-lg">
+      <div className="space-y-1.5">
+        <ul className="space-y-1 text-text-secondary text-base sm:text-lg">
           {description.map((point, i) => (
             <li key={i} className="flex gap-2 items-baseline">
               <span className="text-accent/60">•</span>
@@ -48,11 +46,11 @@ export function TimelineItem({
         </ul>
 
         {displayHighlights && displayHighlights.length > 0 && (
-          <div className="mt-3 pt-3 border-t border-accent/10">
-            <h4 className="text-base font-medium text-text-tertiary mb-2">{highlightsTitle}</h4>
-            <ul className="space-y-2">
+          <div className="mt-1.5 pt-1.5 border-t border-accent/10">
+            <h4 className="text-sm sm:text-base font-medium text-text-tertiary mb-1">{highlightsTitle}</h4>
+            <ul className="space-y-1">
               {displayHighlights.map((highlight, i) => (
-                <li key={i} className="flex gap-2 items-baseline text-lg text-text-secondary">
+                <li key={i} className="flex gap-2 items-baseline text-base sm:text-lg text-text-secondary">
                   <span className="text-accent/60">→</span>
                   <span>{highlight}</span>
                 </li>

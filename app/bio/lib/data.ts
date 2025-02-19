@@ -81,6 +81,7 @@ export const bioData: BioData = {
     { name: 'Next.js', level: 'advanced', category: 'Programming & Development' },
     { name: 'Tailwind CSS', level: 'advanced', category: 'Programming & Development' },
     { name: 'Git', level: 'advanced', category: 'Programming & Development' },
+    { name: 'S3', level: 'advanced', category: 'Programming & Development' },
     { name: 'C', level: 'intermediate', category: 'Programming & Development' },
     { name: 'SCAMP', level: 'intermediate', category: 'Programming & Development' },
 

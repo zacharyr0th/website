@@ -14,11 +14,11 @@ export function Hero({ data }: HeroProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="space-y-8 pt-24 md:pt-16"
+      className="space-y-6 sm:space-y-8 pt-12 sm:pt-16 max-w-4xl mx-auto"
     >
-      <div className="flex flex-col md:flex-row gap-4 items-center">
+      <div className="flex flex-col md:flex-row gap-6 sm:gap-8 md:gap-12 items-center">
         <motion.div
-          className="relative w-24 md:w-28 aspect-square rounded-full overflow-hidden ring-2 ring-zinc-800/50"
+          className="relative w-28 sm:w-32 md:w-40 aspect-square rounded-full overflow-hidden ring-4 ring-zinc-700/50 shadow-xl"
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.2 }}
         >
@@ -27,17 +27,17 @@ export function Hero({ data }: HeroProps) {
             alt="Profile picture of Zachary Roth"
             fill
             priority
-            sizes="(max-width: 768px) 96px, 112px"
-            className="object-cover"
+            sizes="(max-width: 640px) 112px, (max-width: 768px) 128px, 160px"
+            className="object-cover hover:brightness-110 transition-all duration-300"
           />
         </motion.div>
 
-        <div className="flex-1 text-center md:text-left space-y-1">
+        <div className="flex-1 text-center md:text-left space-y-3 sm:space-y-4 py-2 sm:py-4">
           <motion.h1
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-text-primary tracking-tight mb-0"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary tracking-tight mb-0 bg-gradient-to-r from-white to-zinc-300 bg-clip-text text-transparent"
           >
             {data.name}
           </motion.h1>
@@ -46,7 +46,7 @@ export function Hero({ data }: HeroProps) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-lg sm:text-xl md:text-2xl text-text-secondary/90 font-light tracking-wide -mt-1"
+            className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-text-secondary/90 font-light tracking-wide"
           >
             {data.title}
           </motion.p>
@@ -55,7 +55,7 @@ export function Hero({ data }: HeroProps) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="flex gap-3 justify-center md:justify-start pt-1"
+            className="flex gap-4 sm:gap-6 justify-center md:justify-start pt-2 sm:pt-4"
           >
             {data.socialLinks.map(({ icon: Icon, url, label }) => (
               <motion.a
@@ -63,7 +63,7 @@ export function Hero({ data }: HeroProps) {
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xl text-zinc-400 hover:text-zinc-200 transition-all duration-300"
+                className="text-2xl text-zinc-400 hover:text-white transition-all duration-300 hover:scale-110"
                 aria-label={label}
                 whileHover={{ scale: 1.1, y: -2 }}
                 transition={{ duration: 0.2 }}

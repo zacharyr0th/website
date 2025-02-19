@@ -10,7 +10,7 @@ interface ExperienceProps {
 export function Experience({ data }: ExperienceProps) {
   return (
     <Section>
-      <div className="space-y-4">
+      <div className="prose prose-invert prose-lg max-w-none space-y-2">
         {data.map((experience, index) => (
           <TimelineItem
             key={`${experience.company}-${experience.date}`}

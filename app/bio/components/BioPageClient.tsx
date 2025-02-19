@@ -18,14 +18,14 @@ export default function BioPageClient({ containerVariants }: BioPageClientProps)
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="space-y-6"
+      className="space-y-2 sm:space-y-4"
     >
       <Hero data={bioData.basics} />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.6 }}
-        className="flex justify-start -mt-4"
+        className="flex justify-start py-4 sm:py-6"
       >
         <Link
           href="/bio/full"
@@ -45,10 +45,10 @@ export default function BioPageClient({ containerVariants }: BioPageClientProps)
           </motion.svg>
         </Link>
       </motion.div>
-      <div className="-mt-2">
+      <div>
         <Experience data={bioData.experience} />
       </div>
-      <div className="-mt-2">
+      <div>
         <Skills data={bioData.skills} />
       </div>
     </motion.div>
