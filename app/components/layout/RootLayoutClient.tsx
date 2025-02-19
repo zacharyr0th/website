@@ -1,8 +1,6 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import Script from 'next/script';
-import { Analytics } from '@vercel/analytics/react';
 import ConditionalFooter from '../Footer';
 import KeyboardShortcuts from '../KeyboardShortcuts';
 import GlobalConnectModal from '../misc/GlobalConnectModal';
@@ -17,7 +15,7 @@ export default function RootLayoutClient({ children }: RootLayoutClientProps) {
   return (
     <>
       <ErrorBoundary>
-        <Navigation />
+        <Navigation showHomeButton={true} />
         <main>{children}</main>
         <ConditionalFooter />
         <KeyboardShortcuts />

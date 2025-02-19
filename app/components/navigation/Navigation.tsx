@@ -20,7 +20,7 @@ const HomeButton = memo(({ active }: { active: boolean }) => (
     <Link href="/" style={{ textDecoration: 'none' }} aria-label="Go to home page">
       <NavButton active={active} className="w-full h-full flex items-center justify-center p-0">
         <span
-          className="uppercase text-2xl transform-gpu transition-opacity duration-300"
+          className="uppercase text-3xl transform-gpu transition-opacity duration-300"
           aria-hidden="true"
         >
           z
@@ -61,7 +61,7 @@ const NavContent = memo(({ pathname, showHomeButton }: NavContentProps) => {
   const isHome = pathname === '/';
 
   return (
-    <div className="flex w-screen px-8 max-sm:px-4 items-center sm:justify-between max-sm:justify-center">
+    <div className="flex w-full max-w-8xl mx-auto px-10 max-sm:px-4 items-center sm:justify-between max-sm:justify-center">
       <div className="hidden sm:block">
         {showHomeButton && !isHome && <HomeButton active={false} />}
       </div>
