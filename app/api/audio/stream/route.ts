@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3';
 import type { GetObjectCommandInput } from '@aws-sdk/client-s3';
-import { createLogger } from '@/lib/core';
+import { createLogger, LogCategory } from '@/lib/core';
 import {
   validateRequest,
   withSecureMemory,
@@ -14,7 +14,7 @@ import {
 import { streamRequestSchema } from '@/lib/api/schemas';
 import { z } from 'zod';
 
-const logger = createLogger('api:audio:stream');
+const logger = createLogger('api:audio:stream', { category: LogCategory.API });
 
 // Validate environment variables
 const validateEnvironment = () => {
@@ -72,7 +72,7 @@ export async function GET(request: Request) {
       try {
         const commandInput: GetObjectCommandInput = {
           Bucket: env.STORAGE_BUCKET_NAME,
-          Key: key,
+          Key: secureKey,
         };
 
         if (range) {
@@ -110,7 +110,6 @@ export async function GET(request: Request) {
 
         requestLogger.info('Stream started', {
           metadata: {
-            secureKey,
             contentType: ContentType,
             contentLength: ContentLength,
           },
@@ -122,10 +121,8 @@ export async function GET(request: Request) {
         });
       } catch (error) {
         requestLogger.error('Failed to stream audio', {
-          error: error as Error,
-          metadata: {
-            secureKey,
-          },
+          error: new Error('Stream error'),
+          context: { requestId },
         });
 
         return createErrorResponse(ErrorType.STORAGE_ERROR, 500, 'Failed to stream audio file');
@@ -133,7 +130,11 @@ export async function GET(request: Request) {
     });
   } catch (error) {
     requestLogger.error('Unexpected error', {
-      error: error as Error,
+      error: new Error('Internal server error'),
+      context: {
+        requestId,
+        category: LogCategory.API,
+      },
     });
 
     return createErrorResponse(ErrorType.INTERNAL_ERROR, 500, 'Internal server error');

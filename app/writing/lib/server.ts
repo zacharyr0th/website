@@ -96,7 +96,7 @@ export async function readArticlesFromFilesystem(options: {
 
     return result;
   } catch (error) {
-    console.error('Error reading articles from filesystem:', error);
+    console.error('Error reading articles from filesystem:', new Error('File read error'));
     return [];
   }
 }

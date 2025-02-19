@@ -86,15 +86,15 @@ const getMediaErrorType = (error: MediaError): string => {
 };
 
 // Replace console.error with logger
-const handleSignedUrlError = (error: unknown) => {
+const handleSignedUrlError = () => {
   logger.error('Failed to get audio URL', {
-    error: error as Error,
+    error: new Error('Audio URL error'),
     context: { component: 'AudioPlayer' },
   });
 };
 
 // Replace handleAudioError with more specific error handling
-const handleAudioError = (errorDetails: unknown, isTrackChange = false) => {
+const handleAudioError = (isTrackChange = false) => {
   // If it's a track change, only log as debug unless there's a real error
   if (isTrackChange) {
     logger.debug('Audio state change', {
@@ -105,7 +105,7 @@ const handleAudioError = (errorDetails: unknown, isTrackChange = false) => {
 
   // Only log as error if it's a real playback error
   logger.error('Audio element error', {
-    error: new Error(JSON.stringify(errorDetails)),
+    error: new Error('Playback error'),
     context: { component: 'AudioPlayer' },
   });
 };
@@ -113,22 +113,22 @@ const handleAudioError = (errorDetails: unknown, isTrackChange = false) => {
 // Replace console.log with logger.debug
 const handleAudioLoaded = (track: Track) => {
   logger.debug('Audio loaded successfully', {
-    context: { track: track.title },
+    context: { trackId: track.id },
   });
 };
 
 // Replace console.error with logger
-const handleLoadError = (error: unknown, track: Track) => {
+const handleLoadError = (track: Track) => {
   logger.error('Failed to load audio', {
-    error: error as Error,
-    context: { track: track.title },
+    error: new Error('Load error'),
+    context: { trackId: track.id },
   });
 };
 
 // Replace console.log with logger.debug
 const handleNewAudioElement = (track: Track) => {
   logger.debug('Creating new audio element', {
-    context: { track: track.title },
+    context: { trackId: track.id },
   });
 };
 
@@ -146,30 +146,30 @@ const handlePlaybackResume = () => {
 };
 
 // Replace playback logging
-const handlePlaybackError = (error: unknown) => {
+const handlePlaybackError = () => {
   logger.error('Playback error', {
-    error: error as Error,
+    error: new Error('Playback failed'),
   });
 };
 
 // Replace track change logging
 const handleTrackChange = (track: Track) => {
   logger.info('Now playing', {
-    context: { track: track.title },
+    context: { trackId: track.id },
   });
 };
 
 // Replace preload logging
 const handlePreloadStart = (track: Track) => {
   logger.debug('Preloading track', {
-    context: { track: track.title },
+    context: { trackId: track.id },
   });
 };
 
-const handlePreloadError = (error: unknown, track: Track) => {
+const handlePreloadError = (track: Track) => {
   logger.warn('Failed to preload track', {
-    error: error as Error,
-    context: { track: track.title },
+    error: new Error('Preload error'),
+    context: { trackId: track.id },
   });
 };
 
@@ -224,7 +224,7 @@ const useAudioPlayer = (initialTrack: Track) => {
         throw new Error('Failed to load audio');
       }
     } catch (error) {
-      handleSignedUrlError(error);
+      handleSignedUrlError();
       throw new Error('Failed to load audio');
     }
 
@@ -244,12 +244,7 @@ const useAudioPlayer = (initialTrack: Track) => {
           (mediaError.code === MediaError.MEDIA_ERR_ABORTED &&
             audio.readyState < audio.HAVE_METADATA);
 
-        const errorDetails = {
-          type: mediaError ? getMediaErrorType(mediaError) : 'Unknown error',
-          track: track.title,
-        };
-
-        handleAudioError(errorDetails, isTrackChange);
+        handleAudioError(isTrackChange);
 
         // Only reject if it's a real error
         if (!isTrackChange) {
@@ -278,7 +273,7 @@ const useAudioPlayer = (initialTrack: Track) => {
       // Wait for either success or failure
       return await Promise.race([loadPromise, errorPromise]);
     } catch (error) {
-      handleLoadError(error, track);
+      handleLoadError(track);
       throw error;
     }
   }, []);
@@ -315,7 +310,7 @@ const useAudioPlayer = (initialTrack: Track) => {
         }
       }
     } catch (error) {
-      handlePlaybackError(error);
+      handlePlaybackError();
       setPlayingState(false);
     } finally {
       setLoadingState(false);
@@ -360,17 +355,17 @@ const useAudioPlayer = (initialTrack: Track) => {
           const nextTrack = getNextTrack(track.id);
           if (nextTrack) {
             handlePreloadStart(nextTrack);
-            void nextTrack.getSignedUrl().catch((error) => {
-              handlePreloadError(error, nextTrack);
+            void nextTrack.getSignedUrl().catch(() => {
+              handlePreloadError(nextTrack);
             });
           }
         } catch (playError) {
-          handlePlaybackError(playError);
+          handlePlaybackError();
           setPlayingState(false);
           throw playError;
         }
       } catch (error) {
-        handlePlaybackError(error);
+        handlePlaybackError();
         setPlayingState(false);
         updateCurrentTrack(track); // Keep the track in the UI even if playback failed
       } finally {
@@ -405,10 +400,12 @@ const useAudioPlayer = (initialTrack: Track) => {
         const nextTrack = getNextTrack(currentTrack.id);
         if (nextTrack) {
           handlePreloadStart(nextTrack);
-          await nextTrack.getSignedUrl();
+          void nextTrack.getSignedUrl().catch(() => {
+            handlePreloadError(nextTrack);
+          });
         }
       } catch (error) {
-        handlePreloadError(error, currentTrack);
+        handlePreloadError(currentTrack);
       }
     };
 
@@ -434,7 +431,9 @@ const useAudioPlayer = (initialTrack: Track) => {
     onEnd: () => {
       if (isRepeatOn && audioRef.current) {
         audioRef.current.currentTime = 0;
-        void audioRef.current.play();
+        void audioRef.current.play().catch(() => {
+          // Handle error silently
+        });
       } else {
         playNextTrack();
       }
@@ -661,7 +660,9 @@ export default memo(function AudioPlayer() {
     const handleEnd = () => {
       if (isRepeatOn) {
         audio.currentTime = 0;
-        void audio.play().catch(console.error);
+        void audio.play().catch(() => {
+          // Handle error silently
+        });
       } else {
         playNextTrack();
       }

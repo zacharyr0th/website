@@ -22,8 +22,17 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
   }
 
   override componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    // Log to error reporting service
-    console.error('Error caught by boundary:', error, errorInfo);
+    // Log the error without sensitive details
+    console.error('Error caught by boundary:', {
+      name: error.name,
+      message: 'An error occurred',
+      component: errorInfo.componentStack ? 'Component error' : 'Unknown component',
+    });
+    
+    this.setState({
+      hasError: true,
+      error: error,
+    });
   }
 
   override render() {

@@ -157,26 +157,24 @@ class AccessControlService {
       // Log access attempt with type-safe spread
       logger.info('Access control check', {
         context: {
-          userId,
           resource,
           action,
-          requiredPermission,
           granted: hasPermission,
-          ...(context as Record<string, unknown>),
+          category: LogCategory.SECURITY,
+          ...context
         },
-        category: LogCategory.SECURITY,
       });
 
       return hasPermission;
     } catch (error) {
       logger.error('Access control error', {
-        error: error instanceof Error ? error : new Error(String(error)),
+        error: new Error('Access control check failed'),
         context: {
-          ...(userId && { userId }),
           resource,
           action,
+          category: LogCategory.SECURITY,
+          ...context
         },
-        category: LogCategory.SECURITY,
       });
       return false;
     }

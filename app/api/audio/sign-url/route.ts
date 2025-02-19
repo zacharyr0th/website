@@ -103,20 +103,10 @@ export async function GET(request: Request) {
 
     const { key, format } = (validationResult.data as z.infer<typeof audioRequestSchema>).query;
 
-    // Create secure reference for the file key
-    const secureKey = createSecureReference(key);
-
     // Use secure memory for processing
     return await withSecureMemory(SECURITY_MEMORY_LIMITS.DEFAULT, async () => {
       // Construct the full S3 key with the correct prefix and extension
-      const s3Key = `audio/${key.replace('piano/', 'piano/piano_')}.${format}`;
-
-      console.log('Generating S3 signed URL:', {
-        bucket: env.STORAGE_BUCKET_NAME,
-        key: s3Key,
-        format,
-        contentType: format ? `audio/${format}` : 'audio/mp4',
-      });
+      const s3Key = createSecureReference(`audio/${key.replace('piano/', 'piano/piano_')}.${format}`);
 
       const command = new GetObjectCommand({
         Bucket: env.STORAGE_BUCKET_NAME,
@@ -125,44 +115,31 @@ export async function GET(request: Request) {
       });
 
       try {
-        const signedUrl = await getSignedUrl(s3Client, command, { expiresIn: 3600 });
-
-        console.log('Generated signed URL:', {
-          url: signedUrl,
-          key: s3Key,
-        });
+        const url = await getSignedUrl(s3Client, command, { expiresIn: 3600 });
 
         return NextResponse.json(
-          {
-            url: signedUrl,
-            key: s3Key,
-            expiresAt: new Date(Date.now() + 3600 * 1000).toISOString(),
-          },
+          { url },
           {
             status: 200,
             headers: {
               'Cache-Control': 'no-cache, no-store, must-revalidate',
-              Pragma: 'no-cache',
-              Expires: '0',
+              'Content-Type': 'application/json',
             },
           }
         );
       } catch (error) {
-        requestLogger.error('Failed to sign URL', {
-          error: error as Error,
-          context: {
-            secureKey,
-            category: LogCategory.API,
-          },
+        requestLogger.error('Failed to generate signed URL', {
+          error: new Error('URL generation failed'),
+          context: { requestId },
         });
-
         return createErrorResponse(ErrorType.STORAGE_ERROR, 500, 'Failed to generate signed URL');
       }
     });
   } catch (error) {
     requestLogger.error('Unexpected error', {
-      error: error as Error,
+      error: new Error('Internal server error'),
       context: {
+        requestId,
         category: LogCategory.API,
       },
     });

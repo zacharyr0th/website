@@ -97,7 +97,11 @@ const getAudioUrl = async (filename: string, format: string | undefined): Promis
     params.set('format', formatExtension);
 
     const requestUrl = `${baseUrl}/api/audio/sign-url?${params.toString()}`;
-    logger.debug('Requesting audio URL', { context: { filename, format } });
+    logger.debug('Requesting audio URL', { 
+      context: { 
+        id: filename 
+      } 
+    });
 
     const response = await fetch(requestUrl);
     if (!response.ok) {
@@ -109,12 +113,16 @@ const getAudioUrl = async (filename: string, format: string | undefined): Promis
       throw new Error('Failed to load audio');
     }
 
-    logger.debug('Audio URL request successful', { context: { filename, format } });
+    logger.debug('Audio URL request successful', { 
+      context: { 
+        id: filename 
+      } 
+    });
     return data.url;
   } catch (error) {
     logger.error('Error getting audio URL', {
-      error: error as Error,
-      context: { filename, format },
+      error: new Error('URL request failed'),
+      context: { id: filename },
     });
     throw new Error('Failed to load audio');
   }
@@ -141,35 +149,28 @@ class AudioError extends Error {
 
 // Unified audio element management
 class AudioManager {
-  private static async getUrlWithRetry(track: Track, format: string, retries = 3): Promise<string> {
+  private static async getUrlWithRetry(track: Track, retries = 3): Promise<string> {
     logger.debug('Starting URL retry process', {
-      context: { track: track.title, format, retries },
+      context: { trackId: track.id, remainingRetries: retries },
     });
 
     for (let i = 0; i < retries; i++) {
       try {
         logger.debug('Attempting to get URL', {
-          context: { track: track.title, attempt: i + 1, totalAttempts: retries },
+          context: { trackId: track.id, attempt: i + 1, totalAttempts: retries },
         });
 
         const url = await track.getSignedUrl();
 
         if (!url) {
-          logger.debug('Empty URL received during track change', {
-            context: { track: track.title, attempt: i + 1 },
-          });
-          throw new Error('Failed to load audio');
-        }
-
-        if (!url.startsWith('http')) {
-          logger.debug('Invalid URL format during track change', {
-            context: { track: track.title, attempt: i + 1 },
+          logger.debug('Empty URL received', {
+            context: { trackId: track.id, attempt: i + 1 },
           });
           throw new Error('Failed to load audio');
         }
 
         logger.debug('URL request successful', {
-          context: { track: track.title, attempt: i + 1 },
+          context: { trackId: track.id, attempt: i + 1 },
         });
         return url;
       } catch (error) {
@@ -178,7 +179,7 @@ class AudioManager {
           logger.warn('URL request attempt failed', {
             error: new Error('Failed to load audio'),
             context: {
-              track: track.title,
+              trackId: track.id,
               attempt: i + 1,
               remainingRetries: retries - i - 1,
             },
@@ -186,7 +187,7 @@ class AudioManager {
         } else {
           logger.debug('URL request attempt failed, retrying', {
             context: {
-              track: track.title,
+              trackId: track.id,
               attempt: i + 1,
               remainingRetries: retries - i - 1,
             },
@@ -196,7 +197,7 @@ class AudioManager {
         if (i < retries - 1) {
           const delay = 1000 * (i + 1);
           logger.debug('Retrying after delay', {
-            context: { track: track.title, delay },
+            context: { trackId: track.id, delay },
           });
           await new Promise((resolve) => setTimeout(resolve, delay));
         }
@@ -206,7 +207,7 @@ class AudioManager {
     // Only log as error if all retries failed
     logger.error('All retry attempts failed', {
       error: new Error('Failed to load audio'),
-      context: { track: track.title },
+      context: { trackId: track.id },
     });
     throw new Error('Failed to load audio');
   }
@@ -214,18 +215,13 @@ class AudioManager {
   static async cleanup(audio: HTMLAudioElement): Promise<void> {
     try {
       if (audio.src) {
-        // Log cleanup as debug since it's a normal operation
-        logger.debug('Cleaning up audio element', {
-          context: { operation: 'cleanup' },
-        });
-
+        logger.debug('Cleaning up audio element');
         audio.pause();
         audio.currentTime = 0;
         audio.src = '';
         audio.removeAttribute('src');
         audio.load();
 
-        // Remove all event listeners
         const events = [
           'canplay',
           'canplaythrough',
@@ -243,10 +239,8 @@ class AudioManager {
         });
       }
     } catch (error) {
-      // Only log as warning if cleanup actually fails
       logger.warn('Error cleaning up audio', {
-        error: error as Error,
-        context: { operation: 'cleanup' },
+        error: new Error('Cleanup failed'),
       });
     }
   }
@@ -263,17 +257,12 @@ class AudioManager {
       }
 
       // Get URL with retry mechanism
-      const url = await this.getUrlWithRetry(track, format);
+      const url = await this.getUrlWithRetry(track);
 
       // Set up error handling before setting src
       const errorPromise = new Promise<never>((_, reject) => {
-        const errorHandler = (e: ErrorEvent) => {
-          const error = new AudioError('LOAD_ERROR', 'Failed to load audio', {
-            event: e,
-            url,
-            format,
-            track: track.title,
-          });
+        const errorHandler = () => {
+          const error = new AudioError('LOAD_ERROR', 'Failed to load audio');
           reject(error);
           audio.removeEventListener('error', errorHandler);
         };
@@ -299,7 +288,7 @@ class AudioManager {
       await AudioManager.cleanup(audio);
       throw error instanceof AudioError
         ? error
-        : new AudioError('AUDIO_ERROR', 'Failed to create audio element', error);
+        : new AudioError('AUDIO_ERROR', 'Failed to create audio element');
     }
   }
 }
