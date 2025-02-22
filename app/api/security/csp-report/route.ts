@@ -10,7 +10,7 @@ export async function POST(request: Request) {
     const contentLength = request.headers.get('content-length');
     if (contentLength && parseInt(contentLength) > MAX_REPORT_SIZE) {
       return security.createErrorResponse(
-        security.ErrorType.BAD_REQUEST_ERROR,
+        security.ErrorType.VALIDATION_ERROR,
         413,
         'Report too large'
       );
@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     const contentType = request.headers.get('content-type');
     if (!contentType || !contentType?.includes('application/csp-report')) {
       return security.createErrorResponse(
-        security.ErrorType.BAD_REQUEST_ERROR,
+        security.ErrorType.VALIDATION_ERROR,
         415,
         'Invalid content type'
       );
@@ -62,7 +62,7 @@ export async function POST(request: Request) {
     return api.createApiResponse(null, {
       status: 204,
       headers: {
-        ...security.getSecurityHeaders(),
+        ...security.getBaseSecurityHeaders(),
         'Content-Security-Policy-Report-Only': cspReportOnly,
       },
     });

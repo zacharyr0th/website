@@ -1,11 +1,31 @@
-export type ProjectCategory = 'crypto' | 'ai' | 'tools' | 'web';
+import { z } from 'zod';
+
+// Constants
+export const PROJECT_CATEGORIES = {
+  CRYPTO: 'crypto',
+  AI: 'ai',
+  TOOLS: 'tools',
+  WEB: 'web',
+} as const;
+
+export const PROJECT_STATUS = {
+  COMPLETED: 'completed',
+  IN_PROGRESS: 'in-progress',
+  PLANNED: 'planned',
+  FUNCTIONAL: 'Functional',
+  WIP: 'WiP',
+} as const;
+
+// Types
+export type ProjectCategory = (typeof PROJECT_CATEGORIES)[keyof typeof PROJECT_CATEGORIES];
+export type ProjectStatus = (typeof PROJECT_STATUS)[keyof typeof PROJECT_STATUS];
 
 export interface BaseProject {
   readonly id: string;
   readonly title: string;
   readonly description: string;
   readonly tags: ReadonlyArray<string>;
-  readonly status: 'completed' | 'in-progress' | 'planned' | 'Functional' | 'WiP';
+  readonly status: ProjectStatus;
   readonly link?: string;
   readonly publishDate?: string;
   readonly githubLink?: string;
@@ -14,115 +34,153 @@ export interface BaseProject {
   readonly categories: ReadonlyArray<ProjectCategory>;
 }
 
-export const PROJECT_CATEGORIES: Readonly<Record<ProjectCategory, string>> = Object.freeze({
-  crypto: 'Crypto',
-  ai: 'AI',
-  tools: 'Tools',
-  web: 'Web',
+// Validation Schema
+export const ProjectSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  description: z.string(),
+  tags: z.array(z.string()),
+  status: z.enum([
+    PROJECT_STATUS.COMPLETED,
+    PROJECT_STATUS.IN_PROGRESS,
+    PROJECT_STATUS.PLANNED,
+    PROJECT_STATUS.FUNCTIONAL,
+    PROJECT_STATUS.WIP,
+  ]),
+  link: z.string().url().optional(),
+  publishDate: z.string().optional(),
+  githubLink: z.string().url().optional(),
+  articleLink: z.string().optional(),
+  demoLink: z.string().url().optional(),
+  categories: z.array(
+    z.enum([
+      PROJECT_CATEGORIES.CRYPTO,
+      PROJECT_CATEGORIES.AI,
+      PROJECT_CATEGORIES.TOOLS,
+      PROJECT_CATEGORIES.WEB,
+    ])
+  ),
 });
 
-export const PROJECTS: ReadonlyArray<BaseProject> = Object.freeze([
+// Category Display Names
+export const CATEGORY_DISPLAY_NAMES: Record<ProjectCategory, string> = {
+  [PROJECT_CATEGORIES.CRYPTO]: 'Crypto',
+  [PROJECT_CATEGORIES.AI]: 'AI',
+  [PROJECT_CATEGORIES.TOOLS]: 'Tools',
+  [PROJECT_CATEGORIES.WEB]: 'Web',
+};
+
+// Projects Data
+export const PROJECTS = Object.freeze([
   {
     id: 'zacharyr0th-com',
     title: 'zacharyr0th.com',
-    description: 'A modern personal website built with Next.js and TypeScript.',
+    description: 'A feature-rich personal website.',
     link: 'https://zacharyr0th.com',
-    tags: ['Next.js', 'TypeScript', 'Tailwind'],
+    tags: ['Next.js', 's3', 'APIs'],
     githubLink: 'https://github.com/zacharyr0th/website',
-    status: 'Functional',
-    categories: ['web'],
+    status: PROJECT_STATUS.FUNCTIONAL,
+    categories: [PROJECT_CATEGORIES.WEB],
   },
   {
     id: 'simple-os',
     title: 'SimpleOS',
-    description: 'An x86 operating system implementation featuring core OS components.',
+    description: 'The basics of an x86 operating system.',
     tags: ['C', 'Assembly', 'Kernels'],
     githubLink: 'https://github.com/zacharyr0th/simple-os',
     demoLink: '',
     articleLink: '/writing/simple-os',
-    status: 'Functional',
-    categories: ['tools'],
+    status: PROJECT_STATUS.FUNCTIONAL,
+    categories: [PROJECT_CATEGORIES.TOOLS],
   },
   {
     id: 'toml-tools',
     title: 'TOML Tools',
-    description: 'Analytics toolkit for parsing and visualizing data from Electric Capital.',
-    tags: ['Python', 'Data Analysis'],
+    description: 'A toolkit for parsing and visualizing TOML data.',
+    tags: ['Python', 'Web Scraping'],
     githubLink: 'https://github.com/zacharyr0th/toml-tools',
     demoLink: '',
-    status: 'Functional',
-    categories: ['crypto', 'tools'],
+    status: PROJECT_STATUS.FUNCTIONAL,
+    categories: [PROJECT_CATEGORIES.CRYPTO, PROJECT_CATEGORIES.TOOLS],
   },
   {
     id: 'portfolio',
     title: 'Portfolio',
-    description: 'A dashboard integrating banks, brokers, CEXes, and blockchains.',
-    tags: ['Next.js', 'Blockchains', 'Plaid'],
+    description: 'A unified financial dashboard and trading terminal.',
+    tags: ['Next.js', 'Plaid', 'DeFi', 'AI'],
     githubLink: 'https://github.com/zacharyr0th/portfolio',
     demoLink: '',
-    status: 'WiP',
-    categories: ['crypto', 'web'],
+    status: PROJECT_STATUS.WIP,
+    categories: [PROJECT_CATEGORIES.CRYPTO, PROJECT_CATEGORIES.WEB],
   },
   {
     id: 'crypto-repos',
     title: 'Crypto Repos',
-    description: 'A directory of over 125,000 crypto projects and resources.',
-    tags: ['Next.js', 'TypeScript', 'Tailwind'],
+    description: 'A directory of over 150,000 crypto projects and resources.',
+    tags: ['Vite', 'Postgres', 'Supabase'],
     githubLink: '',
     demoLink: '',
-    status: 'WiP',
-    categories: ['crypto', 'web'],
+    status: PROJECT_STATUS.WIP,
+    categories: [PROJECT_CATEGORIES.CRYPTO, PROJECT_CATEGORIES.WEB],
   },
   {
     id: 'casino-time',
     title: 'CasinoTime',
-    description: 'Trustless gambling on Aptos, combining randomness with zero-knowledge proofs.',
+    description: 'Trustless gambling.',
     tags: ['Aptos', 'Gaming'],
     githubLink: '',
     demoLink: '',
-    status: 'WiP',
-    categories: ['crypto'],
+    status: PROJECT_STATUS.WIP,
+    categories: [PROJECT_CATEGORIES.CRYPTO],
   },
   {
     id: 'privvy',
     title: 'Privvy',
-    description: 'Privacy-first DEX built on the zk-forward Aleo blockchain.',
-    tags: ['Aleo', 'Zero-knowledge', 'DeFi'],
+    description: 'Privacy-first DEX.',
+    tags: ['Aleo', 'zk', 'DeFi'],
     githubLink: '',
     demoLink: '',
-    status: 'WiP',
-    categories: ['crypto'],
+    status: PROJECT_STATUS.WIP,
+    categories: [PROJECT_CATEGORIES.CRYPTO],
   },
   {
     id: 'music-ide',
     title: 'MusicIDE',
     description: 'AI-powered music development and research environment.',
-    tags: ['Next.js', 'TypeScript', 'Theory'],
+    tags: ['Next.js', 'Music Theory', 'AI'],
     githubLink: '',
     demoLink: '',
     articleLink: '/writing/musicide',
-    status: 'WiP',
-    categories: ['ai', 'tools'],
+    status: PROJECT_STATUS.WIP,
+    categories: [PROJECT_CATEGORIES.AI, PROJECT_CATEGORIES.TOOLS],
   },
-]);
+] as const) satisfies ReadonlyArray<BaseProject>;
 
-// Get the featured projects for the home page (limited to 6)
-export const getFeaturedProjects = (): ReadonlyArray<BaseProject> => {
-  // First get completed and functional projects
-  const completedProjects = PROJECTS.filter(
-    (project) => project.status === 'completed' || project.status === 'Functional'
-  );
+// Utility Functions
+export const getFeaturedProjects = (limit = 6): ReadonlyArray<BaseProject> => {
+  const completedStatuses = new Set<ProjectStatus>([
+    PROJECT_STATUS.COMPLETED,
+    PROJECT_STATUS.FUNCTIONAL,
+  ]);
 
-  // If we have 6 or more completed projects, return first 6
-  if (completedProjects.length >= 6) {
-    return completedProjects.slice(0, 6);
+  const wipStatuses = new Set<ProjectStatus>([PROJECT_STATUS.WIP, PROJECT_STATUS.IN_PROGRESS]);
+
+  const completedProjects = PROJECTS.filter((project) => completedStatuses.has(project.status));
+
+  if (completedProjects.length >= limit) {
+    return completedProjects.slice(0, limit);
   }
 
-  // Otherwise, get additional WiP projects to fill the remaining slots
-  const wipProjects = PROJECTS.filter(
-    (project) => project.status === 'WiP' || project.status === 'in-progress'
+  const remainingSlots = limit - completedProjects.length;
+  const wipProjects = PROJECTS.filter((project) => wipStatuses.has(project.status)).slice(
+    0,
+    remainingSlots
   );
 
-  // Combine completed and WiP projects, taking only enough WiP projects to reach 6 total
-  return [...completedProjects, ...wipProjects.slice(0, 6 - completedProjects.length)];
+  return [...completedProjects, ...wipProjects];
+};
+
+// Type guard
+export const isValidProject = (project: unknown): project is BaseProject => {
+  return ProjectSchema.safeParse(project).success;
 };

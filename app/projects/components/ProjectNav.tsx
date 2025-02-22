@@ -37,7 +37,7 @@ const ProjectNav = memo<ProjectNavProps>(({ selectedCategory, onCategoryChange, 
           onClick={handleCategoryChange('all')}
           size="sm"
           className={cn(
-            'text-base font-medium',
+            'text-base font-mono font-medium',
             'transition-all duration-200',
             selectedCategory === 'all'
               ? 'text-accent bg-accent/10 shadow-[inset_0_1px_2px_rgba(0,0,0,0.15)]'
@@ -53,7 +53,7 @@ const ProjectNav = memo<ProjectNavProps>(({ selectedCategory, onCategoryChange, 
             onClick={handleCategoryChange(key as ProjectCategory)}
             size="sm"
             className={cn(
-              'text-base font-medium',
+              'text-base font-mono font-medium',
               'transition-all duration-200',
               selectedCategory === key
                 ? 'text-accent bg-accent/10 shadow-[inset_0_1px_2px_rgba(0,0,0,0.15)]'

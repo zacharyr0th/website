@@ -5,7 +5,7 @@ interface ProgressBarProps {
   currentTime: number;
   duration: number;
   progressRef: React.RefObject<HTMLDivElement>;
-  onProgressClick: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onProgressClick: (position: number) => void;
   formatTime: (time: number) => string;
 }
 
@@ -93,21 +93,36 @@ HoverIndicator.displayName = 'HoverIndicator';
 
 const ProgressBar = memo<ProgressBarProps>(
   ({ currentTime, duration, progressRef, onProgressClick, formatTime }) => {
-    const progress = useMemo(
-      () => (duration > 0 ? (currentTime / duration) * 100 : 0),
-      [currentTime, duration]
+    const progress = useMemo(() => {
+      if (duration <= 0 || isNaN(duration) || isNaN(currentTime)) return 0;
+      return Math.min(Math.max((currentTime / duration) * 100, 0), 100);
+    }, [currentTime, duration]);
+
+    const formattedCurrentTime = useMemo(
+      () => formatTime(isNaN(currentTime) ? 0 : currentTime),
+      [currentTime, formatTime]
     );
 
-    const formattedCurrentTime = useMemo(() => formatTime(currentTime), [currentTime, formatTime]);
+    const formattedRemainingTime = useMemo(() => {
+      if (isNaN(duration) || isNaN(currentTime)) return formatTime(0);
+      const remaining = Math.max(0, duration - currentTime);
+      return `-${formatTime(remaining)}`;
+    }, [duration, currentTime, formatTime]);
 
-    const formattedDuration = useMemo(() => formatTime(duration), [duration, formatTime]);
+    const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
+      if (!progressRef.current) return;
+
+      const rect = progressRef.current.getBoundingClientRect();
+      const pos = Math.min(Math.max((e.clientX - rect.left) / rect.width, 0), 1);
+      onProgressClick(pos);
+    };
 
     return (
       <div className="space-y-2">
         <motion.div
           ref={progressRef}
           className="h-3 sm:h-2 bg-[#2A2A2A] rounded-full cursor-pointer overflow-hidden group relative hover:h-4 sm:hover:h-3 transition-all duration-300 touch-manipulation"
-          onClick={onProgressClick}
+          onClick={handleProgressClick}
           whileHover={HOVER_ANIMATION}
           style={styles.container}
         >
@@ -115,9 +130,15 @@ const ProgressBar = memo<ProgressBarProps>(
           <HoverIndicator progress={progress} />
         </motion.div>
 
-        <div className="flex justify-between text-xs sm:text-sm text-[var(--color-text-secondary)]">
-          <TimeDisplay time={formattedCurrentTime} className="tabular-nums" />
-          <TimeDisplay time={formattedDuration} className="tabular-nums" />
+        <div className="flex justify-between text-[var(--color-text-secondary)] font-mono">
+          <TimeDisplay
+            time={formattedCurrentTime}
+            className="tabular-nums select-none text-lg sm:text-sm tracking-tight"
+          />
+          <TimeDisplay
+            time={formattedRemainingTime}
+            className="tabular-nums select-none text-lg sm:text-sm tracking-tight"
+          />
         </div>
       </div>
     );

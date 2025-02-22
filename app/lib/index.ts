@@ -1,9 +1,47 @@
-// Re-export commonly used utilities
-export * from './utils';
+/**
+ * Core library exports with optimized bundling and type safety
+ */
 
-// Export all submodules
-export * as api from './api';
-export * as security from './security';
-export * as ui from './ui';
-export * as config from './config';
+// Base utilities with tree-shaking support
+export { cn, get, clone, toKebabCase, formatDate, formatFileSize } from './utils';
+
+// Core functionality
 export * as core from './core';
+export { createLogger, LogCategory, type Logger } from './core/logger';
+
+// API functionality
+export * as api from './api';
+
+// Security functionality
+export * as security from './security';
+
+// Type exports for enhanced type safety
+export type { ClassValue, DeepPartial } from './utils';
+
+export type {
+  ID,
+  DateString,
+  URLString,
+  Primitive,
+  JSONValue,
+  JSONObject,
+  JSONArray,
+  NavItem,
+  NavItems,
+  WritingProject,
+  ApiResponse,
+  PaginatedResponse,
+  AppError,
+  AppConfig,
+  BaseProps,
+  ButtonProps,
+  FormField,
+  RecursivePartial,
+  ValueOf,
+  AsyncReturnType,
+  LogContext,
+} from './core/types';
+
+// Feature modules with lazy loading support
+export const ui = async () => import('./ui');
+export const config = async () => import('./config');

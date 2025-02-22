@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { getArticles } from '@/writing/components/articles/articles';
-import { PROJECTS } from '@/projects/data/projects';
+import { PROJECTS, PROJECT_STATUS } from '@/projects/data/projects';
 
 // Force static generation for better performance
 export const dynamic = 'force-static';
@@ -90,10 +90,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Generate project route entries, excluding work in progress projects
   const projectRoutes = projects
-    .filter((project) => project.status === 'completed' || project.status === 'Functional')
+    .filter((project) => project.status === PROJECT_STATUS.FUNCTIONAL)
     .map((project) => ({
       url: `${baseUrl}/projects/${project.id}`,
-      lastModified: project.publishDate ? new Date(project.publishDate) : new Date(),
+      lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     }));

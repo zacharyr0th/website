@@ -16,8 +16,6 @@ takeaways:
     engine market in the coming years.
 ---
 
-## The AI Gold Rush
-
 If you have an AI idea that you want to get funded, now is your time to try. VCs have been
 pouring billions into AI startups at an accelerating rate for years, and since ChatGPT went
 mainstream in December, the acceleration has been reaching a fever pitch. ChatGPT was the

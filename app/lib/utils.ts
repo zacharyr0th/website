@@ -1,381 +1,222 @@
-import { type ClassValue, clsx } from 'clsx';
+/**
+ * Core utility functions with optimized performance and type safety
+ */
+
+import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
+// Type definitions for enhanced type safety
+type Primitive = string | number | boolean | null | undefined;
+type DeepPartial<T> = T extends Primitive
+  ? T
+  : T extends Array<infer U>
+    ? Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends Map<infer K, infer V>
+        ? Map<DeepPartial<K>, DeepPartial<V>>
+        : T extends ReadonlyMap<infer K, infer V>
+          ? ReadonlyMap<DeepPartial<K>, DeepPartial<V>>
+          : T extends Set<infer U>
+            ? Set<DeepPartial<U>>
+            : T extends ReadonlySet<infer U>
+              ? ReadonlySet<DeepPartial<U>>
+              : T extends object
+                ? { [K in keyof T]?: DeepPartial<T[K]> }
+                : T;
+
 /**
- * Combines class names using clsx and tailwind-merge for optimal class merging
- * @memoized for repeated class combinations
+ * Memoized class name utility for optimal performance
+ * Uses a WeakMap to cache results while allowing garbage collection
  */
-export const cn = (() => {
-  const cache = new Map<string, string>();
-
-  return (...inputs: ClassValue[]): string => {
-    const key = JSON.stringify(inputs);
-    if (cache.has(key)) {
-      return cache.get(key)!;
-    }
-    const result = twMerge(clsx(inputs));
-    cache.set(key, result);
-    return result;
-  };
-})();
+const classNameCache = new WeakMap<ClassValue[], string>();
 
 /**
- * Formats a date string into a human-readable format
- * @throws {Error} If the date is invalid
+ * Enhanced className utility with memoization and type safety
+ * @param inputs - Class names or conditional objects
+ * @returns Merged and deduplicated class string
  */
-export function formatDate(date: string | Date | null | undefined): string {
-  if (!date) {
-    throw new Error('Date is required');
-  }
+export function cn(...inputs: ClassValue[]): string {
+  // Fast path for empty or single inputs
+  if (inputs.length === 0) return '';
+  if (inputs.length === 1) return twMerge(clsx(inputs[0]));
 
-  const dateObj = new Date(date);
-  if (!isValidDate(dateObj)) {
-    throw new Error('Invalid date provided');
-  }
+  // Check cache for existing result
+  const cached = classNameCache.get(inputs);
+  if (cached) return cached;
+
+  // Compute and cache new result
+  const result = twMerge(clsx(inputs));
+  classNameCache.set(inputs, result);
+  return result;
+}
+
+/**
+ * Type-safe object property accessor with path validation and error handling
+ * @param obj - Source object
+ * @param path - Dot notation path
+ * @param defaultValue - Fallback value
+ * @returns Retrieved value or default
+ */
+export function get<T, D = T>(obj: unknown, path: string, defaultValue: D): T | D {
+  if (!path || typeof path !== 'string') return defaultValue;
 
   try {
-    return dateObj.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-  } catch (error) {
-    console.error('Error formatting date:', error);
-    return 'Invalid Date';
-  }
-}
+    // Optimize path splitting
+    const properties = path
+      .split('.')
+      .flatMap((p) => p.split(/[\[\]]/))
+      .filter(Boolean);
 
-/**
- * Debounce function with proper cleanup and type safety
- */
-export function debounce<T extends (...args: unknown[]) => unknown>(
-  func: T,
-  wait: number,
-  options: { leading?: boolean; trailing?: boolean } = {}
-): {
-  (...args: Parameters<T>): void;
-  cancel: () => void;
-} {
-  let timeout: NodeJS.Timeout | undefined;
-  let lastArgs: Parameters<T> | undefined;
+    if (!properties.length) return defaultValue;
 
-  function executedFunction(...args: Parameters<T>) {
-    const later = () => {
-      timeout = undefined;
-      if (options.trailing !== false && lastArgs) {
-        func(...lastArgs);
-        lastArgs = undefined;
-      }
-    };
-
-    if (timeout) {
-      clearTimeout(timeout);
-    }
-
-    if (options.leading && !timeout) {
-      func(...args);
-    } else {
-      lastArgs = args;
-    }
-
-    timeout = setTimeout(later, wait);
-  }
-
-  executedFunction.cancel = () => {
-    if (timeout) {
-      clearTimeout(timeout);
-      timeout = undefined;
-      lastArgs = undefined;
-    }
-  };
-
-  return executedFunction;
-}
-
-/**
- * Throttle function with proper cleanup and type safety
- */
-export function throttle<T extends (...args: unknown[]) => unknown>(
-  func: T,
-  limit: number,
-  options: { leading?: boolean; trailing?: boolean } = {}
-): {
-  (...args: Parameters<T>): void;
-  cancel: () => void;
-} {
-  let timeout: NodeJS.Timeout | undefined;
-  let lastArgs: Parameters<T> | undefined;
-  let lastRan: number;
-
-  function executedFunction(...args: Parameters<T>) {
-    const now = Date.now();
-
-    if (!lastRan && options.leading === false) {
-      lastRan = now;
-    }
-
-    const remaining = limit - (now - (lastRan || 0));
-
-    if (remaining <= 0 || remaining > limit) {
-      if (timeout) {
-        clearTimeout(timeout);
-        timeout = undefined;
-      }
-      lastRan = now;
-      func(...args);
-      lastArgs = undefined;
-    } else if (!timeout && options.trailing !== false) {
-      lastArgs = args;
-      timeout = setTimeout(() => {
-        lastRan = options.leading === false ? 0 : Date.now();
-        timeout = undefined;
-        func(...lastArgs!);
-        lastArgs = undefined;
-      }, remaining);
-    }
-  }
-
-  executedFunction.cancel = () => {
-    if (timeout) {
-      clearTimeout(timeout);
-      timeout = undefined;
-      lastArgs = undefined;
-    }
-  };
-
-  return executedFunction;
-}
-
-// Constants for better performance
-const IS_CLIENT = typeof window !== 'undefined';
-const IS_SERVER = !IS_CLIENT;
-
-export { IS_CLIENT as isClient, IS_SERVER as isServer };
-
-/**
- * Type-safe deep object property accessor
- */
-export function get<T, D = T>(
-  obj: Record<string, unknown> | null | undefined,
-  path: string,
-  defaultValue: D
-): T | D {
-  if (!obj || !path) return defaultValue;
-
-  try {
-    const segments = path.split('.');
-    if (!segments.every((key) => /^\w+$/.test(key))) {
+    // Validate property names for security
+    if (!properties.every((prop) => /^[a-zA-Z0-9_$]+$/.test(prop))) {
+      console.warn('Invalid property name in path:', path);
       return defaultValue;
     }
 
-    let current: unknown = obj;
-    for (const key of segments) {
-      if (current == null || typeof current !== 'object') {
-        return defaultValue;
-      }
-      if (!Object.prototype.hasOwnProperty.call(current, key)) {
-        return defaultValue;
-      }
-      current = Reflect.get(current as object, key);
+    let result: unknown = obj;
+    for (const prop of properties) {
+      if (result == null || typeof result !== 'object') return defaultValue;
+
+      const target = result as Record<string, unknown>;
+      const descriptor = Object.getOwnPropertyDescriptor(target, prop);
+      if (!descriptor) return defaultValue;
+
+      result = descriptor.value;
     }
 
-    return current === undefined || current === null ? defaultValue : (current as T);
-  } catch {
+    return (result as T) ?? defaultValue;
+  } catch (error) {
+    console.warn('Error accessing object path:', error);
     return defaultValue;
   }
 }
 
 /**
- * Optimized string truncation with proper UTF-8 handling
+ * Enhanced deep clone with circular reference handling and type preservation
+ * @param obj - Object to clone
+ * @returns Deep cloned object
  */
-export function truncate(str: string, length: number, ending: string = '...'): string {
-  if (!str || length <= 0) return '';
-  if (str.length <= length) return str;
+export function clone<T>(obj: T): T {
+  if (!obj || typeof obj !== 'object') return obj;
 
-  // Handle UTF-16 surrogate pairs correctly
-  const truncated = str.slice(0, length - ending.length);
-  const lastChar = truncated.charAt(truncated.length - 1);
-  const isHighSurrogate = lastChar.charCodeAt(0) >= 0xd800 && lastChar.charCodeAt(0) <= 0xdbff;
+  const seen = new WeakMap();
 
-  return (isHighSurrogate ? truncated.slice(0, -1) : truncated) + ending;
+  function cloneInternal<T>(item: T): T {
+    if (!item || typeof item !== 'object') return item;
+    if (seen.has(item as object)) return seen.get(item as object) as T;
+
+    if (item instanceof Date) return new Date(item.getTime()) as unknown as T;
+    if (item instanceof RegExp) return new RegExp(item.source, item.flags) as unknown as T;
+    if (item instanceof Map) {
+      const mapClone = new Map();
+      seen.set(item as object, mapClone);
+      (item as Map<unknown, unknown>).forEach((value, key) =>
+        mapClone.set(cloneInternal(key), cloneInternal(value))
+      );
+      return mapClone as unknown as T;
+    }
+    if (item instanceof Set) {
+      const setClone = new Set();
+      seen.set(item as object, setClone);
+      (item as Set<unknown>).forEach((value) => setClone.add(cloneInternal(value)));
+      return setClone as unknown as T;
+    }
+
+    const objClone = Array.isArray(item) ? [] : {};
+    seen.set(item as object, objClone);
+
+    const safeEntries = Object.entries(Object(item))
+      .filter(([key]) => Object.prototype.hasOwnProperty.call(item, key))
+      .map(([key, value]) => [key, cloneInternal(value)]);
+
+    return Object.assign(objClone, Object.fromEntries(safeEntries)) as T;
+  }
+
+  return cloneInternal(obj);
 }
 
-// Cryptographically secure random string generation
-const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
 /**
- * Generates a cryptographically secure random string
+ * Optimized string case converter with caching
+ * @param str - Input string
+ * @returns Kebab case string
  */
-export function randomString(length: number): string {
-  const bytes = new Uint8Array(length);
-  crypto.getRandomValues(bytes);
-  return Array.from(bytes)
-    .map((byte) => CHARS[byte % CHARS.length])
-    .join('');
-}
-
-/**
- * Optimized string capitalization with input validation
- */
-export function capitalize(str: string): string {
+const kebabCache = new Map<string, string>();
+export function toKebabCase(str: string): string {
   if (!str) return '';
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
 
-// Memoized number formatter for better performance
-const numberFormatter = new Intl.NumberFormat('en-US');
+  const cached = kebabCache.get(str);
+  if (cached) return cached;
 
-/**
- * Formats a number with proper error handling
- */
-export function formatNumber(num: number): string {
-  if (!Number.isFinite(num)) {
-    throw new Error('Invalid number provided');
+  const result = str
+    .replace(/([a-z])([A-Z])/g, '$1-$2')
+    .replace(/[\s_]+/g, '-')
+    .toLowerCase();
+
+  if (kebabCache.size > 1000) {
+    // Prevent unbounded cache growth
+    kebabCache.clear();
   }
-  return numberFormatter.format(num);
-}
-
-/**
- * Type-safe empty check
- */
-export function isEmpty(value: unknown): boolean {
-  if (value === null || value === undefined) return true;
-  if (typeof value === 'string') return value.trim().length === 0;
-  if (Array.isArray(value)) return value.length === 0;
-  if (typeof value === 'object') return Object.keys(value).length === 0;
-  return false;
-}
-
-/**
- * Optimized array range generation
- */
-export function range(start: number, end: number): number[] {
-  if (!Number.isInteger(start) || !Number.isInteger(end)) {
-    throw new Error('Range bounds must be integers');
-  }
-  if (start > end) {
-    throw new Error('Start must be less than or equal to end');
-  }
-  return Array.from({ length: end - start + 1 }, (_, i) => start + i);
-}
-
-/**
- * Optimized Fisher-Yates shuffle with proper randomization
- */
-export function shuffle<T>(array: readonly T[]): T[] {
-  if (!array.length) return [];
-
-  const result = [...array];
-  const swap = (arr: T[], pos1: number, pos2: number): void => {
-    const temp = arr.at(pos1);
-    if (temp === undefined) return;
-    const val2 = arr.at(pos2);
-    if (val2 === undefined) return;
-    arr.splice(pos1, 1, val2);
-    arr.splice(pos2, 1, temp);
-  };
-
-  let currentIndex = result.length;
-  while (currentIndex > 1) {
-    currentIndex--;
-    const randomIndex = Math.floor(Math.random() * (currentIndex + 1));
-    swap(result, currentIndex, randomIndex);
-  }
-
+  kebabCache.set(str, result);
   return result;
 }
 
 /**
- * Optimized unique array with type safety
+ * Internationalized date formatter with caching
+ * @param date - Date to format
+ * @param locale - Optional locale string
+ * @returns Formatted date string
  */
-export function unique<T>(array: readonly T[]): T[] {
-  return Array.from(new Set(array));
-}
+const dateFormatters = new Map<string, Intl.DateTimeFormat>();
+export function formatDate(date: Date | string | number, locale: string = 'en-US'): string {
+  try {
+    const formatter =
+      dateFormatters.get(locale) ??
+      dateFormatters
+        .set(
+          locale,
+          new Intl.DateTimeFormat(locale, {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            timeZone: 'UTC',
+          })
+        )
+        .get(locale)!;
 
-/**
- * Type-safe array grouping
- */
-export function groupBy<T extends Record<string, unknown>, K extends keyof T>(
-  array: readonly T[],
-  key: K
-): Map<string, T[]> {
-  return array.reduce((acc, item) => {
-    const groupKey = String(Reflect.get(item, key));
-    const group = acc.get(groupKey) || [];
-    group.push(item);
-    acc.set(groupKey, group);
-    return acc;
-  }, new Map<string, T[]>());
-}
-
-/**
- * Optimized date validation
- */
-export function isValidDate(date: unknown): date is Date {
-  return date instanceof Date && !isNaN(date.getTime());
-}
-
-// Memoized regex patterns for string transformations
-const KEBAB_REGEX = /([a-z])([A-Z])/g;
-const SPACE_REGEX = /[\s_]+/g;
-const CAMEL_REGEX = /(?:^\w|[A-Z]|\b\w)/g;
-
-/**
- * Optimized kebab case conversion
- */
-export function toKebabCase(str: string): string {
-  if (!str) return '';
-  return str.replace(KEBAB_REGEX, '$1-$2').replace(SPACE_REGEX, '-').toLowerCase();
-}
-
-/**
- * Optimized camel case conversion
- */
-export function toCamelCase(str: string): string {
-  if (!str) return '';
-  return str
-    .replace(CAMEL_REGEX, (letter, index) =>
-      index === 0 ? letter.toLowerCase() : letter.toUpperCase()
-    )
-    .replace(SPACE_REGEX, '');
-}
-
-/**
- * Type-safe property check
- */
-export function hasProperty<T extends object>(obj: T, prop: PropertyKey): prop is keyof T {
-  return Object.prototype.hasOwnProperty.call(obj, prop);
-}
-
-/**
- * Optimized deep clone with proper type handling
- */
-export function deepClone<T>(obj: T): T {
-  if (obj === null || typeof obj !== 'object') return obj;
-
-  if (obj instanceof Date) {
-    return new Date(obj.getTime()) as unknown as T;
+    return formatter.format(new Date(date));
+  } catch (error) {
+    console.warn('Error formatting date:', error);
+    return new Date(date).toLocaleDateString();
   }
-
-  if (obj instanceof RegExp) {
-    return new RegExp(obj) as unknown as T;
-  }
-
-  if (Array.isArray(obj)) {
-    return obj.map((item) => deepClone(item)) as unknown as T;
-  }
-
-  if (obj instanceof Set) {
-    return new Set([...obj].map((item) => deepClone(item))) as unknown as T;
-  }
-
-  if (obj instanceof Map) {
-    const clonedEntries = [...obj].map(([k, v]) => {
-      const clonedValue = v !== null && typeof v === 'object' ? deepClone(v) : v;
-      return [k, clonedValue] as [typeof k, typeof clonedValue];
-    });
-    return new Map(clonedEntries) as unknown as T;
-  }
-
-  return Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, deepClone(v)])) as unknown as T;
 }
+
+/**
+ * Enhanced file size formatter with unit conversion and localization
+ * @param bytes - Size in bytes
+ * @param locale - Optional locale string
+ * @returns Formatted size string
+ */
+const sizeFormatter = new Intl.NumberFormat('en-US', {
+  maximumFractionDigits: 1,
+});
+
+export function formatFileSize(bytes: number, locale?: string): string {
+  if (!Number.isFinite(bytes) || bytes < 0) return '0 B';
+
+  const formatter = locale
+    ? new Intl.NumberFormat(locale, { maximumFractionDigits: 1 })
+    : sizeFormatter;
+
+  const units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'] as const;
+  const exponent = Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), units.length - 1);
+  const size = bytes / Math.pow(1024, exponent);
+  const unit = units[exponent as keyof typeof units];
+
+  return `${formatter.format(size)} ${unit}`;
+}
+
+// Export type utilities for better type inference
+export type { ClassValue, DeepPartial };

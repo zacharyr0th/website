@@ -11,8 +11,6 @@ takeaways:
   - 'Self-custody is a fundamental feature of crypto, giving people more control over their finances and sovereignty than ever before. However, it also requires more responsibility than traditional banking, with some unintended consequences.'
 ---
 
-# Self-Custody
-
 Self-custody has been a fundamental feature of crypto since its inception. While it gives people more control over their finances and sovereignty than ever before, it also gives them more responsibility than they're used to - with some unintended consequences.
 
 A massive ramp-up in education or measures to prevent large amounts of scams and lost recovery phrases must be implemented to onboard billions of users to crypto.

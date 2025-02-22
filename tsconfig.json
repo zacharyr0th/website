@@ -6,7 +6,7 @@
     "jsx": "preserve",
     // Modules
     "module": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./app/*"],

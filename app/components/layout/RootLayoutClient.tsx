@@ -1,7 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import ConditionalFooter from '../Footer';
+import Footer from './Footer';
 import KeyboardShortcuts from '../KeyboardShortcuts';
 import GlobalConnectModal from '../misc/GlobalConnectModal';
 import ErrorBoundary from '../ErrorBoundary';
@@ -17,7 +17,7 @@ export default function RootLayoutClient({ children }: RootLayoutClientProps) {
       <ErrorBoundary>
         <Navigation showHomeButton={true} />
         <main>{children}</main>
-        <ConditionalFooter />
+        <Footer />
         <KeyboardShortcuts />
         <GlobalConnectModal />
       </ErrorBoundary>

@@ -55,12 +55,13 @@ export async function GET() {
     // Read and process bio
     const fileResult = await readFileSecure(filePath);
     if (!fileResult.success) {
-      logger.error('Failed to read bio file', { context: { error: fileResult.error } });
+      const err = new Error(String(fileResult.error));
+      logger.error('Failed to read bio file', err);
       return api.createApiErrorResponse('Bio file not found', { status: 404 });
     }
 
     if (typeof fileResult.data !== 'string') {
-      logger.error('Invalid file content type', { context: { type: typeof fileResult.data } });
+      logger.error('Invalid file content type', undefined, { type: typeof fileResult.data });
       return api.createApiErrorResponse('Invalid file content', { status: 500 });
     }
 
@@ -74,11 +75,8 @@ export async function GET() {
     });
   } catch (error) {
     const err = error instanceof Error ? error : new Error('Unknown error');
-    logger.error('Error in bio API route', {
-      error: err,
-      context: {
-        timestamp: new Date().toISOString(),
-      },
+    logger.error('Error in bio API route', err, {
+      timestamp: new Date().toISOString(),
     });
 
     return api.createApiErrorResponse('Failed to load bio', {

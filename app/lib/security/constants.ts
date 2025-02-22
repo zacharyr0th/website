@@ -113,3 +113,28 @@ export const SECURITY_MEMORY_LIMITS = {
   ARTICLE_PROCESSING: 1024 * 512, // 512KB
   DEFAULT: 1024 * 256, // 256KB
 } as const;
+
+// Allowed origins
+export const SECURITY_CONSTANTS = {
+  ALLOWED_ORIGINS: [
+    'http://localhost:3000',
+    'https://zacharyr0th.com',
+    'https://www.zacharyr0th.com',
+  ],
+
+  // Basic security settings
+  HEADERS: {
+    FRAME_OPTIONS: 'DENY',
+    CONTENT_TYPE_OPTIONS: 'nosniff',
+    REFERRER_POLICY: 'strict-origin-when-cross-origin',
+    PERMITTED_CROSS_DOMAIN_POLICIES: 'none',
+  },
+} as const;
+
+/**
+ * Validates if an origin is allowed
+ */
+export function validateOrigin(origin: string, allowedOrigins: string[]): boolean {
+  if (!origin) return true;
+  return allowedOrigins.includes(origin);
+}

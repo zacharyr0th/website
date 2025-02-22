@@ -1,18 +1,25 @@
 import React, { useState, useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import type { IconType } from 'react-icons';
-import { PROJECTS, PROJECT_CATEGORIES, type ProjectCategory } from '../data/projects';
-import { Icons } from '../data/constants';
+import { FaGithub, FaNewspaper, FaPlay, FaArrowUpRightFromSquare } from 'react-icons/fa6';
+import { PROJECTS, PROJECT_CATEGORIES, type ProjectCategory, type BaseProject } from '../data/projects';
 import { NavButton } from '@/components/buttons/NavButton';
 
 const ProjectIcon: React.FC<{ icon: IconType }> = ({ icon: Icon }) => <Icon className="w-5 h-5" />;
+
+const Icons = {
+  GitHub: FaGithub,
+  Article: FaNewspaper,
+  Demo: FaPlay,
+  Link: FaArrowUpRightFromSquare,
+} as const;
 
 const Hero: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<'all' | ProjectCategory>('all');
 
   const filteredProjects = useMemo(() => {
     if (selectedCategory === 'all') return PROJECTS;
-    return PROJECTS.filter((project) => project.categories.includes(selectedCategory));
+    return PROJECTS.filter((project: BaseProject) => project.categories.includes(selectedCategory));
   }, [selectedCategory]);
 
   const handleCategoryChange = useCallback((category: 'all' | ProjectCategory) => {
@@ -72,9 +79,9 @@ const Hero: React.FC = () => {
                       <ProjectIcon icon={Icons.GitHub} />
                     </Link>
                   )}
-                  {project.articleLink && Icons.Article && (
+                  {(project as BaseProject).articleLink && Icons.Article && (
                     <Link
-                      href={project.articleLink}
+                      href={(project as BaseProject).articleLink!}
                       className="text-muted hover:text-accent transition-colors"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -83,9 +90,9 @@ const Hero: React.FC = () => {
                       <ProjectIcon icon={Icons.Article} />
                     </Link>
                   )}
-                  {project.demoLink && Icons.Demo && (
+                  {(project as BaseProject).demoLink && Icons.Demo && (
                     <Link
-                      href={project.demoLink}
+                      href={(project as BaseProject).demoLink!}
                       className="text-muted hover:text-accent transition-colors"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -94,9 +101,9 @@ const Hero: React.FC = () => {
                       <ProjectIcon icon={Icons.Demo} />
                     </Link>
                   )}
-                  {project.link && Icons.Link && (
+                  {(project as BaseProject).link && Icons.Link && (
                     <Link
-                      href={project.link}
+                      href={(project as BaseProject).link!}
                       className="text-muted hover:text-accent transition-colors"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -122,14 +129,14 @@ const Hero: React.FC = () => {
                   ))}
                 </div>
                 <div className="flex justify-between items-center text-sm text-muted">
-                  {project.publishDate && (
-                    <span>Published: {new Date(project.publishDate).toLocaleDateString()}</span>
+                  {(project as BaseProject).publishDate && (
+                    <span>Published: {new Date((project as BaseProject).publishDate!).toLocaleDateString()}</span>
                   )}
                   <span
                     className={`px-2 py-1 rounded-full ${
-                      project.status === 'completed'
+                      project.status === 'Functional'
                         ? 'bg-green-500/10 text-green-500'
-                        : project.status === 'in-progress'
+                        : project.status === 'WiP'
                           ? 'bg-yellow-500/10 text-yellow-500'
                           : 'bg-blue-500/10 text-blue-500'
                     }`}

@@ -14,12 +14,13 @@ const STYLES = {
     'bg-[var(--color-primary)] bg-opacity-10 border border-[var(--color-primary)] border-opacity-20',
   inactive:
     'hover:bg-[var(--color-border)] hover:bg-opacity-50 hover:shadow-sm border border-transparent hover:border-[var(--color-border)] hover:border-opacity-50',
-  title: 'font-medium text-[var(--color-text-primary)] truncate pr-2',
-  duration: 'text-sm text-[var(--color-text-secondary)] whitespace-nowrap',
-  artist: 'text-[var(--color-text-secondary)] truncate',
-  composer: 'text-[var(--color-text-secondary)] opacity-75 truncate ml-1',
-  metadata: 'text-[var(--color-text-secondary)] opacity-75',
-  genre: 'px-2 py-0.5 rounded-full bg-[var(--color-border)] text-[var(--color-text-secondary)]',
+  title: 'font-mono font-medium text-[var(--color-text-primary)] break-words sm:truncate pr-2',
+  duration: 'font-mono text-sm text-[var(--color-text-secondary)] whitespace-nowrap',
+  artist: 'font-mono text-[var(--color-text-secondary)] truncate',
+  composer: 'font-mono text-[var(--color-text-secondary)] opacity-75 truncate ml-1',
+  metadata: 'font-mono text-[var(--color-text-secondary)] opacity-75',
+  genre:
+    'font-mono text-xs px-2 py-0.5 rounded-full bg-[var(--color-border)] text-[var(--color-text-secondary)]',
   container: {
     willChange: 'transform',
     contain: 'layout style paint',
@@ -55,7 +56,7 @@ const TrackContent = memo<{ track: Track }>(({ track }) => (
       </motion.span>
     </div>
 
-    <div className="flex items-center text-xs sm:text-sm mb-0.5">
+    <div className="flex items-center text-xs sm:text-sm mb-0.5 font-mono">
       <motion.span
         className={STYLES.artist}
         {...ANIMATION}
@@ -75,7 +76,7 @@ const TrackContent = memo<{ track: Track }>(({ track }) => (
       )}
     </div>
 
-    <div className="flex items-center space-x-2 text-xs">
+    <div className="flex items-center space-x-2 text-xs font-mono">
       <motion.span
         className={STYLES.metadata}
         {...ANIMATION}

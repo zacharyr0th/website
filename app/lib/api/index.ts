@@ -8,4 +8,4 @@ export * from './responses';
 export * from './types';
 
 // Re-export security headers
-export { getApiHeaders, getErrorHeaders } from '@/lib/security';
+export { getApiHeaders } from '@/lib/security';

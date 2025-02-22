@@ -12,7 +12,9 @@ takeaways:
   - "Gold's value is primarily extrinsic, based on collective belief rather than intrinsic utility."
 ---
 
-Bitcoin was initially intended to be a peer-to-peer medium of exchange, although its narrative has switched to that of a global store of value. Few are arguing for Bitcoin to serve as money, meaning there is little need for an inherently volatile asset to be used for payments. However, many compelling arguments exist for it to serve as a store of value compared to Gold.
+Bitcoin was initially intended to be a peer-to-peer medium of exchange, although its narrative has switched to that of a global store of value.
+
+Few are arguing for Bitcoin to serve as money, meaning there is little need for an inherently volatile asset to be used for payments, but there are many compelling arguments for it to serve as a store of value compared to Gold.
 
 # Inflation
 

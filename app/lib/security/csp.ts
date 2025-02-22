@@ -9,16 +9,11 @@ const cspCache = new LRUCache<string, string>({
 type CSPValue =
   | "'self'"
   | "'none'"
-  | "'strict-dynamic'"
   | "'unsafe-inline'"
   | "'unsafe-eval'"
   | 'data:'
   | 'https:'
   | `'nonce-${string}'`
-  | 'https://www.googletagmanager.com'
-  | 'https://va.vercel-scripts.com'
-  | 'https://www.google-analytics.com'
-  | 'https://vitals.vercel-insights.com'
   | 'https://hel1.your-objectstorage.com';
 
 export enum CSPDirective {
@@ -35,21 +30,10 @@ export enum CSPDirective {
 
 const DEFAULT_DIRECTIVES: Record<CSPDirective, CSPValue[]> = {
   [CSPDirective.DEFAULT_SRC]: ["'self'"],
-  [CSPDirective.SCRIPT_SRC]: [
-    "'self'",
-    "'unsafe-inline'",
-    "'unsafe-eval'",
-    'https://www.googletagmanager.com',
-    'https://va.vercel-scripts.com',
-  ],
+  [CSPDirective.SCRIPT_SRC]: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
   [CSPDirective.STYLE_SRC]: ["'self'", "'unsafe-inline'"],
   [CSPDirective.IMG_SRC]: ["'self'", 'data:', 'https:'],
-  [CSPDirective.CONNECT_SRC]: [
-    "'self'",
-    'https:',
-    'https://www.google-analytics.com',
-    'https://vitals.vercel-insights.com',
-  ],
+  [CSPDirective.CONNECT_SRC]: ["'self'", 'https:', 'https://hel1.your-objectstorage.com'],
   [CSPDirective.FRAME_ANCESTORS]: ["'none'"],
   [CSPDirective.FORM_ACTION]: ["'self'"],
   [CSPDirective.OBJECT_SRC]: ["'none'"],

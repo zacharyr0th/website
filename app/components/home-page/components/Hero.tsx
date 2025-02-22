@@ -4,15 +4,15 @@ import React, { memo, useState, useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
-import BackgroundSVG from './backgrounds/HeroBackground';
-import { ActionButton } from '../buttons';
-import { heroContent } from './constants';
-import { pageTransition, sectionTransition } from '@/lib/ui/animations';
+import { HeroBackground } from '../utils/BackgroundComponents';
+import { ActionButton } from '../../buttons';
+import { heroContent } from '../constants/hero';
+import { fadeInUpAnimation, fadeInAnimation } from '../utils/animations';
 
 const ChainLogo = memo<{ logo: string }>(({ logo }) => (
   <motion.div
     className="chain-logo w-12 h-12 rounded-full bg-black/40 border border-white/10 p-0.5 backdrop-blur-sm hover:bg-black/60 transition-all duration-300 hover:scale-105 shadow-lg"
-    {...sectionTransition}
+    {...fadeInAnimation()}
   >
     <Image
       src={`/logos/${logo}-logo.webp`}
@@ -29,7 +29,7 @@ const ChainLogo = memo<{ logo: string }>(({ logo }) => (
 ChainLogo.displayName = 'ChainLogo';
 
 const ChainLogos = memo(() => (
-  <motion.div className="flex items-center gap-6" {...pageTransition}>
+  <motion.div className="flex items-center gap-6" {...fadeInUpAnimation()}>
     {heroContent.chainLogos.map((logo) => (
       <ChainLogo key={logo} logo={logo} />
     ))}
@@ -50,13 +50,13 @@ const ContentSection = memo<ContentSectionProps>(({ title, content, children }) 
   return (
     <motion.div
       ref={ref}
-      className="mb-12"
+      className="mb-12 mt-16 lg:mt-0"
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
       <motion.h2
-        className="text-2xl font-bold mb-4 text-text-primary tracking-tight"
+        className="text-3xl sm:text-4xl font-mono mb-8 whitespace-nowrap font-medium tracking-tight text-white"
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : { opacity: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
@@ -64,7 +64,7 @@ const ContentSection = memo<ContentSectionProps>(({ title, content, children }) 
         {title}
       </motion.h2>
       <motion.p
-        className="text-base max-w-xl leading-relaxed mb-6 text-text-secondary"
+        className="text-lg sm:text-xl text-white/70 leading-relaxed font-light tracking-wide mb-8 max-w-3xl"
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : { opacity: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
@@ -90,7 +90,6 @@ const StickyHeader = memo(() => {
 
   useEffect(() => {
     setMounted(true);
-    // Enable scrolling
     document.body.style.overflow = 'visible';
     return () => {
       document.body.style.overflow = '';
@@ -115,37 +114,48 @@ const StickyHeader = memo(() => {
   return (
     <motion.div
       className="min-h-screen px-6 sm:px-12 ml-4 sm:ml-8 lg:ml-16 flex flex-col justify-center"
-      {...pageTransition}
+      {...fadeInUpAnimation()}
     >
       <motion.h1
-        className="text-4xl sm:text-6xl font-normal leading-tight tracking-tight text-text-primary mb-4"
-        {...sectionTransition}
+        className="text-5xl sm:text-6xl mb-2 sm:mb-6 whitespace-nowrap font-mono font-light tracking-[-0.03em] text-white"
+        style={{ textShadow: '0 4px 8px rgba(0,0,0,0.1)' }}
+        {...fadeInAnimation(0.2)}
       >
         {heroContent.name}
       </motion.h1>
       <motion.p
-        className="text-base sm:text-lg mb-6 max-w-xl tracking-tight text-text-secondary font-normal"
-        {...sectionTransition}
+        className="text-lg sm:text-xl lg:text-2xl mb-4 sm:mb-6 tracking-wide text-white/60 font-light flex flex-wrap items-center gap-1.5"
+        {...fadeInAnimation(0.3)}
       >
-        {heroContent.title}{' '}
+        <span className="hidden sm:inline">{heroContent.title}</span>
+        <span className="sm:hidden">{heroContent.mobileTitle}</span>
         <a
           href={heroContent.aptosLink}
-          className="hover:underline transition-colors duration-300 text-accent"
+          className="text-accent hover:text-accent/80 transition-colors duration-300 font-normal inline-block"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Aptos Labs
+          {' Aptos'}
         </a>
       </motion.p>
       <motion.div
-        className="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0 sm:space-x-4"
-        {...sectionTransition}
+        className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4"
+        {...fadeInAnimation(0.4)}
       >
-        <ActionButton variant="primary" onClick={handleOpenModal} size="md">
+        <ActionButton
+          variant="primary"
+          onClick={handleOpenModal}
+          size="md"
+          className="sm:!px-4 sm:!py-2 sm:!text-[1.1rem] sm:!min-h-[44px]"
+        >
           Connect
         </ActionButton>
         <Link href="/bio" passHref>
-          <ActionButton variant="secondary" size="md">
+          <ActionButton
+            variant="secondary"
+            size="md"
+            className="sm:!px-4 sm:!py-2 sm:!text-[1.1rem] sm:!min-h-[44px]"
+          >
             Bio
           </ActionButton>
         </Link>
@@ -162,8 +172,8 @@ const MainContent = memo(() => {
   );
 
   return (
-    <motion.div className="min-h-screen lg:bg-transparent bg-background flex flex-col justify-center">
-      <div className="px-6 sm:px-12 ml-4 sm:ml-8 lg:ml-16 max-w-screen-2xl mx-auto">
+    <motion.div className="min-h-screen bg-background lg:bg-transparent flex flex-col justify-center">
+      <div className="px-6 sm:px-12 ml-4 sm:ml-8 lg:ml-16 max-w-screen-2xl">
         {heroContent.sections?.map((section) => {
           const showChainLogos = isFirstSection(section.title);
           return (
@@ -187,13 +197,13 @@ const HeroContent = memo(() => (
 HeroContent.displayName = 'HeroContent';
 
 const Hero = memo(() => (
-  <motion.section className="relative min-h-screen overflow-visible" {...pageTransition}>
+  <motion.section className="relative min-h-screen overflow-visible" {...fadeInUpAnimation()}>
     <div className="hidden lg:block absolute inset-y-0 left-0 w-1/2 z-10 bg-background" />
-    <motion.div className="w-full lg:w-1/2 flex flex-col relative z-20" {...sectionTransition}>
+    <motion.div className="w-full lg:w-1/2 flex flex-col relative z-20" {...fadeInAnimation(0.2)}>
       <HeroContent />
     </motion.div>
-    <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full opacity-50">
-      <BackgroundSVG />
+    <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full">
+      <HeroBackground />
     </div>
   </motion.section>
 ));

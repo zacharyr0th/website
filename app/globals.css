@@ -28,13 +28,6 @@
   --color-warning: #f39c12;
   --color-info: #3498db;
 
-  /* Typography Scale (1.333 perfect fourth ratio) */
-  --font-size-base: clamp(0.875rem, 1vw, 0.9rem);
-  --font-size-h3: calc(var(--font-size-base) * 1.333); /* 1.333rem */
-  --font-size-h2: calc(var(--font-size-h3) * 1.333); /* 1.776rem */
-  --font-size-h1: calc(var(--font-size-h2) * 1.333); /* 2.37rem */
-  --line-height-base: clamp(1.6, 1.5 + 0.3vw, 1.7);
-
   /* Spacing */
   --spacing-unit: 0.25rem;
   --spacing-2xs: calc(var(--spacing-unit) * 0.5);
@@ -65,139 +58,17 @@
   --footer-height: max(56px, 4vh);
   --max-content-width: min(1200px, 95vw);
   --max-reading-width: min(70ch, 98%);
-  --article-width: 768px;
+  --article-width: min(720px, 98%);
   --sidebar-width: 280px;
   --min-touch-target: 44px;
   --content-width: 1200px;
 }
 
 @layer base {
-  html {
-    font-size: 90%;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
   body {
     @apply bg-background text-text-primary min-h-screen;
-    font-family: var(--font-mono);
-    line-height: var(--line-height-base);
-    font-optical-sizing: auto;
   }
 
-  /* Typography */
-  a {
-    @apply text-accent transition-colors hover:text-[var(--color-accent-hover)];
-  }
-
-  /* Headings with modular scale */
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-mono font-bold text-text-primary;
-  }
-
-  h1 {
-    font-size: var(--font-size-h1);
-    line-height: 1.1;
-    @apply mt-12 mb-8;
-  }
-
-  h2 {
-    font-size: var(--font-size-h2);
-    line-height: 1.2;
-    @apply mt-10 mb-6;
-  }
-
-  h3 {
-    font-size: var(--font-size-h3);
-    line-height: 1.3;
-    @apply mt-8 mb-4;
-  }
-
-  /* Small caps */
-  abbr {
-    font-variant-caps: small-caps;
-    letter-spacing: 0.5px;
-    opacity: 0.8;
-    text-decoration: none;
-    font-feature-settings: 'smcp';
-  }
-
-  /* Drop caps */
-  .prose p:first-of-type::first-letter {
-    float: left;
-    font-size: 3.5em;
-    line-height: 0.85;
-    margin: 0.1em 0.2em 0 0;
-    font-family: var(--font-mono);
-    padding: 0.1em 0.1em 0 0;
-  }
-
-  /* Content reflow */
-  .content {
-    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-    line-height: clamp(1.6, 1.5 + 0.3vw, 1.7);
-    max-width: var(--max-reading-width);
-    margin: 0 auto;
-  }
-
-  /* Sidenotes and footnotes responsive layout */
-  .sidenote {
-    font-size: 0.875em;
-    line-height: 1.5;
-    color: var(--color-text-secondary);
-    margin-bottom: 1em;
-    padding-left: 1em;
-    border-left: 2px solid var(--color-text-secondary);
-  }
-
-  @media (min-width: 1200px) {
-    .sidenote {
-      position: absolute;
-      width: 20%;
-      right: -22%;
-      top: auto;
-      border-left: none;
-      padding-left: 0;
-    }
-  }
-
-  /* Responsive heading sizes */
-  h4 {
-    @apply text-xl md:text-2xl mt-6 mb-3;
-  }
-  h5 {
-    @apply text-lg md:text-xl mt-4 mb-2;
-  }
-  h6 {
-    @apply text-base md:text-lg mt-4 mb-2;
-  }
-
-  /* Remove top margin from first headings */
-  :where(section, article, div) > :where(h1, h2, h3, h4, h5, h6):first-child {
-    @apply mt-0;
-  }
-
-  /* Content Elements */
-  button {
-    @apply font-mono;
-  }
-
-  ul,
-  ol {
-    @apply list-inside mb-6;
-  }
-
-  pre,
-  code {
-    @apply font-mono bg-surface px-1 py-0.5 rounded-lg bg-opacity-50;
-  }
-
-  /* Images */
   img {
     @apply w-full h-auto;
   }
@@ -209,16 +80,16 @@
 
 @layer components {
   .content-page {
-    @apply font-mono min-h-screen bg-background;
+    @apply min-h-screen bg-background;
   }
 
   .content-page main {
-    @apply container mx-auto px-4 sm:px-8 pt-16 pb-16 sm:pt-24;
+    @apply container mx-auto px-1 sm:px-8 pt-8 pb-12 sm:pt-24;
   }
 
   .content-page .content-container {
     @apply mx-auto space-y-8 sm:space-y-12;
-    max-width: var(--article-width);
+    max-width: min(var(--article-width), 98%);
     will-change: transform;
     contain: layout style paint;
   }
@@ -242,27 +113,6 @@
   .hover-bounce {
     @apply transition-all duration-300 ease-in-out hover:scale-[1.02] hover:shadow-lg active:-translate-y-1 hover:cursor-pointer will-change-transform;
     transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  /* Typography */
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  .truncate-lines {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .truncate-2 {
-    @apply truncate-lines;
-    -webkit-line-clamp: 2;
-  }
-
-  .truncate-3 {
-    @apply truncate-lines;
-    -webkit-line-clamp: 3;
   }
 
   /* Flexbox */

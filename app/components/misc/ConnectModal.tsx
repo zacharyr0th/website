@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback, memo } from 'react';
+import React, { useEffect, useRef, useCallback, memo, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { config } from '@/lib';
 import { FaXmark } from 'react-icons/fa6';
@@ -10,9 +10,17 @@ interface ConnectModalProps {
   onClose: () => void;
 }
 
-const { SOCIAL_LINKS } = config;
+interface SocialLink {
+  url: string;
+  label: string;
+  platform: string;
+  active: boolean;
+  icon: React.ComponentType<{ size: number }> | null;
+}
 
-const openSocialLink = (url: string) => window.open(url, '_blank', 'noopener,noreferrer');
+const openSocialLink = (url: string): void => {
+  window.open(url, '_blank', 'noopener,noreferrer');
+};
 
 const modalVariants = {
   hidden: { opacity: 0, y: 20, scale: 0.95 },
@@ -28,36 +36,35 @@ const modalVariants = {
     scale: 0.95,
     transition: { duration: 0.2 },
   },
-};
+} as const;
 
 const overlayVariants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { duration: 0.2 } },
   exit: { opacity: 0, transition: { duration: 0.2 } },
-};
+} as const;
 
-const ErrorFallback = ({
-  error,
-  resetErrorBoundary,
-}: {
-  error: Error;
-  resetErrorBoundary: () => void;
-}) => (
-  <div className="p-3 text-center">
-    <p className="text-red-500 mb-2 text-sm">Something went wrong:</p>
-    <pre className="text-xs mb-3">{error.message}</pre>
-    <button
-      onClick={resetErrorBoundary}
-      className="px-3 py-1.5 bg-accent text-surface rounded-full hover:bg-accent/90 transition-colors text-sm"
-    >
-      Try again
-    </button>
-  </div>
+const ErrorFallback = memo(
+  ({ error, resetErrorBoundary }: { error: Error; resetErrorBoundary: () => void }) => (
+    <div className="p-3 text-center">
+      <p className="text-red-500 mb-2 text-sm">Something went wrong:</p>
+      <pre className="text-xs mb-3">{error.message}</pre>
+      <button
+        onClick={resetErrorBoundary}
+        className="px-3 py-1.5 bg-accent text-surface rounded-full hover:bg-accent/90 transition-colors text-sm"
+      >
+        Try again
+      </button>
+    </div>
+  )
 );
+
+ErrorFallback.displayName = 'ErrorFallback';
 
 const ConnectModal = memo(({ isOpen, onClose }: ConnectModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const initialFocusRef = useRef<HTMLButtonElement>(null);
+  const [socialLinks, setSocialLinks] = React.useState<Record<string, SocialLink>>({});
 
   const handleEscape = useCallback(
     (e: KeyboardEvent) => {
@@ -74,6 +81,19 @@ const ConnectModal = memo(({ isOpen, onClose }: ConnectModalProps) => {
   );
 
   useEffect(() => {
+    const loadConfig = async () => {
+      try {
+        const { SOCIAL_LINKS } = await config();
+        setSocialLinks(SOCIAL_LINKS);
+      } catch (error) {
+        console.error('Failed to load social links:', error);
+        setSocialLinks({});
+      }
+    };
+    void loadConfig();
+  }, []);
+
+  useEffect(() => {
     if (!isOpen) return;
 
     document.addEventListener('keydown', handleEscape);
@@ -88,55 +108,66 @@ const ConnectModal = memo(({ isOpen, onClose }: ConnectModalProps) => {
     };
   }, [isOpen, handleEscape, handleClickOutside]);
 
+  const filteredSocialLinks = useMemo(
+    () =>
+      Object.entries(socialLinks).filter(
+        ([, link]) => link.active && link.platform !== 'GitHub' && link.icon
+      ),
+    [socialLinks]
+  );
+
+  if (!isOpen) return null;
+
   return (
     <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center px-4"
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-          variants={overlayVariants}
-          role="presentation"
-        >
-          <div className="fixed inset-0 bg-text/30 backdrop-blur-sm" aria-hidden="true" />
+      <motion.div
+        className="fixed inset-0 z-50 flex items-center justify-center px-4"
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+        variants={overlayVariants}
+        role="presentation"
+      >
+        <div className="fixed inset-0 bg-text/30 backdrop-blur-sm" aria-hidden="true" />
 
-          <ErrorBoundary FallbackComponent={ErrorFallback} onReset={onClose}>
-            <motion.div
-              ref={modalRef}
-              className="relative rounded-full px-6 py-3 shadow-xl bg-surface w-full max-w-[200px] mx-auto"
-              variants={modalVariants}
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="connect-modal-title"
+        <ErrorBoundary FallbackComponent={ErrorFallback} onReset={onClose}>
+          <motion.div
+            ref={modalRef}
+            className="relative rounded-full px-8 py-4 shadow-xl bg-surface w-full max-w-[240px] mx-auto"
+            variants={modalVariants}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="connect-modal-title"
+          >
+            <button
+              ref={initialFocusRef}
+              onClick={onClose}
+              className="absolute -top-2 -right-2 z-10 p-1.5 bg-accent hover:bg-[var(--color-accent-hover)] rounded-full text-surface transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+              aria-label="Close modal"
             >
-              <button
-                ref={initialFocusRef}
-                onClick={onClose}
-                className="absolute -top-1.5 -right-1.5 z-10 p-1 bg-accent hover:bg-[var(--color-accent-hover)] rounded-full text-surface transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
-                aria-label="Close modal"
-              >
-                <FaXmark size={10} />
-              </button>
+              <FaXmark size={12} />
+            </button>
 
-              <div className="flex justify-center items-center gap-5">
-                {Object.values(SOCIAL_LINKS)
-                  .filter((link) => link.active && link.platform !== 'GitHub')
-                  .map((link) => (
-                    <IconButton
-                      key={link.label}
-                      variant="default"
-                      onClick={() => openSocialLink(link.url)}
-                      className="hover:text-accent transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
-                      ariaLabel={`Connect on ${link.platform}`}
-                      icon={<link.icon size={20} />}
-                    />
-                  ))}
-              </div>
-            </motion.div>
-          </ErrorBoundary>
-        </motion.div>
-      )}
+            <div className="flex justify-center items-center gap-6">
+              {filteredSocialLinks.map(([key, link]) => {
+                const Icon = link.icon;
+                if (!Icon) return null;
+
+                return (
+                  <IconButton
+                    key={key}
+                    variant="default"
+                    onClick={() => openSocialLink(link.url)}
+                    className="hover:text-accent transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+                    ariaLabel={`Connect on ${link.platform}`}
+                    icon={<Icon size={24} />}
+                  />
+                );
+              })}
+            </div>
+          </motion.div>
+        </ErrorBoundary>
+      </motion.div>
     </AnimatePresence>
   );
 });

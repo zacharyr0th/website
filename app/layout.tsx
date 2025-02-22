@@ -6,9 +6,8 @@ import { Analytics } from '@vercel/analytics/react';
 
 // Styles and Assets
 import './globals.css';
-import { ui } from '@/lib';
+import { firaCode, sourceSans } from '@/lib/ui/fonts';
 import { metadata as siteMetadata } from '@/lib/config/metadata';
-const { jetbrainsMono } = ui;
 
 // Components
 import RootLayoutClient from '@/components/layout/RootLayoutClient';
@@ -35,13 +34,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning className={`scroll-smooth ${jetbrainsMono.variable}`}>
-      <body className="antialiased">
-        <ClientAntiClickjack />
-        <Suspense fallback={<div className="min-h-screen bg-background" />}>
-          <RootLayoutClient>{children}</RootLayoutClient>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${firaCode.variable} ${sourceSans.variable}`}
+    >
+      <body>
+        <Suspense fallback={null}>
+          <ClientAntiClickjack />
+          <Analytics />
         </Suspense>
-        <Analytics />
+        <RootLayoutClient>{children}</RootLayoutClient>
       </body>
     </html>
   );

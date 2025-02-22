@@ -11,8 +11,6 @@ takeaways:
   - 'Non-custodial wallets are digital wallets like private bank accounts built into a blockchain. They consist of three primary mechanisms: public keys, private keys, and mnemonics. Your wallet can connect to crypto applications like Solrise and Magic Eden.'
 ---
 
-# Introduction to Non-Custodial Wallets
-
 Non-custodial wallets are digital wallets like private bank accounts built into a blockchain. They consist of three primary mechanisms: public keys, private keys, and mnemonics. Your wallet can connect to crypto applications like Solrise and Magic Eden.
 
 ## Benefits of Non-Custodial Wallets

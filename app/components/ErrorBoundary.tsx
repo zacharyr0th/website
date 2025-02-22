@@ -28,7 +28,7 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
       message: 'An error occurred',
       component: errorInfo.componentStack ? 'Component error' : 'Unknown component',
     });
-    
+
     this.setState({
       hasError: true,
       error: error,

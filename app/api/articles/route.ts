@@ -55,7 +55,7 @@ export async function GET(request: Request) {
     if (!dirResult.success || !dirResult.data) {
       return api.createApiErrorResponse('Failed to read articles directory', {
         status: 500,
-        code: 'STORAGE_ERROR',
+        code: 'INTERNAL_ERROR',
         details: dirResult.error,
       });
     }
@@ -70,8 +70,10 @@ export async function GET(request: Request) {
         });
 
         if (!fileResult.success || !fileResult.data) {
+          const err = new Error(String(fileResult.error || 'Unknown file read error'));
           logger.warn(`Error reading article file: ${file}`, {
-            error: new Error(String(fileResult.error || 'Unknown file read error')),
+            file,
+            error: err.message,
           });
           return null;
         }
@@ -94,7 +96,7 @@ export async function GET(request: Request) {
           };
         } catch (error) {
           const err = error instanceof Error ? error : new Error('Unknown error parsing file');
-          logger.warn(`Error parsing article file: ${file}`, { error: err });
+          logger.warn(`Error parsing article file: ${file}`, { error: err.message });
           return null;
         }
       })
@@ -125,11 +127,8 @@ export async function GET(request: Request) {
     });
   } catch (error) {
     const err = error instanceof Error ? error : new Error('Unknown error');
-    logger.error('Error in articles API route', {
-      error: err,
-      context: {
-        timestamp: new Date().toISOString(),
-      },
+    logger.error('Error in articles API route', err, {
+      timestamp: new Date().toISOString(),
     });
 
     return api.createApiErrorResponse('Failed to fetch articles', {
@@ -159,7 +158,7 @@ export async function HEAD() {
     });
   } catch (error) {
     const err = error instanceof Error ? error : new Error('Unknown error');
-    logger.error('Error in articles HEAD route:', { error: err });
+    logger.error('Error in articles HEAD route', err);
     return new Response(null, { status: 500 });
   }
 }

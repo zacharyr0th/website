@@ -11,7 +11,6 @@ import React, {
 import { motion } from 'framer-motion';
 import type { Track } from './tracks';
 import { TRACKS, getNextTrack, getPreviousTrack } from './tracks';
-import { selectOptimalFormat } from './utils/format-selection';
 import { createLogger, LogCategory } from '@/lib/core/logger';
 
 const logger = createLogger('audio-player', { category: LogCategory.APPLICATION });
@@ -21,7 +20,7 @@ const PlaylistItem = lazy(() => import('./PlaylistItem'));
 const ProgressBar = lazy(() => import('./ProgressBar'));
 
 // Constants for common styles and animations
-const BUTTON_BASE_STYLES = 'touch-manipulation transition-colors';
+const BUTTON_BASE_STYLES = 'touch-manipulation transition-colors font-mono';
 const BUTTON_HOVER_ANIMATION = {
   whileHover: { scale: 1.05 },
   whileTap: { scale: 0.95 },
@@ -87,49 +86,44 @@ const getMediaErrorType = (error: MediaError): string => {
 
 // Replace console.error with logger
 const handleSignedUrlError = () => {
-  logger.error('Failed to get audio URL', {
-    error: new Error('Audio URL error'),
-    context: { component: 'AudioPlayer' },
-  });
+  const err = new Error('Audio URL error');
+  logger.error('Failed to get audio URL', err);
 };
 
 // Replace handleAudioError with more specific error handling
-const handleAudioError = (isTrackChange = false) => {
-  // If it's a track change, only log as debug unless there's a real error
+const handleAudioError = (error: Error | MediaError | null, isTrackChange = false) => {
+  // If it's a track change, only log as debug
   if (isTrackChange) {
-    logger.debug('Audio state change', {
-      context: { component: 'AudioPlayer', type: 'track_change' },
-    });
+    logger.debug('Audio state change during track switch', { type: 'track_change' });
     return;
   }
 
-  // Only log as error if it's a real playback error
-  logger.error('Audio element error', {
-    error: new Error('Playback error'),
-    context: { component: 'AudioPlayer' },
-  });
+  // For media errors, provide more specific error information
+  if (error instanceof MediaError) {
+    const err = new Error(getMediaErrorType(error));
+    logger.error('Audio playback error', err, { code: String(error.code) });
+    return;
+  }
+
+  // For other errors, log with available information
+  const err = error || new Error('Unknown playback error');
+  logger.error('Audio element error', err);
 };
 
 // Replace console.log with logger.debug
 const handleAudioLoaded = (track: Track) => {
-  logger.debug('Audio loaded successfully', {
-    context: { trackId: track.id },
-  });
+  logger.debug('Audio loaded successfully', { id: track.id });
 };
 
 // Replace console.error with logger
 const handleLoadError = (track: Track) => {
-  logger.error('Failed to load audio', {
-    error: new Error('Load error'),
-    context: { trackId: track.id },
-  });
+  const err = new Error('Load error');
+  logger.error('Failed to load audio', err, { id: track.id });
 };
 
 // Replace console.log with logger.debug
 const handleNewAudioElement = (track: Track) => {
-  logger.debug('Creating new audio element', {
-    context: { trackId: track.id },
-  });
+  logger.debug('Creating new audio element', { id: track.id });
 };
 
 // Replace playback logging
@@ -147,36 +141,19 @@ const handlePlaybackResume = () => {
 
 // Replace playback logging
 const handlePlaybackError = () => {
-  logger.error('Playback error', {
-    error: new Error('Playback failed'),
-  });
+  const err = new Error('Playback failed');
+  logger.error('Playback error', err);
 };
 
 // Replace track change logging
 const handleTrackChange = (track: Track) => {
-  logger.info('Now playing', {
-    context: { trackId: track.id },
-  });
+  logger.info('Now playing', { id: track.id });
 };
 
-// Replace preload logging
-const handlePreloadStart = (track: Track) => {
-  logger.debug('Preloading track', {
-    context: { trackId: track.id },
-  });
-};
-
-const handlePreloadError = (track: Track) => {
-  logger.warn('Failed to preload track', {
-    error: new Error('Preload error'),
-    context: { trackId: track.id },
-  });
-};
-
-// Replace console.warn with logger
-const handleNoTrackWarning = () => {
-  logger.warn('No current track to preload');
-};
+// Define function types
+type PlayTrackFunction = (track: Track) => Promise<void>;
+type PlayNextTrackFunction = () => void;
+type PlayPreviousTrackFunction = () => void;
 
 // Extract audio state management into a custom hook with optimizations
 const useAudioPlayer = (initialTrack: Track) => {
@@ -186,23 +163,26 @@ const useAudioPlayer = (initialTrack: Track) => {
   const [duration, setDuration] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [isBuffering, setIsBuffering] = useState(false);
-  const [isRepeatOn, setIsRepeatOn] = useState(false);
+  const [hasInitialized, setHasInitialized] = useState(false);
+  const [hasUserInteracted, setHasUserInteracted] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const animationFrameRef = useRef<number>();
-  const cleanupFunctionsRef = useRef<Array<() => void>>([]);
+  const retryTimeoutRef = useRef<NodeJS.Timeout>();
 
-  // Memoize cleanup function
-  const cleanup = useCallback(() => {
-    if (animationFrameRef.current) {
-      cancelAnimationFrame(animationFrameRef.current);
-    }
-    cleanupFunctionsRef.current.forEach((fn) => fn());
-    cleanupFunctionsRef.current = [];
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.src = '';
-      audioRef.current.load();
-    }
+  // Track user interaction
+  useEffect(() => {
+    const handleInteraction = () => {
+      setHasUserInteracted(true);
+    };
+
+    window.addEventListener('click', handleInteraction);
+    window.addEventListener('keydown', handleInteraction);
+    window.addEventListener('touchstart', handleInteraction);
+
+    return () => {
+      window.removeEventListener('click', handleInteraction);
+      window.removeEventListener('keydown', handleInteraction);
+      window.removeEventListener('touchstart', handleInteraction);
+    };
   }, []);
 
   // Memoize state setters
@@ -211,76 +191,186 @@ const useAudioPlayer = (initialTrack: Track) => {
   const setBufferingState = useCallback((state: boolean) => setIsBuffering(state), []);
   const updateCurrentTrack = useCallback((track: Track) => setCurrentTrack(track), []);
 
-  // Optimize audio creation with better error handling and memory management
-  const createNewAudio = useCallback(async (track: Track) => {
+  // Enhanced cleanup with better error handling
+  const cleanup = useCallback(async () => {
+    try {
+      if (retryTimeoutRef.current) {
+        clearTimeout(retryTimeoutRef.current);
+      }
+
+      if (audioRef.current) {
+        const audio = audioRef.current;
+
+        // Ensure playback is stopped first
+        try {
+          audio.pause();
+          audio.currentTime = 0;
+          setIsPlaying(false);
+        } catch (e) {
+          // Ignore pause errors
+        }
+
+        // Properly remove all event listeners
+        const events = [
+          'timeupdate',
+          'loadedmetadata',
+          'ended',
+          'play',
+          'pause',
+          'waiting',
+          'canplay',
+          'error',
+          'stalled',
+          'suspend',
+        ];
+
+        events.forEach((event) => {
+          audio.removeEventListener(event, () => {});
+        });
+
+        // Reset audio state and clear source
+        audio.src = '';
+        audio.load();
+
+        // Clear the reference
+        audioRef.current = null;
+      }
+
+      // Reset all state
+      setCurrentTime(0);
+      setDuration(0);
+      setIsPlaying(false);
+      setIsLoading(false);
+      setIsBuffering(false);
+    } catch (error) {
+      const err = error instanceof Error ? error : new Error('Cleanup failed');
+      logger.warn('Error during cleanup', { error: err.message });
+    }
+  }, []);
+
+  // Add component unmount cleanup
+  useEffect(() => {
+    return () => {
+      void cleanup();
+    };
+  }, [cleanup]);
+
+  // Enhanced audio creation with retry mechanism and better error handling
+  const createNewAudio = useCallback(async (track: Track, retryCount = 0) => {
     if (!track) {
       throw new Error('Invalid track');
     }
 
-    let url: string;
     try {
-      url = await track.getSignedUrl();
-      if (!url) {
-        throw new Error('Failed to load audio');
-      }
-    } catch (error) {
-      handleSignedUrlError();
-      throw new Error('Failed to load audio');
-    }
-
-    // Create new audio element only after we have a valid URL
-    const audio = new Audio();
-    audio.preload = 'auto';
-    audio.crossOrigin = 'anonymous';
-
-    // Set up error handling
-    const errorPromise = new Promise<never>((_, reject) => {
-      const errorHandler = () => {
-        const mediaError = audio.error;
-
-        // Check if this is a track change or a real error
-        const isTrackChange =
-          !mediaError ||
-          (mediaError.code === MediaError.MEDIA_ERR_ABORTED &&
-            audio.readyState < audio.HAVE_METADATA);
-
-        handleAudioError(isTrackChange);
-
-        // Only reject if it's a real error
-        if (!isTrackChange) {
-          reject(new Error(mediaError ? getMediaErrorType(mediaError) : 'Failed to load audio'));
+      // Get URL with retries
+      let url: string | undefined;
+      for (let i = 0; i < 3; i++) {
+        try {
+          url = await track.getSignedUrl();
+          if (url) break;
+        } catch (error) {
+          handleSignedUrlError();
+          if (i < 2) {
+            await new Promise((resolve) =>
+              setTimeout(resolve, Math.min(1000 * Math.pow(2, i), 5000))
+            );
+          }
         }
-        audio.removeEventListener('error', errorHandler);
-      };
-      audio.addEventListener('error', errorHandler);
-    });
+      }
 
-    // Set up success handling
-    const loadPromise = new Promise<HTMLAudioElement>((resolve) => {
-      const loadHandler = () => {
-        handleAudioLoaded(track);
-        resolve(audio);
-        audio.removeEventListener('canplaythrough', loadHandler);
-      };
-      audio.addEventListener('canplaythrough', loadHandler);
-    });
+      if (!url) {
+        throw new Error('Failed to load audio URL after retries');
+      }
 
-    // Set the source and begin loading
-    try {
+      // Create new audio element
+      const audio = new Audio();
+      audio.preload = 'auto';
+      audio.crossOrigin = 'anonymous';
       audio.src = url;
-      audio.load();
 
-      // Wait for either success or failure
-      return await Promise.race([loadPromise, errorPromise]);
+      // Return a promise that resolves when the audio is ready
+      return new Promise<HTMLAudioElement>((resolve, reject) => {
+        const handleCanPlay = () => {
+          cleanup();
+          handleAudioLoaded(track);
+          resolve(audio);
+        };
+
+        const handleError = () => {
+          cleanup();
+          handleLoadError(track);
+          reject(new Error('Failed to load audio'));
+        };
+
+        const cleanup = () => {
+          audio.removeEventListener('canplaythrough', handleCanPlay);
+          audio.removeEventListener('error', handleError);
+        };
+
+        audio.addEventListener('canplaythrough', handleCanPlay);
+        audio.addEventListener('error', handleError);
+
+        // Start loading
+        audio.load();
+      });
     } catch (error) {
-      handleLoadError(track);
+      // Implement retry logic for recoverable errors
+      if (retryCount < 2) {
+        const retryDelay = Math.min(1000 * Math.pow(2, retryCount), 5000);
+        logger.warn('Retrying audio creation', {
+          trackId: track.id,
+          attempt: retryCount + 1,
+          error: error instanceof Error ? error.message : 'Unknown error',
+        });
+
+        await new Promise((resolve) => setTimeout(resolve, retryDelay));
+        return createNewAudio(track, retryCount + 1);
+      }
+
+      logger.error(
+        'Failed to create audio after all retries',
+        error instanceof Error ? error : new Error('Unknown error'),
+        {
+          trackId: track.id,
+          retryCount,
+        }
+      );
       throw error;
     }
   }, []);
 
-  // Optimize play/pause with better error handling and buffering states
-  const togglePlay = useCallback(async () => {
+  // Helper to check audio format support
+  const checkAudioSupport = useCallback(async (track: Track) => {
+    const audio = document.createElement('audio');
+
     try {
+      const url = await track.getSignedUrl();
+      const response = await fetch(url, { method: 'HEAD' });
+      const contentType = response.headers.get('content-type');
+      const canPlay = audio.canPlayType(contentType || 'audio/mpeg');
+      return canPlay !== '';
+    } catch (error) {
+      return false;
+    } finally {
+      audio.remove();
+    }
+  }, []);
+
+  // Enhance togglePlay with better pause handling
+  const togglePlay = useCallback(async () => {
+    if (!hasUserInteracted) {
+      logger.debug('Waiting for user interaction before playing audio');
+      return;
+    }
+
+    try {
+      if (isPlaying && audioRef.current) {
+        audioRef.current.pause();
+        setPlayingState(false);
+        handlePlaybackPause();
+        return;
+      }
+
       setLoadingState(true);
 
       if (!audioRef.current || !audioRef.current.src) {
@@ -288,24 +378,39 @@ const useAudioPlayer = (initialTrack: Track) => {
         const audio = await createNewAudio(currentTrack);
         audioRef.current = audio;
 
-        // Start playing immediately after creation
-        const playPromise = audio.play();
-        if (playPromise) {
-          await playPromise;
+        try {
+          await audio.play();
           handlePlaybackStart();
           setPlayingState(true);
+        } catch (playError) {
+          if (playError instanceof Error && playError.name === 'NotAllowedError') {
+            logger.warn('Playback not allowed - waiting for user interaction');
+            setPlayingState(false);
+          } else {
+            handlePlaybackError();
+            setPlayingState(false);
+            throw playError;
+          }
         }
       } else {
         if (isPlaying) {
           handlePlaybackPause();
-          await audioRef.current.pause();
+          audioRef.current.pause();
           setPlayingState(false);
         } else {
-          const playPromise = audioRef.current.play();
-          if (playPromise) {
-            await playPromise;
+          try {
+            await audioRef.current.play();
             handlePlaybackResume();
             setPlayingState(true);
+          } catch (playError) {
+            if (playError instanceof Error && playError.name === 'NotAllowedError') {
+              logger.warn('Playback not allowed - waiting for user interaction');
+              setPlayingState(false);
+            } else {
+              handlePlaybackError();
+              setPlayingState(false);
+              throw playError;
+            }
           }
         }
       }
@@ -315,62 +420,199 @@ const useAudioPlayer = (initialTrack: Track) => {
     } finally {
       setLoadingState(false);
     }
-  }, [isPlaying, currentTrack, createNewAudio, setPlayingState, setLoadingState]);
+  }, [
+    isPlaying,
+    currentTrack,
+    createNewAudio,
+    setPlayingState,
+    setLoadingState,
+    hasUserInteracted,
+  ]);
 
-  // Optimize track playback with preloading and caching
-  const playTrack = useCallback(
-    async (track: Track) => {
+  // Modify playTrack to be more subtle
+  const playTrack: PlayTrackFunction = useCallback(
+    async (track) => {
+      if (!hasUserInteracted) {
+        logger.debug('Waiting for user interaction before playing audio');
+        updateCurrentTrack(track);
+        // Set initial duration from track metadata
+        const [minutesStr, secondsStr] = track.duration.split(':');
+        const minutes = parseInt(minutesStr || '0', 10);
+        const seconds = parseInt(secondsStr || '0', 10);
+        const initialDuration = minutes * 60 + seconds;
+        setDuration(initialDuration);
+        return;
+      }
+
+      // Check format support first
+      const isSupported = await checkAudioSupport(track);
+      if (!isSupported) {
+        logger.warn('Audio format not supported', { track: track.id });
+        updateCurrentTrack(track);
+        // Set duration even if format is not supported
+        const [minutesStr, secondsStr] = track.duration.split(':');
+        const minutes = parseInt(minutesStr || '0', 10);
+        const seconds = parseInt(secondsStr || '0', 10);
+        const initialDuration = minutes * 60 + seconds;
+        setDuration(initialDuration);
+        setIsPlaying(false);
+        return;
+      }
+
+      handleTrackChange(track);
+      let newAudio: HTMLAudioElement | null = null;
+      let removeListeners: (() => void) | undefined;
+
       try {
         setLoadingState(true);
         setBufferingState(true);
 
-        // Clean up existing audio before switching tracks
-        if (audioRef.current) {
-          await cleanup();
-          audioRef.current = null;
-        }
+        // Update UI first for better responsiveness
+        updateCurrentTrack(track);
 
-        // Get optimal format first
-        const format = await selectOptimalFormat(navigator.userAgent);
-        if (!format) {
-          throw new Error('No supported audio format found for this browser');
-        }
+        // Set initial duration from track metadata
+        const [minutesStr, secondsStr] = track.duration.split(':');
+        const minutes = parseInt(minutesStr || '0', 10);
+        const seconds = parseInt(secondsStr || '0', 10);
+        const initialDuration = minutes * 60 + seconds;
+        setDuration(initialDuration);
+
+        // Clean up existing audio before switching tracks
+        await cleanup();
 
         // Create and set up new audio
-        const audio = await createNewAudio(track);
-        if (!audio) {
+        newAudio = await createNewAudio(track);
+        if (!newAudio) {
           throw new Error('Failed to create audio element');
         }
 
-        audioRef.current = audio;
-        updateCurrentTrack(track);
+        // Configure audio element
+        newAudio.preload = 'auto';
+        newAudio.autoplay = false;
 
-        // Start playing
-        try {
-          await audio.play();
-          setPlayingState(true);
-          handleTrackChange(track);
+        // Set up event listeners
+        const setupEventListeners = (audio: HTMLAudioElement) => {
+          const handlers = new Map();
 
-          // Preload next track in the background
-          const nextTrack = getNextTrack(track.id);
-          if (nextTrack) {
-            handlePreloadStart(nextTrack);
-            void nextTrack.getSignedUrl().catch(() => {
-              handlePreloadError(nextTrack);
+          handlers.set('waiting', () => {
+            setIsBuffering(true);
+            logger.debug('Audio waiting for data', { track: track.id });
+          });
+
+          handlers.set('canplay', () => {
+            setIsBuffering(false);
+            logger.debug('Audio can play', { track: track.id });
+            // Set duration here as well in case loadedmetadata didn't fire
+            const audioDuration = audio.duration;
+            if (!isNaN(audioDuration) && isFinite(audioDuration)) {
+              setDuration(audioDuration);
+              logger.debug('Duration set on canplay', {
+                track: track.id,
+                duration: audioDuration,
+              });
+            }
+          });
+
+          handlers.set('loadedmetadata', () => {
+            const audioDuration = audio.duration;
+            if (!isNaN(audioDuration) && isFinite(audioDuration)) {
+              setDuration(audioDuration);
+              logger.debug('Audio metadata loaded', {
+                track: track.id,
+                duration: audioDuration,
+              });
+            }
+          });
+
+          handlers.set('durationchange', () => {
+            const audioDuration = audio.duration;
+            if (!isNaN(audioDuration) && isFinite(audioDuration)) {
+              setDuration(audioDuration);
+              logger.debug('Duration changed', {
+                track: track.id,
+                duration: audioDuration,
+              });
+            }
+          });
+
+          handlers.set('timeupdate', () => {
+            const currentTime = audio.currentTime;
+            if (!isNaN(currentTime) && isFinite(currentTime)) {
+              setCurrentTime(currentTime);
+            }
+          });
+
+          handlers.set('ended', () => {
+            const nextTrack = getNextTrack(track.id);
+            if (nextTrack) {
+              void playTrack(nextTrack);
+            }
+          });
+
+          // Add all event listeners
+          handlers.forEach((handler, event) => {
+            audio.addEventListener(event, handler);
+          });
+
+          return () => {
+            handlers.forEach((handler, event) => {
+              audio.removeEventListener(event, handler);
             });
-          }
-        } catch (playError) {
-          handlePlaybackError();
-          setPlayingState(false);
-          throw playError;
+          };
+        };
+
+        removeListeners = setupEventListeners(newAudio);
+        audioRef.current = newAudio;
+
+        try {
+          // Force metadata loading
+          await new Promise<void>((resolve, reject) => {
+            const loadHandler = () => {
+              resolve();
+              newAudio?.removeEventListener('loadedmetadata', loadHandler);
+              newAudio?.removeEventListener('error', errorHandler);
+            };
+
+            const errorHandler = () => {
+              reject(new Error('Failed to load audio metadata'));
+              newAudio?.removeEventListener('loadedmetadata', loadHandler);
+              newAudio?.removeEventListener('error', errorHandler);
+            };
+
+            newAudio?.addEventListener('loadedmetadata', loadHandler);
+            newAudio?.addEventListener('error', errorHandler);
+            newAudio?.load();
+          });
+
+          setHasInitialized(true);
+          logger.debug('Audio initialized successfully', {
+            track: track.id,
+            duration: newAudio.duration,
+          });
+        } catch (error) {
+          logger.warn('Failed to load audio', { track: track.id });
+          throw error;
         }
       } catch (error) {
-        handlePlaybackError();
         setPlayingState(false);
-        updateCurrentTrack(track); // Keep the track in the UI even if playback failed
+        handleAudioError(error instanceof Error ? error : new Error('Unknown error'), true);
+
+        // Clean up on error
+        if (newAudio) {
+          try {
+            newAudio.pause();
+            newAudio.src = '';
+            newAudio.load();
+          } catch (cleanupError) {
+            // Ignore cleanup errors
+          }
+        }
       } finally {
         setLoadingState(false);
         setBufferingState(false);
+        if (removeListeners) {
+          removeListeners();
+        }
       }
     },
     [
@@ -380,75 +622,112 @@ const useAudioPlayer = (initialTrack: Track) => {
       setLoadingState,
       setBufferingState,
       updateCurrentTrack,
+      hasUserInteracted,
+      checkAudioSupport,
     ]
   );
 
-  // Preload initial track and next track
+  // Initialize audio player
   useEffect(() => {
-    const preloadInitialTracks = async () => {
-      try {
-        if (!currentTrack) {
-          handleNoTrackWarning();
-          return;
-        }
+    if (!hasInitialized && initialTrack) {
+      void playTrack(initialTrack);
+    }
+    return () => {
+      void cleanup();
+    };
+  }, [hasInitialized, initialTrack, playTrack, cleanup]);
 
-        // Preload current track
-        handlePreloadStart(currentTrack);
-        await currentTrack.getSignedUrl();
-
-        // Preload next track
-        const nextTrack = getNextTrack(currentTrack.id);
-        if (nextTrack) {
-          handlePreloadStart(nextTrack);
-          void nextTrack.getSignedUrl().catch(() => {
-            handlePreloadError(nextTrack);
-          });
+  const playNextTrack: PlayNextTrackFunction = useCallback(() => {
+    const nextTrack = getNextTrack(currentTrack.id);
+    if (nextTrack) {
+      void (async () => {
+        try {
+          setLoadingState(true);
+          await playTrack(nextTrack);
+        } catch (error) {
+          handlePlaybackError();
+          setPlayingState(false);
+        } finally {
+          setLoadingState(false);
         }
-      } catch (error) {
-        handlePreloadError(currentTrack);
+      })();
+    }
+  }, [currentTrack, playTrack, setLoadingState, setPlayingState]);
+
+  const playPreviousTrack: PlayPreviousTrackFunction = useCallback(() => {
+    // If we're more than 3 seconds into the song, restart it instead of going to previous
+    if (audioRef.current && audioRef.current.currentTime > 3) {
+      audioRef.current.currentTime = 0;
+      if (!isPlaying) {
+        void (async () => {
+          try {
+            await audioRef.current?.play();
+            setPlayingState(true);
+          } catch (error) {
+            handlePlaybackError();
+            setPlayingState(false);
+          }
+        })();
+      }
+    } else {
+      const prevTrack = getPreviousTrack(currentTrack.id);
+      if (prevTrack) {
+        void (async () => {
+          try {
+            setLoadingState(true);
+            await playTrack(prevTrack);
+          } catch (error) {
+            handlePlaybackError();
+            setPlayingState(false);
+          } finally {
+            setLoadingState(false);
+          }
+        })();
+      }
+    }
+  }, [currentTrack, playTrack, isPlaying, setLoadingState, setPlayingState]);
+
+  // Handle keyboard controls
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        void togglePlay();
+      } else if (e.code === 'ArrowLeft') {
+        e.preventDefault();
+        if (e.metaKey || e.ctrlKey) {
+          void playPreviousTrack();
+        } else if (audioRef.current) {
+          audioRef.current.currentTime = Math.max(0, audioRef.current.currentTime - 5);
+        }
+      } else if (e.code === 'ArrowRight') {
+        e.preventDefault();
+        if (e.metaKey || e.ctrlKey) {
+          void playNextTrack();
+        } else if (audioRef.current) {
+          audioRef.current.currentTime = Math.min(
+            audioRef.current.duration,
+            audioRef.current.currentTime + 5
+          );
+        }
       }
     };
 
-    void preloadInitialTracks();
-  }, [currentTrack]);
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [togglePlay, playNextTrack, playPreviousTrack]);
 
-  const playNextTrack = useCallback(() => {
-    handleTrackChange(currentTrack);
-    const nextTrack = getNextTrack(currentTrack.id);
-    void playTrack(nextTrack);
-  }, [currentTrack, playTrack]);
-
-  const playPreviousTrack = useCallback(() => {
-    handleTrackChange(currentTrack);
-    const previousTrack = getPreviousTrack(currentTrack.id);
-    void playTrack(previousTrack);
-  }, [currentTrack, playTrack]);
-
-  // Use consolidated event handlers
+  // Use the hook for audio event handling
   useAudioEventHandlers(audioRef.current, {
     onTimeUpdate: () => setCurrentTime(audioRef.current?.currentTime || 0),
     onLoadedMetadata: () => setDuration(audioRef.current?.duration || 0),
     onEnd: () => {
-      if (isRepeatOn && audioRef.current) {
-        audioRef.current.currentTime = 0;
-        void audioRef.current.play().catch(() => {
-          // Handle error silently
-        });
-      } else {
-        playNextTrack();
+      const nextTrack = getNextTrack(currentTrack.id);
+      if (nextTrack) {
+        void playTrack(nextTrack);
       }
     },
-    onPlay: () => {
-      setIsBuffering(false);
-      setIsPlaying(true);
-    },
-    onPause: () => setIsPlaying(false),
-    onWaiting: () => setIsBuffering(true),
-    onCanPlay: () => setIsBuffering(false),
   });
-
-  // Cleanup on unmount
-  useEffect(() => cleanup, [cleanup]);
 
   return {
     currentTrack,
@@ -457,11 +736,7 @@ const useAudioPlayer = (initialTrack: Track) => {
     duration,
     isLoading,
     isBuffering,
-    isRepeatOn,
-    setIsRepeatOn,
     audioRef,
-    setCurrentTime,
-    setDuration,
     togglePlay,
     playTrack,
     playNextTrack,
@@ -513,19 +788,19 @@ const CurrentTrackInfo = memo<{
   onFilterChange: (filter: string | null) => void;
   controls: React.ReactNode;
 }>(({ track, isLoading, activeFilter, onFilterChange, controls }) => (
-  <div className="space-y-3 sm:space-y-4">
+  <div className="space-y-2 sm:space-y-4">
     <motion.h3
-      className="text-2xl sm:text-4xl font-bold text-[var(--color-text-primary)] tracking-tight line-clamp-2"
+      className="text-xl sm:text-3xl font-mono font-medium text-[var(--color-text-primary)] tracking-tight line-clamp-2"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       key={track.title}
     >
       {track.title}
     </motion.h3>
-    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-0">
-      <div className="flex flex-wrap gap-2 sm:gap-3 items-center">
+    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3">
+      <div className="flex flex-wrap gap-1 sm:gap-2 items-center">
         <motion.p
-          className="text-base sm:text-lg text-[var(--color-text-secondary)]"
+          className="font-mono font-normal text-sm sm:text-base text-[var(--color-text-secondary)]"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.1 }}
@@ -536,7 +811,7 @@ const CurrentTrackInfo = memo<{
           <>
             <span className="text-[var(--color-text-secondary)] opacity-50">•</span>
             <motion.p
-              className="text-base sm:text-lg text-[var(--color-text-secondary)] opacity-75"
+              className="font-mono font-normal text-sm sm:text-base text-[var(--color-text-secondary)] opacity-75"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
@@ -545,12 +820,12 @@ const CurrentTrackInfo = memo<{
             </motion.p>
           </>
         )}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-1 sm:gap-2">
           <motion.button
             onClick={() =>
               onFilterChange(activeFilter === track.instrument ? null : track.instrument)
             }
-            className={`px-3 py-1.5 text-sm rounded-full transition-colors touch-manipulation ${
+            className={`font-mono px-1.5 py-0.5 sm:px-3 sm:py-1.5 text-xs sm:text-sm rounded-full transition-colors touch-manipulation ${
               activeFilter === track.instrument
                 ? 'bg-[var(--color-primary)] text-white'
                 : 'bg-[#2A2A2A] text-[var(--color-text-secondary)] hover:bg-[#3A3A3A] active:bg-[#4A4A4A]'
@@ -568,7 +843,7 @@ const CurrentTrackInfo = memo<{
               onClick={() =>
                 onFilterChange(activeFilter === track.genre ? null : track.genre || null)
               }
-              className={`px-3 py-1.5 text-sm rounded-full transition-colors touch-manipulation ${
+              className={`font-mono px-1.5 py-0.5 sm:px-3 sm:py-1.5 text-xs sm:text-sm rounded-full transition-colors touch-manipulation ${
                 activeFilter === track.genre
                   ? 'bg-[var(--color-primary)] text-white'
                   : 'bg-[#2A2A2A] text-[var(--color-text-secondary)] hover:bg-[#3A3A3A] active:bg-[#4A4A4A]'
@@ -584,7 +859,7 @@ const CurrentTrackInfo = memo<{
           )}
         </div>
         {isLoading && (
-          <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-2 border-[var(--color-primary)] border-t-transparent ml-2 sm:ml-4" />
+          <div className="animate-spin rounded-full h-4 w-4 sm:h-5 sm:w-5 border-2 border-[var(--color-primary)] border-t-transparent ml-1 sm:ml-2" />
         )}
       </div>
       <div className="mt-2 sm:mt-0">{controls}</div>
@@ -603,11 +878,7 @@ export default memo(function AudioPlayer() {
     duration,
     isLoading,
     isBuffering,
-    isRepeatOn,
-    setIsRepeatOn,
     audioRef,
-    setCurrentTime,
-    setDuration,
     togglePlay,
     playTrack,
     playNextTrack,
@@ -629,57 +900,13 @@ export default memo(function AudioPlayer() {
 
   // Memoize event handlers
   const handleProgressClick = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      if (progressRef.current && audioRef.current) {
-        const rect = progressRef.current.getBoundingClientRect();
-        const pos = (e.clientX - rect.left) / rect.width;
+    (pos: number) => {
+      if (audioRef.current) {
         audioRef.current.currentTime = pos * duration;
       }
     },
     [duration, audioRef]
   );
-
-  // Setup audio event listeners
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const updateProgress = () => setCurrentTime(audio.currentTime);
-    const handleLoadedMetadata = () => setDuration(audio.duration || 0);
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.code === 'Space') {
-        e.preventDefault();
-        togglePlay();
-      } else if (e.code === 'ArrowLeft' && audio) {
-        audio.currentTime -= 5;
-      } else if (e.code === 'ArrowRight' && audio) {
-        audio.currentTime += 5;
-      }
-    };
-
-    const handleEnd = () => {
-      if (isRepeatOn) {
-        audio.currentTime = 0;
-        void audio.play().catch(() => {
-          // Handle error silently
-        });
-      } else {
-        playNextTrack();
-      }
-    };
-
-    audio.addEventListener('timeupdate', updateProgress);
-    audio.addEventListener('loadedmetadata', handleLoadedMetadata);
-    audio.addEventListener('ended', handleEnd);
-    window.addEventListener('keydown', handleKeyPress);
-
-    return () => {
-      audio.removeEventListener('timeupdate', updateProgress);
-      audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
-      audio.removeEventListener('ended', handleEnd);
-      window.removeEventListener('keydown', handleKeyPress);
-    };
-  }, [currentTrack, isRepeatOn, togglePlay, playNextTrack, audioRef, setCurrentTime, setDuration]);
 
   const controls = (
     <div className="flex items-center justify-center sm:justify-start gap-4 sm:gap-6">
@@ -718,31 +945,17 @@ export default memo(function AudioPlayer() {
           <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
         </svg>
       </motion.button>
-
-      <motion.button
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-        onClick={() => setIsRepeatOn(!isRepeatOn)}
-        className={`p-2 sm:p-3 rounded-full touch-manipulation ${
-          isRepeatOn ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-secondary)]'
-        }`}
-        aria-label="Toggle repeat"
-      >
-        <svg className="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M17 17H7v-3l-4 4 4 4v-3h12v-6h-2v4zM7 7h10v3l4-4-4-4v3H5v6h2V7z" />
-        </svg>
-      </motion.button>
     </div>
   );
 
   return (
     <motion.div
-      className="w-full max-w-4xl mx-auto p-4 sm:p-8 rounded-3xl bg-gradient-to-br from-[#1A1A1A] to-[#2A2A2A] shadow-2xl backdrop-blur-lg border border-white/10 overflow-hidden"
+      className="w-full rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#1A1A1A] to-[#2A2A2A] shadow-2xl backdrop-blur-lg border border-white/10 overflow-hidden relative"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="flex flex-col space-y-4 sm:space-y-6">
+      <div className="flex flex-col p-3 sm:p-6 space-y-4 sm:space-y-6">
         <CurrentTrackInfo
           track={currentTrack}
           isLoading={isLoading}
@@ -767,16 +980,16 @@ export default memo(function AudioPlayer() {
       </div>
 
       {filteredTracks.length > 0 && (
-        <div className="mt-6 sm:mt-8">
+        <div className="mt-4 sm:mt-6">
           <div
-            className="space-y-2 max-h-[180px] sm:max-h-[280px] overflow-y-auto 
+            className="space-y-2 max-h-none sm:max-h-[280px] overflow-y-visible sm:overflow-y-auto 
             scrollbar-thin scrollbar-track-[#1A1A1A] scrollbar-thumb-[#3A3A3A] 
             hover:scrollbar-thumb-[#4A4A4A] 
             [&::-webkit-scrollbar]:w-2 
             [&::-webkit-scrollbar-thumb]:rounded-full 
             [&::-webkit-scrollbar-track]:rounded-full
             overscroll-behavior-y-contain
-            -mx-4 sm:mx-0 px-4 sm:px-0"
+            px-3 sm:px-6"
           >
             <Suspense fallback={<div className="h-16 bg-surface/50 rounded-lg animate-pulse" />}>
               {filteredTracks.map((track: Track) => (

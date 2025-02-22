@@ -1,5 +1,3 @@
-import type { ProblemDetails } from '@/lib/security';
-
 /**
  * API Response Types
  */
@@ -8,7 +6,13 @@ export interface ApiResponse<T> {
   data: T;
 }
 
-export interface ApiErrorResponse extends ProblemDetails {}
+export interface ApiErrorResponse {
+  error: {
+    code: string;
+    message: string;
+    details?: unknown;
+  };
+}
 
 export interface ApiHeaders extends Record<string, string> {
   'Cache-Control': string;

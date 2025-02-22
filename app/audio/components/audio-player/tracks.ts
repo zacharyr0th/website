@@ -5,20 +5,65 @@ import { createLogger, LogCategory } from '@/lib/core/logger';
 // Create logger instance for audio player
 const logger = createLogger('audio-player', { category: LogCategory.APPLICATION });
 
+// Add global audio manager
+class GlobalAudioManager {
+  private static instance: GlobalAudioManager;
+  private currentAudio: HTMLAudioElement | null = null;
+
+  private constructor() {}
+
+  static getInstance(): GlobalAudioManager {
+    if (!GlobalAudioManager.instance) {
+      GlobalAudioManager.instance = new GlobalAudioManager();
+    }
+    return GlobalAudioManager.instance;
+  }
+
+  setCurrentAudio(audio: HTMLAudioElement | null): void {
+    // Stop any existing audio
+    if (this.currentAudio && this.currentAudio !== audio) {
+      try {
+        this.currentAudio.pause();
+        this.currentAudio.currentTime = 0;
+      } catch (error) {
+        const err = error instanceof Error ? error.message : 'Unknown error';
+        logger.warn('Error stopping previous audio', { error: err });
+      }
+    }
+    this.currentAudio = audio;
+  }
+
+  getCurrentAudio(): HTMLAudioElement | null {
+    return this.currentAudio;
+  }
+
+  stopAll(): void {
+    if (this.currentAudio) {
+      try {
+        this.currentAudio.pause();
+        this.currentAudio.currentTime = 0;
+        this.currentAudio = null;
+      } catch (error) {
+        const err = error instanceof Error ? error.message : 'Unknown error';
+        logger.warn('Error stopping all audio', { error: err });
+      }
+    }
+  }
+}
+
+export const globalAudioManager = GlobalAudioManager.getInstance();
+
 // Core types and interfaces
 export interface Track {
   id: string;
   title: string;
   artist: string;
   composer?: string;
-  isOriginal: boolean;
   duration: string;
   coverArt: string;
-  audioUrl: string;
   getSignedUrl: () => Promise<string>;
   type: 'audio/mp3' | 'audio/mp4' | 'audio/mpeg' | 'audio/webm' | 'audio/ogg' | 'audio/aac';
   genre?: string;
-  waveform?: number[];
   priority?: boolean;
   instrument: 'guitar' | 'piano' | 'guitar/piano';
 }
@@ -81,9 +126,12 @@ const getAudioUrl = async (filename: string, format: string | undefined): Promis
     } as const;
 
     // Get format extension, defaulting to m4a if not found
-    const formatExtension = format && typeof format === 'string' && Object.prototype.hasOwnProperty.call(formatMap, format)
-      ? formatMap[format as keyof typeof formatMap]
-      : 'm4a';
+    const formatExtension =
+      format &&
+      typeof format === 'string' &&
+      Object.prototype.hasOwnProperty.call(formatMap, format)
+        ? formatMap[format as keyof typeof formatMap]
+        : 'm4a';
 
     // Normalize the filename but preserve underscores
     const normalizedFilename = filename
@@ -97,39 +145,39 @@ const getAudioUrl = async (filename: string, format: string | undefined): Promis
     params.set('format', formatExtension);
 
     const requestUrl = `${baseUrl}/api/audio/sign-url?${params.toString()}`;
-    logger.debug('Requesting audio URL', { 
-      context: { 
-        id: filename 
-      } 
-    });
+    logger.debug('Requesting audio URL', { id: filename });
 
     const response = await fetch(requestUrl);
     if (!response.ok) {
-      throw new Error('Failed to load audio');
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(`Failed to load audio: ${errorData.error || response.statusText}`);
     }
 
     const data = await response.json();
     if (!data.url) {
-      throw new Error('Failed to load audio');
+      throw new Error('Invalid response: missing URL');
     }
 
-    logger.debug('Audio URL request successful', { 
-      context: { 
-        id: filename 
-      } 
-    });
+    // Validate the URL
+    try {
+      new URL(data.url);
+    } catch {
+      throw new Error('Invalid URL received from server');
+    }
+
+    logger.debug('Audio URL request successful', { id: filename });
     return data.url;
   } catch (error) {
-    logger.error('Error getting audio URL', {
-      error: new Error('URL request failed'),
-      context: { id: filename },
+    const err = error instanceof Error ? error : new Error('URL request failed');
+    logger.error('Error getting audio URL', err, {
+      id: filename,
+      format,
+      error: err.message,
+      origin: typeof window !== 'undefined' ? window.location.origin : 'unknown',
     });
     throw new Error('Failed to load audio');
   }
 };
-
-const generateInitialWaveform = (length: number = CONFIG.WAVEFORM.LENGTH): number[] =>
-  Array.from({ length }, () => Math.random() * 2 - 1);
 
 // Unified error handling
 class AudioError extends Error {
@@ -150,65 +198,53 @@ class AudioError extends Error {
 // Unified audio element management
 class AudioManager {
   private static async getUrlWithRetry(track: Track, retries = 3): Promise<string> {
-    logger.debug('Starting URL retry process', {
-      context: { trackId: track.id, remainingRetries: retries },
-    });
+    logger.debug('Starting URL retry process', { trackId: track.id, remainingRetries: retries });
 
     for (let i = 0; i < retries; i++) {
       try {
         logger.debug('Attempting to get URL', {
-          context: { trackId: track.id, attempt: i + 1, totalAttempts: retries },
+          trackId: track.id,
+          attempt: i + 1,
+          totalAttempts: retries,
         });
 
         const url = await track.getSignedUrl();
 
         if (!url) {
-          logger.debug('Empty URL received', {
-            context: { trackId: track.id, attempt: i + 1 },
-          });
+          logger.debug('Empty URL received', { trackId: track.id, attempt: i + 1 });
           throw new Error('Failed to load audio');
         }
 
-        logger.debug('URL request successful', {
-          context: { trackId: track.id, attempt: i + 1 },
-        });
+        logger.debug('URL request successful', { id: track.id });
         return url;
       } catch (error) {
         // Only log as warning if it's the last retry
         if (i === retries - 1) {
           logger.warn('URL request attempt failed', {
-            error: new Error('Failed to load audio'),
-            context: {
-              trackId: track.id,
-              attempt: i + 1,
-              remainingRetries: retries - i - 1,
-            },
+            error: 'Failed to load audio',
+            trackId: track.id,
+            attempt: i + 1,
+            remainingRetries: retries - i - 1,
           });
         } else {
           logger.debug('URL request attempt failed, retrying', {
-            context: {
-              trackId: track.id,
-              attempt: i + 1,
-              remainingRetries: retries - i - 1,
-            },
+            trackId: track.id,
+            attempt: i + 1,
+            remainingRetries: retries - i - 1,
           });
         }
 
         if (i < retries - 1) {
           const delay = 1000 * (i + 1);
-          logger.debug('Retrying after delay', {
-            context: { trackId: track.id, delay },
-          });
+          logger.debug('Retrying after delay', { trackId: track.id, delay });
           await new Promise((resolve) => setTimeout(resolve, delay));
         }
       }
     }
 
     // Only log as error if all retries failed
-    logger.error('All retry attempts failed', {
-      error: new Error('Failed to load audio'),
-      context: { trackId: track.id },
-    });
+    const err = new Error('Failed to load audio');
+    logger.error('All retry attempts failed', err, { trackId: track.id });
     throw new Error('Failed to load audio');
   }
 
@@ -221,6 +257,11 @@ class AudioManager {
         audio.src = '';
         audio.removeAttribute('src');
         audio.load();
+
+        // Remove from global manager if this is the current audio
+        if (globalAudioManager.getCurrentAudio() === audio) {
+          globalAudioManager.setCurrentAudio(null);
+        }
 
         const events = [
           'canplay',
@@ -239,9 +280,8 @@ class AudioManager {
         });
       }
     } catch (error) {
-      logger.warn('Error cleaning up audio', {
-        error: new Error('Cleanup failed'),
-      });
+      const err = error instanceof Error ? error : new Error('Cleanup failed');
+      logger.warn('Error cleaning up audio', { error: err.message });
     }
   }
 
@@ -277,6 +317,9 @@ class AudioManager {
         };
         audio.addEventListener('canplaythrough', loadHandler);
       });
+
+      // Register with global manager before setting source
+      globalAudioManager.setCurrentAudio(audio);
 
       // Set the source and begin loading
       audio.src = url;
@@ -396,10 +439,8 @@ class TrackManager {
       const audio = await AudioManager.create(track);
       await this.cache.set(id, audio);
     } catch (error) {
-      logger.warn('Failed to preload track', {
-        error: error as Error,
-        context: { trackId: id },
-      });
+      const err = error instanceof Error ? error : new Error('Failed to preload track');
+      logger.warn('Failed to preload track', { error: err.message, trackId: id });
     } finally {
       this.preloadQueue.delete(id);
     }
@@ -471,27 +512,40 @@ class TrackManager {
     this.cache.clear();
     this.playHistory.clear();
     this.preloadQueue.clear();
+    globalAudioManager.stopAll();
   }
 }
 
 // Export track data and manager
 export const TRACKS = [
   {
+    id: '11',
+    title: 'Nocturne No. 1 in B♭ Minor',
+    artist: 'Zachary Roth',
+    composer: 'Frédéric Chopin',
+    duration: '5:28',
+    genre: 'Classical',
+    type: 'audio/mp4',
+    coverArt: '/audio/covers/nocturne-1.jpg',
+    getSignedUrl: async () => {
+      const format = await selectOptimalFormat(navigator.userAgent);
+      return getAudioUrl('piano/nocturne-1', format);
+    },
+    instrument: 'piano',
+  },
+  {
     id: 'midnight-the-stars-and-you',
     title: 'Midnight, the Stars and You',
     artist: 'Zachary Roth',
     composer: 'Harry M. Woods',
-    isOriginal: false,
     duration: '3:15',
     genre: 'Jazz',
     type: 'audio/mp4',
     coverArt: '/audio/covers/midnight-the-stars-and-you.jpg',
-    audioUrl: '', // This will be populated with the signed URL
     getSignedUrl: async () => {
       const format = await selectOptimalFormat(navigator.userAgent);
       return getAudioUrl('piano/midnight-the-stars-and-you', format);
     },
-    waveform: generateInitialWaveform(),
     instrument: 'piano',
     priority: true,
   },
@@ -500,54 +554,30 @@ export const TRACKS = [
     title: 'Christmas Time Is Here',
     artist: 'Zachary Roth',
     composer: 'Vince Guaraldi',
-    isOriginal: false,
     duration: '3:45',
     genre: 'Jazz',
     type: 'audio/mp4',
     coverArt: '/audio/covers/christmas-time-is-here.jpg',
-    audioUrl: '', // This will be populated with the signed URL
     getSignedUrl: async () => {
       const format = await selectOptimalFormat(navigator.userAgent);
       return getAudioUrl('piano/christmas-time-is-here', format);
     },
-    waveform: generateInitialWaveform(),
     instrument: 'piano',
     priority: true,
-  },
-  {
-    id: '11',
-    title: 'Nocturne No. 1 in B♭ Minor',
-    artist: 'Zachary Roth',
-    composer: 'Frédéric Chopin',
-    isOriginal: false,
-    duration: '5:28',
-    genre: 'Classical',
-    type: 'audio/mp4',
-    coverArt: '/audio/covers/nocturne-1.jpg',
-    audioUrl: '', // This will be populated with the signed URL
-    getSignedUrl: async () => {
-      const format = await selectOptimalFormat(navigator.userAgent);
-      return getAudioUrl('piano/nocturne-1', format);
-    },
-    waveform: generateInitialWaveform(),
-    instrument: 'piano',
   },
   {
     id: '7',
     title: 'Arabesque No. 1',
     artist: 'Zachary Roth',
     composer: 'Claude Debussy',
-    isOriginal: false,
     duration: '5:36',
     genre: 'Classical',
     type: 'audio/mp4',
     coverArt: '/audio/covers/arabesque.jpg',
-    audioUrl: '', // This will be populated with the signed URL
     getSignedUrl: async () => {
       const format = await selectOptimalFormat(navigator.userAgent);
       return getAudioUrl('piano/arabesque-1', format);
     },
-    waveform: generateInitialWaveform(),
     instrument: 'piano',
     priority: true,
   },
@@ -556,17 +586,14 @@ export const TRACKS = [
     title: 'The Entertainer',
     artist: 'Zachary Roth',
     composer: 'Scott Joplin',
-    isOriginal: false,
     duration: '2:23',
     genre: 'Ragtime',
     type: 'audio/mp4',
     coverArt: '/audio/covers/entertainer.jpg',
-    audioUrl: '',
     getSignedUrl: async () => {
       const format = await selectOptimalFormat(navigator.userAgent);
       return getAudioUrl('piano/the_entertainer', format);
     },
-    waveform: generateInitialWaveform(),
     instrument: 'piano',
   },
 ] as const;

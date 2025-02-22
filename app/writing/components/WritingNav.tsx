@@ -20,13 +20,13 @@ export const WritingNav = memo<WritingNavProps>(({ selectedCategory, onCategoryS
   );
 
   return (
-    <div className="flex justify-center md:justify-start md:inline-flex bg-surface/80 backdrop-blur-sm rounded-3xl px-4 py-2.5 items-center space-x-1 md:space-x-4 overflow-x-auto scrollbar-hide">
+    <div className="flex justify-center md:justify-start md:inline-flex bg-surface/80 backdrop-blur-sm rounded-3xl px-2 md:px-4 py-1.5 md:py-2.5 items-center space-x-0.5 md:space-x-4 overflow-x-auto scrollbar-hide">
       <NavButton
         active={selectedCategory === null}
         onClick={handleCategoryChange(null)}
         size="sm"
         className={cn(
-          'text-base font-medium',
+          'text-sm md:text-base font-mono font-medium px-2 md:px-3',
           'transition-all duration-200',
           selectedCategory === null
             ? 'text-accent bg-accent/10 shadow-[inset_0_1px_2px_rgba(0,0,0,0.15)]'
@@ -42,7 +42,7 @@ export const WritingNav = memo<WritingNavProps>(({ selectedCategory, onCategoryS
           onClick={handleCategoryChange(category)}
           size="sm"
           className={cn(
-            'text-base font-medium',
+            'text-sm md:text-base font-mono font-medium px-2 md:px-3',
             'transition-all duration-200',
             selectedCategory === category
               ? 'text-accent bg-accent/10 shadow-[inset_0_1px_2px_rgba(0,0,0,0.15)]'

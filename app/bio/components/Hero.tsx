@@ -14,7 +14,7 @@ export function Hero({ data }: HeroProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="space-y-6 sm:space-y-8 pt-12 sm:pt-16 max-w-4xl mx-auto"
+      className="space-y-6 sm:space-y-8 pt-4 sm:pt-0 max-w-4xl mx-auto"
     >
       <div className="flex flex-col md:flex-row gap-6 sm:gap-8 md:gap-12 items-center">
         <motion.div
@@ -37,7 +37,8 @@ export function Hero({ data }: HeroProps) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-0 bg-gradient-to-r from-white to-zinc-300 bg-clip-text text-transparent"
+            className="text-5xl sm:text-6xl font-mono font-light tracking-[-0.03em] text-white mb-2 sm:mb-3"
+            style={{ textShadow: '0 4px 8px rgba(0,0,0,0.1)' }}
           >
             {data.name}
           </motion.h1>
@@ -46,7 +47,7 @@ export function Hero({ data }: HeroProps) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-text-secondary/90 font-light tracking-wide"
+            className="text-lg sm:text-xl lg:text-2xl mb-6 sm:mb-8 tracking-wide text-white/60 font-light font-mono"
           >
             {data.title}
           </motion.p>
@@ -55,7 +56,7 @@ export function Hero({ data }: HeroProps) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="flex gap-4 sm:gap-6 justify-center md:justify-start pt-2 sm:pt-4"
+            className="flex gap-4 sm:gap-6 justify-center md:justify-start"
           >
             {data.socialLinks.map(({ icon: Icon, url, label }) => (
               <motion.a
@@ -63,7 +64,7 @@ export function Hero({ data }: HeroProps) {
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-2xl text-zinc-400 hover:text-white transition-all duration-300 hover:scale-110"
+                className="text-3xl text-zinc-400 hover:text-white transition-all duration-300 hover:scale-110"
                 aria-label={label}
                 whileHover={{ scale: 1.1, y: -2 }}
                 transition={{ duration: 0.2 }}

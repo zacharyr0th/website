@@ -1,7 +1,7 @@
 // Components
-export { default as Hero } from './Hero';
-export { Main } from './Main';
-export { Thesis } from './Thesis';
+export { default as Hero } from './components/Hero';
+export { Main } from './components/Main';
+export { Thesis } from './components/Thesis';
 
 // Backgrounds
-export { ThesisBackground } from './backgrounds/ThesisBackground';
+export { HeroBackground, ThesisBackground } from './utils/BackgroundComponents';

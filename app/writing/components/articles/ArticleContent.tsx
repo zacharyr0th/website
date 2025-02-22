@@ -12,49 +12,65 @@ const ArticleContent = memo<ArticleProps>(({ article, contentHtml, nextArticle, 
   const { title, description, date, image, takeaways, category, tags } = article;
 
   return (
-    <article className="max-w-none pt-36">
+    <article className="max-w-none pt-4 sm:pt-6">
       <div className="max-w-[650px] mx-auto">
-        <header className="mb-12">
+        <header className="mb-6 sm:mb-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="space-y-4"
+            className="space-y-4 flex flex-col items-center sm:items-start text-center sm:text-left"
           >
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">{title}</h1>
-            {description && <p className="text-xl sm:text-2xl text-zinc-400">{description}</p>}
+            <div className="space-y-3">
+              <h1
+                className="text-[clamp(2.5rem,6vw,3.25rem)] mb-4 sm:mb-6 font-mono font-light tracking-[-0.03em] text-white"
+                style={{ textShadow: '0 4px 8px rgba(0,0,0,0.1)' }}
+              >
+                {title}
+              </h1>
+              {description && (
+                <p className="text-lg sm:text-xl lg:text-2xl mb-4 sm:mb-6 tracking-wide text-white/60 font-mono font-light max-w-[45ch] mx-auto sm:mx-0">
+                  {description}
+                </p>
+              )}
+            </div>
 
-            <div className="flex items-start gap-2 text-sm text-zinc-500 overflow-x-auto no-scrollbar">
+            <div className="flex items-center justify-center sm:justify-start gap-3 sm:gap-6 text-sm sm:text-base text-white/60 font-mono font-light w-full overflow-x-auto no-scrollbar sm:pl-0">
               {date && (
-                <time dateTime={date} className="flex items-center gap-2 whitespace-nowrap">
-                  <span className="i-lucide-calendar h-4" />
-                  <span className="sm:hidden">{formatDateCompact(date)}</span>
-                  <span className="hidden sm:inline">{formatDate(date)}</span>
+                <time
+                  dateTime={date}
+                  className="flex items-center gap-1.5 whitespace-nowrap shrink-0 px-1 sm:p-0"
+                >
+                  <span className="i-lucide-calendar h-3 w-3 sm:h-3.5 sm:w-3.5 opacity-70" />
+                  <span className="sm:hidden font-mono">{formatDateCompact(date)}</span>
+                  <span className="hidden sm:inline font-mono">{formatDate(date)}</span>
                 </time>
               )}
 
-              <div className="w-[1px] h-4 bg-zinc-800" />
-
               {category && (
-                <span className="flex items-center gap-2 whitespace-nowrap">
-                  <span className="i-lucide-folder h-4 w-4" />
-                  <span className="capitalize">{category}</span>
-                </span>
+                <>
+                  <div className="w-[1px] h-3 bg-white/20 shrink-0 mr-2 ml-0.5 sm:ml-0" />
+                  <span className="flex items-center gap-1 whitespace-nowrap shrink-0 pl-0 pr-2">
+                    <span className="i-lucide-folder h-3 w-3 sm:h-3.5 sm:w-3.5 opacity-70" />
+                    <span className="capitalize font-mono">{category}</span>
+                  </span>
+                </>
               )}
 
-              <div className="w-[1px] h-4 bg-zinc-800 mx-3" />
-
               {tags && tags.length > 0 && (
-                <div className="flex items-start">
-                  {tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 text-sm rounded-full bg-zinc-800 text-zinc-400 whitespace-nowrap"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+                <>
+                  <div className="w-[1px] h-3 bg-white/20 shrink-0 mx-1" />
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    {tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-3 py-1 text-[0.7rem] sm:text-xs rounded-full bg-white/[0.03] whitespace-nowrap border border-white/[0.06] shrink-0 font-mono"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </>
               )}
             </div>
           </motion.div>
@@ -93,12 +109,17 @@ const ArticleContent = memo<ArticleProps>(({ article, contentHtml, nextArticle, 
               transition={{ duration: 0.5, delay: 0.4 }}
               className="sm:float-right sm:w-[300px] w-full sm:ml-8 mb-8"
             >
-              <div className="p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-sm hover:bg-white/[0.04] transition-colors">
-                <h2 className="text-xl font-semibold mb-6 text-white/90">Key Takeaways</h2>
-                <ul className="space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-sm hover:bg-white/[0.04] transition-colors shadow-lg">
+                <h2 className="text-2xl font-mono font-semibold mb-8 text-white/90 tracking-tight">
+                  Key Takeaways
+                </h2>
+                <ul className="space-y-6">
                   {takeaways.map((point, index) => (
-                    <li key={index} className="flex gap-3 text-white/70 text-base leading-relaxed">
-                      <span className="text-accent/80">•</span>
+                    <li
+                      key={index}
+                      className="flex gap-4 text-white/70 text-lg sm:text-xl leading-normal tracking-wide font-light"
+                    >
+                      <span className="text-accent/80 text-2xl leading-none mt-1">•</span>
                       {point}
                     </li>
                   ))}
@@ -108,26 +129,7 @@ const ArticleContent = memo<ArticleProps>(({ article, contentHtml, nextArticle, 
           )}
 
           <div
-            className="prose prose-invert prose-xl w-full max-w-none
-              prose-headings:scroll-mt-24
-              prose-headings:font-bold
-              prose-h1:text-4xl prose-h1:bg-gradient-to-br prose-h1:from-white prose-h1:to-white/70 prose-h1:bg-clip-text prose-h1:text-transparent
-              prose-h2:text-2xl prose-h2:text-white/90 prose-h2:border-b prose-h2:border-white/10 prose-h2:pb-2
-              prose-h3:text-xl prose-h3:text-white/80
-              prose-h4:text-lg prose-h4:text-white/70
-              prose-p:text-justify
-              prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline
-              prose-img:rounded-lg
-              prose-pre:bg-zinc-900 prose-pre:border prose-pre:border-zinc-800
-              prose-code:text-blue-400 prose-code:before:content-none prose-code:after:content-none
-              [&_h1_.heading-link]:bg-gradient-to-br [&_h1_.heading-link]:from-white [&_h1_.heading-link]:to-white/70 [&_h1_.heading-link]:bg-clip-text [&_h1_.heading-link]:text-transparent
-              [&_h2_.heading-link]:text-white/90
-              [&_h3_.heading-link]:text-white/80
-              [&_h4_.heading-link]:text-white/70
-              [&_.heading-link]:no-underline [&_.heading-link]:cursor-pointer
-              hover:[&_.heading-link]:text-accent/90 hover:[&_.heading-link]:no-underline
-              [&_.heading-link]:transition-colors [&_.heading-link]:duration-200
-              [&_.heading-link]:block [&_.heading-link]:w-fit"
+            className="prose prose-invert w-full max-w-none prose-base sm:prose-lg lg:prose-xl [&>p]:!font-sans [&>p]:!text-[clamp(1.25rem,calc(1.1rem+0.5vw),1.5rem)] [&>p]:!text-white/60 [&>p]:!leading-normal [&>p]:!tracking-wide [&>p]:!font-light [&>p]:!max-w-none"
             dangerouslySetInnerHTML={{ __html: contentHtml }}
           />
         </motion.div>

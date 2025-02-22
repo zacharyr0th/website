@@ -6,6 +6,7 @@ export const BUTTON_CLASSES = {
     xs: 'px-2 py-0.5 text-sm min-h-[24px]',
     sm: 'px-2.5 py-1 text-sm min-h-[32px]',
     md: 'px-3 py-1.5 text-base min-h-[40px]',
+    'md-lg': 'px-4 py-2 text-[1.1rem] min-h-[44px]',
     lg: 'px-5 py-2.5 text-lg min-h-[48px]',
   } as const,
   state: {

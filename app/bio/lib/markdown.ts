@@ -23,7 +23,7 @@ export async function processMarkdown(content: string) {
   const result = await unified()
     .use(remarkParse)
     .use(remarkGfm)
-    .use(remarkRehype, { 
+    .use(remarkRehype, {
       allowDangerousHtml: true,
       footnoteLabel: 'Footnotes',
       footnoteBackLabel: 'Back to content',
@@ -31,9 +31,9 @@ export async function processMarkdown(content: string) {
     .use(rehypeSlug)
     .use(rehypeAutolinkHeadings, {
       behavior: 'append',
-      properties: { 
-        className: ['heading-link'], 
-        ariaHidden: true 
+      properties: {
+        className: ['heading-link'],
+        ariaHidden: true,
       },
       content: { type: 'text', value: '' },
     })
@@ -46,20 +46,38 @@ export async function processMarkdown(content: string) {
 
   // Additional sanitization with DOMPurify
   const sanitizedContent = DOMPurify.sanitize(result.toString(), {
-    ADD_TAGS: ['img', 'figure', 'figcaption', 'pre', 'code', 'span', 'a', 'h1', 'h2', 'h3', 'h4', 'p', 'ul', 'li', 'ol', 'blockquote', 'hr'],
+    ADD_TAGS: [
+      'img',
+      'figure',
+      'figcaption',
+      'pre',
+      'code',
+      'span',
+      'a',
+      'h1',
+      'h2',
+      'h3',
+      'h4',
+      'p',
+      'ul',
+      'li',
+      'ol',
+      'blockquote',
+      'hr',
+    ],
     ADD_ATTR: [
-      'loading', 
-      'alt', 
-      'src', 
-      'class', 
-      'id', 
-      'data-language', 
+      'loading',
+      'alt',
+      'src',
+      'class',
+      'id',
+      'data-language',
       'aria-hidden',
       'data-line-numbers',
       'style',
       'target',
       'rel',
-      'href'
+      'href',
     ],
   });
 

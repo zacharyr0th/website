@@ -1,3 +1,7 @@
+/**
+ * Core type definitions
+ */
+
 // Base Types
 export type ID = string;
 export type DateString = string;
@@ -61,20 +65,16 @@ export interface AppError extends Error {
 
 // Config Types
 export interface AppConfig {
-  environment: 'development' | 'production' | 'test';
+  environment: 'development' | 'production';
   api: {
     baseUrl: string;
-    timeout: number;
-    retries: number;
   };
-  features: {
-    [key: string]: boolean;
-  };
-  theme: {
-    primary: string;
-    secondary: string;
-    [key: string]: string;
-  };
+}
+
+// Logging context
+export interface LogContext {
+  [key: string]: string | number | boolean | undefined;
+  component?: string;
 }
 
 // Component Props Types
@@ -92,19 +92,13 @@ export interface ButtonProps extends BaseProps {
 }
 
 // Form Types
-export interface FormField<T = string | number | boolean | Date | File> {
+export interface FormField {
   name: string;
   label: string;
   type: 'text' | 'number' | 'email' | 'password' | 'select' | 'textarea';
+  required?: boolean;
   placeholder?: string;
-  defaultValue?: T;
-  validation?: {
-    required?: boolean;
-    min?: number;
-    max?: number;
-    pattern?: RegExp;
-    custom?: (value: T) => boolean;
-  };
+  value?: string;
 }
 
 // Utility Types

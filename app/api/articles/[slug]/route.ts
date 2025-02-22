@@ -77,7 +77,7 @@ export async function GET(
     }
 
     if (typeof fileResult.data !== 'string') {
-      logger.error('Invalid file content type', { context: { type: typeof fileResult.data } });
+      logger.error('Invalid file content type', undefined, { type: typeof fileResult.data });
       return api.createApiErrorResponse('Invalid file content', { status: 500 });
     }
 
@@ -94,17 +94,17 @@ export async function GET(
         slug,
       },
       {
-        headers: security.getStaticHeaders(3600), // 1 hour cache
+        headers: {
+          ...security.getStaticHeaders(3600), // 1 hour cache
+          'Content-Type': 'application/json',
+        },
       }
     );
   } catch (error) {
     const err = error instanceof Error ? error : new Error('Unknown error');
-    logger.error('Error in article API route', {
-      error: err,
-      context: {
-        slug: params.slug,
-        timestamp: new Date().toISOString(),
-      },
+    logger.error('Error in article API route', err, {
+      slug: params.slug,
+      timestamp: new Date().toISOString(),
     });
 
     return api.createApiErrorResponse('Failed to load article', {

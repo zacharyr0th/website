@@ -54,8 +54,8 @@ export const selectOptimalFormat = async (userAgent: string): Promise<string | u
     return browserInfo.formats[0];
   } catch (error) {
     logger.warn('Format selection failed', {
-      error: new Error('Failed to select format'),
-      context: { defaultFormat: SUPPORTED_FORMATS.chrome[0] },
+      error: 'Failed to select format',
+      defaultFormat: SUPPORTED_FORMATS.chrome[0],
     });
     return SUPPORTED_FORMATS.chrome[0];
   }

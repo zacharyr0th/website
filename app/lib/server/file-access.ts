@@ -1,7 +1,8 @@
 import { promises as fs } from 'node:fs';
+import { createReadStream } from 'node:fs';
+import { Stats } from 'node:fs';
 import path from 'node:path';
 import { createLogger } from '@/lib/core';
-import { LogCategory } from '@/lib/core';
 
 const logger = createLogger('security:file-access');
 
@@ -34,6 +35,18 @@ export interface SecureFileResult<T> {
 }
 
 /**
+ * Context for validation logging
+ */
+type ValidationContext = {
+  [key: string]: string | number | boolean | undefined;
+  path: string;
+  extension?: string;
+  required?: string;
+  normalizedPath?: string;
+  normalizedRequired?: string;
+};
+
+/**
  * Validate file path against security constraints
  */
 function validateFilePath(filePath: string, options: SecureFileOptions = {}): boolean {
@@ -44,10 +57,8 @@ function validateFilePath(filePath: string, options: SecureFileOptions = {}): bo
 
   // Must be within project directory
   if (!resolvedPath.startsWith(process.cwd())) {
-    logger.warn('File path outside project directory', {
-      context: { path: filePath },
-      category: LogCategory.SECURITY,
-    });
+    const context: ValidationContext = { path: filePath };
+    logger.warn('File path outside project directory', context);
     return false;
   }
 
@@ -55,21 +66,26 @@ function validateFilePath(filePath: string, options: SecureFileOptions = {}): bo
   if (allowedExtensions) {
     const ext = path.extname(filePath);
     if (!allowedExtensions.includes(ext)) {
-      logger.warn('Invalid file extension', {
-        context: { path: filePath, extension: ext },
-        category: LogCategory.SECURITY,
-      });
+      const context: ValidationContext = { path: filePath, extension: ext };
+      logger.warn('Invalid file extension', context);
       return false;
     }
   }
 
   // Check required path if specified
-  if (requiredPath && !resolvedPath.includes(requiredPath)) {
-    logger.warn('File path not in required directory', {
-      context: { path: filePath, required: requiredPath },
-      category: LogCategory.SECURITY,
-    });
-    return false;
+  if (requiredPath) {
+    const normalizedRequiredPath = path.resolve(requiredPath);
+    const normalizedFilePath = path.resolve(filePath);
+    if (!normalizedFilePath.startsWith(normalizedRequiredPath)) {
+      const context: ValidationContext = {
+        path: filePath,
+        required: requiredPath,
+        normalizedPath: normalizedFilePath,
+        normalizedRequired: normalizedRequiredPath,
+      };
+      logger.warn('File path not in required directory', context);
+      return false;
+    }
   }
 
   return true;
@@ -108,11 +124,7 @@ export async function readFileSecure(
     return { success: true, data: content };
   } catch (error) {
     const err = error instanceof Error ? error : new Error('Unknown error');
-    logger.error('Error reading file', {
-      error: err,
-      context: { path: filePath },
-      category: LogCategory.SECURITY,
-    });
+    logger.error('Error reading file', err, { path: filePath });
     return { success: false, error: 'Failed to read file' };
   }
 }
@@ -148,11 +160,75 @@ export async function readDirSecure(
     return { success: true, data: filteredFiles };
   } catch (error) {
     const err = error instanceof Error ? error : new Error('Unknown error');
-    logger.error('Error reading directory', {
-      error: err,
-      context: { path: dirPath },
-      category: LogCategory.SECURITY,
-    });
+    logger.error('Error reading directory', err, { path: dirPath });
     return { success: false, error: 'Failed to read directory' };
+  }
+}
+
+/**
+ * Create a secure read stream
+ */
+export function createSecureReadStream(
+  filePath: string,
+  options: SecureFileOptions & { start?: number; end?: number } = {}
+): SecureFileResult<ReadableStream> {
+  try {
+    // Validate file path
+    if (!validateFilePath(filePath, options)) {
+      return { success: false, error: 'Invalid file path' };
+    }
+
+    // Create read stream
+    const nodeStream = createReadStream(filePath, {
+      start: options.start,
+      end: options.end,
+    });
+
+    // Convert Node.js stream to web stream
+    const webStream = new ReadableStream({
+      start(controller) {
+        nodeStream.on('data', (chunk: string | Buffer) => {
+          controller.enqueue(chunk instanceof Buffer ? chunk : Buffer.from(chunk));
+        });
+        nodeStream.on('end', () => {
+          controller.close();
+        });
+        nodeStream.on('error', (err: Error) => {
+          controller.error(err);
+        });
+      },
+      cancel() {
+        nodeStream.destroy();
+      },
+    });
+
+    return { success: true, data: webStream };
+  } catch (error) {
+    const err = error instanceof Error ? error : new Error('Unknown error');
+    logger.error('Error creating read stream', err, { path: filePath });
+    return { success: false, error: 'Failed to create stream' };
+  }
+}
+
+/**
+ * Get file stats securely
+ */
+export async function getFileStatsSecure(
+  filePath: string,
+  options: SecureFileOptions = {}
+): Promise<SecureFileResult<Stats>> {
+  try {
+    // Validate file path
+    if (!validateFilePath(filePath, options)) {
+      return { success: false, error: 'Invalid file path' };
+    }
+
+    // Get file stats
+    const stats = await fs.stat(filePath);
+    return { success: true, data: stats };
+  } catch (error) {
+    const err = error instanceof Error ? error : new Error('Unknown error');
+    logger.error('Error getting file stats', err, { path: filePath });
+    return { success: false, error: 'Failed to get file stats' };
   }
 }

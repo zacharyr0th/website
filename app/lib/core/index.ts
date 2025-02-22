@@ -1,13 +1,5 @@
 // Logger exports
-export {
-  createLogger,
-  globalLogger,
-  type Logger,
-  type LogContext,
-  type LogOptions,
-  LogLevel,
-  LogCategory,
-} from './logger';
+export { createLogger, type Logger, LogCategory } from './logger';
 
 // Utility exports
 export {
@@ -46,4 +38,5 @@ export type {
   RecursivePartial,
   ValueOf,
   AsyncReturnType,
+  LogContext,
 } from './types';

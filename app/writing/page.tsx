@@ -1,9 +1,10 @@
 import React from 'react';
 import WritingPageClient from './components/WritingPageClient';
 import { containerVariants } from '@/lib/ui/animations';
-import PageContainer from '@/components/layout/PageContainer';
+import PageContent from '@/components/layout/PageContent';
 import PageHeader from '@/components/layout/PageHeader';
 import PageLayout from '@/components/layout/PageLayout';
+import BaseLayout from '@/components/layout/BaseLayout';
 import type { Metadata } from 'next';
 import { SECTION_METADATA } from '@/lib/config/metadata';
 import { readArticlesFromFilesystem } from './lib/server';
@@ -28,18 +29,20 @@ export default async function WritingPage() {
   });
 
   return (
-    <PageLayout>
-      <PageContainer>
-        <PageHeader title="Writing" />
+    <BaseLayout>
+      <PageLayout>
+        <PageContent maxWidth="wide">
+          <PageHeader title="Writing" />
 
-        <section>
-          <WritingPageClient
-            initialArticles={regularArticles}
-            containerVariants={containerVariants}
-            enableLoadMore
-          />
-        </section>
-      </PageContainer>
-    </PageLayout>
+          <section>
+            <WritingPageClient
+              initialArticles={regularArticles}
+              containerVariants={containerVariants}
+              enableLoadMore
+            />
+          </section>
+        </PageContent>
+      </PageLayout>
+    </BaseLayout>
   );
 }

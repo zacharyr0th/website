@@ -1,13 +1,11 @@
 import React, { Suspense } from 'react';
 import type { Metadata } from 'next';
-import { config } from '@/lib';
+import { SECTION_METADATA } from '@/lib/config/metadata';
 import BioPageClient from './components/BioPageClient';
 import { LoadingState } from '@/components/misc/Loading';
 import PageContainer from '@/components/layout/PageContainer';
 import PageLayout from '@/components/layout/PageLayout';
 import { containerVariants } from '@/lib/ui/animations';
-
-const { SECTION_METADATA } = config;
 
 export const metadata: Metadata = {
   title: SECTION_METADATA.bio.title,

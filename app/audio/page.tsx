@@ -2,9 +2,10 @@ import React, { Suspense } from 'react';
 import { LoadingState } from '@/components/misc/Loading';
 import AudioPageClient from './components/AudioPageClient';
 import { containerVariants } from '@/lib/ui/animations';
-import PageContainer from '@/components/layout/PageContainer';
+import PageContent from '@/components/layout/PageContent';
 import PageHeader from '@/components/layout/PageHeader';
 import PageLayout from '@/components/layout/PageLayout';
+import BaseLayout from '@/components/layout/BaseLayout';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -18,24 +19,26 @@ export const revalidate = 3600; // Revalidate every hour
 
 export default function AudioPage() {
   return (
-    <PageLayout>
-      <PageContainer>
-        <Suspense fallback={<LoadingState label="Loading title" height="h-12" barCount={1} />}>
-          <PageHeader title="Audio" />
-        </Suspense>
-        <Suspense
-          fallback={
-            <LoadingState
-              label="Loading audio content"
-              height="h-[600px]"
-              barCount={4}
-              className="max-w-3xl mx-auto"
-            />
-          }
-        >
-          <AudioPageClient containerVariants={containerVariants} />
-        </Suspense>
-      </PageContainer>
-    </PageLayout>
+    <BaseLayout>
+      <PageLayout>
+        <PageContent maxWidth="wide">
+          <Suspense fallback={<LoadingState label="Loading title" height="h-12" barCount={1} />}>
+            <PageHeader title="Audio" />
+          </Suspense>
+          <Suspense
+            fallback={
+              <LoadingState
+                label="Loading audio content"
+                height="h-[600px]"
+                barCount={4}
+                className="max-w-3xl mx-auto"
+              />
+            }
+          >
+            <AudioPageClient containerVariants={containerVariants} />
+          </Suspense>
+        </PageContent>
+      </PageLayout>
+    </BaseLayout>
   );
 }

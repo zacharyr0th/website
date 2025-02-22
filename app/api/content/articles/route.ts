@@ -32,20 +32,21 @@ export async function GET() {
     const validatedArticles = api.articlesSchema.parse(articles);
 
     return api.createApiResponse(validatedArticles, {
-      headers: security.getStaticHeaders(3600), // 1 hour cache
+      headers: {
+        ...security.getStaticHeaders(3600), // 1 hour cache
+        'Content-Type': 'application/json',
+      },
     });
   } catch (error) {
     const errorObj = error instanceof Error ? error : new Error('Unknown error');
-
-    logger.error('Error in articles API route', {
-      error: errorObj,
+    logger.error('Error in articles API route', errorObj, {
       timestamp: new Date().toISOString(),
     });
 
     return api.createApiErrorResponse('Failed to fetch articles', {
       status: 500,
       code: 'INTERNAL_ERROR',
-      details: errorObj,
+      details: process.env.NODE_ENV === 'development' ? errorObj : undefined,
     });
   }
 }

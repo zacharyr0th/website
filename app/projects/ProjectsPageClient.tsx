@@ -75,7 +75,7 @@ export default function ProjectsPageClient({
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
+        className="grid grid-cols-1 md:grid-cols-2 gap-4"
       >
         {filteredProjects.map((project, index) => (
           <ProjectCard key={project.id} project={project} isFocused={index === focusedIndex} />

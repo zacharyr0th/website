@@ -1,40 +1,34 @@
-// Core security utilities
-export * from './access-control';
-export * from './constants';
-export * from './csp';
-export * from './headers';
-export * from './security';
-export * from './validation';
-export * from './types';
-export * from './performance';
+import type { ProblemDetails } from './types';
 
-// Re-export error handling
+// Essential security exports
 export {
-  createErrorResponse,
-  sanitizeErrorMessage,
+  getBaseSecurityHeaders,
+  getStaticHeaders,
+  getApiHeaders,
   getErrorHeaders,
-  type ProblemDetails,
-} from './error-handling';
+} from './headers';
 
-// Re-export rate limiting
-export { checkRateLimit, RateLimiter } from './rate-limiting';
+export { SECURITY_CONSTANTS, validateOrigin } from './constants';
 
-// Additional security utilities
-export {
-  generateSecureId,
-  SECURITY_CONSTANTS,
-  validateOrigin,
-  sanitizeUrl,
-  generateSriHash,
-  sanitizeHtml,
-  getCSP,
-  getRequestId,
-  getRequestIp,
-  handleSensitiveData,
-  withSecureMemory,
-  createSecureReference,
-  resolveSecureReference,
-  deleteSecureReference,
-  validateResourceAccess,
-  checkServerLoad,
-} from './security';
+export type { SecurityHeaders, CspDirectives, ProblemDetails } from './types';
+
+export { ErrorType } from './types';
+
+// CSP configuration
+export { buildCSPHeader as getCSP, generateNonce } from './csp';
+
+// CSP report schemas
+export { cspReportSchema, reportToSchema } from './schemas';
+
+// Error response utilities
+export const createErrorResponse = (
+  type: string,
+  status: number,
+  title: string,
+  detail?: string
+): ProblemDetails => ({
+  type,
+  title,
+  status,
+  detail,
+});

@@ -1,22 +1,43 @@
-export enum ErrorType {
-  VALIDATION_ERROR = 'validation_error',
-  AUTHENTICATION_ERROR = 'authentication_error',
-  AUTHORIZATION_ERROR = 'authorization_error',
-  NOT_FOUND_ERROR = 'not_found_error',
-  STORAGE_ERROR = 'storage_error',
-  INTERNAL_ERROR = 'internal_error',
-  RATE_LIMIT_ERROR = 'rate_limit_error',
-  BAD_REQUEST_ERROR = 'bad_request_error',
+export interface SecurityHeaders {
+  'X-Content-Type-Options'?: string;
+  'X-Frame-Options'?: string;
+  'Referrer-Policy'?: string;
+  'Strict-Transport-Security'?: string;
+  'Cache-Control'?: string;
+  'Pragma'?: string;
+  'Expires'?: string;
 }
 
-export interface ValidationResult<T = unknown> {
-  success: boolean;
-  data?: T;
-  errors?: Array<{
-    path: string[];
-    message: string;
-  }>;
+export interface CspDirectives {
+  'default-src'?: string[];
+  'script-src'?: string[];
+  'style-src'?: string[];
+  'img-src'?: string[];
+  'connect-src'?: string[];
+  'font-src'?: string[];
+  'object-src'?: string[];
+  'media-src'?: string[];
+  'frame-src'?: string[];
+  'worker-src'?: string[];
+  'manifest-src'?: string[];
+  'form-action'?: string[];
 }
+
+export interface ProblemDetails {
+  type: string;
+  title: string;
+  status: number;
+  detail: string | undefined;
+  instance?: string;
+}
+
+export const ErrorType = {
+  VALIDATION_ERROR: 'validation_error',
+  INTERNAL_ERROR: 'internal_error',
+  NOT_FOUND: 'not_found',
+  UNAUTHORIZED: 'unauthorized',
+  FORBIDDEN: 'forbidden',
+} as const;
 
 export interface SecurityConfig {
   includeCSP?: boolean;
