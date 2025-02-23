@@ -22,7 +22,7 @@ const ProjectNav = memo<ProjectNavProps>(({ selectedCategory, onCategoryChange, 
   return (
     <nav
       className={cn(
-        'flex items-center overflow-x-auto scrollbar-hide',
+        'flex items-center justify-center overflow-x-auto scrollbar-hide',
         'bg-surface/40 backdrop-blur-sm rounded-2xl',
         'px-4 py-2.5 md:px-6',
         'transition-colors duration-200 hover:bg-surface/60',
@@ -31,7 +31,7 @@ const ProjectNav = memo<ProjectNavProps>(({ selectedCategory, onCategoryChange, 
       role="navigation"
       aria-label="Project categories"
     >
-      <div className="flex items-center gap-2 md:gap-4">
+      <div className="flex items-center justify-center md:justify-start gap-2 md:gap-4 w-full">
         <NavButton
           active={selectedCategory === 'all'}
           onClick={handleCategoryChange('all')}
