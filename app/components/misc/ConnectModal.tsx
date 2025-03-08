@@ -1,9 +1,19 @@
-import React, { useEffect, useRef, useCallback, memo, useMemo } from 'react';
+/**
+ * ConnectModal.tsx
+ * This file contains both the ConnectModal component and the GlobalConnectModal component
+ * that provides a global wrapper with keyboard shortcuts and event listeners.
+ */
+
+'use client';
+
+import React, { useEffect, useRef, useCallback, memo, useMemo, useState, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { config } from '@/lib';
 import { FaXmark } from 'react-icons/fa6';
 import { IconButton } from '../buttons';
 import { ErrorBoundary } from 'react-error-boundary';
+
+// ===== ConnectModal Component =====
 
 interface ConnectModalProps {
   isOpen: boolean;
@@ -44,7 +54,7 @@ const overlayVariants = {
   exit: { opacity: 0, transition: { duration: 0.2 } },
 } as const;
 
-const ErrorFallback = memo(
+const ModalErrorFallback = memo(
   ({ error, resetErrorBoundary }: { error: Error; resetErrorBoundary: () => void }) => (
     <div className="p-3 text-center">
       <p className="text-red-500 mb-2 text-sm">Something went wrong:</p>
@@ -59,9 +69,9 @@ const ErrorFallback = memo(
   )
 );
 
-ErrorFallback.displayName = 'ErrorFallback';
+ModalErrorFallback.displayName = 'ModalErrorFallback';
 
-const ConnectModal = memo(({ isOpen, onClose }: ConnectModalProps) => {
+export const ConnectModal = memo(({ isOpen, onClose }: ConnectModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const initialFocusRef = useRef<HTMLButtonElement>(null);
   const [socialLinks, setSocialLinks] = React.useState<Record<string, SocialLink>>({});
@@ -130,7 +140,7 @@ const ConnectModal = memo(({ isOpen, onClose }: ConnectModalProps) => {
       >
         <div className="fixed inset-0 bg-text/30 backdrop-blur-sm" aria-hidden="true" />
 
-        <ErrorBoundary FallbackComponent={ErrorFallback} onReset={onClose}>
+        <ErrorBoundary FallbackComponent={ModalErrorFallback} onReset={onClose}>
           <motion.div
             ref={modalRef}
             className="relative rounded-full px-8 py-4 shadow-xl bg-surface w-full max-w-[240px] mx-auto"
@@ -174,4 +184,83 @@ const ConnectModal = memo(({ isOpen, onClose }: ConnectModalProps) => {
 
 ConnectModal.displayName = 'ConnectModal';
 
-export default ConnectModal;
+// ===== GlobalConnectModal Component =====
+
+interface GlobalConnectModalProps {
+  defaultOpen?: boolean;
+}
+
+const GlobalErrorFallback = ({
+  error,
+  resetErrorBoundary,
+}: {
+  error: Error;
+  resetErrorBoundary: () => void;
+}) => (
+  <div
+    className="fixed bottom-4 right-4 bg-red-500 text-white p-4 rounded-lg shadow-lg max-w-[90vw]"
+    role="alert"
+  >
+    <p className="font-medium">Error loading connect modal</p>
+    <p className="text-sm mt-1 opacity-90">{error.message}</p>
+    <button
+      onClick={resetErrorBoundary}
+      className="mt-2 px-3 py-1 bg-white/10 hover:bg-white/20 text-sm rounded-full transition-colors"
+    >
+      Retry
+    </button>
+  </div>
+);
+
+export const GlobalConnectModal = memo(({ defaultOpen = false }: GlobalConnectModalProps) => {
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+
+  const handleClose = useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
+  const handleToggle = useCallback(() => {
+    setIsOpen((prev) => !prev);
+  }, []);
+
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      // Only handle if not in an input/textarea
+      if (
+        e.target instanceof HTMLElement &&
+        (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')
+      ) {
+        return;
+      }
+
+      if (e.metaKey && e.ctrlKey && e.key === 'c') {
+        e.preventDefault();
+        handleToggle();
+      }
+    };
+
+    const handleOpenEvent = (e: Event) => {
+      e.stopPropagation();
+      setIsOpen(true);
+    };
+
+    window.addEventListener('openConnectModal', handleOpenEvent);
+    window.addEventListener('keydown', handleKeyPress);
+
+    return () => {
+      window.removeEventListener('openConnectModal', handleOpenEvent);
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [handleToggle]);
+
+  return (
+    <ErrorBoundary FallbackComponent={GlobalErrorFallback} onReset={handleClose}>
+      <ConnectModal isOpen={isOpen} onClose={handleClose} />
+    </ErrorBoundary>
+  );
+});
+
+GlobalConnectModal.displayName = 'GlobalConnectModal';
+
+// Default export for backward compatibility
+export default GlobalConnectModal;

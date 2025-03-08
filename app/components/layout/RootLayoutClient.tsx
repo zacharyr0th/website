@@ -3,7 +3,7 @@
 import type { ReactNode } from 'react';
 import Footer from './Footer';
 import KeyboardShortcuts from '../KeyboardShortcuts';
-import GlobalConnectModal from '../misc/GlobalConnectModal';
+import { GlobalConnectModal } from '../misc/ConnectModal';
 import ErrorBoundary from '../ErrorBoundary';
 import Navigation from '../navigation/Navigation';
 

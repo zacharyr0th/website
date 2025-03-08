@@ -1,55 +1,71 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 import type { MouseEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import type { TargetAndTransition } from 'framer-motion';
+import type { TargetAndTransition, VariantLabels } from 'framer-motion';
 import Image from 'next/image';
 
+/**
+ * ProfileImage component - Displays a user profile image with optional modal view and edit functionality
+ */
 interface ProfileImageProps {
+  /** Size of the profile image: 'sm' (small), 'md' (medium), or 'lg' (large) */
   size?: 'sm' | 'md' | 'lg';
+  /** Whether the image can be edited (shows file input) */
   editable?: boolean;
+  /** Whether the image is clickable to show modal */
   clickable?: boolean;
+  /** Callback when image is changed */
   onImageChange?: (file: File) => void;
 }
 
+// Animation constants
 const hoverScale: TargetAndTransition = { scale: 1.05 };
 const tapScale: TargetAndTransition = { scale: 0.95 };
 
-const ProfileImage = ({
+// Size mapping object for better performance
+const SIZE_CLASSES = {
+  sm: 'w-24',
+  md: 'w-48',
+  lg: 'w-96'
+};
+
+const ProfileImage = memo(function ProfileImage({
   size = 'md',
   editable = false,
   clickable = true,
   onImageChange,
-}: ProfileImageProps) => {
+}: ProfileImageProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const sizeClass = ((s: typeof size) => {
-    switch (s) {
-      case 'sm':
-        return 'w-24';
-      case 'md':
-        return 'w-48';
-      case 'lg':
-        return 'w-96';
-      default:
-        return 'w-48';
-    }
-  })(size);
+  
+  // Get size class from mapping object
+  const sizeClass = SIZE_CLASSES[size] || SIZE_CLASSES.md;
 
-  const handleClick = () => clickable && setIsModalOpen(true);
-  const handleClose = () => setIsModalOpen(false);
+  // Memoized event handlers
+  const handleClick = useCallback(() => {
+    if (clickable) setIsModalOpen(true);
+  }, [clickable]);
+  
+  const handleClose = useCallback(() => {
+    setIsModalOpen(false);
+  }, []);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file && onImageChange) {
       onImageChange(file);
     }
-  };
+  }, [onImageChange]);
+
+  const handleModalClick = useCallback((e: MouseEvent) => {
+    e.stopPropagation();
+  }, []);
 
   return (
     <>
       <motion.div
         className={`profile-image relative aspect-square ${sizeClass}`}
-        whileHover={clickable ? hoverScale : {}}
-        whileTap={clickable ? tapScale : {}}
+        whileHover={clickable ? hoverScale : undefined as unknown as TargetAndTransition | VariantLabels}
+        whileTap={clickable ? tapScale : undefined as unknown as TargetAndTransition | VariantLabels}
         onClick={handleClick}
         style={{ cursor: clickable ? 'pointer' : 'default' }}
       >
@@ -89,7 +105,7 @@ const ProfileImage = ({
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               className="profile-image relative aspect-square w-[80vh] max-w-3xl bg-surface p-4 rounded-2xl shadow-2xl"
-              onClick={(e: MouseEvent) => e.stopPropagation()}
+              onClick={handleModalClick}
             >
               <Image
                 src="/misc/profile-picture.webp"
@@ -112,6 +128,6 @@ const ProfileImage = ({
       </AnimatePresence>
     </>
   );
-};
+});
 
 export default ProfileImage;

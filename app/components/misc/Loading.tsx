@@ -1,5 +1,8 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 
+/**
+ * Props for the LoadingState component
+ */
 interface LoadingStateProps {
   /** Label for accessibility */
   label?: string;
@@ -13,6 +16,7 @@ interface LoadingStateProps {
 
 /**
  * A loading spinner component for inline loading states
+ * Used for smaller loading indicators within UI elements
  */
 export const LoadingSpinner = memo(function LoadingSpinner() {
   return (
@@ -31,6 +35,7 @@ export const LoadingSpinner = memo(function LoadingSpinner() {
 
 /**
  * A skeleton loading state component for content placeholders
+ * Displays animated loading bars to indicate content is being loaded
  */
 export const LoadingState = memo(function LoadingState({
   label = 'Loading content',
@@ -38,24 +43,35 @@ export const LoadingState = memo(function LoadingState({
   barCount = 2,
   className = '',
 }: LoadingStateProps) {
+  // Memoize the loading bars to prevent unnecessary re-renders
+  const loadingBars = useMemo(() => 
+    Array.from({ length: barCount }, (_, i) => (
+      <div
+        key={`loading-bar-${i}`}
+        className={`h-4 bg-surface/50 rounded ${i === 0 ? 'w-1/3' : 'w-2/3'}`.trim()}
+        aria-hidden="true"
+      />
+    )),
+    [barCount]
+  );
+
   return (
-    <div role="status" aria-label={label} className="animate-pulse space-y-8">
+    <div 
+      role="status" 
+      aria-label={label} 
+      className="animate-pulse space-y-8"
+    >
       <div
         className={`${height} bg-surface/50 rounded-xl ${className}`.trim()}
         aria-hidden="true"
       />
       <div className="space-y-4">
-        {Array.from({ length: barCount }, (_, i) => (
-          <div
-            key={`loading-bar-${i}`}
-            className={`h-4 bg-surface/50 rounded ${i === 0 ? 'w-1/3' : 'w-2/3'}`.trim()}
-            aria-hidden="true"
-          />
-        ))}
+        {loadingBars}
       </div>
     </div>
   );
 });
 
+// Set display names for better debugging in React DevTools
 LoadingState.displayName = 'LoadingState';
 LoadingSpinner.displayName = 'LoadingSpinner';
