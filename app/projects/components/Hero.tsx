@@ -2,7 +2,12 @@ import React, { useState, useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import type { IconType } from 'react-icons';
 import { FaGithub, FaNewspaper, FaPlay, FaArrowUpRightFromSquare } from 'react-icons/fa6';
-import { PROJECTS, PROJECT_CATEGORIES, type ProjectCategory, type BaseProject } from '../data/projects';
+import {
+  PROJECTS,
+  PROJECT_CATEGORIES,
+  type ProjectCategory,
+  type BaseProject,
+} from '../data/projects';
 import { NavButton } from '@/components/buttons/NavButton';
 
 const ProjectIcon: React.FC<{ icon: IconType }> = ({ icon: Icon }) => <Icon className="w-5 h-5" />;
@@ -130,7 +135,10 @@ const Hero: React.FC = () => {
                 </div>
                 <div className="flex justify-between items-center text-sm text-muted">
                   {(project as BaseProject).publishDate && (
-                    <span>Published: {new Date((project as BaseProject).publishDate!).toLocaleDateString()}</span>
+                    <span>
+                      Published:{' '}
+                      {new Date((project as BaseProject).publishDate!).toLocaleDateString()}
+                    </span>
                   )}
                   <span
                     className={`px-2 py-1 rounded-full ${

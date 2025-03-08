@@ -7,15 +7,13 @@ export const metadata: Metadata = {
 };
 
 export const dynamic = 'force-static';
-export const revalidate = 86400; // Revalidate daily
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen flex flex-col w-full overflow-x-hidden font-mono">
+    <div className="min-h-screen flex flex-col w-full font-mono gap-20">
       <Hero />
       <Main />
       <Thesis />
-      <div className="mt-20" />
-    </main>
+    </div>
   );
 }

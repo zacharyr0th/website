@@ -18,4 +18,4 @@ export default function AnimatedContent({ content, className = '' }: AnimatedCon
       dangerouslySetInnerHTML={{ __html: content }}
     />
   );
-} 
+}

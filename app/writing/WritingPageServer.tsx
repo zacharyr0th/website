@@ -1,61 +1,57 @@
 import type { Article, FetchArticlesOptions } from './components/articles/types';
-import { headers } from 'next/headers';
 
 const FETCH_TIMEOUT_MS = 5000; // 5 seconds timeout
 const CACHE_REVALIDATE_SECONDS = 3600; // 1 hour cache
 
-// Add memoization for the base URL construction
-const getBaseUrl = (headers: Headers): string => {
-  const host =
-    headers.get('host') ||
-    `${process.env.DEVELOPMENT_HOST || 'localhost'}:${process.env.DEVELOPMENT_PORT || '3000'}`;
-  const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
-  return `${protocol}://${host}`;
+// Simplified base URL construction without relying on headers
+const getBaseUrl = (): string => {
+  // Use environment variables or default to localhost in development
+  const isProduction = process.env.NODE_ENV === 'production';
+  const protocol = isProduction ? 'https' : 'http';
+  const host = isProduction
+    ? process.env.PRODUCTION_HOST || 'zacharyr0th.com'
+    : `${process.env.DEVELOPMENT_HOST || 'localhost'}:${process.env.DEVELOPMENT_PORT || '3000'}`;
+
+  return new URL(`${protocol}://${host}`).toString();
 };
 
 async function getArticles(options: FetchArticlesOptions = {}): Promise<Article[]> {
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+  const timeout = new Promise<never>((_, reject) =>
+    setTimeout(() => {
+      controller.abort();
+      reject(new Error(`Request timed out after ${FETCH_TIMEOUT_MS}ms`));
+    }, FETCH_TIMEOUT_MS)
+  );
 
   try {
-    const headersList = await headers();
-    const baseUrl = getBaseUrl(headersList);
-    const response = await fetch(`${baseUrl}/api/articles`, {
-      next: { revalidate: CACHE_REVALIDATE_SECONDS, tags: ['articles'] },
-      signal: options.signal || controller.signal,
-      cache: options.cache || 'default',
-      headers: { Accept: 'application/json' },
-    });
+    const response = await Promise.race([
+      fetch(`${getBaseUrl()}/api/articles`, {
+        next: { revalidate: CACHE_REVALIDATE_SECONDS, tags: ['articles'] },
+        signal: options.signal || controller.signal,
+        cache: options.cache || 'default',
+        headers: { Accept: 'application/json' },
+      }),
+      timeout,
+    ]);
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
     const data = await response.json();
-
     if (!Array.isArray(data)) {
       throw new TypeError('API response is not an array');
     }
 
     return data.filter((article): article is Article => {
-      const isValid = article.slug && article.title;
-      if (!isValid) {
-        console.warn('Article missing required fields:', article);
-      }
+      const isValid = article?.slug && article?.title;
+      if (!isValid) console.warn('Skipping invalid article:', article);
       return isValid;
     });
   } catch (error) {
-    if (error instanceof Error) {
-      const message =
-        error.name === 'AbortError'
-          ? `Failed to load articles: Request timed out after ${FETCH_TIMEOUT_MS}ms`
-          : `Failed to load articles: ${error.message}`;
-      console.error(message);
-      throw new Error(message);
-    }
+    console.error('Error fetching articles:', error);
     throw error;
-  } finally {
-    clearTimeout(timeoutId);
   }
 }
 

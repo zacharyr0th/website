@@ -13,8 +13,7 @@ export default function NotFound() {
       <main className="container mx-auto px-6 sm:px-8 pt-16 sm:pt-36 pb-24">
         <div
           className={cn(
-            'max-w-2xl mx-auto text-center',
-            'space-y-8 p-8 rounded-xl',
+            'max-w-2xl mx-auto text-center space-y-8 p-8 rounded-xl',
             'bg-surface/5 backdrop-blur-sm border border-surface/10'
           )}
         >
@@ -27,14 +26,12 @@ export default function NotFound() {
           <div className="pt-4">
             <Link
               href="/"
+              aria-label="Return to the homepage"
               className={cn(
-                'inline-flex items-center justify-center',
-                'px-6 py-3 rounded-lg font-medium',
-                'bg-accent/10 hover:bg-accent/20 text-accent',
-                'transition-colors duration-200',
+                'inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium',
+                'bg-accent/10 hover:bg-accent/20 text-accent transition-colors duration-200',
                 'focus:outline-none focus:ring-2 focus:ring-accent/50',
-                'motion-safe:hover:scale-105 motion-safe:active:scale-95',
-                'transform-gpu'
+                'motion-safe:hover:scale-105 motion-safe:active:scale-95'
               )}
             >
               Return Home

@@ -1,6 +1,6 @@
 // Import selectOptimalFormat from AudioPlayer
 import { selectOptimalFormat } from './utils/format-selection';
-import { createLogger, LogCategory } from '@/lib/core/logger';
+import { createLogger, LogCategory } from '@/lib/core';
 
 // Create logger instance for audio player
 const logger = createLogger('audio-player', { category: LogCategory.APPLICATION });
@@ -145,7 +145,7 @@ const getAudioUrl = async (filename: string, format: string | undefined): Promis
     params.set('format', formatExtension);
 
     const requestUrl = `${baseUrl}/api/audio/sign-url?${params.toString()}`;
-    logger.debug('Requesting audio URL', { id: filename });
+    logger.debug('Requesting audio URL', { id: filename, url: requestUrl });
 
     const response = await fetch(requestUrl);
     if (!response.ok) {
@@ -165,7 +165,7 @@ const getAudioUrl = async (filename: string, format: string | undefined): Promis
       throw new Error('Invalid URL received from server');
     }
 
-    logger.debug('Audio URL request successful', { id: filename });
+    logger.debug('Audio URL request successful', { id: filename, url: data.url });
     return data.url;
   } catch (error) {
     const err = error instanceof Error ? error : new Error('URL request failed');

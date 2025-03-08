@@ -1,19 +1,17 @@
 import type { IconType } from 'react-icons';
 import { FaLinkedin, FaXTwitter, FaGithub, FaEnvelope } from 'react-icons/fa6';
 
-/**
- * Represents a social media link with associated metadata
- * @interface SocialLink
- */
+/** Social media link structure */
 export interface SocialLink {
-  url: string /** The full URL to the social profile */;
-  label: string /** Display label for the social link */;
-  icon: IconType /** React Icon component */;
-  username?: string /** Username on the platform (optional) */;
-  platform: string /** Name of the social platform */;
-  active: boolean /** Whether the social link is currently active */;
+  readonly url: string;
+  readonly label: string;
+  readonly icon: IconType;
+  readonly username?: string;
+  readonly platform: string;
+  readonly active: boolean;
 }
 
+/** Social media links configuration */
 export const SOCIAL_LINKS = {
   twitter: {
     url: 'https://twitter.com/zacharyr0th',
@@ -47,7 +45,7 @@ export const SOCIAL_LINKS = {
     platform: 'Email',
     active: true,
   },
-} as const satisfies Record<string, SocialLink>;
+} as const satisfies Record<string, Readonly<SocialLink>>;
 
-// Derive types from the const assertion
+/** Extracts social platform keys as a union type */
 export type SocialPlatform = keyof typeof SOCIAL_LINKS;

@@ -1,13 +1,42 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { createLogger, LogCategory } from '@/lib/core';
-import {
-  getBaseSecurityHeaders,
-  getApiHeaders,
-  validateOrigin,
-  SECURITY_CONSTANTS,
-} from '@/lib/security';
 
 const logger = createLogger('middleware', { category: LogCategory.API });
+
+// Simple origin validation function
+const validateOrigin = (origin: string, allowedOrigins: string[]): boolean => {
+  return allowedOrigins.some((allowed) => {
+    if (allowed === '*') return true;
+    if (allowed.includes('*')) {
+      const pattern = allowed.replace('*', '.*');
+      return new RegExp(`^${pattern}$`).test(origin);
+    }
+    return origin === allowed;
+  });
+};
+
+// Allowed origins
+const ALLOWED_ORIGINS = [
+  'http://localhost:3000',
+  'https://localhost:3000',
+  'https://zacharyroth.com',
+  'https://*.zacharyroth.com',
+];
+
+// Basic security headers
+const getBaseSecurityHeaders = () => ({
+  'X-Content-Type-Options': 'nosniff',
+  'X-Frame-Options': 'DENY',
+  'X-XSS-Protection': '1; mode=block',
+});
+
+// API headers with CORS
+const getApiHeaders = () => ({
+  ...getBaseSecurityHeaders(),
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+});
 
 export async function middleware(request: NextRequest) {
   const origin = request.headers.get('origin');
@@ -33,10 +62,7 @@ export async function middleware(request: NextRequest) {
     // Basic origin validation for non-audio routes
     if (
       origin &&
-      !validateOrigin(origin, [
-        ...SECURITY_CONSTANTS.ALLOWED_ORIGINS,
-        'https://hel1.your-objectstorage.com',
-      ])
+      !validateOrigin(origin, [...ALLOWED_ORIGINS, 'https://hel1.your-objectstorage.com'])
     ) {
       return new Response('Invalid origin', { status: 403 });
     }

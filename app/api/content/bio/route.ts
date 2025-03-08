@@ -67,10 +67,14 @@ export async function GET() {
 
     const processedContent = await processMarkdown(fileResult.data);
 
+    // Get security headers
+    const securityHeaders = security.getStaticHeaders(3600); // 1 hour cache
+
     return api.createApiResponse(processedContent, {
       headers: {
+        // Override the Content-Type from security headers with text/html
+        ...securityHeaders,
         'Content-Type': 'text/html',
-        ...security.getStaticHeaders(3600), // 1 hour cache
       },
     });
   } catch (error) {

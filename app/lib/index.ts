@@ -7,7 +7,7 @@ export { cn, get, clone, toKebabCase, formatDate, formatFileSize } from './utils
 
 // Core functionality
 export * as core from './core';
-export { createLogger, LogCategory, type Logger } from './core/logger';
+export { createLogger, LogCategory, type Logger } from './core';
 
 // API functionality
 export * as api from './api';
@@ -40,8 +40,7 @@ export type {
   ValueOf,
   AsyncReturnType,
   LogContext,
-} from './core/types';
+} from './core';
 
 // Feature modules with lazy loading support
-export const ui = async () => import('./ui');
 export const config = async () => import('./config');

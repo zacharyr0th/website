@@ -1,44 +1,44 @@
 import type { Metadata } from 'next';
 
-// Site configuration
+// Site Configuration
 const SITE_NAME = 'Zachary Roth';
 const SITE_URL = 'https://zacharyr0th.com';
 const SITE_DESCRIPTION =
   'Head of Growth at Aptos Labs, focusing on DeFi & AI. Exploring blockchain technology, market strategy, and innovative solutions.';
 const TWITTER_HANDLE = '@zacharyr0th';
 
-// Profile image configuration
+// Profile Image Configuration
 const PROFILE_IMAGE = {
   url: '/misc/profile-picture.webp',
   width: 256,
   height: 256,
-  alt: 'Zachary Roth',
+  alt: SITE_NAME,
   type: 'image/webp',
 } as const;
 
-// Section metadata
+// Section Metadata
 export const SECTION_METADATA = {
   writing: {
-    title: 'Writing | Zachary Roth',
+    title: `Writing | ${SITE_NAME}`,
     description: 'Insights on blockchain technology, DeFi innovations, and market strategy.',
   },
   projects: {
-    title: 'Projects | Zachary Roth',
+    title: `Projects | ${SITE_NAME}`,
     description:
       'Blockchain and DeFi projects, market analysis tools, and ecosystem development initiatives.',
   },
   bio: {
-    title: 'Bio | Zachary Roth',
+    title: `Bio | ${SITE_NAME}`,
     description:
       'Head of Growth at Aptos Labs, with experience in DeFi, blockchain ecosystems, and market strategy.',
   },
 } as const;
 
 // JSON-LD Structured Data
-const structuredData = {
+export const STRUCTURED_DATA = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: 'Zachary Roth',
+  name: SITE_NAME,
   jobTitle: 'Head of Growth, DeFi & AI',
   worksFor: {
     '@type': 'Organization',
@@ -55,7 +55,7 @@ const structuredData = {
   ],
 } as const;
 
-// Base metadata configuration
+// Base Metadata Configuration
 export const metadata: Metadata = {
   title: {
     default: SITE_NAME,
@@ -69,7 +69,6 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: SITE_NAME,
     description: SITE_DESCRIPTION,
     images: [PROFILE_IMAGE],
   },
@@ -77,7 +76,6 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary',
     creator: TWITTER_HANDLE,
-    title: SITE_NAME,
     description: SITE_DESCRIPTION,
     images: [PROFILE_IMAGE],
   },
@@ -117,6 +115,3 @@ export const metadata: Metadata = {
     'theme-color': '#000000',
   },
 };
-
-// Export structured data for use in pages
-export const getStructuredData = () => structuredData;

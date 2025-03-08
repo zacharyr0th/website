@@ -11,7 +11,7 @@ import React, {
 import { motion } from 'framer-motion';
 import type { Track } from './tracks';
 import { TRACKS, getNextTrack, getPreviousTrack } from './tracks';
-import { createLogger, LogCategory } from '@/lib/core/logger';
+import { createLogger, LogCategory } from '@/lib/core';
 
 const logger = createLogger('audio-player', { category: LogCategory.APPLICATION });
 
@@ -118,7 +118,12 @@ const handleAudioLoaded = (track: Track) => {
 // Replace console.error with logger
 const handleLoadError = (track: Track) => {
   const err = new Error('Load error');
-  logger.error('Failed to load audio', err, { id: track.id });
+  logger.error('Failed to load audio', err, {
+    id: track.id,
+    title: track.title,
+    instrument: track.instrument,
+    type: track.type,
+  });
 };
 
 // Replace console.log with logger.debug
@@ -142,7 +147,9 @@ const handlePlaybackResume = () => {
 // Replace playback logging
 const handlePlaybackError = () => {
   const err = new Error('Playback failed');
-  logger.error('Playback error', err);
+  logger.error('Playback error', err, {
+    error: 'Playback failed',
+  });
 };
 
 // Replace track change logging

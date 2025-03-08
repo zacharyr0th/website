@@ -1,27 +1,18 @@
 import { NextResponse } from 'next/server';
-import { createLogger, LogCategory } from '@/lib/core';
-import { ErrorType } from '@/lib/security/types';
 import { z } from 'zod';
-import path from 'path';
-import { createSecureReadStream, getFileStatsSecure } from '@/lib/server/file-access';
-import type { SecureFileOptions } from '@/lib/server/file-access';
-import { security, api } from '@/lib';
-import fs from 'fs';
+import { getFileStats, getFileStream, constructAudioKey } from '@/lib/server';
 
-const logger = createLogger('api:audio:stream', { category: LogCategory.API });
+// Simple logger function
+const log = (level: 'debug' | 'info' | 'warn' | 'error', message: string, data?: Record<string, unknown>) => {
+  const timestamp = new Date().toISOString();
+  console[level](`[${timestamp}] [audio-stream] ${message}`, data || '');
+};
 
 // Request validation schema
 const requestSchema = z.object({
   key: z.string().regex(/^[a-zA-Z0-9-_/]+$/),
   format: z.enum(['mp3', 'm4a', 'wav']).optional(),
 });
-
-// Secure file options
-const audioFileOptions: SecureFileOptions = {
-  allowedExtensions: ['.mp3', '.m4a', '.wav'],
-  requiredPath: path.join(process.cwd(), 'public', 'audio'),
-  maxSize: 1024 * 1024 * 50, // 50MB max size
-};
 
 // MIME type mapping
 const mimeTypes = {
@@ -30,57 +21,75 @@ const mimeTypes = {
   wav: 'audio/wav',
 } as const;
 
+// Create a simple error response
+function createErrorResponse(message: string, status: number) {
+  return new Response(JSON.stringify({ error: message }), {
+    status,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+}
+
 export async function GET(request: Request) {
+  const requestId = crypto.randomUUID();
+
   try {
     // Parse and validate request parameters
     const params = Object.fromEntries(new URL(request.url).searchParams);
     const result = requestSchema.safeParse(params);
 
     if (!result.success) {
-      logger.warn('Invalid request parameters', {
+      log('warn', 'Invalid request parameters', {
+        requestId,
         validation: JSON.stringify(result.error.issues),
         requestParams: JSON.stringify(params),
       });
-      return api.createApiErrorResponse('Invalid request parameters', {
-        status: 400,
-        code: ErrorType.VALIDATION_ERROR,
-      });
+      return createErrorResponse('Invalid request parameters', 400);
     }
 
     const { key, format = 'm4a' } = result.data;
     const range = request.headers.get('range');
 
-    // Construct file path
-    const audioDir = path.join(process.cwd(), 'public', 'audio');
-    const filePath = path.join(audioDir, `${key.replace('piano/', 'piano/piano_')}.${format}`);
+    // Split the key to get category and filename
+    // Expected format: "piano/nocturne-1"
+    const [category, filename] = key.split('/');
+
+    if (!category || !filename) {
+      log('warn', 'Invalid key format', { requestId, key });
+      return createErrorResponse('Invalid key format', 400);
+    }
+
+    // Construct the object storage key
+    const objectKey = constructAudioKey(category, filename, format);
 
     // Log request details
-    logger.debug('Processing audio stream request', {
+    log('info', 'Processing audio stream request', {
+      requestId,
       key,
       format,
-      filePath,
+      objectKey,
       rangeHeader: range || 'none',
     });
 
     // Get file stats first
-    const statsResult = await getFileStatsSecure(filePath, audioFileOptions);
+    const statsResult = await getFileStats(objectKey);
     if (!statsResult.success) {
-      const fileExists = await fs.promises
-        .access(filePath)
-        .then(() => true)
-        .catch(() => false);
-      const error = new Error(statsResult.error || 'Failed to get file stats');
-      logger.error('Failed to get file stats', error, {
-        path: filePath,
-        exists: fileExists,
+      log('error', 'Failed to get file stats', {
+        requestId,
+        path: objectKey,
+        error: statsResult.error,
       });
-      return api.createApiErrorResponse('Audio file not found', {
-        status: 404,
-        code: ErrorType.NOT_FOUND,
-      });
+      return createErrorResponse('Audio file not found', 404);
     }
 
-    const fileSize = statsResult.data!.size;
+    // Add null check for statsResult.data
+    if (!statsResult.data) {
+      log('error', 'File stats data is missing', { requestId, path: objectKey });
+      return createErrorResponse('Audio file metadata not available', 500);
+    }
+
+    const fileSize = statsResult.data.size;
 
     // Handle range request
     let start = 0;
@@ -92,51 +101,50 @@ export async function GET(request: Request) {
       end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
 
       if (isNaN(start) || isNaN(end) || start >= fileSize || end >= fileSize || start > end) {
-        logger.warn('Invalid range request', {
+        log('warn', 'Invalid range request', {
+          requestId,
           rangeHeader: range,
           fileSize: fileSize.toString(),
           startByte: start.toString(),
           endByte: end.toString(),
         });
-        return api.createApiErrorResponse('Invalid range', {
-          status: 416,
-          code: ErrorType.VALIDATION_ERROR,
-        });
+        return createErrorResponse('Invalid range', 416);
       }
     }
 
     // Create stream
-    const streamResult = createSecureReadStream(filePath, {
-      ...audioFileOptions,
-      start,
-      end,
-    });
+    const streamResult = await getFileStream(
+      objectKey,
+      range ? `bytes=${start}-${end}` : undefined
+    );
 
     if (!streamResult.success) {
-      const error = new Error(streamResult.error || 'Failed to create stream');
-      logger.error('Failed to create stream', error, {
-        path: filePath,
+      log('error', 'Failed to create stream', {
+        requestId,
+        path: objectKey,
         rangeInfo: range ? `${start}-${end}` : 'none',
+        error: streamResult.error,
       });
-      return api.createApiErrorResponse('Failed to stream audio', {
-        status: 500,
-        code: ErrorType.INTERNAL_ERROR,
-      });
+      return createErrorResponse('Failed to stream audio', 500);
     }
 
-    // Get base security headers
-    const securityHeaders = security.getBaseSecurityHeaders();
+    // Add null check for streamResult.data
+    if (!streamResult.data) {
+      log('error', 'Stream data is missing', { requestId, path: objectKey });
+      return createErrorResponse('Audio stream data not available', 500);
+    }
 
     // Set response headers
     const headers = new Headers({
-      ...securityHeaders,
-      'Content-Type': mimeTypes[format as keyof typeof mimeTypes] || 'audio/mp4',
+      'Content-Type':
+        streamResult.data.contentType || mimeTypes[format as keyof typeof mimeTypes] || 'audio/mp4',
       'Content-Length': (end - start + 1).toString(),
       'Accept-Ranges': 'bytes',
-      'Cache-Control': api.CACHE_CONTROL.PUBLIC,
-      'Cross-Origin-Resource-Policy': 'same-origin',
-      'Cross-Origin-Embedder-Policy': 'require-corp',
-      'Cross-Origin-Opener-Policy': 'same-origin',
+      'Cache-Control': 'public, max-age=3600',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS',
+      'Access-Control-Allow-Headers': 'Range, Content-Type, Origin',
+      'Access-Control-Expose-Headers': 'Content-Length, Content-Range, Content-Type',
     });
 
     if (range) {
@@ -144,7 +152,8 @@ export async function GET(request: Request) {
     }
 
     // Log successful response
-    logger.debug('Streaming audio file', {
+    log('debug', 'Streaming audio file', {
+      requestId,
       key,
       format,
       fileSize: fileSize.toString(),
@@ -152,33 +161,30 @@ export async function GET(request: Request) {
     });
 
     // Return streaming response
-    return new Response(streamResult.data, {
+    return new Response(streamResult.data.stream, {
       status: range ? 206 : 200,
       headers,
     });
   } catch (error) {
     const err = error instanceof Error ? error : new Error('Unknown error');
-    logger.error('Unexpected error in stream route', err, {
+    log('error', 'Unexpected error in stream route', {
+      requestId,
+      error: err.message,
       stack: err.stack || 'No stack trace',
     });
-    return api.createApiErrorResponse('Internal server error', {
-      status: 500,
-      code: ErrorType.INTERNAL_ERROR,
-    });
+    return createErrorResponse('Internal server error', 500);
   }
 }
 
 // Handle OPTIONS requests for CORS
-export async function OPTIONS(request: Request) {
-  const origin = request.headers.get('origin');
-  const response = new NextResponse(null, { status: 204 });
-
-  if (origin) {
-    response.headers.set('Access-Control-Allow-Origin', origin);
-    response.headers.set('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
-    response.headers.set('Access-Control-Allow-Headers', 'Range, Content-Type');
-    response.headers.set('Access-Control-Max-Age', '3600');
-  }
-
-  return response;
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 204,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS',
+      'Access-Control-Allow-Headers': 'Range, Content-Type, Origin',
+      'Access-Control-Max-Age': '86400',
+    },
+  });
 }

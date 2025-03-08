@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server';
-import { createLogger, LogCategory } from '@/lib/core';
-import { ErrorType } from '@/lib/security/types';
 import { z } from 'zod';
 
-const logger = createLogger('api:audio:sign-url', { category: LogCategory.API });
+// Simple logger function
+const log = (level: 'debug' | 'info' | 'warn' | 'error', message: string, data?: Record<string, unknown>) => {
+  const timestamp = new Date().toISOString();
+  console[level](`[${timestamp}] [audio-sign-url] ${message}`, data || '');
+};
 
 // Simple request schema
 const requestSchema = z.object({
@@ -18,10 +20,7 @@ export async function GET(request: Request) {
     const result = requestSchema.safeParse(params);
 
     if (!result.success) {
-      return NextResponse.json(
-        { error: 'Invalid request parameters', type: ErrorType.VALIDATION_ERROR },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Invalid request parameters' }, { status: 400 });
     }
 
     const { key, format = 'm4a' } = result.data;
@@ -43,23 +42,20 @@ export async function GET(request: Request) {
     );
   } catch (error) {
     const err = error instanceof Error ? error : new Error('Unexpected error');
-    logger.error('Unexpected error', err);
-    return NextResponse.json(
-      { error: 'Internal server error', type: ErrorType.INTERNAL_ERROR },
-      { status: 500 }
-    );
+    log('error', 'Unexpected error', { error: err.message });
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 
 // Handle OPTIONS requests
-export async function OPTIONS(request: Request) {
-  const origin = request.headers.get('origin');
-  const response = new NextResponse(null, { status: 204 });
-  if (origin) {
-    response.headers.set('Access-Control-Allow-Origin', origin);
-    response.headers.set('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
-    response.headers.set('Access-Control-Allow-Headers', 'Range, Content-Type');
-    response.headers.set('Access-Control-Max-Age', '3600');
-  }
-  return response;
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 204,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS',
+      'Access-Control-Allow-Headers': 'Range, Content-Type, Origin',
+      'Access-Control-Max-Age': '86400',
+    },
+  });
 }
