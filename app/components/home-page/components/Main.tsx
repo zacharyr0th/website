@@ -100,14 +100,14 @@ const WritingGrid = memo(({ articles }: { articles: WritingProject[] }) => {
         content: '',
         link: article.link,
         description: article.description,
-        date: new Date().toISOString(), // Default date since original data doesn't have dates
+        date: '2025-03-09T00:00:00.000Z', // Static date to avoid hydration issues
         category: null,
         tags: [],
         image: null,
         takeaways: null,
         frontmatter: {
           title: article.title,
-          date: new Date().toISOString(),
+          date: '2025-03-09T00:00:00.000Z', // Static date to avoid hydration issues
           description: article.description,
           category: null,
           tags: [],

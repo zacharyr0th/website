@@ -203,11 +203,14 @@ export function slugify(text: string): string {
 
 // ===== DATE & FORMATTING UTILITIES =====
 
+// Create a memoization cache for formatted dates to ensure stability
+const dateFormatCache = new Map<string, string>();
+
 /**
  * Internationalized date formatter
  * 
  * Modified to ensure consistent output between server and client rendering
- * by setting a fixed timezone and not creating new Date instances
+ * by using memoization and ensuring stable timezone
  *
  * @param date - Date to format
  * @param options - DateTimeFormat options
@@ -224,20 +227,34 @@ export function formatDate(
   },
   locale: string = 'en-US'
 ): string {
-  // Ensure the date is already a Date object to avoid creating new instances
-  const dateObj = date instanceof Date ? date : new Date(date);
+  // For server/client stability, create a cache key
+  const dateStr = typeof date === 'string' ? date : date instanceof Date ? date.toISOString() : String(date);
+  const optionsKey = JSON.stringify(options);
+  const cacheKey = `${dateStr}|${optionsKey}|${locale}`;
+  
+  // Check if we already have a formatted version
+  if (dateFormatCache.has(cacheKey)) {
+    return dateFormatCache.get(cacheKey)!;
+  }
   
   try {
-    // Always use UTC timezone to ensure consistent output between server and client
+    // Always use UTC timezone to ensure consistent output
     const formatterOptions = {
       ...options,
       timeZone: 'UTC',
     };
     
-    return new Intl.DateTimeFormat(locale, formatterOptions).format(dateObj);
+    const formatter = new Intl.DateTimeFormat(locale, formatterOptions);
+    const result = formatter.format(new Date(date));
+    
+    // Cache the result
+    dateFormatCache.set(cacheKey, result);
+    return result;
   } catch (error) {
     console.warn('Error formatting date:', error);
-    return dateObj.toLocaleDateString(locale, { timeZone: 'UTC' });
+    const fallback = new Date(date).toLocaleDateString(locale, { timeZone: 'UTC' });
+    dateFormatCache.set(cacheKey, fallback);
+    return fallback;
   }
 }
 

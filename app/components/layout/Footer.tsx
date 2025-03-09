@@ -1,6 +1,6 @@
 'use client';
 
-import React, { memo, useMemo } from 'react';
+import React, { memo } from 'react';
 import { motion, useInView } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { FaLinkedin, FaXTwitter, FaGithub } from 'react-icons/fa6';
@@ -59,7 +59,7 @@ SocialButton.displayName = 'SocialButton';
 export default function Footer() {
   const ref = React.useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
-  const year = useMemo(() => new Date().getFullYear().toString(), []);
+  const year = "2025";
 
   return (
     <footer className="bg-background text-sm pb-12 mt-auto">

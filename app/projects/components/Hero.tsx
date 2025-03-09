@@ -6,9 +6,10 @@ import {
   PROJECTS,
   PROJECT_CATEGORIES,
   type ProjectCategory,
-  type BaseProject,
+  type BaseProject
 } from '../data/projects';
 import { Button } from '@/components/misc';
+import { formatDate } from '@/lib/utils';
 
 const ProjectIcon: React.FC<{ icon: IconType }> = ({ icon: Icon }) => <Icon className="w-5 h-5" />;
 
@@ -137,7 +138,11 @@ const Hero: React.FC = () => {
                   {(project as BaseProject).publishDate && (
                     <span>
                       Published:{' '}
-                      {new Date((project as BaseProject).publishDate!).toLocaleDateString()}
+                      {formatDate((project as BaseProject).publishDate!, {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric',
+                      })}
                     </span>
                   )}
                   <span
