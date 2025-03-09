@@ -8,7 +8,7 @@ import { motion, useInView } from 'framer-motion';
 import { ThesisBackground } from '../utils/BackgroundComponents';
 import { THESIS_CONTENT, THESIS_STYLES } from '../constants/thesis';
 import { SHARED_STYLES } from '../utils/styles';
-import styles from '@styles/homepage.module.css';
+import styles from '@/app/styles/homepage.module.css';
 
 const Thesis = () => {
   const ref = React.useRef(null);
