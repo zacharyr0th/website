@@ -2,7 +2,7 @@
 
 /**
  * ArticleContent component
- * Displays the full content of an article
+ * Displays the full content of an article with optimized typography
  */
 
 import React, { useEffect } from 'react';
@@ -42,13 +42,13 @@ export const ArticleContent = ({
   }, []);
 
   return (
-    <div className="max-w-3xl mx-auto px-4 mt-4 md:mt-16">
+    <div className="content-md mx-auto px-4 mt-4 md:mt-16">
       <article>
         {/* Article header */}
         <header className="mb-8 text-center md:text-left">
-          <h1 className="text-4xl md:text-5xl font-normal mb-4">{article.title}</h1>
+          <h1 className="text-4xl md:text-5xl font-normal leading-tight mb-4">{article.title}</h1>
           {article.description && (
-            <p className="text-xl text-[var(--color-text-secondary)] max-w-2xl mx-auto md:mx-0 mb-6">
+            <p className="text-xl text-lead max-w-2xl mx-auto md:mx-0 mb-6 text-pretty">
               {article.description}
             </p>
           )}
@@ -56,12 +56,12 @@ export const ArticleContent = ({
           <div className="flex items-center justify-center md:justify-start gap-4 my-4">
             <time
               dateTime={article.date}
-              className="text-[var(--color-text-tertiary)] font-mono text-sm"
+              className="text-small font-mono"
             >
               {formatDate(article.date)}
             </time>
             {article.category && (
-              <span className="px-3 py-1 rounded-xl text-[var(--color-text-secondary)] text-sm bg-[rgba(255,255,255,0.1)]">
+              <span className="px-3 py-1 rounded-xl text-small bg-[rgba(255,255,255,0.1)]">
                 {article.category}
               </span>
             )}
@@ -79,43 +79,51 @@ export const ArticleContent = ({
               className="w-full rounded-xl shadow-lg mx-auto"
               priority
             />
+            {article.image.caption && (
+              <figcaption className="text-center text-small mt-2 italic">
+                {article.image.caption}
+              </figcaption>
+            )}
           </figure>
         )}
-
-        {/* Main content */}
-        <div
-          className="prose prose-lg dark:prose-invert max-w-none mx-auto"
-          dangerouslySetInnerHTML={{
-            __html: DOMPurify.sanitize(contentHtml),
-          }}
-        />
-
-        {/* Takeaways section */}
+        
+        {/* Key Takeaways section - Positioned beneath the image */}
         {article.takeaways && article.takeaways.length > 0 && (
-          <div className="my-8 p-6 bg-gray-100 dark:bg-gray-800 rounded-lg">
-            <h2>Key Takeaways</h2>
-            <ul>
+          <div className="my-8 p-6 bg-surface rounded-2xl shadow-sm border border-[rgba(255,255,255,0.1)]">
+            <h2 className="heading-subsection mt-0 mb-4">Key Takeaways</h2>
+            <ul className="space-y-3">
               {article.takeaways.map((takeaway, index) => (
-                <li key={index}>{takeaway}</li>
+                <li key={index} className="text-body flex items-start">
+                  <span className="inline-block mr-2 text-accent">•</span>
+                  {takeaway}
+                </li>
               ))}
             </ul>
           </div>
         )}
 
+        {/* Main content */}
+        <div
+          className="prose prose-lg dark:prose-invert with-dropcap mx-auto"
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(contentHtml),
+          }}
+        />
+
         {/* Navigation between articles */}
-        <nav className="mt-8 pt-6 border-t">
+        <nav className="mt-12 pt-6 border-t border-[rgba(255,255,255,0.1)]">
           <div className="flex flex-col sm:flex-row justify-between gap-6">
             {prevArticle && (
-              <Link href={prevArticle.link}>
-                <div className="text-sm">Previous</div>
-                <div>{prevArticle.title}</div>
+              <Link href={prevArticle.link} className="group p-4 rounded-lg hover:bg-surface transition-colors">
+                <div className="text-small uppercase tracking-wider">Previous</div>
+                <div className="text-lg font-medium mt-1 group-hover:text-accent transition-colors">{prevArticle.title}</div>
               </Link>
             )}
 
             {nextArticle && (
-              <Link href={nextArticle.link} className="sm:text-right">
-                <div className="text-sm">Next</div>
-                <div>{nextArticle.title}</div>
+              <Link href={nextArticle.link} className="group p-4 rounded-lg hover:bg-surface transition-colors sm:text-right">
+                <div className="text-small uppercase tracking-wider">Next</div>
+                <div className="text-lg font-medium mt-1 group-hover:text-accent transition-colors">{nextArticle.title}</div>
               </Link>
             )}
           </div>

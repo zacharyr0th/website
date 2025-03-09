@@ -6,6 +6,7 @@
 export interface ArticleImage {
   readonly src: string;
   readonly alt: string;
+  readonly caption?: string;
 }
 
 /** Allowed categories and tags */

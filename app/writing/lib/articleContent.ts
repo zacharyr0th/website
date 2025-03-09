@@ -7,6 +7,8 @@ import { remark } from 'remark';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
+import rehypeSlug from 'rehype-slug';
+import rehypePrism from 'rehype-prism-plus';
 import type { Article } from '../types';
 import { getArticles, parseArticleFile, getArticleFiles } from './articleUtils';
 
@@ -52,16 +54,27 @@ export const getAdjacentArticles = async (
 };
 
 /**
- * Process article content to HTML
+ * Process article content to HTML with enhanced typography support
  */
 export const processArticleContent = async (content: string): Promise<string> => {
   const result = await remark()
     .use(remarkParse)
-    .use(remarkRehype)
-    .use(rehypeStringify)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeSlug) // Add IDs to headings for anchor links
+    .use(rehypePrism, { showLineNumbers: true }) // Syntax highlighting with line numbers
+    .use(rehypeStringify, { allowDangerousHtml: true })
     .process(content);
 
-  return result.toString();
+  // Process the HTML to enhance typography
+  let html = result.toString();
+  
+  // Add heading anchor links for better navigation
+  html = html.replace(
+    /<h([2-6]) id="([^"]+)">(.*?)<\/h\1>/g,
+    '<h$1 id="$2"><a href="#$2" class="heading-anchor">$3</a></h$1>'
+  );
+
+  return html;
 };
 
 /**
