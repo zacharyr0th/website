@@ -8,7 +8,6 @@ import { motion, useInView } from 'framer-motion';
 import { ThesisBackground } from '../utils/BackgroundComponents';
 import { THESIS_CONTENT, THESIS_STYLES } from '../constants/thesis';
 import { SHARED_STYLES } from '../utils/styles';
-import styles from '@/styles/homepage.module.css';
 
 const Thesis = () => {
   const ref = React.useRef(null);
@@ -29,7 +28,7 @@ const Thesis = () => {
       >
         <div className={`${THESIS_STYLES.textContainer} w-full text-center`}>
           <motion.h2
-            className={`${THESIS_STYLES.label} ${styles.thesisLabel}`}
+            className={`${THESIS_STYLES.label}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
@@ -38,7 +37,7 @@ const Thesis = () => {
           </motion.h2>
 
           <motion.h1
-            className={`${THESIS_STYLES.title} ${styles.thesisTitle}`}
+            className={`${THESIS_STYLES.title}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
@@ -47,7 +46,7 @@ const Thesis = () => {
           </motion.h1>
 
           <motion.p
-            className={`${THESIS_STYLES.subtitle} ${styles.thesisSubtitle} mx-auto`}
+            className={`${THESIS_STYLES.subtitle} mx-auto`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
