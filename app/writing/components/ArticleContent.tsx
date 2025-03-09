@@ -55,7 +55,7 @@ export const ArticleContent = ({
 
           <div className="flex items-center justify-center md:justify-start gap-4 my-4">
             <time
-              dateTime={article.date}
+              dateTime={typeof article.date === 'string' ? article.date : article.date.toISOString()}
               className="text-small font-mono"
             >
               {formatDate(article.date)}

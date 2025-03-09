@@ -205,6 +205,9 @@ export function slugify(text: string): string {
 
 /**
  * Internationalized date formatter
+ * 
+ * Modified to ensure consistent output between server and client rendering
+ * by setting a fixed timezone and not creating new Date instances
  *
  * @param date - Date to format
  * @param options - DateTimeFormat options
@@ -221,11 +224,20 @@ export function formatDate(
   },
   locale: string = 'en-US'
 ): string {
+  // Ensure the date is already a Date object to avoid creating new instances
+  const dateObj = date instanceof Date ? date : new Date(date);
+  
   try {
-    return new Intl.DateTimeFormat(locale, options).format(new Date(date));
+    // Always use UTC timezone to ensure consistent output between server and client
+    const formatterOptions = {
+      ...options,
+      timeZone: 'UTC',
+    };
+    
+    return new Intl.DateTimeFormat(locale, formatterOptions).format(dateObj);
   } catch (error) {
     console.warn('Error formatting date:', error);
-    return new Date(date).toLocaleDateString(locale);
+    return dateObj.toLocaleDateString(locale, { timeZone: 'UTC' });
   }
 }
 
