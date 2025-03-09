@@ -2,13 +2,23 @@ import React, { Suspense } from 'react';
 import { PROJECTS } from './data/projects';
 import { LoadingState } from '@/components/misc/Loading';
 import ProjectsPageClient from './ProjectsPageClient';
-import { containerVariants } from '@/lib/ui/animations';
-import PageContent from '@/components/layout/PageContent';
-import PageHeader from '@/components/layout/PageHeader';
-import PageLayout from '@/components/layout/PageLayout';
-import BaseLayout from '@/components/layout/BaseLayout';
+import { RootLayoutClient } from '@/components/layout';
 import type { Metadata } from 'next';
-import { SECTION_METADATA } from '@/lib/config/metadata';
+import { SECTION_METADATA } from '@/lib';
+
+// Define animation variants inline
+const containerVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1],
+      staggerChildren: 0.1,
+    },
+  },
+};
 
 export const metadata: Metadata = {
   title: SECTION_METADATA.projects.title,
@@ -20,26 +30,20 @@ export const revalidate = 3600; // Revalidate every hour
 
 export default function ProjectsPage() {
   return (
-    <BaseLayout>
-      <PageLayout>
-        <PageContent maxWidth="wide">
-          <Suspense fallback={<LoadingState label="Loading title" height="h-12" barCount={1} />}>
-            <PageHeader title="Projects" />
-          </Suspense>
-          <Suspense
-            fallback={
-              <LoadingState
-                label="Loading projects"
-                height="h-[600px]"
-                barCount={4}
-                className="max-w-3xl mx-auto"
-              />
-            }
-          >
-            <ProjectsPageClient initialProjects={PROJECTS} containerVariants={containerVariants} />
-          </Suspense>
-        </PageContent>
-      </PageLayout>
-    </BaseLayout>
+    <RootLayoutClient width="wide">
+      <h1 className="text-6xl font-light text-center sm:text-left mb-10">Projects</h1>
+      <Suspense
+        fallback={
+          <LoadingState
+            label="Loading projects"
+            height="h-[600px]"
+            barCount={4}
+            className="max-w-3xl mx-auto mt-8"
+          />
+        }
+      >
+        <ProjectsPageClient initialProjects={PROJECTS} containerVariants={containerVariants} />
+      </Suspense>
+    </RootLayoutClient>
   );
 }

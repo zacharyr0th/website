@@ -7,7 +7,7 @@ import Image from 'next/image';
 /**
  * ProfileImage component - Displays a user profile image with optional modal view and edit functionality
  */
-interface ProfileImageProps {
+export interface ProfileImageProps {
   /** Size of the profile image: 'sm' (small), 'md' (medium), or 'lg' (large) */
   size?: 'sm' | 'md' | 'lg';
   /** Whether the image can be edited (shows file input) */

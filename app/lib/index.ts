@@ -1,46 +1,105 @@
 /**
- * Core library exports with optimized bundling and type safety
+ * Library Index
+ * 
+ * Central export point for all library modules.
+ * This file makes imports cleaner by allowing imports from '@/lib' instead of specific files.
  */
 
-// Base utilities with tree-shaking support
-export { cn, get, clone, toKebabCase, formatDate, formatFileSize } from './utils';
+// =========================================
+// Import all exports from library files
+// =========================================
 
-// Core functionality
-export * as core from './core';
-export { createLogger, LogCategory, type Logger } from './core';
+// Article exports
+import {
+  getArticles,
+  getArticleBySlug,
+  getAdjacentArticles,
+  processArticleContent,
+  formatArticleDate
+} from '../writing/lib';
 
-// API functionality
-export * as api from './api';
+// Utility exports
+import {
+  cn,
+  createLogger,
+  LogCategory,
+  formatDate,
+  truncateText,
+  slugify,
+  isEmpty,
+  isValidUrl,
+  isTouchDevice,
+  getDeviceAppropriateHandlers
+} from './utils';
 
-// Security functionality
-export * as security from './security';
+// Metadata exports
+import { SECTION_METADATA, SITE_INFO, PROFILE_IMAGE } from './metadata';
 
-// Type exports for enhanced type safety
-export type { ClassValue, DeepPartial } from './utils';
+// Social exports
+import { SOCIAL_LINKS } from './social';
 
+// Security exports
+import { SECURITY } from './security';
+
+// Routes exports
+import { ROUTES } from './routes';
+
+// =========================================
+// Re-export all types
+// =========================================
+
+// Article types
 export type {
-  ID,
-  DateString,
-  URLString,
-  Primitive,
-  JSONValue,
-  JSONObject,
-  JSONArray,
-  NavItem,
-  NavItems,
-  WritingProject,
-  ApiResponse,
-  PaginatedResponse,
-  AppError,
-  AppConfig,
-  BaseProps,
-  ButtonProps,
-  FormField,
-  RecursivePartial,
-  ValueOf,
-  AsyncReturnType,
-  LogContext,
-} from './core';
+  Article,
+  ArticleCategory,
+  ArticleTag,
+  ArticleFrontmatter,
+  ArticleImage,
+  FetchArticlesOptions
+} from '../writing/types';
 
-// Feature modules with lazy loading support
-export const config = async () => import('./config');
+// Social types
+export type { SocialLink } from './social';
+
+// =========================================
+// Re-export all constants
+// =========================================
+
+// Section metadata
+export { SECTION_METADATA, SITE_INFO, PROFILE_IMAGE };
+
+// Social links
+export { SOCIAL_LINKS };
+
+// Security
+export { SECURITY };
+
+// Routes
+export { ROUTES };
+
+// =========================================
+// Re-export all functions
+// =========================================
+
+// Article functions
+export {
+  getArticles,
+  getArticleBySlug as getArticle,
+  getAdjacentArticles,
+  processArticleContent,
+  formatArticleDate as articleFormatDate
+};
+
+// Utility functions
+export {
+  cn,
+  createLogger,
+  LogCategory,
+  formatDate,
+  truncateText,
+  slugify,
+  isEmpty,
+  isValidUrl,
+  isTouchDevice,
+  getDeviceAppropriateHandlers
+}; 

@@ -1,6 +1,6 @@
-// Import selectOptimalFormat from AudioPlayer
+import { useState, useEffect } from 'react';
+import { createLogger, LogCategory } from '@/lib/utils';
 import { selectOptimalFormat } from './utils/format-selection';
-import { createLogger, LogCategory } from '@/lib/core';
 
 // Create logger instance for audio player
 const logger = createLogger('audio-player', { category: LogCategory.APPLICATION });

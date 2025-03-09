@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import { HeroBackground } from '../utils/BackgroundComponents';
-import { ActionButton } from '../../buttons';
+import { Button } from '@/components/misc';
 import { heroContent } from '../constants/hero';
 import { fadeInUpAnimation, fadeInAnimation } from '../utils/animations';
 
@@ -56,7 +56,7 @@ const ContentSection = memo<ContentSectionProps>(({ title, content, children }) 
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
       <motion.h2
-        className="text-3xl sm:text-4xl font-mono mb-8 whitespace-nowrap font-medium tracking-tight text-white"
+        className="text-2xl sm:text-3xl font-mono mb-6 whitespace-nowrap font-medium tracking-tight text-white"
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : { opacity: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
@@ -64,7 +64,7 @@ const ContentSection = memo<ContentSectionProps>(({ title, content, children }) 
         {title}
       </motion.h2>
       <motion.p
-        className="text-lg sm:text-xl text-white/70 leading-relaxed font-light tracking-wide mb-8 max-w-3xl"
+        className="text-base sm:text-lg text-white/70 leading-relaxed font-light tracking-wide mb-6 max-w-3xl"
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : { opacity: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
@@ -117,14 +117,14 @@ const StickyHeader = memo(() => {
       {...fadeInUpAnimation()}
     >
       <motion.h1
-        className="text-5xl sm:text-6xl mb-2 sm:mb-6 whitespace-nowrap font-mono font-light tracking-[-0.03em] text-white"
+        className="text-3xl sm:text-4xl mb-2 sm:mb-4 whitespace-nowrap font-mono font-light tracking-[-0.03em] text-white"
         style={{ textShadow: '0 4px 8px rgba(0,0,0,0.1)' }}
         {...fadeInAnimation(0.2)}
       >
         {heroContent.name}
       </motion.h1>
       <motion.p
-        className="text-lg sm:text-xl lg:text-2xl mb-4 sm:mb-6 tracking-wide text-white/60 font-light flex flex-wrap items-center gap-1.5"
+        className="text-base sm:text-lg mb-4 tracking-wide text-white/60 font-light flex flex-wrap items-center gap-1.5"
         {...fadeInAnimation(0.3)}
       >
         <span className="hidden sm:inline">{heroContent.title}</span>
@@ -142,22 +142,22 @@ const StickyHeader = memo(() => {
         className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4"
         {...fadeInAnimation(0.4)}
       >
-        <ActionButton
+        <Button
           variant="primary"
           onClick={handleOpenModal}
           size="md"
-          className="sm:!px-4 sm:!py-2 sm:!text-[1.1rem] sm:!min-h-[44px]"
+          className="sm:!px-3 sm:!py-1.5 sm:!text-sm sm:!min-h-[36px]"
         >
           Connect
-        </ActionButton>
+        </Button>
         <Link href="/bio" passHref>
-          <ActionButton
+          <Button
             variant="secondary"
             size="md"
-            className="sm:!px-4 sm:!py-2 sm:!text-[1.1rem] sm:!min-h-[44px]"
+            className="sm:!px-3 sm:!py-1.5 sm:!text-sm sm:!min-h-[36px]"
           >
             Bio
-          </ActionButton>
+          </Button>
         </Link>
       </motion.div>
     </motion.div>

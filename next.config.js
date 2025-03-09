@@ -161,9 +161,68 @@ const nextConfig = {
           },
         ],
       },
+      // Exception for the agents API route which should be cached
+      {
+        source: '/api/public/agents',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
+          },
+        ],
+      },
+      // Exception for the robots API route which should be cached
+      {
+        source: '/api/public/robots',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
+          },
+          {
+            key: 'Content-Type',
+            value: 'text/plain',
+          },
+        ],
+      },
+      // Exception for the sitemap API route which should be cached
+      {
+        source: '/api/public/sitemap',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
+          },
+          {
+            key: 'Content-Type',
+            value: 'application/xml',
+          },
+        ],
+      },
     ];
 
     return cacheConfigs;
+  },
+
+  // Add redirects for standard paths to API routes
+  async redirects() {
+    return [
+      {
+        source: '/robots.txt',
+        destination: '/api/public/robots',
+        permanent: false,
+      },
+      {
+        source: '/sitemap.xml',
+        destination: '/api/public/sitemap',
+        permanent: false,
+      },
+      {
+        source: '/agents.json',
+        destination: '/api/public/agents',
+        permanent: false,
+      },
+    ];
   },
 };
 

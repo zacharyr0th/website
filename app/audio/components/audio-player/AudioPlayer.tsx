@@ -11,13 +11,12 @@ import React, {
 import { motion } from 'framer-motion';
 import type { Track } from './tracks';
 import { TRACKS, getNextTrack, getPreviousTrack } from './tracks';
-import { createLogger, LogCategory } from '@/lib/core';
+import { createLogger, LogCategory } from '@/lib/utils';
+import ControlButton from './ControlButton';
+import PlaylistItem from './PlaylistItem';
+import ProgressBar from './ProgressBar';
 
 const logger = createLogger('audio-player', { category: LogCategory.APPLICATION });
-
-// Lazy load heavy components with error boundaries
-const PlaylistItem = lazy(() => import('./PlaylistItem'));
-const ProgressBar = lazy(() => import('./ProgressBar'));
 
 // Constants for common styles and animations
 const BUTTON_BASE_STYLES = 'touch-manipulation transition-colors font-mono';
@@ -170,6 +169,7 @@ const useAudioPlayer = (initialTrack: Track) => {
   const [duration, setDuration] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [isBuffering, setIsBuffering] = useState(false);
+  const [loadedProgress, setLoadedProgress] = useState(0);
   const [hasInitialized, setHasInitialized] = useState(false);
   const [hasUserInteracted, setHasUserInteracted] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -363,6 +363,25 @@ const useAudioPlayer = (initialTrack: Track) => {
     }
   }, []);
 
+  // Add a function to update the loaded progress
+  const updateLoadedProgress = useCallback(() => {
+    if (!audioRef.current) return;
+    
+    try {
+      const audio = audioRef.current;
+      if (audio.buffered.length === 0) return;
+      
+      // Get the end time of the last buffered range
+      const bufferedEnd = audio.buffered.end(audio.buffered.length - 1);
+      const progress = (bufferedEnd / audio.duration) * 100;
+      
+      setLoadedProgress(isNaN(progress) ? 0 : progress);
+    } catch (error) {
+      // Ignore errors in buffered calculations
+      logger.debug('Error calculating buffer progress', { error: 'Buffer calculation failed' });
+    }
+  }, []);
+
   // Enhance togglePlay with better pause handling
   const togglePlay = useCallback(async () => {
     if (!hasUserInteracted) {
@@ -547,6 +566,13 @@ const useAudioPlayer = (initialTrack: Track) => {
             if (!isNaN(currentTime) && isFinite(currentTime)) {
               setCurrentTime(currentTime);
             }
+            // Update loaded progress on timeupdate
+            updateLoadedProgress();
+          });
+
+          handlers.set('progress', () => {
+            // Update loaded progress on progress event
+            updateLoadedProgress();
           });
 
           handlers.set('ended', () => {
@@ -554,6 +580,19 @@ const useAudioPlayer = (initialTrack: Track) => {
             if (nextTrack) {
               void playTrack(nextTrack);
             }
+          });
+
+          handlers.set('stalled', () => {
+            setIsBuffering(true);
+            logger.debug('Audio stalled', { track: track.id });
+          });
+
+          handlers.set('suspend', () => {
+            // Only set buffering to false if we have enough data
+            if (audio.readyState >= 3) {
+              setIsBuffering(false);
+            }
+            updateLoadedProgress();
           });
 
           // Add all event listeners
@@ -743,11 +782,13 @@ const useAudioPlayer = (initialTrack: Track) => {
     duration,
     isLoading,
     isBuffering,
+    loadedProgress,
     audioRef,
     togglePlay,
     playTrack,
     playNextTrack,
     playPreviousTrack,
+    updateLoadedProgress,
   };
 };
 
@@ -885,6 +926,7 @@ export default memo(function AudioPlayer() {
     duration,
     isLoading,
     isBuffering,
+    loadedProgress,
     audioRef,
     togglePlay,
     playTrack,
@@ -894,6 +936,7 @@ export default memo(function AudioPlayer() {
 
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const progressRef = useRef<HTMLDivElement>(null);
+  const [loadingTrackId, setLoadingTrackId] = useState<string | null>(null);
 
   // Filter tracks based on active filter
   const filteredTracks = useMemo(() => {
@@ -915,43 +958,46 @@ export default memo(function AudioPlayer() {
     [duration, audioRef]
   );
 
+  // Enhanced play handler with loading state tracking
+  const handlePlayTrack = useCallback(
+    async (track: Track) => {
+      if (track.id === currentTrack.id) {
+        togglePlay();
+        return;
+      }
+      
+      setLoadingTrackId(track.id);
+      try {
+        await playTrack(track);
+      } finally {
+        setLoadingTrackId(null);
+      }
+    },
+    [currentTrack.id, playTrack, togglePlay]
+  );
+
+  // Use the improved ControlButton component
   const controls = (
     <div className="flex items-center justify-center sm:justify-start gap-4 sm:gap-6">
-      <motion.button
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
+      <ControlButton
         onClick={playPreviousTrack}
-        className="p-2 sm:p-3 text-[var(--color-text-primary)] touch-manipulation"
-        aria-label="Previous track"
-      >
-        <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" />
-        </svg>
-      </motion.button>
+        icon="previous"
+        label="Previous track"
+      />
 
-      <motion.button
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
+      <ControlButton
         onClick={togglePlay}
-        className="p-3 sm:p-4 rounded-full bg-[var(--color-primary)] text-white shadow-lg touch-manipulation"
-        aria-label={isPlaying ? 'Pause' : 'Play'}
-      >
-        <svg className="w-6 h-6 sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="currentColor">
-          {isPlaying ? <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" /> : <path d="M8 5v14l11-7z" />}
-        </svg>
-      </motion.button>
+        icon={isPlaying ? "pause" : "play"}
+        isActive={isPlaying}
+        isLoading={isLoading}
+        className="bg-[var(--color-primary)] text-white shadow-lg"
+      />
 
-      <motion.button
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
+      <ControlButton
         onClick={playNextTrack}
-        className="p-2 sm:p-3 text-[var(--color-text-primary)] touch-manipulation"
-        aria-label="Next track"
-      >
-        <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
-        </svg>
-      </motion.button>
+        icon="next"
+        label="Next track"
+      />
     </div>
   );
 
@@ -974,15 +1020,15 @@ export default memo(function AudioPlayer() {
         />
 
         <div className="mt-2 touch-none">
-          <Suspense fallback={<div className="h-2 bg-surface/50 rounded-full animate-pulse" />}>
-            <ProgressBar
-              progressRef={progressRef}
-              currentTime={currentTime}
-              duration={duration}
-              formatTime={formatTime}
-              onProgressClick={handleProgressClick}
-            />
-          </Suspense>
+          <ProgressBar
+            progressRef={progressRef}
+            currentTime={currentTime}
+            duration={duration}
+            formatTime={formatTime}
+            onProgressClick={handleProgressClick}
+            isBuffering={isBuffering}
+            loadedProgress={loadedProgress}
+          />
         </div>
       </div>
 
@@ -998,38 +1044,23 @@ export default memo(function AudioPlayer() {
             overscroll-behavior-y-contain
             px-3 sm:px-6"
           >
-            <Suspense fallback={<div className="h-16 bg-surface/50 rounded-lg animate-pulse" />}>
-              {filteredTracks.map((track: Track) => (
-                <PlaylistItem
-                  key={track.id}
-                  track={track}
-                  currentTrack={currentTrack}
-                  onPlay={playTrack}
-                />
-              ))}
-            </Suspense>
+            {filteredTracks.map((track: Track) => (
+              <PlaylistItem
+                key={track.id}
+                track={track}
+                currentTrack={currentTrack}
+                onPlay={handlePlayTrack}
+                isLoading={loadingTrackId === track.id}
+              />
+            ))}
           </div>
         </div>
+      )}
+
+      {/* Add a visualizer at the bottom when playing */}
+      {isPlaying && !isBuffering && (
+        <TrackVisualization isPlaying={isPlaying} />
       )}
     </motion.div>
   );
 });
-
-// Update button components to use common styles and animations
-const ControlButton = memo<{
-  onClick: () => void;
-  icon: React.ReactNode;
-  label: string;
-  className?: string;
-}>(({ onClick, icon, label, className }) => (
-  <motion.button
-    {...BUTTON_HOVER_ANIMATION}
-    onClick={onClick}
-    className={`${BUTTON_BASE_STYLES} ${className}`}
-    aria-label={label}
-  >
-    {icon}
-  </motion.button>
-));
-
-ControlButton.displayName = 'ControlButton';

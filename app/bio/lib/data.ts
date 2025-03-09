@@ -1,4 +1,4 @@
-import { SOCIAL_LINKS } from '@/lib/config/social';
+import { SOCIAL_LINKS } from '@/lib';
 import type { BioData } from '../types';
 
 export const bioData: BioData = {

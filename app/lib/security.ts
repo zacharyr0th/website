@@ -1,18 +1,23 @@
 /**
- * Security utilities for API routes and server components
+ * Security Configuration
+ * 
+ * Contains security-related constants and patterns
  */
 
-/**
- * Returns headers for static content with cache control
- * @param maxAge Maximum age in seconds for the cache
- * @returns Headers object with security and cache headers
- */
-export const getStaticHeaders = (maxAge: number = 3600) => {
-  return {
-    'Cache-Control': `public, max-age=${maxAge}, s-maxage=${maxAge}, stale-while-revalidate=${maxAge * 2}`,
-    'Content-Type': 'application/json',
-    'X-Content-Type-Options': 'nosniff',
-    'X-Frame-Options': 'DENY',
-    'X-XSS-Protection': '1; mode=block',
-  };
-};
+export const SECURITY = {
+  // Pattern for sensitive routes that should not be included in sitemap
+  sensitiveRoutePattern: /^\/(?:admin|dashboard|account|api|auth)/i,
+  
+  // CSRF protection settings
+  csrf: {
+    cookieName: 'csrf',
+    headerName: 'X-CSRF-Token',
+    expirySeconds: 3600 // 1 hour
+  },
+  
+  // Rate limiting settings
+  rateLimit: {
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    maxRequests: 100 // limit each IP to 100 requests per windowMs
+  }
+}; 

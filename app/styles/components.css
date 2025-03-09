@@ -1,0 +1,249 @@
+/**
+ * Component Styles
+ * 
+ * This file contains styles for reusable UI components.
+ * Typography is now handled by the typography.css system.
+ */
+
+/* ======= BUTTONS ======= */
+.btn {
+  @apply inline-flex items-center justify-center rounded-md px-3 py-1.5 
+  transition-colors focus:outline-none focus:ring-2 focus:ring-accent 
+  focus:ring-offset-2 disabled:opacity-50;
+  font-size: var(--font-size-sm);
+}
+
+.btn-primary {
+  @apply bg-accent text-white hover:bg-[var(--color-accent-hover)];
+}
+
+.btn-secondary {
+  @apply bg-surface text-text-primary border border-gray-700 
+  hover:bg-gray-800 hover:border-gray-600;
+}
+
+.btn-ghost {
+  @apply text-text-primary hover:bg-surface hover:text-text-primary;
+}
+
+.btn-sm {
+  @apply px-2 py-0.5;
+  font-size: var(--font-size-xs);
+}
+
+.btn-lg {
+  @apply px-5 py-2;
+  font-size: var(--font-size-base);
+}
+
+.btn-icon {
+  @apply p-1.5 rounded-full;
+}
+
+/* ======= FORM ELEMENTS ======= */
+.input {
+  @apply border border-gray-200 dark:border-gray-700 p-2;
+  @apply bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-accent;
+  font-size: var(--font-size-sm);
+}
+
+.input-label {
+  @apply bg-gray-100 dark:bg-gray-800 font-semibold;
+  @apply block mb-1.5 text-text-primary;
+  font-size: var(--font-size-sm);
+}
+
+.checkbox {
+  @apply rounded border-gray-300 text-accent 
+  focus:ring-accent dark:border-gray-600;
+}
+
+/* ======= CARDS ======= */
+.card {
+  @apply bg-surface rounded-lg overflow-hidden border border-gray-800;
+  @apply transition-all duration-300 hover:border-gray-700;
+  @apply flex flex-col h-full;
+}
+
+.card-header {
+  @apply p-3 border-b border-gray-800;
+}
+
+.card-body {
+  @apply p-3 flex-grow;
+}
+
+.card-footer {
+  @apply p-3 border-t border-gray-800;
+}
+
+/* ======= ARTICLE COMPONENTS ======= */
+.article-card {
+  @apply bg-surface rounded-lg overflow-hidden border border-gray-800;
+  @apply transition-all duration-300 hover:border-gray-700 hover:shadow-md;
+  @apply flex flex-col h-full;
+}
+
+.article-card-featured {
+  @apply md:grid md:grid-cols-2 md:gap-4;
+}
+
+.article-card-image-container {
+  @apply relative w-full aspect-video overflow-hidden;
+}
+
+.article-card-image {
+  @apply object-cover w-full h-full transition-transform duration-500;
+  @apply hover:scale-105;
+}
+
+.article-card-content {
+  @apply p-3 flex flex-col flex-grow;
+}
+
+.article-card-title {
+  @apply font-mono font-bold mb-1.5
+  text-text-primary hover:text-accent transition-colors;
+  font-size: var(--font-size-lg);
+  text-wrap: balance;
+}
+
+.article-card-description {
+  @apply text-text-secondary opacity-80 mb-3;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+  text-wrap: pretty;
+}
+
+/* ======= FEATURED IMAGE ======= */
+.featured-image {
+  @apply relative w-full aspect-video overflow-hidden rounded-lg mb-4;
+  @apply border border-gray-800;
+}
+
+.featured-image-inner {
+  @apply absolute inset-0;
+}
+
+/* ======= TYPOGRAPHY COMPONENTS ======= */
+/* These components have specific styling beyond what's in typography.css */
+
+.section-title {
+  @apply font-mono font-bold text-text-primary mb-3;
+  font-size: var(--font-size-xl);
+}
+
+.subsection-title {
+  @apply font-mono font-semibold text-text-primary mb-2;
+  font-size: var(--font-size-lg);
+}
+
+.blockquote {
+  @apply pl-4 border-l-4 border-accent italic my-5
+  text-text-secondary opacity-80;
+  font-size: var(--font-size-base);
+}
+
+/* ======= NAVIGATION ======= */
+.nav-link {
+  @apply px-2.5 py-1.5 rounded-md text-text-secondary;
+  @apply hover:bg-surface hover:text-text-primary transition-colors;
+  font-size: var(--font-size-sm);
+}
+
+.nav-link-active {
+  @apply bg-surface text-text-primary;
+}
+
+/* ======= MISC COMPONENTS ======= */
+.link {
+  @apply text-accent underline underline-offset-2
+  decoration-[rgba(var(--color-accent-rgb),0.3)] decoration-1
+  transition-all duration-150;
+  font-size: inherit;
+}
+
+.link:hover {
+  @apply opacity-100 text-[var(--color-accent-hover)];
+  text-decoration-thickness: 2px;
+}
+
+.tag {
+  @apply inline-flex items-center rounded-full px-2 py-0.5;
+  @apply bg-surface text-text-secondary border border-gray-700;
+  font-size: var(--font-size-xs);
+}
+
+.divider {
+  @apply h-px w-full bg-gray-800 my-4;
+}
+
+.avatar {
+  @apply rounded-full overflow-hidden border-2 border-accent;
+}
+
+.tooltip {
+  @apply absolute z-10 p-2 bg-surface text-text-primary rounded shadow-lg;
+  @apply border border-gray-700 invisible opacity-0 transition-opacity;
+  @apply group-hover:visible group-hover:opacity-100;
+  font-size: var(--font-size-xs);
+}
+
+.badge {
+  @apply absolute top-2 right-2 px-1.5 py-0.5 rounded-full;
+  @apply bg-accent text-white font-semibold;
+  font-size: var(--font-size-xs);
+}
+
+.skeleton {
+  @apply animate-pulse bg-gray-800 rounded;
+}
+
+/* ======= TABLE COMPONENTS ======= */
+.table-base {
+  @apply w-full border-collapse;
+}
+
+.table-wrapper {
+  @apply overflow-x-auto w-full;
+}
+
+.table-cell {
+  @apply border border-gray-200 dark:border-gray-700 p-2 text-sm;
+}
+
+.table-header {
+  @apply bg-gray-100 dark:bg-gray-800 font-semibold;
+}
+
+.table-row:last-child .table-cell {
+  @apply border-b;
+}
+
+/* ======= RESPONSIVE ADJUSTMENTS ======= */
+@media (min-width: 640px) {
+  /* Article Card Responsive */
+  .article-card {
+    @apply rounded-xl;
+  }
+  
+  .article-card-featured {
+    @apply rounded-xl;
+  }
+  
+  .article-card-image-container {
+    max-height: 240px;
+  }
+  
+  .article-card-featured .article-card-image-container {
+    max-height: 320px;
+  }
+  
+  .article-card-featured .article-card-description {
+    -webkit-line-clamp: 5;
+  }
+  
+  .article-card-content {
+    @apply p-6;
+  }
+} 

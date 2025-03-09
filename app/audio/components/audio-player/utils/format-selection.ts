@@ -1,4 +1,4 @@
-import { createLogger, LogCategory } from '@/lib/core';
+import { createLogger, LogCategory } from '@/lib/utils';
 
 const logger = createLogger('format-selection', { category: LogCategory.APPLICATION });
 

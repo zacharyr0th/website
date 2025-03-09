@@ -1,4 +1,6 @@
-/** Core article types and configurations */
+/**
+ * Core article types and configurations for the entire writing section
+ */
 
 /** Image metadata for articles */
 export interface ArticleImage {
@@ -7,8 +9,15 @@ export interface ArticleImage {
 }
 
 /** Allowed categories and tags */
-export const CATEGORIES = ['technology', 'finance', 'music'] as const;
-export const TAGS = ['crypto', 'computing', 'theory', 'ai', 'trading'] as const;
+export const CATEGORIES = ['Tech', 'Finance', 'Music'] as const;
+export const TAGS = ['react', 'typescript', 'nextjs', 'web', 'ai', 'investing', 'production', 'guitar', 'synthesis', 'crypto', 'computing', 'theory', 'trading'] as const;
+
+// Category display names
+export const CATEGORY_DISPLAY_NAMES: Record<ArticleCategory, string> = {
+  'Tech': 'Tech',
+  'Finance': 'Finance',
+  'Music': 'Music'
+} as const;
 
 /** Core configuration for article management */
 export const ARTICLE_CONFIG = {
@@ -91,6 +100,19 @@ export interface FetchArticlesOptions {
   readonly excludeDrafts?: boolean;
   readonly signal?: AbortSignal;
   readonly cache?: RequestCache;
+  readonly offset?: number;
+}
+
+/** Mutable version of FetchArticlesOptions for internal use */
+export interface MutableFetchArticlesOptions {
+  featured?: boolean;
+  category?: ArticleCategory;
+  tag?: ArticleTag;
+  limit?: number;
+  excludeDrafts?: boolean;
+  signal?: AbortSignal;
+  cache?: RequestCache;
+  offset?: number;
 }
 
 /** Props for article content component */
@@ -99,7 +121,11 @@ export interface ArticleContentProps {
   contentHtml: string;
   nextArticle: Article | null;
   prevArticle: Article | null;
-  containerVariants: typeof import('@/lib/ui/animations').containerVariants;
+  containerVariants?: {
+    hidden: object;
+    visible: object;
+    exit: object;
+  };
 }
 
 /** Props for archive section component */

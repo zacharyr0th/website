@@ -1,9 +1,15 @@
 import path from 'path';
 import { processMarkdown } from '@/bio/lib/markdown';
-import { api, core, security } from '@/lib';
+import { 
+  createLogger, 
+  LogCategory, 
+  createApiResponse, 
+  createApiErrorResponse,
+  getStaticHeaders
+} from '@/lib';
 import { readFileSecure } from '@/lib/server';
 
-const logger = core.createLogger('bio-api', { category: core.LogCategory.API });
+const logger = createLogger('bio-api', { category: LogCategory.API });
 
 // Validate environment variables
 const validateEnvironment = () => {
@@ -49,7 +55,7 @@ export async function GET() {
     // Get secure file path
     const filePath = getSecureBioPath();
     if (!filePath) {
-      return api.createApiErrorResponse('Invalid bio file path', { status: 400 });
+      return createApiErrorResponse('Invalid bio file path', { status: 400 });
     }
 
     // Read and process bio
@@ -57,20 +63,20 @@ export async function GET() {
     if (!fileResult.success) {
       const err = new Error(String(fileResult.error));
       logger.error('Failed to read bio file', err);
-      return api.createApiErrorResponse('Bio file not found', { status: 404 });
+      return createApiErrorResponse('Bio file not found', { status: 404 });
     }
 
     if (typeof fileResult.data !== 'string') {
       logger.error('Invalid file content type', undefined, { type: typeof fileResult.data });
-      return api.createApiErrorResponse('Invalid file content', { status: 500 });
+      return createApiErrorResponse('Invalid file content', { status: 500 });
     }
 
     const processedContent = await processMarkdown(fileResult.data);
 
     // Get security headers
-    const securityHeaders = security.getStaticHeaders(3600); // 1 hour cache
+    const securityHeaders = getStaticHeaders(3600); // 1 hour cache
 
-    return api.createApiResponse(processedContent, {
+    return createApiResponse(processedContent, {
       headers: {
         // Override the Content-Type from security headers with text/html
         ...securityHeaders,
@@ -83,7 +89,7 @@ export async function GET() {
       timestamp: new Date().toISOString(),
     });
 
-    return api.createApiErrorResponse('Failed to load bio', {
+    return createApiErrorResponse('Failed to load bio', {
       status: 500,
       details: process.env.NODE_ENV === 'development' ? err : undefined,
     });

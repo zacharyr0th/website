@@ -3,13 +3,14 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import { bioData } from '../lib/data';
 import { Hero } from './Hero';
 import { Experience } from './Experience';
 import { Skills } from './Skills';
 
 interface BioPageClientProps {
-  containerVariants: typeof import('@/lib/ui/animations').containerVariants;
+  containerVariants: Variants;
 }
 
 export default function BioPageClient({ containerVariants }: BioPageClientProps) {

@@ -8,7 +8,7 @@ import {
   type ProjectCategory,
   type BaseProject,
 } from '../data/projects';
-import { NavButton } from '@/components/buttons/NavButton';
+import { Button } from '@/components/misc';
 
 const ProjectIcon: React.FC<{ icon: IconType }> = ({ icon: Icon }) => <Icon className="w-5 h-5" />;
 
@@ -40,16 +40,16 @@ const Hero: React.FC = () => {
       </header>
 
       <div className="bg-surface/80 backdrop-blur-sm rounded-3xl px-4 py-2.5 flex items-center space-x-4 overflow-x-auto scrollbar-hide">
-        <NavButton
+        <Button
           variant="secondary"
           active={selectedCategory === 'all'}
           onClick={() => handleCategoryChange('all')}
           size="sm"
         >
           All
-        </NavButton>
+        </Button>
         {Object.entries(PROJECT_CATEGORIES).map(([key, value]) => (
-          <NavButton
+          <Button
             key={key}
             variant="secondary"
             active={selectedCategory === key}
@@ -57,7 +57,7 @@ const Hero: React.FC = () => {
             size="sm"
           >
             {value}
-          </NavButton>
+          </Button>
         ))}
       </div>
 

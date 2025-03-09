@@ -3,7 +3,7 @@ import React, { memo, useMemo } from 'react';
 /**
  * Props for the LoadingState component
  */
-interface LoadingStateProps {
+export interface LoadingStateProps {
   /** Label for accessibility */
   label?: string;
   /** Height class for the loading skeleton */

@@ -1,222 +1,307 @@
 /**
  * Core utility functions with optimized performance and type safety
+ * 
+ * This file contains reusable utility functions for the application,
+ * optimized for performance, type safety, and maintainability.
  */
 
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
-// Type definitions for enhanced type safety
-type Primitive = string | number | boolean | null | undefined;
-type DeepPartial<T> = T extends Primitive
-  ? T
-  : T extends Array<infer U>
-    ? Array<DeepPartial<U>>
-    : T extends ReadonlyArray<infer U>
-      ? ReadonlyArray<DeepPartial<U>>
-      : T extends Map<infer K, infer V>
-        ? Map<DeepPartial<K>, DeepPartial<V>>
-        : T extends ReadonlyMap<infer K, infer V>
-          ? ReadonlyMap<DeepPartial<K>, DeepPartial<V>>
-          : T extends Set<infer U>
-            ? Set<DeepPartial<U>>
-            : T extends ReadonlySet<infer U>
-              ? ReadonlySet<DeepPartial<U>>
-              : T extends object
-                ? { [K in keyof T]?: DeepPartial<T[K]> }
-                : T;
+// ===== TYPE DEFINITIONS =====
+
+// Base Types
+export type ID = string;
+export type DateString = string;
+export type URLString = string;
+export type Primitive = string | number | boolean | null | undefined;
+export type JSONValue = Primitive | JSONObject | JSONArray;
+export interface JSONObject {
+  [key: string]: JSONValue;
+}
+export interface JSONArray extends Array<JSONValue> {}
+
+// Navigation Types
+export interface NavItem {
+  label: string;
+  href: string;
+  icon?: string;
+  external?: boolean;
+  disabled?: boolean;
+  children?: NavItem[];
+}
+
+export type NavItems = NavItem[];
+
+// Writing Types
+export interface WritingProject {
+  id: ID;
+  title: string;
+  description: string;
+  link: URLString;
+  publishedAt?: DateString;
+  updatedAt?: DateString;
+  author?: string;
+  tags?: string[];
+  category?: string;
+  status?: 'draft' | 'published' | 'archived';
+  metadata?: Record<string, JSONValue>;
+}
+
+// API Response Types
+export interface ApiResponse<T> {
+  data: T;
+  error?: string;
+  status: number;
+  message?: string;
+  timestamp: DateString;
+}
+
+export interface PaginatedResponse<T> extends ApiResponse<T[]> {
+  page: number;
+  limit: number;
+  total: number;
+  hasMore: boolean;
+}
+
+// Error Types
+export interface AppError extends Error {
+  code?: string;
+  status?: number;
+  metadata?: Record<string, JSONValue>;
+}
+
+// Config Types
+export interface AppConfig {
+  environment: 'development' | 'production';
+  api: {
+    baseUrl: string;
+  };
+}
+
+// Logging context
+export interface LogContext {
+  [key: string]: string | number | boolean | undefined | unknown;
+  component?: string;
+}
+
+// Component Props Types
+export interface BaseProps extends React.HTMLAttributes<HTMLElement> {
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+export interface ButtonProps extends BaseProps {
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  loading?: boolean;
+  disabled?: boolean;
+  onClick?: () => void;
+}
+
+// Form Types
+export interface FormField {
+  name: string;
+  label: string;
+  type: 'text' | 'number' | 'email' | 'password' | 'select' | 'textarea';
+  required?: boolean;
+  placeholder?: string;
+  value?: string;
+}
+
+// ===== LOGGER =====
+
+export enum LogCategory {
+  APPLICATION = 'application',
+  API = 'api',
+  SECURITY = 'security',
+}
+
+export interface Logger {
+  debug(message: string, context?: LogContext): void;
+  info(message: string, context?: LogContext): void;
+  warn(message: string, context?: LogContext): void;
+  error(message: string, error?: Error, context?: LogContext): void;
+}
 
 /**
- * Memoized class name utility for optimal performance
- * Uses a WeakMap to cache results while allowing garbage collection
+ * Simple logger factory
  */
-const classNameCache = new WeakMap<ClassValue[], string>();
+export function createLogger(component: string, options: { category?: LogCategory } = {}): Logger {
+  const { category } = options;
+  const prefix = category ? `[${category}:${component}]` : `[${component}]`;
+
+  return {
+    debug(message: string, context = {}) {
+      if (process.env.NODE_ENV !== 'production') {
+        console.debug(prefix, message, context);
+      }
+    },
+
+    info(message: string, context = {}) {
+      console.log(prefix, message, context);
+    },
+
+    warn(message: string, context = {}) {
+      console.warn(prefix, message, context);
+    },
+
+    error(message: string, error?: Error, context = {}) {
+      console.error(prefix, message, error, context);
+    },
+  };
+}
+
+// ===== UI UTILITIES =====
 
 /**
- * Enhanced className utility with memoization and type safety
+ * Enhanced className utility with Tailwind support
+ * Combines and deduplicates class names
+ * 
  * @param inputs - Class names or conditional objects
  * @returns Merged and deduplicated class string
  */
 export function cn(...inputs: ClassValue[]): string {
-  // Fast path for empty or single inputs
-  if (inputs.length === 0) return '';
-  if (inputs.length === 1) return twMerge(clsx(inputs[0]));
-
-  // Check cache for existing result
-  const cached = classNameCache.get(inputs);
-  if (cached) return cached;
-
-  // Compute and cache new result
-  const result = twMerge(clsx(inputs));
-  classNameCache.set(inputs, result);
-  return result;
+  return twMerge(clsx(...inputs));
 }
 
+// ===== STRING UTILITIES =====
+
 /**
- * Type-safe object property accessor with path validation and error handling
- * @param obj - Source object
- * @param path - Dot notation path
- * @param defaultValue - Fallback value
- * @returns Retrieved value or default
+ * Truncates text to a specified length with ellipsis
+ * 
+ * @param text - Text to truncate
+ * @param maxLength - Maximum length before truncation
+ * @param ellipsis - Custom ellipsis string (default: '...')
+ * @returns Truncated text with ellipsis if needed
  */
-export function get<T, D = T>(obj: unknown, path: string, defaultValue: D): T | D {
-  if (!path || typeof path !== 'string') return defaultValue;
-
-  try {
-    // Optimize path splitting
-    const properties = path
-      .split('.')
-      .flatMap((p) => p.split(/[\[\]]/))
-      .filter(Boolean);
-
-    if (!properties.length) return defaultValue;
-
-    // Validate property names for security
-    if (!properties.every((prop) => /^[a-zA-Z0-9_$]+$/.test(prop))) {
-      console.warn('Invalid property name in path:', path);
-      return defaultValue;
-    }
-
-    let result: unknown = obj;
-    for (const prop of properties) {
-      if (result == null || typeof result !== 'object') return defaultValue;
-
-      const target = result as Record<string, unknown>;
-      const descriptor = Object.getOwnPropertyDescriptor(target, prop);
-      if (!descriptor) return defaultValue;
-
-      result = descriptor.value;
-    }
-
-    return (result as T) ?? defaultValue;
-  } catch (error) {
-    console.warn('Error accessing object path:', error);
-    return defaultValue;
-  }
+export function truncateText(text: string, maxLength: number, ellipsis = '...'): string {
+  if (!text || text.length <= maxLength) return text;
+  
+  // Find the last space within the limit to avoid cutting words
+  const lastSpace = text.lastIndexOf(' ', maxLength);
+  const truncateIndex = lastSpace > maxLength / 2 ? lastSpace : maxLength;
+  
+  return text.slice(0, truncateIndex) + ellipsis;
 }
 
 /**
- * Enhanced deep clone with circular reference handling and type preservation
- * @param obj - Object to clone
- * @returns Deep cloned object
+ * Slugifies a string for URL-friendly format
+ * 
+ * @param text - Text to slugify
+ * @returns URL-friendly slug
  */
-export function clone<T>(obj: T): T {
-  if (!obj || typeof obj !== 'object') return obj;
-
-  const seen = new WeakMap();
-
-  function cloneInternal<T>(item: T): T {
-    if (!item || typeof item !== 'object') return item;
-    if (seen.has(item as object)) return seen.get(item as object) as T;
-
-    if (item instanceof Date) return new Date(item.getTime()) as unknown as T;
-    if (item instanceof RegExp) return new RegExp(item.source, item.flags) as unknown as T;
-    if (item instanceof Map) {
-      const mapClone = new Map();
-      seen.set(item as object, mapClone);
-      (item as Map<unknown, unknown>).forEach((value, key) =>
-        mapClone.set(cloneInternal(key), cloneInternal(value))
-      );
-      return mapClone as unknown as T;
-    }
-    if (item instanceof Set) {
-      const setClone = new Set();
-      seen.set(item as object, setClone);
-      (item as Set<unknown>).forEach((value) => setClone.add(cloneInternal(value)));
-      return setClone as unknown as T;
-    }
-
-    const objClone = Array.isArray(item) ? [] : {};
-    seen.set(item as object, objClone);
-
-    const safeEntries = Object.entries(Object(item))
-      .filter(([key]) => Object.prototype.hasOwnProperty.call(item, key))
-      .map(([key, value]) => [key, cloneInternal(value)]);
-
-    return Object.assign(objClone, Object.fromEntries(safeEntries)) as T;
-  }
-
-  return cloneInternal(obj);
+export function slugify(text: string): string {
+  if (!text) return '';
+  
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '') // Remove special characters
+    .replace(/[\s_]+/g, '-')  // Replace spaces, underscores, and hyphens with a single hyphen
+    .replace(/^-+|-+$/g, '');  // Remove leading/trailing hyphens
 }
 
-/**
- * Optimized string case converter with caching
- * @param str - Input string
- * @returns Kebab case string
- */
-const kebabCache = new Map<string, string>();
-export function toKebabCase(str: string): string {
-  if (!str) return '';
-
-  const cached = kebabCache.get(str);
-  if (cached) return cached;
-
-  const result = str
-    .replace(/([a-z])([A-Z])/g, '$1-$2')
-    .replace(/[\s_]+/g, '-')
-    .toLowerCase();
-
-  if (kebabCache.size > 1000) {
-    // Prevent unbounded cache growth
-    kebabCache.clear();
-  }
-  kebabCache.set(str, result);
-  return result;
-}
+// ===== DATE & FORMATTING UTILITIES =====
 
 /**
- * Internationalized date formatter with caching
+ * Internationalized date formatter
+ * 
  * @param date - Date to format
+ * @param options - DateTimeFormat options
  * @param locale - Optional locale string
  * @returns Formatted date string
  */
-const dateFormatters = new Map<string, Intl.DateTimeFormat>();
-export function formatDate(date: Date | string | number, locale: string = 'en-US'): string {
+export function formatDate(
+  date: Date | string | number,
+  options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    timeZone: 'UTC',
+  },
+  locale: string = 'en-US'
+): string {
   try {
-    const formatter =
-      dateFormatters.get(locale) ??
-      dateFormatters
-        .set(
-          locale,
-          new Intl.DateTimeFormat(locale, {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            timeZone: 'UTC',
-          })
-        )
-        .get(locale)!;
-
-    return formatter.format(new Date(date));
+    return new Intl.DateTimeFormat(locale, options).format(new Date(date));
   } catch (error) {
     console.warn('Error formatting date:', error);
-    return new Date(date).toLocaleDateString();
+    return new Date(date).toLocaleDateString(locale);
   }
 }
 
 /**
- * Enhanced file size formatter with unit conversion and localization
- * @param bytes - Size in bytes
- * @param locale - Optional locale string
- * @returns Formatted size string
+ * Checks if a value is empty (null, undefined, empty string, empty array, or empty object)
  */
-const sizeFormatter = new Intl.NumberFormat('en-US', {
-  maximumFractionDigits: 1,
-});
-
-export function formatFileSize(bytes: number, locale?: string): string {
-  if (!Number.isFinite(bytes) || bytes < 0) return '0 B';
-
-  const formatter = locale
-    ? new Intl.NumberFormat(locale, { maximumFractionDigits: 1 })
-    : sizeFormatter;
-
-  const units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'] as const;
-  const exponent = Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), units.length - 1);
-  const size = bytes / Math.pow(1024, exponent);
-  const unit = units[exponent as keyof typeof units];
-
-  return `${formatter.format(size)} ${unit}`;
+export function isEmpty(value: unknown): boolean {
+  if (value === null || value === undefined) return true;
+  if (typeof value === 'string') return value.trim().length === 0;
+  if (Array.isArray(value)) return value.length === 0;
+  if (typeof value === 'object') return Object.keys(value).length === 0;
+  return false;
 }
 
+/**
+ * Validates a URL
+ * 
+ * @param url - URL to validate
+ * @param requireHttps - Whether to require HTTPS
+ * @returns Whether the URL is valid
+ */
+export function isValidUrl(url: string, requireHttps = false): boolean {
+  if (!url) return false;
+  
+  try {
+    const parsedUrl = new URL(url);
+    return requireHttps ? parsedUrl.protocol === 'https:' : true;
+  } catch {
+    return false;
+  }
+}
+
+// ===== EXPORT TYPES =====
+
 // Export type utilities for better type inference
-export type { ClassValue, DeepPartial };
+export type { ClassValue };
+
+// ===== TOUCH & DEVICE UTILITIES =====
+
+/**
+ * Detects if the current device supports touch events
+ * @returns {boolean} True if the device supports touch events
+ */
+export const isTouchDevice = (): boolean => {
+  if (typeof window === 'undefined') return false;
+  return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+};
+
+/**
+ * CSS class to apply only on devices that support hover
+ * Use with Tailwind's @media queries
+ */
+export const HOVER_MEDIA_CLASS = '@media (hover: hover)';
+
+/**
+ * Returns appropriate event handlers based on device type
+ * @param {Object} handlers - Event handlers for different interaction types
+ * @returns {Object} - The appropriate event handlers for the current device
+ */
+export const getDeviceAppropriateHandlers = ({
+  onClick,
+  onTouchStart,
+  onTouchEnd,
+  onMouseEnter,
+  onMouseLeave,
+}: {
+  onClick?: () => void;
+  onTouchStart?: () => void;
+  onTouchEnd?: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
+}) => {
+  const isTouch = isTouchDevice();
+  
+  return {
+    onClick,
+    ...(isTouch ? { onTouchStart, onTouchEnd } : { onMouseEnter, onMouseLeave }),
+  };
+};

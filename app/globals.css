@@ -1,69 +1,22 @@
 /**
  * Global Styles
  * 
- * Structure:
- * 1. Tailwind Directives
- * 2. Theme Variables
- * 3. Base Styles (@layer base)
- * 4. Utility Classes (@layer utilities)
+ * This is the main entry point for all global styles.
+ * It imports modular CSS files and defines base styles.
  */
 
+/* Tailwind Directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Theme Variables */
-:root {
-  /* Colors */
-  --color-primary: #2c3e50;
-  --color-secondary: #34495e;
-  --color-accent: #2d7fc1;
-  --color-accent-hover: #1d6ca8;
-  --color-text-primary: #ecf0f1;
-  --color-text-secondary: #bdc3c7;
-  --color-background: #1a1a1a;
-  --color-surface: #2c2c2c;
-  --color-error: #e74c3c;
-  --color-success: #2ecc71;
-  --color-warning: #f39c12;
-  --color-info: #3498db;
+/* Import CSS files in order of specificity */
+@import './styles/variables.css';
+@import './styles/typography.css';
+@import './styles/components.css';
+@import './styles/utilities.css';
 
-  /* Spacing */
-  --spacing-unit: 0.25rem;
-  --spacing-2xs: calc(var(--spacing-unit) * 0.5);
-  --spacing-xs: var(--spacing-unit);
-  --spacing-sm: calc(var(--spacing-unit) * 2);
-  --spacing-md: calc(var(--spacing-unit) * 4);
-  --spacing-lg: calc(var(--spacing-unit) * 6);
-  --spacing-xl: calc(var(--spacing-unit) * 8);
-  --spacing-2xl: calc(var(--spacing-unit) * 12);
-  --spacing-3xl: calc(var(--spacing-unit) * 16);
-
-  /* Effects */
-  --shadow-color: rgba(0, 0, 0, 0.1);
-  --shadow-sm: 0 1px 2px var(--shadow-color);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4);
-  --transition-speed: 0.3s;
-
-  /* Border Radii */
-  --radius-unit: 0.25rem;
-  --radius-sm: var(--radius-unit);
-  --radius-md: calc(var(--radius-unit) * 2);
-  --radius-lg: calc(var(--radius-unit) * 4);
-  --radius-full: 9999px;
-
-  /* Layout */
-  --header-height: max(56px, 4vh);
-  --footer-height: max(56px, 4vh);
-  --max-content-width: min(1200px, 95vw);
-  --max-reading-width: min(70ch, 98%);
-  --article-width: min(720px, 98%);
-  --sidebar-width: 280px;
-  --min-touch-target: 44px;
-  --content-width: 1200px;
-}
-
+/* Base Styles */
 @layer base {
   body {
     @apply bg-background text-text-primary min-h-screen;
@@ -76,100 +29,4 @@
   figure {
     @apply overflow-hidden;
   }
-}
-
-@layer components {
-  .content-page {
-    @apply min-h-screen bg-background;
-  }
-
-  .content-page main {
-    @apply container mx-auto px-1 sm:px-8 pt-8 pb-12 sm:pt-24;
-  }
-
-  .content-page .content-container {
-    @apply mx-auto space-y-8 sm:space-y-12;
-    max-width: min(var(--article-width), 98%);
-    will-change: transform;
-    contain: layout style paint;
-  }
-}
-
-@layer utilities {
-  /* Transitions */
-  .transition-base {
-    @apply transition-all duration-300 ease-in-out;
-  }
-
-  /* Hover Effects */
-  .hover-fade {
-    @apply transition-opacity hover:opacity-80;
-  }
-
-  .hover-scale {
-    @apply transition-transform hover:scale-105;
-  }
-
-  .hover-bounce {
-    @apply transition-all duration-300 ease-in-out hover:scale-[1.02] hover:shadow-lg active:-translate-y-1 hover:cursor-pointer will-change-transform;
-    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  /* Flexbox */
-  .flex-center {
-    @apply flex justify-center items-center;
-  }
-
-  .flex-between {
-    @apply flex justify-between items-center;
-  }
-
-  .flex-start {
-    @apply flex justify-start items-center;
-  }
-
-  .flex-end {
-    @apply flex justify-end items-center;
-  }
-}
-
-/* Custom Scrollbar */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 8px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: var(--color-border);
-  border-radius: 4px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: var(--color-text-secondary);
-}
-
-/* For Firefox */
-.custom-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-surface-mixed) transparent;
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.animate-gradient {
-  background-size: 200% 200%;
-  animation: gradient 15s ease infinite;
-}
+} 

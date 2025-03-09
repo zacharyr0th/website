@@ -1,7 +1,7 @@
 'use client';
 
 import React, { memo, useCallback } from 'react';
-import { NavButton } from '@/components/buttons';
+import { Button } from '@/components/misc';
 import { PROJECT_CATEGORIES, type ProjectCategory } from '../types/types';
 import { cn } from '@/lib';
 
@@ -32,7 +32,7 @@ const ProjectNav = memo<ProjectNavProps>(({ selectedCategory, onCategoryChange, 
       aria-label="Project categories"
     >
       <div className="flex items-center justify-center md:justify-start gap-2 md:gap-4 w-full">
-        <NavButton
+        <Button
           active={selectedCategory === 'all'}
           onClick={handleCategoryChange('all')}
           size="sm"
@@ -45,9 +45,9 @@ const ProjectNav = memo<ProjectNavProps>(({ selectedCategory, onCategoryChange, 
           )}
         >
           All
-        </NavButton>
+        </Button>
         {Object.entries(PROJECT_CATEGORIES).map(([key, value]) => (
-          <NavButton
+          <Button
             key={key}
             active={selectedCategory === key}
             onClick={handleCategoryChange(key as ProjectCategory)}
@@ -61,7 +61,7 @@ const ProjectNav = memo<ProjectNavProps>(({ selectedCategory, onCategoryChange, 
             )}
           >
             {value}
-          </NavButton>
+          </Button>
         ))}
       </div>
     </nav>

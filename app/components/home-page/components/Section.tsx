@@ -20,7 +20,7 @@ export const Section = memo(({ title, children, id, className = '' }: SectionPro
       <div className="w-full px-4">
         <div className="mx-0 sm:mx-24 lg:mx-32">
           <motion.h2
-            className="text-4xl sm:text-5xl font-mono mb-8 sm:mb-12 text-center sm:text-left whitespace-nowrap font-medium tracking-tight text-white"
+            className="text-2xl sm:text-3xl font-mono mb-6 sm:mb-8 text-center sm:text-left whitespace-nowrap font-medium tracking-tight text-white"
             {...fadeInAnimation(0.2)}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           >

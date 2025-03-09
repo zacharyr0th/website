@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import type { ProjectCategory, BaseProject } from './types/types';
 import ProjectCard from './components/ProjectCard';
 import ProjectNav from './components/ProjectNav';
@@ -9,7 +10,7 @@ import ProjectNav from './components/ProjectNav';
 type Category = 'all' | ProjectCategory;
 interface ProjectsPageClientProps {
   readonly initialProjects: ReadonlyArray<BaseProject>;
-  readonly containerVariants: typeof import('@/lib/ui/animations').containerVariants;
+  readonly containerVariants: Variants;
 }
 
 export default function ProjectsPageClient({
@@ -75,7 +76,7 @@ export default function ProjectsPageClient({
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="grid grid-cols-1 md:grid-cols-2 gap-4"
+        className="grid grid-cols-1 md:grid-cols-2 gap-6"
       >
         {filteredProjects.map((project, index) => (
           <ProjectCard key={project.id} project={project} isFocused={index === focusedIndex} />

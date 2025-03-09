@@ -4,10 +4,10 @@ import React, { memo, useMemo } from 'react';
 import { motion, useInView } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { FaLinkedin, FaXTwitter, FaGithub } from 'react-icons/fa6';
-import { SOCIAL_LINKS } from '@/lib/config/social';
-import { IconButton } from '@/components/buttons';
+import { SOCIAL_LINKS } from '@/lib';
+import { Button } from '@/components/misc';
 
-type SocialLink = {
+export type SocialLink = {
   href: string;
   Icon: React.ComponentType<{ size: number }>;
   label: string;
@@ -45,7 +45,7 @@ const socialLinks: readonly SocialLink[] = [
 ] as const;
 
 const SocialButton = memo<SocialLink>(({ href, Icon, label }) => (
-  <IconButton
+  <Button
     variant="default"
     onClick={() => window.open(href, '_blank', 'noopener,noreferrer')}
     ariaLabel={label}

@@ -1,145 +1,151 @@
 'use client';
 
-import React, { useState, useMemo, useEffect, useCallback } from 'react';
+/**
+ * WritingPageClient component
+ * Client-side component for the writing page with filtering and pagination
+ */
+
+import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import type { Article, ArticleCategory } from './articles/types';
-import ArticleCard from './articles/ArticleCard';
+import { Button, LoadingState } from '@/components/misc';
+import type { Article, ArticleCategory } from '../types';
+import { ArticleCard } from './ArticleCard';
 import { WritingNav } from './WritingNav';
-import { getArticles } from './articles/articles';
-import { LoadingState } from '@/components/misc/Loading';
 
 interface WritingPageClientProps {
   initialArticles: Article[];
-  containerVariants?: {
-    hidden: { opacity: number; y: number };
-    visible: {
-      opacity: number;
-      y: number;
-      transition: {
-        duration: number;
-        ease: number[];
-        staggerChildren: number;
-      };
-    };
-  };
   enableLoadMore?: boolean;
 }
 
-const ARTICLES_PER_PAGE = 10;
-
-export default function WritingPageClient({
-  initialArticles,
-  containerVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.48, 0.15, 0.25, 0.96],
-        staggerChildren: 0.1,
-      },
-    },
-  },
-  enableLoadMore = false,
-}: WritingPageClientProps) {
-  const [selectedCategory, setSelectedCategory] = useState<ArticleCategory | null>(null);
-  const [focusedIndex, setFocusedIndex] = useState(-1);
+export const WritingPageClient = ({ 
+  initialArticles, 
+  enableLoadMore = true 
+}: WritingPageClientProps) => {
   const [articles, setArticles] = useState<Article[]>(initialArticles);
-  const [page, setPage] = useState(1);
+  const [selectedCategory, setSelectedCategory] = useState<ArticleCategory | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-
+  const [offset, setOffset] = useState(initialArticles.length);
+  
+  // Filter articles by selected category
   const filteredArticles = useMemo(() => {
     if (!selectedCategory) return articles;
-    return articles.filter((article) => article.category === selectedCategory);
-  }, [selectedCategory, articles]);
+    return articles.filter(article => article.category === selectedCategory);
+  }, [articles, selectedCategory]);
 
-  const loadMoreArticles = useCallback(async () => {
+  // Load more articles
+  const loadMoreArticles = async () => {
     if (isLoading || !hasMore) return;
-
+    
     setIsLoading(true);
     try {
-      const nextPage = page + 1;
-      const moreArticles = await getArticles({
-        excludeDrafts: true,
-        featured: false,
-        limit: ARTICLES_PER_PAGE,
-        offset: nextPage * ARTICLES_PER_PAGE,
+      const params = new URLSearchParams({
+        offset: offset.toString(),
+        limit: '10',
       });
-
-      if (moreArticles.length < ARTICLES_PER_PAGE) {
-        setHasMore(false);
+      
+      if (selectedCategory) {
+        params.append('category', selectedCategory);
       }
-
-      setArticles((prev) => [...prev, ...moreArticles]);
-      setPage(nextPage);
+      
+      const response = await fetch(`/writing/api/articles?${params.toString()}`);
+      const newArticles = await response.json();
+      
+      if (newArticles.length === 0) {
+        setHasMore(false);
+      } else {
+        setArticles(prev => [...prev, ...newArticles]);
+        setOffset(prev => prev + newArticles.length);
+      }
     } catch (error) {
       console.error('Error loading more articles:', error);
     } finally {
       setIsLoading(false);
     }
-  }, [page, isLoading, hasMore]);
+  };
 
-  const handleKeyboardNavigation = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
-        e.preventDefault();
-        const newIndex =
-          e.key === 'ArrowUp'
-            ? Math.max(focusedIndex - 1, 0)
-            : Math.min(focusedIndex + 1, filteredArticles.length - 1);
-        setFocusedIndex(newIndex);
+  // Handle category selection
+  const handleCategorySelect = (category: ArticleCategory | null) => {
+    setSelectedCategory(category);
+    
+    // Reset pagination when changing category
+    if (category !== selectedCategory) {
+      setOffset(initialArticles.length);
+      setHasMore(true);
+      
+      // If changing to a new category, fetch articles for that category
+      if (category) {
+        const fetchCategoryArticles = async () => {
+          setIsLoading(true);
+          try {
+            const response = await fetch(`/writing/api/articles?category=${category}`);
+            const categoryArticles = await response.json();
+            setArticles(prev => {
+              // Merge with existing articles, avoiding duplicates
+              const existingIds = new Set(prev.map(a => a.id));
+              const newArticles = categoryArticles.filter((a: Article) => !existingIds.has(a.id));
+              return [...prev, ...newArticles];
+            });
+          } catch (error) {
+            console.error('Error fetching category articles:', error);
+          } finally {
+            setIsLoading(false);
+          }
+        };
+        
+        fetchCategoryArticles();
       }
-    },
-    [focusedIndex, filteredArticles.length]
-  );
-
-  useEffect(() => {
-    window.addEventListener('keydown', handleKeyboardNavigation);
-    return () => window.removeEventListener('keydown', handleKeyboardNavigation);
-  }, [handleKeyboardNavigation]);
-
-  if (!articles || articles.length === 0) {
-    return (
-      <div className="max-w-2xl mx-auto space-y-4" role="status" aria-live="polite">
-        <h2 className="text-xl font-medium text-text-primary">No Articles Found</h2>
-        <p className="text-text-secondary">
-          Articles are currently being prepared. Check back soon for updates.
-        </p>
-      </div>
-    );
-  }
+    }
+  };
 
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="space-y-6"
-    >
-      <WritingNav selectedCategory={selectedCategory} onCategorySelect={setSelectedCategory} />
-      <div className="space-y-4">
-        {filteredArticles.map((article, index) => (
-          <ArticleCard key={article.slug} article={article} isFocused={index === focusedIndex} />
+    <div className="space-y-8">
+      <WritingNav 
+        selectedCategory={selectedCategory}
+        onCategorySelect={handleCategorySelect}
+      />
+      
+      <motion.div 
+        className="grid grid-cols-1 gap-6"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        {filteredArticles.map((article) => (
+          <ArticleCard 
+            key={article.id} 
+            article={article} 
+          />
         ))}
-      </div>
-
-      {enableLoadMore && hasMore && (
-        <div className="mt-8 text-center">
-          <button
-            onClick={loadMoreArticles}
-            disabled={isLoading}
-            className="px-6 py-2 text-sm font-medium text-text-primary bg-background-secondary rounded-md hover:bg-background-tertiary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isLoading ? 'Loading...' : 'Load More Articles'}
-          </button>
+      </motion.div>
+      
+      {filteredArticles.length === 0 && !isLoading && (
+        <div className="text-center py-12">
+          <p className="text-lg text-[var(--color-text-secondary)]">
+            No articles found in this category.
+          </p>
         </div>
       )}
-
-      {isLoading && (
-        <LoadingState label="Loading more articles" height="h-24" barCount={1} className="mt-4" />
+      
+      {enableLoadMore && hasMore && (
+        <div className="flex justify-center mt-8">
+          <Button
+            onClick={loadMoreArticles}
+            disabled={isLoading}
+            className="px-6 py-2"
+          >
+            {isLoading ? 'Loading...' : 'Load More'}
+          </Button>
+        </div>
       )}
-    </motion.div>
+      
+      {isLoading && (
+        <LoadingState 
+          label="Loading more articles" 
+          height="h-24" 
+          barCount={3}
+        />
+      )}
+    </div>
   );
-}
+}; 

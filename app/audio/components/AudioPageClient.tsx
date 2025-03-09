@@ -1,12 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import AudioPlayer from './audio-player/AudioPlayer';
 import AudioGrid from './AudioGrid';
 import { type Category } from './CategoryCard';
 
 interface AudioPageClientProps {
-  readonly containerVariants: typeof import('@/lib/ui/animations').containerVariants;
+  readonly containerVariants: Variants;
 }
 
 const AUDIO_CATEGORIES: readonly Category[] = [

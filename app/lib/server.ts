@@ -1,368 +1,303 @@
 /**
- * Server Module
- *
- * This file consolidates server-side functionality including:
- * - Secure file access
- * - Hetzner object storage integration
+ * Server-side utilities for audio file handling
  */
-import 'server-only';
-import { promises as fs } from 'node:fs';
-import { createReadStream } from 'node:fs';
-import { Stats } from 'node:fs';
-import path from 'node:path';
-import { createLogger } from '@/lib/core';
-import { S3Client, GetObjectCommand, HeadObjectCommand } from '@aws-sdk/client-s3';
-import type { GetObjectCommandInput } from '@aws-sdk/client-s3';
 
-// =========================================
-// Secure File Access
-// =========================================
-
-const fileLogger = createLogger('security:file-access');
-
-/**
- * Options for secure file access
- */
-export interface SecureFileOptions {
-  allowedExtensions?: string[];
-  requiredPath?: string;
-  maxSize?: number;
-}
-
-/**
- * Result of secure file access
- */
-export interface SecureFileResult<T> {
-  success: boolean;
-  data?: T;
-  error?: string;
-}
-
-/**
- * Context for validation logging
- */
-type ValidationContext = {
-  [key: string]: string | number | boolean | undefined;
-  path: string;
-  extension?: string;
-  required?: string;
-  normalizedPath?: string;
-  normalizedRequired?: string;
-};
-
-/**
- * Validate file path against security constraints
- */
-function validateFilePath(filePath: string, options: SecureFileOptions = {}): boolean {
-  const { allowedExtensions, requiredPath } = options;
-
-  // Resolve to absolute path
-  const resolvedPath = path.resolve(filePath);
-
-  // Must be within project directory
-  if (!resolvedPath.startsWith(process.cwd())) {
-    const context: ValidationContext = { path: filePath };
-    fileLogger.warn('File path outside project directory', context);
-    return false;
-  }
-
-  // Check file extension if allowedExtensions is provided
-  if (allowedExtensions) {
-    const ext = path.extname(filePath);
-    if (!allowedExtensions.includes(ext)) {
-      const context: ValidationContext = { path: filePath, extension: ext };
-      fileLogger.warn('Invalid file extension', context);
-      return false;
-    }
-  }
-
-  // Check required path if specified
-  if (requiredPath) {
-    const normalizedRequiredPath = path.resolve(requiredPath);
-    const normalizedFilePath = path.resolve(filePath);
-    if (!normalizedFilePath.startsWith(normalizedRequiredPath)) {
-      const context: ValidationContext = {
-        path: filePath,
-        required: requiredPath,
-        normalizedPath: normalizedFilePath,
-        normalizedRequired: normalizedRequiredPath,
-      };
-      fileLogger.warn('File path not in required directory', context);
-      return false;
-    }
-  }
-
-  return true;
-}
-
-/**
- * Read file securely
- */
-export async function readFileSecure(
-  filePath: string,
-  options: SecureFileOptions = {}
-): Promise<SecureFileResult<string>> {
-  try {
-    // Validate file path
-    if (!validateFilePath(filePath, options)) {
-      return { success: false, error: 'Invalid file path' };
-    }
-
-    // Check file exists
-    try {
-      await fs.access(filePath);
-    } catch {
-      return { success: false, error: 'File not found' };
-    }
-
-    // Check file size if specified
-    if (options.maxSize) {
-      const stats = await fs.stat(filePath);
-      if (stats.size > options.maxSize) {
-        return { success: false, error: 'File too large' };
-      }
-    }
-
-    // Read file
-    const content = await fs.readFile(filePath, 'utf8');
-    return { success: true, data: content };
-  } catch (error) {
-    const err = error instanceof Error ? error : new Error('Unknown error');
-    fileLogger.error('Error reading file', err, { path: filePath });
-    return { success: false, error: 'Failed to read file' };
-  }
-}
-
-/**
- * Read directory securely
- */
-export async function readDirSecure(
-  dirPath: string,
-  options: SecureFileOptions = {}
-): Promise<SecureFileResult<string[]>> {
-  try {
-    // Validate directory path
-    if (!validateFilePath(dirPath, options)) {
-      return { success: false, error: 'Invalid directory path' };
-    }
-
-    // Check directory exists
-    try {
-      await fs.access(dirPath);
-    } catch {
-      return { success: false, error: 'Directory not found' };
-    }
-
-    // Read directory
-    const files = await fs.readdir(dirPath);
-
-    // Filter files by extension if specified
-    const filteredFiles = options.allowedExtensions?.length
-      ? files.filter((file) => options.allowedExtensions?.includes(path.extname(file)))
-      : files;
-
-    return { success: true, data: filteredFiles };
-  } catch (error) {
-    const err = error instanceof Error ? error : new Error('Unknown error');
-    fileLogger.error('Error reading directory', err, { path: dirPath });
-    return { success: false, error: 'Failed to read directory' };
-  }
-}
-
-/**
- * Create a secure read stream
- */
-export function createSecureReadStream(
-  filePath: string,
-  options: SecureFileOptions & { start?: number; end?: number } = {}
-): SecureFileResult<ReadableStream> {
-  try {
-    // Validate file path
-    if (!validateFilePath(filePath, options)) {
-      return { success: false, error: 'Invalid file path' };
-    }
-
-    // Create read stream
-    const nodeStream = createReadStream(filePath, {
-      start: options.start,
-      end: options.end,
-    });
-
-    // Convert Node.js stream to web stream
-    const webStream = new ReadableStream({
-      start(controller) {
-        nodeStream.on('data', (chunk: string | Buffer) => {
-          controller.enqueue(chunk instanceof Buffer ? chunk : Buffer.from(chunk));
-        });
-        nodeStream.on('end', () => {
-          controller.close();
-        });
-        nodeStream.on('error', (err: Error) => {
-          controller.error(err);
-        });
-      },
-      cancel() {
-        nodeStream.destroy();
-      },
-    });
-
-    return { success: true, data: webStream };
-  } catch (error) {
-    const err = error instanceof Error ? error : new Error('Unknown error');
-    fileLogger.error('Error creating read stream', err, { path: filePath });
-    return { success: false, error: 'Failed to create stream' };
-  }
-}
-
-/**
- * Get file stats securely
- */
-export async function getFileStatsSecure(
-  filePath: string,
-  options: SecureFileOptions = {}
-): Promise<SecureFileResult<Stats>> {
-  try {
-    // Validate file path
-    if (!validateFilePath(filePath, options)) {
-      return { success: false, error: 'Invalid file path' };
-    }
-
-    // Get file stats
-    const stats = await fs.stat(filePath);
-    return { success: true, data: stats };
-  } catch (error) {
-    const err = error instanceof Error ? error : new Error('Unknown error');
-    fileLogger.error('Error getting file stats', err, { path: filePath });
-    return { success: false, error: 'Failed to get file stats' };
-  }
-}
-
-// =========================================
-// Hetzner Object Storage
-// =========================================
+import fs from 'fs';
+import path from 'path';
+import { createReadStream, Stats } from 'fs';
+import { S3Client, HeadObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3';
+import { Readable } from 'stream';
 
 // Simple logger function
-const storageLog = (level: 'debug' | 'info' | 'warn' | 'error', message: string, data?: Record<string, unknown>) => {
+const log = (level: 'debug' | 'info' | 'warn' | 'error', message: string, data?: Record<string, unknown>) => {
   const timestamp = new Date().toISOString();
-  console[level](`[${timestamp}] [hetzner-storage] ${message}`, data || '');
-};
-
-// S3 client configuration
-const STORAGE_CONFIG = {
-  bucket: process.env.STORAGE_BUCKET_NAME || 'website-audio',
-  region: process.env.STORAGE_REGION || 'eu-central-1',
-  endpoint: process.env.STORAGE_ENDPOINT || 'https://s3.eu-central-1.hetzner.com',
-  accessKey: process.env.STORAGE_ACCESS_KEY || '',
-  secretKey: process.env.STORAGE_SECRET_KEY || '',
+  console[level](`[${timestamp}] [server-utils] ${message}`, data || '');
 };
 
 // Initialize S3 client
 const s3Client = new S3Client({
-  region: STORAGE_CONFIG.region,
-  endpoint: STORAGE_CONFIG.endpoint,
+  region: 'eu-central-1',
+  endpoint: 'https://hel1.your-objectstorage.com',
   credentials: {
-    accessKeyId: STORAGE_CONFIG.accessKey,
-    secretAccessKey: STORAGE_CONFIG.secretKey,
+    accessKeyId: process.env.STORAGE_ACCESS_KEY || '',
+    secretAccessKey: process.env.STORAGE_SECRET_KEY || '',
   },
-  forcePathStyle: true, // Required for S3-compatible storage providers
+  forcePathStyle: true, // Required for Hetzner S3-compatible storage
 });
 
-/**
- * Get file stats from Hetzner Object Storage
- */
-export async function getFileStats(key: string) {
-  try {
-    storageLog('debug', 'Getting file stats', { key });
+const BUCKET_NAME = process.env.STORAGE_BUCKET_NAME || 'website-audio';
+const FALLBACK_AUDIO_PATH = path.join(process.cwd(), 'public', 'audio');
 
+// Type definitions for our return values
+interface FileStatsResult {
+  success: boolean;
+  data?: {
+    size: number;
+    lastModified?: Date | undefined;
+    contentType?: string | undefined;
+  };
+  error?: string;
+}
+
+interface FileStreamResult {
+  success: boolean;
+  data?: {
+    stream: Readable;
+    contentType?: string | undefined;
+  };
+  error?: string;
+}
+
+/**
+ * Constructs a standardized audio file key
+ */
+export function constructAudioKey(category: string, filename: string, format: string = 'm4a'): string {
+  // Remove any leading/trailing slashes and normalize path
+  const normalizedCategory = category.replace(/^\/+|\/+$/g, '');
+  const normalizedFilename = filename.replace(/^\/+|\/+$/g, '');
+  
+  // Add the audio/ prefix to the path
+  const prefix = 'audio';
+  
+  // Ensure the filename has the instrument prefix and correct extension
+  // Current format in the bucket is: piano_nocturne-1.m4a
+  const filenameWithPrefix = `${normalizedCategory}_${normalizedFilename}`;
+  const filenameWithExt = filenameWithPrefix.endsWith(`.${format}`) 
+    ? filenameWithPrefix 
+    : `${filenameWithPrefix}.${format}`;
+  
+  return `${prefix}/${normalizedCategory}/${filenameWithExt}`;
+}
+
+/**
+ * Gets file statistics for the specified audio file
+ */
+export async function getFileStats(objectKey: string): Promise<FileStatsResult> {
+  try {
+    // Try S3 first
     const command = new HeadObjectCommand({
-      Bucket: STORAGE_CONFIG.bucket,
-      Key: key,
+      Bucket: BUCKET_NAME,
+      Key: objectKey,
     });
 
-    const response = await s3Client.send(command);
+    log('debug', `Checking S3 for file stats`, {
+      bucket: BUCKET_NAME,
+      key: objectKey,
+      endpoint: process.env.STORAGE_ENDPOINT,
+      region: process.env.STORAGE_REGION,
+    });
 
-    return {
-      success: true,
-      data: {
-        size: response.ContentLength || 0,
-        lastModified: response.LastModified || new Date(),
-        contentType: response.ContentType || 'application/octet-stream',
-      },
-    };
-  } catch (error) {
-    const err = error instanceof Error ? error : new Error('Unknown error');
-    storageLog('error', 'Failed to get file stats', { key, error: err.message });
+    try {
+      const response = await s3Client.send(command);
+      log('debug', `S3 file stats retrieved successfully`, {
+        key: objectKey,
+        contentLength: response.ContentLength,
+        contentType: response.ContentType,
+      });
+      
+      return {
+        success: true,
+        data: {
+          size: response.ContentLength || 0,
+          lastModified: response.LastModified || undefined,
+          contentType: response.ContentType || undefined,
+        },
+      };
+    } catch (s3Error) {
+      log('error', `S3 HeadObject error for ${objectKey}`, {
+        error: s3Error instanceof Error ? s3Error.message : 'Unknown error',
+        stack: s3Error instanceof Error ? s3Error.stack : undefined,
+        bucket: BUCKET_NAME,
+      });
+      
+      // Fallback to local file system if S3 fails
+      log('debug', `Falling back to local filesystem`, {
+        path: FALLBACK_AUDIO_PATH,
+        fullPath: path.join(FALLBACK_AUDIO_PATH, objectKey),
+      });
+      
+      const filePath = path.join(FALLBACK_AUDIO_PATH, objectKey);
+      
+      try {
+        const stats = await fs.promises.stat(filePath);
+        log('debug', `Local file stats retrieved successfully`, {
+          path: filePath,
+          size: stats.size,
+        });
+        
+        return {
+          success: true,
+          data: {
+            size: stats.size,
+            lastModified: stats.mtime,
+          },
+        };
+      } catch (fsError) {
+        log('error', `Local filesystem error for ${filePath}`, {
+          error: fsError instanceof Error ? fsError.message : 'Unknown error',
+        });
+        
+        return {
+          success: false,
+          error: `File not found in S3 or local filesystem: ${objectKey}`,
+        };
+      }
+    }
+  } catch (error: any) {
     return {
       success: false,
-      error: 'Failed to get file stats',
+      error: `Failed to get file stats for ${objectKey}: ${error?.message || 'Unknown error'}`,
     };
   }
 }
 
 /**
- * Get file stream from Hetzner Object Storage
+ * Parse range header string into start and end values
  */
-export async function getFileStream(key: string, range?: string) {
+function parseRangeHeader(rangeHeader: string): { start?: number | undefined; end?: number | undefined } | null {
+  // Simple string operations instead of regex
+  if (!rangeHeader.startsWith('bytes=')) {
+    return null;
+  }
+  
+  const rangeValue = rangeHeader.substring(6); // Remove 'bytes='
+  const rangeParts = rangeValue.split('-');
+  
+  if (rangeParts.length !== 2) {
+    return null;
+  }
+  
+  const start = rangeParts[0] ? parseInt(rangeParts[0], 10) : undefined;
+  const end = rangeParts[1] ? parseInt(rangeParts[1], 10) : undefined;
+  
+  if ((start !== undefined && isNaN(start)) || (end !== undefined && isNaN(end))) {
+    return null;
+  }
+  
+  return { start, end };
+}
+
+/**
+ * Creates a readable stream for the specified audio file
+ */
+export async function getFileStream(objectKey: string, rangeHeader?: string): Promise<FileStreamResult> {
   try {
-    storageLog('debug', 'Getting file stream', { key, range });
-
-    const commandInput: GetObjectCommandInput = {
-      Bucket: STORAGE_CONFIG.bucket,
-      Key: key,
-    };
-
-    if (range) {
-      commandInput.Range = range;
+    // Parse range header if provided
+    let range: { start?: number | undefined; end?: number | undefined } | undefined;
+    if (rangeHeader) {
+      const parsedRange = parseRangeHeader(rangeHeader);
+      if (parsedRange) {
+        range = parsedRange;
+      }
     }
 
-    const command = new GetObjectCommand(commandInput);
+    log('debug', `Attempting to stream file from S3`, {
+      bucket: BUCKET_NAME,
+      key: objectKey,
+      range: rangeHeader || 'none',
+    });
 
-    const response = await s3Client.send(command);
+    // Try S3 first
+    const command = new GetObjectCommand({
+      Bucket: BUCKET_NAME,
+      Key: objectKey,
+      Range: rangeHeader,
+    });
 
-    if (!response.Body) {
-      throw new Error('No body returned from S3');
+    try {
+      const response = await s3Client.send(command);
+      
+      if (!response.Body) {
+        throw new Error('No response body from S3');
+      }
+      
+      log('debug', `S3 stream created successfully`, {
+        key: objectKey,
+        contentType: response.ContentType,
+        contentLength: response.ContentLength,
+      });
+      
+      return {
+        success: true,
+        data: {
+          stream: response.Body as Readable,
+          contentType: response.ContentType || undefined,
+        },
+      };
+    } catch (s3Error) {
+      log('error', `S3 GetObject error for ${objectKey}`, {
+        error: s3Error instanceof Error ? s3Error.message : 'Unknown error',
+        stack: s3Error instanceof Error ? s3Error.stack : undefined,
+        bucket: BUCKET_NAME,
+      });
+      
+      // Fallback to local file system if S3 fails
+      log('debug', `Falling back to local filesystem for streaming`, {
+        path: FALLBACK_AUDIO_PATH,
+        fullPath: path.join(FALLBACK_AUDIO_PATH, objectKey),
+        range: range ? JSON.stringify(range) : 'none',
+      });
+      
+      const filePath = path.join(FALLBACK_AUDIO_PATH, objectKey);
+      const options: { start?: number; end?: number } = {};
+      
+      if (range) {
+        if (typeof range.start === 'number') options.start = range.start;
+        if (typeof range.end === 'number') options.end = range.end;
+      }
+      
+      try {
+        const stream = createReadStream(filePath, options);
+        
+        // Add an error handler to catch file not found errors
+        const streamPromise = new Promise<Readable>((resolve, reject) => {
+          stream.on('error', (err) => {
+            log('error', `Local file stream error`, {
+              path: filePath,
+              error: err.message,
+            });
+            reject(err);
+          });
+          
+          // Once we get data, the stream is valid
+          stream.on('readable', () => {
+            resolve(stream);
+          });
+          
+          // If the stream ends without becoming readable (empty file)
+          stream.on('end', () => {
+            resolve(stream);
+          });
+        });
+        
+        await streamPromise;
+        
+        log('debug', `Local file stream created successfully`, {
+          path: filePath,
+        });
+        
+        return {
+          success: true,
+          data: {
+            stream,
+          },
+        };
+      } catch (fsError) {
+        log('error', `Failed to create local file stream`, {
+          path: filePath,
+          error: fsError instanceof Error ? fsError.message : 'Unknown error',
+        });
+        
+        return {
+          success: false,
+          error: `File not found in S3 or local filesystem: ${objectKey}`,
+        };
+      }
     }
-
-    return {
-      success: true,
-      data: {
-        stream: response.Body as ReadableStream,
-        contentLength: response.ContentLength || 0,
-        contentType: response.ContentType || 'application/octet-stream',
-        contentRange: response.ContentRange,
-      },
-    };
-  } catch (error) {
-    const err = error instanceof Error ? error : new Error('Unknown error');
-    storageLog('error', 'Failed to stream file', { key, range, error: err.message });
+  } catch (error: any) {
     return {
       success: false,
-      error: 'Failed to stream file',
+      error: `Failed to create file stream for ${objectKey}: ${error?.message || 'Unknown error'}`,
     };
   }
-}
-
-/**
- * Check if a file exists in Hetzner Object Storage
- */
-export async function fileExists(key: string): Promise<boolean> {
-  try {
-    const result = await getFileStats(key);
-    return result.success;
-  } catch (error) {
-    return false;
-  }
-}
-
-/**
- * Construct the object storage key for an audio file
- */
-export function constructAudioKey(category: string, filename: string, format: string): string {
-  // For piano files, the naming convention is piano_filename.m4a
-  if (category === 'piano') {
-    return `piano_${filename}.${format}`;
-  }
-
-  // For other categories, use a standard format
-  return `${category}_${filename}.${format}`;
-}
+} 

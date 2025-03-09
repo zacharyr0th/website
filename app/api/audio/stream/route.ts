@@ -113,10 +113,7 @@ export async function GET(request: Request) {
     }
 
     // Create stream
-    const streamResult = await getFileStream(
-      objectKey,
-      range ? `bytes=${start}-${end}` : undefined
-    );
+    const streamResult = await getFileStream(objectKey, range || undefined);
 
     if (!streamResult.success) {
       log('error', 'Failed to create stream', {
@@ -161,7 +158,7 @@ export async function GET(request: Request) {
     });
 
     // Return streaming response
-    return new Response(streamResult.data.stream, {
+    return new Response(streamResult.data.stream as unknown as ReadableStream, {
       status: range ? 206 : 200,
       headers,
     });

@@ -1,100 +1,137 @@
 'use client';
 
+/**
+ * Main component for the home page
+ * Displays featured projects and writing articles in a grid layout
+ */
+
 import React, { memo } from 'react';
 import Link from 'next/link';
 import { getFeaturedProjects } from '@/projects/data/projects';
 import ProjectCard from '@/projects/components/ProjectCard';
 import { type BaseProject } from '@/projects/types/types';
 import { WRITING_PROJECTS } from '../constants/writing';
-import { Card } from './Card';
+import { ArticleCard } from '@/writing/components/ArticleCard';
 import { Section } from './Section';
 
+// Type definitions
 interface WritingProject {
   title: string;
   description: string;
   link: string;
 }
 
-const WritingCard = memo(({ article }: { article: WritingProject }) => (
-  <Card title={article.title} description={article.description} link={article.link}>
-    <div className="flex items-center text-accent/80 group-hover:text-accent text-xs sm:text-sm font-mono transition-colors">
-      Read Article
-      <svg
-        className="ml-1 w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-0.5 transition-transform"
-        viewBox="0 0 16 16"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-      >
-        <path
-          d="M6.66667 12.6667L12 7.33333L6.66667 2"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    </div>
-  </Card>
+interface GridProps {
+  children: React.ReactNode;
+  columns?: 2 | 3;
+}
+
+interface ViewAllLinkProps {
+  href: string;
+  text: string;
+}
+
+// Reusable components
+const Grid = memo<GridProps>(({ children, columns = 2 }) => (
+  <div className={`grid grid-cols-1 gap-6 sm:grid-cols-2 ${columns === 3 ? 'lg:grid-cols-3' : ''}`}>
+    {children}
+  </div>
 ));
 
-WritingCard.displayName = 'WritingCard';
+Grid.displayName = 'Grid';
 
+const ViewAllLink = memo<ViewAllLinkProps>(({ href, text }) => (
+  <div className="mt-6 sm:mt-8 text-center">
+    <Link
+      href={href}
+      className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-zinc-400 hover:text-accent border-b border-transparent hover:border-accent/30 transition-all duration-200"
+    >
+      {text}
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1.5">
+        <path d="M5 12h14"></path>
+        <path d="m12 5 7 7-7 7"></path>
+      </svg>
+    </Link>
+  </div>
+));
+
+ViewAllLink.displayName = 'ViewAllLink';
+
+// Grid components
 const ProjectGrid = memo(() => {
   const featuredProjects = getFeaturedProjects();
-  const displayedProjects = featuredProjects.slice(0, 4);
+  const displayedProjects = featuredProjects.slice(0, 6);
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 sm:gap-6">
+      <Grid columns={3}>
         {displayedProjects.map((project: BaseProject) => (
           <ProjectCard key={project.id} project={project} isFocused={false} />
         ))}
-      </div>
-      <div className="mt-6 sm:mt-8 text-center">
-        <Link
-          href="/projects"
-          className="inline-flex items-center justify-center px-4 sm:px-6 py-2 text-sm font-medium text-accent hover:text-accent/80 transition-colors duration-200"
-        >
-          View all projects →
-        </Link>
-      </div>
+      </Grid>
+      <ViewAllLink href="/projects" text="View all projects" />
     </>
   );
 });
 
 ProjectGrid.displayName = 'ProjectGrid';
 
-const WritingGrid = memo(({ articles }: { articles: WritingProject[] }) => (
-  <>
-    <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
-      {articles.map((article) => {
-        const title = article.title.includes('and Veblen')
-          ? article.title.replace('and', '&')
-          : article.title;
+const WritingGrid = memo(({ articles }: { articles: WritingProject[] }) => {
+  // Transform WritingProject to Article format expected by ArticleCard
+  const processedArticles = React.useMemo(() => 
+    articles.map((article, index) => ({
+      id: `article-${index}`,
+      slug: article.link.split('/').pop() || `article-${index}`,
+      title: article.title.includes('and Veblen') 
+        ? article.title.replace('and', '&') 
+        : article.title,
+      content: '',
+      link: article.link,
+      description: article.description,
+      date: new Date().toISOString(), // Default date since original data doesn't have dates
+      category: null,
+      tags: [],
+      image: null,
+      takeaways: null,
+      frontmatter: {
+        title: article.title,
+        date: new Date().toISOString(),
+        description: article.description,
+        category: null,
+        tags: [],
+        image: null,
+        featured: false,
+        draft: false,
+        takeaways: null
+      }
+    })),
+    [articles]
+  );
 
-        return <WritingCard key={article.link} article={{ ...article, title }} />;
-      })}
-    </div>
-    <div className="mt-6 sm:mt-8 text-center">
-      <Link
-        href="/writing"
-        className="inline-flex items-center justify-center px-4 sm:px-6 py-2 text-sm font-medium text-accent hover:text-accent/80 transition-colors duration-200"
-      >
-        View all articles →
-      </Link>
-    </div>
-  </>
-));
+  return (
+    <>
+      <Grid columns={3}>
+        {processedArticles.map((article) => (
+          <ArticleCard key={article.id} article={article} isFocused={false} />
+        ))}
+      </Grid>
+      <ViewAllLink href="/writing" text="View all articles" />
+    </>
+  );
+});
 
 WritingGrid.displayName = 'WritingGrid';
 
+// Common section styling
+const sectionClassName = "w-full pt-12 pb-12 px-3 sm:pt-16 sm:pb-16 sm:px-4 bg-background";
+
+// Main component
 export const Main = memo(() => (
   <>
     <Section
       id="section-always-building"
       title="Always Building"
-      className="w-full pt-12 pb-12 px-3 sm:pt-16 sm:pb-16 sm:px-4 bg-background"
+      className={sectionClassName}
     >
       <ProjectGrid />
     </Section>
@@ -102,7 +139,7 @@ export const Main = memo(() => (
     <Section
       id="section-sometimes-writing"
       title="Sometimes Writing"
-      className="w-full pt-12 pb-12 px-3 sm:pt-16 sm:pb-16 sm:px-4 bg-surface"
+      className={sectionClassName}
     >
       <WritingGrid articles={WRITING_PROJECTS} />
     </Section>

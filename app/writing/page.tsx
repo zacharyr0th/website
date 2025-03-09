@@ -1,13 +1,9 @@
-import React from 'react';
-import WritingPageClient from './components/WritingPageClient';
-import { containerVariants } from '@/lib/ui/animations';
-import PageContent from '@/components/layout/PageContent';
-import PageHeader from '@/components/layout/PageHeader';
-import PageLayout from '@/components/layout/PageLayout';
-import BaseLayout from '@/components/layout/BaseLayout';
+import React, { Suspense } from 'react';
+import { RootLayoutClient } from '@/components/layout';
 import type { Metadata } from 'next';
-import { SECTION_METADATA } from '@/lib/config/metadata';
-import { readArticlesFromFilesystem } from './lib/server';
+import { SECTION_METADATA } from '@/lib';
+import { LoadingState } from '@/components/misc/Loading';
+import { WritingPageClient } from './components/WritingPageClient';
 
 export const metadata: Metadata = {
   title: SECTION_METADATA.writing.title,
@@ -18,31 +14,40 @@ export const revalidate = 3600; // 1 hour
 export const dynamic = 'force-static';
 export const preferredRegion = 'auto';
 
-const INITIAL_ARTICLES_LIMIT = 50;
+async function getInitialArticles() {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || `http://localhost:${process.env.PORT || 3000}`;
+  const response = await fetch(`${baseUrl}/writing/api/articles?limit=50`, {
+    next: { revalidate: 3600 }
+  });
+  
+  if (!response.ok) {
+    throw new Error('Failed to fetch articles');
+  }
+  
+  return await response.json();
+}
 
 export default async function WritingPage() {
-  // Only fetch featured articles and a limited number of regular articles initially
-  const regularArticles = await readArticlesFromFilesystem({
-    excludeDrafts: true,
-    featured: false,
-    limit: INITIAL_ARTICLES_LIMIT,
-  });
-
+  const articles = await getInitialArticles();
+  
   return (
-    <BaseLayout>
-      <PageLayout>
-        <PageContent maxWidth="wide">
-          <PageHeader title="Writing" />
-
-          <section>
-            <WritingPageClient
-              initialArticles={regularArticles}
-              containerVariants={containerVariants}
-              enableLoadMore
-            />
-          </section>
-        </PageContent>
-      </PageLayout>
-    </BaseLayout>
+    <RootLayoutClient width="wide">
+      <h1 className="text-6xl font-light text-center sm:text-left mb-10">Writing</h1>
+      <Suspense
+        fallback={
+          <LoadingState
+            label="Loading articles"
+            height="h-[600px]"
+            barCount={4}
+            className="max-w-3xl mx-auto mt-8"
+          />
+        }
+      >
+        <WritingPageClient 
+          initialArticles={articles}
+          enableLoadMore={false}
+        />
+      </Suspense>
+    </RootLayoutClient>
   );
 }
