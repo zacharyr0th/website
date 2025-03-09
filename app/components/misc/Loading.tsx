@@ -44,30 +44,25 @@ export const LoadingState = memo(function LoadingState({
   className = '',
 }: LoadingStateProps) {
   // Memoize the loading bars to prevent unnecessary re-renders
-  const loadingBars = useMemo(() => 
-    Array.from({ length: barCount }, (_, i) => (
-      <div
-        key={`loading-bar-${i}`}
-        className={`h-4 bg-surface/50 rounded ${i === 0 ? 'w-1/3' : 'w-2/3'}`.trim()}
-        aria-hidden="true"
-      />
-    )),
+  const loadingBars = useMemo(
+    () =>
+      Array.from({ length: barCount }, (_, i) => (
+        <div
+          key={`loading-bar-${i}`}
+          className={`h-4 bg-surface/50 rounded ${i === 0 ? 'w-1/3' : 'w-2/3'}`.trim()}
+          aria-hidden="true"
+        />
+      )),
     [barCount]
   );
 
   return (
-    <div 
-      role="status" 
-      aria-label={label} 
-      className="animate-pulse space-y-8"
-    >
+    <div role="status" aria-label={label} className="animate-pulse space-y-8">
       <div
         className={`${height} bg-surface/50 rounded-xl ${className}`.trim()}
         aria-hidden="true"
       />
-      <div className="space-y-4">
-        {loadingBars}
-      </div>
+      <div className="space-y-4">{loadingBars}</div>
     </div>
   );
 });

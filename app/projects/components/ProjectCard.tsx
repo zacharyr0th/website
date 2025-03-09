@@ -76,7 +76,12 @@ const ProjectCard = ({ project, isFocused }: ProjectCardProps) => {
     project.demoLink || project.articleLink || project.githubLink || project.link || '#';
 
   return (
-    <Link href={primaryLink} target="_blank" rel="noopener noreferrer" className="group relative block h-full">
+    <Link
+      href={primaryLink}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group relative block h-full"
+    >
       <motion.article
         ref={cardRef}
         tabIndex={0}
@@ -96,9 +101,7 @@ const ProjectCard = ({ project, isFocused }: ProjectCardProps) => {
               </h3>
               <ProjectLinks project={project} className="ml-auto" />
             </div>
-            <p className="text-base text-[var(--color-text-secondary)]">
-              {project.description}
-            </p>
+            <p className="text-base text-[var(--color-text-secondary)]">{project.description}</p>
           </div>
 
           <div className="flex items-center justify-between">

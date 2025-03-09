@@ -1,6 +1,6 @@
 /**
  * Core utility functions with optimized performance and type safety
- * 
+ *
  * This file contains reusable utility functions for the application,
  * optimized for performance, type safety, and maintainability.
  */
@@ -157,7 +157,7 @@ export function createLogger(component: string, options: { category?: LogCategor
 /**
  * Enhanced className utility with Tailwind support
  * Combines and deduplicates class names
- * 
+ *
  * @param inputs - Class names or conditional objects
  * @returns Merged and deduplicated class string
  */
@@ -169,7 +169,7 @@ export function cn(...inputs: ClassValue[]): string {
 
 /**
  * Truncates text to a specified length with ellipsis
- * 
+ *
  * @param text - Text to truncate
  * @param maxLength - Maximum length before truncation
  * @param ellipsis - Custom ellipsis string (default: '...')
@@ -177,35 +177,35 @@ export function cn(...inputs: ClassValue[]): string {
  */
 export function truncateText(text: string, maxLength: number, ellipsis = '...'): string {
   if (!text || text.length <= maxLength) return text;
-  
+
   // Find the last space within the limit to avoid cutting words
   const lastSpace = text.lastIndexOf(' ', maxLength);
   const truncateIndex = lastSpace > maxLength / 2 ? lastSpace : maxLength;
-  
+
   return text.slice(0, truncateIndex) + ellipsis;
 }
 
 /**
  * Slugifies a string for URL-friendly format
- * 
+ *
  * @param text - Text to slugify
  * @returns URL-friendly slug
  */
 export function slugify(text: string): string {
   if (!text) return '';
-  
+
   return text
     .toLowerCase()
     .replace(/[^\w\s-]/g, '') // Remove special characters
-    .replace(/[\s_]+/g, '-')  // Replace spaces, underscores, and hyphens with a single hyphen
-    .replace(/^-+|-+$/g, '');  // Remove leading/trailing hyphens
+    .replace(/[\s_]+/g, '-') // Replace spaces, underscores, and hyphens with a single hyphen
+    .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
 }
 
 // ===== DATE & FORMATTING UTILITIES =====
 
 /**
  * Internationalized date formatter
- * 
+ *
  * @param date - Date to format
  * @param options - DateTimeFormat options
  * @param locale - Optional locale string
@@ -242,14 +242,14 @@ export function isEmpty(value: unknown): boolean {
 
 /**
  * Validates a URL
- * 
+ *
  * @param url - URL to validate
  * @param requireHttps - Whether to require HTTPS
  * @returns Whether the URL is valid
  */
 export function isValidUrl(url: string, requireHttps = false): boolean {
   if (!url) return false;
-  
+
   try {
     const parsedUrl = new URL(url);
     return requireHttps ? parsedUrl.protocol === 'https:' : true;
@@ -299,7 +299,7 @@ export const getDeviceAppropriateHandlers = ({
   onMouseLeave?: () => void;
 }) => {
   const isTouch = isTouchDevice();
-  
+
   return {
     onClick,
     ...(isTouch ? { onTouchStart, onTouchEnd } : { onMouseEnter, onMouseLeave }),

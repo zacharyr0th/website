@@ -19,11 +19,11 @@ declare global {
   }
 }
 
-export const ArticleContent = ({ 
-  article, 
+export const ArticleContent = ({
+  article,
   contentHtml,
-  nextArticle, 
-  prevArticle
+  nextArticle,
+  prevArticle,
 }: ArticleContentProps) => {
   // Set up header click handler for table of contents
   useEffect(() => {
@@ -35,7 +35,7 @@ export const ArticleContent = ({
         window.scrollTo({ top: y, behavior: 'smooth' });
       }
     };
-    
+
     return () => {
       window.handleHeaderClick = undefined;
     };
@@ -52,10 +52,10 @@ export const ArticleContent = ({
               {article.description}
             </p>
           )}
-          
+
           <div className="flex items-center justify-center md:justify-start gap-4 my-4">
-            <time 
-              dateTime={article.date} 
+            <time
+              dateTime={article.date}
               className="text-[var(--color-text-tertiary)] font-mono text-sm"
             >
               {formatDate(article.date)}
@@ -67,7 +67,7 @@ export const ArticleContent = ({
             )}
           </div>
         </header>
-        
+
         {/* Featured image */}
         {article.image && (
           <figure className="my-8">
@@ -81,15 +81,15 @@ export const ArticleContent = ({
             />
           </figure>
         )}
-        
+
         {/* Main content */}
-        <div 
+        <div
           className="prose prose-lg dark:prose-invert max-w-none mx-auto"
-          dangerouslySetInnerHTML={{ 
-            __html: DOMPurify.sanitize(contentHtml) 
-          }} 
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(contentHtml),
+          }}
         />
-        
+
         {/* Takeaways section */}
         {article.takeaways && article.takeaways.length > 0 && (
           <div className="my-8 p-6 bg-gray-100 dark:bg-gray-800 rounded-lg">
@@ -101,7 +101,7 @@ export const ArticleContent = ({
             </ul>
           </div>
         )}
-        
+
         {/* Navigation between articles */}
         <nav className="mt-8 pt-6 border-t">
           <div className="flex flex-col sm:flex-row justify-between gap-6">
@@ -111,7 +111,7 @@ export const ArticleContent = ({
                 <div>{prevArticle.title}</div>
               </Link>
             )}
-            
+
             {nextArticle && (
               <Link href={nextArticle.link} className="sm:text-right">
                 <div className="text-sm">Next</div>
@@ -123,4 +123,4 @@ export const ArticleContent = ({
       </article>
     </div>
   );
-}; 
+};

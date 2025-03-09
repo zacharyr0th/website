@@ -22,7 +22,7 @@ export const WritingNav = ({ selectedCategory, onCategorySelect }: WritingNavPro
   };
 
   return (
-    <nav 
+    <nav
       className={cn(
         'flex items-center justify-center overflow-x-auto scrollbar-hide',
         'bg-surface/40 backdrop-blur-sm rounded-2xl',
@@ -37,10 +37,7 @@ export const WritingNav = ({ selectedCategory, onCategorySelect }: WritingNavPro
           active={selectedCategory === null}
           onClick={handleCategoryChange(null)}
           size="sm"
-          className={cn(
-            'text-base font-mono font-medium',
-            'transition-all duration-200',
-          )}
+          className={cn('text-base font-mono font-medium', 'transition-all duration-200')}
         >
           All
         </Button>
@@ -51,10 +48,7 @@ export const WritingNav = ({ selectedCategory, onCategorySelect }: WritingNavPro
             active={selectedCategory === category}
             onClick={handleCategoryChange(category)}
             size="sm"
-            className={cn(
-              'text-base font-mono font-medium',
-              'transition-all duration-200',
-            )}
+            className={cn('text-base font-mono font-medium', 'transition-all duration-200')}
           >
             {CATEGORY_DISPLAY_NAMES[category]}
           </Button>
@@ -62,4 +56,4 @@ export const WritingNav = ({ selectedCategory, onCategorySelect }: WritingNavPro
       </div>
     </nav>
   );
-}; 
+};

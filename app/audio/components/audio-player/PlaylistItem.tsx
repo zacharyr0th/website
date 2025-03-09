@@ -52,7 +52,7 @@ const LoadingIndicator = memo(() => (
     <motion.div
       className="w-4 h-4 rounded-full border-2 border-[var(--color-primary)] border-t-transparent"
       animate={{ rotate: 360 }}
-      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+      transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
     />
   </div>
 ));
@@ -61,7 +61,7 @@ LoadingIndicator.displayName = 'LoadingIndicator';
 
 // Play indicator component
 const PlayIndicator = memo<{ isPlaying: boolean }>(({ isPlaying }) => (
-  <motion.div 
+  <motion.div
     className="w-5 h-5 flex items-center justify-center"
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
@@ -74,11 +74,7 @@ const PlayIndicator = memo<{ isPlaying: boolean }>(({ isPlaying }) => (
         transition={{ duration: 1.5, repeat: Infinity }}
       />
     ) : (
-      <svg 
-        className="w-4 h-4 text-[var(--color-primary)]" 
-        viewBox="0 0 24 24" 
-        fill="currentColor"
-      >
+      <svg className="w-4 h-4 text-[var(--color-primary)]" viewBox="0 0 24 24" fill="currentColor">
         <path d="M8 5v14l11-7z" />
       </svg>
     )}
@@ -92,8 +88,8 @@ const TrackContent = memo<{ track: Track; isActive: boolean; isLoading: boolean 
   ({ track, isActive, isLoading }) => (
     <div className="flex-1 min-w-0">
       <div className="flex items-center justify-between mb-1.5">
-        <motion.h5 
-          className={`${STYLES.title} ${isLoading ? STYLES.loading : ''}`} 
+        <motion.h5
+          className={`${STYLES.title} ${isLoading ? STYLES.loading : ''} ${isActive ? 'text-accent' : ''}`}
           {...ANIMATION}
         >
           {track.title}
@@ -181,7 +177,7 @@ const PlaylistItem = memo<PlaylistItemProps>(
             ) : null}
           </AnimatePresence>
         </div>
-        
+
         <TrackContent track={track} isActive={isActive} isLoading={isLoading} />
       </motion.div>
     );

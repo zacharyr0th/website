@@ -81,8 +81,8 @@ const LoadingSpinner = memo<{ size: ControlButtonProps['size'] }>(({ size = 'med
 LoadingSpinner.displayName = 'LoadingSpinner';
 
 // Simple SVG component without unnecessary memoization
-const ButtonIcon = memo<{ 
-  icon: ControlButtonProps['icon']; 
+const ButtonIcon = memo<{
+  icon: ControlButtonProps['icon'];
   size: ControlButtonProps['size'];
   isLoading: boolean;
 }>(({ icon, size = 'medium', isLoading }) => (
@@ -101,13 +101,13 @@ ButtonIcon.displayName = 'ButtonIcon';
 
 // Single button component that handles both animated and static cases
 const ControlButton = memo<ControlButtonProps>(
-  ({ 
-    onClick, 
-    icon, 
-    isActive = false, 
+  ({
+    onClick,
+    icon,
+    isActive = false,
     isLoading = false,
     isDisabled = false,
-    className = '', 
+    className = '',
     animate = true,
     size = 'medium',
     label,
@@ -120,7 +120,7 @@ const ControlButton = memo<ControlButtonProps>(
       ${isLoading ? STYLES.loading : ''} 
       ${className}
     `;
-    
+
     const handleClick = (e: React.MouseEvent) => {
       if (isDisabled || isLoading) {
         e.preventDefault();
@@ -128,7 +128,7 @@ const ControlButton = memo<ControlButtonProps>(
       }
       onClick();
     };
-    
+
     const ButtonComponent = animate ? motion.button : 'button';
     const animationProps = animate && !isDisabled && !isLoading ? ANIMATION_CONFIG : {};
 

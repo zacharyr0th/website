@@ -35,7 +35,7 @@ The middleware acts as the first line of defense and runs on every request to th
 export async function middleware(request: NextRequest) {
   const origin = request.headers.get('origin');
   const isApiRoute = request.nextUrl.pathname.startsWith('/api');
-  
+
   // Add appropriate headers
   const response = NextResponse.next();
   const headers = isApiRoute ? getCorsHeaders(origin) : getSecurityHeaders();
@@ -63,7 +63,7 @@ export function createApiResponse<T>(
   } = {}
 ): NextResponse<ApiResponse<T>> {
   const { status = 200, headers = {} } = options;
-  
+
   return NextResponse.json(
     { data },
     {
@@ -92,7 +92,7 @@ export async function GET(
   try {
     // Process request
     // ...
-    
+
     return api.createApiResponse(
       {
         content: processedContent.toString(),
@@ -126,10 +126,12 @@ Provides shared security and caching functionality:
 ## Complete Request Lifecycle
 
 1. **Request Arrival**
+
    - Client sends request to the server
    - Next.js routes the request to the appropriate handler
 
 2. **Middleware Processing**
+
    - `middleware.ts` intercepts the request
    - Validates origin if present
    - Applies appropriate security headers
@@ -138,12 +140,14 @@ Provides shared security and caching functionality:
    - If validation passes, forwards request to route handler
 
 3. **Route Handler Processing**
+
    - Specific route handler receives the request
    - Validates request parameters using schemas from `api.ts`
    - Performs business logic (data fetching, processing, etc.)
    - Prepares response data
 
 4. **Response Formatting**
+
    - Route handler uses `createApiResponse` or `createApiErrorResponse` from `api.ts`
    - Response is formatted with consistent structure
    - Appropriate headers are applied

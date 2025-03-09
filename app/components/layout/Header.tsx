@@ -190,25 +190,27 @@ export const HomeButton = memo(({ active }: { active: boolean }) => (
 ));
 HomeButton.displayName = 'HomeButton';
 
-export const NavLink = memo(({ label, href, active, description }: NavItem & { active: boolean }) => (
-  <li
-    className={`${active ? 'max-sm:hidden' : ''} transition-transform duration-300 ease-out hover:scale-105`}
-    role="none"
-  >
-    <Link
-      href={href}
-      aria-current={active ? 'page' : undefined}
-      className="focus:outline-none focus:ring-2 focus:ring-primary group"
-      aria-label={description}
+export const NavLink = memo(
+  ({ label, href, active, description }: NavItem & { active: boolean }) => (
+    <li
+      className={`${active ? 'max-sm:hidden' : ''} transition-transform duration-300 ease-out hover:scale-105`}
+      role="none"
     >
-      <Button active={active}>
-        <span className="transform-gpu transition-all duration-300 group-hover:text-primary">
-          {label}
-        </span>
-      </Button>
-    </Link>
-  </li>
-));
+      <Link
+        href={href}
+        aria-current={active ? 'page' : undefined}
+        className="focus:outline-none focus:ring-2 focus:ring-primary group"
+        aria-label={description}
+      >
+        <Button active={active}>
+          <span className="transform-gpu transition-all duration-300 group-hover:text-primary">
+            {label}
+          </span>
+        </Button>
+      </Link>
+    </li>
+  )
+);
 NavLink.displayName = 'NavLink';
 
 export interface NavContentProps {
@@ -294,4 +296,4 @@ const Header = memo(({ showHomeButton = false }: NavigationProps) => {
 });
 Header.displayName = 'Header';
 
-export default Header; 
+export default Header;

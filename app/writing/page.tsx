@@ -15,21 +15,22 @@ export const dynamic = 'force-static';
 export const preferredRegion = 'auto';
 
 async function getInitialArticles() {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || `http://localhost:${process.env.PORT || 3000}`;
+  const baseUrl =
+    process.env.NEXT_PUBLIC_BASE_URL || `http://localhost:${process.env.PORT || 3000}`;
   const response = await fetch(`${baseUrl}/writing/api/articles?limit=50`, {
-    next: { revalidate: 3600 }
+    next: { revalidate: 3600 },
   });
-  
+
   if (!response.ok) {
     throw new Error('Failed to fetch articles');
   }
-  
+
   return await response.json();
 }
 
 export default async function WritingPage() {
   const articles = await getInitialArticles();
-  
+
   return (
     <RootLayoutClient width="wide">
       <h1 className="text-6xl font-light text-center sm:text-left mb-10">Writing</h1>
@@ -43,10 +44,7 @@ export default async function WritingPage() {
           />
         }
       >
-        <WritingPageClient 
-          initialArticles={articles}
-          enableLoadMore={false}
-        />
+        <WritingPageClient initialArticles={articles} enableLoadMore={false} />
       </Suspense>
     </RootLayoutClient>
   );

@@ -3,7 +3,7 @@ import { SOCIAL_LINKS, PRIMARY_SOCIAL_PLATFORMS } from './social';
 
 /**
  * Profile Image Configuration
- * 
+ *
  * Defines the properties of the profile image used throughout the site
  * for consistent representation in metadata, components, and structured data.
  */
@@ -17,14 +17,17 @@ export const PROFILE_IMAGE = {
 
 /**
  * Site Information
- * 
- * Central configuration for the website, used across metadata, sitemap, 
+ *
+ * Central configuration for the website, used across metadata, sitemap,
  * robots.txt, and API versioning.
  */
 export const SITE_INFO = {
   name: 'Zachary Roth',
-  description: 'Head of Growth at Aptos Labs, focusing on DeFi & AI. Exploring blockchain technology, market strategy, and innovative solutions.',
-  url: process.env.NEXT_PUBLIC_SITE_URL || `http://${process.env.DEVELOPMENT_HOST || 'localhost'}:${process.env.DEVELOPMENT_PORT || '3000'}`,
+  description:
+    'Head of Growth at Aptos Labs, focusing on DeFi & AI. Exploring blockchain technology, market strategy, and innovative solutions.',
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    `http://${process.env.DEVELOPMENT_HOST || 'localhost'}:${process.env.DEVELOPMENT_PORT || '3000'}`,
   twitterHandle: '@zacharyr0th',
   locale: 'en_US',
   organization: {
@@ -39,12 +42,12 @@ export const SITE_INFO = {
   modifiedTime: new Date().toISOString(),
   authorName: 'Zachary Roth',
   keywords: [
-    'Zachary Roth', 
-    'Blockchain', 
-    'DeFi', 
-    'Artificial Intelligence', 
-    'Growth Strategy', 
-    'Web3', 
+    'Zachary Roth',
+    'Blockchain',
+    'DeFi',
+    'Artificial Intelligence',
+    'Growth Strategy',
+    'Web3',
     'Aptos Labs',
     'Move Language',
     'Layer 1',
@@ -54,7 +57,7 @@ export const SITE_INFO = {
 
 /**
  * JSON-LD Structured Data
- * 
+ *
  * Provides search engines with structured information about the person/entity
  * represented by this website. This improves search result appearance and
  * knowledge graph integration.
@@ -72,9 +75,9 @@ export const STRUCTURED_DATA = {
   description: SITE_INFO.description,
   image: PROFILE_IMAGE.url,
   url: SITE_INFO.url,
-  sameAs: PRIMARY_SOCIAL_PLATFORMS
-    .filter(platform => SOCIAL_LINKS[platform].active)
-    .map(platform => SOCIAL_LINKS[platform].url),
+  sameAs: PRIMARY_SOCIAL_PLATFORMS.filter((platform) => SOCIAL_LINKS[platform].active).map(
+    (platform) => SOCIAL_LINKS[platform].url
+  ),
   knowsAbout: [
     'Blockchain Technology',
     'Decentralized Finance (DeFi)',
@@ -91,7 +94,7 @@ export const STRUCTURED_DATA = {
 
 /**
  * Breadcrumb Structured Data
- * 
+ *
  * Provides search engines with structured information about the site's navigation hierarchy.
  * This improves search result appearance and helps users understand their location within the site.
  */
@@ -134,7 +137,7 @@ export const BREADCRUMB_STRUCTURED_DATA = {
 
 /**
  * SEO Enhancement Configuration
- * 
+ *
  * Provides configuration for various SEO enhancements including schema.org types,
  * canonical URL strategy, and social sharing image dimensions.
  */
@@ -147,14 +150,14 @@ export const SEO_ENHANCEMENTS = {
     bio: ['Person', 'ProfilePage'],
     audio: ['AudioObject', 'PodcastEpisode'],
   },
-  
+
   // Canonical URL strategy
   canonicalStrategy: {
     enforceHttps: true,
     removeTrailingSlash: true,
     lowercaseUrls: true,
   },
-  
+
   // Social sharing image dimensions
   socialImages: {
     twitter: {
@@ -174,7 +177,7 @@ export const SEO_ENHANCEMENTS = {
 
 /**
  * Section Metadata
- * 
+ *
  * Provides metadata for each section of the website, including title, description,
  * Open Graph image, and keywords for SEO optimization.
  */
@@ -187,19 +190,22 @@ export const SECTION_METADATA = {
   },
   projects: {
     title: `Projects | ${SITE_INFO.name}`,
-    description: 'Blockchain and DeFi projects, market analysis tools, and ecosystem development initiatives.',
+    description:
+      'Blockchain and DeFi projects, market analysis tools, and ecosystem development initiatives.',
     ogImage: '/images/og/projects-og.webp',
     keywords: ['blockchain projects', 'DeFi tools', 'Web3 development', 'crypto ecosystem'],
   },
   bio: {
     title: `Bio | ${SITE_INFO.name}`,
-    description: 'Head of Growth at Aptos Labs, with experience in DeFi, blockchain ecosystems, and market strategy.',
+    description:
+      'Head of Growth at Aptos Labs, with experience in DeFi, blockchain ecosystems, and market strategy.',
     ogImage: '/images/og/bio-og.webp',
     keywords: ['blockchain professional', 'DeFi expert', 'Web3 growth', 'Aptos Labs'],
   },
   audio: {
     title: `Audio | ${SITE_INFO.name}`,
-    description: 'Podcasts, interviews, and audio content on blockchain technology and market strategy.',
+    description:
+      'Podcasts, interviews, and audio content on blockchain technology and market strategy.',
     ogImage: '/images/og/audio-og.webp',
     keywords: ['blockchain podcasts', 'DeFi interviews', 'Web3 audio', 'crypto discussions'],
   },
@@ -207,7 +213,7 @@ export const SECTION_METADATA = {
 
 /**
  * Route Configurations
- * 
+ *
  * Used for sitemap.ts, robots.txt, and SEO enhancements.
  */
 export const ROUTES = {
@@ -220,17 +226,22 @@ export const ROUTES = {
     { route: '/audio/archive', priority: 0.7, changeFrequency: 'weekly', isSecure: false },
     { route: '/bio', priority: 0.8, changeFrequency: 'monthly', isSecure: false },
   ] as const,
-  
+
   // Resource routes for sitemap.ts
   resources: [
     { route: '/manifest.json', priority: 0.4, changeFrequency: 'monthly', isSecure: false },
     { route: '/api/public/robots', priority: 0.4, changeFrequency: 'monthly', isSecure: false },
     { route: '/api/public/sitemap', priority: 0.4, changeFrequency: 'monthly', isSecure: false },
-    { route: '/.well-known/security.txt', priority: 0.4, changeFrequency: 'monthly', isSecure: false },
+    {
+      route: '/.well-known/security.txt',
+      priority: 0.4,
+      changeFrequency: 'monthly',
+      isSecure: false,
+    },
     { route: '/api/public/agents', priority: 0.4, changeFrequency: 'monthly', isSecure: false },
     { route: '/rss.xml', priority: 0.5, changeFrequency: 'daily', isSecure: false },
   ] as const,
-  
+
   // Allowed paths for robots.txt
   allowedPaths: [
     '/',
@@ -244,7 +255,7 @@ export const ROUTES = {
     '/.well-known/*',
     '/rss.xml',
   ] as const,
-  
+
   // Asset patterns for robots.txt
   assetPatterns: [
     '/*.json',
@@ -253,7 +264,7 @@ export const ROUTES = {
     '/api/public/*',
     '/assets/*',
   ] as const,
-  
+
   // Public API paths that are allowed for bots
   publicApiPaths: [
     '/api/public/articles',
@@ -267,7 +278,7 @@ export const ROUTES = {
 
 /**
  * Bot Configuration
- * 
+ *
  * Used for robots.txt generation to control crawler behavior.
  */
 export const BOT_CONFIG = {
@@ -299,7 +310,7 @@ export const BOT_CONFIG = {
 
 /**
  * Next.js Metadata Configuration
- * 
+ *
  * This metadata is used by Next.js to generate the <head> section of the HTML document.
  * It provides SEO metadata, Open Graph tags, Twitter cards, and other metadata.
  */
@@ -322,7 +333,7 @@ export const metadata: Metadata = {
       'en-US': '/en-US',
     },
   },
-  
+
   openGraph: {
     type: SITE_INFO.siteType,
     locale: SITE_INFO.locale,
@@ -339,7 +350,7 @@ export const metadata: Metadata = {
       },
     ],
   },
-  
+
   twitter: {
     card: 'summary',
     title: SITE_INFO.name,
@@ -347,13 +358,7 @@ export const metadata: Metadata = {
     creator: SITE_INFO.twitterHandle,
     images: [PROFILE_IMAGE.url],
   },
-  
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 5,
-  },
-  
+
   robots: {
     index: true,
     follow: true,
@@ -365,23 +370,21 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  
+
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
     yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION,
     // bing is not directly supported in the Metadata type
     // Use the 'other' field for additional verification codes
   },
-  
+
   icons: {
     icon: [
       { url: '/favicon.ico' },
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
-    apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
-    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
     other: [
       {
         rel: 'mask-icon',
@@ -389,14 +392,26 @@ export const metadata: Metadata = {
       },
     ],
   },
-  
+
   manifest: '/manifest.json',
-  
+
   category: 'technology',
-  
+
   // Store the publish/modified times in the other field since they're not valid for website type
   other: {
     'og:published_time': SITE_INFO.publishedTime,
     'og:modified_time': SITE_INFO.modifiedTime,
   },
+};
+
+/**
+ * Next.js Viewport Configuration
+ * 
+ * This viewport configuration is used by Next.js to generate the viewport meta tag.
+ * It has been moved from the metadata object to comply with Next.js requirements.
+ */
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
 };

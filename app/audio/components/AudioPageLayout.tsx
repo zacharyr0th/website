@@ -9,10 +9,10 @@ interface AudioPageLayoutProps {
   pageSubtitle?: string;
 }
 
-export default function AudioPageLayout({ 
-  children, 
-  pageTitle = "Audio Recordings",
-  pageSubtitle 
+export default function AudioPageLayout({
+  children,
+  pageTitle = 'Audio Recordings',
+  pageSubtitle,
 }: AudioPageLayoutProps) {
   return (
     <RootLayoutClient
@@ -21,7 +21,7 @@ export default function AudioPageLayout({
       contentClassName="mx-auto space-y-12"
       pageHeader={{
         title: pageTitle,
-        ...(pageSubtitle ? { subtitle: pageSubtitle } : {})
+        ...(pageSubtitle ? { subtitle: pageSubtitle } : {}),
       }}
     >
       {children}

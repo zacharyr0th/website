@@ -10,7 +10,7 @@ export default function AudioDatasetsPage() {
   return (
     <RootLayoutClient
       width="wide"
-      pageHeader={{ title: "Audio Datasets" }}
+      pageHeader={{ title: 'Audio Datasets' }}
       className="bg-gradient-to-b from-neutral-950 to-neutral-900"
     >
       <section className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">

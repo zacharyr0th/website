@@ -6,7 +6,7 @@ import { Source_Sans_3, Fira_Code } from 'next/font/google';
 
 // Styles and Assets
 import './globals.css';
-import { SITE_INFO, ROUTES, BOT_CONFIG } from '@/lib';
+import { metadata as siteMetadata, viewport as siteViewport } from '@/lib';
 
 // Configure fonts with optimized settings
 const firaCode = Fira_Code({
@@ -37,10 +37,9 @@ interface RootLayoutProps {
   children: ReactNode;
 }
 
+// Extend the base viewport configuration with additional settings
 export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  maximumScale: 5,
+  ...siteViewport,
   viewportFit: 'cover',
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#ffffff' },
@@ -48,7 +47,7 @@ export const viewport: Viewport = {
   ],
 };
 
-export const metadata: Metadata = SITE_INFO;
+export const metadata: Metadata = siteMetadata;
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (

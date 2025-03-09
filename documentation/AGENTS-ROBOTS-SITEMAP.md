@@ -4,9 +4,10 @@ This document describes the implementation of dynamically generated agents.json,
 
 ## Overview
 
-Instead of using static files or Next.js's built-in app directory files (robots.ts, sitemap.ts), we've implemented these as dynamic API routes. 
+Instead of using static files or Next.js's built-in app directory files (robots.ts, sitemap.ts), we've implemented these as dynamic API routes.
 
 This approach offers several advantages:
+
 1. **Dynamic Content Generation**: Content is generated at request time, ensuring it's always up-to-date
 2. **Centralized Logic**: All generation logic is in API routes, making it easier to maintain
 3. **Proper Caching**: Each route has appropriate cache headers for optimal performance
@@ -28,13 +29,13 @@ All three files are implemented as API routes in the `app/api/public/` directory
 ```typescript
 // Example usage
 const agentsData = {
-  apiVersion: "1.1",
+  apiVersion: '1.1',
   baseUrl: SITE_INFO.url,
   metadata: {
     author: SITE_INFO.authorName,
     description: SITE_INFO.description,
     // ...
-  }
+  },
   // ...
 };
 ```
@@ -141,7 +142,7 @@ export const ROUTES = {
     { route: '/api/public/agents', priority: 0.4, changeFrequency: 'monthly', isSecure: false },
     // ...
   ],
-  
+
   // Public API paths that are allowed for bots
   publicApiPaths: [
     // ...
@@ -252,13 +253,12 @@ describe('SEO Endpoints', () => {
     const response = await fetch('https://yourdomain.com/robots.txt');
     expect(response.status).toBe(200);
     expect(response.headers.get('content-type')).toContain('text/plain');
-    
+
     const text = await response.text();
     expect(text).toContain('User-agent:');
     expect(text).toContain('Sitemap:');
   });
-  
+
   // Similar tests for sitemap.xml and agents.json
 });
 ```
-

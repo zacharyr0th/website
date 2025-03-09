@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
 import type { ButtonHTMLAttributes } from 'react';
@@ -22,7 +22,8 @@ const BUTTON_CLASSES = {
     loading: 'relative cursor-wait',
   } as const,
   variant: {
-    primary: 'bg-primary text-text-primary hover:opacity-90 active:opacity-100 active:bg-primary/90',
+    primary:
+      'bg-primary text-text-primary hover:opacity-90 active:opacity-100 active:bg-primary/90',
     secondary:
       'bg-surface text-text-secondary border border-secondary hover:border-accent hover:text-accent active:bg-surface/80',
     default: 'bg-transparent hover:bg-surface/10 active:bg-surface/20',
@@ -158,10 +159,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     return (
-      <button 
-        ref={ref} 
-        className={buttonClassName} 
-        disabled={disabled || isLoading} 
+      <button
+        ref={ref}
+        className={buttonClassName}
+        disabled={disabled || isLoading}
         style={style}
         {...props}
       >
@@ -170,9 +171,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             <LoadingSpinner />
           </div>
         )}
-        <span className={isLoading ? 'invisible' : 'visible'}>
-          {content}
-        </span>
+        <span className={isLoading ? 'invisible' : 'visible'}>{content}</span>
       </button>
     );
   }
@@ -188,17 +187,17 @@ export interface TouchButtonProps extends ButtonProps {
    * Feedback color to show on touch
    */
   touchFeedbackColor?: string;
-  
+
   /**
    * Custom touch start handler
    */
   onTouchStart?: (e: React.TouchEvent) => void;
-  
+
   /**
    * Custom touch end handler
    */
   onTouchEnd?: (e: React.TouchEvent) => void;
-  
+
   /**
    * Whether to use larger touch targets
    */
@@ -225,28 +224,33 @@ export const TouchButton = React.forwardRef<HTMLButtonElement, TouchButtonProps>
   ) => {
     const [isTouched, setIsTouched] = useState(false);
     const isTouch = isTouchDevice();
-    
+
     // Determine appropriate size for touch devices
-    const touchSize = enlargeTouchTarget && isTouch ? 
-      (size === 'xs' ? 'sm' : 
-       size === 'sm' ? 'md' : 
-       size === 'md' ? 'md-lg' : 'lg') : size;
-    
+    const touchSize =
+      enlargeTouchTarget && isTouch
+        ? size === 'xs'
+          ? 'sm'
+          : size === 'sm'
+            ? 'md'
+            : size === 'md'
+              ? 'md-lg'
+              : 'lg'
+        : size;
+
     // Handle touch events
     const handleTouchStart = (e: React.TouchEvent) => {
       setIsTouched(true);
       onTouchStart?.(e);
     };
-    
+
     const handleTouchEnd = (e: React.TouchEvent) => {
       setIsTouched(false);
       onTouchEnd?.(e);
     };
-    
+
     // Apply touch-specific styles
-    const touchStyles = isTouched ? 
-      { backgroundColor: touchFeedbackColor } : {};
-    
+    const touchStyles = isTouched ? { backgroundColor: touchFeedbackColor } : {};
+
     return (
       <Button
         ref={ref}
@@ -266,4 +270,4 @@ export const TouchButton = React.forwardRef<HTMLButtonElement, TouchButtonProps>
   }
 );
 
-TouchButton.displayName = 'TouchButton'; 
+TouchButton.displayName = 'TouchButton';

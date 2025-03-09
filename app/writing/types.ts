@@ -10,13 +10,27 @@ export interface ArticleImage {
 
 /** Allowed categories and tags */
 export const CATEGORIES = ['Tech', 'Finance', 'Music'] as const;
-export const TAGS = ['react', 'typescript', 'nextjs', 'web', 'ai', 'investing', 'production', 'guitar', 'synthesis', 'crypto', 'computing', 'theory', 'trading'] as const;
+export const TAGS = [
+  'react',
+  'typescript',
+  'nextjs',
+  'web',
+  'ai',
+  'investing',
+  'production',
+  'guitar',
+  'synthesis',
+  'crypto',
+  'computing',
+  'theory',
+  'trading',
+] as const;
 
 // Category display names
 export const CATEGORY_DISPLAY_NAMES: Record<ArticleCategory, string> = {
-  'Tech': 'Tech',
-  'Finance': 'Finance',
-  'Music': 'Music'
+  Tech: 'Tech',
+  Finance: 'Finance',
+  Music: 'Music',
 } as const;
 
 /** Core configuration for article management */

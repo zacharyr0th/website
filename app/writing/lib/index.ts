@@ -4,4 +4,4 @@
  */
 
 export * from './articleUtils';
-export * from './articleContent'; 
+export * from './articleContent';

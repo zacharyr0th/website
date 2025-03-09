@@ -49,9 +49,10 @@ An `index.json` file serves as a catalog of all articles.
 
 ### images/
 
-Contains image assets used throughout the website, primarily in WebP and AVIF formats for optimal performance. 
+Contains image assets used throughout the website, primarily in WebP and AVIF formats for optimal performance.
 
 Images are related to:
+
 - Article illustrations and diagrams
 - Project screenshots
 - Technical concepts visualization

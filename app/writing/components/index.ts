@@ -4,6 +4,6 @@
  */
 
 export { ArticleCard } from './ArticleCard';
-export { ArticleContent, ArticleHeader } from './ArticleContent';
+export { ArticleContent } from './ArticleContent';
 export { WritingNav } from './WritingNav';
-export { WritingPageClient } from './WritingPageClient'; 
+export { WritingPageClient } from './WritingPageClient';

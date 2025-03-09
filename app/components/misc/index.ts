@@ -1,6 +1,6 @@
 /**
  * Misc Components Export Index
- * 
+ *
  * This module exports all components from the misc folder:
  * - Button: Standard, icon, and action button variants
  * - ErrorBoundary: React error boundary component

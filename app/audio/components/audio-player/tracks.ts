@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { createLogger, LogCategory } from '@/lib/utils';
 import { selectOptimalFormat } from './utils/format-selection';
 

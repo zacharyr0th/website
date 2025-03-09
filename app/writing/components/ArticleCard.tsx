@@ -18,7 +18,7 @@ interface ArticleCardProps {
 
 export const ArticleCard = ({ article, isFocused }: ArticleCardProps) => {
   const cardRef = React.useRef<HTMLDivElement>(null);
-  
+
   React.useEffect(() => {
     if (isFocused && cardRef.current) {
       cardRef.current.focus();
@@ -32,7 +32,7 @@ export const ArticleCard = ({ article, isFocused }: ArticleCardProps) => {
         tabIndex={0}
         className={cn(
           'relative h-full overflow-hidden rounded-2xl bg-gradient-to-br from-[#1A1A1A]/50 to-[#2A2A2A]/50 p-6 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl border border-white/5',
-          'focus:outline-none focus:ring-2 focus:ring-accent/50',
+          'focus:outline-none focus:ring-2 focus:ring-accent/50'
         )}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
@@ -43,13 +43,14 @@ export const ArticleCard = ({ article, isFocused }: ArticleCardProps) => {
             <h2 className="text-xl font-semibold text-[var(--color-text-primary)] group-hover:text-accent transition-colors">
               {article.title}
             </h2>
-            <p className="text-base text-[var(--color-text-secondary)]">
-              {article.description}
-            </p>
+            <p className="text-base text-[var(--color-text-secondary)]">{article.description}</p>
           </div>
 
           <div className="flex items-center justify-between">
-            <time dateTime={article.date} className="text-sm font-mono text-[var(--color-text-tertiary)]">
+            <time
+              dateTime={article.date}
+              className="text-sm font-mono text-[var(--color-text-tertiary)]"
+            >
               {formatDate(article.date)}
             </time>
             {article.category && (
@@ -62,4 +63,4 @@ export const ArticleCard = ({ article, isFocused }: ArticleCardProps) => {
       </motion.article>
     </Link>
   );
-}; 
+};

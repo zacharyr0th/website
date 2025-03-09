@@ -2,7 +2,11 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 
 // Simple logger function
-const log = (level: 'debug' | 'info' | 'warn' | 'error', message: string, data?: Record<string, unknown>) => {
+const log = (
+  level: 'debug' | 'info' | 'warn' | 'error',
+  message: string,
+  data?: Record<string, unknown>
+) => {
   const timestamp = new Date().toISOString();
   console[level](`[${timestamp}] [audio-sign-url] ${message}`, data || '');
 };

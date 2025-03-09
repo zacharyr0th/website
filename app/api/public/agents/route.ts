@@ -1,6 +1,6 @@
 /**
  * Dynamic Agents.json Generator
- * 
+ *
  * This API route dynamically generates the agents.json file with values from the site configuration.
  * It uses a more efficient approach by defining the JSON structure directly in code.
  */
@@ -16,19 +16,19 @@ export const revalidate = 3600; // Revalidate every hour
 const getAgentsData = () => {
   // Base agents data structure
   const agentsData = {
-    apiVersion: "1.1",
+    apiVersion: '1.1',
     baseUrl: SITE_INFO.url,
     agentCapabilities: {
       supportedActions: [
-        "read",
-        "navigate",
-        "interact",
-        "search",
-        "prefetch",
-        "report",
-        "analyze",
-        "automate",
-        "delegate"
+        'read',
+        'navigate',
+        'interact',
+        'search',
+        'prefetch',
+        'report',
+        'analyze',
+        'automate',
+        'delegate',
       ],
       rateLimit: {
         requestsPerMinute: 120,
@@ -37,101 +37,101 @@ const getAgentsData = () => {
         perEndpoint: {
           auth: {
             requestsPerMinute: 20,
-            cooldownPeriod: 300
+            cooldownPeriod: 300,
           },
           search: {
             requestsPerMinute: 60,
-            cooldownPeriod: 120
+            cooldownPeriod: 120,
           },
           api: {
             requestsPerMinute: 100,
-            cooldownPeriod: 60
-          }
-        }
+            cooldownPeriod: 60,
+          },
+        },
       },
       errorHandling: {
         retryStrategy: {
           maxRetries: 3,
           backoffMultiplier: 1.5,
-          initialDelayMs: 1000
-        }
-      }
+          initialDelayMs: 1000,
+        },
+      },
     },
     globalInteractions: {
       keyboardShortcuts: {
         shortcuts: {
           writing: {
-            key: "w",
-            modifiers: ["meta", "ctrl"],
-            target: "/writing",
-            description: "Navigate to writing section"
+            key: 'w',
+            modifiers: ['meta', 'ctrl'],
+            target: '/writing',
+            description: 'Navigate to writing section',
           },
           projects: {
-            key: "p",
-            modifiers: ["meta", "shift"],
-            target: "/projects",
-            description: "Navigate to projects section"
+            key: 'p',
+            modifiers: ['meta', 'shift'],
+            target: '/projects',
+            description: 'Navigate to projects section',
           },
           audio: {
-            key: "a",
-            modifiers: ["meta", "shift"],
-            target: "/audio",
-            description: "Navigate to audio section"
+            key: 'a',
+            modifiers: ['meta', 'shift'],
+            target: '/audio',
+            description: 'Navigate to audio section',
           },
           bio: {
-            key: "b",
-            modifiers: ["meta", "shift"],
-            target: "/bio",
-            description: "Navigate to bio section"
+            key: 'b',
+            modifiers: ['meta', 'shift'],
+            target: '/bio',
+            description: 'Navigate to bio section',
           },
           home: {
-            key: "z",
-            modifiers: ["meta", "shift"],
-            target: "/",
-            description: "Navigate to home page"
-          }
-        }
-      }
+            key: 'z',
+            modifiers: ['meta', 'shift'],
+            target: '/',
+            description: 'Navigate to home page',
+          },
+        },
+      },
     },
     pages: {
-      "/": {
-        sections: ["hero", "mainNavigation", "featuredContent"],
+      '/': {
+        sections: ['hero', 'mainNavigation', 'featuredContent'],
         caching: {
-          strategy: "stale-while-revalidate",
-          maxAge: 3600
-        }
+          strategy: 'stale-while-revalidate',
+          maxAge: 3600,
+        },
       },
-      "/writing": {
-        sections: ["articleList", "filters"],
-        itemsPerPage: 10
+      '/writing': {
+        sections: ['articleList', 'filters'],
+        itemsPerPage: 10,
       },
-      "/projects": {
-        sections: ["projectGrid"]
+      '/projects': {
+        sections: ['projectGrid'],
       },
-      "/bio": {
-        sections: ["about", "experience", "skills"]
+      '/bio': {
+        sections: ['about', 'experience', 'skills'],
       },
-      "/audio": {
-        sections: ["audioPlayer", "playlist"]
-      }
+      '/audio': {
+        sections: ['audioPlayer', 'playlist'],
+      },
     },
     metadata: {
       author: SITE_INFO.authorName,
       description: SITE_INFO.description,
       primaryLanguage: SITE_INFO.defaultLanguage,
       lastUpdated: new Date().toISOString(),
-      version: "1.1.0"
+      version: '1.1.0',
     },
     security: {
       cors: {
         enabled: true,
-        methods: ["GET", "HEAD", "OPTIONS"],
-        origins: ALLOWED_ORIGINS
+        methods: ['GET', 'HEAD', 'OPTIONS'],
+        origins: ALLOWED_ORIGINS,
       },
       contentSecurity: {
-        enabled: true
-      }
-    }
+        enabled: true,
+      },
+    },
   };
 
   return agentsData;
@@ -140,7 +140,7 @@ const getAgentsData = () => {
 export async function GET() {
   try {
     const agentsData = getAgentsData();
-    
+
     // Return the JSON response with appropriate headers
     return NextResponse.json(agentsData, {
       headers: {
@@ -150,9 +150,6 @@ export async function GET() {
     });
   } catch (error) {
     console.error('Error generating agents.json:', error);
-    return NextResponse.json(
-      { error: 'Failed to generate agents.json' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to generate agents.json' }, { status: 500 });
   }
-} 
+}

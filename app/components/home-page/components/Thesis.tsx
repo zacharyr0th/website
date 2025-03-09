@@ -12,9 +12,9 @@ import styles from '@/styles/homepage.module.css';
 
 const Thesis = () => {
   const ref = React.useRef(null);
-  const isInView = useInView(ref, { 
-    once: true, 
-    margin: '-100px' 
+  const isInView = useInView(ref, {
+    once: true,
+    margin: '-100px',
   });
 
   return (
@@ -28,7 +28,7 @@ const Thesis = () => {
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className={`${THESIS_STYLES.textContainer} w-full text-center`}>
-          <motion.h2 
+          <motion.h2
             className={`${THESIS_STYLES.label} ${styles.thesisLabel}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -36,8 +36,8 @@ const Thesis = () => {
           >
             {THESIS_CONTENT.label}
           </motion.h2>
-          
-          <motion.h1 
+
+          <motion.h1
             className={`${THESIS_STYLES.title} ${styles.thesisTitle}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -45,8 +45,8 @@ const Thesis = () => {
           >
             {THESIS_CONTENT.title}
           </motion.h1>
-          
-          <motion.p 
+
+          <motion.p
             className={`${THESIS_STYLES.subtitle} ${styles.thesisSubtitle} mx-auto`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

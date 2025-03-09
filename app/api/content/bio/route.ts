@@ -1,13 +1,13 @@
 import path from 'path';
+import fs from 'fs/promises';
 import { processMarkdown } from '@/bio/lib/markdown';
-import { 
-  createLogger, 
-  LogCategory, 
-  createApiResponse, 
+import {
+  createLogger,
+  LogCategory,
+  createApiResponse,
   createApiErrorResponse,
-  getStaticHeaders
+  getStaticHeaders,
 } from '@/lib';
-import { readFileSecure } from '@/lib/server';
 
 const logger = createLogger('bio-api', { category: LogCategory.API });
 
@@ -46,6 +46,35 @@ function getSecureBioPath(): string | null {
   return resolvedPath;
 }
 
+// Securely read a file with path validation
+async function readFileSecurely(filePath: string) {
+  try {
+    // Validate path is within project directory
+    const resolvedPath = path.resolve(filePath);
+    const projectRoot = process.cwd();
+
+    if (!resolvedPath.startsWith(projectRoot)) {
+      return {
+        success: false,
+        error: 'Path traversal attempt detected',
+      };
+    }
+
+    // Read file
+    const content = await fs.readFile(filePath, 'utf-8');
+
+    return {
+      success: true,
+      data: content,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error reading file',
+    };
+  }
+}
+
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
@@ -59,7 +88,7 @@ export async function GET() {
     }
 
     // Read and process bio
-    const fileResult = await readFileSecure(filePath);
+    const fileResult = await readFileSecurely(filePath);
     if (!fileResult.success) {
       const err = new Error(String(fileResult.error));
       logger.error('Failed to read bio file', err);

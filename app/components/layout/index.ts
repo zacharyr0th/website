@@ -1,6 +1,6 @@
 /**
  * Layout component exports
- * 
+ *
  * This file exhaustively exports all layout components, types, interfaces, and constants.
  */
 
@@ -12,21 +12,14 @@ export { PageHeader } from './RootLayoutClient';
 
 // Header exports
 export { default as Header } from './Header';
-export type { 
-  NavItem, 
-  NavConfig, 
+export type {
+  NavItem,
+  NavConfig,
   BlurBackgroundProps,
   NavigationProps,
-  NavContentProps
+  NavContentProps,
 } from './Header';
-export { 
-  navConfig, 
-  navItems, 
-  BlurBackground, 
-  HomeButton, 
-  NavLink, 
-  NavContent 
-} from './Header';
+export { navConfig, navItems, BlurBackground, HomeButton, NavLink, NavContent } from './Header';
 
 // Footer exports
 export { default as Footer } from './Footer';

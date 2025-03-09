@@ -1,6 +1,6 @@
 /**
  * Routes Configuration
- * 
+ *
  * Contains route definitions for sitemap generation
  */
 
@@ -18,36 +18,36 @@ export const ROUTES = {
     {
       route: '/',
       priority: 1.0,
-      changeFrequency: 'weekly'
+      changeFrequency: 'weekly',
     },
     {
       route: '/about',
       priority: 0.8,
-      changeFrequency: 'monthly'
+      changeFrequency: 'monthly',
     },
     {
       route: '/projects',
       priority: 0.9,
-      changeFrequency: 'weekly'
+      changeFrequency: 'weekly',
     },
     {
       route: '/writing',
       priority: 0.9,
-      changeFrequency: 'daily'
+      changeFrequency: 'daily',
     },
     {
       route: '/contact',
       priority: 0.7,
-      changeFrequency: 'monthly'
-    }
+      changeFrequency: 'monthly',
+    },
   ] as RouteConfig[],
-  
+
   // Resource routes (static resources)
   resources: [
     {
       route: '/resources',
       priority: 0.6,
-      changeFrequency: 'monthly'
-    }
-  ] as RouteConfig[]
-}; 
+      changeFrequency: 'monthly',
+    },
+  ] as RouteConfig[],
+};

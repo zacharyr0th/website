@@ -3,7 +3,11 @@ import { z } from 'zod';
 import { getFileStats, getFileStream, constructAudioKey } from '@/lib/server';
 
 // Simple logger function
-const log = (level: 'debug' | 'info' | 'warn' | 'error', message: string, data?: Record<string, unknown>) => {
+const log = (
+  level: 'debug' | 'info' | 'warn' | 'error',
+  message: string,
+  data?: Record<string, unknown>
+) => {
   const timestamp = new Date().toISOString();
   console[level](`[${timestamp}] [audio-stream] ${message}`, data || '');
 };

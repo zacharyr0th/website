@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Hero, Main, Thesis } from './components/home-page';
-import { SITE_INFO, PROFILE_IMAGE } from '@/lib';
+import { SITE_INFO, PROFILE_IMAGE, viewport } from '@/lib';
 
 export const metadata: Metadata = {
   title: `Home | ${SITE_INFO.name}`,
@@ -10,12 +10,14 @@ export const metadata: Metadata = {
     description: SITE_INFO.description,
     url: SITE_INFO.url,
     siteName: SITE_INFO.name,
-    images: [{
-      url: PROFILE_IMAGE.url,
-      width: PROFILE_IMAGE.width,
-      height: PROFILE_IMAGE.height,
-      alt: PROFILE_IMAGE.alt,
-    }],
+    images: [
+      {
+        url: PROFILE_IMAGE.url,
+        width: PROFILE_IMAGE.width,
+        height: PROFILE_IMAGE.height,
+        alt: PROFILE_IMAGE.alt,
+      },
+    ],
     locale: SITE_INFO.locale,
     type: SITE_INFO.siteType,
   },
@@ -31,6 +33,9 @@ export const metadata: Metadata = {
     canonical: SITE_INFO.url,
   },
 };
+
+// Export the viewport configuration
+export { viewport };
 
 export const dynamic = 'force-static';
 

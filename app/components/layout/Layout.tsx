@@ -1,6 +1,6 @@
 /**
  * Layout.tsx
- * 
+ *
  * DEPRECATED: This file is maintained for backward compatibility only.
  * The Layout component has been moved into RootLayoutClient.tsx.
  * Please update your imports to use RootLayoutClient instead.
@@ -46,7 +46,7 @@ const Layout: FC<LayoutProps> = ({
   contentClassName,
   animate = true,
   width = 'default',
-  header
+  header,
 }) => {
   // Extract title and subtitle from header if it's a Header component
   let pageHeader: { title: string; subtitle?: string } | undefined;
@@ -56,20 +56,20 @@ const Layout: FC<LayoutProps> = ({
       pageHeader = { title, subtitle };
     }
   }
-  
-  // Create props object with only defined values
-  const props: Partial<RootLayoutClientProps> = {
+
+  // Create props object with required and optional properties
+  const props = {
     children,
     animate,
     width,
-    pageHeader
-  };
-  
+  } as RootLayoutClientProps;
+
   // Only add optional props if they're defined
+  if (pageHeader !== undefined) props.pageHeader = pageHeader;
   if (className !== undefined) props.className = className;
   if (contentClassName !== undefined) props.contentClassName = contentClassName;
-  
+
   return <RootLayoutClient {...props} />;
 };
 
-export default Layout; 
+export default Layout;

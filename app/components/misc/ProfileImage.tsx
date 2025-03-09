@@ -26,7 +26,7 @@ const tapScale: TargetAndTransition = { scale: 0.95 };
 const SIZE_CLASSES = {
   sm: 'w-24',
   md: 'w-48',
-  lg: 'w-96'
+  lg: 'w-96',
 };
 
 const ProfileImage = memo(function ProfileImage({
@@ -36,7 +36,7 @@ const ProfileImage = memo(function ProfileImage({
   onImageChange,
 }: ProfileImageProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+
   // Get size class from mapping object
   const sizeClass = SIZE_CLASSES[size] || SIZE_CLASSES.md;
 
@@ -44,17 +44,20 @@ const ProfileImage = memo(function ProfileImage({
   const handleClick = useCallback(() => {
     if (clickable) setIsModalOpen(true);
   }, [clickable]);
-  
+
   const handleClose = useCallback(() => {
     setIsModalOpen(false);
   }, []);
 
-  const handleFileChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file && onImageChange) {
-      onImageChange(file);
-    }
-  }, [onImageChange]);
+  const handleFileChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0];
+      if (file && onImageChange) {
+        onImageChange(file);
+      }
+    },
+    [onImageChange]
+  );
 
   const handleModalClick = useCallback((e: MouseEvent) => {
     e.stopPropagation();
@@ -64,8 +67,12 @@ const ProfileImage = memo(function ProfileImage({
     <>
       <motion.div
         className={`profile-image relative aspect-square ${sizeClass}`}
-        whileHover={clickable ? hoverScale : undefined as unknown as TargetAndTransition | VariantLabels}
-        whileTap={clickable ? tapScale : undefined as unknown as TargetAndTransition | VariantLabels}
+        whileHover={
+          clickable ? hoverScale : (undefined as unknown as TargetAndTransition | VariantLabels)
+        }
+        whileTap={
+          clickable ? tapScale : (undefined as unknown as TargetAndTransition | VariantLabels)
+        }
         onClick={handleClick}
         style={{ cursor: clickable ? 'pointer' : 'default' }}
       >

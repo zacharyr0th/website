@@ -26,10 +26,7 @@ export const metadata: Metadata = {
 
 export default function BioPage() {
   return (
-    <RootLayoutClient 
-      width="wide"
-      pageHeader={{ title: "Bio" }}
-    >
+    <RootLayoutClient width="wide" pageHeader={{ title: 'Bio' }}>
       <Suspense
         fallback={
           <LoadingState

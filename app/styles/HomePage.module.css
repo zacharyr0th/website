@@ -72,19 +72,19 @@
   .heroTitle {
     font-size: var(--font-size-3xl) !important;
   }
-  
+
   .heroSubtitle {
     font-size: var(--font-size-base) !important;
   }
-  
+
   .sectionTitle {
     font-size: var(--font-size-2xl) !important;
   }
-  
+
   .thesisTitle {
     font-size: var(--font-size-2xl) !important;
   }
-  
+
   .thesisSubtitle {
     font-size: var(--font-size-lg) !important;
     max-width: 90% !important;

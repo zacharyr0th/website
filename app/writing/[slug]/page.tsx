@@ -17,7 +17,9 @@ const defaultMetadata: Metadata = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = params;
+  const resolvedParams = await Promise.resolve(params);
+  const { slug } = resolvedParams;
+  
   try {
     const article = await getArticleBySlug(slug);
     if (!article) return defaultMetadata;
@@ -32,7 +34,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ArticlePage({ params }: Props) {
-  const { slug } = params;
+  const resolvedParams = await Promise.resolve(params);
+  const { slug } = resolvedParams;
 
   try {
     const article = await getArticleBySlug(slug);

@@ -1,17 +1,12 @@
 /**
  * Dynamic Robots.txt Generator
- * 
+ *
  * This API route dynamically generates the robots.txt file with values from the site configuration.
  * It uses the same logic as the app/robots.ts file but serves it as a text response.
  */
 
 import { NextResponse } from 'next/server';
-import { 
-  SITE_INFO, 
-  ROUTES, 
-  BOT_CONFIG,
-  SECURITY
-} from '@/lib';
+import { SITE_INFO, ROUTES, BOT_CONFIG, SECURITY } from '@/lib';
 
 // Force static generation with revalidation
 export const dynamic = 'force-static';
@@ -35,49 +30,49 @@ export async function GET() {
       // General bots
       {
         userAgent: BOT_CONFIG.general.userAgent,
-        allow: [...ROUTES.allowedPaths, ...ROUTES.assetPatterns],
+        allow: [...ROUTES.static.map((r) => r.route), ...ROUTES.resources.map((r) => r.route)],
         disallow: [...SECURITY.sensitivePathPatterns, ...SECURITY.commonDisallowPatterns],
         crawlDelay: BOT_CONFIG.general.crawlDelay,
       },
-      
+
       // Google bot - more permissive for better indexing
       {
         userAgent: BOT_CONFIG.googlebot.userAgent,
-        allow: [...ROUTES.allowedPaths, '/manifest.json'],
+        allow: [...ROUTES.static.map((r) => r.route), '/manifest.json'],
         disallow: [...SECURITY.commonDisallowPatterns],
         crawlDelay: BOT_CONFIG.googlebot.crawlDelay,
       },
-      
+
       // GPT bot - allow access to public API paths for AI training
       {
         userAgent: BOT_CONFIG.gptbot.userAgent,
-        allow: [...ROUTES.allowedPaths, agentsJsonPath, ...ROUTES.publicApiPaths],
+        allow: [...ROUTES.static.map((r) => r.route), agentsJsonPath, '/api/public/*'],
         disallow: [...SECURITY.commonDisallowPatterns, '/api/private/*', '/api/draft/*'],
         crawlDelay: BOT_CONFIG.gptbot.crawlDelay,
       },
-      
+
       // Bing bot
       {
         userAgent: BOT_CONFIG.bingbot.userAgent,
-        allow: [...ROUTES.allowedPaths, agentsJsonPath],
+        allow: [...ROUTES.static.map((r) => r.route), agentsJsonPath],
         disallow: [...SECURITY.commonDisallowPatterns],
         crawlDelay: BOT_CONFIG.bingbot.crawlDelay,
       },
-      
+
       // Other search engine bots - more restrictive
       {
-        userAgent: Array.isArray(BOT_CONFIG.otherBots.userAgent) 
-          ? Array.from(BOT_CONFIG.otherBots.userAgent) 
+        userAgent: Array.isArray(BOT_CONFIG.otherBots.userAgent)
+          ? Array.from(BOT_CONFIG.otherBots.userAgent)
           : BOT_CONFIG.otherBots.userAgent,
-        allow: [...ROUTES.allowedPaths],
-        disallow: [...SECURITY.commonDisallowPatterns, agentsJsonPath, ...ROUTES.publicApiPaths],
+        allow: [...ROUTES.static.map((r) => r.route)],
+        disallow: [...SECURITY.commonDisallowPatterns, agentsJsonPath, '/api/public/*'],
         crawlDelay: BOT_CONFIG.otherBots.crawlDelay,
       },
-      
+
       // Security scanners and potentially harmful bots - highly restricted
       {
-        userAgent: Array.isArray(BOT_CONFIG.securityScanners.userAgent) 
-          ? Array.from(BOT_CONFIG.securityScanners.userAgent) 
+        userAgent: Array.isArray(BOT_CONFIG.securityScanners.userAgent)
+          ? Array.from(BOT_CONFIG.securityScanners.userAgent)
           : BOT_CONFIG.securityScanners.userAgent,
         disallow: ['/', '/api/*'],
         crawlDelay: BOT_CONFIG.securityScanners.crawlDelay,
@@ -142,4 +137,4 @@ export async function GET() {
       },
     });
   }
-} 
+}

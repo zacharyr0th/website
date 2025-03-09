@@ -24,7 +24,7 @@ const RootLayoutContext = createContext(false);
 const pageTransition = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] }
+  transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
 };
 
 // Content width options
@@ -34,7 +34,7 @@ const widthClasses: Record<ContentWidth, string> = {
   default: 'max-w-[650px]',
   narrow: 'max-w-xl',
   wide: 'max-w-3xl',
-  full: 'max-w-none'
+  full: 'max-w-none',
 };
 
 // Header component from Header.tsx - memoized to prevent unnecessary re-renders
@@ -85,30 +85,28 @@ const RootLayoutClient = ({
   animate = true,
   width = 'default',
   pageHeader,
-  showHomeButton = true
+  showHomeButton = true,
 }: RootLayoutClientProps) => {
   const pathname = usePathname();
   const isHomePage = pathname === '/';
   const isSpecialPage = ['/projects', '/writing', '/audio'].includes(pathname);
-  
+
   // Check if this component is nested inside another RootLayoutClient
   const isNested = useContext(RootLayoutContext);
-  
+
   // Memoize the width class to prevent recalculation
   const widthClass = useMemo(() => widthClasses[width], [width]);
-  
+
   // Only load motion when needed
   if (!animate) {
     return (
       <RootLayoutContext.Provider value={true}>
         <ErrorBoundary>
           {!isNested && <Header showHomeButton={showHomeButton} />}
-          
+
           {isHomePage ? (
             // Homepage layout - simple and direct
-            <main className={cn('min-h-screen', className)}>
-              {children}
-            </main>
+            <main className={cn('min-h-screen', className)}>{children}</main>
           ) : (
             // Standard layout for all other pages
             <div className={cn('min-h-screen bg-background', className)}>
@@ -121,27 +119,21 @@ const RootLayoutClient = ({
               >
                 {pageHeader && !isNested && (
                   <header className="mt-0 mb-8 w-full">
-                    <PageHeader 
-                      title={pageHeader.title} 
-                      subtitle={pageHeader.subtitle} 
+                    <PageHeader
+                      title={pageHeader.title}
+                      subtitle={pageHeader.subtitle}
                       className="w-full"
                     />
                   </header>
                 )}
-                
-                <div
-                  className={cn(
-                    'mx-auto space-y-4 sm:space-y-8',
-                    widthClass,
-                    contentClassName
-                  )}
-                >
+
+                <div className={cn('mx-auto space-y-4 sm:space-y-8', widthClass, contentClassName)}>
                   <main>{children}</main>
                 </div>
               </section>
             </div>
           )}
-          
+
           {!isNested && <Footer />}
           {!isNested && <KeyboardShortcuts />}
           {!isNested && <GlobalConnectModal />}
@@ -149,18 +141,16 @@ const RootLayoutClient = ({
       </RootLayoutContext.Provider>
     );
   }
-  
+
   // With animations
   return (
     <RootLayoutContext.Provider value={true}>
       <ErrorBoundary>
         {!isNested && <Header showHomeButton={showHomeButton} />}
-        
+
         {isHomePage ? (
           // Homepage layout - simple and direct
-          <main className={cn('min-h-screen', className)}>
-            {children}
-          </main>
+          <main className={cn('min-h-screen', className)}>{children}</main>
         ) : (
           // Standard layout for all other pages
           <div className={cn('min-h-screen bg-background', className)}>
@@ -173,21 +163,17 @@ const RootLayoutClient = ({
             >
               {pageHeader && !isNested && (
                 <header className="mt-0 mb-8 w-full">
-                  <PageHeader 
-                    title={pageHeader.title} 
-                    subtitle={pageHeader.subtitle} 
+                  <PageHeader
+                    title={pageHeader.title}
+                    subtitle={pageHeader.subtitle}
                     className="w-full"
                   />
                 </header>
               )}
-              
+
               <LazyMotion features={domAnimation}>
                 <motion.div
-                  className={cn(
-                    'mx-auto space-y-4 sm:space-y-8',
-                    widthClass,
-                    contentClassName
-                  )}
+                  className={cn('mx-auto space-y-4 sm:space-y-8', widthClass, contentClassName)}
                   initial={pageTransition.initial}
                   animate={pageTransition.animate}
                   transition={pageTransition.transition}
@@ -198,7 +184,7 @@ const RootLayoutClient = ({
             </section>
           </div>
         )}
-        
+
         {!isNested && <Footer />}
         {!isNested && <KeyboardShortcuts />}
         {!isNested && <GlobalConnectModal />}

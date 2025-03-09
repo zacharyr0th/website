@@ -226,24 +226,24 @@
   .article-card {
     @apply rounded-xl;
   }
-  
+
   .article-card-featured {
     @apply rounded-xl;
   }
-  
+
   .article-card-image-container {
     max-height: 240px;
   }
-  
+
   .article-card-featured .article-card-image-container {
     max-height: 320px;
   }
-  
+
   .article-card-featured .article-card-description {
     -webkit-line-clamp: 5;
   }
-  
+
   .article-card-content {
     @apply p-6;
   }
-} 
+}

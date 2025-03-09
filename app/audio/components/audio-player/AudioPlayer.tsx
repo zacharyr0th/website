@@ -1,13 +1,4 @@
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-  memo,
-  lazy,
-  Suspense,
-  useMemo,
-} from 'react';
+import React, { useState, useRef, useEffect, useCallback, memo, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import type { Track } from './tracks';
 import { TRACKS, getNextTrack, getPreviousTrack } from './tracks';
@@ -17,13 +8,6 @@ import PlaylistItem from './PlaylistItem';
 import ProgressBar from './ProgressBar';
 
 const logger = createLogger('audio-player', { category: LogCategory.APPLICATION });
-
-// Constants for common styles and animations
-const BUTTON_BASE_STYLES = 'touch-manipulation transition-colors font-mono';
-const BUTTON_HOVER_ANIMATION = {
-  whileHover: { scale: 1.05 },
-  whileTap: { scale: 0.95 },
-};
 
 const formatTime = (time: number) => {
   const minutes = Math.floor(time / 60);
@@ -366,15 +350,15 @@ const useAudioPlayer = (initialTrack: Track) => {
   // Add a function to update the loaded progress
   const updateLoadedProgress = useCallback(() => {
     if (!audioRef.current) return;
-    
+
     try {
       const audio = audioRef.current;
       if (audio.buffered.length === 0) return;
-      
+
       // Get the end time of the last buffered range
       const bufferedEnd = audio.buffered.end(audio.buffered.length - 1);
       const progress = (bufferedEnd / audio.duration) * 100;
-      
+
       setLoadedProgress(isNaN(progress) ? 0 : progress);
     } catch (error) {
       // Ignore errors in buffered calculations
@@ -415,7 +399,6 @@ const useAudioPlayer = (initialTrack: Track) => {
           } else {
             handlePlaybackError();
             setPlayingState(false);
-            throw playError;
           }
         }
       } else {
@@ -435,7 +418,6 @@ const useAudioPlayer = (initialTrack: Track) => {
             } else {
               handlePlaybackError();
               setPlayingState(false);
-              throw playError;
             }
           }
         }
@@ -668,6 +650,7 @@ const useAudioPlayer = (initialTrack: Track) => {
       setLoadingState,
       setBufferingState,
       updateCurrentTrack,
+      updateLoadedProgress,
       hasUserInteracted,
       checkAudioSupport,
     ]
@@ -965,7 +948,7 @@ export default memo(function AudioPlayer() {
         togglePlay();
         return;
       }
-      
+
       setLoadingTrackId(track.id);
       try {
         await playTrack(track);
@@ -979,25 +962,17 @@ export default memo(function AudioPlayer() {
   // Use the improved ControlButton component
   const controls = (
     <div className="flex items-center justify-center sm:justify-start gap-4 sm:gap-6">
-      <ControlButton
-        onClick={playPreviousTrack}
-        icon="previous"
-        label="Previous track"
-      />
+      <ControlButton onClick={playPreviousTrack} icon="previous" label="Previous track" />
 
       <ControlButton
         onClick={togglePlay}
-        icon={isPlaying ? "pause" : "play"}
+        icon={isPlaying ? 'pause' : 'play'}
         isActive={isPlaying}
         isLoading={isLoading}
         className="bg-[var(--color-primary)] text-white shadow-lg"
       />
 
-      <ControlButton
-        onClick={playNextTrack}
-        icon="next"
-        label="Next track"
-      />
+      <ControlButton onClick={playNextTrack} icon="next" label="Next track" />
     </div>
   );
 
@@ -1058,9 +1033,7 @@ export default memo(function AudioPlayer() {
       )}
 
       {/* Add a visualizer at the bottom when playing */}
-      {isPlaying && !isBuffering && (
-        <TrackVisualization isPlaying={isPlaying} />
-      )}
+      {isPlaying && !isBuffering && <TrackVisualization isPlaying={isPlaying} />}
     </motion.div>
   );
 });

@@ -1,19 +1,19 @@
 import type { IconType } from 'react-icons';
-import { 
-  FaLinkedin, 
-  FaXTwitter, 
-  FaGithub, 
+import {
+  FaLinkedin,
+  FaXTwitter,
+  FaGithub,
   FaEnvelope,
   FaMedium,
   FaYoutube,
   FaDiscord,
   FaTelegram,
-  FaReddit
+  FaReddit,
 } from 'react-icons/fa6';
 
 /**
  * Social media link structure
- * 
+ *
  * Defines the structure for social media links used throughout the site.
  * Each platform has a consistent structure for easy access and rendering.
  */
@@ -30,7 +30,7 @@ export interface SocialLink {
 
 /**
  * Social media links configuration
- * 
+ *
  * Central configuration for all social media platforms.
  * Used for profile links, sharing buttons, and SEO metadata.
  */
@@ -145,20 +145,20 @@ export function getActiveSocialLinks(platforms?: SocialPlatform[]): SocialLink[]
   // If no platforms are specified, use all platforms
   if (!platforms) {
     return Object.values(SOCIAL_LINKS)
-      .filter(link => link.active)
+      .filter((link) => link.active)
       .sort((a, b) => (b.priority || 0) - (a.priority || 0));
   }
-  
+
   // If platforms are specified, filter by them
   return platforms
-    .filter(platform => SOCIAL_LINKS[platform].active)
-    .map(platform => SOCIAL_LINKS[platform])
+    .filter((platform) => SOCIAL_LINKS[platform].active)
+    .map((platform) => SOCIAL_LINKS[platform])
     .sort((a, b) => (b.priority || 0) - (a.priority || 0));
 }
 
 /**
  * Get primary social links as defined in site configuration
- * 
+ *
  * @returns Array of primary social links that are active
  */
 export function getPrimarySocialLinks(): SocialLink[] {
@@ -170,23 +170,23 @@ export function getPrimarySocialLinks(): SocialLink[] {
  */
 export function getSharingPlatforms(): SocialLink[] {
   return Object.values(SOCIAL_LINKS)
-    .filter(link => link.shareEnabled)
+    .filter((link) => link.shareEnabled)
     .sort((a, b) => (b.priority || 0) - (a.priority || 0));
 }
 
 /**
  * Format social username for display
- * 
+ *
  * @param platform - The social platform
  * @returns Formatted username with appropriate prefix
  */
 export function formatSocialUsername(platform: SocialPlatform): string {
   const link = SOCIAL_LINKS[platform];
-  
+
   if (!link.username) {
     return '';
   }
-  
+
   switch (platform) {
     case 'twitter':
       return link.username.startsWith('@') ? link.username : `@${link.username}`;
@@ -201,18 +201,18 @@ export function formatSocialUsername(platform: SocialPlatform): string {
 /**
  * Supported social sharing platforms
  */
-export type SharingPlatform = 
-  | SocialPlatform 
-  | 'facebook' 
-  | 'pinterest' 
-  | 'reddit' 
-  | 'whatsapp' 
-  | 'telegram' 
-  | 'hackernews' 
-  | 'mastodon' 
-  | 'pocket' 
-  | 'tumblr' 
-  | 'discord' 
+export type SharingPlatform =
+  | SocialPlatform
+  | 'facebook'
+  | 'pinterest'
+  | 'reddit'
+  | 'whatsapp'
+  | 'telegram'
+  | 'hackernews'
+  | 'mastodon'
+  | 'pocket'
+  | 'tumblr'
+  | 'discord'
   | 'slack'
   | 'farcaster';
 
@@ -238,46 +238,44 @@ export interface SocialShareOptions {
 
 /**
  * Generate a social sharing URL for various platforms
- * 
+ *
  * @param platform - Social platform to generate sharing URL for
  * @param options - Sharing options (url, text, image, etc.)
  * @returns Platform-specific sharing URL
  */
 export function getSocialShareUrl(
   platform: SharingPlatform,
-  options: SocialShareOptions | string,
+  options: SocialShareOptions | string
 ): string {
   // Handle string argument for backward compatibility
-  const opts: SocialShareOptions = typeof options === 'string' 
-    ? { url: options } 
-    : options;
-  
-  const { 
-    url, 
-    text = '', 
-    imageUrl = '', 
-    tags = [], 
+  const opts: SocialShareOptions = typeof options === 'string' ? { url: options } : options;
+
+  const {
+    url,
+    text = '',
+    imageUrl = '',
+    tags = [],
     mastodonInstance = 'mastodon.social',
     via = '',
-    frameUrl
+    frameUrl,
   } = opts;
-  
+
   // Encode parameters
   const encodedUrl = encodeURIComponent(url);
   const encodedText = text ? encodeURIComponent(text) : '';
   const encodedImageUrl = imageUrl ? encodeURIComponent(imageUrl) : '';
   const encodedVia = via ? encodeURIComponent(via) : '';
-  
+
   // Format hashtags for platforms that support them
-  const hashtagsString = tags.map(tag => tag.startsWith('#') ? tag.substring(1) : tag).join(',');
+  const hashtagsString = tags
+    .map((tag) => (tag.startsWith('#') ? tag.substring(1) : tag))
+    .join(',');
   const encodedHashtags = encodeURIComponent(hashtagsString);
-  
+
   // Generate hashtags text for platforms that use them inline
-  const hashtagsText = tags
-    .map(tag => tag.startsWith('#') ? tag : `#${tag}`)
-    .join(' ');
+  const hashtagsText = tags.map((tag) => (tag.startsWith('#') ? tag : `#${tag}`)).join(' ');
   const encodedHashtagsText = hashtagsText ? encodeURIComponent(' ' + hashtagsText) : '';
-  
+
   switch (platform) {
     case 'twitter':
       let twitterUrl = `https://twitter.com/intent/tweet?url=${encodedUrl}`;
@@ -285,75 +283,75 @@ export function getSocialShareUrl(
       if (encodedHashtags) twitterUrl += `&hashtags=${encodedHashtags}`;
       if (encodedVia) twitterUrl += `&via=${encodedVia}`;
       return twitterUrl;
-      
+
     case 'facebook':
       return `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
-      
+
     case 'linkedin':
-      let linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
+      const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
       return linkedinUrl;
-      
+
     case 'pinterest':
       let pinterestUrl = `https://pinterest.com/pin/create/button/?url=${encodedUrl}`;
       if (encodedText) pinterestUrl += `&description=${encodedText}`;
       if (encodedImageUrl) pinterestUrl += `&media=${encodedImageUrl}`;
       return pinterestUrl;
-      
+
     case 'reddit':
       let redditUrl = `https://www.reddit.com/submit?url=${encodedUrl}`;
       if (encodedText) redditUrl += `&title=${encodedText}`;
       return redditUrl;
-      
+
     case 'whatsapp':
       let whatsappText = encodedText ? `${encodedText} ${encodedUrl}` : encodedUrl;
       whatsappText += encodedHashtagsText;
       return `https://api.whatsapp.com/send?text=${whatsappText}`;
-      
+
     case 'telegram':
       let telegramText = encodedText ? `${encodedText} ${encodedUrl}` : encodedUrl;
       telegramText += encodedHashtagsText;
-      return `https://t.me/share/url?url=${encodedUrl}&text=${encodedText}${encodedHashtagsText}`;
-      
+      return `https://t.me/share/url?url=${encodedUrl}&text=${telegramText}`;
+
     case 'hackernews':
       let hnUrl = `https://news.ycombinator.com/submitlink?u=${encodedUrl}`;
       if (encodedText) hnUrl += `&t=${encodedText}`;
       return hnUrl;
-      
+
     case 'mastodon':
       const instance = mastodonInstance || 'mastodon.social';
       let mastodonText = encodedText ? `${encodedText} ${encodedUrl}` : encodedUrl;
       mastodonText += encodedHashtagsText;
       return `https://${instance}/share?text=${mastodonText}`;
-      
+
     case 'pocket':
       let pocketUrl = `https://getpocket.com/save?url=${encodedUrl}`;
       if (encodedText) pocketUrl += `&title=${encodedText}`;
       return pocketUrl;
-      
+
     case 'tumblr':
       let tumblrUrl = `https://www.tumblr.com/widgets/share/tool?canonicalUrl=${encodedUrl}`;
       if (encodedText) tumblrUrl += `&title=${encodedText}`;
       if (encodedHashtagsText) tumblrUrl += `&tags=${encodedHashtags}`;
       return tumblrUrl;
-      
+
     case 'discord':
       // Discord has limited sharing capabilities via URL
       return `https://discord.com/channels/@me?text=${encodedUrl}`;
-      
+
     case 'slack':
       // Opens Slack app with prefilled content if installed
-      let slackText = encodedText ? `${encodedText} ${encodedUrl}` : encodedUrl;
+      const slackText = encodedText ? `${encodedText} ${encodedUrl}` : encodedUrl;
       return `https://slack.com/app_redirect?channel=general&text=${slackText}`;
-      
+
     case 'email':
       const subject = encodedText || 'Check this out';
       const body = `${encodedText ? encodedText + '%0A%0A' : ''}${encodedUrl}${encodedHashtagsText ? '%0A%0A' + encodedHashtagsText : ''}`;
       return `mailto:?subject=${subject}&body=${body}`;
-      
+
     case 'github':
       // GitHub doesn't have a direct sharing mechanism
       return url;
-      
+
     case 'farcaster':
       // Farcaster uses Warpcast as its main client
       // If a frameUrl is provided, use that for Frame-compatible sharing
@@ -363,7 +361,7 @@ export function getSocialShareUrl(
       } else {
         return `https://warpcast.com/~/compose?embeds[]=${encodeURIComponent(farcasterFrameUrl)}`;
       }
-      
+
     default:
       return url;
   }
@@ -371,7 +369,7 @@ export function getSocialShareUrl(
 
 /**
  * Get all available sharing platforms
- * 
+ *
  * @returns Array of all supported sharing platforms
  */
 export function getAvailableSharingPlatforms(): SharingPlatform[] {
@@ -391,8 +389,8 @@ export function getAvailableSharingPlatforms(): SharingPlatform[] {
     'slack',
     'email',
     'farcaster',
-    ...Object.keys(SOCIAL_LINKS).filter(platform => 
-      SOCIAL_LINKS[platform as SocialPlatform].shareEnabled
-    ) as SocialPlatform[]
+    ...(Object.keys(SOCIAL_LINKS).filter(
+      (platform) => SOCIAL_LINKS[platform as SocialPlatform].shareEnabled
+    ) as SocialPlatform[]),
   ];
 }

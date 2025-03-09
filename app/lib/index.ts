@@ -1,6 +1,6 @@
 /**
  * Library Index
- * 
+ *
  * Central export point for all library modules.
  * This file makes imports cleaner by allowing imports from '@/lib' instead of specific files.
  */
@@ -15,7 +15,7 @@ import {
   getArticleBySlug,
   getAdjacentArticles,
   processArticleContent,
-  formatArticleDate
+  formatArticleDate,
 } from '../writing/lib';
 
 // Utility exports
@@ -29,11 +29,11 @@ import {
   isEmpty,
   isValidUrl,
   isTouchDevice,
-  getDeviceAppropriateHandlers
+  getDeviceAppropriateHandlers,
 } from './utils';
 
 // Metadata exports
-import { SECTION_METADATA, SITE_INFO, PROFILE_IMAGE } from './metadata';
+import { SECTION_METADATA, SITE_INFO, PROFILE_IMAGE, metadata, viewport } from './metadata';
 
 // Social exports
 import { SOCIAL_LINKS } from './social';
@@ -43,6 +43,15 @@ import { SECURITY } from './security';
 
 // Routes exports
 import { ROUTES } from './routes';
+
+// API exports
+import {
+  createApiResponse,
+  createApiErrorResponse,
+  getStaticHeaders,
+  BOT_CONFIG,
+  ALLOWED_ORIGINS,
+} from './api';
 
 // =========================================
 // Re-export all types
@@ -55,7 +64,7 @@ export type {
   ArticleTag,
   ArticleFrontmatter,
   ArticleImage,
-  FetchArticlesOptions
+  FetchArticlesOptions,
 } from '../writing/types';
 
 // Social types
@@ -66,7 +75,7 @@ export type { SocialLink } from './social';
 // =========================================
 
 // Section metadata
-export { SECTION_METADATA, SITE_INFO, PROFILE_IMAGE };
+export { SECTION_METADATA, SITE_INFO, PROFILE_IMAGE, metadata, viewport };
 
 // Social links
 export { SOCIAL_LINKS };
@@ -76,6 +85,9 @@ export { SECURITY };
 
 // Routes
 export { ROUTES };
+
+// API constants
+export { BOT_CONFIG, ALLOWED_ORIGINS };
 
 // =========================================
 // Re-export all functions
@@ -87,7 +99,7 @@ export {
   getArticleBySlug as getArticle,
   getAdjacentArticles,
   processArticleContent,
-  formatArticleDate as articleFormatDate
+  formatArticleDate as articleFormatDate,
 };
 
 // Utility functions
@@ -101,5 +113,8 @@ export {
   isEmpty,
   isValidUrl,
   isTouchDevice,
-  getDeviceAppropriateHandlers
-}; 
+  getDeviceAppropriateHandlers,
+};
+
+// API functions
+export { createApiResponse, createApiErrorResponse, getStaticHeaders };
