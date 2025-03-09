@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { SECTION_METADATA } from '@/lib';
 import { LoadingState } from '@/components/misc/Loading';
 import { WritingPageClient } from './components/WritingPageClient';
+import { getArticles } from './lib';
 
 export const metadata: Metadata = {
   title: SECTION_METADATA.writing.title,
@@ -15,17 +16,14 @@ export const dynamic = 'force-static';
 export const preferredRegion = 'auto';
 
 async function getInitialArticles() {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_BASE_URL || `http://localhost:${process.env.PORT || 3000}`;
-  const response = await fetch(`${baseUrl}/writing/api/articles?limit=50`, {
-    next: { revalidate: 3600 },
-  });
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch articles');
+  try {
+    // During build time, use direct file system access instead of API
+    return await getArticles({ limit: 50 });
+  } catch (error) {
+    console.error('Error fetching articles:', error);
+    // Return an empty array instead of throwing to prevent build failures
+    return [];
   }
-
-  return await response.json();
 }
 
 export default async function WritingPage() {

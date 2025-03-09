@@ -6,7 +6,7 @@
   "type": "module",
   "packageManager": "npm@10.2.4",
   "engines": {
-    "node": ">=20.0.0",
+    "node": "^20.0.0",
     "npm": ">=10.0.0"
   },
   "files": [
@@ -27,6 +27,7 @@
     "dev:help": "node scripts/dev.js help",
     "dev:port": "node scripts/dev.js default",
     "build": "next build",
+    "build:simple": "NODE_ENV=production next build",
     "build:analyze": "ANALYZE=true next build",
     "build:clean": "npm run clean && npm run build",
     "build:full": "npm run lint:fix && npm run type-check && npm run build",

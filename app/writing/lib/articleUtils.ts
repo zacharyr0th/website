@@ -47,14 +47,24 @@ export const getArticleFiles = async () => {
   // In server environments, use dynamic import to load fs
   try {
     const fs = await getFs();
-    if (!fs) return [];
+    if (!fs) {
+      console.warn('File system module not available');
+      return [];
+    }
 
     const articlesDirectory = path.join(process.cwd(), ARTICLE_CONFIG.directory);
-    return fs
-      .readdirSync(articlesDirectory)
-      .filter((file) => file.endsWith('.md') || file.endsWith('.mdx'));
+    
+    // Check if directory exists before trying to read it
+    if (!fs.existsSync(articlesDirectory)) {
+      console.warn(`Articles directory does not exist: ${articlesDirectory}`);
+      return [];
+    }
+    
+    const files = fs.readdirSync(articlesDirectory);
+    return files.filter((file) => file.endsWith('.md') || file.endsWith('.mdx'));
   } catch (error) {
     console.error('Error reading article directory:', error);
+    // Return empty array instead of throwing to prevent build failures
     return [];
   }
 };
@@ -144,39 +154,55 @@ export const getArticles = async (options: FetchArticlesOptions = {}): Promise<A
     return MOCK_ARTICLES;
   }
 
-  const files = await getArticleFiles();
-  const articlesPromises = files.map((file) => parseArticleFile(file));
-  const articlesResults = await Promise.all(articlesPromises);
-  let articles = articlesResults.filter((article): article is Article => article !== null);
+  try {
+    const files = await getArticleFiles();
+    if (!files || files.length === 0) {
+      console.warn('No article files found.');
+      return [];
+    }
 
-  // Apply filters
-  if (excludeDrafts) {
-    articles = articles.filter((article) => !article.frontmatter.draft);
+    const articlesPromises = files.map((file) => parseArticleFile(file));
+    const articlesResults = await Promise.all(articlesPromises);
+    let articles = articlesResults.filter((article): article is Article => article !== null);
+
+    if (articles.length === 0) {
+      console.warn('No valid articles parsed from files.');
+      return [];
+    }
+
+    // Apply filters
+    if (excludeDrafts) {
+      articles = articles.filter((article) => !article.frontmatter.draft);
+    }
+
+    if (featured) {
+      articles = articles.filter((article) => article.frontmatter.featured);
+    }
+
+    if (category) {
+      articles = articles.filter((article) => article.category === category);
+    }
+
+    if (tag) {
+      articles = articles.filter((article) => article.tags.includes(tag));
+    }
+
+    // Sort by date (newest first)
+    articles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+    // Apply pagination
+    if (offset > 0) {
+      articles = articles.slice(offset);
+    }
+
+    if (limit) {
+      articles = articles.slice(0, limit);
+    }
+
+    return articles;
+  } catch (error) {
+    console.error('Error in getArticles:', error);
+    // During build, return empty array instead of throwing to prevent build failures
+    return [];
   }
-
-  if (featured) {
-    articles = articles.filter((article) => article.frontmatter.featured);
-  }
-
-  if (category) {
-    articles = articles.filter((article) => article.category === category);
-  }
-
-  if (tag) {
-    articles = articles.filter((article) => article.tags.includes(tag));
-  }
-
-  // Sort by date (newest first)
-  articles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-  // Apply pagination
-  if (offset > 0) {
-    articles = articles.slice(offset);
-  }
-
-  if (limit) {
-    articles = articles.slice(0, limit);
-  }
-
-  return articles;
 };
