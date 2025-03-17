@@ -48,7 +48,7 @@
     "optimize:images": "node scripts/optimize-images.js"
   },
   "dependencies": {
-    "@aws-sdk/s3-request-presigner": "3.749.0",
+    "@aws-sdk/s3-request-presigner": "3.750.0",
     "@headlessui/react": "2.2.0",
     "@tanstack/react-virtual": "^3.11.3",
     "@types/toobusy-js": "^0.5.4",
