@@ -64,7 +64,7 @@
     "isomorphic-dompurify": "^2.21.0",
     "lru-cache": "11.0.2",
     "lucide-react": "^0.474.0",
-    "next": "^15.1.6",
+    "next": "^15.2.3",
     "pino": "^8.21.0",
     "pino-pretty": "^10.3.1",
     "react": "^18.2.0",
