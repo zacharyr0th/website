@@ -1,0 +1,144 @@
+/**
+ * HomePage Module Styles
+ * 
+ * Component-specific styles for the HomePage component.
+ * All styles now use Tailwind directly without external dependencies.
+ */
+
+.featuredImage {
+  @apply relative w-full aspect-video overflow-hidden rounded-lg mb-4 border border-gray-800;
+}
+
+.featuredImageInner {
+  @apply absolute inset-0;
+}
+
+/* Typography overrides for homepage */
+.heroTitle {
+  font-size: var(--font-size-4xl) !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.03em !important;
+}
+
+.heroSubtitle {
+  font-size: var(--font-size-lg) !important;
+  line-height: 1.5 !important;
+}
+
+.sectionTitle {
+  font-size: var(--font-size-3xl) !important;
+  line-height: 1.3 !important;
+  margin-bottom: 1rem !important;
+}
+
+.sectionText {
+  font-size: var(--font-size-base) !important;
+  line-height: 1.6 !important;
+}
+
+.cardTitle {
+  font-size: var(--font-size-lg) !important;
+}
+
+.cardDescription {
+  font-size: var(--font-size-sm) !important;
+}
+
+/* Thesis component overrides */
+.thesisLabel {
+  font-size: var(--font-size-lg) !important;
+  margin-bottom: 0.75rem !important;
+  text-align: center !important;
+}
+
+.thesisTitle {
+  font-size: var(--font-size-3xl) !important;
+  line-height: 1.2 !important;
+  margin-bottom: 1rem !important;
+  text-align: center !important;
+}
+
+.thesisSubtitle {
+  font-size: var(--font-size-xl) !important;
+  line-height: 1.4 !important;
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 36rem !important; /* ~576px */
+}
+
+/* Media queries for responsive text */
+@media (max-width: 640px) {
+  .heroTitle {
+    font-size: var(--font-size-3xl) !important;
+  }
+
+  .heroSubtitle {
+    font-size: var(--font-size-base) !important;
+  }
+
+  .sectionTitle {
+    font-size: var(--font-size-2xl) !important;
+  }
+
+  .thesisTitle {
+    font-size: var(--font-size-2xl) !important;
+  }
+
+  .thesisSubtitle {
+    font-size: var(--font-size-lg) !important;
+    max-width: 90% !important;
+  }
+}
+
+/* Shared styles migrated from styles.ts */
+.section {
+  @apply relative min-h-screen;
+}
+
+.container {
+  @apply w-full max-w-[1280px] mx-auto px-4 sm:px-6;
+}
+
+.contentWrapper {
+  @apply w-full flex flex-col relative z-20;
+}
+
+/* Heading styles */
+.headingH1 {
+  @apply text-2xl sm:text-3xl font-normal leading-tight tracking-tighter text-text-primary mb-3;
+}
+
+.headingH2 {
+  @apply text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-text-primary;
+}
+
+.headingH3 {
+  @apply text-lg font-bold mb-3 text-text-primary;
+}
+
+/* Text styles */
+.textPrimary {
+  @apply text-text-primary;
+}
+
+.textSecondary {
+  @apply text-text-secondary;
+}
+
+.textAccent {
+  @apply text-accent;
+}
+
+/* Background styles */
+.backgroundPrimary {
+  @apply bg-background;
+}
+
+.backgroundSurface {
+  @apply bg-surface;
+}
+
+.backgroundTransparent {
+  @apply bg-transparent;
+}

@@ -1,0 +1,36 @@
+# Zachary Roth's Website
+
+> Personal website and blog of Zachary Roth, Head of Growth at Aptos Labs, focusing on DeFi & AI, blockchain technology, market strategy, and innovative solutions.
+
+This website serves as a professional platform and knowledge repository. The site uses Next.js and provides several machine-readable endpoints for better integration. Key features include:
+
+- **Server-Side Rendering**: Built with Next.js for optimal performance and SEO
+- **API Endpoints**: RESTful endpoints for site metadata and content
+- **Content Management**: Markdown-based content with frontmatter support
+- **TypeScript**: Fully typed codebase for reliability and maintainability
+
+## API Reference
+
+- [API Documentation](/api/reference.md): Complete API reference including endpoints, types, and utilities
+- [Agents API](/api/public/agents.md): Machine-readable metadata about the site
+- [Robots API](/api/public/robots.md): Site crawling and indexing policies
+- [Sitemap API](/api/public/sitemap.md): Site structure and page metadata
+- [RSS Feed](/rss.xml): Content updates and blog posts
+
+## Components
+
+- [UI Components](/components/index.md): Reusable React components and design system
+- [Hooks](/hooks/index.md): Custom React hooks for state management and functionality
+- [Types](/types/index.md): TypeScript type definitions and interfaces
+
+## Content
+
+- [Blog Posts](/blog/index.md): Articles on blockchain, DeFi, AI, and market strategy
+- [About](/about.md): Professional background and current focus areas
+- [Projects](/projects/index.md): Current and past project portfolio
+
+## Optional
+
+- [Speaking](/speaking/index.md): Conference talks and presentations
+- [Media](/media/index.md): Interviews, podcasts, and press coverage
+- [Technical Details](/technical/index.md): Implementation details and architecture decisions 

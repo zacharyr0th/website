@@ -1,0 +1,164 @@
+{
+  "name": "Zachary Roth | Software Engineer",
+  "short_name": "zacharyr0th",
+  "description": "Full-stack development, tech insights, and creative projects by Zachary Roth",
+  "start_url": "/?source=pwa",
+  "id": "zacharyr0th-portfolio",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "any",
+  "theme_color": "#3b82f6",
+  "background_color": "#000000",
+  "categories": ["development", "technology", "portfolio", "software-engineering"],
+  "lang": "en-US",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/assets/icons/icon-512.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-192-maskable.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/icons/icon-192-monochrome.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "monochrome"
+    },
+    {
+      "src": "/assets/icons/icon-192.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/favicon.ico",
+      "sizes": "48x48 32x32 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/assets/icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/screenshots/desktop_optimized.webp",
+      "sizes": "1920x1080",
+      "type": "image/webp",
+      "platform": "wide",
+      "label": "Zachary Roth's Website - Desktop View",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/assets/screenshots/writing_optimized.webp",
+      "sizes": "1920x1080",
+      "type": "image/webp",
+      "platform": "wide",
+      "label": "Writing Section - Articles and Insights",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/assets/screenshots/projects_optimized.webp",
+      "sizes": "1920x1080",
+      "type": "image/webp",
+      "platform": "wide",
+      "label": "Projects Portfolio - Showcase",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Writing",
+      "short_name": "Write",
+      "description": "View my latest articles and insights",
+      "url": "/writing?source=shortcut",
+      "icons": [
+        { "src": "/assets/icons/writing-icon.webp", "sizes": "96x96", "type": "image/webp" }
+      ]
+    },
+    {
+      "name": "Projects",
+      "short_name": "Projects",
+      "description": "Explore my software projects",
+      "url": "/projects?source=shortcut",
+      "icons": [
+        { "src": "/assets/icons/projects-icon.webp", "sizes": "96x96", "type": "image/webp" }
+      ]
+    },
+    {
+      "name": "Bio",
+      "short_name": "Bio",
+      "description": "Learn about my background",
+      "url": "/bio?source=shortcut",
+      "icons": [{ "src": "/assets/icons/bio-icon.webp", "sizes": "96x96", "type": "image/webp" }]
+    },
+    {
+      "name": "Connect",
+      "short_name": "Connect",
+      "description": "Get in touch with me",
+      "url": "/connect?source=shortcut",
+      "icons": [
+        { "src": "/assets/icons/connect-icon.webp", "sizes": "96x96", "type": "image/webp" }
+      ]
+    }
+  ],
+  "share_target": {
+    "action": "/share-target",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "handle_links": "preferred",
+  "launch_handler": {
+    "client_mode": ["navigate-existing", "auto"]
+  },
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "web+zacharyroth",
+      "url": "/%s"
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://www.zacharyr0th.com/manifest.json"
+    }
+  ],
+  "prefer_related_applications": false,
+  "iarc_rating_id": "",
+  "permissions": [],
+  "file_handlers": [
+    {
+      "action": "/open-file",
+      "accept": {
+        "text/*": [".txt", ".md"],
+        "application/json": [".json"]
+      }
+    }
+  ],
+  "widgets": [
+    {
+      "name": "Latest Articles",
+      "tag": "latest-articles",
+      "description": "Shows my most recent articles",
+      "ms_ac_template": "widget-template-latest-articles"
+    }
+  ]
+}

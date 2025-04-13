@@ -1,0 +1,24 @@
+# Dev folders
+node_modules
+.git
+.github
+
+# Caches
+.next/cache
+.vercel/cache
+
+# Large assets not needed for deployment
+public/audio
+public/videos
+
+# Build artifacts
+pnpm-debug.log*
+.pnpm-store
+.turbo
+
+# Local env files
+.env*.local
+
+# Test files
+**/__tests__
+**/*.test.*

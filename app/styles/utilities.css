@@ -1,0 +1,80 @@
+/**
+ * Utility Classes (utilities.css)
+ * 
+ * Primary Responsibilities:
+ * 1. Custom Utility Classes (not provided by Tailwind)
+ * 2. Complex Composable Utilities
+ * 3. Project-Specific Reusable Patterns
+ * 
+ * This file should:
+ * - Only contain utilities not easily achieved with Tailwind
+ * - Avoid duplicating Tailwind utilities
+ * - Focus on unique, reusable patterns
+ * 
+ * When adding new utilities:
+ * 1. Check if Tailwind already provides similar functionality
+ * 2. Consider if it belongs in typography.css or globals.css
+ * 3. Use clear, descriptive class names
+ * 4. Document complex utilities
+ */
+
+/* ======= TRANSITIONS & ANIMATIONS ======= */
+.transition-base {
+  transition: var(--transition-base);
+}
+
+/* Hover Effects */
+.hover-fade {
+  @apply transition-opacity hover:opacity-80;
+}
+
+.hover-scale {
+  @apply transition-transform hover:scale-105;
+}
+
+/* ======= TEXT UTILITIES ======= */
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* Line Clamp Utilities */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ======= SCROLLBAR STYLES ======= */
+/* Hide Scrollbar */
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* For Firefox */
+.scrollbar-hide {
+  scrollbar-width: none;
+}
