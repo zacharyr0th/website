@@ -13,7 +13,7 @@ import { motion, LazyMotion, domAnimation } from 'framer-motion';
 import { cn } from '@/lib';
 import Footer from './Footer';
 import KeyboardShortcuts from 'components/common/KeyboardShortcuts';
-import { GlobalConnectModal } from '../../app/components/home-page/components/ConnectModal';
+import { GlobalConnectModal } from '../home-page/components/ConnectModal';
 import { ErrorBoundary } from '@/lib/errors/ErrorBoundary';
 import Header from './Header';
 

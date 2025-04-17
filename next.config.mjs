@@ -2,18 +2,18 @@
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
-  
+
   // Use standalone mode with optimizations
   output: 'standalone',
-  
+
   // Configure pageExtensions to include md and mdx
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
 
   // Disable formatting during build
   eslint: {
-    ignoreDuringBuilds: true
+    ignoreDuringBuilds: true,
   },
-  
+
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -26,20 +26,11 @@ const nextConfig = {
   // Performance optimizations
   experimental: {
     serverMinification: false,
-    optimizePackageImports: [
-      'react-icons',
-      'framer-motion',
-      'lodash',
-    ],
+    optimizePackageImports: ['react-icons', 'framer-motion', 'lodash'],
     // Add size optimization
     outputFileTracingRoot: process.cwd(),
     outputFileTracingExcludes: {
-      '*': [
-        '.git/**',
-        'node_modules/.cache/**',
-        '.next/cache/**',
-        'public/audio/**',
-      ],
+      '*': ['.git/**', 'node_modules/.cache/**', '.next/cache/**', 'public/audio/**'],
     },
   },
 };

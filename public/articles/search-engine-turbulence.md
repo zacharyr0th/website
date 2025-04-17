@@ -2,7 +2,7 @@
 title: 'Search Engine Turbulence'
 date: '2023-03-10'
 image:
-  src: /images/bing-0.webp
+  src: '/images/bing-0 3.webp'
   alt: 'Search Engine Turbulence'
 description: 'LLMs and the Future of Search Engines'
 category: 'technology'

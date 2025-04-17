@@ -2,7 +2,7 @@
 title: 'Unbanked to Bankless'
 date: '2022-10-28'
 image:
-  src: '/misc/placeholder.webp'
+  src: '/images/bsod.webp'
   alt: 'Unbanked to Bankless'
 description: 'Crypto fixes this'
 category: 'technology'
@@ -15,13 +15,13 @@ takeaways:
 
 Most people worldwide have at least one bank account, but millions don't. Being unbanked or underbanked can be very destabilizing because you have to safeguard or carry your assets with you at all times and pay for everything in cash.
 
-As blockchain technology has developed, anyone can generate a [non-custodial wallet](/writing/non-custodial-wallets), which can serve as a decentralized bank, and an investment account. This eliminates the need for you to trust an intermediary to safeguard and give you access to your funds. In its current form, it's not for everyone, but for many - it's becoming a necessity.
+As blockchain technology has developed, anyone can generate a [non-custodial wallet](/writing/non-custodial-wallets), which can serve as a decentralized bank and an investment account. This eliminates the need for you to trust an intermediary to safeguard and give you access to your funds. In its current form, it's not for everyone, but it's becoming a necessity for many.
 
-No one can close your blockchain account, and no one has access to your funds other than you. You are nearly bankless, but you do need to configure on-boarding and off-boarding methods, which may require a bank. While a covetable aspect of a developed society, banking has its issues. This article breaks a few of them down and gets into the problems of being unbanked and the promise of going bankless.
+No one can close your blockchain account, and no one can access your funds other than you. You are nearly bankless, but you do need to configure on-boarding and off-boarding methods, which may require a bank. While a covetable aspect of a developed society, banking has its issues. This article breaks a few of them down and gets into the problems of being unbanked and the promise of going bankless.
 
 ## The Unbanked
 
-![Banking Statistics](/images/misc/placeholder.webp)
+![Banking Statistics](/images/images/placeholder.webp)
 
 The number of unbanked citizens varies globally, from roughly 0% in countries like Norway and Sweden to over 70% in Morocco. Reasons also vary, but some causes are a lack of trustworthiness in domestic banking institutions and excess poverty. Financially stable countries are generally more banked; however, the US, the "richest" country globally, had 22% of its adults unbanked or underbanked in 2019. That's 63 million people.
 
@@ -35,7 +35,7 @@ While banking isn't a perfect system, using a good one undoubtedly gives an indi
 
 Trustworthy bank accounts are a luxury in many parts of the world, and even more so in the US, where most bank accounts are FDIC-insured for up to $250,000. If you deposit $250,000 into an FDIC-insured bank account, you can be certain that your money is backed by the full faith and credit of the US government, its military, and its money printer.
 
-Non-US bank accounts are generally trustworthy, although developing countries with their own currencies often experience volatility in purchasing power. This, along with internal political and external geopolitical pressures, can result in what's known as a bank run, where everybody tries to withdraw their money at or around the same time. Due to the global practice of fractional-reserve lending, banks are not holding onto everyone's money simultaneously.
+Non-US bank accounts are generally trustworthy, although developing countries with their currencies often experience volatility in purchasing power. This, along with internal political and external geopolitical pressures, can result in what's known as a bank run, where everybody tries to withdraw their money at or around the same time. Due to the global practice of fractional-reserve lending, banks are not holding onto everyone's money simultaneously.
 
 They are lending it out with interest to make money on your money.
 
@@ -49,7 +49,7 @@ This debt that borrowers are incurring must be paid back – with interest. In t
 
 ### Systemic Risk
 
-When economies are riding high, fractional reserve lending is a bank's superpower, just as leverage is to your common trader. Problems start appearing once currencies lose their value and too many people try to withdraw their cash simultaneously. Currency failure is a factor because your deposits are just collateral for banks to issue loans. These loans are on behalf of your liquidity, but you are not being rewarded for it – the bank is. When you take out a loan, you borrow another depositor's liquidity. US Treasuries are not much different.
+When economies are riding high, fractional reserve lending is a bank's superpower, just as leverage is to your typical trader. Problems start appearing once currencies lose their value, and too many people try to withdraw their cash simultaneously. Currency failure is a factor because your deposits are just collateral for banks to issue loans. These loans are on behalf of your liquidity, but you are not being rewarded for it – the bank is. When you take out a loan, you borrow another depositor's liquidity. US Treasuries are not much different.
 
 Skeptics often refer to cryptocurrencies as Ponzi schemes, and in some cases, they are correct, although these skeptics usually fail to recognize how the US Treasury system works.
 
@@ -58,7 +58,7 @@ The US Treasury system works like this:
 The US government spends all its tax revenue and wants to borrow money to keep spending.
 The US government issues US Treasury notes, bills, and bonds to increase liquidity.
 These notes, bills, and bonds – treasuries – are I-owe-yous that will be paid back with interest. This interest rate is called the risk-free rate, although that name is misleading.
-Treasuries, like all forms of fixed income, are legal contracts that require buyers to be paid by a certain date.
+Treasuries, like all forms of fixed income, are legal contracts that require buyers to be paid by a specific date.
 Previously issued US Treasuries must be paid off with interest, so the US government either uses tax revenue or issues new Treasuries to pay off old debts. Usually, they issue new debt.
 Now, let's look at the definition of a Ponzi scheme on the SEC's website.
 
@@ -66,7 +66,7 @@ A Ponzi scheme is an investment fraud that pays existing investors with funds co
 
 ### Bad Behavior
 
-Aside from the global financial meltdown in 2008, caused by Wall Street and the banking system, banks have accumulated hundreds of billions of dollars in fines for other bad behavior.
+Aside from the global financial meltdown in 2008, which was caused by Wall Street and the banking system, banks have accumulated hundreds of billions of dollars in fines for other bad behavior.
 
 Here's a list of the number of fines that a few banks have paid since the year 2000.
 
@@ -82,7 +82,7 @@ Financial services are the most fined industry in the world. Since 2000, there h
 
 ### Going Bankless
 
-As you can see, banking has its issues. Before Bitcoin and non-custodial wallets, the only way to be your own bank was to be unbanked, and as detailed earlier, that also had its issues. Bitcoin, then Ethereum, and thousands of other cryptocurrencies enabled anyone anywhere to open a private bank and investment account on a blockchain without requiring the trust of any third party.
+As you can see, banking has its issues. Before Bitcoin and non-custodial wallets, the only way to be your bank was to be unbanked, and as detailed earlier, that also had its problems. Bitcoin, then Ethereum, and thousands of other cryptocurrencies enabled anyone anywhere to open a private bank and investment account on a blockchain without requiring the trust of any third party.
 
 It's counterintuitive, but you don't want to trust anyone regarding financial services. An ideal blockchain would not require participants to trust each other but rather serve as an operating system for applications to operate trustless and permissionless.
 
@@ -96,7 +96,7 @@ https://academy.solflare.com/what-is-a-mnemonic-phrase-and-how-does-it-work/
 
 ### Conclusion
 
-For the first time in history, individuals can self-custody their own assets. Given that so many people are still unbanked and the banking system has so many problems, many are jumping straight from being unbanked to going bankless.
+For the first time in history, individuals can self-custody their assets. Since so many people are still unbanked and the banking system has many problems, many are jumping straight from unbanked to bankless.
 
 This phenomenon is particularly evident in Africa and Southeast Asia, with high percentages of unbanked populations and high adoption rates of blockchain technology. As more of the world's unbanked population goes bankless, these individuals will begin to take advantage of the next generation of financial services and markets.
 

@@ -2,7 +2,7 @@
 title: 'Liquidity Pools'
 date: '2022-01-14'
 image:
-  src: '/misc/placeholder.webp'
+  src: '/images/placeholder.webp'
   alt: 'Liquidity Pools'
 description: 'Automated Market Making'
 category: 'technology'

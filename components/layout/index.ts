@@ -2,6 +2,7 @@
  * Layout component exports
  *
  * This file exhaustively exports all layout components, types, interfaces, and constants.
+ * Organized by component for better maintainability.
  */
 
 // RootLayoutClient exports

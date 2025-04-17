@@ -2,7 +2,7 @@
 title: "A Bird's Eye View"
 date: '2022-10-19'
 image:
-  src: '/misc/placeholder.webp'
+  src: '/images/placeholder.webp'
   alt: "A Bird's Eye View"
 description: 'Why use a blockchain?'
 category: 'technology'

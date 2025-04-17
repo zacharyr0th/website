@@ -1,16 +1,15 @@
 ---
-title: 'Web 2'
-date: '2022-07-16'
+title: 'Web 2.0'
+date: '2022-09-02'
 image:
-  src: '/misc/placeholder.webp'
-  alt: 'Web 2'
-description: 'Content Creation Networks'
+  src: '/images/placeholder.webp'
+  alt: 'Web 2.0'
+description: 'The Read-Write Web'
 category: 'technology'
-tags: ['crypto']
+tags: ['web']
 takeaways:
-  - 'Web 2 (2004-Present) transformed the internet into a user-generated content platform, leading to the rise of powerful intermediaries controlling digital distribution channels.'
-  - 'The Crisis phase (post-9/11) brought significant changes including the rise of big tech, political polarization, and a shift in how people consume information online.'
-  - 'Technology bubbles, while often criticized, play a significant role in technological adoption by demonstrating potential to the masses, as seen with e-commerce and crypto.'
+  - 'Web 2.0 evolved from static web pages to dynamic, interactive social platforms that allowed users to both consume and create content.'
+  - 'This era introduced the attention economy, where user data became the product sold to advertisers, creating powerful centralized platforms at the expense of user privacy.'
 ---
 
 In Web 1, we broke down the cultural and generational context of how the infrastructure for the modern Internet came to be and how it set in motion the innovations that led to Web 2 and 3.
@@ -37,7 +36,7 @@ For a deeper understanding of the cultural shifts underlying the advancements an
 
 The world theoretically entered a crisis phase with the onset of 9/11, although some argue it didn't take full effect until around 2008 when the Great Recession began. This period brought about an international war on terror, unprecedented military spending, global financial hardship, the rise of big tech, and political polarization unlike ever before due to social media and people obtaining their information online from a disparate web of subjective sources rather than for example just the New York Times.
 
-![Web Evolution Image](/images/web-2-0.webp)
+![Web Evolution Image](/images/placeholder.webp)
 
 ## Archetypes
 
@@ -79,7 +78,7 @@ Technology doesn't work how humans think. Humans think linearly, and technology 
 
 ### Moore's Law
 
-![Web Evolution Image](/images/web-2-1.webp)
+![Web Evolution Image](/images/placeholder.webp)
 
 According to Moore's Law, the number of transistors in a dense integrated circuit (microchip) doubles every two years. As you can see in the graph below, Moore's Law has been proven to be true since Intel's microchips debuted in the early 1970s. These transistors improve computing power and enable technological advances that drive unforeseen societal changes across all industries.
 
@@ -87,7 +86,7 @@ According to Moore's Law, the number of transistors in a dense integrated circui
 
 Metcalfe's Law defines the value of a telecommunications network as the squared product of the number of users in the network. In other words, Metcalfe's Law mathematically describes the power of network effects. As each new user is introduced to a network, they bring the capacity to introduce other new users and interact with the previous users. This creates an economy of interactions that exponentially expands as more people join the network while the cost of the network only increases linearly.
 
-![Web Evolution Image](/images/web-2-2.webp)
+![Web Evolution Image](/images/placeholder.webp)
 
 # Key Innovations
 
@@ -103,7 +102,7 @@ Posting and interacting with the world opened doors to new creator economies and
 
 If you look at old photographs of people on public transportation, you'll often see everybody reading the same newspaper. This phenomenon instilled a homogeneity of ideas.
 
-![Web Evolution Image](/images/web-2-4.webp)
+![Web Evolution Image](/images/placeholder.webp)
 
 It's similar to how most people are now on their phones and have headphones on when riding public transportation, except now everyone is reading and listening to their algorithmically curated news feeds. These news feeds disrupted big media because anyone could make a media channel and distill information to their following, irrespective of their background or credentials.
 

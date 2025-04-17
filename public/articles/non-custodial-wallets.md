@@ -2,7 +2,7 @@
 title: 'Non-Custodial Wallets'
 date: '2021-11-18'
 image:
-  src: '/misc/placeholder.webp'
+  src: '/images/placeholder.webp'
   alt: 'Non-Custodial Wallets'
 description: 'A Primer on Self Custody'
 category: 'technology'

@@ -77,6 +77,12 @@ export const metadata: Metadata = {
   },
   manifest: '/manifest.json',
   category: 'technology',
+  themeColor: '#ffffff',
+  appleWebApp: {
+    capable: true,
+    title: SITE_INFO.name,
+    statusBarStyle: 'default',
+  },
 } as const;
 
 // SEO Enhancements
@@ -201,7 +207,54 @@ export const WEBSITE_STRUCTURED_DATA = {
   datePublished: SITE_INFO.publishedTime,
 } as const;
 
-// Breadcrumb Navigation
+// Article structured data template
+export const getArticleStructuredData = (articleData: {
+  title: string;
+  description: string;
+  url: string;
+  datePublished: string;
+  dateModified: string;
+  authorName: string;
+  authorUrl: string;
+  imageUrl: string;
+  tags?: string[];
+  wordCount?: number;
+}) =>
+  ({
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: articleData.title,
+    description: articleData.description,
+    author: {
+      '@type': 'Person',
+      name: articleData.authorName,
+      url: articleData.authorUrl,
+    },
+    image: articleData.imageUrl,
+    datePublished: articleData.datePublished,
+    dateModified: articleData.dateModified,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': articleData.url,
+    },
+    publisher: {
+      '@type': 'Person',
+      name: SITE_INFO.authorName,
+      url: SITE_INFO.url,
+    },
+    keywords: articleData.tags?.join(', '),
+    wordCount: articleData.wordCount,
+    inLanguage: SITE_INFO.defaultLanguage,
+    copyrightYear: new Date(articleData.datePublished).getFullYear(),
+    copyrightHolder: {
+      '@type': 'Person',
+      name: SITE_INFO.authorName,
+    },
+    isAccessibleForFree: true,
+    license: 'https://creativecommons.org/licenses/by/4.0/',
+  }) as const;
+
+// Updated Breadcrumb Navigation with explicit URL nesting
 export const BREADCRUMB_STRUCTURED_DATA = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -210,31 +263,51 @@ export const BREADCRUMB_STRUCTURED_DATA = {
       '@type': 'ListItem',
       position: 1,
       name: 'Home',
-      item: SITE_INFO.url.endsWith('/') ? SITE_INFO.url : `${SITE_INFO.url}/`,
+      item: {
+        '@type': 'WebPage',
+        '@id': SITE_INFO.url.endsWith('/') ? SITE_INFO.url : `${SITE_INFO.url}/`,
+        url: SITE_INFO.url.endsWith('/') ? SITE_INFO.url : `${SITE_INFO.url}/`,
+      },
     },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Writing',
-      item: `${SITE_INFO.url.endsWith('/') ? SITE_INFO.url : `${SITE_INFO.url}/`}writing/`,
+      item: {
+        '@type': 'WebPage',
+        '@id': `${SITE_INFO.url.endsWith('/') ? SITE_INFO.url : `${SITE_INFO.url}/`}writing/`,
+        url: `${SITE_INFO.url.endsWith('/') ? SITE_INFO.url : `${SITE_INFO.url}/`}writing/`,
+      },
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Projects',
-      item: `${SITE_INFO.url.endsWith('/') ? SITE_INFO.url : `${SITE_INFO.url}/`}projects/`,
+      item: {
+        '@type': 'WebPage',
+        '@id': `${SITE_INFO.url.endsWith('/') ? SITE_INFO.url : `${SITE_INFO.url}/`}projects/`,
+        url: `${SITE_INFO.url.endsWith('/') ? SITE_INFO.url : `${SITE_INFO.url}/`}projects/`,
+      },
     },
     {
       '@type': 'ListItem',
       position: 4,
       name: 'Bio',
-      item: `${SITE_INFO.url.endsWith('/') ? SITE_INFO.url : `${SITE_INFO.url}/`}bio/`,
+      item: {
+        '@type': 'WebPage',
+        '@id': `${SITE_INFO.url.endsWith('/') ? SITE_INFO.url : `${SITE_INFO.url}/`}bio/`,
+        url: `${SITE_INFO.url.endsWith('/') ? SITE_INFO.url : `${SITE_INFO.url}/`}bio/`,
+      },
     },
     {
       '@type': 'ListItem',
       position: 5,
       name: 'Audio',
-      item: `${SITE_INFO.url.endsWith('/') ? SITE_INFO.url : `${SITE_INFO.url}/`}audio/`,
+      item: {
+        '@type': 'WebPage',
+        '@id': `${SITE_INFO.url.endsWith('/') ? SITE_INFO.url : `${SITE_INFO.url}/`}audio/`,
+        url: `${SITE_INFO.url.endsWith('/') ? SITE_INFO.url : `${SITE_INFO.url}/`}audio/`,
+      },
     },
   ],
 } as const;

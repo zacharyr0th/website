@@ -2,7 +2,7 @@
 title: 'NounsDAO'
 date: '2021-08-31'
 image:
-  src: '/images/articles/nouns-1.webp'
+  src: '/images/nouns-5.webp'
   alt: 'NounsDAO logo and John Cage portrait'
 description: 'The answer is time.'
 category: 'technology'
@@ -18,7 +18,7 @@ In 1985, contemporary composer John Cage wrote a solo piano piece called ASLSP (
 
 NounsDAO is an NFT project built on Ethereum that harnesses time as a method of distribution and decentralization. Each Noun is a generative 32x32 pixel NFT comprising people, places, and things. Their features are random and controlled by a smart contract that transfers the Noun to the winning bidder's wallet while simultaneously creating a new Noun for auction 24 hours later. 100% of the auction proceeds are deposited into the NounsDAO Treasury and governed by Noun NFT holders. At the time of writing, 24 Nouns control 3260.6022 Ethereum ($11,003,847.70 at a current ETH price of $3,374.79).
 
-![NounsDAO](/images/articles/nouns-3.webp)
+![NounsDAO](/images/nouns-5.webp)
 
 Since 100% of auction revenue gets deposited into the Treasury, the founders (Nounders) will be gifted every 10th Noun for the first five years.
 
@@ -32,17 +32,17 @@ These proposals can be anything from donating to charities to changing the amoun
 
 Although they have succeeded in doling out a total of 30 ETH ($101,243.70) to 6 different charities, and you can see that the 30 ETH have been disbursed in the internal transactions tab on the NounsDAO Treasury address on Etherscan. It's too bad governments don't have a public ledger for spending our money.
 
-![NounsDAO Treasury](/images/articles/nouns-4.webp)
+![NounsDAO Treasury](/images/placeholder.webp)
 
 # Derivatives
 
 Below, you can see the hand-drawn Improper Noun set. The artist is releasing a new one daily and can be connected with on Twitter.
 
-![Improper Nouns](/images/articles/nouns-5.webp)
+![Improper Nouns](/images/placeholder.webp)
 
 Here is a set of paintings designed using the AI process known as GAN.
 
-![Noun GAN Study](/images/articles/nouns-6.webp)
+![Noun GAN Study](/images/placeholder.webp)
 
 ## Its Interesting
 

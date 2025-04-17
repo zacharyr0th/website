@@ -2,7 +2,7 @@
 title: 'Kernel Access'
 date: '2024-08-04'
 image:
-  src: '/misc/placeholder.webp'
+  src: '/images/placeholder.webp'
   alt: 'Kernel Access'
 description: 'Everything You Need to Worry About'
 category: 'technology'

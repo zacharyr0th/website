@@ -33,14 +33,14 @@ let childProcess = null;
 const execute = (command, options = {}) => {
   try {
     console.log(`\n🚀 Executing: ${command}\n`);
-    
+
     if (options.async) {
-      childProcess = spawn(command, { 
-        shell: true, 
+      childProcess = spawn(command, {
+        shell: true,
         stdio: 'inherit',
-        env: { ...process.env } 
+        env: { ...process.env },
       });
-      
+
       return new Promise((resolve, reject) => {
         childProcess.on('close', (code) => {
           childProcess = null;
@@ -51,7 +51,7 @@ const execute = (command, options = {}) => {
             reject(new Error(`Command exited with code ${code}`));
           }
         });
-        
+
         childProcess.on('error', (error) => {
           childProcess = null;
           console.error(`\n❌ Error executing command: ${command}`);
@@ -74,19 +74,19 @@ const execute = (command, options = {}) => {
 // Function to check node_modules and package integrity
 const checkDependencies = async () => {
   const nodeModulesPath = join(process.cwd(), 'node_modules');
-  
+
   // Check if node_modules exists
   if (!existsSync(nodeModulesPath)) {
     console.log('\n📦 node_modules not found, installing dependencies...');
     return await execute('pnpm install');
   }
-  
+
   // Check for next in node_modules as a simple validity check
   if (!existsSync(join(nodeModulesPath, 'next'))) {
     console.log('\n⚠️ Critical dependencies appear to be missing, reinstalling...');
     return await execute('pnpm install');
   }
-  
+
   return true;
 };
 
@@ -108,11 +108,11 @@ process.on('SIGHUP', cleanup);
 const setupInteractiveMode = () => {
   const rl = createInterface({
     input: process.stdin,
-    output: process.stdout
+    output: process.stdout,
   });
-  
+
   console.log('💡 Interactive mode: Press "r" to restart the server or "q" to quit');
-  
+
   rl.on('line', async (input) => {
     if (input.toLowerCase() === 'r') {
       console.log('\n🔄 Restarting development server...');
@@ -124,16 +124,16 @@ const setupInteractiveMode = () => {
       cleanup();
     }
   });
-  
+
   return rl;
 };
 
 // Main async function to run the dev environment
 const main = async () => {
   console.log(`\n🛠️ Starting Next.js development server on port ${port}`);
-  
+
   let rl;
-  
+
   try {
     await checkDependencies();
     rl = setupInteractiveMode();
@@ -148,7 +148,7 @@ const main = async () => {
 };
 
 // Run the main function
-main().catch(error => {
+main().catch((error) => {
   console.error('❌ Unhandled error in main process:', error);
   process.exit(1);
-}); 
+});

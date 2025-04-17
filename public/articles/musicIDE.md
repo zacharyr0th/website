@@ -2,46 +2,40 @@
 title: 'MusicIDE'
 date: '2024-10-30'
 image:
-  src: '/misc/placeholder.webp'
+  src: '/images/placeholder.webp'
   alt: 'MusicIDE'
-description: 'Cursor + Musescore for Research + Composition'
+description: 'Cursor + MuseScore for Research + Composition'
 category: 'music'
 tags: ['theory']
 takeaways:
-  - 'MusicIDE is a tool that combines the power of LLMs and AI with the capabilities of Musescore and more to create a comprehensive music research and composition tool.'
-  - 'The tool will provide users with a seamless way to generate and edit music and access a wide range of resources and historical examples. The release data for public access is not soon.'
+  - 'MusicIDE will be a tool that combines the power of LLMs and AI with the capabilities of Musescore and more, offering a comprehensive music research and composition tool.'
+  - 'The tool will provide users with a seamless way to generate and edit music and access a wide range of resources and historical examples. Public access is not expected soon.'
 ---
 
-With the advent of LLMs and AI wrappers, the barriers to entry in the world of technology are breaking. As Chamath put it, the future will not be governed by people who are good at memorizing things and manually doing laborious computations but rather by tastemakers.
-
-Tastemakers know what they want because they've seen what they don't. Unfortunately, when money gets involved, sellouts become a problem. True tastemakers create trends and drive innovation by sticking to their tastes rather than catering to their corporate sponsors or audiences. In other words, the more personal something is, the more universal it is - and AI tools have the potential to push creative boundaries in ways that are not easy to imagine.
+With the rise of large language models and AI tools, one avenue of technological innovation is becoming more accessible. Success may increasingly depend not on memorization or manual computation but on the ability to guide, integrate, and creatively apply.
 
 # Notation Landscape
 
-Dominant notation software like Sibelius is limited and static and requires meticulous attention to detail at every step of the process.
+Traditional notation software like Sibelius is rigid and detail-heavy, requiring manual input at every step. To substitute a Neapolitan 6 chord in first inversion as the dominant chord in a symphonic score, you'd need to identify the chord structure and enter each note across the instruments individually. It's tedious on paper and becomes slow, repetitive, and ergonomically draining in notation software. Keyboard shortcuts and MIDI input help, but they only go so far. Ideas slip away in the time it takes to write them down.
 
-To substitute a Db Neopolitan 6 chord in first inversion across 18 instruments for the dominant chord in a symphonic score, the chord must be diagnosed, and each note must be inputted individually across the instruments. Editing this on paper is one thing, but doing it within a notation program is tiring and probably bad for your back. Keyboard shortcuts and MIDI input help, but we need more.
+This tool will recognize that you're in the key of C and generate a Db major chord with F in the bass. It needs to understand what a Neapolitan chord is, what "six" refers to, the notes in every key, and how to apply that substitution across all instruments in the score.
 
-IMAGE: Db Neopolitan 6 chord in first inversion
+MusicIDE aims to change that. Like Cursor for code, the vision is to prompt the system to handle edits—automatically generating and applying changes across the score while giving you complete control to review and refine them. While it may take time before AI excels at original composition, editing based on historical patterns and theoretical conventions should become significantly easier.
 
-With MusicIDE, the goal is to be able to prompt the system to do this in the same way that Cursor does—to generate and apply all the changes while giving me the option to further edit them before accepting them.
+![cursor](/images/cursor-layout.webp)
 
-IMAGE: Cursor layout
-
-This tool will know that you're in the key of C and will generate a Db chord with an F in the bass. To do that, it needs to understand what a Neopolitan chord is, what the six means, what the notes are in every key, and be able to substitute the current notes for the new ones across all the instruments.
-
-Traditionalists will say this is blasphemy, and they have a point, but this isn't traditional music composition. Think of it as a parabolic extrapolation of the curated non-determinism that composers have used for over a century.
+Some traditionalists might call this blasphemy—and to be fair, they have a point. But this isn't traditional composition. It's more like a natural extension of the indeterminacy or curated unpredictability that composers have explored for over a century.
 
 # Generated Music?
 
-Generated is the right word to use, although it's different from what's out there—like Suno, which will put most musicians to shame and potentially fill them with anger. It is what it is: use these tools or lose out. Record labels are doing the same thing; they're just less tech-savvy, so it's taking time, and there are legal hurdles. Suno doesn't seem to care about the legal hurdles.
+"Generated" is the right word—though what we're building differs from tools like Suno, which can already outperform many musicians and, understandably, stir up some frustration. But the reality is: either adapt to these tools or risk falling behind. Record labels are heading in the same direction—they're just slower, partly due to less tech fluency and partly because of legal barriers. Suno, on the other hand, doesn't seem too concerned with those.
 
-MusicIDE is going to be much more than a generative AI wrapper. It's a power tool for composers and musicians that will feature exhaustive permutations of music concepts, references to historical examples of those concepts, and a way to learn music on the instrument of your choosing with the help of AR and guitar-hero-inspired visuals.
+MusicIDE is more than just a generative AI wrapper. It's a power tool for composers and musicians, designed to explore deep permutations of musical concepts, reference historical examples, and help users learn through their instrument of choice. Future AR integrations and Guitar Hero–style visuals will also offer an interactive, intuitive way to practice and internalize musical ideas.
 
-Eventually, it will be open source, with plugins for other use cases, such as virtual reality instrument training and robotic symphonies.
+Eventually, MusicIDE will be open source, supporting plugins that enable a wide range of use cases—from virtual reality instrument training to robotic symphonies.
 
 # Applications
 
-The overarching goal is to aid individuals in music research and composition by giving everyone the compositional and analytical tools that history's greatest musicologists, musicians, and composers have been working with.
+The overarching goal is to support music research and composition by giving individuals access to the same analytical and creative tools that history's most outstanding musicologists, composers, and performers have used.
 
-Public access is not soon.
+Development is ongoing, with public access planned for a future release. The name may change.

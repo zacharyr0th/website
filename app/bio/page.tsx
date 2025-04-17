@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import type { Metadata } from 'next';
 import { SECTION_METADATA } from '@/lib';
-import BioPageClient from './components/BioPageClient';
+import BioPageClient from 'components/bio-page/components/BioPageClient';
 import { LoadingState } from 'components/common/Loading';
 import { RootLayoutClient } from 'components/layout';
 

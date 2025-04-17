@@ -2,7 +2,7 @@
 title: 'Derivatives vs Spot'
 date: '2022-03-02'
 image:
-  src: /images/derivatives-0.webp
+  src: '/images/derivatives.webp'
   alt: 'Derivatives vs Spot'
 description: 'Market Structure & Price Discovery'
 category: 'finance'

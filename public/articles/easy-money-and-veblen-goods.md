@@ -2,7 +2,7 @@
 title: 'Easy Money and Veblen Goods'
 date: '2022-04-08'
 image:
-  src: '/misc/placeholder.webp'
+  src: '/images/placeholder.webp'
   alt: 'Easy Money and Veblen Goods'
 description: 'The Reflexivity of Value'
 category: 'finance'

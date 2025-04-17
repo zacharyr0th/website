@@ -1,16 +1,15 @@
 ---
-title: 'Web 1'
-date: '2022-06-29'
+title: 'Web 1.0'
+date: '2022-09-01'
 image:
-  src: '/misc/placeholder.webp'
-  alt: 'Web 1'
-description: 'Content Delivery Networks'
+  src: '/images/placeholder.webp'
+  alt: 'Web 1.0'
+description: 'The Read-Only Web'
 category: 'technology'
-tags: ['crypto']
+tags: ['web']
 takeaways:
-  - "Web 1 (1990-2004) was characterized by content delivery networks, coinciding with the Strauss-Howe theory's 'Unraveling' period of weak institutions and strong individualism."
-  - "The generational dynamics between Nomads and Heroes shaped Web 1's development, with Nomads leading during the Unraveling and Heroes (Millennials) emerging to challenge existing structures."
-  - "The period's ethos of democratic and free society was challenged by the emergence of dominant digital companies, setting the stage for Web 2's centralized platforms."
+  - 'Web 1.0 was a static, read-only experience primarily delivering content from institutions to passive consumers.'
+  - 'The fundamental infrastructure of URLs, HTTP, and HTML, and mentality established during this era continues to be the foundation of today's internet.'
 ---
 
 This article is the first in a series of deep dives into Web 1, Web 2, and Web 3. It will examine the history, function, and legacy of Web 1 through the lens of the Strauss-Howe Generational Theory.

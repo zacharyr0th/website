@@ -1,16 +1,15 @@
 ---
-title: 'Web 3'
-date: '2022-09-14'
+title: 'Web 3.0'
+date: '2022-09-03'
 image:
-  src: '/misc/placeholder.webp'
-  alt: 'Web 3'
-description: 'User-owned Networks'
+  src: '/images/web-3-3.webp'
+  alt: 'Web 3.0'
+description: 'The Read-Write-Own Web'
 category: 'technology'
-tags: ['crypto']
+tags: ['web']
 takeaways:
-  - 'Web 3 (2017-Present) represents a shift towards user-owned networks, challenging the centralized control of Web 2 platforms and empowering users with greater ownership and autonomy.'
-  - 'The generational conflict between Heroes (Web 2 leaders) and Artists (Web 3 innovators) reflects a fundamental tension between centralized control and decentralized disruption.'
-  - "Smart contracts and token standards (ERC20, ERC721) have enabled new models of user engagement and value creation that weren't possible in the Web 2 era."
+  - 'Web 3.0 represents a shift to decentralized infrastructure using blockchain technology to enable user ownership and control of data and digital assets.'
+  - 'The transition faces challenges: slow performance, complex UX, scaling limitations, high energy usage, regulatory uncertainty, and interoperability issues.'
 ---
 
 Web 3 is a technical philosophy that has disrupted previous internet models by empowering users to take more ownership of the products they're using.
@@ -107,7 +106,7 @@ For the record, there are still \*\*far too many nefarious influencers promoting
 
 ICOs are a spin-off of Initial Public Offerings (IPOs), the traditional method of large-scale fundraising for companies looking to enter the public markets. So, it's not surprising that there are so many ICO spin-offs. These include but are not limited to the following:
 
-![Web Evolution Image](/images/web-3-0.webp)
+![Web Evolution Image](/images/web-3-3.webp)
 
 ### NFTs
 
@@ -123,7 +122,7 @@ Anyone who minted and held an Aurorian has experienced significant price appreci
 
 #### The Infinite Garden
 
-![infinite Image](/images/web-3-2.webp)
+![Infinite Image](/images/placeholder.webp)
 
 There is also a documentary titled Ethereum: The Infinite Garden that raised nearly 1,036 ETH, now valued at over $4 million, through the sales of NFTs associated with the movie.
 
@@ -155,7 +154,7 @@ NounsDAO is an ambitious NFT project that will mint one noun every day forever. 
 
 This treasury is used to help build products and projects surrounding the Noun community, such as Nouns.com, a hot or not game between pairs of different Nouns, and even a hangout area built within the CryptoVoxels metaverse. They also decided to donate 30 ETH to charity; you can see their record. Below is an image of transactions from their public treasury wallet.
 
-![Open Source Image](/images/web-3-4.webp)
+![Open Source Image](/images/placeholder.webp)
 
 Imagine a crypto-friendly city like Miami, Lisbon, or New York deciding to level its transparency and operate all financial transactions on a public blockchain. It probably won't happen, but it could with a Web 3 framework. NounsDAO is silly but most innovations on the Internet start silly.
 
@@ -203,7 +202,7 @@ These pools generate trading fees transmitted to the liquidity providers and, in
 
 Below is a screenshot of Token Terminal's home page, which displays the profitability metrics such as Price/Sales and Price/Earnings ratios of each DeFi protocol and underlying blockchain.
 
-![Open Source Image](/images/web-3-5.webp)
+![Open Source Image](/images/placeholder.webp)
 
 ## Moatless
 
@@ -217,7 +216,7 @@ You'll continue to hear stories of white-cap hackers that expose vulnerabilities
 
 A hacker stole over $600 million from the Polygon Layer 2 scaling solution, and it was all returned. The Polygon team then attempted to recruit the hacker, but he declined by responding with messages written into smart contracts, such as the one below.
 
-![Open Source Image](/images/web-3-6.webp)
+![Open Source Image](/images/placeholder.webp)
 
 Another hacker exposed an 850 million dollar vulnerability and was awarded a 2 million bug bounty.
 

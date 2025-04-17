@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
-import { PROJECTS } from './data/projects';
+import { PROJECTS } from '../../components/projects-page/data/projects';
 import { LoadingState } from 'components/common/Loading';
-import ProjectsPageClient from './ProjectsPageClient';
+import ProjectsPageClient from '../../components/projects-page/components/ProjectsPageClient';
 import { RootLayoutClient } from 'components/layout';
 import type { Metadata } from 'next';
 import { SECTION_METADATA } from '@/lib';

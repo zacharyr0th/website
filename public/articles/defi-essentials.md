@@ -2,7 +2,7 @@
 title: 'DeFi Essentials'
 date: '2021-10-2'
 image:
-  src: '/misc/placeholder.webp'
+  src: '/images/placeholder.webp'
   alt: 'DeFi Essentials'
 description: 'Essential Protocols for any DeFi Ecosystem'
 category: 'technology'

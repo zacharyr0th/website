@@ -2,7 +2,7 @@
 title: 'Permissionless Systems'
 date: '2021-10-27'
 image:
-  src: '/misc/placeholder.webp'
+  src: '/images/placeholder.webp'
   alt: 'Permissionless Systems'
 description: 'Understanding DeFi, NFTs, and DAOs'
 category: 'technology'

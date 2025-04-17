@@ -2,7 +2,7 @@
 title: 'Crypto-Repos'
 date: '2025-4-14'
 image:
-  src: '/images/cr.png'
+  src: '/images/cr.webp'
   alt: 'Crypto-Repos Logo'
 description: 'An open-source directory of code across major blockchain ecosystems'
 category: 'technology'
@@ -54,11 +54,11 @@ It currently indexes 10,523 repositories and 7,457 contributors across [@Aptos](
 
 #### Advanced search capabilities across ecosystems and categories
 
-![Search Interface](/images/cr-search.jpeg)
+![Search Interface](/images/cr-search.webp)
 
 #### In-depth repository analysis with key metrics
 
-![Repository Analysis](/images/cr-view.jpeg)
+![Repository Analysis](/images/cr-view.webp)
 
 #### Track and analyze contributor activities across repositories
 
@@ -93,24 +93,24 @@ Electric Capital's annual developer report stands out as a cornerstone analysis 
 
 The crypto-ecosystems repository is a taxonomy hosted on GitHub that categorizes and tracks open-source blockchain development across various ecosystems. Maintained by Electric Capital, this collaborative database allows anyone to contribute by adding links to blockchain-related code repositories under specific ecosystems.
 
-![Crypto Ecosystems Repository](/images/cr-ce.jpeg)
+![Crypto Ecosystems Repository](/images/cr-ce.webp)
 
 Ecosystem .toml files contain lists of all known repositories with at least some open-source code deployed on a corresponding blockchain.
 
 ## Quality vs Quantity
 
-The report analyzes the number of commits, full-time developers, monthly active developers, and more. Electric Capital maintains its definitions of what defines a full-time or monthly active developer, its own quality assurance standards, and the right to alter the calculation methodology so some metrics may change over time. Github activity can be manipulated, so these top-down measures are required to prevent low-quality actors and ecosystems from tipping the scale.
+The report analyzes the number of commits, full-time developers, monthly active developers, and more. Electric Capital maintains its definitions of a full-time or monthly active developer, its own quality assurance standards, and the right to alter the calculation methodology, so some metrics may change over time. Github activity can be manipulated, so these top-down measures are required to prevent low-quality actors and ecosystems from tipping the scale.
 
-Repository metrics don't always capture development quality—a high commit count might reflect minor updates rather than substantial development, while a single high-quality contribution could significantly impact a repository or an ecosystem. Several other factors complicate the quality assessment of this open-source analysis.
+Repository metrics don't always capture development quality—a high commit count might reflect minor updates rather than substantial development. At the same time, a single high-quality contribution could significantly impact a repository or an ecosystem. Several other factors complicate the quality assessment of this open-source analysis.
 
 To name a few:
 
 - **Code Accessibility**: Many projects maintain hybrid repositories where core functionality remains private while only specific components are public
-- **Repository Maintenance**: A repository might show recent commits but actually be in maintenance mode
+- **Repository Maintenance**: A repository might show recent commits but be in maintenance mode
 - **Code Reuse and Forking**: The prevalence of forked repositories and templated code can inflate repository counts
 - **Documentation Quality**: The presence and quality of documentation significantly impacts project usability
 
-With Electric Capital's report's database as the foundation, one can track the number of developers and repositories, but understanding the true impact and quality of the codebases involved requires a more granular approach that considers details on the repositories and developers themselves.
+With Electric Capital's report's database as the foundation, one can track the number of developers and repositories, but understanding the impact and quality of the codebases involved requires a more granular approach that considers details on the repositories and developers themselves.
 
 **Crypto-Repos takes this more granular approach by offering detailed views of repository metrics, contributor activity, and in-depth analysis features.** This allows users to move beyond simple quantitative metrics and gain a deeper understanding of the quality and impact of the code and contributions within each project and ecosystem.
 
@@ -133,13 +133,13 @@ Crypto-Repos zooms in on Electric Capital's dataset and provides search capabili
 
 ### Next Steps
 
-- **Resolve known errors**: Some repositories don't show all contributor information and some contributor details include forked repositories, duplicating their contribution counts
+- **Resolve known errors**: Some repositories don't show all contributor information, and some contributor details include forked repositories, duplicating their contribution counts
 - **Data Updates**: Implement weekly update schedule for .toml data
 - **Data Expansion**: Add support for 200+ additional blockchain ecosystems using Github's API and the crypto-ecosystems dataset
 - **Search Enhancement**: Optimize search using Hasura and vector embeddings. Refactor known redundancies/issues
 - **Categorization v1**: Build a filter system to sort categories for repositories
 - **Visualization**: Build proper developer profiles with detailed programming language usage statistics
-- **Verified Page**: Build blockchain specific pages featuring verified open-source projects, their source code, and their top contributors
+- **Verified Page**: Build blockchain-specific pages featuring verified open-source projects, their source code, and their top contributors
 
 ## Future Plans
 
@@ -156,4 +156,4 @@ Crypto-Repos zooms in on Electric Capital's dataset and provides search capabili
 - Ecosystem-specific bounty boards
 - Team building tools
 
-Try it out for yourself at [crypto-repos.com](https://crypto-repos.com).
+Try it out at [crypto-repos.com](https://crypto-repos.com).

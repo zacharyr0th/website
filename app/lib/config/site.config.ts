@@ -1,10 +1,5 @@
 import { type ManifestOptions } from '@/types/manifest';
 
-const getSiteUrl = () => {
-  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
-  return `http://${process.env.DEVELOPMENT_HOST || 'localhost'}:${process.env.DEVELOPMENT_PORT || '3000'}`;
-};
-
 export const PROFILE_IMAGE = {
   url: '/misc/profile-picture.webp',
   width: 256,
@@ -13,49 +8,43 @@ export const PROFILE_IMAGE = {
   type: 'image/webp',
 } as const;
 
+// Site keywords
+export const SITE_KEYWORDS = [
+  'blockchain',
+  'cryptocurrency',
+  'DeFi',
+  'Web3',
+  'Aptos',
+  'Move',
+  'growth strategy',
+  'market analysis',
+];
+
 export const SITE_INFO = {
-  name: 'Zachary Roth',
-  description:
-    'Head of Growth at Aptos Labs, focusing on DeFi & AI. Exploring blockchain technology, market strategy, and innovative solutions.',
-  url: getSiteUrl(),
+  name: 'Zachary Tyler Roth',
+  description: 'Thoughts on blockchain, DeFi, and market strategy.',
+  url: 'https://zacharyr0th.com',
   twitterHandle: '@zacharyr0th',
-  locale: 'en_US',
+  locale: 'en-US',
   organization: {
     name: 'Aptos Labs',
-    url: 'https://aptoslabs.com/',
-    logo: 'https://aptoslabs.com/logo.png',
+    url: 'https://aptoslabs.com',
+    logo: 'https://aptoslabs.com/images/aptos_word_dark.svg',
   },
   siteType: 'website' as const,
-  defaultLanguage: 'en',
+  defaultLanguage: 'en-US',
   alternateLanguages: [],
-  publishedTime: '2023-01-01T00:00:00.000Z',
-  modifiedTime: new Date().toISOString(),
-  authorName: 'Zachary Roth',
-  contactEmail: 'contact@zacharyroth.com',
-  copyright: {
-    startYear: 2024,
-    currentYear: new Date().getFullYear(),
-    holder: 'Zachary Roth',
-    rights: 'All Rights Reserved',
-  },
-  keywords: [
-    'Zachary Roth',
-    'Blockchain',
-    'DeFi',
-    'Artificial Intelligence',
-    'Growth Strategy',
-    'Web3',
-    'Aptos Labs',
-    'Move Language',
-    'Layer 1',
-    'Cryptocurrency',
-  ],
-};
+  authorName: 'Zachary Tyler Roth',
+  publishedTime: '2024-01-01T00:00:00.000Z',
+  modifiedTime: '2024-03-19T00:00:00.000Z',
+  keywords: SITE_KEYWORDS,
+  defaultOgImage: '/images/og/default-og.webp', // Default Open Graph image
+} as const satisfies Record<string, unknown>;
 
 export const MANIFEST: ManifestOptions = {
   name: 'Zachary Roth | Software Engineer',
   shortName: 'zacharyr0th',
-  description: 'Full-stack development, tech insights, and creative projects by Zachary Roth',
+  description: 'Full-stack development, thoughtful insights, and creative projects by Zachary Roth',
   startUrl: '/?source=pwa',
   id: 'zacharyr0th-portfolio',
   themeColor: '#3b82f6',
@@ -65,12 +54,6 @@ export const MANIFEST: ManifestOptions = {
   scope: '/',
   lang: 'en-US',
   dir: 'ltr',
-} as const;
-
-export const FONT_CONFIG = {
-  display: 'swap',
-  preload: true,
-  fallback: ['system-ui', 'sans-serif'],
 } as const;
 
 export const CACHE_CONFIG = {

@@ -2,7 +2,7 @@
 title: Blockchain Foundations
 date: '2022-01-09'
 image:
-  src: /misc/placeholder.webp
+  src: '/images/placeholder.webp'
   alt: Blockchain Foundations
 description: Understanding the Building Blocks
 category: technology

@@ -8,11 +8,18 @@ export const ROUTES = {
   static: [
     { route: '', priority: 1.0, changeFrequency: 'daily', isSecure: false },
     { route: '/writing', priority: 0.9, changeFrequency: 'daily', isSecure: false },
-    { route: '/projects', priority: 0.8, changeFrequency: 'daily', isSecure: false },
+    { route: '/projects', priority: 0.8, changeFrequency: 'weekly', isSecure: false },
     { route: '/audio', priority: 0.8, changeFrequency: 'daily', isSecure: false },
     { route: '/audio/archive', priority: 0.7, changeFrequency: 'weekly', isSecure: false },
     { route: '/bio', priority: 0.8, changeFrequency: 'monthly', isSecure: false },
   ] as const,
+
+  // Dynamic routes for sitemap generation
+  dynamic: {
+    articles: '/api/public/articles',
+    projects: '/api/public/projects',
+    audio: '/api/public/audio',
+  } as const,
 
   // Resource routes for sitemap.ts
   resources: [
@@ -90,7 +97,7 @@ export const BOT_CONFIG = {
     crawlDelay: 2,
   },
   securityScanners: {
-    userAgent: ['*-bot', '*-spider', '*-crawler', 'scanner', 'burp'],
+    userAgent: ['*-bot', '*-spider', '*-crawler', 'scanner', 'burp', 'sqlmap', 'nmap', 'nikto'],
     crawlDelay: 10,
   },
 } as const;
@@ -116,5 +123,7 @@ export const SECURITY = {
     '/tmp/*', // Block temp directories
     '/test/*', // Block test directories
     '/coverage/*', // Block coverage reports
+    '/favicon.*', // Block favicon files
+    '/icons/*', // Block icon directory
   ],
 } as const;

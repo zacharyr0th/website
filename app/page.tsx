@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Hero, Main, Thesis } from './components/home-page';
+import { Hero, Main, Thesis } from '../components/home-page';
 import { SITE_INFO, PROFILE_IMAGE, viewport } from '@/lib';
 import { ContentErrorBoundary } from '@/lib/errors';
 
