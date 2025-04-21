@@ -31,7 +31,7 @@
     "clean": "rm -rf .next out node_modules/.cache coverage .turbo pnpm-lock.yaml node_modules"
   },
   "dependencies": {
-    "@aws-sdk/s3-request-presigner": "3.749.0",
+    "@aws-sdk/s3-request-presigner": "3.777.0",
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
     "@next/bundle-analyzer": "^15.3.0",
