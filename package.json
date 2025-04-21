@@ -48,7 +48,7 @@
     "gray-matter": "^4.0.3",
     "isomorphic-dompurify": "^2.21.0",
     "lodash": "^4.17.21",
-    "lru-cache": "11.0.2",
+    "lru-cache": "11.1.0",
     "lucide-react": "^0.487.0",
     "marked": "^15.0.8",
     "next": "^15.3.0",
